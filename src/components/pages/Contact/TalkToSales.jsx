@@ -33,7 +33,7 @@ export default function TalkToSales() {
             />
             <div className="flex items-center">
               <FaPhone className="w-5 h-5 text-primary mr-2" />
-              <p className="text-grayDark font-poppins">+1 (123) 456-7890</p>
+              <p className="text-grayDark font-poppins">+91 9211013220</p>
             </div>
             <div className="flex items-center">
               <FaEnvelope className="w-5 h-5 text-primary mr-2" />

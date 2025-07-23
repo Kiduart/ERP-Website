@@ -15,7 +15,7 @@ export default function SendMessage() {
             <div className="lg:w-1/2 space-y-6 pt-8">
               <div className="flex items-center">
                 <FaPhone className="w-6 h-6 text-primary mr-3" />
-                <p className="text-grayDark font-poppins text-lg">+1 (123) 456-7890</p>
+                <p className="text-grayDark font-poppins text-lg">+91 9211013220</p>
               </div>
               <div className="flex items-center">
                 <FaEnvelope className="w-6 h-6 text-primary mr-3" />
@@ -23,7 +23,7 @@ export default function SendMessage() {
               </div>
               <div className="flex items-center">
                 <FaMapMarkerAlt className="w-6 h-6 text-primary mr-3" />
-                <p className="text-grayDark font-poppins text-lg">123 Education Lane, Tech City, CA 94000, USA</p>
+                <p className="text-grayDark font-poppins text-lg">Noida, Uttar Pradesh, India, CA 94000, USA</p>
               </div>
             </div>
           </div>

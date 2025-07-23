@@ -335,7 +335,7 @@ export default function Contact() {
               viewport={{ once: true }}
             >
               <p>📧 Email: support@example.com</p>
-              <p>📞 Phone: +1 (123) 456-7890</p>
+              <p>📞 Phone: +91 9211013220</p>
             </motion.div>
           </motion.div>
         </div>

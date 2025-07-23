@@ -222,8 +222,8 @@ export default function Footer() {
           >
             <h4 className="text-lg font-medium mb-4 text-white font-inter">Contact Us</h4>
             <p className="text-white text-sm mb-2 font-poppins">Email: support@kidurat.com</p>
-            <p className="text-white text-sm mb-2 font-poppins">Phone: +1 (123) 456-7890</p>
-            <p className="text-white text-sm font-poppins">Address: 123 Education Lane, Tech City</p>
+            <p className="text-white text-sm mb-2 font-poppins">Phone: +91 9211013220</p>
+            <p className="text-white text-sm font-poppins">Address: Noida, Uttar Pradesh, India</p>
           </motion.div>
 
           {/* Newsletter Subscription */}
