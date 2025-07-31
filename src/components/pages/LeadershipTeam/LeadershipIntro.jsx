@@ -18,14 +18,21 @@ export default function LeadershipIntro() {
 
   return (
     <div className="relative py-16">
-      <WaveBackground gradient={theme.gradients.cyanToPink} height="80px" opacity={0.1} particleShape="circle" waveCount={3} texture="smooth" />
+      <WaveBackground
+        gradient={theme.gradients.cyanToPink}
+        height="80px"
+        opacity={0.1}
+        particleShape="circle"
+        waveCount={3}
+        texture="smooth"
+      />
       <ParticleEffect count={20} color={theme.colors.neonPink} shape="circle" />
       <DecorativeCircles
         positions={[
-          { size: '200px', top: '-50px', left: '-50px' },
-          { size: '150px', bottom: '-30px', right: '-30px' },
+          { size: "200px", top: "-50px", left: "-50px" },
+          { size: "150px", bottom: "-30px", right: "-30px" },
         ]}
-        colors={['bg-primary', 'bg-skyBlue']}
+        colors={["bg-primary", "bg-skyBlue"]}
       />
       <motion.div
         className="max-w-4xl mx-auto text-center relative z-10"
@@ -44,7 +51,13 @@ export default function LeadershipIntro() {
           className="text-lg text-grayDark leading-relaxed"
           style={{ fontFamily: typography.body }}
         >
-          Our leadership team at KIDURAT is a group of visionary individuals dedicated to transforming education through innovation. With decades of combined experience in EdTech, AI, and educational administration, they guide KIDURAT’s mission to empower schools and educators worldwide. Their diverse expertise ensures that KIDURAT remains at the forefront of educational technology, delivering impactful solutions to over 10 million students across 50+ countries.
+          Our leadership team at KIDUART is a group of visionary individuals
+          dedicated to transforming education through innovation. With decades
+          of combined experience in EdTech, AI, and educational administration,
+          they guide KIDUART’s mission to empower schools and educators
+          worldwide. Their diverse expertise ensures that KIDUART remains at the
+          forefront of educational technology, delivering impactful solutions to
+          over 10 million students across 50+ countries.
         </p>
       </motion.div>
     </div>

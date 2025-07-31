@@ -14,9 +14,12 @@ import CallToAction from "../../../components/pages/Contact/CallToAction";
 import { theme } from "../../../components/utils/theme";
 
 // Dynamically import ParticleEffect with SSR disabled
-const ParticleEffect = dynamic(() => import("../../../components/utils/ParticleEffect"), {
-  ssr: false,
-});
+const ParticleEffect = dynamic(
+  () => import("../../../components/utils/ParticleEffect"),
+  {
+    ssr: false,
+  }
+);
 
 export default function Contact() {
   const breadcrumbItems = [
@@ -41,7 +44,10 @@ export default function Contact() {
     },
     {
       className: "rounded-full border-2 border-neonPink",
-      style: { background: "linear-gradient(135deg, rgb(255 105 180), rgb(111 66 193))" },
+      style: {
+        background:
+          "linear-gradient(135deg, rgb(255 105 180), rgb(111 66 193))",
+      },
       size: 80,
       angle: 135,
       initial: { x: 120 },
@@ -49,7 +55,9 @@ export default function Contact() {
     },
     {
       className: "rounded-full border-2 border-primary",
-      style: { background: "linear-gradient(135deg, rgb(0 33 71), rgb(135 206 235))" },
+      style: {
+        background: "linear-gradient(135deg, rgb(0 33 71), rgb(135 206 235))",
+      },
       size: 50,
       angle: 45,
       initial: { y: -120 },
@@ -69,11 +77,24 @@ export default function Contact() {
   return (
     <div className="w-full relative">
       <div className="relative">
-        <WaveBackground gradient={theme.gradients.cyanToPink} height="80px" opacity={0.1} particleShape="circle" waveCount={3} texture="smooth" />
-        <ParticleEffect count={30} color={theme.colors.neonPink} shape="hexagon" speed={0.3} motionPath="spiral" />
+        <WaveBackground
+          gradient={theme.gradients.cyanToPink}
+          height="80px"
+          opacity={0.1}
+          particleShape="circle"
+          waveCount={3}
+          texture="smooth"
+        />
+        <ParticleEffect
+          count={30}
+          color={theme.colors.neonPink}
+          shape="hexagon"
+          speed={0.3}
+          motionPath="spiral"
+        />
         <Hero
           title="Contact Us"
-          description="Connect with KIDURAT for support, inquiries, or partnerships."
+          description="Connect with KIDUART for support, inquiries, or partnerships."
           breadcrumbItems={breadcrumbItems}
           gradientClass="from-accentCyan/80 via-neonPink/60 to-emeraldGreen/80"
           circleColors={["bg-neonPink", "bg-accentCyan", "bg-emeraldGreen"]}

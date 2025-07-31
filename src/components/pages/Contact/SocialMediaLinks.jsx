@@ -14,10 +14,26 @@ const defaultTypography = {
 };
 
 const socialLinks = [
-  { icon: <FaTwitter />, href: "https://twitter.com/kidurat", label: "Twitter" },
-  { icon: <FaLinkedin />, href: "https://linkedin.com/company/kidurat", label: "LinkedIn" },
-  { icon: <FaFacebook />, href: "https://facebook.com/kidurat", label: "Facebook" },
-  { icon: <FaInstagram />, href: "https://instagram.com/kidurat", label: "Instagram" },
+  {
+    icon: <FaTwitter />,
+    href: "https://twitter.com/kiduart",
+    label: "Twitter",
+  },
+  {
+    icon: <FaLinkedin />,
+    href: "https://linkedin.com/company/kiduart",
+    label: "LinkedIn",
+  },
+  {
+    icon: <FaFacebook />,
+    href: "https://facebook.com/kiduart",
+    label: "Facebook",
+  },
+  {
+    icon: <FaInstagram />,
+    href: "https://instagram.com/kiduart",
+    label: "Instagram",
+  },
 ];
 
 export default function SocialMediaLinks() {
@@ -25,8 +41,20 @@ export default function SocialMediaLinks() {
 
   return (
     <div className="relative py-16 bg-gradient-to-br from-white to-skyBlue/10">
-      <WaveBackground gradient={theme.gradients.purpleToGreen} height="80px" opacity={0.1} particleShape="star" waveCount={3} texture="smooth" />
-      <ParticleEffect count={20} color={theme.colors.accentCyan} shape="circle" speed={0.3} />
+      <WaveBackground
+        gradient={theme.gradients.purpleToGreen}
+        height="80px"
+        opacity={0.1}
+        particleShape="star"
+        waveCount={3}
+        texture="smooth"
+      />
+      <ParticleEffect
+        count={20}
+        color={theme.colors.accentCyan}
+        shape="circle"
+        speed={0.3}
+      />
       <DecorativeCircles
         positions={[
           { size: "200px", top: "-50px", left: "-50px" },

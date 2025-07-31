@@ -12,7 +12,6 @@ import Section from "@/components/sections/Section";
 import DecorativeCircles from "@/components/utils/DecorativeCircles";
 import { motion } from "framer-motion";
 
-
 // Fallback typography in case theme is undefined
 const defaultTypography = {
   heading: "'Inter', sans-serif",
@@ -22,10 +21,7 @@ const defaultTypography = {
 export default function Features() {
   const typography = theme?.typography || defaultTypography;
 
-  const breadcrumbItems = [
-    { label: "Home", href: "/" },
-    { label: "Features" },
-  ];
+  const breadcrumbItems = [{ label: "Home", href: "/" }, { label: "Features" }];
 
   const featuresFloatingIcons = [
     { icon: "⚙️", size: "35px", top: "5%", left: "5%", delay: 0 },
@@ -43,7 +39,10 @@ export default function Features() {
     },
     {
       className: "rounded-full border-2 border-neonPink",
-      style: { background: "linear-gradient(135deg, rgb(255 105 180), rgb(111 66 193))" },
+      style: {
+        background:
+          "linear-gradient(135deg, rgb(255 105 180), rgb(111 66 193))",
+      },
       size: 80,
       angle: 135,
       initial: { x: 120 },
@@ -51,7 +50,9 @@ export default function Features() {
     },
     {
       className: "rounded-full border-2 border-violet",
-      style: { background: "linear-gradient(135deg, rgb(148 0 211), rgb(0 182 239))" },
+      style: {
+        background: "linear-gradient(135deg, rgb(148 0 211), rgb(0 182 239))",
+      },
       size: 50,
       angle: 45,
       initial: { y: -120 },
@@ -84,11 +85,24 @@ export default function Features() {
   return (
     <div className="w-full">
       <div className="relative">
-        <WaveBackground gradient={theme.gradients.cyanToPink} height="80px" opacity={0.1} particleShape="circle" waveCount={3} texture="smooth" />
-        <ParticleEffect count={30} color={theme.colors.neonPink} shape="hexagon" speed={0.3} motionPath="spiral" />
+        <WaveBackground
+          gradient={theme.gradients.cyanToPink}
+          height="80px"
+          opacity={0.1}
+          particleShape="circle"
+          waveCount={3}
+          texture="smooth"
+        />
+        <ParticleEffect
+          count={30}
+          color={theme.colors.neonPink}
+          shape="hexagon"
+          speed={0.3}
+          motionPath="spiral"
+        />
         <Hero
-          title="Explore KIDURAT Features"
-          description="Discover the powerful features that make KIDURAT the best choice for school management."
+          title="Explore KIDUART Features"
+          description="Discover the powerful features that make KIDUART the best choice for school management."
           breadcrumbItems={breadcrumbItems}
           gradientClass="from-accentCyan/80 via-neonPink/60 to-violet/80 via-deepIndigo/50"
           circleColors={["bg-neonPink", "bg-violet", "bg-deepIndigo"]}
@@ -107,12 +121,27 @@ export default function Features() {
           buttonClassName="animate-float"
         />
       </div>
-      <Section title="Our Features" className="bg-gradient-to-br from-white to-accentCyan/10">
+      <Section
+        title="Our Features"
+        className="bg-gradient-to-br from-white to-accentCyan/10"
+      >
         <FeatureList />
       </Section>
-      <Section title="Feature Comparison" glassmorphism={true} className="relative bg-gradient-to-br from-white to-neonPink/10">
-        <ParticleEffect count={20} color={theme.colors.accentCyan} shape="star" speed={0.2} />
-        <DecorativeCircles positions={positions} colors={["bg-neonPink", "bg-violet", "bg-deepIndigo"]} />
+      <Section
+        title="Feature Comparison"
+        glassmorphism={true}
+        className="relative bg-gradient-to-br from-white to-neonPink/10"
+      >
+        <ParticleEffect
+          count={20}
+          color={theme.colors.accentCyan}
+          shape="star"
+          speed={0.2}
+        />
+        <DecorativeCircles
+          positions={positions}
+          colors={["bg-neonPink", "bg-violet", "bg-deepIndigo"]}
+        />
         <div className="relative z-10 overflow-x-auto">
           <table className="min-w-full text-center border-collapse">
             <thead>
@@ -198,7 +227,10 @@ export default function Features() {
           </table>
         </div>
       </Section>
-      <Section title="Feature Spotlight" className="bg-gradient-to-br from-white to-skyBlue/10">
+      <Section
+        title="Feature Spotlight"
+        className="bg-gradient-to-br from-white to-skyBlue/10"
+      >
         <FeatureSpotlight />
       </Section>
       <Section title="What Our Users Say" className="bg-white">

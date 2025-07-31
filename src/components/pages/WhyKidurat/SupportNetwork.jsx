@@ -1,7 +1,7 @@
 "use client";
 
-import Button from '@/components/common/Button';
-import { motion } from 'framer-motion';
+import Button from "@/components/common/Button";
+import { motion } from "framer-motion";
 
 export default function SupportNetwork() {
   return (
@@ -13,9 +13,14 @@ export default function SupportNetwork() {
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
       >
-        <h3 className="text-2xl font-semibold text-primary font-inter mb-4">Unparalleled Support</h3>
+        <h3 className="text-2xl font-semibold text-primary font-inter mb-4">
+          Unparalleled Support
+        </h3>
         <p className="text-lg text-grayDark font-poppins mb-6">
-          With KIDURAT, you’re supported by award-winning professional services, dedicated support teams, and industry experts. Our conferences, user groups, and PowerSchool Community connect you with experienced professionals to meet your ongoing needs.
+          With KIDUART, you’re supported by award-winning professional services,
+          dedicated support teams, and industry experts. Our conferences, user
+          groups, and PowerSchool Community connect you with experienced
+          professionals to meet your ongoing needs.
         </p>
         <Button
           text="Join Our Community"
@@ -29,7 +34,7 @@ export default function SupportNetwork() {
         <div className="relative w-full h-0 pb-[56.25%] rounded-lg shadow-md overflow-hidden">
           <iframe
             src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-            title="KIDURAT Support Overview"
+            title="KIDUART Support Overview"
             className="absolute top-0 left-0 w-full h-full"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen

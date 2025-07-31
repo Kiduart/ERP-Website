@@ -10,8 +10,18 @@ const defaultTypography = {
 };
 
 const contactMethods = [
-  { method: "Phone", value: "+91-123-456-7890", href: "tel:+911234567890", icon: "📞" },
-  { method: "Email", value: "sales@kidurat.com", href: "mailto:sales@kidurat.com", icon: "📧" },
+  {
+    method: "Phone",
+    value: "+91-123-456-7890",
+    href: "tel:+911234567890",
+    icon: "📞",
+  },
+  {
+    method: "Email",
+    value: "sales@kiduart.com",
+    href: "mailto:sales@kiduart.com",
+    icon: "📧",
+  },
   { method: "Chat", value: "Live Chat", href: "/chat", icon: "💬" },
 ];
 

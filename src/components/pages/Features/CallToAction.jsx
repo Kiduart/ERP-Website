@@ -7,7 +7,6 @@ import { theme } from "@/components/utils/theme";
 import WaveBackground from "@/components/utils/WaveBackground";
 import { motion } from "framer-motion";
 
-
 // Fallback typography in case theme is undefined
 const defaultTypography = {
   heading: "'Inter', sans-serif",
@@ -62,7 +61,8 @@ export default function CallToAction() {
           className="text-lg text-grayDark leading-relaxed mb-8"
           style={{ fontFamily: typography.body }}
         >
-          Explore how KIDURAT’s features can streamline your school management and enhance learning outcomes. Get started today!
+          Explore how KIDUART’s features can streamline your school management
+          and enhance learning outcomes. Get started today!
         </p>
         <motion.div animate={floatAnimation}>
           <Button

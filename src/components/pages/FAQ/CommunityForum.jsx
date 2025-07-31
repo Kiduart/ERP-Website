@@ -23,8 +23,20 @@ export default function CommunityForum() {
 
   return (
     <div className="relative py-16">
-      <WaveBackground gradient={theme.gradients.purpleToGreen} height="80px" opacity={0.1} particleShape="star" waveCount={3} texture="smooth" />
-      <ParticleEffect count={20} color={theme.colors.accentCyan} shape="diamond" speed={0.3} />
+      <WaveBackground
+        gradient={theme.gradients.purpleToGreen}
+        height="80px"
+        opacity={0.1}
+        particleShape="star"
+        waveCount={3}
+        texture="smooth"
+      />
+      <ParticleEffect
+        count={20}
+        color={theme.colors.accentCyan}
+        shape="diamond"
+        speed={0.3}
+      />
       <DecorativeCircles
         positions={[
           { size: "200px", top: "-50px", left: "-50px" },
@@ -49,7 +61,8 @@ export default function CommunityForum() {
           className="text-lg text-grayDark leading-relaxed mb-8"
           style={{ fontFamily: typography.body }}
         >
-          Connect with other KIDURAT users, ask questions, share tips, and learn best practices in our vibrant community forum.
+          Connect with other KIDUART users, ask questions, share tips, and learn
+          best practices in our vibrant community forum.
         </p>
         <motion.div animate={floatAnimation}>
           <Button

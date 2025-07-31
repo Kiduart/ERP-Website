@@ -1,8 +1,8 @@
 "use client";
 
-import Button from '@/components/common/Button';
-import { motion } from 'framer-motion';
-import Image from 'next/image';
+import Button from "@/components/common/Button";
+import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function ComprehensiveSolutions() {
   return (
@@ -24,7 +24,11 @@ export default function ComprehensiveSolutions() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          KIDURAT transcends traditional student information systems. Our cloud-based solutions streamline processes, unify data for informed decisions, and leverage ethical AI to enhance student outcomes and equity. Experience a reliable, centralized platform for educators, students, and administrators.
+          KIDUART transcends traditional student information systems. Our
+          cloud-based solutions streamline processes, unify data for informed
+          decisions, and leverage ethical AI to enhance student outcomes and
+          equity. Experience a reliable, centralized platform for educators,
+          students, and administrators.
         </motion.p>
         <Button
           text="Learn More"

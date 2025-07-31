@@ -20,7 +20,7 @@ const partners = [
     name: "Global Learning Network",
     logo: "https://images.unsplash.com/photo-1531482615713-2e6d3a709b3a?q=80&w=200&h=200&auto=format&fit=crop",
     description:
-      "Global Learning Network collaborates with KIDURAT to connect educators worldwide, fostering a community of over 10,000 schools.",
+      "Global Learning Network collaborates with KIDUART to connect educators worldwide, fostering a community of over 10,000 schools.",
     website: "https://example.com/globallearning",
     profile: "/company/our-partners/globallearning",
   },
@@ -29,7 +29,7 @@ const partners = [
     name: "AI Innovators",
     logo: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=200&h=200&auto=format&fit=crop",
     description:
-      "AI Innovators supports KIDURAT with cutting-edge AI technology, powering our school management systems for seamless operations.",
+      "AI Innovators supports KIDUART with cutting-edge AI technology, powering our school management systems for seamless operations.",
     website: "https://example.com/aiinnovators",
     profile: "/company/our-partners/aiinnovators",
   },

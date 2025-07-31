@@ -17,19 +17,19 @@ const locations = [
     city: "New Delhi, India",
     address: "123 Education Lane, New Delhi, 110001",
     phone: "+91-123-456-7890",
-    email: "delhi@kidurat.com",
+    email: "delhi@kiduart.com",
   },
   {
     city: "New York, USA",
     address: "456 School Street, New York, NY 10001",
     phone: "+1-800-555-1234",
-    email: "ny@kidurat.com",
+    email: "ny@kiduart.com",
   },
   {
     city: "London, UK",
     address: "789 Learning Road, London, SW1A 1AA",
     phone: "+44-20-1234-5678",
-    email: "london@kidurat.com",
+    email: "london@kiduart.com",
   },
 ];
 
@@ -38,8 +38,20 @@ export default function KiduratLocations() {
 
   return (
     <div className="relative py-16 bg-gradient-to-br from-white to-neonPink/10">
-      <WaveBackground gradient={theme.gradients.purpleToGreen} height="80px" opacity={0.1} particleShape="star" waveCount={3} texture="smooth" />
-      <ParticleEffect count={20} color={theme.colors.accentCyan} shape="circle" speed={0.3} />
+      <WaveBackground
+        gradient={theme.gradients.purpleToGreen}
+        height="80px"
+        opacity={0.1}
+        particleShape="star"
+        waveCount={3}
+        texture="smooth"
+      />
+      <ParticleEffect
+        count={20}
+        color={theme.colors.accentCyan}
+        shape="circle"
+        speed={0.3}
+      />
       <DecorativeCircles
         positions={[
           { size: "200px", top: "-50px", left: "-50px" },
@@ -85,13 +97,25 @@ export default function KiduratLocations() {
                 className="text-grayDark mb-2"
                 style={{ fontFamily: typography.body }}
               >
-                Phone: <a href={`tel:${location.phone}`} className="text-primary hover:text-neonPink">{location.phone}</a>
+                Phone:{" "}
+                <a
+                  href={`tel:${location.phone}`}
+                  className="text-primary hover:text-neonPink"
+                >
+                  {location.phone}
+                </a>
               </p>
               <p
                 className="text-grayDark"
                 style={{ fontFamily: typography.body }}
               >
-                Email: <a href={`mailto:${location.email}`} className="text-primary hover:text-neonPink">{location.email}</a>
+                Email:{" "}
+                <a
+                  href={`mailto:${location.email}`}
+                  className="text-primary hover:text-neonPink"
+                >
+                  {location.email}
+                </a>
               </p>
             </motion.div>
           ))}
@@ -110,7 +134,9 @@ export default function KiduratLocations() {
             Find Us on the Map
           </h3>
           <div className="w-full h-64 bg-gray-200 rounded-lg flex items-center justify-center">
-            <p className="text-grayDark">Interactive Map Placeholder (Embed Google Maps or similar)</p>
+            <p className="text-grayDark">
+              Interactive Map Placeholder (Embed Google Maps or similar)
+            </p>
           </div>
         </motion.div>
       </div>

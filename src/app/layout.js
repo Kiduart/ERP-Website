@@ -3,7 +3,7 @@ import Footer from '../components/layout/Footer';
 import './globals.css';
 
 export const metadata = {
-  title: 'KIDURAT - School ERP',
+  title: 'KIDUART - School ERP',
   description: 'A comprehensive school management system powered by AI.',
   icons: {
     icon: 'https://fav.farm/📚',

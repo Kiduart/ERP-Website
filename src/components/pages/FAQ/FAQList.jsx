@@ -18,9 +18,9 @@ export default function FAQList() {
   const faqs = [
     {
       category: "General",
-      question: "What is KIDURAT?",
+      question: "What is KIDUART?",
       answer:
-        "KIDURAT is an AI-powered school ERP system that helps manage student information, attendance, timetables, fees, and more.",
+        "KIDUART is an AI-powered school ERP system that helps manage student information, attendance, timetables, fees, and more.",
     },
     {
       category: "General",
@@ -30,7 +30,7 @@ export default function FAQList() {
     },
     {
       category: "General",
-      question: "Is my data secure with KIDURAT?",
+      question: "Is my data secure with KIDUART?",
       answer:
         "Yes, we use robust encryption and comply with global data protection standards to ensure your data is secure.",
     },
@@ -47,13 +47,13 @@ export default function FAQList() {
     },
     {
       category: "Features",
-      question: "Can I integrate KIDURAT with other systems?",
+      question: "Can I integrate KIDUART with other systems?",
       answer:
         "Yes, our Enterprise plan supports custom integrations with various third-party systems.",
     },
     {
       category: "Features",
-      question: "Does KIDURAT have a mobile app?",
+      question: "Does KIDUART have a mobile app?",
       answer:
         "Yes, our mobile app is available for iOS and Android devices with the Enterprise plan.",
     },
@@ -61,12 +61,13 @@ export default function FAQList() {
       category: "Support",
       question: "How can I get support?",
       answer:
-        "You can reach our support team via email (support@kidurat.com), phone (+91-123-456-7890), or live chat.",
+        "You can reach our support team via email (info@kiduart.com), phone (+91-123-456-7890), or live chat.",
     },
     {
       category: "Support",
       question: "What are the support hours?",
-      answer: "Our support team is available 24/7 for Pro and Enterprise plan users, and 9 AM to 6 PM IST for Basic plan users.",
+      answer:
+        "Our support team is available 24/7 for Pro and Enterprise plan users, and 9 AM to 6 PM IST for Basic plan users.",
     },
   ];
 
@@ -91,7 +92,12 @@ export default function FAQList() {
 
   return (
     <div className="relative py-16">
-      <ParticleEffect count={20} color={theme.colors.accentCyan} shape="star" speed={0.2} />
+      <ParticleEffect
+        count={20}
+        color={theme.colors.accentCyan}
+        shape="star"
+        speed={0.2}
+      />
       <div className="max-w-4xl mx-auto space-y-8 relative z-10">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
           <div className="relative w-full sm:w-auto">

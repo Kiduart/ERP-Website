@@ -9,9 +9,8 @@ import HowWeAchieve from "../../components/pages/Priorities/HowWeAchieve";
 import CallToAction from "../../components/pages/Priorities/CallToAction";
 import { theme } from "@/components/utils/theme";
 import ParticleEffect from "@/components/utils/ParticleEffect";
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 import Priorities from "@/components/pages/Priorities/Prioriteies";
-
 
 // Fallback typography in case theme is undefined
 const defaultTypography = {
@@ -43,7 +42,9 @@ export default function Priority() {
     },
     {
       className: "rounded-full border-2 border-neonOrange",
-      style: { background: "linear-gradient(135deg, rgb(255 165 0), rgb(0 182 239))" },
+      style: {
+        background: "linear-gradient(135deg, rgb(255 165 0), rgb(0 182 239))",
+      },
       size: 80,
       angle: 135,
       initial: { x: 120 },
@@ -51,7 +52,10 @@ export default function Priority() {
     },
     {
       className: "rounded-full border-2 border-skyBlue",
-      style: { background: "linear-gradient(135deg, rgb(135 206 235), rgb(249 206 51))" },
+      style: {
+        background:
+          "linear-gradient(135deg, rgb(135 206 235), rgb(249 206 51))",
+      },
       size: 50,
       angle: 45,
       initial: { y: -120 },
@@ -75,7 +79,7 @@ export default function Priority() {
 
   const testimonial = {
     quote:
-      "KIDURAT’s focus on security and efficiency has allowed us to dedicate more time to our students’ growth.",
+      "KIDUART’s focus on security and efficiency has allowed us to dedicate more time to our students’ growth.",
     author: "Sarah Johnson, Principal",
     school: "Bright Future Academy",
   };
@@ -83,11 +87,24 @@ export default function Priority() {
   return (
     <div className="w-full">
       <div className="relative">
-        <WaveBackground gradient={theme.gradients.cyanToPink} height="80px" opacity={0.1} particleShape="circle" waveCount={3} texture="smooth" />
-        <ParticleEffect count={30} color={theme.colors.neonPink} shape="hexagon" speed={0.3} motionPath="spiral" />
+        <WaveBackground
+          gradient={theme.gradients.cyanToPink}
+          height="80px"
+          opacity={0.1}
+          particleShape="circle"
+          waveCount={3}
+          texture="smooth"
+        />
+        <ParticleEffect
+          count={30}
+          color={theme.colors.neonPink}
+          shape="hexagon"
+          speed={0.3}
+          motionPath="spiral"
+        />
         <Hero
           title="Our Priorities"
-          description="Learn about the core principles that drive KIDURAT."
+          description="Learn about the core principles that drive KIDUART."
           breadcrumbItems={breadcrumbItems}
           gradientClass="from-primary/80 via-neonOrange/60 to-accentCyan/80 via-skyBlue/50"
           circleColors={["bg-neonOrange", "bg-accentCyan", "bg-skyBlue"]}
@@ -106,13 +123,35 @@ export default function Priority() {
           titleClassName="bg-gradient-to-r from-primary to-neonOrange bg-clip-text text-transparent animate-glow"
         />
       </div>
-      <Section title="Our Priorities" className="bg-gradient-to-br from-white to-accentCyan/10">
+      <Section
+        title="Our Priorities"
+        className="bg-gradient-to-br from-white to-accentCyan/10"
+      >
         <Priorities />
       </Section>
-      <Section title="Why These Priorities Matter" glassmorphism={true} className="relative bg-gradient-to-br from-white to-neonPink/10">
-        <WaveBackground gradient={theme.gradients.purpleToGreen} height="80px" opacity={0.1} particleShape="star" waveCount={3} texture="smooth" />
-        <ParticleEffect count={20} color={theme.colors.accentCyan} shape="star" speed={0.2} />
-        <DecorativeCircles positions={positions} colors={["bg-neonOrange", "bg-accentCyan", "bg-skyBlue"]} />
+      <Section
+        title="Why These Priorities Matter"
+        glassmorphism={true}
+        className="relative bg-gradient-to-br from-white to-neonPink/10"
+      >
+        <WaveBackground
+          gradient={theme.gradients.purpleToGreen}
+          height="80px"
+          opacity={0.1}
+          particleShape="star"
+          waveCount={3}
+          texture="smooth"
+        />
+        <ParticleEffect
+          count={20}
+          color={theme.colors.accentCyan}
+          shape="star"
+          speed={0.2}
+        />
+        <DecorativeCircles
+          positions={positions}
+          colors={["bg-neonOrange", "bg-accentCyan", "bg-skyBlue"]}
+        />
         <div className="relative z-10 text-center max-w-3xl mx-auto">
           <motion.p
             className="text-lg text-grayDark mb-6"
@@ -122,7 +161,10 @@ export default function Priority() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            Our priorities are designed to ensure that schools can focus on what matters most—student success. By prioritizing security, efficiency, and innovation, we empower educators to create a better learning environment.
+            Our priorities are designed to ensure that schools can focus on what
+            matters most—student success. By prioritizing security, efficiency,
+            and innovation, we empower educators to create a better learning
+            environment.
           </motion.p>
           <motion.blockquote
             className="text-grayDark italic border-l-4 border-primary pl-4 py-2"
@@ -139,7 +181,10 @@ export default function Priority() {
           </motion.blockquote>
         </div>
       </Section>
-      <Section title="Our Impact" className="bg-gradient-to-br from-white to-skyBlue/10">
+      <Section
+        title="Our Impact"
+        className="bg-gradient-to-br from-white to-skyBlue/10"
+      >
         <OurImpact />
       </Section>
       <Section title="How We Achieve These Priorities" className="bg-white">

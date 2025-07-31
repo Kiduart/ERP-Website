@@ -1,22 +1,31 @@
 "use client";
 
-import { motion, useScroll, useTransform } from 'framer-motion';
-import Image from 'next/image';
-import Breadcrumb from '@/components/common/Breadcrumb';
-import Button from '@/components/common/Button';
-import { useState, useEffect } from 'react';
-import { TypeAnimation } from 'react-type-animation';
-import { theme } from '@/components/utils/theme';
-import ParticleEffect from '@/components/utils/ParticleEffect';
-import DecorativeCircles from '@/components/utils/DecorativeCircles';
-import WaveBackground from '@/components/utils/WaveBackground';
+import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
+import Breadcrumb from "@/components/common/Breadcrumb";
+import Button from "@/components/common/Button";
+import { useState, useEffect } from "react";
+import { TypeAnimation } from "react-type-animation";
+import { theme } from "@/components/utils/theme";
+import ParticleEffect from "@/components/utils/ParticleEffect";
+import DecorativeCircles from "@/components/utils/DecorativeCircles";
+import WaveBackground from "@/components/utils/WaveBackground";
 
 export default function LeadershipHero({ breadcrumbItems }) {
   const [currentImage, setCurrentImage] = useState(0);
   const images = [
-    { src: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2070&auto=format&fit=crop', caption: 'Visionary Leadership' },
-    { src: 'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop', caption: 'Driving Innovation' },
-    { src: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=2070&auto=format&fit=crop', caption: 'Global Impact' },
+    {
+      src: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2070&auto=format&fit=crop",
+      caption: "Visionary Leadership",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop",
+      caption: "Driving Innovation",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=2070&auto=format&fit=crop",
+      caption: "Global Impact",
+    },
   ];
 
   const { scrollY } = useScroll();
@@ -31,18 +40,25 @@ export default function LeadershipHero({ breadcrumbItems }) {
 
   const floatAnimation = {
     y: [0, -10, 0],
-    transition: { duration: 3, repeat: Infinity, ease: 'easeInOut' },
+    transition: { duration: 3, repeat: Infinity, ease: "easeInOut" },
   };
 
   const leadershipFloatingIcons = [
-    { icon: '👥', size: '35px', top: '6%', left: '4%', delay: 0 },
-    { icon: '🏆', size: '30px', top: '10%', right: '6%', delay: 1 },
-    { icon: '🌟', size: '32px', bottom: '10%', left: '8%', delay: 2 },
+    { icon: "👥", size: "35px", top: "6%", left: "4%", delay: 0 },
+    { icon: "🏆", size: "30px", top: "10%", right: "6%", delay: 1 },
+    { icon: "🌟", size: "32px", bottom: "10%", left: "8%", delay: 2 },
   ];
 
   return (
     <section className="relative overflow-hidden py-16 px-6">
-      <WaveBackground gradient={theme.gradients.purpleToGreen} height="120px" opacity={0.15} particleShape="diamond" waveCount={4} texture="wavy" />
+      <WaveBackground
+        gradient={theme.gradients.purpleToGreen}
+        height="120px"
+        opacity={0.15}
+        particleShape="diamond"
+        waveCount={4}
+        texture="wavy"
+      />
       <motion.video
         autoPlay
         loop
@@ -59,11 +75,11 @@ export default function LeadershipHero({ breadcrumbItems }) {
       <ParticleEffect count={30} color={theme.colors.accentCyan} shape="star" />
       <DecorativeCircles
         positions={[
-          { size: '450px', top: '-120px', right: '-120px' },
-          { size: '200px', bottom: '60px', left: '-60px' },
-          { size: '300px', top: '50%', left: '-80px' },
+          { size: "450px", top: "-120px", right: "-120px" },
+          { size: "200px", bottom: "60px", left: "-60px" },
+          { size: "300px", top: "50%", left: "-80px" },
         ]}
-        colors={['bg-neonPink', 'bg-skyBlue', 'bg-accentPurple']}
+        colors={["bg-neonPink", "bg-skyBlue", "bg-accentPurple"]}
       />
       {leadershipFloatingIcons.map((floatIcon, index) => (
         <motion.div
@@ -76,17 +92,30 @@ export default function LeadershipHero({ breadcrumbItems }) {
             bottom: floatIcon.bottom,
             fontSize: floatIcon.size,
             zIndex: 20,
-            pointerEvents: 'auto',
-            willChange: 'transform',
+            pointerEvents: "auto",
+            willChange: "transform",
           }}
-          animate={{ ...floatAnimation, transition: { ...floatAnimation.transition, delay: floatIcon.delay } }}
-          whileHover={{ scale: 1.2, opacity: 1, boxShadow: `0 0 15px ${theme.colors.accentCyan}`, transition: { duration: 0.3 } }}
+          animate={{
+            ...floatAnimation,
+            transition: {
+              ...floatAnimation.transition,
+              delay: floatIcon.delay,
+            },
+          }}
+          whileHover={{
+            scale: 1.2,
+            opacity: 1,
+            boxShadow: `0 0 15px ${theme.colors.accentCyan}`,
+            transition: { duration: 0.3 },
+          }}
         >
           {floatIcon.icon}
         </motion.div>
       ))}
       <div className="relative max-w-7xl mx-auto z-10">
-        {breadcrumbItems && <Breadcrumb items={breadcrumbItems} inHero={true} />}
+        {breadcrumbItems && (
+          <Breadcrumb items={breadcrumbItems} inHero={true} />
+        )}
         <div className="flex flex-col md:flex-row items-center gap-12">
           <motion.div
             className="md:w-1/2 text-center md:text-left"
@@ -99,11 +128,11 @@ export default function LeadershipHero({ breadcrumbItems }) {
             </h1>
             <TypeAnimation
               sequence={[
-                'Guiding Innovation',
+                "Guiding Innovation",
                 2000,
-                'Shaping Education',
+                "Shaping Education",
                 2000,
-                'Empowering Futures',
+                "Empowering Futures",
                 2000,
               ]}
               wrapper="p"
@@ -111,7 +140,8 @@ export default function LeadershipHero({ breadcrumbItems }) {
               repeat={Infinity}
             />
             <p className="text-lg text-white font-poppins mb-8 opacity-90">
-              Meet the visionaries behind KIDURAT, driving global educational transformation with innovation and passion.
+              Meet the visionaries behind KIDUART, driving global educational
+              transformation with innovation and passion.
             </p>
             <Button
               text="Explore Our Leaders"
@@ -139,12 +169,14 @@ export default function LeadershipHero({ breadcrumbItems }) {
                   src={image.src}
                   alt={image.caption}
                   fill
-                  style={{ objectFit: 'cover' }}
+                  style={{ objectFit: "cover" }}
                   sizes="(max-width: 768px) 100vw, 50vw"
                   loading="lazy"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4 text-center">
-                  <p className="text-sm text-white font-poppins">{image.caption}</p>
+                  <p className="text-sm text-white font-poppins">
+                    {image.caption}
+                  </p>
                 </div>
               </motion.div>
             ))}

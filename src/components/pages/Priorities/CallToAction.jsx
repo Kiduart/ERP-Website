@@ -7,7 +7,6 @@ import { theme } from "@/components/utils/theme";
 import WaveBackground from "@/components/utils/WaveBackground";
 import { motion } from "framer-motion";
 
-
 // Fallback typography in case theme is undefined
 const defaultTypography = {
   heading: "'Inter', sans-serif",
@@ -24,8 +23,20 @@ export default function CallToAction() {
 
   return (
     <div className="relative py-16">
-      <WaveBackground gradient={theme.gradients.purpleToGreen} height="90px" opacity={0.1} particleShape="star" waveCount={4} texture="smooth" />
-      <ParticleEffect count={15} color={theme.colors.skyBlue} shape="diamond" speed={0.3} />
+      <WaveBackground
+        gradient={theme.gradients.purpleToGreen}
+        height="90px"
+        opacity={0.1}
+        particleShape="star"
+        waveCount={4}
+        texture="smooth"
+      />
+      <ParticleEffect
+        count={15}
+        color={theme.colors.skyBlue}
+        shape="diamond"
+        speed={0.3}
+      />
       <DecorativeCircles
         positions={[
           { size: "250px", top: "-60px", right: "-60px" },
@@ -50,7 +61,8 @@ export default function CallToAction() {
           className="text-lg text-grayDark leading-relaxed mb-8"
           style={{ fontFamily: typography.body }}
         >
-          Discover how KIDURAT’s core principles can transform your school. Explore our features or request a demo today!
+          Discover how KIDUART’s core principles can transform your school.
+          Explore our features or request a demo today!
         </p>
         <div className="flex justify-center gap-4">
           <motion.div animate={floatAnimation}>

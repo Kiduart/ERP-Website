@@ -24,14 +24,21 @@ export default function CareersIntro() {
 
   return (
     <div className="relative py-16">
-      <WaveBackground gradient={theme.gradients.cyanToPink} height="80px" opacity={0.1} particleShape="circle" waveCount={3} texture="smooth" />
+      <WaveBackground
+        gradient={theme.gradients.cyanToPink}
+        height="80px"
+        opacity={0.1}
+        particleShape="circle"
+        waveCount={3}
+        texture="smooth"
+      />
       <ParticleEffect count={20} color={theme.colors.neonPink} shape="circle" />
       <DecorativeCircles
         positions={[
-          { size: '200px', top: '-50px', left: '-50px' },
-          { size: '150px', bottom: '-30px', right: '-30px' },
+          { size: "200px", top: "-50px", left: "-50px" },
+          { size: "150px", bottom: "-30px", right: "-30px" },
         ]}
-        colors={['bg-primary', 'bg-skyBlue']}
+        colors={["bg-primary", "bg-skyBlue"]}
       />
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12 relative z-10">
         <motion.div
@@ -45,13 +52,16 @@ export default function CareersIntro() {
             className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-accentCyan to-neonPink bg-clip-text text-transparent mb-6"
             style={{ fontFamily: typography.heading }}
           >
-            Careers & Culture at KIDURAT
+            Careers & Culture at KIDUART
           </h2>
           <p
             className="text-lg text-grayDark leading-relaxed mb-8"
             style={{ fontFamily: typography.body }}
           >
-            Join a team that’s passionate about transforming education globally. At KIDURAT, we foster a culture of innovation, collaboration, and growth, empowering our employees to make a meaningful impact on millions of students worldwide.
+            Join a team that’s passionate about transforming education globally.
+            At KIDUART, we foster a culture of innovation, collaboration, and
+            growth, empowering our employees to make a meaningful impact on
+            millions of students worldwide.
           </p>
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Button
@@ -73,7 +83,7 @@ export default function CareersIntro() {
         >
           <Image
             src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=2070&auto=format&fit=crop"
-            alt="Careers at KIDURAT"
+            alt="Careers at KIDUART"
             fill
             style={{ objectFit: "cover" }}
             sizes="(max-width: 768px) 100vw, 50vw"

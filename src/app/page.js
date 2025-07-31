@@ -54,7 +54,7 @@ export default function Home() {
   return (
     <div className="w-full">
       <Hero
-        title="Transform Your School with KIDURAT"
+        title="Transform Your School with KIDUART"
         description="A comprehensive AI-powered ERP system designed to streamline school management and enhance student outcomes."
         buttonText="Request a Demo"
         buttonLink="/request-demo"

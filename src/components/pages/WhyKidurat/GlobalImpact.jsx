@@ -1,12 +1,12 @@
 "use client";
 
-import { motion } from 'framer-motion';
-import Image from 'next/image';
+import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function GlobalImpact() {
   const counters = [
-    { value: 90, label: 'Countries & Territories', suffix: '+' },
-    { value: 60, label: 'Million Students', suffix: 'M+' },
+    { value: 90, label: "Countries & Territories", suffix: "+" },
+    { value: 60, label: "Million Students", suffix: "M+" },
   ];
 
   return (
@@ -44,7 +44,8 @@ export default function GlobalImpact() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          KIDURAT’s solutions empower schools in over 90 countries, serving millions of students with innovative tools for education management.
+          KIDUART’s solutions empower schools in over 90 countries, serving
+          millions of students with innovative tools for education management.
         </motion.p>
         <div className="grid grid-cols-2 gap-4">
           {counters.map((counter, index) => (
@@ -60,7 +61,9 @@ export default function GlobalImpact() {
                 {counter.value}
                 <span className="text-2xl">{counter.suffix}</span>
               </h4>
-              <p className="text-sm text-grayDark font-poppins">{counter.label}</p>
+              <p className="text-sm text-grayDark font-poppins">
+                {counter.label}
+              </p>
             </motion.div>
           ))}
         </div>

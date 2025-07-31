@@ -1,21 +1,30 @@
 "use client";
 
-import { motion, useScroll, useTransform } from 'framer-motion';
-import Image from 'next/image';
-import Breadcrumb from '@/components/common/Breadcrumb';
-import Button from '@/components/common/Button';
-import WaveBackground from '@/components/utils/WaveBackground';
-import DecorativeCircles from '@/components/utils/DecorativeCircles';
-import { theme } from '../../utils/theme';
-import { useState, useEffect } from 'react';
-import { TypeAnimation } from 'react-type-animation';
+import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
+import Breadcrumb from "@/components/common/Breadcrumb";
+import Button from "@/components/common/Button";
+import WaveBackground from "@/components/utils/WaveBackground";
+import DecorativeCircles from "@/components/utils/DecorativeCircles";
+import { theme } from "../../utils/theme";
+import { useState, useEffect } from "react";
+import { TypeAnimation } from "react-type-animation";
 
 export default function CompanyHero({ breadcrumbItems }) {
   const [currentImage, setCurrentImage] = useState(0);
   const images = [
-    { src: 'https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop', caption: 'Empowering Education' },
-    { src: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop', caption: 'Innovative Solutions' },
-    { src: 'https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop', caption: 'Global Impact' },
+    {
+      src: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070&auto=format&fit=crop",
+      caption: "Empowering Education",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2070&auto=format&fit=crop",
+      caption: "Innovative Solutions",
+    },
+    {
+      src: "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop",
+      caption: "Global Impact",
+    },
   ];
 
   const { scrollY } = useScroll();
@@ -30,18 +39,22 @@ export default function CompanyHero({ breadcrumbItems }) {
 
   const floatAnimation = {
     y: [0, -10, 0],
-    transition: { duration: 3, repeat: Infinity, ease: 'easeInOut' },
+    transition: { duration: 3, repeat: Infinity, ease: "easeInOut" },
   };
 
   const aboutUsFloatingIcons = [
-    { icon: '👥', size: '35px', top: '6%', left: '4%', delay: 0 },
-    { icon: '🤝', size: '30px', top: '10%', right: '6%', delay: 1 },
-    { icon: '🌍', size: '32px', bottom: '10%', left: '8%', delay: 2 },
+    { icon: "👥", size: "35px", top: "6%", left: "4%", delay: 0 },
+    { icon: "🤝", size: "30px", top: "10%", right: "6%", delay: 1 },
+    { icon: "🌍", size: "32px", bottom: "10%", left: "8%", delay: 2 },
   ];
 
   return (
     <section className="relative overflow-hidden py-16 px-6">
-      <WaveBackground gradient={theme.gradients.cyanToPink} height="100px" opacity={0.1} />
+      <WaveBackground
+        gradient={theme.gradients.cyanToPink}
+        height="100px"
+        opacity={0.1}
+      />
       <motion.video
         autoPlay
         loop
@@ -57,10 +70,10 @@ export default function CompanyHero({ breadcrumbItems }) {
       <div className="absolute inset-0 bg-gradient-to-br from-primary/60 to-accentCyan/60" />
       <DecorativeCircles
         positions={[
-          { size: '400px', top: '-100px', right: '-100px' },
-          { size: '150px', bottom: '50px', left: '-50px' },
+          { size: "400px", top: "-100px", right: "-100px" },
+          { size: "150px", bottom: "50px", left: "-50px" },
         ]}
-        colors={['bg-neonOrange', 'bg-secondary', 'bg-accentYellow']}
+        colors={["bg-neonOrange", "bg-secondary", "bg-accentYellow"]}
       />
       {aboutUsFloatingIcons.map((floatIcon, index) => (
         <motion.div
@@ -73,17 +86,30 @@ export default function CompanyHero({ breadcrumbItems }) {
             bottom: floatIcon.bottom,
             fontSize: floatIcon.size,
             zIndex: 20,
-            pointerEvents: 'auto',
-            willChange: 'transform',
+            pointerEvents: "auto",
+            willChange: "transform",
           }}
-          animate={{ ...floatAnimation, transition: { ...floatAnimation.transition, delay: floatIcon.delay } }}
-          whileHover={{ scale: 1.2, opacity: 1, boxShadow: `0 0 15px ${theme.colors.accentCyan}`, transition: { duration: 0.3 } }}
+          animate={{
+            ...floatAnimation,
+            transition: {
+              ...floatAnimation.transition,
+              delay: floatIcon.delay,
+            },
+          }}
+          whileHover={{
+            scale: 1.2,
+            opacity: 1,
+            boxShadow: `0 0 15px ${theme.colors.accentCyan}`,
+            transition: { duration: 0.3 },
+          }}
         >
           {floatIcon.icon}
         </motion.div>
       ))}
       <div className="relative max-w-7xl mx-auto z-10">
-        {breadcrumbItems && <Breadcrumb items={breadcrumbItems} inHero={true} />}
+        {breadcrumbItems && (
+          <Breadcrumb items={breadcrumbItems} inHero={true} />
+        )}
         <div className="flex flex-col md:flex-row items-center gap-8">
           <motion.div
             className="md:w-1/2 text-center md:text-left"
@@ -96,11 +122,11 @@ export default function CompanyHero({ breadcrumbItems }) {
             </h1>
             <TypeAnimation
               sequence={[
-                'Empowering Schools Worldwide',
+                "Empowering Schools Worldwide",
                 2000,
-                'Innovating with AI',
+                "Innovating with AI",
                 2000,
-                'Building a Brighter Future',
+                "Building a Brighter Future",
                 2000,
               ]}
               wrapper="p"
@@ -108,7 +134,9 @@ export default function CompanyHero({ breadcrumbItems }) {
               repeat={Infinity}
             />
             <p className="text-lg text-white font-poppins mb-6 opacity-90">
-              Since 2018, KIDURAT has been revolutionizing education, impacting over 10 million students across 50+ countries with AI-driven solutions.
+              Since 2018, KIDUART has been revolutionizing education, impacting
+              over 10 million students across 50+ countries with AI-driven
+              solutions.
             </p>
             <Button
               text="Discover Our Story"
@@ -136,7 +164,7 @@ export default function CompanyHero({ breadcrumbItems }) {
                   src={image.src}
                   alt={image.caption}
                   fill
-                  style={{ objectFit: 'cover' }}
+                  style={{ objectFit: "cover" }}
                   sizes="(max-width: 768px) 100vw, 50vw"
                   loading="lazy"
                 />

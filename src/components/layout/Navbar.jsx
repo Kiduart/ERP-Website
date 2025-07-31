@@ -1,9 +1,9 @@
 "use client";
 
-import Link from 'next/link';
-import { useState } from 'react';
-import { FaBars, FaTimes, FaChevronDown, FaRocket } from 'react-icons/fa';
-import { motion, AnimatePresence } from 'framer-motion';
+import Link from "next/link";
+import { useState } from "react";
+import { FaBars, FaTimes, FaChevronDown, FaRocket } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,83 +19,108 @@ export default function Navbar() {
   };
 
   const menuItems = [
-    { name: 'Home', href: '/' },
+    { name: "Home", href: "/" },
     {
-      name: 'Resources',
-      href: '/resources',
+      name: "Resources",
+      href: "/resources",
       subItems: [
         {
-          section: 'KIDURAT',
+          section: "KIDUART",
           items: [
-            { name: 'Features', href: '/features' },
-            { name: 'Pricing', href: '/pricing' },
-            { name: 'FAQ', href: '/faq' },
-            { name: 'Priority', href: '/priority' },
+            { name: "Features", href: "/features" },
+            { name: "Pricing", href: "/pricing" },
+            { name: "FAQ", href: "/faq" },
+            { name: "Priority", href: "/priority" },
           ],
         },
       ],
     },
     {
-      name: 'Company',
-      href: '/company',
+      name: "Company",
+      href: "/company",
       subItems: [
         {
-          section: 'ABOUT KIDURAT',
+          section: "ABOUT KIDUART",
           items: [
-            { name: 'Why KIDURAT?', href: '/company/why-kidurat' },
-            { name: 'About Us', href: '/company/about-us' },
-            { name: 'In The News', href: '/company/in-the-news' },
-            { name: 'Contact Us', href: '/company/contact' },
-            { name: 'Our Leadership', href: '/company/leadership-team' },
+            { name: "Why KIDUART?", href: "/company/why-kiduart" },
+            { name: "About Us", href: "/company/about-us" },
+            { name: "In The News", href: "/company/in-the-news" },
+            { name: "Contact Us", href: "/company/contact" },
+            { name: "Our Leadership", href: "/company/leadership-team" },
           ],
         },
         {
-          section: 'PARTNERSHIPS',
-          items: [
-            { name: 'Our Partners', href: '/company/our-partners' },
-          ],
+          section: "PARTNERSHIPS",
+          items: [{ name: "Our Partners", href: "/company/our-partners" }],
         },
         {
-          section: 'CAREERS',
+          section: "CAREERS",
           items: [
-            { name: 'Careers & Culture', href: '/company/careers-culture' },
+            { name: "Careers & Culture", href: "/company/careers-culture" },
           ],
         },
       ],
     },
-    { name: 'Request a Demo', href: '/request-demo' },
+    { name: "Request a Demo", href: "/request-demo" },
   ];
 
   const linkVariants = {
-    hover: { scale: 1.05, transition: { duration: 0.3, ease: 'easeOut' } },
+    hover: { scale: 1.05, transition: { duration: 0.3, ease: "easeOut" } },
   };
 
   const subLinkVariants = {
-    hover: { scale: 1.05, transition: { duration: 0.3, ease: 'easeOut' } },
+    hover: { scale: 1.05, transition: { duration: 0.3, ease: "easeOut" } },
   };
 
   const dropdownVariants = {
-    hidden: { height: 0, clipPath: 'inset(0 0 100% 0)', opacity: 0, transition: { duration: 0.5, ease: 'easeInOut' } },
-    visible: { height: 'auto', clipPath: 'inset(0 0 0 0)', opacity: 1, transition: { duration: 0.5, ease: 'easeInOut' } },
-    exit: { height: 0, clipPath: 'inset(0 0 100% 0)', opacity: 0, transition: { duration: 0.5, ease: 'easeInOut' } },
+    hidden: {
+      height: 0,
+      clipPath: "inset(0 0 100% 0)",
+      opacity: 0,
+      transition: { duration: 0.5, ease: "easeInOut" },
+    },
+    visible: {
+      height: "auto",
+      clipPath: "inset(0 0 0 0)",
+      opacity: 1,
+      transition: { duration: 0.5, ease: "easeInOut" },
+    },
+    exit: {
+      height: 0,
+      clipPath: "inset(0 0 100% 0)",
+      opacity: 0,
+      transition: { duration: 0.5, ease: "easeInOut" },
+    },
   };
 
   const mobileMenuVariants = {
-    hidden: { x: '100%', opacity: 0 },
-    visible: { x: 0, opacity: 1, transition: { duration: 0.5, ease: 'easeInOut' } },
-    exit: { x: '100%', opacity: 0, transition: { duration: 0.5, ease: 'easeInOut' } },
+    hidden: { x: "100%", opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: { duration: 0.5, ease: "easeInOut" },
+    },
+    exit: {
+      x: "100%",
+      opacity: 0,
+      transition: { duration: 0.5, ease: "easeInOut" },
+    },
   };
 
   const navbarVariants = {
     hidden: { opacity: 0, y: -20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeOut" },
+    },
   };
 
   const underlineVariants = {
-    hidden: { width: '0%' },
+    hidden: { width: "0%" },
     hover: {
-      width: '100%',
-      transition: { duration: 0.4, ease: 'easeOut' },
+      width: "100%",
+      transition: { duration: 0.4, ease: "easeOut" },
     },
   };
 
@@ -111,7 +136,7 @@ export default function Navbar() {
           position: relative;
         }
         .gradient-underline::after {
-          content: '';
+          content: "";
           position: absolute;
           bottom: -2px;
           left: 0;
@@ -127,7 +152,7 @@ export default function Navbar() {
           position: relative;
         }
         .subheading-underline::after {
-          content: '';
+          content: "";
           position: absolute;
           bottom: -2px;
           left: 0;
@@ -140,7 +165,7 @@ export default function Navbar() {
           width: 100%;
         }
         .dropdown-container::before {
-          content: '';
+          content: "";
           position: absolute;
           top: 0;
           left: 0;
@@ -151,14 +176,13 @@ export default function Navbar() {
         }
       `}</style>
 
-
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex justify-between items-center h-20 relative">
           <div className="flex-shrink-0">
             <Link href="/">
               <motion.img
                 src="https://fav.farm/📚"
-                alt="KIDURAT Logo"
+                alt="KIDUART Logo"
                 className="h-12 w-auto"
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 transition={{ duration: 0.3 }}
@@ -190,18 +214,24 @@ export default function Navbar() {
                     />
                   </motion.div>
                 ) : (
-                  <motion.div whileHover="hover" variants={linkVariants} className="relative">
+                  <motion.div
+                    whileHover="hover"
+                    variants={linkVariants}
+                    className="relative"
+                  >
                     <Link
                       href={item.href}
                       className={`${
-                        item.name === 'Request a Demo'
-                          ? 'bg-gradient-to-r from-accentCyan to-neonPink text-white px-6 py-2 rounded-lg flex items-center gap-2'
-                          : 'text-grayDark font-semibold text-lg font-inter gradient-underline'
+                        item.name === "Request a Demo"
+                          ? "bg-gradient-to-r from-accentCyan to-neonPink text-white px-6 py-2 rounded-lg flex items-center gap-2"
+                          : "text-grayDark font-semibold text-lg font-inter gradient-underline"
                       } transition-all duration-300`}
                     >
                       {item.name}
-                      {item.name === 'Request a Demo' && <FaRocket className="h-4 w-4" />}
-                      {item.name !== 'Request a Demo' && (
+                      {item.name === "Request a Demo" && (
+                        <FaRocket className="h-4 w-4" />
+                      )}
+                      {item.name !== "Request a Demo" && (
                         <motion.div
                           className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-accentCyan to-neonPink"
                           variants={underlineVariants}
@@ -210,14 +240,19 @@ export default function Navbar() {
                         />
                       )}
                     </Link>
-                    {item.name === 'Request a Demo' && (
+                    {item.name === "Request a Demo" && (
                       <motion.div
                         className="absolute inset-0 rounded-lg pointer-events-none"
                         whileHover={{
-                          background: 'radial-gradient(circle at 50% 50%, rgba(0, 182, 239, 0.3) 0%, transparent 70%)',
+                          background:
+                            "radial-gradient(circle at 50% 50%, rgba(0, 182, 239, 0.3) 0%, transparent 70%)",
                           scale: [1, 1.5],
                           opacity: [0, 0.8, 0],
-                          transition: { duration: 0.6, repeat: 2, ease: 'easeOut' },
+                          transition: {
+                            duration: 0.6,
+                            repeat: 2,
+                            ease: "easeOut",
+                          },
                         }}
                       />
                     )}
@@ -227,9 +262,10 @@ export default function Navbar() {
                   {item.subItems && dropdownOpen === item.name && (
                     <motion.div
                       className={`absolute top-[55px] left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur-md shadow-lg dropdown-container overflow-hidden ${
-                        item.name === 'Community & Support' || item.name === 'Company'
-                          ? 'w-[50vw] max-w-3xl min-w-[900px]'
-                          : 'min-w-[200px] max-w-[300px]'
+                        item.name === "Community & Support" ||
+                        item.name === "Company"
+                          ? "w-[50vw] max-w-3xl min-w-[900px]"
+                          : "min-w-[200px] max-w-[300px]"
                       }`}
                       initial="hidden"
                       animate="visible"
@@ -239,12 +275,18 @@ export default function Navbar() {
                       onMouseLeave={() => setDropdownOpen(null)}
                     >
                       <div className="px-6 py-6">
-                        {item.name === 'Community & Support' || item.name === 'Company' || item.name === 'Resources' ? (
+                        {item.name === "Community & Support" ||
+                        item.name === "Company" ||
+                        item.name === "Resources" ? (
                           <div className="grid grid-cols-3 gap-10">
                             {item.subItems.map((section, index) => (
                               <div
                                 key={index}
-                                className={`space-y-4 min-w-0 ${index < item.subItems.length - 1 ? 'border-r border-gray-200 pr-6' : ''}`}
+                                className={`space-y-4 min-w-0 ${
+                                  index < item.subItems.length - 1
+                                    ? "border-r border-gray-200 pr-6"
+                                    : ""
+                                }`}
                               >
                                 <div className="relative text-2xl font-extrabold text-primary font-inter border-l-4 border-primary pl-3">
                                   {section.section}
@@ -254,14 +296,14 @@ export default function Navbar() {
                                     initial="hidden"
                                     whileHover="hover"
                                   />
-                                  <motion.div 
-                                  className="absolute button text-2xl font-extract text primary"
-                                  >
-                                    
-                                  </motion.div>
+                                  <motion.div className="absolute button text-2xl font-extract text primary"></motion.div>
                                 </div>
                                 {section.items.map((subItem) => (
-                                  <motion.div key={subItem.name} whileHover="hover" variants={subLinkVariants}>
+                                  <motion.div
+                                    key={subItem.name}
+                                    whileHover="hover"
+                                    variants={subLinkVariants}
+                                  >
                                     <Link
                                       href={subItem.href}
                                       className="block text-grayDark font-semibold text-base font-inter rounded-md px-3 py-2 subheading-underline"
@@ -276,7 +318,11 @@ export default function Navbar() {
                         ) : (
                           <div className="flex flex-col gap-2">
                             {item.subItems.map((subItem, index) => (
-                              <motion.div key={index} whileHover="hover" variants={subLinkVariants}>
+                              <motion.div
+                                key={index}
+                                whileHover="hover"
+                                variants={subLinkVariants}
+                              >
                                 <Link
                                   href={subItem.href}
                                   className="block text-grayDark font-semibold text-base font-inter rounded-md px-3 py-2 subheading-underline"
@@ -302,7 +348,7 @@ export default function Navbar() {
                               x: (Math.random() - 0.5) * 50,
                               y: (Math.random() - 0.5) * 50,
                               opacity: [1, 0],
-                              transition: { duration: 0.5, ease: 'easeOut' },
+                              transition: { duration: 0.5, ease: "easeOut" },
                             }}
                           />
                         ))}
@@ -320,7 +366,11 @@ export default function Navbar() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
-              {isOpen ? <FaTimes className="h-6 w-6" /> : <FaBars className="h-6 w-6" />}
+              {isOpen ? (
+                <FaTimes className="h-6 w-6" />
+              ) : (
+                <FaBars className="h-6 w-6" />
+              )}
             </motion.button>
           </div>
         </div>
@@ -345,7 +395,11 @@ export default function Navbar() {
                         whileHover={{ scale: 1.05 }}
                       >
                         <span>{item.name}</span>
-                        <FaChevronDown className={`h-4 w-4 transition-transform ${dropdownOpen === item.name ? 'rotate-180' : ''}`} />
+                        <FaChevronDown
+                          className={`h-4 w-4 transition-transform ${
+                            dropdownOpen === item.name ? "rotate-180" : ""
+                          }`}
+                        />
                       </motion.div>
                       {dropdownOpen === item.name && (
                         <div className="pl-4 mt-2 space-y-4">
@@ -393,23 +447,30 @@ export default function Navbar() {
                       <Link
                         href={item.href}
                         className={`block ${
-                          item.name === 'Request a Demo'
-                            ? 'bg-gradient-to-r from-accentCyan to-neonPink text-white px-6 py-2 rounded-lg flex items-center gap-2 justify-center'
-                            : 'text-grayDark font-semibold text-lg font-inter'
+                          item.name === "Request a Demo"
+                            ? "bg-gradient-to-r from-accentCyan to-neonPink text-white px-6 py-2 rounded-lg flex items-center gap-2 justify-center"
+                            : "text-grayDark font-semibold text-lg font-inter"
                         } transition-all duration-300 text-center`}
                         onClick={() => setIsOpen(false)}
                       >
                         {item.name}
-                        {item.name === 'Request a Demo' && <FaRocket className="h-4 w-4" />}
+                        {item.name === "Request a Demo" && (
+                          <FaRocket className="h-4 w-4" />
+                        )}
                       </Link>
-                      {item.name === 'Request a Demo' && (
+                      {item.name === "Request a Demo" && (
                         <motion.div
                           className="absolute inset-0 rounded-lg pointer-events-none"
                           whileHover={{
-                            background: 'radial-gradient(circle at 50% 50%, rgba(0, 182, 239, 0.3) 0%, transparent 70%)',
+                            background:
+                              "radial-gradient(circle at 50% 50%, rgba(0, 182, 239, 0.3) 0%, transparent 70%)",
                             scale: [1, 1.5],
                             opacity: [0, 0.8, 0],
-                            transition: { duration: 0.6, repeat: 2, ease: 'easeOut' },
+                            transition: {
+                              duration: 0.6,
+                              repeat: 2,
+                              ease: "easeOut",
+                            },
                           }}
                         />
                       )}

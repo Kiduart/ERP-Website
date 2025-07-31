@@ -15,7 +15,7 @@ const defaultTypography = {
 const testimonials = [
   {
     quote:
-      "KIDURAT’s AI Analytics transformed how we track student progress. It’s a game-changer for our school!",
+      "KIDUART’s AI Analytics transformed how we track student progress. It’s a game-changer for our school!",
     author: "John Doe, Principal",
     school: "Greenwood High School",
   },
@@ -27,7 +27,7 @@ const testimonials = [
   },
   {
     quote:
-      "Managing fees has never been easier. KIDURAT saves us hours every month!",
+      "Managing fees has never been easier. KIDUART saves us hours every month!",
     author: "Sarah Lee, Administrator",
     school: "Bright Future School",
   },

@@ -22,10 +22,7 @@ const defaultTypography = {
 export default function FAQ() {
   const typography = theme?.typography || defaultTypography;
 
-  const breadcrumbItems = [
-    { label: "Home", href: "/" },
-    { label: "FAQ" },
-  ];
+  const breadcrumbItems = [{ label: "Home", href: "/" }, { label: "FAQ" }];
 
   const faqFloatingIcons = [
     { icon: "❓", size: "35px", top: "7%", left: "6%", delay: 0 },
@@ -43,7 +40,9 @@ export default function FAQ() {
     },
     {
       className: "rounded-full border-2 border-emeraldGreen",
-      style: { background: "linear-gradient(135deg, rgb(0 201 87), rgb(148 0 211))" },
+      style: {
+        background: "linear-gradient(135deg, rgb(0 201 87), rgb(148 0 211))",
+      },
       size: 80,
       angle: 135,
       initial: { x: 120 },
@@ -51,7 +50,9 @@ export default function FAQ() {
     },
     {
       className: "rounded-full border-2 border-neonPink",
-      style: { background: "linear-gradient(135deg, rgb(255 105 180), rgb(0 33 71))" },
+      style: {
+        background: "linear-gradient(135deg, rgb(255 105 180), rgb(0 33 71))",
+      },
       size: 50,
       angle: 45,
       initial: { y: -120 },
@@ -74,19 +75,42 @@ export default function FAQ() {
   ];
 
   const contactMethods = [
-    { method: "Email", value: "support@kidurat.com", href: "mailto:support@kidurat.com", icon: "📧" },
-    { method: "Phone", value: "+91-123-456-7890", href: "tel:+911234567890", icon: "📞" },
+    {
+      method: "Email",
+      value: "info@kiduart.com",
+      href: "mailto:info@kiduart.com",
+      icon: "📧",
+    },
+    {
+      method: "Phone",
+      value: "+91-123-456-7890",
+      href: "tel:+911234567890",
+      icon: "📞",
+    },
     { method: "Chat", value: "Live Chat", href: "/chat", icon: "💬" },
   ];
 
   return (
     <div className="w-full">
       <div className="relative">
-        <WaveBackground gradient={theme.gradients.cyanToPink} height="80px" opacity={0.1} particleShape="circle" waveCount={3} texture="smooth" />
-        <ParticleEffect count={30} color={theme.colors.neonPink} shape="hexagon" speed={0.3} motionPath="spiral" />
+        <WaveBackground
+          gradient={theme.gradients.cyanToPink}
+          height="80px"
+          opacity={0.1}
+          particleShape="circle"
+          waveCount={3}
+          texture="smooth"
+        />
+        <ParticleEffect
+          count={30}
+          color={theme.colors.neonPink}
+          shape="hexagon"
+          speed={0.3}
+          motionPath="spiral"
+        />
         <Hero
           title="Frequently Asked Questions"
-          description="Find answers to common questions about KIDURAT."
+          description="Find answers to common questions about KIDUART."
           breadcrumbItems={breadcrumbItems}
           gradientClass="from-emeraldGreen/70 via-primary/90 to-skyBlue/50 via-neonOrange/90"
           circleColors={["bg-accentPurple", "bg-emeraldGreen", "bg-neonPink"]}
@@ -106,13 +130,35 @@ export default function FAQ() {
           titleClassName="bg-gradient-to-r from-emeraldGreen to-neonPink bg-clip-text text-transparent animate-glow"
         />
       </div>
-      <Section title="FAQs" className="bg-gradient-to-br from-white to-accentCyan/10">
+      <Section
+        title="FAQs"
+        className="bg-gradient-to-br from-white to-accentCyan/10"
+      >
         <FAQList />
       </Section>
-      <Section title="Still Have Questions?" glassmorphism={true} className="relative bg-gradient-to-br from-white to-neonPink/10">
-        <WaveBackground gradient={theme.gradients.purpleToGreen} height="80px" opacity={0.1} particleShape="star" waveCount={3} texture="smooth" />
-        <ParticleEffect count={20} color={theme.colors.accentCyan} shape="star" speed={0.2} />
-        <DecorativeCircles positions={positions} colors={["bg-accentPurple", "bg-emeraldGreen", "bg-neonPink"]} />
+      <Section
+        title="Still Have Questions?"
+        glassmorphism={true}
+        className="relative bg-gradient-to-br from-white to-neonPink/10"
+      >
+        <WaveBackground
+          gradient={theme.gradients.purpleToGreen}
+          height="80px"
+          opacity={0.1}
+          particleShape="star"
+          waveCount={3}
+          texture="smooth"
+        />
+        <ParticleEffect
+          count={20}
+          color={theme.colors.accentCyan}
+          shape="star"
+          speed={0.2}
+        />
+        <DecorativeCircles
+          positions={positions}
+          colors={["bg-accentPurple", "bg-emeraldGreen", "bg-neonPink"]}
+        />
         <div className="relative z-10 text-center">
           <p
             className="text-lg text-grayDark mb-6"
@@ -154,7 +200,10 @@ export default function FAQ() {
           </motion.div>
         </div>
       </Section>
-      <Section title="Video Tutorials" className="bg-gradient-to-br from-white to-skyBlue/10">
+      <Section
+        title="Video Tutorials"
+        className="bg-gradient-to-br from-white to-skyBlue/10"
+      >
         <VideoTutorials />
       </Section>
       <Section title="Join Our Community" className="bg-white">
