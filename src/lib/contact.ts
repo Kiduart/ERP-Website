@@ -1,5 +1,5 @@
-export const CONTACT_PHONE_DISPLAY = "+91 98769 87234";
-export const CONTACT_PHONE_E164 = "919876987234";
+export const CONTACT_PHONE_DISPLAY = "+91 92175 34128";
+export const CONTACT_PHONE_E164 = "919217534128";
 export const CONTACT_EMAIL = "support@kiduart.com";
 export const CONTACT_LOCATION = "Noida, Uttar Pradesh, India";
 export const DEFAULT_COUNTRY_CODE = "+91";
