@@ -1,0 +1,19 @@
+
+> school-erp@1.0.0 dev
+> next dev
+
+   ▲ Next.js 15.5.15
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.1.35:3000
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 1524ms
+ ○ Compiling /platform ...
+ ✓ Compiled /platform in 3.5s (973 modules)
+ ✓ Compiled in 227ms (973 modules)
+ GET /platform 200 in 4515ms
+ ✓ Compiled /solutions in 105ms (981 modules)
+ GET /solutions 200 in 519ms
+ GET /platform 200 in 290ms
+ GET /solutions 200 in 269ms

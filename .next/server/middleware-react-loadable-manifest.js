@@ -1,1 +1,0 @@
-self.__REACT_LOADABLE_MANIFEST="{\"components/sections/Hero.jsx -> ./HeroImageFrame\":{\"id\":\"components/sections/Hero.jsx -> ./HeroImageFrame\",\"files\":[\"static/chunks/_app-pages-browser_src_components_sections_HeroImageFrame_jsx.js\"]}}"

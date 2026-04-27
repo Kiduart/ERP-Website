@@ -1,27 +1,31 @@
+import path from "path";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
-        formats: ['image/webp'],
-        remotePatterns: [
-            {
-                protocol: 'https',
-                hostname: 'images.unsplash.com',
-            },
-            {
-                protocol: 'https',
-                hostname: 'img.icons8.com',
-            },
-            {
-                protocol: 'https',
-                hostname: 'www.powerschool.com',
-            },
-            {
-                protocol: 'https',
-                hostname: 'assets.mixkit.co'
-            },
-        ],
+  reactStrictMode: true,
+  poweredByHeader: false,
+  async redirects() {
+    return [
+      {
+        source: "/help-center",
+        destination: "/help",
+        permanent: true,
+      },
+      {
+        source: "/help-center/:slug",
+        destination: "/help/:slug",
+        permanent: true,
+      },
+    ];
+  },
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      wouter: path.resolve("./src/lib/wouter-compat.tsx"),
+    };
 
-    },
+    return config;
+  },
 };
 
 export default nextConfig;
