@@ -192,18 +192,18 @@ export default function Home() {
           image="https://plus.unsplash.com/premium_photo-1764691435961-ecb3a0a5d311?q=80&w=2064&auto=format&fit=crop&ixlib=rb-4.1.0"
           actions={(
             <>
-            <Link
-              href="/demo"
-              className="rounded-full bg-white px-8 py-4 text-center text-lg font-bold text-brand-navy shadow-xl transition-all duration-300 hover:-translate-y-1 hover:bg-brand-beige"
-            >
-              Get Free Demo
-            </Link>
-            <Link
-              href="/pricing"
-              className="flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:bg-white/15"
-            >
-              Start Free Trial <ArrowRight className="h-5 w-5" />
-            </Link>
+              <Link
+                href="/demo"
+                className="rounded-full bg-white px-8 py-4 text-center text-lg font-bold text-brand-navy shadow-xl transition-all duration-300 hover:-translate-y-1 hover:bg-brand-beige"
+              >
+                Get Free Demo
+              </Link>
+              <Link
+                href="/pricing"
+                className="flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:bg-white/15"
+              >
+                Start Free Trial <ArrowRight className="h-5 w-5" />
+              </Link>
             </>
           )}
         />
@@ -464,6 +464,10 @@ export default function Home() {
           <FloatingIcons icons={["Heart", "Star", "Users"]} count={4} />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <SectionReveal className="text-center mb-10">
+
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-brand-yellow font-semibold text-sm mb-6 border border-white/20">
+                Our Proofs
+              </div>
               <h2 className="text-4xl font-bold text-brand-navy mb-4">Proof from School Teams</h2>
               <p className="text-lg text-brand-navy/70 max-w-3xl mx-auto">
                 Social proof matters, so the page now shows testimonials, supporting stats, and institution-style identity markers instead of generic claims.
