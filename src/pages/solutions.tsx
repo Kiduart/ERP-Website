@@ -111,6 +111,12 @@ const impactStats: ImpactStat[] = [
   { end: 24, trailingText: "/7", label: "parent visibility and alerts" },
 ];
 
+const heroSnapshots = [
+  "5 stakeholder-ready views",
+  "10+ hrs saved weekly for teachers",
+  "24/7 parent visibility and alerts",
+];
+
 
 const cards = [
   {
@@ -245,7 +251,7 @@ export default function Solutions() {
                     Live snapshots
                   </div>
                   <div className="mt-3 space-y-1">
-                    {["319 job roles", "265 school flows", "324 admin actions"].map((item) => (
+                    {heroSnapshots.map((item) => (
                       <div
                         key={item}
                         className="rounded-xl bg-brand-beige/60 px-4 py-1 text-sm font-bold text-brand-navy"

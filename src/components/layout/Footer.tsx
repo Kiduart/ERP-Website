@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Facebook, Linkedin, Mail, MapPin, Phone, Twitter } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Twitter } from "lucide-react";
 import { CONTACT_EMAIL, CONTACT_LOCATION, CONTACT_PHONE_DISPLAY } from "@/lib/contact";
 
 export function Footer() {
@@ -60,13 +60,13 @@ export function Footer() {
             </div>
 
             <div className="mt-8 flex gap-4">
-              <a href="#" className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-brand-navy shadow-sm transition-colors hover:bg-brand-navy hover:text-white">
-                <Twitter className="h-5 w-5" />
+              <a href="https://www.instagram.com/kiduart/" className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-brand-navy shadow-sm transition-colors hover:bg-brand-navy hover:text-white">
+                <Instagram className="h-5 w-5" />
               </a>
-              <a href="#" className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-brand-navy shadow-sm transition-colors hover:bg-brand-navy hover:text-white">
+              {/* <a href="#" className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-brand-navy shadow-sm transition-colors hover:bg-brand-navy hover:text-white">
                 <Facebook className="h-5 w-5" />
-              </a>
-              <a href="#" className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-brand-navy shadow-sm transition-colors hover:bg-brand-navy hover:text-white">
+              </a> */}
+              <a href="https://www.linkedin.com/company/kiduart" className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-brand-navy shadow-sm transition-colors hover:bg-brand-navy hover:text-white">
                 <Linkedin className="h-5 w-5" />
               </a>
             </div>

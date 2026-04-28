@@ -1,7 +1,7 @@
 import { useParams, Link } from "wouter";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CtaSection } from "@/components/ui/CtaSection";
-import { ArrowLeft, ArrowRight, Clock, Calendar, Facebook, Twitter, Linkedin, Link as LinkIcon, Mail } from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock, Calendar, Linkedin, Link as LinkIcon, Mail, Instagram } from "lucide-react";
 import React from "react";
 
 const blogData: Record<string, any> = {
@@ -319,6 +319,37 @@ export default function BlogPost() {
   const { slug } = useParams();
   const post = slug ? blogData[slug] : null;
 
+  const handleCopyLink = async () => {
+    if (typeof window === "undefined") return;
+
+    const currentUrl = window.location.href;
+
+    try {
+      await navigator.clipboard.writeText(currentUrl);
+    } catch {
+      const tempInput = document.createElement("input");
+      tempInput.value = currentUrl;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempInput);
+    }
+  };
+
+  const shareLinks = [
+    {
+      label: "Instagram",
+      href: "https://www.instagram.com/kiduart/",
+      icon: Instagram,
+    },
+    {
+      label: "LinkedIn",
+      href: "https://www.linkedin.com/company/kiduart/",
+      icon: Linkedin,
+    },
+    // Facebook share link intentionally kept pending for now.
+  ];
+
   if (!post) {
     return (
       <PageTransition className="flex min-h-[60vh] flex-col items-center justify-center pt-32 pb-24 text-center">
@@ -341,9 +372,6 @@ export default function BlogPost() {
       <section className="section-space-tight bg-brand-beige/30">
         <div className="reading-shell text-center">
           <SectionReveal>
-            <Link href="/blog" className="inline-flex items-center gap-2 text-sm font-semibold text-brand-teal transition-colors hover:text-brand-navy">
-              <ArrowLeft className="h-4 w-4" /> Back to Blog
-            </Link>
 
             <div className="mt-8 inline-flex rounded-full bg-brand-navy px-4 py-1.5 text-sm font-bold text-white shadow-sm">
               {post.category}
@@ -414,14 +442,26 @@ export default function BlogPost() {
                 <div className="rounded-[1.75rem] border border-brand-navy/10 bg-white p-6 shadow-sm">
                   <h2 className="text-xs font-bold uppercase tracking-[0.24em] text-brand-teal">Share article</h2>
                   <div className="mt-5 flex flex-wrap gap-3">
-                    {[Twitter, Linkedin, Facebook, LinkIcon].map((Icon, index) => (
-                      <button
-                        key={index}
+                    {shareLinks.map(({ label, href, icon: Icon }) => (
+                      <a
+                        key={label}
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={label}
                         className="flex h-11 w-11 items-center justify-center rounded-full bg-brand-beige/55 text-brand-navy transition-colors hover:bg-brand-navy hover:text-white"
                       >
                         <Icon className="h-4 w-4" />
-                      </button>
+                      </a>
                     ))}
+                    <button
+                      type="button"
+                      onClick={handleCopyLink}
+                      aria-label="Copy article link"
+                      className="flex h-11 w-11 items-center justify-center rounded-full bg-brand-beige/55 text-brand-navy transition-colors hover:bg-brand-navy hover:text-white"
+                    >
+                      <LinkIcon className="h-4 w-4" />
+                    </button>
                   </div>
                 </div>
               </div>
@@ -439,11 +479,26 @@ export default function BlogPost() {
               <div className="reading-shell mt-10 rounded-[1.75rem] border border-brand-navy/10 bg-brand-teal px-6 py-8 text-white shadow-lg xl:hidden">
                 <h2 className="text-sm font-bold uppercase tracking-[0.24em] text-white/70">Share this article</h2>
                 <div className="mt-5 flex gap-3">
-                  {[Twitter, Linkedin, Facebook].map((Icon, index) => (
-                    <button key={index} className="flex h-12 w-12 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-white hover:text-brand-navy">
+                  {shareLinks.map(({ label, href, icon: Icon }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={label}
+                      className="flex h-12 w-12 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-white hover:text-brand-navy"
+                    >
                       <Icon className="h-5 w-5" />
-                    </button>
+                    </a>
                   ))}
+                  <button
+                    type="button"
+                    onClick={handleCopyLink}
+                    aria-label="Copy article link"
+                    className="flex h-12 w-12 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-white hover:text-brand-navy"
+                  >
+                    <LinkIcon className="h-5 w-5" />
+                  </button>
                 </div>
               </div>
             </main>
