@@ -58,10 +58,10 @@ export function GetInTouchSection() {
                     <div className="mt-3 grid grid-cols-[9rem_minmax(0,1fr)] gap-3">
                       <select
                         defaultValue={DEFAULT_COUNTRY_CODE}
-                        className="field-surface-dark w-full border-0 border-b border-white/14 px-0 py-3 text-sm text-white focus:border-[#d6c1a8] focus:outline-none focus:ring-0"
+                        className="native-dark-select field-surface-dark w-full rounded-md border-0 border-b border-white/20 px-0 py-3 pr-8 text-sm font-semibold text-[#f5efe6] focus:border-[#d6c1a8] focus:outline-none focus:ring-0"
                       >
                         {COUNTRY_CODES.map((code) => (
-                          <option key={code.value} value={code.value} className="text-brand-navy">
+                          <option key={code.value} value={code.value}>
                             {code.label}
                           </option>
                         ))}

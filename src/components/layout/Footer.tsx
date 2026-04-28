@@ -1,8 +1,65 @@
 import { Link } from "wouter";
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Twitter } from "lucide-react";
 import { CONTACT_EMAIL, CONTACT_LOCATION, CONTACT_PHONE_DISPLAY } from "@/lib/contact";
+import { useState, type FormEvent } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 export function Footer() {
+  const { toast } = useToast();
+  const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (!email.trim()) {
+      toast({
+        title: "Email required",
+        description: "Please enter your email to subscribe.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const contentType = response.headers.get("content-type") || "";
+      const rawBody = await response.text();
+      const result = contentType.includes("application/json") && rawBody ? JSON.parse(rawBody) : {};
+
+      if (!response.ok) {
+        throw new Error(
+          typeof result === "object" && result && "error" in result
+            ? String(result.error)
+            : "Unable to subscribe right now."
+        );
+      }
+
+      setEmail("");
+      toast({
+        title: "Subscribed",
+        description: "You’ll now receive KIDUART updates and insights.",
+      });
+    } catch (error) {
+      toast({
+        title: "Subscription failed",
+        description: error instanceof Error ? error.message : "Something went wrong while subscribing.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <footer className="border-t border-brand-navy/10 bg-brand-beige pt-10 pb-8 sm:pt-14">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -18,19 +75,22 @@ export function Footer() {
 
           <form
             className="field-surface-dark mt-8 flex flex-col gap-3 rounded-[1.75rem] border border-white/10 p-2 sm:flex-row sm:items-center sm:rounded-full sm:pl-3"
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={handleSubmit}
           >
             <input
               type="email"
               placeholder="Enter your email"
               required
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
               className="field-surface-dark h-14 flex-1 rounded-full px-4 text-base text-white placeholder:text-white/55 focus:outline-none"
             />
             <button
               type="submit"
+              disabled={isSubmitting}
               className="inline-flex h-14 items-center justify-center rounded-full bg-white px-8 text-base font-semibold text-brand-navy transition-transform hover:-translate-y-0.5"
             >
-              Subscribe
+              {isSubmitting ? "Subscribing..." : "Subscribe"}
             </button>
           </form>
         </div>

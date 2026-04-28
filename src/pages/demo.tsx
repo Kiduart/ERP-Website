@@ -12,39 +12,93 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { CheckCircle2 } from "lucide-react";
 import { CONTACT_PHONE_DISPLAY, COUNTRY_CODES, DEFAULT_COUNTRY_CODE, WHATSAPP_URL } from "@/lib/contact";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
+import { useState } from "react";
 
 const demoSchema = z.object({
   firstName: z.string().min(2, "First name is required"),
   lastName: z.string().min(2, "Last name is required"),
   email: z.string().email("Invalid email address"),
-  phoneCode: z.string().min(2, "Country code is required"),
+  code: z.string().min(2, "Country code is required"),
   phone: z.string().regex(/^\d{10}$/, "Enter a valid 10 digit phone number"),
   school: z.string().min(2, "School name is required"),
   role: z.string().min(2, "Role is required"),
   students: z.string().min(1, "Please select student count"),
-  country: z.string().min(2, "Country is required"),
   message: z.string().optional(),
 });
 
 type DemoFormValues = z.infer<typeof demoSchema>;
 
+async function parseApiResponse(response: Response) {
+  const contentType = response.headers.get("content-type") || "";
+  const rawBody = await response.text();
+
+  if (contentType.includes("application/json")) {
+    return rawBody ? JSON.parse(rawBody) : {};
+  }
+
+  throw new Error(
+    response.ok
+      ? "Unexpected response from the server."
+      : "The form API is not returning JSON yet. Please retry after the server restart."
+  );
+}
+
 export default function RequestDemo() {
   const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
   const form = useForm<DemoFormValues>({
     resolver: zodResolver(demoSchema),
     defaultValues: {
-      firstName: "", lastName: "", email: "", phoneCode: DEFAULT_COUNTRY_CODE, phone: "",
-      school: "", role: "", students: "", country: "", message: ""
+      firstName: "", lastName: "", email: "", code: DEFAULT_COUNTRY_CODE, phone: "",
+      school: "", role: "", students: "", message: ""
     }
   });
 
-  const onSubmit = (data: DemoFormValues) => {
-    console.log(data);
-    toast({
-      title: "Request Received!",
-      description: "Our team will contact you shortly to schedule your demo.",
-    });
-    form.reset();
+  const onSubmit = async (data: DemoFormValues) => {
+    setIsSubmitting(true);
+    setSuccessMessage("");
+
+    try {
+      const response = await fetch("/api/demo", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await parseApiResponse(response);
+
+      if (!response.ok) {
+        throw new Error(result?.error || "Unable to send demo request right now.");
+      }
+
+      toast({
+        title: "Request Received!",
+        description: "Our team will contact you shortly to schedule your demo.",
+      });
+      setSuccessMessage("Your demo request has been sent. We'll be in touch shortly.");
+      form.reset({
+        firstName: "",
+        lastName: "",
+        email: "",
+        code: DEFAULT_COUNTRY_CODE,
+        phone: "",
+        school: "",
+        role: "",
+        students: "",
+        message: "",
+      });
+    } catch (error) {
+      toast({
+        title: "Request failed",
+        description: error instanceof Error ? error.message : "Something went wrong while scheduling your demo.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -143,17 +197,10 @@ export default function RequestDemo() {
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-6">
-                    <FormField control={form.control} name="email" render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-brand-navy">Work Email</FormLabel>
-                        <FormControl><Input placeholder="john@school.edu" {...field} className="field-surface" /></FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )} />
-                    <FormField control={form.control} name="phoneCode" render={({ field }) => (
+                    <FormField control={form.control} name="code" render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-brand-navy">Country Code</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <Select onValueChange={field.onChange} value={field.value}>
                           <FormControl><SelectTrigger className="field-surface"><SelectValue placeholder="Select code" /></SelectTrigger></FormControl>
                           <SelectContent>
                             {COUNTRY_CODES.map((code) => (
@@ -167,7 +214,14 @@ export default function RequestDemo() {
                     <FormField control={form.control} name="phone" render={({ field }) => (
                       <FormItem className="md:col-span-1">
                         <FormLabel className="text-brand-navy">Phone Number</FormLabel>
-                        <FormControl><Input placeholder="10 digit number" inputMode="numeric" maxLength={10} {...field} className="field-surface" /></FormControl>
+                        <FormControl><Input placeholder="10 digit number" inputMode="numeric" maxLength={10} {...field} onChange={(e) => field.onChange(e.target.value.replace(/\D/g, "").slice(0, 10))} className="field-surface" /></FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )} />
+                    <FormField control={form.control} name="email" render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-brand-navy">Work Email</FormLabel>
+                        <FormControl><Input placeholder="john@school.edu" {...field} className="field-surface" /></FormControl>
                         <FormMessage />
                       </FormItem>
                     )} />
@@ -181,11 +235,11 @@ export default function RequestDemo() {
                     </FormItem>
                   )} />
 
-                  <div className="grid md:grid-cols-3 gap-6">
+                  <div className="grid md:grid-cols-2 gap-6">
                     <FormField control={form.control} name="role" render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-brand-navy">Your Role</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <Select onValueChange={field.onChange} value={field.value}>
                           <FormControl><SelectTrigger className="field-surface"><SelectValue placeholder="Select" /></SelectTrigger></FormControl>
                           <SelectContent>
                             <SelectItem value="Principal">Principal/Admin</SelectItem>
@@ -200,7 +254,7 @@ export default function RequestDemo() {
                     <FormField control={form.control} name="students" render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-brand-navy">Students</FormLabel>
-                        <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <Select onValueChange={field.onChange} value={field.value}>
                           <FormControl><SelectTrigger className="field-surface"><SelectValue placeholder="Select" /></SelectTrigger></FormControl>
                           <SelectContent>
                             <SelectItem value="<500">Under 500</SelectItem>
@@ -211,13 +265,13 @@ export default function RequestDemo() {
                         <FormMessage />
                       </FormItem>
                     )} />
-                    <FormField control={form.control} name="country" render={({ field }) => (
+                    {/* <FormField control={form.control} name="country" render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-brand-navy">Country</FormLabel>
                         <FormControl><Input placeholder="India" {...field} className="field-surface" /></FormControl>
                         <FormMessage />
                       </FormItem>
-                    )} />
+                    )} /> */}
                   </div>
 
                   <FormField control={form.control} name="message" render={({ field }) => (
@@ -228,9 +282,12 @@ export default function RequestDemo() {
                     </FormItem>
                   )} />
 
-                  <button type="submit" className="w-full py-4 rounded-xl bg-brand-navy text-white font-bold text-lg hover:bg-brand-teal transition-all duration-300 shadow-lg hover:shadow-brand-teal/25">
-                    Schedule Demo
+                  <button type="submit" disabled={isSubmitting} className="w-full py-4 rounded-xl bg-brand-navy text-white font-bold text-lg hover:bg-brand-teal transition-all duration-300 shadow-lg hover:shadow-brand-teal/25 disabled:cursor-not-allowed disabled:opacity-70">
+                    {isSubmitting ? "Scheduling..." : "Schedule Demo"}
                   </button>
+                  {successMessage ? (
+                    <p aria-live="polite" className="text-sm font-medium text-brand-teal">{successMessage}</p>
+                  ) : null}
                 </form>
               </Form>
             </SectionReveal>
