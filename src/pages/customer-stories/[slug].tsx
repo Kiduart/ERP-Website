@@ -13,7 +13,7 @@ const storiesData: Record<string, any> = {
     results: ["92% fee collection rate (up from 68%)", "40% reduction in administrative overhead", "500+ hours saved per month across campuses", "Parent satisfaction score improved from 6.2 to 8.7/10"],
     quote: "KIDUART transformed how we run our three campuses. What used to require a 10-person admin team now runs smoothly with 6 people, and our parents are happier than ever.",
     leadership: "Dr. Ramesh Gupta, Principal",
-    image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=1600",
+    image: "/images/banner/blog-post-2.jpg",
   },
   "greenfield-academy": {
     school: "Greenfield Academy",

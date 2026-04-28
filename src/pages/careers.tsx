@@ -42,7 +42,7 @@ export default function Careers() {
           <SectionReveal delay={0.08} className="flex justify-center lg:justify-end">
             <div className="relative aspect-square w-[min(80vw,34rem)] overflow-hidden rounded-full border-[14px] border-white shadow-[0_26px_70px_rgba(0,48,73,0.16)]">
               <img
-                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=1400"
+                src="/images/banner/career-post-1.jpg"
                 alt="Careers hero"
                 className="h-full w-full object-cover object-center"
               />

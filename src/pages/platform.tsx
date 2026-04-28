@@ -27,8 +27,7 @@ export default function Platform() {
       color: "text-brand-teal",
       bg: "bg-brand-teal/10",
       href: "/features/student-management",
-      cta: "Explore student operations",
-      image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&q=80&w=1200",
+      cta: "Explore student operations"
     },
     {
       title: "Teacher Dashboard",
@@ -37,8 +36,7 @@ export default function Platform() {
       color: "text-brand-orange",
       bg: "bg-brand-orange/10",
       href: "/features/attendance",
-      cta: "Explore attendance workflows",
-      image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=1200",
+      cta: "Explore attendance workflows"
     },
     {
       title: "HR Dashboard",
@@ -47,8 +45,7 @@ export default function Platform() {
       color: "text-brand-navy",
       bg: "bg-brand-navy/10",
       href: "/features/student-management",
-      cta: "Explore profile management",
-      image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&q=80&w=1200",
+      cta: "Explore profile management"
     },
     {
       title: "Finance Dashboard",
@@ -57,8 +54,7 @@ export default function Platform() {
       color: "text-brand-yellow",
       bg: "bg-brand-yellow/20",
       href: "/features/fee-management",
-      cta: "Explore fee operations",
-      image: "https://images.unsplash.com/photo-1554224154-26032ffc0d07?auto=format&fit=crop&q=80&w=1200",
+      cta: "Explore fee operations"
     },
     {
       title: "Student Dashboard",
@@ -67,8 +63,7 @@ export default function Platform() {
       color: "text-brand-teal",
       bg: "bg-brand-teal/10",
       href: "/features/reports",
-      cta: "Explore academic insights",
-      image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=1200",
+      cta: "Explore academic insights"
     },
     {
       title: "Parent Dashboard",
@@ -77,8 +72,7 @@ export default function Platform() {
       color: "text-brand-orange",
       bg: "bg-brand-orange/10",
       href: "/features/communication",
-      cta: "Explore parent communication",
-      image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1200",
+      cta: "Explore parent communication"
     },
     {
       title: "Accounting Dashboard",
@@ -87,8 +81,7 @@ export default function Platform() {
       color: "text-brand-navy",
       bg: "bg-brand-navy/10",
       href: "/features/fee-management",
-      cta: "Explore billing controls",
-      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=1200",
+      cta: "Explore billing controls"
     },
     {
       title: "Director Dashboard",
@@ -97,8 +90,7 @@ export default function Platform() {
       color: "text-brand-teal",
       bg: "bg-brand-teal/10",
       href: "/features/reports",
-      cta: "Explore executive reporting",
-      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=1200",
+      cta: "Explore executive reporting"
     },
     {
       title: "System Admin Panel",
@@ -107,8 +99,7 @@ export default function Platform() {
       color: "text-brand-orange",
       bg: "bg-brand-orange/10",
       href: "/features/communication",
-      cta: "Explore access workflows",
-      image: "https://images.unsplash.com/photo-1516321497487-e288fb19713f?auto=format&fit=crop&q=80&w=1200",
+      cta: "Explore access workflows"
     },
     {
       title: "School Management Panel",
@@ -117,8 +108,7 @@ export default function Platform() {
       color: "text-brand-navy",
       bg: "bg-brand-navy/10",
       href: "/features/reports",
-      cta: "Explore management reporting",
-      image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=1200",
+      cta: "Explore management reporting"
     },
   ];
 
@@ -128,7 +118,7 @@ export default function Platform() {
         eyebrow="Role-based dashboard views"
         title="One Platform. Every Role. Every Dashboard."
         subtitle="Explore the full range of KIDUART ERP dashboards built for every stakeholder in your school."
-        image="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80"
+        image="/images/banner/platform-hero.jpg"
         fullHeight={true}
         overlayClassName="bg-[linear-gradient(135deg,rgba(250,248,240,0.78),rgba(250,248,240,0.54))]"
         floatingIcons={["LayoutDashboard", "Users", "BarChart2"]}

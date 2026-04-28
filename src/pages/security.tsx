@@ -42,7 +42,7 @@ export default function Security() {
       <HeroSection
         title="Protecting School and Student Data"
         subtitle="We treat your institution's data with bank-grade security. Safety, privacy, and compliance are built into the foundation of KIDUART ERP."
-        image="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        image="/images/banner/security-hero.jpg"
         layout="center"
       />
 

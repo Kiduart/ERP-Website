@@ -84,7 +84,7 @@ export function HeroSection({
     <section
       className={cn(
         isOverlay
-          ? "surface-dark relative flex min-h-[min(80vh,50rem)] items-center overflow-hidden bg-brand-navy py-[clamp(4.5rem,7vw,6.5rem)]"
+          ? "surface-dark relative flex min-h-[min(92vh,50rem)] items-center overflow-hidden bg-brand-navy py-[clamp(4.5rem,7vw,6.5rem)]"
           : "relative overflow-hidden py-[clamp(4rem,6vw,5.75rem)]",
         isSplitDark && "surface-dark bg-brand-navy",
         isSplitLight && "surface-light bg-[linear-gradient(180deg,rgba(255,255,255,1),rgba(250,248,240,0.75))]",

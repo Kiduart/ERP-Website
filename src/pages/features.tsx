@@ -160,7 +160,7 @@ export default function Features() {
           eyebrow="Connected school ERP features"
           title="School ERP Features - Complete School Management System"
           subtitle="From admissions to exams, manage every school operation with our AI-powered ERP platform."
-          image="https://images.unsplash.com/photo-1696395050055-eb7a315bb1cb?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          image="/images/banner/features-hero.jpg"
           actions={(
             <>
             <Link

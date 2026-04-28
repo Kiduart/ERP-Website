@@ -12,7 +12,7 @@ export default function Contact() {
         eyebrow="Talk to our team"
         title="We're Here to Help"
         subtitle="Whether you're looking for a demo, need technical support, or have a general inquiry, our team is ready to assist."
-        image="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=1200"
+        image="/images/banner/contact-post-1.jpg"
         actions={(
           <>
             <a href={`mailto:${CONTACT_EMAIL}`} className="rounded-full bg-brand-navy px-7 py-3.5 text-sm font-bold text-white transition-colors hover:bg-brand-teal">

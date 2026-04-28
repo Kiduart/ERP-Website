@@ -189,7 +189,7 @@ export default function Home() {
         <HomeCurveHero
           title="AI-Powered School ERP Software for Smart School Management"
           subtitle="Manage admissions, fees, attendance, exams & communication — all in one platform designed for modern schools."
-          image="https://plus.unsplash.com/premium_photo-1764691435961-ecb3a0a5d311?q=80&w=2064&auto=format&fit=crop&ixlib=rb-4.1.0"
+          image="/images/banner/home-hero.jpeg"
           actions={(
             <>
               <Link
@@ -465,7 +465,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <SectionReveal className="text-center mb-10">
 
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-brand-yellow font-semibold text-sm mb-6 border border-white/20">
+              <div className="section-kicker mb-5">
                 Our Proofs
               </div>
               <h2 className="text-4xl font-bold text-brand-navy mb-4">Proof from School Teams</h2>

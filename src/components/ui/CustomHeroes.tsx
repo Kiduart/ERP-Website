@@ -195,11 +195,11 @@ export function HomeCurveHero({
             {subtitle}
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">{actions}</div>
-          <div className="mt-10 flex items-center justify-center gap-2">
+          {/* <div className="mt-10 flex items-center justify-center gap-2">
             <span className="h-2.5 w-2.5 rounded-full bg-white" />
             <span className="h-2.5 w-2.5 rounded-full bg-white/50" />
             <span className="h-2.5 w-2.5 rounded-full bg-white/50" />
-          </div>
+          </div> */}
         </SectionReveal>
       </div>
     </section>
@@ -284,7 +284,7 @@ export function BankingContactHero({
         <SectionReveal className="relative order-2 lg:order-1">
           <div className="relative mx-auto max-w-[30rem]">
             <div className="absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-teal/10" />
-            <div className="relative mx-auto h-72 w-72 overflow-hidden rounded-full border-[12px] border-white shadow-[0_30px_70px_rgba(0,48,73,0.12)]">
+            <div className="relative mx-auto h-74 w-74 overflow-hidden rounded-full border-[12px] border-white shadow-[0_30px_70px_rgba(0,48,73,0.12)]">
               <img src={image} alt={title} className="h-full w-full object-cover" />
             </div>
             {[

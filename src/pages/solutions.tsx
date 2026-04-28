@@ -1,12 +1,12 @@
 import Head from "next/head";
 import { Link } from "wouter";
 import { ArrowRight, BookOpen, Building, Building2, CheckCircle2, Presentation, Users } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
 import { FloatingIcons } from "@/components/animations/FloatingIcons";
 import { CtaSection } from "@/components/ui/CtaSection";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type RoleSolution = {
   title: string;
@@ -98,27 +98,80 @@ const districtFeatures = [
   "Role-based permissions for district and school-level teams",
 ];
 
-const impactStats = [
-  { value: "40%", label: "less administrative workload" },
-  { value: "10+ hrs", label: "saved weekly for teachers" },
-  { value: "24/7", label: "parent visibility and alerts" },
+type ImpactStat = {
+  end: number;
+  label: string;
+  suffix?: string;
+  trailingText?: string;
+};
+
+const impactStats: ImpactStat[] = [
+  { end: 40, suffix: "%", label: "less administrative workload" },
+  { end: 10, suffix: "+", trailingText: " hrs", label: "saved weekly for teachers" },
+  { end: 24, trailingText: "/7", label: "parent visibility and alerts" },
 ];
 
 
 const cards = [
   {
     id: 1,
-    img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=900",
+    img: "/images/banner/solution-hero-2.jpg",
   },
   {
     id: 2,
-    img: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&q=80&w=900",
+    img: "/images/banner/solution-hero-1.jpg",
   },
   {
     id: 3,
-    img: "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?auto=format&fit=crop&q=80&w=900",
+    img: "/images/banner/solution-hero-3.jpg",
   },
 ];
+
+function CountUpNumber({
+  end,
+  suffix = "",
+  trailingText = "",
+  duration = 1600,
+}: Pick<ImpactStat, "end" | "suffix" | "trailingText"> & { duration?: number }) {
+  const countRef = useRef<HTMLDivElement | null>(null);
+  const isInView = useInView(countRef, { once: true, margin: "-80px" });
+  const [value, setValue] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    let animationFrame = 0;
+    let startTime: number | null = null;
+
+    const updateValue = (timestamp: number) => {
+      if (startTime === null) {
+        startTime = timestamp;
+      }
+
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easedProgress = 1 - Math.pow(1 - progress, 3);
+
+      setValue(Math.round(end * easedProgress));
+
+      if (progress < 1) {
+        animationFrame = window.requestAnimationFrame(updateValue);
+      }
+    };
+
+    animationFrame = window.requestAnimationFrame(updateValue);
+
+    return () => window.cancelAnimationFrame(animationFrame);
+  }, [duration, end, isInView]);
+
+  return (
+    <div ref={countRef} className="text-4xl font-extrabold text-brand-navy">
+      {value}
+      {suffix}
+      {trailingText}
+    </div>
+  );
+}
 
 
 export default function Solutions() {
@@ -400,7 +453,7 @@ export default function Solutions() {
               <div className="mt-10 grid gap-6 md:grid-cols-3">
                 {impactStats.map((stat) => (
                   <div key={stat.label} className="rounded-3xl bg-brand-beige/20 px-6 py-8 text-center">
-                    <div className="text-4xl font-extrabold text-brand-navy">{stat.value}</div>
+                    <CountUpNumber end={stat.end} suffix={stat.suffix} trailingText={stat.trailingText} />
                     <p className="mt-3 text-sm font-semibold uppercase tracking-[0.18em] text-brand-navy/60">{stat.label}</p>
                   </div>
                 ))}

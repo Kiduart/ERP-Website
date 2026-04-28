@@ -38,7 +38,7 @@ export default function CustomerStories() {
       summary: "Managing 2,400+ students across 3 campuses with fragmented systems led to frequent data errors, slow fee collection, and overwhelmed administrative staff.",
       stat: "92% fee collection rate (up from 68%)",
       color: "from-brand-teal to-brand-navy",
-      image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=900",
+      image: "/images/banner/stories-post-1.jpg",
     },
     {
       slug: "greenfield-academy",
@@ -50,7 +50,7 @@ export default function CustomerStories() {
       summary: "A newly established premium school needed a modern ERP from day one. Manual systems were already causing issues in the first year with just 400 students.",
       stat: "100% digital enrollment process",
       color: "from-brand-orange to-brand-yellow",
-      image: "https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&q=80&w=900",
+      image: "/images/banner/stories-post-2.jpg",
     },
     {
       slug: "sunrise-international",
@@ -62,7 +62,7 @@ export default function CustomerStories() {
       summary: "As an IB school, Sunrise needed a flexible system that could handle their unique grading scale, multi-language communication, and complex fee structures.",
       stat: "Multi-currency billing for 40+ nationalities",
       color: "from-brand-navy to-brand-teal",
-      image: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&q=80&w=900",
+      image: "/images/banner/stories-post-3.jpg",
     },
     {
       slug: "metro-schools-district",
@@ -74,7 +74,7 @@ export default function CustomerStories() {
       summary: "Overseeing 12 schools with completely inconsistent data practices made district-level reporting impossible. Compliance reports took 3 weeks to compile manually.",
       stat: "Compliance reports in 2 hours (previously 3 weeks)",
       color: "from-brand-teal to-brand-orange",
-      image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&q=80&w=900",
+      image: "/images/banner/stories-post-4.jpg",
     },
     {
       slug: "st-mary-school",
@@ -86,7 +86,7 @@ export default function CustomerStories() {
       summary: "A 60-year-old institution with deeply entrenched paper-based processes needed to modernize without losing institutional culture or disrupting longtime staff.",
       stat: "Paper usage reduced by 85%",
       color: "from-brand-yellow to-brand-orange",
-      image: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=900",
+      image: "/images/banner/stories-post-5.jpg",
     },
     {
       slug: "brighton-college",

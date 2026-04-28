@@ -56,7 +56,7 @@ export default function Integrations() {
         eyebrow="School ERP integrations"
         title="Connect Your School Tools"
         subtitle="KIDUART plays nicely with the software you already use. Sync your data across platforms to create a unified ecosystem."
-        image="https://images.unsplash.com/photo-1516321165247-4aa89a48be28?auto=format&fit=crop&q=80"
+        image="/images/banner/integration-hero.jpg"
         actions={(
           <>
             <Link

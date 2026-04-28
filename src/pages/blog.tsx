@@ -72,7 +72,7 @@ export default function Blog() {
     <PageTransition className="pt-20 pb-0">
       <section className="relative min-h-[calc(100svh-5rem)] overflow-hidden bg-[#e7ebee]">
         <img
-          src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=1600"
+          src="/images/banner/blog-hero.avif"
           alt="Blog hero background"
           className="absolute right-0 top-0 h-full w-full object-cover object-[72%_center]"
         />
@@ -129,12 +129,12 @@ export default function Blog() {
                     <img
                       src={
                         [
-                          "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=600&q=80",
-                          "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=600&q=80",
-                          "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=600&q=80",
-                          "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&q=80",
-                          "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&q=80",
-                          "https://images.unsplash.com/photo-1588072432836-e10032774350?w=600&q=80",
+                          "/images/banner/blog-post-1.jpg",
+                          "/images/banner/blog-post-2.jpg",
+                          "/images/banner/blog-post-3.jpg",
+                          "/images/banner/blog-post-4.jpg",
+                          "/images/banner/blog-post-5.jpg",
+                          "/images/banner/blog-post-6.jpg",
                         ][idx % 6]
                       }
                       alt={post.title}

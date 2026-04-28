@@ -6,7 +6,7 @@ import { Link } from "wouter";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
-const heroImage = "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=1600";
+const heroImage = "/images/banner/help-center-hero-1.jpg";
 
 export default function HelpCenter() {
   const [chatOpen, setChatOpen] = useState(false);
