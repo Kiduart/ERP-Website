@@ -47,7 +47,7 @@ export function Footer() {
       setEmail("");
       toast({
         title: "Subscribed",
-        description: "You’ll now receive KIDUART updates and insights.",
+        description: "You are subscribed. We will only send things worth reading.",
       });
     } catch (error) {
       toast({
@@ -66,10 +66,10 @@ export function Footer() {
         <div className="rounded-[2rem] bg-brand-navy px-6 py-8 text-white shadow-[0_24px_60px_rgba(0,48,73,0.18)] sm:px-8 sm:py-10 lg:px-12 lg:py-12">
           <div className="max-w-3xl">
             <h3 className="text-3xl font-bold leading-tight text-white sm:text-4xl">
-              Subscribe to stay updated with KIDUART ERP product improvements and school innovation insights.
+              Stay ahead of what is happening in school management.
             </h3>
             <p className="mt-4 max-w-2xl text-base leading-8 text-white/75 sm:text-lg">
-              Get the latest education tech news.
+              Product updates, practical school operations content, and insights from our team , delivered to your inbox. No noise.
             </p>
           </div>
 
@@ -79,7 +79,7 @@ export function Footer() {
           >
             <input
               type="email"
-              placeholder="Enter your email"
+              placeholder="Your email address"
               required
               value={email}
               onChange={(event) => setEmail(event.target.value)}
@@ -101,7 +101,7 @@ export function Footer() {
               <img src="/logo.png" alt="KIDUART" className="h-20 w-auto" />
             </Link>
             <p className="mt-6 text-sm leading-7 text-brand-navy/70">
-              Transforming modern education through intelligent, intuitive, and powerful technology.
+              KIDUART builds school ERP software for Indian educational institutions , helping admin teams, teachers, and finance staff do their jobs without the friction.
             </p>
 
             <div className="mt-6 space-y-3 text-sm text-brand-navy/75">

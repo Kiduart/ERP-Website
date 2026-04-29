@@ -128,38 +128,48 @@ const featureCategories: { title: string; label: string; accent: string; items: 
 ];
 
 const aiAssistantPoints = [
-  "Auto timetable generation for faster academic planning",
-  "Student performance suggestions based on trends and outcomes",
-  "Smart communication drafts for notices, reminders, and parent updates",
-  "Predictive analytics to surface attendance and performance risks early",
+  "Timetable generation that avoids teacher conflicts and room clashes automatically",
+  "Student performance trend analysis that surfaces concerns before exam week",
+  "Communication drafts for fee reminders, attendance alerts, and school notices",
+  "Fee defaulter prediction based on payment history and seasonal patterns",
 ];
 
 const pageHighlights = [
-  { value: 16, suffix: "+", label: "connected school ERP features" },
-  { value: 4, suffix: "", label: "organized module categories" },
-  { value: 1, suffix: "", label: "AI-powered school management system" },
+  { value: 16, suffix: "+", label: "operational modules" },
+  { value: 4, suffix: "", label: "role-focused categories" },
+  { value: 1, suffix: "", label: "connected school platform" },
 ];
 
 export default function Features() {
   return (
     <>
       <Head>
-        <title>School ERP Features | Complete School Management System</title>
+        <title>School ERP Features | KIDUART , Every Module Your School Needs</title>
         <meta
           name="description"
-          content="Explore school ERP features for admissions, attendance, fees, exams, payroll, parent app, and AI tools. Discover the best school ERP India schools can use to manage every operation."
+          content="Explore KIDUART's school ERP features , student management, fee collection, attendance tracking, exam scheduling, AI analytics, parent app, and more. Built for Indian schools."
         />
         <meta
           name="keywords"
           content="school ERP features, school management software modules, best school ERP India, AI school ERP, school attendance system, school fee management software"
         />
+        <link rel="canonical" href="https://www.kiduart.com/features" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="KIDUART" />
+        <meta property="og:title" content="School ERP Features | KIDUART , Every Module Your School Needs" />
+        <meta property="og:description" content="Explore KIDUART's school ERP features , student management, fee collection, attendance tracking, exam scheduling, AI analytics, parent app, and more. Built for Indian schools." />
+        <meta property="og:url" content="https://www.kiduart.com/features" />
+        <meta property="og:image" content="https://www.kiduart.com/images/banner/home-hero.jpeg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="School ERP Features | KIDUART , Every Module Your School Needs" />
+        <meta name="twitter:description" content="Explore KIDUART's school ERP features , student management, fee collection, attendance tracking, exam scheduling, AI analytics, parent app, and more. Built for Indian schools." />
       </Head>
 
       <PageTransition className="pt-20 pb-0">
         <CircleShowcaseHero
-          eyebrow="Connected school ERP features"
-          title="School ERP Features - Complete School Management System"
-          subtitle="From admissions to exams, manage every school operation with our AI-powered ERP platform."
+          eyebrow="What KIDUART covers"
+          title="Every module your school's admin team reaches for, every day"
+          subtitle="From the first admission inquiry to the final term report , organised by the way school teams actually think about their work."
           image="/images/banner/features-hero.jpg"
           actions={(
             <>
@@ -214,9 +224,9 @@ export default function Features() {
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <SectionReveal className="mx-auto mb-16 max-w-4xl text-center">
               <p className="text-sm font-bold uppercase tracking-[0.28em] text-brand-teal">Structured Modules</p>
-              <h2 className="mt-4 text-4xl font-bold text-brand-navy">Everything your school needs, grouped the way buyers expect</h2>
+              <h2 className="mt-4 text-4xl font-bold text-brand-navy">Every part of school operations, in one place</h2>
               <p className="mt-4 text-lg leading-8 text-brand-navy/70">
-                We have organized every module into clear categories so schools can evaluate the platform faster and understand how each feature improves day-to-day operations.
+                We grouped the modules by how school teams actually work , not by how software companies prefer to organize feature lists.
               </p>
             </SectionReveal>
 
@@ -233,7 +243,7 @@ export default function Features() {
                       <h3 className="mt-3 text-3xl font-bold text-brand-navy">{category.title}</h3>
                     </div>
                     <p className="max-w-2xl text-brand-navy/65">
-                      Benefit-led school management software modules designed to reduce manual work, improve visibility, and make operations easier for every team.
+                      Each module is designed to reduce a specific kind of manual work. Together, they eliminate the need to re-enter the same data in multiple places.
                     </p>
                   </div>
 
@@ -273,11 +283,11 @@ export default function Features() {
             <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
               <SectionReveal>
                 <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-brand-yellow">
-                  AI Assistant for Schools
+                  AI that does a real job
                 </div>
-                <h2 className="mt-6 text-4xl font-bold text-brand-beige">Your biggest differentiator should be visible in seconds</h2>
+                <h2 className="mt-6 text-4xl font-bold text-brand-beige">The AI layer works on your data, not generic templates</h2>
                 <p className="mt-5 max-w-2xl text-lg leading-8 text-brand-beige/80">
-                  Our AI assistant helps schools move faster on academic planning, communication, and decision-making. Instead of being a vague add-on, it supports real workflows that admins, teachers, and leadership teams use every day.
+                  KIDUART's AI assistant handles the tasks that consume time without requiring judgement , timetable conflicts, payment risk signals, performance trends, communication drafts. Your team focuses on the decisions only humans should make.
                 </p>
                 <div className="mt-8 grid gap-4 sm:grid-cols-2">
                   {aiAssistantPoints.map((point, index) => (
@@ -299,17 +309,17 @@ export default function Features() {
                   <div className="flex items-center justify-between border-b border-brand-navy/10 pb-4">
                     <div>
                       <p className="text-sm font-bold uppercase tracking-[0.24em] text-brand-teal">AI Command Center</p>
-                      <h3 className="mt-2 text-2xl font-bold">School-specific AI help</h3>
+                      <h3 className="mt-2 text-2xl font-bold">What you can ask KIDUART AI</h3>
                     </div>
                     <BrainCircuit className="h-10 w-10 text-brand-orange" />
                   </div>
 
                   <div className="mt-6 space-y-4">
                     {[
-                      "Generate a timetable for Class 8 to 10 with no teacher conflicts",
-                      "Draft a fee reminder message for parents with overdue payments",
-                      "Identify students with falling attendance in the last 30 days",
-                      "Show likely performance concerns before exams begin",
+                      "Build a conflict-free timetable for Classes 8 through 10 starting next week",
+                      "Draft a fee reminder for parents who missed the October deadline",
+                      "Show me students whose attendance dropped more than 15% last month",
+                      "Which sections have the largest gap between expected and actual marks?",
                     ].map((task) => (
                       <div key={task} className="rounded-2xl bg-white px-4 py-4 shadow-sm">
                         <p className="text-sm leading-6 text-brand-navy/75">{task}</p>
@@ -329,14 +339,14 @@ export default function Features() {
               <p className="text-sm font-bold uppercase tracking-[0.24em] text-brand-orange">Built for Real Schools</p>
               <h2 className="mt-4 text-4xl font-bold text-brand-navy">See how these school ERP features work in real school operations</h2>
               <p className="mx-auto mt-4 max-w-3xl text-lg leading-8 text-brand-navy/70">
-                If you are comparing school ERP features, school management software modules, or the best school ERP in India, the fastest way to judge fit is a live walkthrough with your own workflows.
+                The fastest way to judge whether a school ERP is right for your institution is to see it handling your actual workflows , not a generic demonstration designed to look impressive.
               </p>
               <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
                 <Link
                   href="/demo"
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-navy px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-brand-teal"
                 >
-                  Book a Free Demo and See How Our ERP Works in Real Schools
+                  Book a free demo
                   <ArrowRight className="h-5 w-5" />
                 </Link>
                 <a
@@ -354,8 +364,8 @@ export default function Features() {
         </section>
 
         <CtaSection
-          title="Book a Free Demo and See How Our ERP Works in Real Schools"
-          subtitle="Explore admissions, attendance, fees, exams, payroll, parent app, and AI workflows in one live walkthrough."
+          title="Want to see how these modules work together in a real school?"
+          subtitle="Book a live walkthrough built around your school's size and the specific workflows you want to improve."
         />
       </PageTransition>
     </>

@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CtaSection } from "@/components/ui/CtaSection";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
@@ -8,16 +9,33 @@ import { pricingPlans } from "@/data/pricing";
 
 export default function Pricing() {
   const faqs = [
-    { q: "How is pricing calculated?", a: "We charge a simple, flat fee per active student per month. Staff, teacher, and parent accounts are completely free and unlimited." },
-    { q: "Are there setup or onboarding fees?", a: "For the Professional and Enterprise plans, onboarding and data migration is included free of charge. Basic plans have a nominal one-time setup fee." },
-    { q: "Can we add modules later?", a: "Yes, you can upgrade your plan or add specific premium modules like Transport Tracking or Library Management at any time." },
-    { q: "Do you offer discounts for large districts?", a: "Absolutely. Our Enterprise plan offers tiered volume discounts for districts with over 5,000 students. Contact sales for a quote." },
-    { q: "What happens to our data if we cancel?", a: "You own your data. If you decide to leave, you can export all your records in standard formats (CSV, Excel, PDF) at no cost." },
-    { q: "Is the parent app included?", a: "The Parent App is included in the Professional and Enterprise plans. It's available for both iOS and Android devices." },
+    { q: "How is pricing calculated?", a: "Based on the number of active students enrolled in your institution per month. Teacher accounts, staff logins, and parent access are completely free , you only pay for students." },
+    { q: "Are there setup or onboarding fees?", a: "Professional and Enterprise plans include full onboarding and data migration at no extra cost. Basic plans have a one-time setup fee. We will confirm the exact amount during your demo." },
+    { q: "Can we add modules after signing up?", a: "Yes. You can upgrade your plan or add specific premium modules , such as Transport Tracking or Library Management , at any time, with prorated billing." },
+    { q: "Do you offer discounts for large districts?", a: "Yes. Our Enterprise plan includes volume-based pricing for districts managing more than 5,000 students across campuses. Contact our sales team for a custom quote." },
+    { q: "What happens to our data if we choose to leave?", a: "Your data belongs to your school. If you decide to move on, you can export all records in standard formats , CSV, Excel, and PDF , at no cost and with no data retention by us." },
+    { q: "Is the parent app included in all plans?", a: "The parent app is included in Professional and Enterprise plans. It is available on iOS and Android. Basic plan users can add it as an optional module." },
   ];
 
   return (
     <PageTransition className="pt-20 pb-0">
+      <Head>
+        <title>School ERP Pricing | Simple Plans for Indian Schools | KIDUART</title>
+        <meta
+          name="description"
+          content="KIDUART school ERP pricing is based on active students per month. Staff and parent accounts are free. See plans for Indian schools of every size. No hidden fees."
+        />
+        <link rel="canonical" href="https://www.kiduart.com/pricing" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="KIDUART" />
+        <meta property="og:title" content="School ERP Pricing | Simple Plans for Indian Schools | KIDUART" />
+        <meta property="og:description" content="KIDUART school ERP pricing is based on active students per month. Staff and parent accounts are free. See plans for Indian schools of every size. No hidden fees." />
+        <meta property="og:url" content="https://www.kiduart.com/pricing" />
+        <meta property="og:image" content="https://www.kiduart.com/images/banner/home-hero.jpeg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="School ERP Pricing | Simple Plans for Indian Schools | KIDUART" />
+        <meta name="twitter:description" content="KIDUART school ERP pricing is based on active students per month. Staff and parent accounts are free. See plans for Indian schools of every size. No hidden fees." />
+      </Head>
       <section className="py-20 bg-brand-beige/20 relative overflow-hidden">
         <BackgroundBlobs
           blobs={[
@@ -28,10 +46,10 @@ export default function Pricing() {
         <FloatingIcons icons={["Star", "Award", "Lightbulb"]} count={4} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionReveal className="mx-auto mb-14 max-w-3xl text-center">
-            <div className="section-kicker">Simple school ERP pricing</div>
-            <h1 className="mt-6 text-[clamp(2rem,1.45rem+1.8vw,3.75rem)] font-bold text-brand-navy">Simple Pricing for Schools</h1>
+            <div className="section-kicker">Straightforward school ERP pricing</div>
+            <h1 className="mt-6 text-[clamp(2rem,1.45rem+1.8vw,3.75rem)] font-bold text-brand-navy">Pricing that grows with your school</h1>
             <p className="mt-4 text-lg text-brand-navy/70">
-              No hidden fees, no complex tiers. Pay only for the active students enrolled in your institution.
+              You pay for active students. Staff accounts, teacher logins and parent app access are included at no extra cost regardless of how many people use the platform.
             </p>
           </SectionReveal>
 
@@ -78,12 +96,12 @@ export default function Pricing() {
         <FloatingIcons icons={["Lightbulb", "Brain", "Award"]} count={4} />
         <div className="max-w-5xl mx-auto px-4 text-center">
           <SectionReveal>
-            <h3 className="text-2xl font-bold text-brand-navy mb-8">Optional Premium Add-Ons</h3>
+            <h3 className="text-2xl font-bold text-brand-navy mb-8">Optional modules available on any plan</h3>
             <div className="grid sm:grid-cols-3 gap-6">
-              {["AI Predictive Assistant", "GPS Transport Tracking", "Digital Library System"].map((addon, i) => (
+              {["AI Insights Assistant", "GPS Transport Tracking", "Digital Library System"].map((addon, i) => (
                 <div key={i} className="p-6 border border-brand-navy/10 rounded-2xl bg-brand-beige/10">
                   <h4 className="font-bold text-brand-navy mb-2">{addon}</h4>
-                  <p className="text-sm text-brand-navy/60">+ $0.50 /student/month</p>
+                  <p className="text-sm text-brand-navy/60">Contact for pricing</p>
                 </div>
               ))}
             </div>
@@ -96,7 +114,7 @@ export default function Pricing() {
         <FloatingIcons icons={["MessageSquare", "Users"]} count={4} />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionReveal className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-brand-navy">Frequently Asked Questions</h2>
+            <h2 className="text-3xl font-bold text-brand-navy">Common questions about pricing and plans</h2>
           </SectionReveal>
           <div className="grid md:grid-cols-2 gap-8">
             {faqs.map((faq, idx) => (

@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CtaSection } from "@/components/ui/CtaSection";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
@@ -119,6 +120,23 @@ export default function CustomerStories() {
 
   return (
     <PageTransition className="pt-20 pb-0">
+      <Head>
+        <title>School ERP Customer Stories | Real Results from Real Schools | KIDUART</title>
+        <meta
+          name="description"
+          content="Read how Indian schools use KIDUART to improve fee collection, reduce admin workload, and give parents better visibility. Real case studies from K-12, private, international, and district schools."
+        />
+        <link rel="canonical" href="https://www.kiduart.com/stories" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="KIDUART" />
+        <meta property="og:title" content="School ERP Customer Stories | Real Results from Real Schools | KIDUART" />
+        <meta property="og:description" content="Read how Indian schools use KIDUART to improve fee collection, reduce admin workload, and give parents better visibility. Real case studies from K-12, private, international, and district schools." />
+        <meta property="og:url" content="https://www.kiduart.com/stories" />
+        <meta property="og:image" content="https://www.kiduart.com/images/banner/home-hero.jpeg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="School ERP Customer Stories | Real Results from Real Schools | KIDUART" />
+        <meta name="twitter:description" content="Read how Indian schools use KIDUART to improve fee collection, reduce admin workload, and give parents better visibility. Real case studies from K-12, private, international, and district schools." />
+      </Head>
       <section className="relative overflow-hidden bg-[#f6efdf]">
         <div className="page-shell relative z-10 flex min-h-[calc(100svh-5rem)] flex-col justify-center py-10">
           <SectionReveal className="mx-auto max-w-3xl text-center">
@@ -126,10 +144,10 @@ export default function CustomerStories() {
               Customer stories
             </div> */}
             <h5 className="text-[clamp(2.1rem,1.5rem+2.2vw,3.05rem)] font-bold leading-[0.98] text-brand-navy">
-              Streamline your team,supercharge your workflow
+              Real schools. Real outcomes. Real people doing the daily work.
             </h5>
             <p className="mx-auto mt-5 max-w-2xl text-[clamp(1rem,0.96rem+0.2vw,1.06rem)] leading-7 text-brand-navy/65">
-              Real schools, real operators, and real outcomes from the same platform your team can explore below.
+              Every story below started with a school team dealing with the same problems most schools face , fragmented data, slow fee collection, and admin work that never seemed to end. Here is what changed.
             </p>
           </SectionReveal>
 
@@ -194,7 +212,7 @@ export default function CustomerStories() {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search by school name, location, or challenge..."
+                placeholder="Search by school name, city, or type of challenge..."
                 className="w-full bg-white rounded-full py-4 pl-12 pr-6 text-brand-navy shadow-xl focus:outline-none focus:ring-4 focus:ring-brand-teal/50 transition-shadow"
               />
             </div>
@@ -264,8 +282,8 @@ export default function CustomerStories() {
           ) : (
             <SectionReveal className="text-center py-20">
               <FolderSearch className="w-16 h-16 text-brand-navy/20 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-brand-navy mb-2">No stories found</h3>
-              <p className="text-brand-navy/60">Try adjusting your search query or removing filters.</p>
+              <h3 className="text-2xl font-bold text-brand-navy mb-2">No matching stories found</h3>
+              <p className="text-brand-navy/60">Try adjusting the search term or removing a filter.</p>
               <button
                 onClick={() => {
                   setSearchQuery("");
@@ -288,7 +306,7 @@ export default function CustomerStories() {
         </div>
       </section>
 
-      <CtaSection title="Become our next success story" subtitle="Join hundreds of schools saving time and improving education outcomes." />
+      <CtaSection title="Ready to write your own story?" subtitle="Book a demo and see what KIDUART would look like for your school's specific size and workflow." />
     </PageTransition>
   );
 }

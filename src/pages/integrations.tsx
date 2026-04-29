@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CtaSection } from "@/components/ui/CtaSection";
 import { CircleShowcaseHero } from "@/components/ui/CustomHeroes";
@@ -52,6 +53,9 @@ export default function Integrations() {
 
   return (
     <PageTransition className="pt-20 pb-0 tooo">
+      <Head>
+        <link rel="canonical" href="https://www.kiduart.com/integrations" />
+      </Head>
       <CircleShowcaseHero
         eyebrow="School ERP integrations"
         title="Connect Your School Tools"

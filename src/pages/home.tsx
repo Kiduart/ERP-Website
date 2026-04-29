@@ -28,8 +28,8 @@ const modules = [
   {
     slug: "student-management",
     icon: Users,
-    title: "Student Management System",
-    desc: "Centralize admissions, profiles, documents, class history, and parent records in one searchable school ERP software India teams can use daily.",
+    title: "Student Management", // CONTENT: Simplified module name for clearer UX copy
+    desc: "Every student's records in one place. Profiles, documents, parent contacts and class history are all accessible to the right people without anyone hunting through files or calling another department.", // CONTENT: Replaced module description with audit-approved copy
     color: "text-brand-teal",
     bg: "bg-brand-teal/10",
   },
@@ -37,7 +37,7 @@ const modules = [
     slug: "fee-management",
     icon: CreditCard,
     title: "Fee Management",
-    desc: "Automate invoices, due reminders, payment tracking, and receipts so finance teams reduce manual follow-ups and improve collections.",
+    desc: "Automated invoices, due-date reminders, payment tracking, and receipts. Finance teams close the month without chasing parents on WhatsApp.", // CONTENT: Added practical finance outcome
     color: "text-brand-orange",
     bg: "bg-brand-orange/10",
   },
@@ -45,7 +45,7 @@ const modules = [
     slug: "attendance",
     icon: CalendarCheck,
     title: "Attendance Tracking",
-    desc: "Record daily attendance faster, flag irregular patterns, and share instant updates with parents and school leadership.",
+    desc: "Teachers mark attendance in seconds. Irregular patterns get flagged before they become a problem. Parents get notified the same day.", // CONTENT: Focused on speed and intervention value
     color: "text-brand-navy",
     bg: "bg-brand-navy/10",
   },
@@ -53,7 +53,7 @@ const modules = [
     slug: "reports",
     icon: FileText,
     title: "Exam & Report Cards",
-    desc: "Generate marksheets, report cards, term summaries, and academic analytics without spreadsheet-heavy workflows.",
+    desc: "Build exam schedules, record marks, and publish report cards without a single spreadsheet. Academic data flows straight from the system.", // CONTENT: Emphasized spreadsheet-free reporting
     color: "text-brand-yellow",
     bg: "bg-brand-yellow/20",
   },
@@ -61,15 +61,15 @@ const modules = [
     slug: "communication",
     icon: MessageSquare,
     title: "Parent Communication",
-    desc: "Send fee reminders, attendance alerts, exam updates, and important notices from the same school management software.",
+    desc: "Fee reminders, attendance alerts, exam notices and school circulars sent from one place with delivery tracking built in.", // CONTENT: Removed em dash and matched audit copy
     color: "text-brand-teal",
     bg: "bg-brand-teal/10",
   },
   {
     slug: "reports",
     icon: PieChart,
-    title: "School Analytics Dashboard",
-    desc: "Track admissions, fee status, attendance trends, and academic performance through role-based dashboards for every team.",
+    title: "Analytics Dashboard", // CONTENT: Tightened title language
+    desc: "Admissions, collections, attendance trends, and academic performance in one view. Role-based access means every team sees what matters to them.", // CONTENT: Clarified role-based analytics benefit
     color: "text-brand-bronze",
     bg: "bg-brand-bronze/10",
   },
@@ -78,62 +78,63 @@ const modules = [
 const aiFeatures = [
   {
     icon: Brain,
-    title: "Smart Attendance Predictions",
-    desc: "Identify absenteeism patterns early so admins and class teachers can intervene before attendance becomes a bigger issue.",
+    title: "Attendance Pattern Alerts", // CONTENT: Reframed AI capability in plain language
+    desc: "When a student's attendance starts slipping below normal, the system surfaces it early , before a parent call is needed or a session is at risk.", // CONTENT: Added concrete early-warning scenario
   },
   {
     icon: Bell,
-    title: "Fee Defaulters Alerts",
-    desc: "Spot overdue payment risk faster with automated alerts for finance teams and timely reminders for parents.",
+    title: "Fee Risk Detection", // CONTENT: Corrected phrasing and sharpened intent
+    desc: "KIDUART identifies accounts showing signs of payment delay and queues them for follow-up, so your finance team focuses on the right ones first.", // CONTENT: Explained prioritization workflow
   },
   {
     icon: FileText,
-    title: "Automated Report Cards",
-    desc: "Speed up result publishing with faster academic summaries, report card preparation, and performance narratives.",
+    title: "Faster Report Card Generation", // CONTENT: Updated title to outcome-first wording
+    desc: "Academic data flows directly into report card templates. Staff review instead of re-entering, and publishing takes minutes instead of days.", // CONTENT: Highlighted data flow and time savings
   },
   {
     icon: Sparkles,
-    title: "Parent Communication Suggestions",
-    desc: "Draft clearer fee, attendance, and exam-related communication with AI-assisted message suggestions for school staff.",
+    title: "Communication Drafts for Staff", // CONTENT: Clarified feature use case
+    desc: "Drafting fee reminders, exam notices, and attendance circulars takes less effort when the system suggests the wording based on context.", // CONTENT: Tied AI writing help to routine communications
   },
 ];
 
 const howItWorks = [
   {
     step: "01",
-    title: "Set up your school",
-    desc: "Configure classes, sections, staff roles, fee heads, academic sessions, and permissions inside one school ERP platform.",
+    title: "Configure your school", // CONTENT: Updated onboarding step title per requested journey language
+    desc: "Set up classes, sections, fee structures, academic sessions, staff roles, and access permissions. Our onboarding team works with you through every step.", // CONTENT: Added setup scope and support expectation
   },
   {
     step: "02",
-    title: "Run daily workflows",
-    desc: "Manage admissions, attendance, fees, exams, and parent communication from role-based dashboards for admins, teachers, and finance teams.",
+    title: "Your team takes over", // CONTENT: Shifted step framing to post-setup adoption
+    desc: "Admins, teachers, and finance staff each log into a dashboard built for their role. No one sees more than they need to , and no one has to be trained twice.", // CONTENT: Clarified role-scoped access and training efficiency
   },
   {
     step: "03",
-    title: "Track performance with AI",
-    desc: "Use insights, alerts, and reports to take faster decisions on collections, attendance, and academic operations.",
+    title: "Decisions get easier", // CONTENT: Rewrote step title to leadership outcome
+    desc: "With live data on attendance, fees, and academic performance, school leadership can act on facts , not guesswork or end-of-term reports.", // CONTENT: Emphasized real-time decision quality
   },
 ];
 
 const faqs = [
   {
     q: "What does your school ERP software manage?",
-    a: "Our platform helps schools manage admissions, student records, fees, attendance, exams, report cards, and parent communication in one place.",
+    a: "KIDUART covers the full lifecycle of school administration , from processing new admissions and maintaining student records to tracking daily attendance, managing fee collections, scheduling exams, generating report cards, and sending notices to parents. Everything runs from one dashboard, which means your admin team stops switching between spreadsheets, WhatsApp, and disconnected tools.",
   },
   {
     q: "Is this suitable for schools in India?",
-    a: "Yes, the product is positioned as school ERP software India teams can use for daily academic, admin, and finance workflows.",
+    a: "Yes. KIDUART is designed specifically for the Indian school context , including support for typical Indian fee structures, academic session patterns, and the communication habits of Indian parents. The platform is currently used by schools in Uttar Pradesh and expanding across North India.",
   },
   {
     q: "How does AI help school management?",
-    a: "AI helps with attendance pattern visibility, fee reminder workflows, faster report card preparation, and better parent communication suggestions.",
+    a: "The AI layer works on patterns in your own school data. It surfaces students with irregular attendance before the problem becomes serious, flags accounts at risk of fee delays so your finance team can act early, speeds up report card generation by pre-filling structured data, and suggests clearer wording for parent circulars.",
   },
   {
     q: "Can different staff have different access?",
-    a: "Yes, role-based access lets admins, teachers, finance teams, and parents see only the data relevant to them.",
+    a: "Yes. KIDUART uses role-based access control. A class teacher sees attendance and gradebook data for their sections. A finance officer sees fee accounts and payment history. The principal sees the full school dashboard. Parents access only their child's profile.",
   },
 ];
+// SEO-UPGRADE: Replaced FAQ answers with high-intent, India-specific operational copy
 
 const comparisons = [
   {
@@ -166,29 +167,56 @@ const testimonials = [
     role: "IT Director, Metro Schools",
     quote: "The platform gave leadership, teachers, and finance staff clearer visibility without adding extra complexity to day-to-day processes.",
   },
-  {
-    img: "avatar-1.png",
-    name: "Elena Rodriguez",
-    role: "Head of Admin, Brighton Public School",
-    quote: "Fee reminders, report workflows, and parent communication feel far more streamlined than our older school management setup.",
-  },
+  // {
+  //   img: "avatar-1.png",
+  //   name: "Elena Rodriguez",
+  //   role: "Head of Admin, Brighton Public School",
+  //   quote: "Fee reminders, report workflows, and parent communication feel far more streamlined than our older school management setup.",
+  // },
 ];
 
 export default function Home() {
   return (
     <>
       <Head>
-        <title>Best School ERP Software in India | AI School Management System</title>
+        <title>School ERP Software for Indian Schools | KIDUART</title>
+        {/* CONTENT: Updated homepage title for keyword and brand precision */}
         <meta
           name="description"
-          content="Manage your school efficiently with our AI-powered School ERP software. फीस, attendance, exams और parent communication — सब कुछ एक platform में।"
+          content="KIDUART helps Indian schools manage admissions, fees, attendance, exams, and parent communication from one platform. AI-powered. Built for how your school actually works. Book a free demo."
         />
+        {/* CONTENT: Replaced meta description with natural, audience-focused copy */}
+        <link rel="canonical" href="https://www.kiduart.com/" />
+        {/* SEO-UPGRADE: Added canonical URL for homepage */}
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="KIDUART" />
+        <meta property="og:title" content="School ERP Software for Indian Schools | KIDUART" />
+        <meta property="og:description" content="KIDUART helps Indian schools manage admissions, fees, attendance, exams, and parent communication from one platform. AI-powered. Built for how your school actually works. Book a free demo." />
+        <meta property="og:url" content="https://www.kiduart.com/" />
+        <meta property="og:image" content="https://www.kiduart.com/images/banner/home-hero.jpeg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="School ERP Software for Indian Schools | KIDUART" />
+        <meta name="twitter:description" content="KIDUART helps Indian schools manage admissions, fees, attendance, exams, and parent communication from one platform. AI-powered. Built for how your school actually works. Book a free demo." />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "KIDUART School ERP",
+            "applicationCategory": "EducationalApplication",
+            "operatingSystem": "Web",
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
+            "description": "AI-powered school ERP for Indian schools covering admissions, fees, attendance, exams and parent communication in one place."
+          })}}
+        />
+        {/* SEO-UPGRADE: Added SoftwareApplication structured data */}
       </Head>
 
       <PageTransition className="pt-0 pb-0">
         <HomeCurveHero
-          title="AI-Powered School ERP Software for Smart School Management"
-          subtitle="Manage admissions, fees, attendance, exams & communication — all in one platform designed for modern schools."
+          title="School ERP Software That Actually Fits How Indian Schools Work"
+          subtitle="One platform for admissions, fees, attendance, exams, and parent communication. No more switching between spreadsheets, WhatsApp, and paper registers."
+          // SEO-UPGRADE: Strengthened hero subtitle with trust and workflow pain-point language
           image="/images/banner/home-hero.jpeg"
           actions={(
             <>
@@ -218,18 +246,19 @@ export default function Home() {
           <FloatingIcons icons={["Calculator", "BarChart2"]} count={4} />
           <div className="page-shell relative z-10">
             <SectionReveal className="mx-auto mb-12 max-w-3xl text-center">
-              <div className="section-kicker">Connected school ERP impact</div>
-              <h2 className="section-title mt-6 text-brand-navy">The operating numbers school leaders care about first</h2>
+              <div className="section-kicker">From schools currently using KIDUART</div>
+              <h2 className="section-title mt-6 text-brand-navy">The numbers behind real school operations</h2>
+              {/* SEO-UPGRADE: Rewrote stats heading for clarity and directness */}
               <p className="section-copy mt-4 text-brand-navy/70">
-                Each metric highlights what this platform actually improves across admissions, academics, parent communication, and collections.
+                Each figure reflects what schools running KIDUART have seen across admissions, collections, communication, and daily admin work.
               </p>
             </SectionReveal>
             <SectionReveal className="grid grid-cols-2 gap-4 text-center md:grid-cols-4 md:gap-6">
               {[
-                { label: "Student records managed", area: "School operations", value: 10000, suffix: "+", decimals: 0 },
-                { label: "Teachers using dashboards", area: "Daily usage", value: 500, suffix: "+", decimals: 0 },
-                { label: "Automated workflows", area: "ERP automation", value: 25, suffix: "+", decimals: 0 },
-                { label: "Platform uptime", area: "Reliability", value: 99.9, suffix: "%", decimals: 1 },
+                { label: "Student records managed", area: "Operations", value: 4, suffix: "+", decimals: 0 },
+                { label: "Teachers on daily dashboards", area: "Adoption", value: 20, suffix: "+", decimals: 0 },
+                { label: "Admin tasks automated", area: "Efficiency", value: 0, suffix: "+", decimals: 0 },
+                { label: "Avg. platform uptime", area: "Reliability", value: 99.9, suffix: "%", decimals: 1 },
               ].map((stat, idx) => (
                 <div key={idx} className="rounded-3xl border border-brand-navy/10 bg-brand-beige/20 px-4 py-6 shadow-sm">
                   <div className="text-xs font-semibold uppercase tracking-[0.24em] text-brand-teal/80">{stat.area}</div>
@@ -254,10 +283,11 @@ export default function Home() {
 
           <div className="page-shell relative z-10">
             <SectionReveal className="mx-auto mb-16 max-w-4xl text-center">
-              <div className="section-kicker">Connected school ERP features</div>
-              <h2 className="section-title mt-6 text-brand-navy">School ERP software India teams can actually use every day</h2>
+              <div className="section-kicker">Core ERP modules</div>
+              <h2 className="section-title mt-6 text-brand-navy">Every school workflow in one connected system</h2>
+              {/* SEO-UPGRADE: Simplified modules heading to core value proposition */}
               <p className="section-copy mt-4 text-brand-navy/70">
-                Explore the core modules inside our school management software, built to reduce admin workload and improve visibility across your institution.
+                From the first admission inquiry to the final exam report , each module is built around the tasks your admin team does every single day.
               </p>
             </SectionReveal>
 
@@ -296,11 +326,11 @@ export default function Home() {
           <div className="page-shell relative z-10">
             <SectionReveal className="mx-auto mb-16 max-w-3xl text-center">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-brand-yellow font-semibold text-sm mb-6 border border-white/20">
-                Practical AI for School Teams
+                AI built for school workflows
               </div>
-              <h2 className="section-title mb-4 text-brand-beige">How AI helps your school teams work faster</h2>
+              <h2 className="section-title mb-4 text-brand-beige">Where AI actually helps your school staff</h2>
               <p className="section-copy" style={{ color: "rgb(var(--hero-muted-rgb) / 0.7)" }}>
-                AI should not feel like a buzzword. It should help admins, teachers, and finance teams act faster on real school workflows.
+                Not a chatbot. Not a gimmick. KIDUART's AI layer works on patterns in your own school data to surface things your team would otherwise miss.
               </p>
             </SectionReveal>
 
@@ -334,9 +364,9 @@ export default function Home() {
           <FloatingIcons icons={["CheckCircle2", "Users", "Star"]} count={4} />
           <div className="page-shell relative z-10">
             <SectionReveal className="text-center mb-16">
-              <h2 className="section-title text-brand-navy mb-4">How it works</h2>
+              <h2 className="section-title text-brand-navy mb-4">Up and running in days, not months</h2>
               <p className="section-copy text-brand-navy/70 max-w-3xl mx-auto">
-                Launch your school management software in three practical steps without overwhelming your team.
+                Most schools are fully operational within two weeks. Here is what the journey looks like.
               </p>
             </SectionReveal>
 
@@ -465,13 +495,12 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <SectionReveal className="text-center mb-10">
 
-              <div className="section-kicker mb-5">
-                Our Proofs
-              </div>
+              <div className="section-kicker mb-5">What schools are saying</div>
               <h2 className="text-4xl font-bold text-brand-navy mb-4">Proof from School Teams</h2>
               <p className="text-lg text-brand-navy/70 max-w-3xl mx-auto">
-                Social proof matters, so the page now shows testimonials, supporting stats, and institution-style identity markers instead of generic claims.
+                Hear from the school teams already running smoother operations with KIDUART.
               </p>
+              {/* SEO-UPGRADE: Replaced internal scaffolding sentence with customer-facing social proof copy */}
             </SectionReveal>
 
             {/* <SectionReveal className="flex flex-wrap justify-center gap-4 mb-12">
@@ -512,8 +541,9 @@ export default function Home() {
             <SectionReveal className="text-center mb-16">
               <h2 className="text-4xl font-bold text-brand-beige mb-4">Why choose us over generic school software?</h2>
               <p className="text-lg max-w-3xl mx-auto text-brand-beige/75">
-                This comparison section helps visitors understand why your school management software is a stronger operational choice.
+                Here is how KIDUART stacks up against generic school software in everyday use.
               </p>
+              {/* SEO-UPGRADE: Replaced placeholder comparison sentence with clear buyer-oriented copy */}
             </SectionReveal>
 
             <SectionReveal className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 shadow-2xl">
@@ -615,9 +645,10 @@ export default function Home() {
         </section>
 
         <CtaSection
-          title="Book a Free Demo of Our School ERP Today"
-          subtitle="See how admissions, fees, attendance, exams, and parent communication can run from one AI-powered platform."
+          title="See KIDUART in action, free with no obligation"
+          subtitle="One of our product specialists will walk you through the platform live. Ask whatever you want. We cover everything relevant to your school's setup."
         />
+        {/* SEO-UPGRADE: Updated CTA to reduce friction and set demo expectations */}
       </PageTransition>
     </>
   );

@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useState } from "react";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CtaSection } from "@/components/ui/CtaSection";
@@ -5,20 +6,21 @@ import { ChevronDown, MessageCircleQuestion } from "lucide-react";
 
 const faqData = {
   "Pricing & Plans": [
-    { q: "How is pricing calculated?", a: "Based on active students per month, starting at $2/student/month." },
-    { q: "Is there a free trial?", a: "Yes, 30-day full-access trial, no credit card needed." },
-    { q: "What's included in the Basic plan?", a: "Student management, attendance, basic reports, email support." },
-    { q: "Can I upgrade my plan?", a: "Yes, upgrade anytime, prorated billing." }
+    { q: "How is pricing calculated?", a: "Pricing is based on the number of active students enrolled in your institution each month. Teacher accounts, staff logins and parent access are all included at no extra cost. You only pay for students. We price in INR for Indian schools. Visit the pricing page or book a demo to get a figure for your school's size." },
+    { q: "Are there setup or onboarding fees?", a: "Professional and Enterprise plans include full onboarding support and data migration from your existing system at no extra cost. For the Basic plan, a one-time setup fee applies. We confirm the exact amount during your demo so there are no surprises later." },
+    { q: "Can we add modules after signing up?", a: "Yes. You can upgrade your plan or add specific modules at any time. Billing adjusts on a prorated basis so you only pay for what you use from the day you add it." },
+    { q: "Do you offer discounts for large school groups?", a: "Yes. Schools managing more than 2,000 students or school groups with multiple campuses qualify for volume pricing. Contact our team for a custom quote." },
+    { q: "What happens to our data if we stop using KIDUART?", a: "Your data belongs to your school. If you decide to move on, you can export all records in standard formats, CSV, Excel and PDF, at no cost. We do not retain your data after the export period." }
   ],
   "Onboarding & Setup": [
-    { q: "How long does implementation take?", a: "Most schools are live in 2 weeks with our guided onboarding." },
-    { q: "Do you migrate existing data?", a: "Yes, we handle full data migration from your current system." },
-    { q: "Is training included?", a: "Yes, live training sessions for all staff roles included." },
-    { q: "What support is provided during setup?", a: "Dedicated onboarding specialist for 30 days." }
+    { q: "How long does implementation take?", a: "Most schools are fully live within one to two weeks using our guided onboarding process. Larger institutions or those with complex existing data may take three to four weeks." },
+    { q: "Do you migrate existing data?", a: "Yes. We handle the full data migration from your current system, whether that is spreadsheets, another ERP or a mix of both. Our team will map your existing data structure before we start." },
+    { q: "Is training included?", a: "Yes. Live training sessions for all staff roles are included as part of onboarding. We train admins, teachers, finance staff and parent portal users separately so each group gets exactly what they need." },
+    { q: "What support is available during setup?", a: "A dedicated onboarding specialist is assigned to your institution for the first 30 days. After that, your account manager handles any follow-up questions." }
   ],
   "Features & Modules": [
     { q: "Can I customize the platform?", a: "Yes, extensive customization for forms, reports, and workflows." },
-    { q: "Is there a mobile app?", a: "Yes, mobile apps for parents, teachers, and students (iOS & Android)." },
+    { q: "Is there a mobile app?", a: "A mobile-optimised web experience works on any phone browser today. Dedicated iOS and Android apps for parents and teachers are in active development. Ask during your demo for the current timeline." },
     { q: "Does it support multiple campuses?", a: "Yes, multi-campus management in Professional and Enterprise plans." },
     { q: "Can parents access the platform?", a: "Yes, dedicated parent portal and mobile app." }
   ],
@@ -64,14 +66,46 @@ export default function FAQ() {
 
   return (
     <PageTransition className="pt-20 pb-0 tooo">
+      <Head>
+        <title>School ERP FAQ | Common Questions About KIDUART</title>
+        <meta
+          name="description"
+          content="Answers to the most common questions about KIDUART school ERP: pricing, onboarding, features, security, integrations and support. Cannot find your answer? Ask us directly."
+        />
+        <link rel="canonical" href="https://www.kiduart.com/faq" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="KIDUART" />
+        <meta property="og:title" content="School ERP FAQ | Common Questions About KIDUART" />
+        <meta property="og:description" content="Answers to the most common questions about KIDUART school ERP: pricing, onboarding, features, security, integrations and support. Cannot find your answer? Ask us directly." />
+        <meta property="og:url" content="https://www.kiduart.com/faq" />
+        <meta property="og:image" content="https://www.kiduart.com/images/banner/home-hero.jpeg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="School ERP FAQ | Common Questions About KIDUART" />
+        <meta name="twitter:description" content="Answers to the most common questions about KIDUART school ERP: pricing, onboarding, features, security, integrations and support. Cannot find your answer? Ask us directly." />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": Object.values(faqData).flat().map((item) => ({
+              "@type": "Question",
+              "name": item.q,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": item.a
+              }
+            }))
+          })}}
+        />
+      </Head>
       <section className="bg-brand-beige/30 py-20 border-b border-brand-navy/5">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <SectionReveal>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-navy mb-6">
-              Frequently Asked Questions
+              Frequently asked questions
             </h1>
             <p className="text-xl text-brand-navy/70">
-              Find answers to common questions about KIDUART ERP.
+              Everything most schools want to know before making a decision. If your question is not here, ask us directly using the form at the bottom.
             </p>
           </SectionReveal>
         </div>
@@ -137,14 +171,14 @@ export default function FAQ() {
                 <MessageCircleQuestion className="w-6 h-6 text-brand-orange" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-brand-navy">Still have questions?</h2>
-                <p className="text-brand-navy/70">Our team is here to help.</p>
+                <h2 className="text-2xl font-bold text-brand-navy">Still have a question?</h2>
+                <p className="text-brand-navy/70">Ask us directly. We will respond within one business day.</p>
               </div>
             </div>
 
             {formSubmitted ? (
               <div className="bg-brand-teal/10 border border-brand-teal/30 text-brand-teal p-6 rounded-xl text-center font-medium text-lg">
-                Thank you! We'll respond within 24 hours.
+                Received. We will get back to you within one business day.
               </div>
             ) : (
               <form onSubmit={handleFormSubmit} className="space-y-6">
@@ -163,7 +197,7 @@ export default function FAQ() {
                   <textarea required rows={4} className="field-surface w-full px-4 py-3 rounded-xl border border-brand-navy/20 focus:outline-none focus:ring-2 focus:ring-brand-teal resize-none" placeholder="How does the..." />
                 </div>
                 <button type="submit" className="w-full px-8 py-4 rounded-full bg-brand-navy text-white font-bold text-lg hover:bg-brand-teal transition-colors">
-                  Send Question
+                  Send your question
                 </button>
               </form>
             )}
@@ -171,7 +205,7 @@ export default function FAQ() {
         </div>
       </section>
 
-      <CtaSection />
+      <CtaSection title="Ready to see KIDUART in action?" subtitle="Book a free demo and we will walk through the features and workflows most relevant to your school." />
     </PageTransition>
   );
 }

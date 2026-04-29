@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { BankingContactHero } from "@/components/ui/CustomHeroes";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
@@ -86,7 +87,7 @@ export default function Contact() {
         help: "I want to schedule a demo",
         message: "",
       });
-      setSuccessMessage("Your message has been sent successfully. Our team will get back to you soon.");
+      setSuccessMessage("Your message is on its way. We will respond within one business day.");
       toast({
         title: "Message sent",
         description: "Our team has received your inquiry.",
@@ -104,10 +105,27 @@ export default function Contact() {
 
   return (
     <PageTransition className="pt-20 pb-0 tooo">
+      <Head>
+        <title>Contact KIDUART | Talk to Our School ERP Team</title>
+        <meta
+          name="description"
+          content="Get in touch with KIDUART , book a demo, ask a product question, or request support. We are based in Noida, Uttar Pradesh and respond within one business day."
+        />
+        <link rel="canonical" href="https://www.kiduart.com/contact" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="KIDUART" />
+        <meta property="og:title" content="Contact KIDUART | Talk to Our School ERP Team" />
+        <meta property="og:description" content="Get in touch with KIDUART , book a demo, ask a product question, or request support. We are based in Noida, Uttar Pradesh and respond within one business day." />
+        <meta property="og:url" content="https://www.kiduart.com/contact" />
+        <meta property="og:image" content="https://www.kiduart.com/images/banner/home-hero.jpeg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Contact KIDUART | Talk to Our School ERP Team" />
+        <meta name="twitter:description" content="Get in touch with KIDUART , book a demo, ask a product question, or request support. We are based in Noida, Uttar Pradesh and respond within one business day." />
+      </Head>
       <BankingContactHero
-        eyebrow="Talk to our team"
-        title="We're Here to Help"
-        subtitle="Whether you're looking for a demo, need technical support, or have a general inquiry, our team is ready to assist."
+        eyebrow="Talk to the team"
+        title="We are easier to reach than you might expect."
+        subtitle="Whether you want to book a demo, have a product question, or just want to understand whether KIDUART is the right fit before committing , we are here. Real people, fast responses."
         image="/images/banner/contact-post-1.jpg"
         actions={(
           <>
@@ -133,14 +151,14 @@ export default function Contact() {
             {/* Contact Info & Locations */}
             <div className="lg:col-span-1 space-y-12">
               <SectionReveal>
-                <h2 className="text-2xl font-bold text-brand-navy mb-6">Get in Touch</h2>
+                <h2 className="text-2xl font-bold text-brand-navy mb-6">Get in touch</h2>
                 <div className="space-y-6">
                   <div className="flex gap-4">
                     <div className="w-12 h-12 rounded-full bg-brand-teal/10 flex items-center justify-center shrink-0">
                       <PhoneCall className="w-5 h-5 text-brand-teal" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-brand-navy">Sales</h4>
+                      <h4 className="font-bold text-brand-navy">Sales and demo requests</h4>
                       <p className="text-brand-navy/70 text-sm mb-1">{CONTACT_PHONE_DISPLAY}</p>
                       <a href={`mailto:${CONTACT_EMAIL}`} className="text-brand-teal font-medium text-sm hover:underline">{CONTACT_EMAIL}</a>
                     </div>
@@ -151,8 +169,8 @@ export default function Contact() {
                       <LifeBuoy className="w-5 h-5 text-brand-orange" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-brand-navy">Support</h4>
-                      <p className="text-brand-navy/70 text-sm mb-1">Available 24/7 for Enterprise</p>
+                      <h4 className="font-bold text-brand-navy">Technical support</h4>
+                      <p className="text-brand-navy/70 text-sm mb-1">Available during business hours. Enterprise plans include priority response.</p>
                       <a href={`mailto:${CONTACT_EMAIL}`} className="text-brand-teal font-medium text-sm hover:underline">{CONTACT_EMAIL}</a>
                     </div>
                   </div>
@@ -162,7 +180,7 @@ export default function Contact() {
                       <Mail className="w-5 h-5 text-brand-navy" />
                     </div>
                     <div>
-                      <h4 className="font-bold text-brand-navy">General Inquiries</h4>
+                      <h4 className="font-bold text-brand-navy">General questions</h4>
                       <a href={`mailto:${CONTACT_EMAIL}`} className="text-brand-teal font-medium text-sm hover:underline">{CONTACT_EMAIL}</a>
                     </div>
                   </div>
@@ -170,18 +188,18 @@ export default function Contact() {
               </SectionReveal>
 
               <SectionReveal delay={0.2}>
-                <h2 className="text-2xl font-bold text-brand-navy mb-6">Global Offices</h2>
+                <h2 className="text-2xl font-bold text-brand-navy mb-6">Where we are</h2>
                 <div className="space-y-6">
                   <div>
-                    <h4 className="font-bold text-brand-navy flex items-center gap-2 mb-1"><MapPin className="w-4 h-4 text-brand-teal" /> KIDUART (HQ)</h4>
+                    <h4 className="font-bold text-brand-navy flex items-center gap-2 mb-1"><MapPin className="w-4 h-4 text-brand-teal" /> KIDUART HQ</h4>
                     <p className="text-brand-navy/70 text-sm ml-6">{CONTACT_LOCATION}</p>
                   </div>
                   <div>
-                    <h4 className="font-bold text-brand-navy flex items-center gap-2 mb-1"><MapPin className="w-4 h-4 text-brand-teal" /> Support Desk</h4>
+                    <h4 className="font-bold text-brand-navy flex items-center gap-2 mb-1"><MapPin className="w-4 h-4 text-brand-teal" /> Support contact</h4>
                     <p className="text-brand-navy/70 text-sm ml-6">{CONTACT_PHONE_DISPLAY}<br/>{CONTACT_EMAIL}</p>
                   </div>
                   <div>
-                    <h4 className="font-bold text-brand-navy flex items-center gap-2 mb-1"><MapPin className="w-4 h-4 text-brand-teal" /> KIDUART Base</h4>
+                    <h4 className="font-bold text-brand-navy flex items-center gap-2 mb-1"><MapPin className="w-4 h-4 text-brand-teal" /> Registered office</h4>
                     <p className="text-brand-navy/70 text-sm ml-6">{CONTACT_LOCATION}</p>
                   </div>
                 </div>
@@ -222,21 +240,21 @@ export default function Contact() {
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-brand-navy">How can we help?</label>
                     <select required value={formData.help} onChange={(e) => handleChange("help", e.target.value)} className="field-surface w-full border border-brand-navy/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-teal focus:border-transparent transition-all appearance-none">
-                      <option>I want to schedule a demo</option>
+                      <option>I want to book a demo</option>
+                      <option>I have a product question</option>
                       <option>I need technical support</option>
-                      <option>Partnership inquiry</option>
-                      <option>Billing question</option>
-                      <option>Other</option>
+                      <option>I am exploring a partnership</option>
+                      <option>Something else</option>
                     </select>
                   </div>
 
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-brand-navy">Message</label>
-                    <textarea required rows={5} value={formData.message} onChange={(e) => handleChange("message", e.target.value)} className="field-surface w-full border border-brand-navy/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-teal focus:border-transparent transition-all resize-none" placeholder="Tell us more about what you need..."></textarea>
+                    <textarea required rows={5} value={formData.message} onChange={(e) => handleChange("message", e.target.value)} className="field-surface w-full border border-brand-navy/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-teal focus:border-transparent transition-all resize-none" placeholder="Tell us what you are working on and what you need , the more specific, the faster we can help."></textarea>
                   </div>
 
                   <button type="submit" disabled={isSubmitting} className="w-full py-4 rounded-xl bg-brand-navy text-white font-bold text-lg hover:bg-brand-teal shadow-xl hover:shadow-brand-teal/25 transition-all duration-300 flex items-center justify-center gap-2 disabled:cursor-not-allowed disabled:opacity-70">
-                    {isSubmitting ? "Sending..." : "Send Message"} <Send className="w-5 h-5" />
+                    {isSubmitting ? "Sending..." : "Send message"} <Send className="w-5 h-5" />
                   </button>
                   {successMessage ? (
                     <p aria-live="polite" className="text-sm font-medium text-brand-teal">{successMessage}</p>

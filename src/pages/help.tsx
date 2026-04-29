@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
 import { FloatingIcons } from "@/components/animations/FloatingIcons";
@@ -107,6 +108,9 @@ export default function HelpCenter() {
 
   return (
     <PageTransition className="pt-20 pb-0">
+      <Head>
+        <link rel="canonical" href="https://www.kiduart.com/help" />
+      </Head>
       <section className="hero-viewport relative overflow-hidden bg-[#f5f0e6]">
         <div className="page-shell hero-viewport-inner relative z-10 grid items-center gap-10 py-8 md:py-10 lg:grid-cols-[0.92fr_1.08fr]">
           <SectionReveal className="max-w-xl">

@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
 import { FloatingIcons } from "@/components/animations/FloatingIcons";
@@ -75,10 +76,12 @@ export default function RequestDemo() {
       }
 
       toast({
-        title: "Request Received!",
-        description: "Our team will contact you shortly to schedule your demo.",
+        title: "Demo request confirmed!",
+        description: "We will be in touch within one business day to finalise your session. Check your inbox for a confirmation shortly.",
       });
-      setSuccessMessage("Your demo request has been sent. We'll be in touch shortly.");
+      // SEO-UPGRADE: Updated success toast copy for clarity on timeline and next steps
+      setSuccessMessage("Your request is in. We will be in touch within one business day to confirm your session time and understand your priorities.");
+      // CONTENT: Updated success inline message with concrete response expectation
       form.reset({
         firstName: "",
         lastName: "",
@@ -103,6 +106,21 @@ export default function RequestDemo() {
 
   return (
     <PageTransition className="pt-20 pb-0 bg-brand-beige/20 min-h-screen flex items-center relative overflow-hidden">
+      <Head>
+        <title>Book a Free School ERP Demo | See KIDUART Live</title>
+        <meta name="description" content="Book a free 30-minute live demo of KIDUART school ERP software. See how admissions, fee management, attendance tracking, and AI tools work in a real school context. No commitment required." />
+        <link rel="canonical" href="https://www.kiduart.com/demo" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="KIDUART" />
+        <meta property="og:title" content="Book a Free School ERP Demo | See KIDUART Live" />
+        <meta property="og:description" content="Book a free 30-minute live demo of KIDUART school ERP software. See how admissions, fee management, attendance tracking, and AI tools work in a real school context. No commitment required." />
+        <meta property="og:url" content="https://www.kiduart.com/demo" />
+        <meta property="og:image" content="https://www.kiduart.com/images/banner/home-hero.jpeg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Book a Free School ERP Demo | See KIDUART Live" />
+        <meta name="twitter:description" content="Book a free 30-minute live demo of KIDUART school ERP software. See how admissions, fee management, attendance tracking, and AI tools work in a real school context. No commitment required." />
+      </Head>
+      {/* SEO-UPGRADE: Added Demo page metadata and canonical URL */}
       <BackgroundBlobs blobs={[
         { color: "#fcbf49", size: 400, position: "top-left", opacity: 0.35 },
         { color: "#0c716b", size: 400, position: "bottom-right", opacity: 0.35 }
@@ -115,13 +133,16 @@ export default function RequestDemo() {
           <div className="lg:col-span-2">
             <SectionReveal>
               <h1 className="text-4xl md:text-5xl font-bold text-brand-navy mb-6 leading-tight">
-                See KIDUART ERP in Action
+                See exactly how KIDUART works for your school
               </h1>
+              {/* SEO-UPGRADE: Updated demo H1 for outcome-focused intent */}
               <p className="text-lg text-brand-navy/70 mb-10">
-                Schedule a personalized 30-minute walkthrough of the platform with our education technology experts.
+                This is not a recorded walkthrough. It is a live session shaped around your school's size, structure and the specific workflow problems you want to solve. Bring your hardest questions. The specialist will have real answers.
               </p>
+              {/* SEO-UPGRADE: Rewrote subtitle to set live-demo expectation and qualify intent */}
               <div className="mb-8 flex flex-wrap items-center gap-4 text-sm text-brand-navy/72">
-                <span className="font-semibold">Prefer a quick chat?</span>
+                <span className="font-semibold">Not ready to book yet?</span>
+                {/* SEO-UPGRADE: Improved WhatsApp CTA pretext for pre-booking confidence */}
                 <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 font-semibold text-brand-navy shadow-sm transition-colors hover:text-brand-teal">
                   <WhatsAppIcon className="h-4 w-4" />
                   {CONTACT_PHONE_DISPLAY}
@@ -130,10 +151,10 @@ export default function RequestDemo() {
               
               <div className="space-y-6 mb-12">
                 {[
-                  "Live demonstration of core modules",
-                  "Discussion of your school's specific challenges",
-                  "Pricing estimation based on your requirements",
-                  "Q&A with a product specialist"
+                  "A live walkthrough of the modules your school actually needs, not a scripted tour.",
+                  "You will get a ballpark figure before the call ends, no waiting for a proposal document.",
+                  "We cover what your specific school type and size requires, not a generic product overview.",
+                  "You leave with a clear picture of fit and a realistic implementation timeline."
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-3">
                     <CheckCircle2 className="w-6 h-6 text-brand-teal shrink-0" />
@@ -144,27 +165,27 @@ export default function RequestDemo() {
 
               {/* Steps */}
               <div className="bg-white p-6 rounded-2xl border border-brand-navy/10 shadow-sm">
-                <h4 className="font-bold text-brand-navy mb-4">What happens next?</h4>
+                <h4 className="font-bold text-brand-navy mb-4">What happens after you submit</h4>
                 <div className="space-y-4">
                   <div className="flex gap-4">
                     <div className="w-8 h-8 rounded-full bg-brand-navy text-white font-bold flex items-center justify-center shrink-0 text-sm">1</div>
                     <div>
-                      <p className="font-semibold text-brand-navy text-sm">Submit Request</p>
-                      <p className="text-brand-navy/60 text-xs">Fill out the form with your details.</p>
+                      <p className="font-semibold text-brand-navy text-sm">Tell us about your school</p>
+                      <p className="text-brand-navy/60 text-xs">Complete the form below. The more detail you add, the better we can tailor the session to what actually matters for your institution.</p>
                     </div>
                   </div>
                   <div className="flex gap-4">
                     <div className="w-8 h-8 rounded-full bg-brand-teal text-white font-bold flex items-center justify-center shrink-0 text-sm">2</div>
                     <div>
-                      <p className="font-semibold text-brand-navy text-sm">Quick Call</p>
-                      <p className="text-brand-navy/60 text-xs">We'll call to confirm your needs.</p>
+                      <p className="font-semibold text-brand-navy text-sm">We reach out within a day</p>
+                      <p className="text-brand-navy/60 text-xs">A product specialist reviews your submission and contacts you to confirm timing and understand where you are and what your school looks like. We take it from there.</p>
                     </div>
                   </div>
                   <div className="flex gap-4">
                     <div className="w-8 h-8 rounded-full bg-brand-orange text-white font-bold flex items-center justify-center shrink-0 text-sm">3</div>
                     <div>
-                      <p className="font-semibold text-brand-navy text-sm">Custom Demo</p>
-                      <p className="text-brand-navy/60 text-xs">Experience the platform tailored to you.</p>
+                      <p className="font-semibold text-brand-navy text-sm">Your personalised session</p>
+                      <p className="text-brand-navy/60 text-xs">A live screen-share of KIDUART configured around the workflows that matter to your school. You leave with a clear picture of fit and a realistic implementation timeline.</p>
                     </div>
                   </div>
                 </div>
@@ -175,7 +196,7 @@ export default function RequestDemo() {
           {/* Right Form */}
           <div className="lg:col-span-3">
             <SectionReveal delay={0.2} className="bg-white p-8 sm:p-10 rounded-3xl shadow-xl border border-brand-navy/5">
-              <h3 className="text-2xl font-bold text-brand-navy mb-6">Request Your Demo</h3>
+              <h3 className="text-2xl font-bold text-brand-navy mb-6">Book your free demo</h3>
               
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -220,7 +241,8 @@ export default function RequestDemo() {
                     )} />
                     <FormField control={form.control} name="email" render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-brand-navy">Work Email</FormLabel>
+                        <FormLabel className="text-brand-navy">School or Work Email</FormLabel>
+                        {/* SEO-UPGRADE: Updated field label for school/work email acceptance */}
                         <FormControl><Input placeholder="john@school.edu" {...field} className="field-surface" /></FormControl>
                         <FormMessage />
                       </FormItem>
@@ -229,7 +251,8 @@ export default function RequestDemo() {
 
                   <FormField control={form.control} name="school" render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-brand-navy">School / Organization Name</FormLabel>
+                        <FormLabel className="text-brand-navy">School Name</FormLabel>
+                      {/* SEO-UPGRADE: Simplified school name field label */}
                       <FormControl><Input placeholder="Oakridge Academy" {...field} className="field-surface" /></FormControl>
                       <FormMessage />
                     </FormItem>
@@ -276,14 +299,15 @@ export default function RequestDemo() {
 
                   <FormField control={form.control} name="message" render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-brand-navy">Anything specific you'd like to see?</FormLabel>
+                        <FormLabel className="text-brand-navy">What is the biggest challenge you want us to address?</FormLabel>
+                      {/* SEO-UPGRADE: Reframed open field label for problem-led demo prep */}
                       <FormControl><Textarea placeholder="e.g. We are mainly looking for a better gradebook..." {...field} className="field-surface resize-none" rows={3} /></FormControl>
                       <FormMessage />
                     </FormItem>
                   )} />
 
                   <button type="submit" disabled={isSubmitting} className="w-full py-4 rounded-xl bg-brand-navy text-white font-bold text-lg hover:bg-brand-teal transition-all duration-300 shadow-lg hover:shadow-brand-teal/25 disabled:cursor-not-allowed disabled:opacity-70">
-                    {isSubmitting ? "Scheduling..." : "Schedule Demo"}
+                    {isSubmitting ? "Scheduling..." : "Book My Free Demo"}
                   </button>
                   {successMessage ? (
                     <p aria-live="polite" className="text-sm font-medium text-brand-teal">{successMessage}</p>

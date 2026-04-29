@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CtaSection } from "@/components/ui/CtaSection";
 import { ImageBackdropHero } from "@/components/ui/CustomHeroes";
@@ -23,101 +24,119 @@ export default function Platform() {
     {
       title: "Admin Dashboard",
       icon: LayoutDashboard,
-      capabilities: ["Student enrollment mgmt", "Staff oversight", "Campus analytics", "Document management"],
+      capabilities: ["Enrollment and admission tracking", "Staff oversight and records", "Campus-wide operational analytics", "Document management and compliance"],
       color: "text-brand-teal",
       bg: "bg-brand-teal/10",
       href: "/features/student-management",
-      cta: "Explore student operations"
+      cta: "Explore admin workflows"
     },
     {
       title: "Teacher Dashboard",
       icon: BookOpen,
-      capabilities: ["Class attendance", "Gradebook", "Lesson planning", "Student communication"],
+      capabilities: ["Attendance marking for each class", "Gradebook and exam records", "Lesson planning and notes", "Direct messaging with parents"],
       color: "text-brand-orange",
       bg: "bg-brand-orange/10",
       href: "/features/attendance",
-      cta: "Explore attendance workflows"
+      cta: "Explore teacher tools"
     },
     {
       title: "HR Dashboard",
       icon: Users,
-      capabilities: ["Staff profiles", "Leave management", "Payroll processing", "Performance reviews"],
+      capabilities: ["Staff profile management", "Leave application and approval", "Monthly payroll processing", "Performance review records"],
       color: "text-brand-navy",
       bg: "bg-brand-navy/10",
       href: "/features/student-management",
-      cta: "Explore profile management"
+      cta: "Explore HR features"
     },
     {
       title: "Finance Dashboard",
       icon: DollarSign,
-      capabilities: ["Fee collection", "Expense tracking", "Budget reports", "Payment gateway"],
+      capabilities: ["Fee collection and receipt tracking", "Expense recording and categories", "Budget and variance reports", "Payment gateway reconciliation"],
       color: "text-brand-yellow",
       bg: "bg-brand-yellow/20",
       href: "/features/fee-management",
-      cta: "Explore fee operations"
+      cta: "Explore finance tools"
     },
     {
       title: "Student Dashboard",
       icon: GraduationCap,
-      capabilities: ["My grades", "Attendance record", "Assignments", "Timetable"],
+      capabilities: ["Personal grades and report history", "Attendance record and trends", "Assignment submissions and deadlines", "Class timetable and schedule updates"],
       color: "text-brand-teal",
       bg: "bg-brand-teal/10",
       href: "/features/reports",
-      cta: "Explore academic insights"
+      cta: "Explore student view"
     },
     {
       title: "Parent Dashboard",
       icon: Heart,
-      capabilities: ["Child's progress", "Fee payments", "Teacher messages", "Notifications"],
+      capabilities: ["Child's daily attendance", "Fee payment and receipt history", "Direct communication with class teacher", "School notices and exam alerts"],
       color: "text-brand-orange",
       bg: "bg-brand-orange/10",
       href: "/features/communication",
-      cta: "Explore parent communication"
+      cta: "Explore parent features"
     },
     {
       title: "Accounting Dashboard",
       icon: Calculator,
-      capabilities: ["Income/expense ledger", "Invoice management", "Tax reports", "Audit trail"],
+      capabilities: ["Income and expense ledger", "Invoice creation and management", "Tax summary and GST reports", "Full audit trail by transaction"],
       color: "text-brand-navy",
       bg: "bg-brand-navy/10",
       href: "/features/fee-management",
-      cta: "Explore billing controls"
+      cta: "Explore accounting controls"
     },
     {
       title: "Director Dashboard",
       icon: TrendingUp,
-      capabilities: ["School-wide analytics", "KPI monitoring", "Strategic insights", "Executive reports"],
+      capabilities: ["School-wide performance analytics", "Key indicator monitoring by term", "Strategic planning data views", "Executive summary reports"],
       color: "text-brand-teal",
       bg: "bg-brand-teal/10",
       href: "/features/reports",
-      cta: "Explore executive reporting"
+      cta: "Explore director view"
     },
     {
       title: "System Admin Panel",
       icon: ShieldCheck,
-      capabilities: ["User roles & permissions", "System config", "Integration settings", "Security logs"],
+      capabilities: ["User role creation and permissions", "System configuration and settings", "Integration management and API keys", "Security logs and access history"],
       color: "text-brand-orange",
       bg: "bg-brand-orange/10",
       href: "/features/communication",
-      cta: "Explore access workflows"
+      cta: "Explore access management"
     },
     {
-      title: "School Management Panel",
+      title: "Multi-Campus Panel",
       icon: Building2,
-      capabilities: ["Multi-campus control", "Policy management", "Academic calendar", "Compliance"],
+      capabilities: ["Oversight across all campuses", "Centralised policy and calendar management", "Cross-campus reporting and benchmarks", "Compliance tracking by location"],
       color: "text-brand-navy",
       bg: "bg-brand-navy/10",
       href: "/features/reports",
-      cta: "Explore management reporting"
+      cta: "Explore multi-campus tools"
     },
   ];
 
   return (
     <PageTransition className="pt-20 pb-0">
+      <Head>
+        <title>School ERP Platform | Role-Based Dashboards for Every Team | KIDUART</title>
+        <meta
+          name="description"
+          content="KIDUART gives every school stakeholder their own dashboard , admin, teacher, finance, student, parent, HR, and director. One platform. Ten role-specific views. Book a free demo."
+        />
+        <link rel="canonical" href="https://www.kiduart.com/platform" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="KIDUART" />
+        <meta property="og:title" content="School ERP Platform | Role-Based Dashboards for Every Team | KIDUART" />
+        <meta property="og:description" content="KIDUART gives every school stakeholder their own dashboard , admin, teacher, finance, student, parent, HR, and director. One platform. Ten role-specific views. Book a free demo." />
+        <meta property="og:url" content="https://www.kiduart.com/platform" />
+        <meta property="og:image" content="https://www.kiduart.com/images/banner/home-hero.jpeg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="School ERP Platform | Role-Based Dashboards for Every Team | KIDUART" />
+        <meta name="twitter:description" content="KIDUART gives every school stakeholder their own dashboard , admin, teacher, finance, student, parent, HR, and director. One platform. Ten role-specific views. Book a free demo." />
+      </Head>
+      {/* CONTENT: Added platform metadata and canonical URL */}
       <ImageBackdropHero
-        eyebrow="Role-based dashboard views"
-        title="One Platform. Every Role. Every Dashboard."
-        subtitle="Explore the full range of KIDUART ERP dashboards built for every stakeholder in your school."
+        eyebrow="Built for every role in your school"
+        title="One platform. A separate dashboard for every team that uses it."
+        subtitle="Admins, teachers, finance officers, HR teams, students, parents, and school directors all work differently. KIDUART gives each role a view that matches their actual responsibilities , not a one-size screen that serves no one particularly well."
         image="/images/banner/platform-hero.jpg"
         fullHeight={true}
         overlayClassName="bg-[linear-gradient(135deg,rgba(250,248,240,0.78),rgba(250,248,240,0.54))]"
@@ -150,10 +169,10 @@ export default function Platform() {
         <FloatingIcons icons={["BookOpen", "Calculator", "Lightbulb"]} count={4} />
         <div className="page-shell relative z-10">
           <SectionReveal className="mx-auto mb-16 max-w-3xl text-center">
-            <div className="section-kicker">Role-based platform views</div>
-            <h2 className="section-title mt-6 text-brand-navy">Explore the dashboard that matches each school team</h2>
+            <div className="section-kicker">Role-based views</div>
+            <h2 className="section-title mt-6 text-brand-navy">Which dashboard is built for your team?</h2>
             <p className="section-copy mt-4 text-brand-navy/70">
-              Each card now points to the closest matching feature area instead of sending every user to the same generic destination.
+              Each card below represents a real stakeholder role in your school. Click through to explore the specific workflows each dashboard handles.
             </p>
           </SectionReveal>
 
@@ -223,15 +242,15 @@ export default function Platform() {
       <section className="border-t border-brand-navy/5 bg-brand-beige/20 py-24">
         <div className="mx-auto max-w-4xl px-4 text-center">
           <SectionReveal>
-            <h2 className="text-3xl font-bold text-brand-navy">Want to see it live?</h2>
+            <h2 className="text-3xl font-bold text-brand-navy">Want to see the dashboard built for your role?</h2>
             <p className="mt-4 text-lg text-brand-navy/70">
-              Get a personalized walkthrough of the dashboards that matter most to your institution.
+              Tell us which team you are part of and we will walk through the exact view , and workflows , that apply to your day-to-day work.
             </p>
             <Link
               href="/demo"
               className="mt-8 inline-flex items-center gap-2 rounded-full bg-brand-navy px-8 py-4 text-lg font-bold text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:bg-brand-teal hover:shadow-brand-teal/25"
             >
-              Request Demo
+              Book a personalised walkthrough
             </Link>
           </SectionReveal>
         </div>

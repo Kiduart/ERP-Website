@@ -106,9 +106,9 @@ type ImpactStat = {
 };
 
 const impactStats: ImpactStat[] = [
-  { end: 40, suffix: "%", label: "less administrative workload" },
-  { end: 10, suffix: "+", trailingText: " hrs", label: "saved weekly for teachers" },
-  { end: 24, trailingText: "/7", label: "parent visibility and alerts" },
+  { end: 40, suffix: "%", label: "Less time on manual admin tasks" },
+  { end: 10, suffix: "+", trailingText: " hrs", label: "Hours saved on report card publishing per term" },
+  { end: 24, trailingText: "/7", label: "Parent communication sent from one place" },
 ];
 
 const heroSnapshots = [
@@ -195,6 +195,16 @@ export default function Solutions() {
           name="keywords"
           content="school ERP solutions, school management system for teachers, ERP for schools India, school ERP for parents, school ERP for administrators"
         />
+        <link rel="canonical" href="https://www.kiduart.com/solutions" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="KIDUART" />
+        <meta property="og:title" content="School ERP Solutions for Teachers, Parents, Students & Administrators" />
+        <meta property="og:description" content="Explore school ERP solutions for teachers, parents, students, administrators, and districts. Discover ERP for schools India teams can use to reduce admin work and improve engagement." />
+        <meta property="og:url" content="https://www.kiduart.com/solutions" />
+        <meta property="og:image" content="https://www.kiduart.com/images/banner/home-hero.jpeg" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="School ERP Solutions for Teachers, Parents, Students & Administrators" />
+        <meta name="twitter:description" content="Explore school ERP solutions for teachers, parents, students, administrators, and districts. Discover ERP for schools India teams can use to reduce admin work and improve engagement." />
       </Head>
 
       <PageTransition className="pt-20 pb-0">

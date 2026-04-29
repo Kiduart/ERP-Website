@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
 import { FloatingIcons } from "@/components/animations/FloatingIcons";
@@ -70,6 +71,9 @@ export default function Blog() {
 
   return (
     <PageTransition className="pt-20 pb-0">
+      <Head>
+        <link rel="canonical" href="https://www.kiduart.com/blog" />
+      </Head>
       <section className="relative min-h-[calc(100svh-5rem)] overflow-hidden bg-[#e7ebee]">
         <img
           src="/images/banner/blog-hero.avif"
