@@ -41,10 +41,16 @@ export function Link({ children, ...props }: CompatLinkProps) {
   return <NextLink {...props}>{children}</NextLink>;
 }
 
-export function useLocation(): [string, (to: string) => Promise<boolean>] {
+export function useLocation(): [
+  string,
+  (to: string, opts?: { replace?: boolean }) => Promise<boolean>,
+] {
   const router = useRouter();
 
-  return [router.asPath, router.push];
+  return [
+    router.asPath,
+    (to, opts) => (opts?.replace ? router.replace(to) : router.push(to)),
+  ];
 }
 
 export function useParams<T extends Params = Params>(): T {

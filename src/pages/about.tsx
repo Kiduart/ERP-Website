@@ -136,7 +136,7 @@ export default function About() {
           <SectionReveal className="text-center mb-16">
             <h2 className="text-3xl font-bold text-brand-navy">The team behind KIDUART</h2>
             {/* SEO-UPGRADE: Updated leadership heading to accurate near-term expectation */}
-            <p className="mt-3 text-lg text-brand-navy/70">KIDUART is built by a founding team with backgrounds in education technology, school operations, and product engineering. We are based in Noida, Uttar Pradesh, and work directly with school teams to shape the platform in every development cycle. Full profiles are coming soon , follow us on LinkedIn to stay in the loop.</p>
+            <p className="mt-3 text-lg text-brand-navy/70">KIDUART is built by a founding team with backgrounds in education technology, school operations, and product engineering. We are based in Noida, Uttar Pradesh, and work directly with school teams to shape the platform in every development cycle. Individual profiles will be published here soon; until then, follow us on LinkedIn for company updates.</p>
             {/* SEO-UPGRADE: Replaced leadership placeholder paragraph with trust-building company context */}
           </SectionReveal>
 
@@ -152,7 +152,7 @@ export default function About() {
                     <Skeleton className="mx-auto mt-3 h-4 w-52 rounded-full bg-brand-teal/15" />
                     <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand-beige px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-brand-orange">
                       <Sparkles className="h-3.5 w-3.5" />
-                      Leadership reveal coming soon
+                      Profile coming soon
                     </div>
                   </div>
                 </SectionReveal>
@@ -166,7 +166,7 @@ export default function About() {
                     <Skeleton className="mx-auto mt-3 h-4 w-52 rounded-full bg-brand-teal/15" />
                     <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand-beige px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-brand-orange">
                       <Sparkles className="h-3.5 w-3.5" />
-                      Leadership reveal coming soon
+                      Profile coming soon
                     </div>
                   </div>
                 </SectionReveal>
@@ -215,9 +215,9 @@ export default function About() {
             <Trophy className="mx-auto mb-6 h-12 w-12 text-brand-yellow" />
             <h2 className="mb-12 text-3xl font-bold text-brand-navy">Building toward recognized standards</h2>
             <div className="flex flex-wrap justify-center gap-8 opacity-70 grayscale transition-all duration-500 hover:grayscale-0">
-              <div className="flex h-12 items-center rounded bg-brand-navy/5 px-6 font-bold text-brand-navy">EdTech Breakthrough 2026</div>
-              <div className="flex h-12 items-center rounded bg-brand-navy/5 px-6 font-bold text-brand-navy">Best SaaS for Education</div>
-              <div className="flex h-12 items-center rounded bg-brand-navy/5 px-6 font-bold text-brand-navy">ISO 27001 Certified</div>
+              <div className="flex h-12 items-center rounded bg-brand-navy/5 px-6 font-bold text-brand-navy">SOC 2 (on roadmap)</div>
+              <div className="flex h-12 items-center rounded bg-brand-navy/5 px-6 font-bold text-brand-navy">DPDP-ready controls</div>
+              <div className="flex h-12 items-center rounded bg-brand-navy/5 px-6 font-bold text-brand-navy">ISO 27001 (in progress)</div>
             </div>
           </SectionReveal>
         </div>

@@ -1,8 +1,12 @@
 import { Link } from "wouter";
+import { CTA_SCHOOLS_SUBTITLE } from "@/lib/siteData";
+import { useAnalytics } from "@/hooks/useAnalytics";
 import { SectionReveal } from "./PageTransition";
 import { ArrowRight } from "lucide-react";
 
-export function CtaSection({ title = "Ready to Transform Your School?", subtitle = "Join over 500+ forward-thinking schools that have upgraded their management experience." }) {
+export function CtaSection({ title = "See KIDUART with your own school data", subtitle = CTA_SCHOOLS_SUBTITLE }) {
+  const { trackEvent } = useAnalytics();
+
   return (
     <section className="surface-dark section-space relative overflow-hidden">
       <div className="absolute inset-0 bg-brand-navy" />
@@ -21,12 +25,14 @@ export function CtaSection({ title = "Ready to Transform Your School?", subtitle
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link 
               href="/demo" 
+              onClick={() => trackEvent("CTA", "cta_click", "hero_demo_button")}
               className="w-full sm:w-auto px-8 py-4 rounded-full bg-brand-yellow text-brand-navy font-bold text-lg hover:bg-white shadow-xl hover:shadow-brand-yellow/20 transition-all duration-300 hover:-translate-y-1 flex items-center justify-center gap-2"
             >
               Request a Demo <ArrowRight className="w-5 h-5" />
             </Link>
             <Link 
               href="/contact" 
+              onClick={() => trackEvent("CTA", "cta_click", "contact_sales_button")}
               className="w-full sm:w-auto px-8 py-4 rounded-full bg-transparent border-2 border-white/30 text-white font-bold text-lg hover:bg-white/10 transition-all duration-300"
             >
               Contact Sales

@@ -1,4 +1,5 @@
 import { type ReactNode } from "react";
+import { heroImageAlt, heroImgProps, IMAGE_DIMENSIONS } from "@/lib/imageSeo";
 import { cn } from "@/lib/utils";
 import { SectionReveal } from "@/components/ui/PageTransition";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
@@ -55,7 +56,12 @@ export function HeroSection({
              {/* rounded-[2.5rem] border border-white/10 bg-white/5 p-4 shadow-[0_28px_80px_rgba(0,48,73,0.28)] */}
             <div className="overflow-hidden">
                {/* rounded-[2rem] border border-white/10 */}
-              <img src={image} alt={title} className="aspect-[0.92] w-full rounded-full object-cover" />
+              <img
+                src={image}
+                alt={heroImageAlt(title)}
+                className="aspect-[0.92] w-full rounded-full object-cover"
+                {...heroImgProps(IMAGE_DIMENSIONS.heroPortrait)}
+              />
             </div>
           </div>
         </>
@@ -72,7 +78,12 @@ export function HeroSection({
             <div className="overflow-hidden "
             // rounded-[2.75rem] border border-brand-navy/10 bg-white p-4 shadow-[0_28px_80px_rgba(0,48,73,0.12)]
             >
-              <img src={image} alt={title} className="aspect-[0.92] w-full rounded-full object-cover" />
+              <img
+                src={image}
+                alt={heroImageAlt(title)}
+                className="aspect-[0.92] w-full rounded-full object-cover"
+                {...heroImgProps(IMAGE_DIMENSIONS.heroPortrait)}
+              />
             </div>
           </div>
         </>

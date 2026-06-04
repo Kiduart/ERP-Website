@@ -1,11 +1,15 @@
+import { PageSeoHead } from "@/components/seo/PageSeoHead";
+import { pageSeo } from "@/lib/pageSeo";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CtaSection } from "@/components/ui/CtaSection";
 import { Terminal, Key, Shield, Code2, Server } from "lucide-react";
 
 export default function ApiDocs() {
   return (
-    <PageTransition className="pt-20 pb-0 tooo">
-      <section className="bg-brand-navy py-20 lg:py-32 relative overflow-hidden">
+    <>
+      <PageSeoHead {...pageSeo.apiDocs} />
+      <PageTransition className="pt-20 pb-0">
+      <section className="section-space bg-brand-navy relative overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-brand-teal/20 via-brand-navy to-brand-navy" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <SectionReveal>
@@ -16,18 +20,18 @@ export default function ApiDocs() {
               Developer API Documentation
             </h1>
             <p className="text-xl text-white/70 max-w-2xl mx-auto">
-              Build powerful integrations with KIDUART's RESTful API
+              REST endpoints and webhooks for your internal systems and LMS tools
             </p>
           </SectionReveal>
         </div>
       </section>
 
-      <section className="py-24 bg-white">
+      <section className="section-space bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionReveal className="mb-16">
             <h2 className="text-3xl font-bold text-brand-navy mb-4">Introduction</h2>
             <p className="text-lg text-brand-navy/70 leading-relaxed bg-brand-beige/20 p-6 rounded-2xl border border-brand-navy/5">
-              The KIDUART API provides programmatic access to all platform data and operations. Built on REST principles with JSON responses, our API allows your technical team to seamlessly sync data between KIDUART and your other internal systems, learning management systems, or custom applications.
+              The KIDUART API exposes students, fees, attendance, and related records over HTTPS with JSON responses. Your developers can pull or push data between KIDUART and internal tools, learning platforms, or custom parent-facing apps.
             </p>
           </SectionReveal>
 
@@ -171,5 +175,6 @@ export default function ApiDocs() {
         subtitle="Get your API key when you sign up for any plan." 
       />
     </PageTransition>
+    </>
   );
 }

@@ -24,7 +24,7 @@ const RESPONSES: Record<string, string> = {
   "Can I request a demo?": "Absolutely! Click the 'Request Demo' button in our navbar or visit /demo. Our team will schedule a personalized walkthrough within 24 hours.",
   "What features are included?": "KIDUART includes Student Management, Attendance, Gradebook, Fee Management, Timetable, Parent Communication, AI Analytics, and much more. Visit our Features page to explore all capabilities.",
   "How do I set up my school?": "Setup is straightforward! After your demo, our onboarding team guides you through data migration and configuration. Most schools are live within 2 weeks.",
-  "Is my data secure?": "Absolutely. We use 256-bit encryption, are GDPR/FERPA compliant, ISO 27001 certified, and host on enterprise-grade infrastructure with 99.9% uptime.",
+  "Is my data secure?": "We use AES-256 encryption, role-based access, and regular backups. GDPR-style controls and education privacy practices are built in; ISO 27001 certification is in progress. See /security for current status.",
   "How do integrations work?": "KIDUART integrates with Google Classroom, Moodle, Canvas, Zoom, Stripe, and more. Visit our Integrations page or check our API docs for custom integrations."
 };
 
@@ -64,7 +64,10 @@ export function ChatbotWidget() {
 
   return (
     <>
-      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+      <div
+        className="fixed right-6 z-50 flex flex-col items-end gap-3"
+        style={{ bottom: "calc(1.5rem + var(--sticky-bar-height, 0px))", transition: "bottom 0.3s cubic-bezier(0.32, 0, 0.67, 0)" }}
+      >
         <a
           href={WHATSAPP_URL}
           target="_blank"

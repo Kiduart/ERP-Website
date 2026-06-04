@@ -6,6 +6,8 @@ import { FloatingIcons } from "@/components/animations/FloatingIcons";
 import { Search, MapPin, TrendingUp, ArrowRight, FolderSearch } from "lucide-react";
 import { Link } from "wouter";
 import { useState } from "react";
+import { bannerAltFromSrc, heroImgProps, IMAGE_DIMENSIONS, lazyImgProps } from "@/lib/imageSeo";
+import { ComingSoonBadge, ComingSoonContentMask } from "@/components/common/ComingSoonOverlay";
 
 export default function CustomerStories() {
   const filters = ["All", "K-12", "Higher Secondary", "School District", "Private School", "Religious Institution", "International School"];
@@ -30,74 +32,74 @@ export default function CustomerStories() {
 
   const stories = [
     {
-      slug: "delhi-public-school",
-      initial: "D",
-      name: "Delhi Public School",
-      location: "New Delhi, India",
+      slug: "k12-multi-campus",
+      initial: "K",
+      name: "Multi-campus K-12 school",
+      location: "North India",
       type: "K-12",
-      title: "How Delhi Public School eliminated paper trails and saved 500 hours a month.",
-      summary: "Managing 2,400+ students across 3 campuses with fragmented systems led to frequent data errors, slow fee collection, and overwhelmed administrative staff.",
-      stat: "92% fee collection rate (up from 68%)",
+      title: "Moving admissions and fees off spreadsheets across three campuses.",
+      summary: "Student records lived in different files per campus. Fee reminders went out late, and the accounts team spent most of the week reconciling numbers by hand.",
+      stat: "Single fee ledger for all sections",
       color: "from-brand-teal to-brand-navy",
       image: "/images/banner/stories-post-1.jpg",
     },
     {
-      slug: "greenfield-academy",
-      initial: "G",
-      name: "Greenfield Academy",
-      location: "Mumbai, India",
+      slug: "new-private-school",
+      initial: "P",
+      name: "New private school",
+      location: "Western India",
       type: "Private School",
-      title: "Building a modern premium school from day one.",
-      summary: "A newly established premium school needed a modern ERP from day one. Manual systems were already causing issues in the first year with just 400 students.",
-      stat: "100% digital enrollment process",
+      title: "Starting with digital enrollment from year one.",
+      summary: "A school in its first academic session wanted to avoid paper registers before habits set in. Even with a few hundred students, manual tracking was already slowing the office down.",
+      stat: "Online forms linked to student profiles",
       color: "from-brand-orange to-brand-yellow",
       image: "/images/banner/stories-post-2.jpg",
     },
     {
-      slug: "sunrise-international",
-      initial: "S",
-      name: "Sunrise International School",
-      location: "Bangalore, India",
+      slug: "international-programme",
+      initial: "I",
+      name: "International programme school",
+      location: "South India",
       type: "International School",
-      title: "Customizing ERP for complex IB requirements and global families.",
-      summary: "As an IB school, Sunrise needed a flexible system that could handle their unique grading scale, multi-language communication, and complex fee structures.",
-      stat: "Multi-currency billing for 40+ nationalities",
+      title: "Handling IB-style grading and multilingual parent updates.",
+      summary: "The academic team needed flexible grade scales and fee plans for families on different calendars, without maintaining a separate sheet for each nationality.",
+      stat: "Fee plans and notices by student group",
       color: "from-brand-navy to-brand-teal",
       image: "/images/banner/stories-post-3.jpg",
     },
     {
-      slug: "metro-schools-district",
-      initial: "M",
-      name: "Metro Schools District",
-      location: "Chennai, India",
+      slug: "district-group",
+      initial: "D",
+      name: "School group, multiple branches",
+      location: "South India",
       type: "School District",
-      title: "Unifying 12 campuses under a single management dashboard.",
-      summary: "Overseeing 12 schools with completely inconsistent data practices made district-level reporting impossible. Compliance reports took 3 weeks to compile manually.",
-      stat: "Compliance reports in 2 hours (previously 3 weeks)",
+      title: "One dashboard for a group of branch schools.",
+      summary: "Leadership could not compare attendance or collections across branches because each school reported differently. Monthly compliance packs took weeks to assemble.",
+      stat: "Branch-level reports from one login",
       color: "from-brand-teal to-brand-orange",
       image: "/images/banner/stories-post-4.jpg",
     },
     {
-      slug: "st-mary-school",
-      initial: "S",
-      name: "St. Mary's School",
-      location: "Pune, India",
+      slug: "heritage-institution",
+      initial: "H",
+      name: "Established faith-based school",
+      location: "Western India",
       type: "Religious Institution",
-      title: "Modernizing a 60-year-old institution without losing its culture.",
-      summary: "A 60-year-old institution with deeply entrenched paper-based processes needed to modernize without losing institutional culture or disrupting longtime staff.",
-      stat: "Paper usage reduced by 85%",
+      title: "Digitising registers without changing how staff work with families.",
+      summary: "Decades of paper processes made staff wary of big IT projects. The goal was smaller daily wins: attendance on phone, fees online, circulars that parents actually read.",
+      stat: "Daily attendance marked in under a minute per class",
       color: "from-brand-yellow to-brand-orange",
       image: "/images/banner/stories-post-5.jpg",
     },
     {
-      slug: "brighton-college",
-      initial: "B",
-      name: "Brighton College",
-      location: "Hyderabad, India",
+      slug: "higher-secondary",
+      initial: "S",
+      name: "Higher secondary school",
+      location: "South India",
       type: "Higher Secondary",
-      title: "Using AI analytics to improve board exam results dramatically.",
-      summary: "A competitive higher secondary school needed better analytics to improve board exam results and reduce the gap between teacher expectations and student performance.",
-      stat: "Board exam pass rate improved from 78% to 94%",
+      title: "Tracking board-exam readiness across subjects.",
+      summary: "Teachers needed a clearer view of which students were slipping in multiple subjects before pre-board exams, not after results were printed.",
+      stat: "Early alerts on attendance and marks trends",
       color: "from-brand-navy to-brand-orange",
       image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&q=80&w=900",
     },
@@ -121,21 +123,21 @@ export default function CustomerStories() {
   return (
     <PageTransition className="pt-20 pb-0">
       <Head>
-        <title>School ERP Customer Stories | Real Results from Real Schools | KIDUART</title>
+        <title>School ERP Customer Stories | KIDUART</title>
         <meta
           name="description"
-          content="Read how Indian schools use KIDUART to improve fee collection, reduce admin workload, and give parents better visibility. Real case studies from K-12, private, international, and district schools."
+          content="Illustrative scenarios for K-12, private, international, and multi-branch schools planning fees, attendance, and parent communication on KIDUART. Verified customer stories will be published as schools go live."
         />
         <link rel="canonical" href="https://www.kiduart.com/stories" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="KIDUART" />
-        <meta property="og:title" content="School ERP Customer Stories | Real Results from Real Schools | KIDUART" />
-        <meta property="og:description" content="Read how Indian schools use KIDUART to improve fee collection, reduce admin workload, and give parents better visibility. Real case studies from K-12, private, international, and district schools." />
+        <meta property="og:title" content="School ERP Customer Stories | KIDUART" />
+        <meta property="og:description" content="Illustrative school scenarios for fees, attendance, and parent communication on KIDUART." />
         <meta property="og:url" content="https://www.kiduart.com/stories" />
         <meta property="og:image" content="https://www.kiduart.com/images/banner/home-hero.jpeg" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="School ERP Customer Stories | Real Results from Real Schools | KIDUART" />
-        <meta name="twitter:description" content="Read how Indian schools use KIDUART to improve fee collection, reduce admin workload, and give parents better visibility. Real case studies from K-12, private, international, and district schools." />
+        <meta name="twitter:title" content="School ERP Customer Stories | KIDUART" />
+        <meta name="twitter:description" content="Illustrative school scenarios for fees, attendance, and parent communication on KIDUART." />
       </Head>
       <section className="relative overflow-hidden bg-[#f6efdf]">
         <div className="page-shell relative z-10 flex min-h-[calc(100svh-5rem)] flex-col justify-center py-10">
@@ -144,10 +146,10 @@ export default function CustomerStories() {
               Customer stories
             </div> */}
             <h5 className="text-[clamp(2.1rem,1.5rem+2.2vw,3.05rem)] font-bold leading-[0.98] text-brand-navy">
-              Real schools. Real outcomes. Real people doing the daily work.
+              How schools use KIDUART day to day
             </h5>
             <p className="mx-auto mt-5 max-w-2xl text-[clamp(1rem,0.96rem+0.2vw,1.06rem)] leading-7 text-brand-navy/65">
-              Every story below started with a school team dealing with the same problems most schools face , fragmented data, slow fee collection, and admin work that never seemed to end. Here is what changed.
+              These outlines reflect the situations we hear most often in conversations with Indian school teams: scattered records, fee follow-ups that never end, and parents who still call the office for basic updates. Full published case studies are on the way.
             </p>
           </SectionReveal>
 
@@ -163,7 +165,12 @@ export default function CustomerStories() {
                   className="group relative block h-[23rem] w-[16rem] overflow-hidden rounded-[1.7rem] bg-white shadow-[0_26px_40px_rgba(0,0,0,0.12)] transition-transform duration-300 hover:z-20 hover:scale-[1.06]"
                   style={{ transform: `translateY(${offsets[index]}px) rotate(${rotations[index]}deg)` }}
                 >
-                  <img src={story.image} alt={story.name} className="h-full w-full object-cover" />
+                  <img
+                    src={story.image}
+                    alt={bannerAltFromSrc(story.image, `Customer story cover for ${story.name}`)}
+                    className="h-full w-full object-cover"
+                    {...heroImgProps(IMAGE_DIMENSIONS.storyCard)}
+                  />
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.04),rgba(0,0,0,0.22))]" />
                   <div className="absolute inset-x-0 bottom-0 h-1/2 translate-y-full bg-[linear-gradient(180deg,rgba(0,48,73,0.1),rgba(0,48,73,0.92))] p-4 text-white transition-transform duration-300 group-hover:translate-y-0">
                     <div className="text-lg font-bold leading-snug">{story.name}</div>
@@ -180,7 +187,12 @@ export default function CustomerStories() {
             <div className="flex gap-4 overflow-x-auto pb-2">
               {heroStories.map((story) => (
                 <Link key={story.slug} href={`/customer-stories/${story.slug}`} className="group relative block h-[20rem] min-w-[14rem] overflow-hidden rounded-[1.5rem] shadow-lg">
-                  <img src={story.image} alt={story.name} className="h-full w-full object-cover" />
+                  <img
+                    src={story.image}
+                    alt={bannerAltFromSrc(story.image, `Customer story cover for ${story.name}`)}
+                    className="h-full w-full object-cover"
+                    {...lazyImgProps(IMAGE_DIMENSIONS.storyCard)}
+                  />
                   <div className="absolute inset-x-0 bottom-0 h-1/2 bg-[linear-gradient(180deg,rgba(0,48,73,0.04),rgba(0,48,73,0.92))] p-4 text-white">
                     <div className="text-lg font-bold leading-snug">{story.name}</div>
                     <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-brand-navy">
@@ -194,7 +206,7 @@ export default function CustomerStories() {
         </div>
       </section>
 
-      <section className="py-16 bg-brand-beige/20 min-h-[50vh] relative overflow-hidden">
+      <section className="section-space-tight bg-brand-beige/20 min-h-[50vh] relative overflow-hidden">
         <BackgroundBlobs
           blobs={[
             { color: "#f77f00", size: 300, position: "center-left", opacity: 0.15 },
@@ -212,7 +224,7 @@ export default function CustomerStories() {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search by school name, city, or type of challenge..."
+                placeholder="Search by school type, region, or topic..."
                 className="w-full bg-white rounded-full py-4 pl-12 pr-6 text-brand-navy shadow-xl focus:outline-none focus:ring-4 focus:ring-brand-teal/50 transition-shadow"
               />
             </div>
@@ -240,8 +252,9 @@ export default function CustomerStories() {
           {filteredStories.length > 0 ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredStories.map((story, idx) => (
-                <SectionReveal key={story.slug} delay={idx * 0.1} className="bg-white rounded-2xl shadow-lg shadow-brand-navy/5 border border-brand-navy/5 overflow-hidden flex flex-col hover:-translate-y-1 transition-transform group">
-                  <Link href={`/customer-stories/${story.slug}`} className="block">
+                <SectionReveal key={story.slug} delay={idx * 0.1} className="relative overflow-hidden bg-white rounded-2xl shadow-lg shadow-brand-navy/5 border border-brand-navy/5 flex flex-col hover:-translate-y-1 transition-transform group">
+                  <ComingSoonBadge />
+                  <Link href={`/customer-stories/${story.slug}`} className="block pointer-events-none">
                     <div className={`h-32 bg-gradient-to-r ${story.color} flex items-center px-6 relative`}>
                       <div className="w-16 h-16 rounded-xl bg-white shadow-md flex items-center justify-center text-2xl font-black text-brand-navy absolute -bottom-8 border-4 border-white group-hover:scale-110 transition-transform">
                         {story.initial}
@@ -250,31 +263,30 @@ export default function CustomerStories() {
                   </Link>
 
                   <div className="pt-12 p-6 flex flex-col flex-grow">
-                    <div className="flex justify-between items-start mb-4">
-                      <div>
-                        <Link href={`/customer-stories/${story.slug}`}>
-                          <h3 className="font-bold text-brand-navy text-lg group-hover:text-brand-teal transition-colors">{story.name}</h3>
-                        </Link>
-                        <div className="flex items-center gap-1 text-xs text-brand-navy/60 mt-1">
-                          <MapPin className="w-3 h-3" /> {story.location}
+                    <ComingSoonContentMask className="flex flex-col flex-grow">
+                      <div className="flex justify-between items-start mb-4">
+                        <div>
+                          <h3 className="font-bold text-brand-navy text-lg">{story.name}</h3>
+                          <div className="flex items-center gap-1 text-xs text-brand-navy/60 mt-1">
+                            <MapPin className="w-3 h-3" /> {story.location}
+                          </div>
                         </div>
                       </div>
-                      <span className="text-xs font-bold bg-brand-beige px-2 py-1 rounded text-brand-navy text-center ml-2">{story.type}</span>
-                    </div>
+                      <span className="text-xs font-bold bg-brand-beige px-2 py-1 rounded text-brand-navy text-center inline-block mb-4">{story.type}</span>
+                      <h4 className="text-xl font-bold text-brand-navy mb-3 leading-snug">{story.title}</h4>
+                      <p className="text-brand-navy/70 text-sm mb-6 flex-grow">{story.summary}</p>
 
-                    <h4 className="text-xl font-bold text-brand-navy mb-3 leading-snug">{story.title}</h4>
-                    <p className="text-brand-navy/70 text-sm mb-6 flex-grow">{story.summary}</p>
-
-                    <div className="bg-brand-teal/5 border border-brand-teal/10 rounded-xl p-4 mb-6">
-                      <div className="flex items-center gap-2 text-brand-teal font-bold text-sm">
-                        <TrendingUp className="w-4 h-4" /> Impact
+                      <div className="bg-brand-teal/5 border border-brand-teal/10 rounded-xl p-4 mb-6">
+                        <div className="flex items-center gap-2 text-brand-teal font-bold text-sm">
+                          <TrendingUp className="w-4 h-4" /> Impact
+                        </div>
+                        <div className="font-medium text-brand-navy mt-1">{story.stat}</div>
                       </div>
-                      <div className="font-medium text-brand-navy mt-1">{story.stat}</div>
-                    </div>
+                    </ComingSoonContentMask>
 
-                    <Link href={`/customer-stories/${story.slug}`} className="w-full py-3 rounded-xl border-2 border-brand-navy/10 font-bold text-brand-navy hover:bg-brand-navy hover:text-white transition-colors flex justify-center items-center gap-2">
-                      Read Story <ArrowRight className="w-4 h-4" />
-                    </Link>
+                    <button disabled className="w-full py-3 rounded-xl border-2 border-brand-navy/10 font-bold text-brand-navy/60 opacity-50 cursor-not-allowed flex justify-center items-center gap-2">
+                      Coming Soon
+                    </button>
                   </div>
                 </SectionReveal>
               ))}

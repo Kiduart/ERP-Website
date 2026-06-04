@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import { Menu, X, ChevronDown } from "lucide-react";
+import { useAnalytics } from "@/hooks/useAnalytics";
 
 type NavLink = {
   label: string;
@@ -13,7 +14,11 @@ type DropdownItem = {
   label: string;
   href: string;
   note?: string;
+  soon?: boolean;
 };
+
+const SOON_BADGE_CLASS =
+  "shrink-0 rounded-full bg-brand-yellow px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-brand-navy";
 
 type DropdownGroup = {
   title: string;
@@ -31,8 +36,8 @@ const DROPDOWNS: Record<string, DropdownGroup[]> = {
     {
       title: "Insights",
       items: [
-        { label: "Blog", href: "/blog", note: "Ideas, guides, and updates" },
-        { label: "Customer Stories", href: "/stories", note: "See real school outcomes" },
+        { label: "Blog", href: "/blog", note: "Ideas, guides, and updates", soon: true },
+        { label: "Customer Stories", href: "/stories", note: "See real school outcomes", soon: true },
       ],
     },
     {
@@ -56,7 +61,7 @@ const DROPDOWNS: Record<string, DropdownGroup[]> = {
       title: "Company",
       items: [
         { label: "About", href: "/about", note: "Who we are building for" },
-        { label: "Careers", href: "/careers", note: "Join the team" },
+        { label: "Careers", href: "/careers", note: "Join the team", soon: true },
         { label: "Contact", href: "/contact", note: "Talk to KIDUART" },
       ],
     },
@@ -128,6 +133,7 @@ const dropdownItemVariants: Variants = {
 };
 
 export function Navbar() {
+  const { trackEvent } = useAnalytics();
   const [location] = useLocation();
   const isHomePage = location === "/" || location === "/home";
   const [scrolled, setScrolled] = useState(false);
@@ -146,6 +152,10 @@ export function Navbar() {
     setActiveDropdown(null);
   }, [location]);
 
+  const trackNavClick = (label: string) => {
+    trackEvent("Navigation", "nav_click", label);
+  };
+
   return (
     <header
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
@@ -155,8 +165,17 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group shrink-0">
-            <img src="/logo.png" alt="KIDUART" className="h-10 w-auto md:h-16" />
+          <Link href="/" onClick={() => trackNavClick("Home")} className="flex items-center gap-2 group shrink-0">
+            <img
+              src="/logo.png"
+              alt="KIDUART school ERP"
+              className="h-10 w-auto md:h-16"
+              width={160}
+              height={64}
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
+            />
           </Link>
 
           {/* Desktop Nav */}
@@ -165,6 +184,7 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
+                onClick={() => trackNavClick(link.label)}
                 className={`hover-underline-group px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5 ${
                   location === link.href
                     ? transparentMode
@@ -224,10 +244,14 @@ export function Navbar() {
                                 <motion.div key={item.href} variants={dropdownItemVariants}>
                                   <Link
                                     href={item.href}
+                                    onClick={() => trackNavClick(item.label)}
                                     className="hover-underline-group block rounded-[1rem] px-3 py-3 transition-colors hover:bg-brand-beige/65"
                                   >
-                                    <div className="center-gradient-underline text-sm font-semibold text-brand-navy transition-colors">
-                                      {item.label}
+                                    <div className="flex items-center gap-2">
+                                      <div className="center-gradient-underline text-sm font-semibold text-brand-navy transition-colors">
+                                        {item.label}
+                                      </div>
+                                      {item.soon && <span className={SOON_BADGE_CLASS}>Soon</span>}
                                     </div>
                                     {item.note && (
                                       <div className="mt-1 text-xs leading-5 text-brand-navy/52">
@@ -252,12 +276,14 @@ export function Navbar() {
           <div className="flex items-center gap-4">
             <Link 
               href="/login" 
+              onClick={() => trackNavClick("Login")}
               className={`hidden md:block text-sm font-bold transition-colors text-brand-navy hover:text-brand-teal`}
             >
               Login
             </Link>
             <Link
               href="/demo"
+              onClick={() => trackNavClick("Request Demo")}
               className={`hidden md:inline-flex items-center justify-center px-6 py-2.5 rounded-full font-semibold text-sm shadow-lg transition-all duration-300 hover:-translate-y-0.5 ${
                  "bg-brand-navy text-white hover:bg-brand-teal hover:shadow-brand-teal/25"
               }`}
@@ -289,6 +315,7 @@ export function Navbar() {
                   <Link
                     key={link.href}
                     href={link.href}
+                    onClick={() => trackNavClick(link.label)}
                     className="block px-4 py-3 rounded-lg bg-brand-beige/30 text-brand-navy font-medium flex items-center justify-between"
                   >
                     {link.label}
@@ -315,9 +342,11 @@ export function Navbar() {
                             <Link
                               key={item.href}
                               href={item.href}
-                              className="block rounded-lg px-3 py-2 text-sm text-brand-navy hover:bg-brand-beige/50"
+                              onClick={() => trackNavClick(item.label)}
+                              className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-brand-navy hover:bg-brand-beige/50"
                             >
-                              {item.label}
+                              <span>{item.label}</span>
+                              {item.soon && <span className={SOON_BADGE_CLASS}>Soon</span>}
                             </Link>
                           ))}
                         </div>
@@ -330,12 +359,14 @@ export function Navbar() {
               <div className="pt-4 border-t border-brand-beige/50 flex flex-col gap-3">
                 <Link
                   href="/login"
+                  onClick={() => trackNavClick("Login")}
                   className="block w-full text-center px-6 py-3 rounded-xl border-2 border-brand-navy text-brand-navy font-bold"
                 >
                   Login
                 </Link>
                 <Link
                   href="/demo"
+                  onClick={() => trackNavClick("Request Demo")}
                   className="block w-full text-center px-6 py-3 rounded-xl bg-brand-navy text-white font-bold"
                 >
                   Request a Demo

@@ -6,6 +6,7 @@ import {
   useMemo,
   useState,
 } from "react";
+import { stickyBarBottomOffset } from "@/lib/floatingWidgetLayout";
 import {
   Accessibility,
   AlignCenter,
@@ -407,7 +408,10 @@ export function AccessibilityWidget() {
       {!isOpen && (
         <>
           {hasCustomizations && (
-            <div className="pointer-events-none fixed bottom-[5.6rem] left-5 z-50 sm:bottom-[6.1rem] sm:left-6">
+            <div
+              className="pointer-events-none fixed left-5 z-50 sm:left-6"
+              style={stickyBarBottomOffset("5.6rem")}
+            >
               <div className="a11y-tooltip-sway relative max-w-[16rem] rounded-2xl border border-brand-navy/10 bg-card/95 px-4 py-3 text-sm text-brand-navy shadow-xl backdrop-blur">
                 <p className="font-semibold">You can reset your default settings from here</p>
                 <div className="absolute -bottom-2 left-5 h-4 w-4 rotate-45 rounded-[4px] border-b border-r border-brand-navy/10 bg-card/95" />
@@ -418,7 +422,8 @@ export function AccessibilityWidget() {
           <button
             type="button"
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-5 left-5 z-50 flex h-14 w-14 items-center justify-center rounded-full border border-brand-navy/15 bg-card text-brand-navy shadow-xl transition-transform hover:scale-105 sm:bottom-6 sm:left-6"
+            className="fixed left-5 z-50 flex h-14 w-14 items-center justify-center rounded-full border border-brand-navy/15 bg-card text-brand-navy shadow-xl transition-transform hover:scale-105 sm:left-6"
+            style={stickyBarBottomOffset("1.5rem")}
             aria-label="Open accessibility controls"
           >
             <Accessibility className="h-7 w-7" />

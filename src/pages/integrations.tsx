@@ -1,4 +1,4 @@
-import Head from "next/head";
+import { PageSeoHead } from "@/components/seo/PageSeoHead";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CtaSection } from "@/components/ui/CtaSection";
 import { CircleShowcaseHero } from "@/components/ui/CustomHeroes";
@@ -17,7 +17,7 @@ export default function Integrations() {
       integrations: [
         { name: "Moodle", desc: "Sync courses, grades, and assignments.", logo: "M", slug: "moodle" },
         { name: "Google Classroom", desc: "Import classroom rosters and sync grades.", logo: "G", slug: "google-classroom" },
-        { name: "Canvas LMS", desc: "Two-way sync for seamless learning management.", logo: "C", slug: "canvas" }
+        { name: "Canvas LMS", desc: "Two-way sync for courses, rosters, and grades.", logo: "C", slug: "canvas" }
       ]
     },
     {
@@ -53,13 +53,16 @@ export default function Integrations() {
 
   return (
     <PageTransition className="pt-20 pb-0 tooo">
-      <Head>
-        <link rel="canonical" href="https://www.kiduart.com/integrations" />
-      </Head>
+      <PageSeoHead
+        title="School ERP Integrations — KIDUART"
+        description="Connect KIDUART with Google Classroom, Zoom, Stripe, Moodle, Microsoft Teams and more. Keep class, fee, and communication data aligned across the tools your school already uses."
+        path="/integrations"
+        keywords="school ERP integrations, Google Classroom sync, Zoom school, Moodle integration, school fee payment gateway India"
+      />
       <CircleShowcaseHero
         eyebrow="School ERP integrations"
         title="Connect Your School Tools"
-        subtitle="KIDUART plays nicely with the software you already use. Sync your data across platforms to create a unified ecosystem."
+        subtitle="Plug KIDUART into the classroom, payment, and communication tools your team already relies on, so data does not live in separate silos."
         image="/images/banner/integration-hero.jpg"
         actions={(
           <>
@@ -79,7 +82,7 @@ export default function Integrations() {
         )}
       />
 
-      <section className="py-24 bg-white relative overflow-hidden">
+      <section className="section-space bg-white relative overflow-hidden">
         <BackgroundBlobs blobs={[
           { color: "#fcbf49", size: 300, position: "center-left", opacity: 0.15 },
           { color: "#0c716b", size: 300, position: "center-right", opacity: 0.15 }
@@ -120,7 +123,7 @@ export default function Integrations() {
       </section>
 
       {/* API Section */}
-      <section className="py-24 bg-brand-navy text-white overflow-hidden relative" style={{ color: '#fcf6d3' }}>
+      <section className="section-space bg-brand-navy text-white overflow-hidden relative" style={{ color: '#fcf6d3' }}>
         <BackgroundBlobs blobs={[
           { color: "#f77f00", size: 400, position: "top-left", opacity: 0.15 },
           { color: "#0c716b", size: 400, position: "bottom-right", opacity: 0.15 }
@@ -129,10 +132,10 @@ export default function Integrations() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <SectionReveal>
-              <h2 className="text-3xl lg:text-4xl font-bold mb-6">Powerful API for Custom Integrations</h2>
-              <p className="text-lg mb-8 leading-relaxed" style={{ color: 'rgba(252,246,211,0.7)' }}>Need to connect internal tools or a niche platform? Our RESTful API and Webhooks allow your developer team to build custom integrations in days, not months.</p>
+              <h2 className="text-3xl lg:text-4xl font-bold mb-6">API for custom integrations</h2>
+              <p className="text-lg mb-8 leading-relaxed" style={{ color: 'rgba(252,246,211,0.7)' }}>Need to connect an internal tool or a niche platform? Your developers can use our REST API and webhooks to move data in and out of KIDUART on a schedule that suits your IT team.</p>
               <ul className="space-y-4 mb-8">
-                {['RESTful architecture', 'Comprehensive documentation', 'Real-time webhooks', 'Dedicated developer support'].map((item, i) => (
+                {['REST endpoints', 'Published API reference', 'Webhooks for live events', 'Developer support channel'].map((item, i) => (
                   <li key={i} className="flex items-center gap-3">
                     <Zap className="w-5 h-5 text-brand-yellow" />
                     <span>{item}</span>

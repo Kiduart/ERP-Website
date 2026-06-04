@@ -1,4 +1,5 @@
-import Head from "next/head";
+import { PageSeoHead } from "@/components/seo/PageSeoHead";
+import { pageSeo } from "@/lib/pageSeo";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CtaSection } from "@/components/ui/CtaSection";
 import { HeroSection } from "@/components/ui/HeroSection";
@@ -40,21 +41,7 @@ export default function Security() {
 
   return (
     <PageTransition className="pt-20 pb-0 tooo">
-      <Head>
-        <title>School Data Security | How KIDUART Protects Your Institution</title>
-        <meta name="description" content="KIDUART uses AES-256 encryption, role-based access control, and automated cloud backups to protect student records, fee data, and staff information. Built in compliance with India's DPDP Act and GDPR." />
-        <link rel="canonical" href="https://www.kiduart.com/security" />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="KIDUART" />
-        <meta property="og:title" content="School Data Security | How KIDUART Protects Your Institution" />
-        <meta property="og:description" content="KIDUART uses AES-256 encryption, role-based access control, and automated cloud backups to protect student records, fee data, and staff information. Built in compliance with India's DPDP Act and GDPR." />
-        <meta property="og:url" content="https://www.kiduart.com/security" />
-        <meta property="og:image" content="https://www.kiduart.com/images/banner/home-hero.jpeg" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="School Data Security | How KIDUART Protects Your Institution" />
-        <meta name="twitter:description" content="KIDUART uses AES-256 encryption, role-based access control, and automated cloud backups to protect student records, fee data, and staff information. Built in compliance with India's DPDP Act and GDPR." />
-      </Head>
-      {/* SEO-UPGRADE: Added Security page metadata and canonical URL */}
+      <PageSeoHead {...pageSeo.security} />
       <HeroSection
         title="Your school's data has a serious job to do. We take that seriously."
         subtitle="Student profiles, fee transactions, attendance records, exam results , every piece of data in KIDUART is encrypted in transit and at rest. Access is locked to role. Backups run every hour. Your data stays in India."
@@ -64,7 +51,7 @@ export default function Security() {
       />
 
       {/* Philosophy */}
-      <section className="py-24 bg-white relative overflow-hidden">
+      <section className="section-space bg-white relative overflow-hidden">
         <BackgroundBlobs blobs={[
           { color: "#fcbf49", size: 300, position: "center-left", opacity: 0.15 },
           { color: "#0c716b", size: 300, position: "center-right", opacity: 0.15 }
@@ -108,7 +95,7 @@ export default function Security() {
       </section>
 
       {/* Pillars */}
-      <section className="py-24 bg-brand-beige/30 border-y border-brand-navy/5 relative overflow-hidden">
+      <section className="section-space bg-brand-beige/30 border-y border-brand-navy/5 relative overflow-hidden">
         <BackgroundBlobs blobs={[
           { color: "#f77f00", size: 300, position: "top-right", opacity: 0.15 }
         ]} />
@@ -136,7 +123,7 @@ export default function Security() {
       </section>
 
       {/* Certifications */}
-      <section className="py-24 bg-white relative overflow-hidden">
+      <section className="section-space bg-white relative overflow-hidden">
         <BackgroundBlobs blobs={[
           { color: "#0c716b", size: 300, position: "bottom-left", opacity: 0.15 }
         ]} />

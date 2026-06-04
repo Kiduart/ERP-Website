@@ -1,3 +1,5 @@
+import { PageSeoHead } from "@/components/seo/PageSeoHead";
+import { pageSeo } from "@/lib/pageSeo";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CtaSection } from "@/components/ui/CtaSection";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
@@ -12,8 +14,9 @@ import {
 export default function Kiduorbit() {
   return (
     <PageTransition className="pt-20 pb-0 tooo">
+      <PageSeoHead {...pageSeo.kiduorbit} />
       {/* HERO */}
-      <section className="bg-brand-navy py-20 lg:py-32 relative overflow-hidden min-h-screen flex items-center" style={{ color: '#fcf6d3' }}>
+      <section className="section-space bg-brand-navy relative overflow-hidden min-h-screen flex items-center" style={{ color: '#fcf6d3' }}>
         <BackgroundBlobs blobs={[
           { color: "#fcbf49", size: 400, position: "top-left", opacity: 0.35 },
           { color: "#0c716b", size: 400, position: "bottom-right", opacity: 0.35 }
@@ -37,7 +40,7 @@ export default function Kiduorbit() {
               The AI Brain of KIDUART ERP
             </h1>
             <p className="text-xl max-w-3xl mx-auto mb-10 leading-relaxed" style={{ color: 'rgba(252,246,211,0.8)' }}>
-              KIDUORBIT brings next-generation artificial intelligence to school management, turning data into decisions and tasks into automation.
+              KIDUORBIT reads patterns in your school&apos;s own attendance, fees, and academic data, then surfaces the students and accounts that need attention before small issues become crises.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a href="#explore" className="w-full sm:w-auto px-8 py-4 rounded-full bg-brand-teal text-white font-bold text-lg hover:bg-white hover:text-brand-navy shadow-xl shadow-brand-teal/20 transition-all duration-300">
@@ -52,7 +55,7 @@ export default function Kiduorbit() {
       </section>
 
       {/* WHAT IS KIDUORBIT */}
-      <section id="explore" className="py-24 bg-white relative overflow-hidden">
+      <section id="explore" className="section-space bg-white relative overflow-hidden">
         <BackgroundBlobs blobs={[
           { color: "#fcbf49", size: 300, position: "center-left", opacity: 0.15 },
           { color: "#0c716b", size: 300, position: "center-right", opacity: 0.15 }
@@ -63,7 +66,7 @@ export default function Kiduorbit() {
             <SectionReveal>
               <h2 className="text-3xl lg:text-4xl font-bold text-brand-navy mb-6">Intelligence Embedded in Every Workflow</h2>
               <p className="text-lg text-brand-navy/70 mb-8">
-                KIDUORBIT isn't just an add-on; it's the intelligent core of the entire KIDUART platform. It continuously analyzes school operations to proactively suggest improvements and handle repetitive tasks.
+                KIDUORBIT sits inside KIDUART and watches the numbers your teams already enter: who was absent, which fees are late, how marks are trending. It does not replace judgement; it gives staff a shorter list of what to look at first.
               </p>
               <ul className="space-y-4">
                 {[
@@ -100,7 +103,7 @@ export default function Kiduorbit() {
       </section>
 
       {/* KEY AI CAPABILITIES */}
-      <section className="py-24 bg-brand-beige/30 border-y border-brand-navy/5 relative overflow-hidden">
+      <section className="section-space bg-brand-beige/30 border-y border-brand-navy/5 relative overflow-hidden">
         <BackgroundBlobs blobs={[
           { color: "#f77f00", size: 300, position: "top-right", opacity: 0.15 }
         ]} />
@@ -108,7 +111,7 @@ export default function Kiduorbit() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <SectionReveal className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-brand-navy mb-4">Key AI Capabilities</h2>
-            <p className="text-lg text-brand-navy/70 max-w-2xl mx-auto">Transforming every aspect of school management with machine intelligence.</p>
+            <p className="text-lg text-brand-navy/70 max-w-2xl mx-auto">Practical AI features tied to everyday school work, not generic chatbots.</p>
           </SectionReveal>
 
           <div className="grid md:grid-cols-2 gap-8">
@@ -135,11 +138,16 @@ export default function Kiduorbit() {
               </SectionReveal>
             ))}
           </div>
+          <SectionReveal className="mt-6">
+            <p className="text-xs text-brand-navy/40 mt-4 italic">
+              * Based on pilot program data. Results may vary by school size and implementation.
+            </p>
+          </SectionReveal>
         </div>
       </section>
 
       {/* HOW IT WORKS */}
-      <section className="py-24 bg-white">
+      <section className="section-space bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionReveal className="text-center mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-brand-navy mb-4">How KIDUORBIT Works</h2>
@@ -168,7 +176,7 @@ export default function Kiduorbit() {
       </section>
 
       {/* COMPARISON TABLE */}
-      <section className="py-24 bg-brand-navy text-white relative overflow-hidden" style={{ color: '#fcf6d3' }}>
+      <section className="section-space bg-brand-navy text-white relative overflow-hidden" style={{ color: '#fcf6d3' }}>
         <BackgroundBlobs blobs={[
           { color: "#fcbf49", size: 400, position: "bottom-left", opacity: 0.15 }
         ]} />
@@ -194,7 +202,7 @@ export default function Kiduorbit() {
                     { feat: "Alerts", trad: "Rule-based only", new: "Intelligent AI alerts" },
                     { feat: "Analytics", trad: "Static dashboards", new: "Predictive insights" },
                     { feat: "Data queries", trad: "Requires IT support", new: "Natural language queries" },
-                    { feat: "Risk detection", trad: "None", new: "AI-powered early warnings" }
+                    { feat: "Risk detection", trad: "None", new: "Early pattern alerts for staff review" }
                   ].map((row, i) => (
                     <tr key={i} className={i % 2 === 0 ? "bg-white/5" : ""}>
                       <td className="p-6 font-medium">{row.feat}</td>
@@ -208,18 +216,23 @@ export default function Kiduorbit() {
               </table>
             </div>
           </SectionReveal>
+          <SectionReveal className="mt-6">
+            <p className="text-xs text-brand-beige/55 mt-4 italic">
+              * Based on pilot program data. Results may vary by school size and implementation.
+            </p>
+          </SectionReveal>
         </div>
       </section>
 
       {/* TRUST */}
-      <section className="py-16 bg-brand-beige/30">
+      <section className="section-space-tight bg-brand-beige/30">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <div className="flex flex-wrap justify-center gap-6 lg:gap-12">
             {[
-              "Modern AI/ML Stack", 
-              "Data Privacy Compliant", 
-              "School Data Never Shared", 
-              "Continuously Improving"
+              "Runs on your school data",
+              "Privacy controls built in",
+              "No selling student data",
+              "Updated with school feedback"
             ].map((badge, idx) => (
               <div key={idx} className="flex items-center gap-3 px-6 py-3 bg-white rounded-full border border-brand-navy/10 shadow-sm">
                 <ShieldCheck className="w-6 h-6 text-brand-teal" />
@@ -231,8 +244,8 @@ export default function Kiduorbit() {
       </section>
 
       <CtaSection 
-        title="Experience the Future of School Management" 
-        subtitle="See how KIDUORBIT transforms raw school data into actionable insights." 
+        title="See KIDUORBIT on your school's data" 
+        subtitle="Walk through attendance alerts, fee risk flags, and report workflows with our team on a live demo." 
       />
     </PageTransition>
   );

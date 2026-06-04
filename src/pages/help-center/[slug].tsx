@@ -103,7 +103,7 @@ export default function HelpArticle() {
   return (
     <PageTransition className="pt-20 pb-0 tooo">
       {/* Breadcrumb & Header */}
-      <section className="bg-brand-navy py-16 text-white border-b border-white/10">
+      <section className="section-space-tight bg-brand-navy text-white border-b border-white/10">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionReveal>
             <div className="flex items-center gap-2 text-sm text-white/60 mb-8 font-medium">
@@ -127,7 +127,7 @@ export default function HelpArticle() {
       </section>
 
       {/* Article Content */}
-      <section className="py-16 bg-white">
+      <section className="section-space-tight bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionReveal>
             <div className="prose prose-lg max-w-none prose-headings:text-brand-navy prose-p:text-brand-navy/80 prose-strong:text-brand-navy">
@@ -158,7 +158,7 @@ export default function HelpArticle() {
       </section>
 
       {/* Related Articles */}
-      <section className="py-20 bg-brand-beige/20">
+      <section className="section-space bg-brand-beige/20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionReveal className="mb-10">
             <h2 className="text-2xl font-bold text-brand-navy">Related Articles</h2>
@@ -181,7 +181,7 @@ export default function HelpArticle() {
       </section>
 
       {/* Contact Support */}
-      <section className="py-20 bg-brand-navy text-center text-white">
+      <section className="section-space bg-brand-navy text-center text-white">
         <div className="max-w-2xl mx-auto px-4">
           <SectionReveal>
             <HelpCircle className="w-12 h-12 text-brand-yellow mx-auto mb-6" />

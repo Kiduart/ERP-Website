@@ -13,10 +13,10 @@ const solutionsData: Record<string, any> = {
     role: "Students", icon: GraduationCap, 
     headline: "Your Entire Academic Life, Organized.",
     challenges: ["Can't find assignments and deadlines in one place", "No visibility into attendance record", "Confusing fee payment process", "Disconnected communication with teachers"],
-    solutions: ["Unified student dashboard with all academic info", "Real-time attendance tracking with history", "Online fee payment portal with digital receipts", "Direct messaging with teachers via parent app"],
+    solutions: ["One student dashboard for timetable, marks, and fees", "Attendance history families can check anytime", "Online fee payments with digital receipts", "Messages to teachers through the parent app"],
     features: ["Personal dashboard", "Assignment tracker", "Grade history", "Digital timetable", "Fee payment portal", "Direct messaging"],
     dayInLife: ["Morning: Check today's timetable and classes", "Attendance: Teacher marks attendance in 30 seconds", "Grades: Instant notification when results published", "Fees: Parents pay online, student sees receipt", "Communication: Get messages from teachers directly"],
-    testimonial: { quote: "I can see all my grades, timetable, and fee status in one app. My parents never miss a school update anymore.", name: "Riya Patel", role: "Grade 10 Student" },
+    testimonial: { quote: "I can see my timetable, marks, and fee status in one place instead of asking at the office.", name: "Grade 10 student", role: "Secondary school learner" },
     color: "text-brand-orange", bg: "bg-brand-orange/20"
   },
   "teachers": {
@@ -26,17 +26,17 @@ const solutionsData: Record<string, any> = {
     solutions: ["Mark attendance in under 30 seconds on mobile", "Centralized gradebook with auto report generation", "Bulk messaging to all parents with one click", "Complete student profiles with history and notes"],
     features: ["Mobile attendance", "Digital gradebook", "Parent messaging", "Student profiles", "Lesson planner", "Substitute management"],
     dayInLife: ["8:00 AM: Mark class attendance on mobile", "10:00 AM: Enter quiz scores in gradebook", "12:00 PM: Send homework reminder to parents", "2:00 PM: Review student performance dashboard", "3:00 PM: Generate weekly class report automatically"],
-    testimonial: { quote: "What used to take me 2 hours at the end of each day now takes 20 minutes. I have more time for my students.", name: "Ms. Sarah Thompson", role: "Senior Teacher, Greenfield School" },
+    testimonial: { quote: "Marking attendance and posting homework used to eat my last period. Now I finish admin before I leave campus.", name: "Senior secondary teacher", role: "Class teacher" },
     color: "text-brand-teal", bg: "bg-brand-teal/20"
   },
   "administrators": {
     role: "School Administrators", icon: Building2,
     headline: "Run a Smarter School From One Dashboard.",
     challenges: ["Data scattered across 5+ different systems", "No real-time visibility into school operations", "Manual report generation takes days", "Staff communication is fragmented"],
-    solutions: ["Single unified dashboard for all school data", "Real-time analytics and operational metrics", "One-click automated report generation", "Centralized staff communication and notifications"],
-    features: ["Unified dashboard", "Staff management", "Enrollment tracking", "Financial overview", "Communication center", "Compliance reports"],
+    solutions: ["One admin dashboard for attendance, fees, and staffing", "Live operational metrics for leadership meetings", "Scheduled and on-demand reports", "Staff notices from one communication hub"],
+    features: ["School dashboard", "Staff management", "Enrollment tracking", "Financial overview", "Communication center", "Compliance reports"],
     dayInLife: ["9:00 AM: Check daily attendance overview", "10:00 AM: Review fee collection status", "11:00 AM: Approve staff leave requests", "2:00 PM: Send school-wide announcement", "4:00 PM: Review weekly performance report"],
-    testimonial: { quote: "I have complete visibility into every aspect of our school in real time. Decision-making has never been easier.", name: "Dr. Michael Chen", role: "Principal, Metro International School" },
+    testimonial: { quote: "I can see attendance, fees, and staffing issues on one screen before the morning meeting instead of waiting for someone to email a sheet.", name: "School principal", role: "K-12 leadership" },
     color: "text-brand-yellow", bg: "bg-brand-yellow/20"
   },
   "parents": {
@@ -46,17 +46,17 @@ const solutionsData: Record<string, any> = {
     solutions: ["Real-time grade and attendance notifications", "Push notifications for all school communications", "Online fee payment from mobile", "Direct teacher messaging through parent app"],
     features: ["Child progress dashboard", "Attendance alerts", "Online fee payment", "Teacher messaging", "Event calendar", "Report downloads"],
     dayInLife: ["Morning: Check today's attendance notification", "Afternoon: Receive grade update from exam", "Evening: Pay monthly fees online in 2 minutes", "Weekend: Review monthly progress report", "Anytime: Message teacher directly"],
-    testimonial: { quote: "I feel completely connected to my child's school life even during work hours. The instant notifications give me peace of mind.", name: "Priya Sharma", role: "Parent, Delhi Public School" },
+    testimonial: { quote: "I get absence alerts and fee reminders on my phone, so I am not finding out about problems at the gate.", name: "Working parent", role: "Parent of two students" },
     color: "text-brand-orange", bg: "bg-brand-orange/20"
   },
   "school-districts": {
     role: "School Districts", icon: Globe,
     headline: "Manage Every School. See Everything. Control Nothing Less.",
     challenges: ["No consolidated view across all campuses", "Inconsistent data collection methods", "Compliance reporting takes weeks to compile", "Staff performance tracking is manual"],
-    solutions: ["Multi-campus unified dashboard", "Standardized data collection across all schools", "Automated compliance reports at district level", "Centralized HR and performance management"],
+    solutions: ["Multi-campus dashboard for group leadership", "Standard data collection across every branch", "Compliance packs generated from the same fields", "Central HR and performance views"],
     features: ["Multi-campus dashboard", "District-wide analytics", "Compliance automation", "Centralized HR", "Policy management", "Executive reporting"],
     dayInLife: ["9:00 AM: Review district-wide enrollment dashboard", "10:00 AM: Check compliance status across campuses", "11:00 AM: Review district performance metrics", "2:00 PM: Deploy policy update to all schools", "4:00 PM: Generate monthly executive report"],
-    testimonial: { quote: "Managing 15 schools from one dashboard has transformed how we operate. Compliance reporting that used to take weeks now takes minutes.", name: "Dr. Jennifer Willis", role: "District Superintendent" },
+    testimonial: { quote: "Branch principals used to send different spreadsheets every month. Now we pull the same reports for every campus from one login.", name: "Group academic director", role: "Multi-branch schools" },
     color: "text-brand-teal", bg: "bg-brand-teal/20"
   }
 };
@@ -207,7 +207,7 @@ export default function SolutionDetail() {
       </section>
 
       {/* CHALLENGES VS SOLUTIONS */}
-      <section className="py-24 bg-brand-beige/30">
+      <section className="section-space bg-brand-beige/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-24">
             <SectionReveal>
@@ -245,7 +245,7 @@ export default function SolutionDetail() {
       </section>
 
       {/* KEY FEATURES */}
-      <section className="py-24 bg-white">
+      <section className="section-space bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <SectionReveal className="mb-16">
             <h2 className="text-3xl font-bold text-brand-navy">Everything You Need</h2>
@@ -263,7 +263,7 @@ export default function SolutionDetail() {
       </section>
 
       {/* DAY IN THE LIFE */}
-      <section className="py-24 bg-brand-navy text-white">
+      <section className="section-space bg-brand-navy text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionReveal className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-4">A Day in the Life</h2>
@@ -289,7 +289,7 @@ export default function SolutionDetail() {
       </section>
 
       {/* TESTIMONIAL */}
-      <section className="py-24 bg-brand-beige/20">
+      <section className="section-space bg-brand-beige/20">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <SectionReveal className="bg-white p-12 rounded-[3rem] shadow-xl shadow-brand-navy/5 border border-brand-navy/5 relative">
             <Quote className={`w-16 h-16 ${data.color} absolute top-8 left-8 opacity-20`} />
@@ -305,7 +305,7 @@ export default function SolutionDetail() {
       </section>
 
       {/* RELATED SOLUTIONS */}
-      <section className="py-16 bg-white border-t border-brand-navy/5">
+      <section className="section-space-tight bg-white border-t border-brand-navy/5">
         <div className="max-w-7xl mx-auto px-4">
           <SectionReveal className="mb-8">
             <h3 className="text-xl font-bold text-brand-navy text-center">Explore other roles</h3>

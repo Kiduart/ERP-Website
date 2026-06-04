@@ -1,8 +1,88 @@
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { Link } from "wouter";
+import { FormEvent, useState } from "react";
 import { CONTACT_EMAIL, CONTACT_LOCATION, CONTACT_PHONE_DISPLAY, COUNTRY_CODES, DEFAULT_COUNTRY_CODE } from "@/lib/contact";
+import { useAnalytics } from "@/hooks/useAnalytics";
+import { useToast } from "@/hooks/use-toast";
+
+type GetInTouchFormState = {
+  name: string;
+  email: string;
+  code: string;
+  phone: string;
+  message: string;
+};
 
 export function GetInTouchSection() {
+  const { trackEvent } = useAnalytics();
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState<GetInTouchFormState>({
+    name: "",
+    email: "",
+    code: DEFAULT_COUNTRY_CODE,
+    phone: "",
+    message: "",
+  });
+
+  const handleChange = (field: keyof GetInTouchFormState, value: string) => {
+    setFormData((current) => ({ ...current, [field]: value }));
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    trackEvent("Form", "form_submit", "get_in_touch_form");
+
+    if (!/^\d{10}$/.test(formData.phone)) {
+      toast({
+        title: "Invalid phone number",
+        description: "Please enter a valid 10 digit phone number.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          help: "Get in Touch form",
+        }),
+      });
+
+      const result = (await response.json().catch(() => null)) as { error?: string } | null;
+
+      if (!response.ok) {
+        throw new Error(result?.error || "Unable to send your message right now.");
+      }
+
+      setFormData({
+        name: "",
+        email: "",
+        code: DEFAULT_COUNTRY_CODE,
+        phone: "",
+        message: "",
+      });
+
+      toast({
+        title: "Message sent",
+        description: "Thanks for reaching out. Our team will get back to you shortly.",
+      });
+    } catch (error) {
+      toast({
+        title: "Unable to send message",
+        description: error instanceof Error ? error.message : "Please try again in a moment.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section className="bg-brand-beige px-4 py-20 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl px-4">
@@ -17,7 +97,7 @@ export function GetInTouchSection() {
               <p className="max-w-xs text-xs font-medium uppercase tracking-[0.34em] text-[#d9c8b3]">
                 School operations, admissions, and AI-led growth
               </p>
-              <h2 className="mt-6 max-w-xl font-serif text-4xl uppercase leading-[0.92] tracking-[-0.04em] text-[#f5efe6] sm:text-6xl lg:text-6xl">
+              <h2 className="mt-6 max-w-xl font-serif text-4xl font-normal uppercase leading-[0.92] tracking-[-0.02em] text-[#f5efe6] sm:text-6xl lg:text-6xl">
                 Let&apos;s Get In Touch
               </h2>
               <p className="mt-6 max-w-lg text-base leading-7 text-white/72">
@@ -42,7 +122,7 @@ export function GetInTouchSection() {
             </div>
 
             <div className="rounded-[1.75rem] border border-brand-navy/10 bg-brand-navy/70 p-6 text-white shadow-[0_18px_50px_rgba(0,48,73,0.22)] backdrop-blur-xl sm:p-7">
-              <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid gap-5 sm:grid-cols-[0.8fr_1.1fr] ">
                   <label className="block">
                     <span className="text-[11px] uppercase tracking-[0.28em] text-white/48">Full Name</span>
@@ -50,6 +130,8 @@ export function GetInTouchSection() {
                       type="text"
                       placeholder="Your name"
                       required
+                      value={formData.name}
+                      onChange={(e) => handleChange("name", e.target.value)}
                       className="field-surface-dark mt-3 w-full border-0 border-b border-white/14 px-0 py-3 text-sm text-white placeholder:text-white/28 focus:border-[#d6c1a8] focus:outline-none focus:ring-0"
                     />
                   </label>
@@ -57,7 +139,8 @@ export function GetInTouchSection() {
                     <span className="text-[11px] uppercase tracking-[0.28em] text-white/48">Phone</span>
                     <div className="mt-3 grid grid-cols-[9rem_minmax(0,1fr)] gap-3">
                       <select
-                        defaultValue={DEFAULT_COUNTRY_CODE}
+                        value={formData.code}
+                        onChange={(e) => handleChange("code", e.target.value)}
                         className="native-dark-select field-surface-dark w-full rounded-md border-0 border-b border-white/20 px-0 py-3 pr-8 text-sm font-semibold text-[#f5efe6] focus:border-[#d6c1a8] focus:outline-none focus:ring-0"
                       >
                         {COUNTRY_CODES.map((code) => (
@@ -73,6 +156,8 @@ export function GetInTouchSection() {
                         maxLength={10}
                         required
                         placeholder="10 digit number"
+                        value={formData.phone}
+                        onChange={(e) => handleChange("phone", e.target.value)}
                         className="field-surface-dark w-full border-0 border-b border-white/14 px-0 py-3 text-sm text-white placeholder:text-white/28 focus:border-[#d6c1a8] focus:outline-none focus:ring-0"
                       />
                     </div>
@@ -85,6 +170,8 @@ export function GetInTouchSection() {
                     type="email"
                     placeholder="you@school.edu"
                     required
+                    value={formData.email}
+                    onChange={(e) => handleChange("email", e.target.value)}
                     className="field-surface-dark mt-3 w-full border-0 border-b border-white/14 px-0 py-3 text-sm text-white placeholder:text-white/28 focus:border-[#d6c1a8] focus:outline-none focus:ring-0"
                   />
                 </label>
@@ -95,6 +182,8 @@ export function GetInTouchSection() {
                     rows={4}
                     placeholder="Share your current school workflow challenges or goals."
                     required
+                    value={formData.message}
+                    onChange={(e) => handleChange("message", e.target.value)}
                     className="field-surface-dark mt-3 w-full resize-none border-0 border-b border-white/14 px-0 py-3 text-sm text-white placeholder:text-white/28 focus:border-[#d6c1a8] focus:outline-none focus:ring-0"
                   />
                 </label>
@@ -109,7 +198,8 @@ export function GetInTouchSection() {
 
                   <button
                     type="submit"
-                    className="inline-flex h-14 w-14 items-center justify-center rounded-full border border-white/14 bg-white text-brand-navy transition-all duration-300 hover:translate-x-1 hover:bg-[#f2e7da]"
+                    disabled={isSubmitting}
+                    className="inline-flex h-14 w-14 items-center justify-center rounded-full border border-white/14 bg-white text-brand-navy transition-all duration-300 hover:translate-x-1 hover:bg-[#f2e7da] disabled:cursor-not-allowed disabled:opacity-60"
                     aria-label="Submit inquiry"
                   >
                     <ArrowUpRight className="h-6 w-6" />

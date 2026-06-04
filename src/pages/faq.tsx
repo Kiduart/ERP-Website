@@ -1,10 +1,12 @@
 import Head from "next/head";
 import { useState } from "react";
+import { SchemaMarkup } from "@/components/seo/SchemaMarkup";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CtaSection } from "@/components/ui/CtaSection";
+import { buildFaqPageSchema } from "@/lib/seoSchemas";
 import { ChevronDown, MessageCircleQuestion } from "lucide-react";
 
-const faqData = {
+export const faqData = {
   "Pricing & Plans": [
     { q: "How is pricing calculated?", a: "Pricing is based on the number of active students enrolled in your institution each month. Teacher accounts, staff logins and parent access are all included at no extra cost. You only pay for students. We price in INR for Indian schools. Visit the pricing page or book a demo to get a figure for your school's size." },
     { q: "Are there setup or onboarding fees?", a: "Professional and Enterprise plans include full onboarding support and data migration from your existing system at no extra cost. For the Basic plan, a one-time setup fee applies. We confirm the exact amount during your demo so there are no surprises later." },
@@ -26,7 +28,7 @@ const faqData = {
   ],
   "Security & Privacy": [
     { q: "How is student data protected?", a: "256-bit encryption, role-based access, regular security audits." },
-    { q: "Is KIDUART GDPR compliant?", a: "Yes, fully GDPR and FERPA compliant." },
+    { q: "Is KIDUART GDPR compliant?", a: "We follow GDPR-style data protection practices and design for education privacy requirements (including FERPA-aligned workflows where applicable). ISO 27001 certification is in progress — see our Security page for the latest status." },
     { q: "Who can access student data?", a: "Only authorized staff with role-specific permissions." },
     { q: "Where is data hosted?", a: "Secure cloud infrastructure in certified data centers." }
   ],
@@ -82,23 +84,9 @@ export default function FAQ() {
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="School ERP FAQ | Common Questions About KIDUART" />
         <meta name="twitter:description" content="Answers to the most common questions about KIDUART school ERP: pricing, onboarding, features, security, integrations and support. Cannot find your answer? Ask us directly." />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": Object.values(faqData).flat().map((item) => ({
-              "@type": "Question",
-              "name": item.q,
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": item.a
-              }
-            }))
-          })}}
-        />
       </Head>
-      <section className="bg-brand-beige/30 py-20 border-b border-brand-navy/5">
+      <SchemaMarkup data={buildFaqPageSchema(faqData)} />
+      <section className="section-space bg-brand-beige/30 border-b border-brand-navy/5">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <SectionReveal>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-navy mb-6">
@@ -111,7 +99,7 @@ export default function FAQ() {
         </div>
       </section>
 
-      <section className="py-16 bg-white min-h-[600px]">
+      <section className="section-space-tight bg-white min-h-[600px]">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Categories */}
           <SectionReveal delay={0.1} className="mb-12">
@@ -163,7 +151,7 @@ export default function FAQ() {
       </section>
 
       {/* Ask a Question Form */}
-      <section className="py-24 bg-brand-beige/20 border-y border-brand-navy/5">
+      <section className="section-space bg-brand-beige/20 border-y border-brand-navy/5">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionReveal className="bg-white rounded-3xl p-8 md:p-12 shadow-xl shadow-brand-navy/5 border border-brand-navy/10">
             <div className="flex items-center gap-4 mb-8">

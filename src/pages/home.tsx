@@ -1,10 +1,15 @@
-import Head from "next/head";
+import { PageSeoHead } from "@/components/seo/PageSeoHead";
+import { SchemaMarkup } from "@/components/seo/SchemaMarkup";
+import { pageSeo } from "@/lib/pageSeo";
+import { softwareApplicationSchema } from "@/lib/seoSchemas";
 import { Fragment } from "react";
 import { Link } from "wouter";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CtaSection } from "@/components/ui/CtaSection";
 import { HomeCurveHero } from "@/components/ui/CustomHeroes";
-import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
+import { ComingSoonBadge, ComingSoonContentMask } from "@/components/common/ComingSoonOverlay";
+import { HOME_IMPACT_HIGHLIGHTS } from "@/lib/siteData";
+import { CONTACT_PHONE_E164 } from "@/lib/contact";
 import { FloatingIcons } from "@/components/animations/FloatingIcons";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
 import { pricingPlans } from "@/data/pricing";
@@ -15,6 +20,7 @@ import {
   CalendarCheck,
   CheckCircle2,
   CreditCard,
+  Building2,
   FileText,
   MessageSquare,
   PieChart,
@@ -79,7 +85,7 @@ const aiFeatures = [
   {
     icon: Brain,
     title: "Attendance Pattern Alerts", // CONTENT: Reframed AI capability in plain language
-    desc: "When a student's attendance starts slipping below normal, the system surfaces it early , before a parent call is needed or a session is at risk.", // CONTENT: Added concrete early-warning scenario
+    desc: "When a student's attendance starts slipping below normal, the system surfaces it early, before a parent call is needed or a session is at risk.", // CONTENT: Added concrete early-warning scenario
   },
   {
     icon: Bell,
@@ -107,23 +113,23 @@ const howItWorks = [
   {
     step: "02",
     title: "Your team takes over", // CONTENT: Shifted step framing to post-setup adoption
-    desc: "Admins, teachers, and finance staff each log into a dashboard built for their role. No one sees more than they need to , and no one has to be trained twice.", // CONTENT: Clarified role-scoped access and training efficiency
+    desc: "Admins, teachers, and finance staff each log into a dashboard built for their role. No one sees more than they need to, and no one has to be trained twice.", // CONTENT: Clarified role-scoped access and training efficiency
   },
   {
     step: "03",
     title: "Decisions get easier", // CONTENT: Rewrote step title to leadership outcome
-    desc: "With live data on attendance, fees, and academic performance, school leadership can act on facts , not guesswork or end-of-term reports.", // CONTENT: Emphasized real-time decision quality
+    desc: "With live data on attendance, fees, and academic performance, school leadership can act on facts, not guesswork or end-of-term reports.", // CONTENT: Emphasized real-time decision quality
   },
 ];
 
 const faqs = [
   {
     q: "What does your school ERP software manage?",
-    a: "KIDUART covers the full lifecycle of school administration , from processing new admissions and maintaining student records to tracking daily attendance, managing fee collections, scheduling exams, generating report cards, and sending notices to parents. Everything runs from one dashboard, which means your admin team stops switching between spreadsheets, WhatsApp, and disconnected tools.",
+    a: "KIDUART covers the full lifecycle of school administration, from processing new admissions and maintaining student records to tracking daily attendance, managing fee collections, scheduling exams, generating report cards, and sending notices to parents. Everything runs from one dashboard, which means your admin team stops switching between spreadsheets, WhatsApp, and disconnected tools.",
   },
   {
     q: "Is this suitable for schools in India?",
-    a: "Yes. KIDUART is designed specifically for the Indian school context , including support for typical Indian fee structures, academic session patterns, and the communication habits of Indian parents. The platform is currently used by schools in Uttar Pradesh and expanding across North India.",
+    a: "Yes. KIDUART is designed for the Indian school context, including typical fee structures, academic session patterns, and how families expect updates. We are onboarding pilot schools in Uttar Pradesh and welcome demos from schools across India.",
   },
   {
     q: "How does AI help school management?",
@@ -154,67 +160,38 @@ const comparisons = [
   },
 ];
 
-const testimonials = [
-  {
-    img: "avatar-1.png",
-    name: "Sarah Jenkins",
-    role: "Principal, Oakridge Academy",
-    quote: "Admissions and attendance workflows became much more organized, and our admin team finally had one reliable dashboard to work from.",
-  },
-  {
-    img: "avatar-2.png",
-    name: "David Chen",
-    role: "IT Director, Metro Schools",
-    quote: "The platform gave leadership, teachers, and finance staff clearer visibility without adding extra complexity to day-to-day processes.",
-  },
-  // {
-  //   img: "avatar-1.png",
-  //   name: "Elena Rodriguez",
-  //   role: "Head of Admin, Brighton Public School",
-  //   quote: "Fee reminders, report workflows, and parent communication feel far more streamlined than our older school management setup.",
-  // },
-];
-
 export default function Home() {
   return (
     <>
-      <Head>
-        <title>School ERP Software for Indian Schools | KIDUART</title>
-        {/* CONTENT: Updated homepage title for keyword and brand precision */}
-        <meta
-          name="description"
-          content="KIDUART helps Indian schools manage admissions, fees, attendance, exams, and parent communication from one platform. AI-powered. Built for how your school actually works. Book a free demo."
-        />
-        {/* CONTENT: Replaced meta description with natural, audience-focused copy */}
-        <link rel="canonical" href="https://www.kiduart.com/" />
-        {/* SEO-UPGRADE: Added canonical URL for homepage */}
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="KIDUART" />
-        <meta property="og:title" content="School ERP Software for Indian Schools | KIDUART" />
-        <meta property="og:description" content="KIDUART helps Indian schools manage admissions, fees, attendance, exams, and parent communication from one platform. AI-powered. Built for how your school actually works. Book a free demo." />
-        <meta property="og:url" content="https://www.kiduart.com/" />
-        <meta property="og:image" content="https://www.kiduart.com/images/banner/home-hero.jpeg" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="School ERP Software for Indian Schools | KIDUART" />
-        <meta name="twitter:description" content="KIDUART helps Indian schools manage admissions, fees, attendance, exams, and parent communication from one platform. AI-powered. Built for how your school actually works. Book a free demo." />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "SoftwareApplication",
-            "name": "KIDUART School ERP",
-            "applicationCategory": "EducationalApplication",
-            "operatingSystem": "Web",
-            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
-            "description": "AI-powered school ERP for Indian schools covering admissions, fees, attendance, exams and parent communication in one place."
-          })}}
-        />
-        {/* SEO-UPGRADE: Added SoftwareApplication structured data */}
-      </Head>
+      <PageSeoHead {...pageSeo.home} />
+      <SchemaMarkup
+        type="Organization"
+        data={{
+          name: "KIDUART",
+          url: "https://www.kiduart.com",
+          logo: "https://www.kiduart.com/images/logo.png",
+          description: "School ERP software for Indian schools",
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Noida",
+            addressRegion: "Uttar Pradesh",
+            addressCountry: "IN",
+          },
+          contactPoint: {
+            "@type": "ContactPoint",
+            telephone: `+${CONTACT_PHONE_E164}`,
+            contactType: "customer service",
+            email: "support@kiduart.com",
+            areaServed: "IN",
+            availableLanguage: ["English", "Hindi"],
+          },
+        }}
+      />
+      <SchemaMarkup data={softwareApplicationSchema} />
 
       <PageTransition className="pt-0 pb-0">
         <HomeCurveHero
-          title="School ERP Software That Actually Fits How Indian Schools Work"
+          title="School ERP software built around how Indian schools run"
           subtitle="One platform for admissions, fees, attendance, exams, and parent communication. No more switching between spreadsheets, WhatsApp, and paper registers."
           // SEO-UPGRADE: Strengthened hero subtitle with trust and workflow pain-point language
           image="/images/banner/home-hero.jpeg"
@@ -222,13 +199,13 @@ export default function Home() {
             <>
               <Link
                 href="/demo"
-                className="rounded-full bg-white px-8 py-4 text-center text-lg font-bold text-brand-navy shadow-xl transition-all duration-300 hover:-translate-y-1 hover:bg-brand-beige"
+                className="w-full sm:w-auto rounded-full bg-white px-8 py-4 text-center text-lg font-bold text-brand-navy shadow-xl transition-all duration-300 hover:-translate-y-1 hover:bg-brand-beige"
               >
                 Get Free Demo
               </Link>
               <Link
                 href="/pricing"
-                className="flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:bg-white/15"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:bg-white/15"
               >
                 Start Free Trial <ArrowRight className="h-5 w-5" />
               </Link>
@@ -246,26 +223,18 @@ export default function Home() {
           <FloatingIcons icons={["Calculator", "BarChart2"]} count={4} />
           <div className="page-shell relative z-10">
             <SectionReveal className="mx-auto mb-12 max-w-3xl text-center">
-              <div className="section-kicker">From schools currently using KIDUART</div>
-              <h2 className="section-title mt-6 text-brand-navy">The numbers behind real school operations</h2>
-              {/* SEO-UPGRADE: Rewrote stats heading for clarity and directness */}
+              <div className="section-kicker">Built for daily school work</div>
+              <h2 className="section-title mt-6 text-brand-navy">What changes when operations sit in one system</h2>
               <p className="section-copy mt-4 text-brand-navy/70">
-                Each figure reflects what schools running KIDUART have seen across admissions, collections, communication, and daily admin work.
+                These are the outcomes we design for — not deployment statistics. Book a demo to see how they map to your school.
               </p>
             </SectionReveal>
             <SectionReveal className="grid grid-cols-2 gap-4 text-center md:grid-cols-4 md:gap-6">
-              {[
-                { label: "Student records managed", area: "Operations", value: 4, suffix: "+", decimals: 0 },
-                { label: "Teachers on daily dashboards", area: "Adoption", value: 20, suffix: "+", decimals: 0 },
-                { label: "Admin tasks automated", area: "Efficiency", value: 0, suffix: "+", decimals: 0 },
-                { label: "Avg. platform uptime", area: "Reliability", value: 99.9, suffix: "%", decimals: 1 },
-              ].map((stat, idx) => (
-                <div key={idx} className="rounded-3xl border border-brand-navy/10 bg-brand-beige/20 px-4 py-6 shadow-sm">
+              {HOME_IMPACT_HIGHLIGHTS.map((stat) => (
+                <div key={stat.label} className="rounded-3xl border border-brand-navy/10 bg-brand-beige/20 px-4 py-6 shadow-sm">
                   <div className="text-xs font-semibold uppercase tracking-[0.24em] text-brand-teal/80">{stat.area}</div>
-                  <div className="stat-value mt-4 font-extrabold text-brand-navy">
-                    <AnimatedCounter end={stat.value} suffix={stat.suffix} decimals={stat.decimals} />
-                  </div>
-                  <div className="mt-3 text-sm font-semibold uppercase tracking-[0.18em] text-brand-navy/55">{stat.label}</div>
+                  <div className="stat-value mt-4 text-2xl font-extrabold text-brand-navy md:text-3xl">{stat.headline}</div>
+                  <div className="mt-3 text-sm font-medium leading-snug text-brand-navy/65">{stat.label}</div>
                 </div>
               ))}
             </SectionReveal>
@@ -287,7 +256,7 @@ export default function Home() {
               <h2 className="section-title mt-6 text-brand-navy">Every school workflow in one connected system</h2>
               {/* SEO-UPGRADE: Simplified modules heading to core value proposition */}
               <p className="section-copy mt-4 text-brand-navy/70">
-                From the first admission inquiry to the final exam report , each module is built around the tasks your admin team does every single day.
+                From the first admission inquiry to the final exam report, each module is built around the tasks your admin team does every single day.
               </p>
             </SectionReveal>
 
@@ -484,7 +453,7 @@ export default function Home() {
           </div>
         </section> */}
 
-        <section className="py-24 bg-white relative overflow-hidden">
+        <section className="section-space bg-white relative overflow-hidden">
           <BackgroundBlobs
             blobs={[
               { color: "#0c716b", size: 400, position: "top-left", opacity: 0.15 },
@@ -494,42 +463,109 @@ export default function Home() {
           <FloatingIcons icons={["Heart", "Star", "Users"]} count={4} />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <SectionReveal className="text-center mb-10">
-
-              <div className="section-kicker mb-5">What schools are saying</div>
-              <h2 className="text-4xl font-bold text-brand-navy mb-4">Proof from School Teams</h2>
-              <p className="text-lg text-brand-navy/70 max-w-3xl mx-auto">
-                Hear from the school teams already running smoother operations with KIDUART.
+              <h2 className="text-4xl font-bold text-brand-navy mb-4">What school teams tell us</h2>
+              <p className="mx-auto max-w-2xl text-brand-navy/70">
+                Verified customer stories are on the way. In the meantime, these themes come up again and again when we speak with administrators, teachers, and finance staff during onboarding.
               </p>
-              {/* SEO-UPGRADE: Replaced internal scaffolding sentence with customer-facing social proof copy */}
             </SectionReveal>
 
-            {/* <SectionReveal className="flex flex-wrap justify-center gap-4 mb-12">
-              {["Oakridge Academy", "Metro Schools", "Brighton Public School", "Greenfield Campus", "Starlight International"].map((logo) => (
-                <div key={logo} className="rounded-full border border-brand-navy/10 bg-brand-navy/80 px-5 py-3 text-sm font-semibold text-brand-beige">
-                  {logo}
-                </div>
-              ))}
-            </SectionReveal> */}
-
             <div className="grid md:grid-cols-3 gap-8">
-              {testimonials.map((t, idx) => (
-                <SectionReveal key={t.name} delay={idx * 0.08} className="bg-brand-beige/20 p-8 rounded-2xl relative border border-brand-navy/10">
-                  <div className="text-brand-orange text-4xl font-serif absolute top-4 right-6 opacity-20">"</div>
-                  <p className="text-brand-navy/80 italic mb-8 relative z-10">"{t.quote}"</p>
+              {[
+                {
+                  id: "theme-1",
+                  title: "Admissions and daily operations",
+                  label: "Common admin priorities",
+                  lines: [
+                    "Less time reconciling spreadsheets between the front office and accounts.",
+                    "Attendance and notices handled from one place instead of three apps.",
+                    "Staff spend fewer hours on follow-ups that should not need a phone call.",
+                  ],
+                },
+                {
+                  id: "theme-2",
+                  title: "Finance and parent communication",
+                  label: "What finance teams ask for",
+                  lines: [
+                    "Clearer view of who has paid, who is due, and which reminders went out.",
+                    "Receipts and fee history parents can check without calling the school.",
+                    "Month-end closing that does not depend on chasing WhatsApp screenshots.",
+                  ],
+                },
+                {
+                  id: "theme-3",
+                  title: "Leadership and reporting",
+                  label: "What principals want to see",
+                  lines: [
+                    "Exam and report card work that does not start from a blank Excel file.",
+                    "Updates to families that match the channel the school already uses.",
+                    "A single picture of attendance, fees, and academics before Monday morning meetings.",
+                  ],
+                },
+              ].map((card, idx) => (
+                <SectionReveal
+                  key={card.id}
+                  delay={idx * 0.08}
+                  className="relative overflow-hidden rounded-2xl border border-brand-navy/10 bg-brand-beige/20 p-8"
+                >
+                  <ComingSoonBadge />
+
                   <div className="flex items-center gap-4">
-                    <img src={`/images/${t.img}`} alt={t.name} className="w-12 h-12 rounded-full bg-brand-navy/10 object-cover" />
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full border border-brand-teal/20 bg-brand-teal/10 text-brand-teal">
+                      <Building2 className="h-6 w-6" />
+                    </div>
                     <div>
-                      <div className="font-bold text-brand-navy">{t.name}</div>
-                      <div className="text-sm text-brand-teal">{t.role}</div>
+                      <div className="font-bold text-brand-navy">{card.title}</div>
+                      <div className="mt-1 text-sm font-semibold tracking-tight text-brand-teal/80">
+                        {card.label}
+                      </div>
                     </div>
                   </div>
+
+                  <ComingSoonContentMask className="mt-5 space-y-2">
+                    {card.lines.map((line) => (
+                      <p key={line} className="text-brand-navy/70 leading-7 text-sm">
+                        {line}
+                      </p>
+                    ))}
+                  </ComingSoonContentMask>
                 </SectionReveal>
               ))}
             </div>
+
+            <SectionReveal className="mt-10">
+              <div className="flex flex-col items-center gap-4">
+                <p className="text-lg font-semibold text-brand-navy">
+                  Using KIDUART and willing to share your experience? We would like to hear from you.
+                </p>
+                <Link
+                  href="/demo"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-brand-yellow px-8 py-4 text-base font-bold text-brand-navy shadow-xl hover:bg-white transition-colors duration-300"
+                >
+                  Request Demo <ArrowRight className="h-5 w-5" />
+                </Link>
+              </div>
+            </SectionReveal>
+
+            <SectionReveal className="mt-12">
+              <div className="flex flex-wrap items-center justify-center gap-4">
+                {[
+                  "🔒 Data Secure — GDPR Compliant",
+                  "🇮🇳 Built for Indian Schools",
+                  "⚡ Live in 2 Weeks",
+                ].map((badge) => (
+                  <div
+                    key={badge}
+                    className="rounded-full border border-brand-navy/10 bg-brand-beige/20 px-6 py-3 text-sm font-semibold text-brand-navy/90"
+                  >
+                    {badge}
+                  </div>
+                ))}
+              </div>
+            </SectionReveal>
           </div>
         </section>
 
-        <section className="py-24 bg-brand-navy border-y border-white/10 relative overflow-hidden" style={{ color: "#fcf6d3" }}>
+        <section className="section-space bg-brand-navy border-y border-white/10 relative overflow-hidden" style={{ color: "#fcf6d3" }}>
           <BackgroundBlobs
             blobs={[
               { color: "#fcbf49", size: 360, position: "top-left", opacity: 0.14 },
@@ -614,7 +650,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="py-28 my-20 bg-brand-beige/30 relative overflow-hidden">
+        <section className="section-space my-20 bg-brand-beige/30 relative overflow-hidden">
           <BackgroundBlobs blobs={[{ color: "#f77f00", size: 300, position: "center-right", opacity: 0.15 }]} />
           <FloatingIcons icons={["ShieldCheck", "Lock", "Eye"]} count={4} />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

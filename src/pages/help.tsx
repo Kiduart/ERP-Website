@@ -1,10 +1,12 @@
-import Head from "next/head";
+import { PageSeoHead } from "@/components/seo/PageSeoHead";
+import { pageSeo } from "@/lib/pageSeo";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
 import { FloatingIcons } from "@/components/animations/FloatingIcons";
 import { Search, Settings, Users, BarChart3, ArrowRight, MessageCircle, Ticket, Mail, X, Play } from "lucide-react";
 import { Link } from "wouter";
 import { useEffect, useRef, useState } from "react";
+import { bannerAltFromSrc, heroImgProps, IMAGE_DIMENSIONS } from "@/lib/imageSeo";
 import gsap from "gsap";
 
 const heroImage = "/images/banner/help-center-hero-1.jpg";
@@ -108,9 +110,7 @@ export default function HelpCenter() {
 
   return (
     <PageTransition className="pt-20 pb-0">
-      <Head>
-        <link rel="canonical" href="https://www.kiduart.com/help" />
-      </Head>
+      <PageSeoHead {...pageSeo.help} />
       <section className="hero-viewport relative overflow-hidden bg-[#f5f0e6]">
         <div className="page-shell hero-viewport-inner relative z-10 grid items-center gap-10 py-8 md:py-10 lg:grid-cols-[0.92fr_1.08fr]">
           <SectionReveal className="max-w-xl">
@@ -134,7 +134,12 @@ export default function HelpCenter() {
               ref={stageRef}
               className="relative mx-auto aspect-[1.16/1] w-full max-w-4xl overflow-hidden rounded-[2rem] border border-brand-navy/10 bg-white shadow-[0_28px_70px_rgba(0,48,73,0.18)]"
             >
-              <img src={heroImage} alt="Help center support preview" className="h-full w-full object-cover" />
+              <img
+                src={heroImage}
+                alt={bannerAltFromSrc(heroImage, "KIDUART help center walkthrough of school ERP screens")}
+                className="h-full w-full object-cover"
+                {...heroImgProps(IMAGE_DIMENSIONS.heroWide)}
+              />
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,48,73,0.04),rgba(0,48,73,0.14))]" />
               <div
                 ref={lensRef}
@@ -156,7 +161,7 @@ export default function HelpCenter() {
         </div>
       </section>
 
-      <section className="py-20 bg-brand-beige/20 relative overflow-hidden">
+      <section className="section-space bg-brand-beige/20 relative overflow-hidden">
         <BackgroundBlobs
           blobs={[
             { color: "#fcbf49", size: 300, position: "center-left", opacity: 0.15 },
@@ -179,7 +184,7 @@ export default function HelpCenter() {
         </div>
       </section>
 
-      <section className="py-16 bg-white relative overflow-hidden">
+      <section className="section-space-tight bg-white relative overflow-hidden">
         <BackgroundBlobs blobs={[{ color: "#f77f00", size: 300, position: "bottom-right", opacity: 0.15 }]} />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <SectionReveal>
@@ -199,7 +204,7 @@ export default function HelpCenter() {
         </div>
       </section>
 
-      <section className="py-24 bg-brand-beige/40 border-t border-brand-navy/5 relative overflow-hidden">
+      <section className="section-space bg-brand-beige/40 border-t border-brand-navy/5 relative overflow-hidden">
         <BackgroundBlobs blobs={[{ color: "#003049", size: 300, position: "bottom-left", opacity: 0.12 }]} />
         <FloatingIcons icons={["MessageSquare", "Mail"]} count={4} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

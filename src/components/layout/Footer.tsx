@@ -95,10 +95,18 @@ export function Footer() {
           </form>
         </div>
 
-        <div className="grid grid-cols-1 gap-12 py-16 md:grid-cols-2 xl:grid-cols-[1.2fr_0.8fr_0.8fr_0.95fr]">
+        <div className="grid grid-cols-1 gap-12 py-16 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-[1.2fr_0.7fr_0.7fr_0.8fr_0.95fr]">
           <div className="max-w-sm">
             <Link href="/" className="inline-flex items-center">
-              <img src="/logo.png" alt="KIDUART" className="h-20 w-auto" />
+              <img
+                src="/logo.png"
+                alt="KIDUART school ERP"
+                className="h-20 w-auto"
+                width={160}
+                height={80}
+                loading="lazy"
+                decoding="async"
+              />
             </Link>
             <p className="mt-6 text-sm leading-7 text-brand-navy/70">
               KIDUART builds school ERP software for Indian educational institutions , helping admin teams, teachers, and finance staff do their jobs without the friction.
@@ -136,8 +144,18 @@ export function Footer() {
             <h4 className="mb-6 text-sm font-bold uppercase tracking-[0.25em] text-brand-teal">Company</h4>
             <ul className="space-y-4">
               <li><Link href="/about" className="hover-underline-group inline-flex text-sm text-brand-navy/75 transition-colors hover:text-brand-navy"><span className="center-gradient-underline">About Us</span></Link></li>
-              <li><Link href="/careers" className="hover-underline-group inline-flex text-sm text-brand-navy/75 transition-colors hover:text-brand-navy"><span className="center-gradient-underline">Careers</span></Link></li>
-              <li><Link href="/stories" className="hover-underline-group inline-flex text-sm text-brand-navy/75 transition-colors hover:text-brand-navy"><span className="center-gradient-underline">Customer Stories</span></Link></li>
+              <li>
+                <Link href="/careers" className="hover-underline-group inline-flex items-center gap-2 text-sm text-brand-navy/75 transition-colors hover:text-brand-navy">
+                  <span className="center-gradient-underline">Careers</span>
+                  <span className="rounded-full bg-brand-yellow px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-brand-navy">Soon</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/stories" className="hover-underline-group inline-flex items-center gap-2 text-sm text-brand-navy/75 transition-colors hover:text-brand-navy">
+                  <span className="center-gradient-underline">Customer Stories</span>
+                  <span className="rounded-full bg-brand-yellow px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-brand-navy">Soon</span>
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -154,19 +172,29 @@ export function Footer() {
           <div>
             <h4 className="mb-6 text-sm font-bold uppercase tracking-[0.25em] text-brand-teal">Resources</h4>
             <ul className="space-y-4">
-              <li><Link href="/blog" className="hover-underline-group inline-flex text-sm text-brand-navy/75 transition-colors hover:text-brand-navy"><span className="center-gradient-underline">Blog & Insights</span></Link></li>
+              <li>
+                <Link href="/blog" className="hover-underline-group inline-flex items-center gap-2 text-sm text-brand-navy/75 transition-colors hover:text-brand-navy">
+                  <span className="center-gradient-underline">Blog & Insights</span>
+                  <span className="rounded-full bg-brand-yellow px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-brand-navy">Soon</span>
+                </Link>
+              </li>
               <li><Link href="/help" className="hover-underline-group inline-flex text-sm text-brand-navy/75 transition-colors hover:text-brand-navy"><span className="center-gradient-underline">Help Center</span></Link></li>
               <li><Link href="/contact" className="hover-underline-group inline-flex text-sm text-brand-navy/75 transition-colors hover:text-brand-navy"><span className="center-gradient-underline">Contact Us</span></Link></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="mb-6 text-sm font-bold uppercase tracking-[0.25em] text-brand-teal">Legal</h4>
+            <ul className="space-y-4">
+              <li><Link href="/privacy-policy" className="hover-underline-group inline-flex text-sm text-brand-navy/75 transition-colors hover:text-brand-navy"><span className="center-gradient-underline">Privacy Policy</span></Link></li>
+              <li><Link href="/terms-conditions" className="hover-underline-group inline-flex text-sm text-brand-navy/75 transition-colors hover:text-brand-navy"><span className="center-gradient-underline">Terms & Conditions</span></Link></li>
+              <li><Link href="/refund-cancellation-policy" className="hover-underline-group inline-flex text-sm text-brand-navy/75 transition-colors hover:text-brand-navy"><span className="center-gradient-underline">Refund / Cancellation Policy</span></Link></li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-brand-navy/10 pt-6 text-center">
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-brand-navy/60">
-            <Link href="#" className="hover-underline-group inline-flex transition-colors hover:text-brand-navy"><span className="center-gradient-underline">Privacy Statement</span></Link>
-            <Link href="#" className="hover-underline-group inline-flex transition-colors hover:text-brand-navy"><span className="center-gradient-underline">Terms of Use</span></Link>
-            <Link href="#" className="hover-underline-group inline-flex transition-colors hover:text-brand-navy"><span className="center-gradient-underline">Cookie Preferences</span></Link>
-            <Link href="#" className="hover-underline-group inline-flex transition-colors hover:text-brand-navy"><span className="center-gradient-underline">Accessibility</span></Link>
             <span>&copy; {new Date().getFullYear()} KIDUART Inc. All rights reserved.</span>
           </div>
         </div>

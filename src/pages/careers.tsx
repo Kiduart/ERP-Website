@@ -1,9 +1,10 @@
 import Head from "next/head";
+import { bannerAltFromSrc, heroImgProps, IMAGE_DIMENSIONS } from "@/lib/imageSeo";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CtaSection } from "@/components/ui/CtaSection";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
 import { FloatingIcons } from "@/components/animations/FloatingIcons";
-import { Rocket, Heart, BookOpen, Laptop, Briefcase, Smile, MapPin, Building2, Clock } from "lucide-react";
+import { Rocket, Heart, BookOpen, Laptop, Briefcase, Smile } from "lucide-react";
 
 export default function Careers() {
   const benefits = [
@@ -13,13 +14,6 @@ export default function Careers() {
     { icon: Rocket, title: "Early equity", desc: "Stock options available for key roles , because we want the people building this to benefit from where it goes." },
     { icon: Smile, title: "Parental leave", desc: "Generous paid leave for all new parents. We believe in people having a life outside work." },
     { icon: Briefcase, title: "Team time", desc: "Regular in-person gatherings for a fully distributed team , because remote works better with occasional face time." },
-  ];
-
-  const jobs = [
-    { role: "Senior Frontend Developer", dept: "Engineering", loc: "Noida, Uttar Pradesh / Remote India", type: "Full-time" },
-    { role: "Backend Node.js Engineer", dept: "Engineering", loc: "Noida, Uttar Pradesh", type: "Full-time" },
-    { role: "Product Manager (Analytics)", dept: "Product", loc: "Remote India", type: "Full-time" },
-    { role: "Customer Success Manager", dept: "Customer Success", loc: "Noida, Uttar Pradesh", type: "Full-time" },
   ];
 
   return (
@@ -61,15 +55,16 @@ export default function Careers() {
             <div className="relative aspect-square w-[min(80vw,34rem)] overflow-hidden rounded-full border-[14px] border-white shadow-[0_26px_70px_rgba(0,48,73,0.16)]">
               <img
                 src="/images/banner/career-post-1.jpg"
-                alt="KIDUART team working on school ERP software in Noida India"
+                alt={bannerAltFromSrc("/images/banner/career-post-1.jpg", "KIDUART team working on school ERP software in Noida, India")}
                 className="h-full w-full object-cover object-center"
+                {...heroImgProps(IMAGE_DIMENSIONS.heroPortrait)}
               />
             </div>
           </SectionReveal>
         </div>
       </section>
 
-      <section className="py-24 bg-brand-beige/30 relative overflow-hidden">
+      <section className="section-space bg-brand-beige/30 relative overflow-hidden">
         <BackgroundBlobs
           blobs={[
             { color: "#fcbf49", size: 300, position: "center-left", opacity: 0.15 },
@@ -96,7 +91,7 @@ export default function Careers() {
         </div>
       </section>
 
-      <section className="py-24 bg-white border-y border-brand-navy/5 relative overflow-hidden">
+      <section className="section-space bg-white border-y border-brand-navy/5 relative overflow-hidden">
         <BackgroundBlobs blobs={[{ color: "#f77f00", size: 300, position: "bottom-left", opacity: 0.15 }]} />
         <FloatingIcons icons={["Smile", "Star"]} count={4} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
@@ -121,36 +116,51 @@ export default function Careers() {
         </div>
       </section>
 
-      <section className="py-24 bg-brand-beige/10 relative overflow-hidden" id="open-roles">
+      <section className="section-space bg-brand-beige/10 relative overflow-hidden" id="open-roles">
         <BackgroundBlobs blobs={[{ color: "#0c716b", size: 300, position: "top-right", opacity: 0.15 }]} />
         <FloatingIcons icons={["Users", "Briefcase"]} count={4} />
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <SectionReveal className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-brand-navy mb-4">Open roles</h2>
-            <p className="text-brand-navy/70 text-lg">We are growing carefully , hiring for quality over speed. If you see a role that fits, apply. If you do not see one but think you belong here anyway, reach out.</p>
+            <h2 className="text-3xl font-bold text-brand-navy mb-4">Open Positions</h2>
           </SectionReveal>
 
-          <div className="space-y-4">
-            {jobs.map((job, idx) => (
-              <SectionReveal key={idx} delay={idx * 0.1} className="bg-white p-6 rounded-2xl shadow-sm border border-brand-navy/10 flex flex-col md:flex-row md:items-center justify-between gap-6 hover:shadow-md transition-shadow">
-                <div>
-                  <h3 className="text-xl font-bold text-brand-navy mb-2">{job.role}</h3>
-                  <div className="flex flex-wrap gap-4 text-sm text-brand-navy/60 font-medium">
-                    <span className="flex items-center gap-1"><Building2 className="w-4 h-4" /> {job.dept}</span>
-                    <span className="flex items-center gap-1"><MapPin className="w-4 h-4" /> {job.loc}</span>
-                    <span className="flex items-center gap-1"><Clock className="w-4 h-4" /> {job.type}</span>
-                  </div>
-                </div>
-                <button className="px-6 py-3 bg-brand-navy text-white font-bold rounded-xl hover:bg-brand-teal transition-colors shrink-0">
-                  Apply Now
-                </button>
-              </SectionReveal>
-            ))}
-          </div>
+          <SectionReveal className="rounded-2xl border-2 border-dashed border-brand-navy/20 bg-brand-beige/20 p-12 text-center">
+            <div className="mb-4 text-5xl">👥</div>
+            <h3 className="mb-3 text-2xl font-bold text-brand-navy">We&apos;re Growing</h3>
+            <p className="mx-auto mb-6 max-w-md text-brand-navy/70">
+              We&apos;re in the early stages of building our team. New roles will be posted here soon. Meanwhile, if you&apos;re
+              passionate about EdTech and want to be considered early, reach out directly.
+            </p>
+            <a
+              href="mailto:careers@kiduart.com"
+              className="inline-flex items-center gap-2 rounded-full bg-brand-navy px-8 py-4 font-bold text-white transition-colors hover:bg-brand-teal"
+            >
+              Send Your Resume →
+            </a>
+          </SectionReveal>
+
+          <SectionReveal className="mt-8 text-center">
+            <h3 className="text-lg font-bold text-brand-navy">Role categories we&apos;ll be hiring for</h3>
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
+              {[
+                "Engineering & Product",
+                "Sales & Customer Success",
+                "Marketing & Content",
+                "Operations & Support",
+              ].map((item) => (
+                <span
+                  key={item}
+                  className="inline-flex rounded-full bg-brand-beige px-4 py-2 text-sm font-semibold text-brand-navy"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+          </SectionReveal>
         </div>
       </section>
 
-      <section className="py-24 bg-white border-t border-brand-navy/5">
+      <section className="section-space bg-white border-t border-brand-navy/5">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <SectionReveal>
             <h2 className="text-3xl font-bold text-brand-navy mb-12">Our Hiring Process</h2>

@@ -9,6 +9,7 @@ import { AccessibilityProvider, AccessibilityWidget } from "@/components/common/
 import { ScrollRestoration } from "@/components/common/ScrollRestoration";
 import { ScrollToTopButton } from "@/components/common/ScrollToTopButton";
 import { ChatbotWidget } from "@/components/common/ChatbotWidget";
+import { StickyDemoBar } from "@/components/common/StickyDemoBar";
 import { CursorEffect } from "@/components/animations/CursorEffect";
 import { GetInTouchSection } from "@/components/ui/GetInTouchSection";
 
@@ -18,9 +19,14 @@ type AppShellProps = {
 
 export function AppShell({ children }: AppShellProps) {
   const [queryClient] = useState(() => new QueryClient());
+  const [stickyDemoBarDismissed, setStickyDemoBarDismissed] = useState(false);
   const router = useRouter();
   const shouldShowGetInTouch = useMemo(
     () => !["/contact", "/demo", "/404", "/not-found"].includes(router.pathname),
+    [router.pathname],
+  );
+  const shouldShowStickyDemoBar = useMemo(
+    () => !["/contact", "/demo"].includes(router.pathname),
     [router.pathname],
   );
 
@@ -38,6 +44,12 @@ export function AppShell({ children }: AppShellProps) {
             <AccessibilityWidget />
             <ScrollToTopButton />
             <ChatbotWidget />
+            {shouldShowStickyDemoBar && (
+              <StickyDemoBar
+                dismissed={stickyDemoBarDismissed}
+                onDismiss={() => setStickyDemoBarDismissed(true)}
+              />
+            )}
           </div>
           <Toaster />
         </TooltipProvider>

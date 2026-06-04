@@ -65,7 +65,8 @@ export default {
       },
 
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
+        sans: ["var(--font-sans-family)"],
+        serif: ["var(--font-serif-family)"],
       },
     },
   },

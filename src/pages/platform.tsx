@@ -1,4 +1,5 @@
-import Head from "next/head";
+import { PageSeoHead } from "@/components/seo/PageSeoHead";
+import { pageSeo } from "@/lib/pageSeo";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CtaSection } from "@/components/ui/CtaSection";
 import { ImageBackdropHero } from "@/components/ui/CustomHeroes";
@@ -115,24 +116,7 @@ export default function Platform() {
 
   return (
     <PageTransition className="pt-20 pb-0">
-      <Head>
-        <title>School ERP Platform | Role-Based Dashboards for Every Team | KIDUART</title>
-        <meta
-          name="description"
-          content="KIDUART gives every school stakeholder their own dashboard , admin, teacher, finance, student, parent, HR, and director. One platform. Ten role-specific views. Book a free demo."
-        />
-        <link rel="canonical" href="https://www.kiduart.com/platform" />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="KIDUART" />
-        <meta property="og:title" content="School ERP Platform | Role-Based Dashboards for Every Team | KIDUART" />
-        <meta property="og:description" content="KIDUART gives every school stakeholder their own dashboard , admin, teacher, finance, student, parent, HR, and director. One platform. Ten role-specific views. Book a free demo." />
-        <meta property="og:url" content="https://www.kiduart.com/platform" />
-        <meta property="og:image" content="https://www.kiduart.com/images/banner/home-hero.jpeg" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="School ERP Platform | Role-Based Dashboards for Every Team | KIDUART" />
-        <meta name="twitter:description" content="KIDUART gives every school stakeholder their own dashboard , admin, teacher, finance, student, parent, HR, and director. One platform. Ten role-specific views. Book a free demo." />
-      </Head>
-      {/* CONTENT: Added platform metadata and canonical URL */}
+      <PageSeoHead {...pageSeo.platform} />
       <ImageBackdropHero
         eyebrow="Built for every role in your school"
         title="One platform. A separate dashboard for every team that uses it."
@@ -145,13 +129,13 @@ export default function Platform() {
           <>
             <Link
               href="/demo"
-              className="rounded-full bg-brand-navy px-8 py-4 text-base font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-teal"
+              className="w-full sm:w-auto rounded-full bg-brand-navy px-8 py-4 text-base font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-teal"
             >
               Request Demo
             </Link>
             <Link
               href="/features"
-              className="rounded-full border border-brand-navy/14 bg-white/70 px-8 py-4 text-base font-bold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
+              className="w-full sm:w-auto rounded-full border border-brand-navy/14 bg-white/70 px-8 py-4 text-base font-bold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
             >
               Explore Features
             </Link>
@@ -239,7 +223,7 @@ export default function Platform() {
         </div>
       </section>
 
-      <section className="border-t border-brand-navy/5 bg-brand-beige/20 py-24">
+      <section className="section-space border-t border-brand-navy/5 bg-brand-beige/20">
         <div className="mx-auto max-w-4xl px-4 text-center">
           <SectionReveal>
             <h2 className="text-3xl font-bold text-brand-navy">Want to see the dashboard built for your role?</h2>
@@ -248,7 +232,7 @@ export default function Platform() {
             </p>
             <Link
               href="/demo"
-              className="mt-8 inline-flex items-center gap-2 rounded-full bg-brand-navy px-8 py-4 text-lg font-bold text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:bg-brand-teal hover:shadow-brand-teal/25"
+              className="mt-8 w-full sm:w-auto inline-flex items-center gap-2 rounded-full bg-brand-navy px-8 py-4 text-lg font-bold text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:bg-brand-teal hover:shadow-brand-teal/25"
             >
               Book a personalised walkthrough
             </Link>

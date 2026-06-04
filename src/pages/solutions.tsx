@@ -1,12 +1,14 @@
 import Head from "next/head";
 import { Link } from "wouter";
 import { ArrowRight, BookOpen, Building, Building2, CheckCircle2, Presentation, Users } from "lucide-react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
 import { FloatingIcons } from "@/components/animations/FloatingIcons";
 import { CtaSection } from "@/components/ui/CtaSection";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
+import { CountUpNumber } from "@/components/ui/CountUpNumber";
+import { heroImgProps, IMAGE_DIMENSIONS, solutionCarouselAlt } from "@/lib/imageSeo";
 
 type RoleSolution = {
   title: string;
@@ -24,7 +26,7 @@ type RoleSolution = {
 const roles: RoleSolution[] = [
   {
     title: "For Teachers",
-    shortValue: "Save teaching time by automating class admin in one place.",
+    shortValue: "Less time on attendance and marks, more time in class.",
     slug: "teachers",
     icon: Presentation,
     accent: "text-brand-teal",
@@ -36,7 +38,7 @@ const roles: RoleSolution[] = [
       "Scattered student data",
     ],
     solution:
-      "Mark attendance in 1 click, automate grading, and manage all class data from one dashboard, saving up to 10+ hours every week.",
+      "Mark attendance quickly, enter marks once, and send class updates without juggling separate apps.",
     cta: "See How It Works for Teachers",
   },
   {
@@ -53,7 +55,7 @@ const roles: RoleSolution[] = [
       "Important alerts get missed",
     ],
     solution:
-      "Track attendance, pay fees online, and receive instant school alerts from one parent app that improves engagement without extra follow-ups.",
+      "See attendance, pay fees, and read school notices from one parent app instead of calling the office for each update.",
     cta: "View Parent App Demo",
   },
   {
@@ -133,53 +135,6 @@ const cards = [
   },
 ];
 
-function CountUpNumber({
-  end,
-  suffix = "",
-  trailingText = "",
-  duration = 1600,
-}: Pick<ImpactStat, "end" | "suffix" | "trailingText"> & { duration?: number }) {
-  const countRef = useRef<HTMLDivElement | null>(null);
-  const isInView = useInView(countRef, { once: true, margin: "-80px" });
-  const [value, setValue] = useState(0);
-
-  useEffect(() => {
-    if (!isInView) return;
-
-    let animationFrame = 0;
-    let startTime: number | null = null;
-
-    const updateValue = (timestamp: number) => {
-      if (startTime === null) {
-        startTime = timestamp;
-      }
-
-      const elapsed = timestamp - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const easedProgress = 1 - Math.pow(1 - progress, 3);
-
-      setValue(Math.round(end * easedProgress));
-
-      if (progress < 1) {
-        animationFrame = window.requestAnimationFrame(updateValue);
-      }
-    };
-
-    animationFrame = window.requestAnimationFrame(updateValue);
-
-    return () => window.cancelAnimationFrame(animationFrame);
-  }, [duration, end, isInView]);
-
-  return (
-    <div ref={countRef} className="text-4xl font-extrabold text-brand-navy">
-      {value}
-      {suffix}
-      {trailingText}
-    </div>
-  );
-}
-
-
 export default function Solutions() {
   const [active, setActive] = useState<number | null>(1);
   const [searchTerm, setSearchTerm] = useState("");
@@ -208,7 +163,7 @@ export default function Solutions() {
       </Head>
 
       <PageTransition className="pt-20 pb-0">
-        <section className="relative overflow-hidden bg-[linear-gradient(180deg,#f6f7fb,#ffffff)] py-24">
+        <section className="section-space relative overflow-hidden bg-[linear-gradient(180deg,#f6f7fb,#ffffff)]">
           <BackgroundBlobs
             blobs={[
               { color: "hsl(var(--blob-yellow))", size: 360, position: "top-left", opacity: 0.12 },
@@ -218,7 +173,7 @@ export default function Solutions() {
 
           <div className="page-shell relative z-10 grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr]">
             <SectionReveal>
-              <div className="inline-flex rounded-full border border-brand-navy/10 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-brand-teal">
+              <div className="section-kicker inline-flex rounded-full border border-brand-navy/10 bg-white px-4 py-2">
                 Role-based school ERP solutions
               </div>
               <h1 className="mt-6 max-w-xl text-[clamp(2.15rem,1.4rem+1.9vw,3.6rem)] font-bold leading-[1.03] text-brand-navy">
@@ -230,10 +185,11 @@ export default function Solutions() {
 
               <div className="mt-8 flex max-w-xl items-center gap-3 rounded-full border border-brand-navy/10 bg-white px-4 py-3 shadow-lg shadow-brand-navy/5">
                 <input
+                  type="search"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Search by team, workflow, or outcome"
-                  className="field-surface w-full rounded-full text-sm font-medium text-brand-navy/70 outline-none placeholder:text-brand-navy/45"
+                  className="w-full min-w-0 appearance-none rounded-full border-0 bg-transparent text-sm font-medium text-brand-navy/70 outline-none shadow-none ring-0 placeholder:text-brand-navy/45 focus:border-0 focus:outline-none focus:ring-0 focus:shadow-none focus-visible:outline-none focus-visible:ring-0 focus-visible:shadow-none"
                 />
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-navy text-white">
                   <ArrowRight className="h-4 w-4" />
@@ -296,8 +252,9 @@ export default function Solutions() {
                         <div className="w-[18rem] rounded-[2rem] border border-black/10 bg-[#2b211b] p-3">
                           <img
                             src={card.img}
-                            alt="preview"
+                            alt={solutionCarouselAlt(card.img)}
                             className="h-[23rem] w-full rounded-[1.5rem] object-cover"
+                            {...heroImgProps(IMAGE_DIMENSIONS.carouselCard)}
                           />
                         </div>
                       </div>
@@ -310,7 +267,7 @@ export default function Solutions() {
           </div>
         </section>
 
-        <section className="relative overflow-hidden bg-white py-24">
+        <section className="section-space relative overflow-hidden bg-white">
           <BackgroundBlobs
             blobs={[
               { color: "#fcbf49", size: 320, position: "top-left", opacity: 0.14 },
@@ -321,7 +278,7 @@ export default function Solutions() {
 
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <SectionReveal className="mx-auto mb-16 max-w-4xl text-center">
-              <p className="text-sm font-bold uppercase tracking-[0.24em] text-brand-teal">Role-Based School ERP Solutions</p>
+              <p className="section-kicker">Role-Based School ERP Solutions</p>
               <h2 className="mt-4 text-4xl font-bold text-brand-navy">Every stakeholder gets a clearer path, not just more software</h2>
               <p className="mt-4 text-lg leading-8 text-brand-navy/70">
                 This page focuses on outcomes, not generic ERP features. Each solution is built around what teachers, parents, students, and administrators need to do faster and better.
@@ -343,7 +300,7 @@ export default function Solutions() {
                     <role.icon className={`h-8 w-8 ${role.iconClass}`} />
                   </div>
 
-                  <h2 className="text-3xl font-bold">{role.title}</h2>
+                  <h3 className="text-3xl font-bold">{role.title}</h3>
                   <p className="mt-3 text-lg leading-7 opacity-85">{role.shortValue}</p>
 
                   <div className="mt-8">
@@ -378,7 +335,7 @@ export default function Solutions() {
           </div>
         </section>
 
-        <section className="relative overflow-hidden bg-brand-navy py-24" style={{ color: "#fcf6d3" }}>
+        <section className="section-space relative overflow-hidden bg-brand-navy" style={{ color: "#fcf6d3" }}>
           <BackgroundBlobs
             blobs={[
               { color: "#fcbf49", size: 380, position: "top-right", opacity: 0.16 },
@@ -420,7 +377,7 @@ export default function Solutions() {
                 <div className="rounded-[1.75rem] border border-white/10 bg-brand-beige p-6 text-brand-navy">
                   <div className="flex items-center justify-between border-b border-brand-navy/10 pb-4">
                     <div>
-                      <p className="text-sm font-bold uppercase tracking-[0.24em] text-brand-teal">District Overview</p>
+                      <p className="section-kicker">District Overview</p>
                       <h3 className="mt-2 text-2xl font-bold">One command view across schools</h3>
                     </div>
                     <Building className="h-10 w-10 text-brand-orange" />
@@ -456,11 +413,11 @@ export default function Solutions() {
           </div>
         </section>
 
-        <section className="relative overflow-hidden border-y border-brand-navy/5 bg-brand-beige/25 py-24">
+        <section className="section-space relative overflow-hidden border-y border-brand-navy/5 bg-brand-beige/25">
           <BackgroundBlobs blobs={[{ color: "#003049", size: 380, position: "center-left", opacity: 0.12 }]} />
           <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <SectionReveal className="rounded-[2rem] border border-brand-navy/10 bg-white p-8 shadow-xl shadow-brand-navy/5 md:p-12">
-              <p className="text-sm font-bold uppercase tracking-[0.24em] text-brand-orange">Why This Matters</p>
+              <p className="section-kicker">Why This Matters</p>
               <h2 className="mt-4 text-4xl font-bold text-brand-navy">Better school systems create better daily outcomes</h2>
               <p className="mt-4 max-w-3xl text-lg leading-8 text-brand-navy/72">
                 Schools using KIDUART ERP reduce administrative workload by up to 40% and improve parent engagement significantly, giving staff more time for teaching, planning, and student support.
@@ -469,7 +426,12 @@ export default function Solutions() {
               <div className="mt-10 grid gap-6 md:grid-cols-3">
                 {impactStats.map((stat) => (
                   <div key={stat.label} className="rounded-3xl bg-brand-beige/20 px-6 py-8 text-center">
-                    <CountUpNumber end={stat.end} suffix={stat.suffix} trailingText={stat.trailingText} />
+                    <CountUpNumber
+                      end={stat.end}
+                      suffix={stat.suffix}
+                      trailingText={stat.trailingText}
+                      className="text-4xl font-extrabold text-brand-navy"
+                    />
                     <p className="mt-3 text-sm font-semibold uppercase tracking-[0.18em] text-brand-navy/60">{stat.label}</p>
                   </div>
                 ))}

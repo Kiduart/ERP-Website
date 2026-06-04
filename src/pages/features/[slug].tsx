@@ -1,4 +1,7 @@
+import { PageSeoHead } from "@/components/seo/PageSeoHead";
+import { featurePageSeo } from "@/lib/pageSeo";
 import { useParams, Link } from "wouter";
+import { featureDashboardAlt, heroImgProps, IMAGE_DIMENSIONS } from "@/lib/imageSeo";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CtaSection } from "@/components/ui/CtaSection";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
@@ -33,7 +36,7 @@ const featuresData: Record<string, any> = {
     ],
     howItWorks: [
       { step: 1, title: "Enroll students", desc: "Admins or parents complete digital enrollment forms with all required documents." },
-      { step: 2, title: "Build profiles", desc: "The system automatically creates comprehensive student profiles from enrollment data." },
+      { step: 2, title: "Build profiles", desc: "The system creates full student profiles from enrollment data without duplicate entry." },
       { step: 3, title: "Access anywhere", desc: "Authorized staff access student information from any device, anytime." },
       { step: 4, title: "Track progress", desc: "Link academic, attendance, and activity data to each student's central profile." },
     ],
@@ -82,7 +85,7 @@ const featuresData: Record<string, any> = {
     description:
       "Our intelligent scheduling engine factors in teacher availability, room capacity, subject hours, and student groups to create optimal timetables automatically.",
     capabilities: [
-      "AI-powered schedule generation",
+      "Automated timetable suggestions from your constraints",
       "Teacher availability management",
       "Room and lab booking",
       "Substitute teacher management",
@@ -167,7 +170,7 @@ const featuresData: Record<string, any> = {
     title: "Reports & Analytics",
     headline: "Turn school data into decisions your team can act on.",
     description:
-      "Generate comprehensive academic, financial, and operational reports with one click. Schedule automated reports or build custom dashboards for every stakeholder.",
+      "Generate academic, financial, and operational reports from live data. Schedule automated reports or build custom dashboards for each role.",
     capabilities: [
       "Student report cards",
       "Class performance analytics",
@@ -210,7 +213,9 @@ export default function FeatureDetail() {
   const otherSlugs = Object.keys(featuresData).filter((item) => item !== slug).slice(0, 3);
 
   return (
-    <PageTransition className="pt-20 pb-0">
+    <>
+      <PageSeoHead {...featurePageSeo(slug!, data.title, data.description)} />
+      <PageTransition className="pt-20 pb-0">
       <section className="relative flex min-h-[calc(100svh-5rem)] items-center overflow-hidden bg-[linear-gradient(180deg,#f8f6ef_0%,#f1efff_52%,#ffffff_100%)]">
         <div className="absolute inset-x-0 bottom-0 h-40 bg-[radial-gradient(circle_at_center,rgba(131,103,255,0.18),transparent_70%)]" />
         <div className="page-shell relative z-10 flex w-full flex-col items-center justify-center py-10 text-center">
@@ -234,8 +239,9 @@ export default function FeatureDetail() {
             <div className="overflow-hidden rounded-[1.8rem] border border-[#d7d9ef] bg-white p-2 shadow-[0_24px_80px_rgba(84,74,155,0.16)] sm:p-4">
               <img
                 src="/dashboard-page.jpg"
-                alt={`${data.title} dashboard`}
+                alt={featureDashboardAlt(data.title)}
                 className="h-auto w-full rounded-[1.3rem] object-cover"
+                {...heroImgProps(IMAGE_DIMENSIONS.dashboard)}
               />
             </div>
           </SectionReveal>
@@ -345,5 +351,6 @@ export default function FeatureDetail() {
 
       <CtaSection />
     </PageTransition>
+    </>
   );
 }

@@ -1,4 +1,5 @@
-import Head from "next/head";
+import { PageSeoHead } from "@/components/seo/PageSeoHead";
+import { pageSeo } from "@/lib/pageSeo";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { BankingContactHero } from "@/components/ui/CustomHeroes";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
@@ -105,27 +106,11 @@ export default function Contact() {
 
   return (
     <PageTransition className="pt-20 pb-0 tooo">
-      <Head>
-        <title>Contact KIDUART | Talk to Our School ERP Team</title>
-        <meta
-          name="description"
-          content="Get in touch with KIDUART , book a demo, ask a product question, or request support. We are based in Noida, Uttar Pradesh and respond within one business day."
-        />
-        <link rel="canonical" href="https://www.kiduart.com/contact" />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="KIDUART" />
-        <meta property="og:title" content="Contact KIDUART | Talk to Our School ERP Team" />
-        <meta property="og:description" content="Get in touch with KIDUART , book a demo, ask a product question, or request support. We are based in Noida, Uttar Pradesh and respond within one business day." />
-        <meta property="og:url" content="https://www.kiduart.com/contact" />
-        <meta property="og:image" content="https://www.kiduart.com/images/banner/home-hero.jpeg" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Contact KIDUART | Talk to Our School ERP Team" />
-        <meta name="twitter:description" content="Get in touch with KIDUART , book a demo, ask a product question, or request support. We are based in Noida, Uttar Pradesh and respond within one business day." />
-      </Head>
+      <PageSeoHead {...pageSeo.contact} />
       <BankingContactHero
         eyebrow="Talk to the team"
         title="We are easier to reach than you might expect."
-        subtitle="Whether you want to book a demo, have a product question, or just want to understand whether KIDUART is the right fit before committing , we are here. Real people, fast responses."
+        subtitle="Book a demo, ask about pricing, or send a product question. You will reach our Noida team directly, and we aim to reply within one business day."
         image="/images/banner/contact-post-1.jpg"
         actions={(
           <>
@@ -139,7 +124,7 @@ export default function Contact() {
         )}
       />
 
-      <section className="py-20 bg-white relative overflow-hidden">
+      <section className="section-space bg-white relative overflow-hidden">
         <BackgroundBlobs blobs={[
           { color: "#f77f00", size: 300, position: "center-left", opacity: 0.15 },
           { color: "#0c716b", size: 300, position: "center-right", opacity: 0.15 }
@@ -250,7 +235,7 @@ export default function Contact() {
 
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-brand-navy">Message</label>
-                    <textarea required rows={5} value={formData.message} onChange={(e) => handleChange("message", e.target.value)} className="field-surface w-full border border-brand-navy/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-teal focus:border-transparent transition-all resize-none" placeholder="Tell us what you are working on and what you need , the more specific, the faster we can help."></textarea>
+                    <textarea required rows={5} value={formData.message} onChange={(e) => handleChange("message", e.target.value)} className="field-surface w-full border border-brand-navy/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-teal focus:border-transparent transition-all resize-none" placeholder="Tell us what you are working on and what you need. The more specific, the faster we can help."></textarea>
                   </div>
 
                   <button type="submit" disabled={isSubmitting} className="w-full py-4 rounded-xl bg-brand-navy text-white font-bold text-lg hover:bg-brand-teal shadow-xl hover:shadow-brand-teal/25 transition-all duration-300 flex items-center justify-center gap-2 disabled:cursor-not-allowed disabled:opacity-70">

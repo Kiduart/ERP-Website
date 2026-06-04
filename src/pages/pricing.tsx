@@ -1,9 +1,10 @@
-import Head from "next/head";
+import { PageSeoHead } from "@/components/seo/PageSeoHead";
+import { pageSeo } from "@/lib/pageSeo";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CtaSection } from "@/components/ui/CtaSection";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
 import { FloatingIcons } from "@/components/animations/FloatingIcons";
-import { Check, HelpCircle } from "lucide-react";
+import { ArrowRight, Check, HelpCircle } from "lucide-react";
 import { Link } from "wouter";
 import { pricingPlans } from "@/data/pricing";
 
@@ -19,24 +20,8 @@ export default function Pricing() {
 
   return (
     <PageTransition className="pt-20 pb-0">
-      <Head>
-        <title>School ERP Pricing | Simple Plans for Indian Schools | KIDUART</title>
-        <meta
-          name="description"
-          content="KIDUART school ERP pricing is based on active students per month. Staff and parent accounts are free. See plans for Indian schools of every size. No hidden fees."
-        />
-        <link rel="canonical" href="https://www.kiduart.com/pricing" />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="KIDUART" />
-        <meta property="og:title" content="School ERP Pricing | Simple Plans for Indian Schools | KIDUART" />
-        <meta property="og:description" content="KIDUART school ERP pricing is based on active students per month. Staff and parent accounts are free. See plans for Indian schools of every size. No hidden fees." />
-        <meta property="og:url" content="https://www.kiduart.com/pricing" />
-        <meta property="og:image" content="https://www.kiduart.com/images/banner/home-hero.jpeg" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="School ERP Pricing | Simple Plans for Indian Schools | KIDUART" />
-        <meta name="twitter:description" content="KIDUART school ERP pricing is based on active students per month. Staff and parent accounts are free. See plans for Indian schools of every size. No hidden fees." />
-      </Head>
-      <section className="py-20 bg-brand-beige/20 relative overflow-hidden">
+      <PageSeoHead {...pageSeo.pricing} />
+      <section className="section-space bg-brand-beige/20 relative overflow-hidden">
         <BackgroundBlobs
           blobs={[
             { color: "#fcbf49", size: 300, position: "center-left", opacity: 0.15 },
@@ -64,8 +49,23 @@ export default function Pricing() {
                 <h3 className="text-2xl font-bold text-brand-navy mb-2">{plan.name}</h3>
                 <p className="text-brand-navy/60 text-sm mb-6">{plan.desc}</p>
                 <div className="mb-8 pb-8 border-b border-brand-navy/10">
-                  <span className="text-5xl font-extrabold text-brand-navy">{plan.price}</span>
-                  <span className="text-brand-navy/60 font-medium ml-1">{plan.unit}</span>
+                  {plan.isPopular ? (
+                    <div className="space-y-1">
+                      <div className="text-brand-teal font-bold text-sm uppercase tracking-wide">Most chosen plan</div>
+                      <div className="text-2xl font-extrabold text-brand-navy">Tailored for your school</div>
+                      <div className="text-brand-navy/60 text-sm">Pricing based on student count — talk to us</div>
+                    </div>
+                  ) : plan.price === "Custom" ? (
+                    <div className="space-y-1">
+                      <div className="text-brand-navy font-extrabold text-2xl">Enterprise pricing</div>
+                      <div className="text-brand-navy/60 text-sm">Custom quote for large districts</div>
+                    </div>
+                  ) : (
+                    <div className="space-y-1">
+                      <div className="text-brand-navy font-extrabold text-2xl">Get a quote</div>
+                      <div className="text-brand-navy/60 text-sm">Starts affordable — tailored to your school size</div>
+                    </div>
+                  )}
                 </div>
                 <ul className="space-y-4 mb-8">
                   {plan.features.map((feat, i) => (
@@ -76,22 +76,29 @@ export default function Pricing() {
                   ))}
                 </ul>
                 <Link
-                  href="/demo"
+                  href={plan.price === "Custom" ? "/contact" : "/demo"}
                   className={`block w-full py-4 text-center rounded-xl font-bold transition-all ${
                     plan.isPopular
                       ? "bg-brand-teal text-white hover:bg-brand-navy shadow-lg hover:shadow-brand-teal/25"
                       : "bg-brand-beige text-brand-navy hover:bg-brand-navy hover:text-white"
                   }`}
                 >
-                  {plan.price === "Custom" ? "Contact Sales" : "Start Free Trial"}
+                  {plan.price === "Custom" ? "Contact Sales" : "Book a Free Demo"}
                 </Link>
               </SectionReveal>
+            ))}
+          </div>
+          <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+            {["✓ Free onboarding included", "✓ No setup surprises", "✓ Cancel anytime", "✓ Full data export"].map((item) => (
+              <div key={item} className="rounded-xl border border-brand-navy/10 bg-brand-beige/20 px-4 py-3 text-sm font-medium text-brand-navy text-center">
+                {item}
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-16 bg-white border-t border-brand-navy/5 relative overflow-hidden">
+      <section className="section-space-tight bg-white border-t border-brand-navy/5 relative overflow-hidden">
         <BackgroundBlobs blobs={[{ color: "#f77f00", size: 300, position: "top-right", opacity: 0.15 }]} />
         <FloatingIcons icons={["Lightbulb", "Brain", "Award"]} count={4} />
         <div className="max-w-5xl mx-auto px-4 text-center">
@@ -101,7 +108,9 @@ export default function Pricing() {
               {["AI Insights Assistant", "GPS Transport Tracking", "Digital Library System"].map((addon, i) => (
                 <div key={i} className="p-6 border border-brand-navy/10 rounded-2xl bg-brand-beige/10">
                   <h4 className="font-bold text-brand-navy mb-2">{addon}</h4>
-                  <p className="text-sm text-brand-navy/60">Contact for pricing</p>
+                  <Link href="/demo" className="mt-3 inline-flex items-center gap-1 text-sm font-bold text-brand-teal hover:text-brand-navy transition-colors">
+                    Ask about this module <ArrowRight className="w-4 h-4" />
+                  </Link>
                 </div>
               ))}
             </div>
@@ -109,7 +118,7 @@ export default function Pricing() {
         </div>
       </section>
 
-      <section className="py-24 bg-brand-beige/30 border-t border-brand-navy/5 relative overflow-hidden">
+      <section className="section-space bg-brand-beige/30 border-t border-brand-navy/5 relative overflow-hidden">
         <BackgroundBlobs blobs={[{ color: "#0c716b", size: 300, position: "bottom-left", opacity: 0.15 }]} />
         <FloatingIcons icons={["MessageSquare", "Users"]} count={4} />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">

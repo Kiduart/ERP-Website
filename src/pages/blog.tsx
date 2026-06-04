@@ -1,79 +1,56 @@
-import Head from "next/head";
+import { PageSeoHead } from "@/components/seo/PageSeoHead";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
 import { FloatingIcons } from "@/components/animations/FloatingIcons";
+import { BLOG_POST_IMAGES, getBlogListingPosts } from "@/data/blogData";
+import { pageSeo } from "@/lib/pageSeo";
 import { Calendar, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
+
+type SubscribeStatus = "idle" | "loading" | "success" | "error";
 
 export default function Blog() {
   const categories = ["All", "Education Technology", "School Management", "AI in Education", "Student Success"];
   const [activeCategory, setActiveCategory] = useState("All");
+  const [email, setEmail] = useState("");
+  const [subscribeStatus, setSubscribeStatus] = useState<SubscribeStatus>("idle");
+  const [subscribeError, setSubscribeError] = useState("");
 
-  const posts = [
-    {
-      title: "The Future of AI in Education: What Schools Need to Know in 2026",
-      excerpt: "Artificial intelligence is no longer a future concept for education - it's happening now, reshaping how schools operate, how teachers teach, and how students learn.",
-      category: "AI in Education",
-      date: "March 5, 2026",
-      color: "from-brand-teal/20 to-brand-navy/20",
-      badgeColor: "bg-brand-teal text-white",
-      slug: "ai-in-education-2026",
-    },
-    {
-      title: "5 Proven Benefits of Implementing a School ERP System",
-      excerpt: "Schools that implement a modern ERP system see measurable improvements in efficiency, parent satisfaction, and student outcomes within the first 90 days.",
-      category: "School Management",
-      date: "February 20, 2026",
-      color: "from-brand-orange/20 to-brand-yellow/20",
-      badgeColor: "bg-brand-orange text-white",
-      slug: "school-erp-benefits",
-    },
-    {
-      title: "The Complete Guide to Digital Transformation for Schools",
-      excerpt: "Digital transformation in education isn't just about buying new software - it's a cultural shift that requires strategy, leadership, and the right technology foundation.",
-      category: "Education Technology",
-      date: "February 10, 2026",
-      color: "from-brand-navy/20 to-brand-teal/20",
-      badgeColor: "bg-brand-navy text-white",
-      slug: "digital-transformation-schools",
-    },
-    {
-      title: "Revolutionizing Parent-Teacher Communication with Technology",
-      excerpt: "The gap between parents and schools has historically been one of education's biggest challenges. Modern communication platforms are finally bridging it.",
-      category: "School Management",
-      date: "January 28, 2026",
-      color: "from-brand-yellow/20 to-brand-orange/20",
-      badgeColor: "bg-brand-yellow text-brand-navy",
-      slug: "parent-teacher-communication",
-    },
-    {
-      title: "Student Data Management Best Practices for Modern Schools",
-      excerpt: "How schools collect, store, and use student data has enormous implications for privacy, compliance, and ultimately student outcomes.",
-      category: "Student Success",
-      date: "January 15, 2026",
-      color: "from-brand-teal/20 to-brand-orange/20",
-      badgeColor: "bg-brand-teal text-white",
-      slug: "student-data-management",
-    },
-    {
-      title: "How KIDUORBIT's Predictive Analytics Is Saving Students From Failure",
-      excerpt: "Early intervention is the most powerful tool in education. KIDUORBIT's AI identifies at-risk students weeks before traditional methods - and schools are seeing dramatic results.",
-      category: "AI in Education",
-      date: "March 10, 2026",
-      color: "from-brand-navy/20 to-brand-yellow/20",
-      badgeColor: "bg-brand-navy text-white",
-      slug: "kiduorbit-predictive-analytics",
-    },
-  ];
+  const posts = getBlogListingPosts();
+
+  const handleSubscribe = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+
+    setSubscribeStatus("loading");
+    setSubscribeError("");
+
+    try {
+      const response = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.trim() }),
+      });
+
+      if (!response.ok) {
+        const payload = (await response.json().catch(() => ({}))) as { error?: string };
+        throw new Error(payload.error ?? "Unable to subscribe right now.");
+      }
+
+      setSubscribeStatus("success");
+      setEmail("");
+    } catch (error) {
+      setSubscribeStatus("error");
+      setSubscribeError(error instanceof Error ? error.message : "Unable to subscribe right now.");
+    }
+  };
 
   const filteredPosts = activeCategory === "All" ? posts : posts.filter((post) => post.category === activeCategory);
 
   return (
     <PageTransition className="pt-20 pb-0">
-      <Head>
-        <link rel="canonical" href="https://www.kiduart.com/blog" />
-      </Head>
+      <PageSeoHead {...pageSeo.blog} />
       <section className="relative min-h-[calc(100svh-5rem)] overflow-hidden bg-[#e7ebee]">
         <img
           src="/images/banner/blog-hero.avif"
@@ -86,14 +63,12 @@ export default function Blog() {
           <SectionReveal className="max-w-xl">
             <div className="mb-5 text-sm font-semibold uppercase tracking-[0.22em] text-brand-teal">Blog and insights</div>
             <h1 className="text-[clamp(2.3rem,1.7rem+2.5vw,5rem)] font-bold leading-[0.95] text-brand-navy">
-              Don&apos;t rely on hearsay.
+              Notes on running
               <br />
-              Read our blogs.
-              <br />
-              Trust KIDUART.
+              schools better
             </h1>
             <p className="mt-6 max-w-md text-[clamp(1rem,0.96rem+0.22vw,1.08rem)] leading-7 text-brand-navy/65">
-              Practical education technology insights, product thinking, and school operations advice written for teams that need clarity before they make the next move.
+              Articles on school operations, parent communication, fees, and sensible use of AI, written for administrators who want plain language, not buzzwords.
             </p>
           </SectionReveal>
         </div>
@@ -105,9 +80,9 @@ export default function Blog() {
         <div className="page-shell relative z-10">
           <SectionReveal className="mx-auto mb-10 max-w-3xl text-center">
             <div className="section-kicker">Education blog library</div>
-            <h2 className="section-title mt-6 text-brand-navy">Browse insights by topic, not just by publish date</h2>
+            <h2 className="section-title mt-6 text-brand-navy">Browse by topic</h2>
             <p className="section-copy mt-4 text-brand-navy/70">
-              Filter articles by school management, AI in education, student success, and digital transformation.
+              School management, AI in education, student success, and technology planning.
             </p>
           </SectionReveal>
 
@@ -128,19 +103,10 @@ export default function Blog() {
           {filteredPosts.length > 0 ? (
             <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
               {filteredPosts.map((post, idx) => (
-                <SectionReveal key={post.slug} delay={idx * 0.1} className="group flex flex-col overflow-hidden rounded-[1.75rem] border border-brand-navy/10 bg-white shadow-lg shadow-brand-navy/5 transition-transform hover:-translate-y-1">
+                <SectionReveal key={post.slug} delay={idx * 0.1} className="group relative flex flex-col overflow-hidden rounded-[1.75rem] border border-brand-navy/10 bg-white shadow-lg shadow-brand-navy/5 transition-transform hover:-translate-y-1">
                   <Link href={`/blog/${post.slug}`} className="relative block h-52 overflow-hidden bg-gradient-to-br">
                     <img
-                      src={
-                        [
-                          "/images/banner/blog-post-1.jpg",
-                          "/images/banner/blog-post-2.jpg",
-                          "/images/banner/blog-post-3.jpg",
-                          "/images/banner/blog-post-4.jpg",
-                          "/images/banner/blog-post-5.jpg",
-                          "/images/banner/blog-post-6.jpg",
-                        ][idx % 6]
-                      }
+                      src={BLOG_POST_IMAGES[idx % BLOG_POST_IMAGES.length]}
                       alt={post.title}
                       className="absolute inset-0 h-full w-full object-cover opacity-60 transition-transform duration-500 group-hover:scale-105"
                       onError={(e) => {
@@ -159,14 +125,17 @@ export default function Blog() {
                       <Calendar className="h-4 w-4" />
                       {post.date}
                     </div>
-                    <Link href={`/blog/${post.slug}`}>
-                      <h3 className="mb-3 text-[clamp(1.2rem,1.08rem+0.5vw,1.5rem)] font-bold text-brand-navy transition-colors group-hover:text-brand-teal">
+                    <div className="mb-3 text-sm font-medium text-brand-navy/50">
+                      {post.author} • {post.readTime}
+                    </div>
+                    <h3 className="mb-3 text-[clamp(1.2rem,1.08rem+0.5vw,1.5rem)] font-bold text-brand-navy">
+                      <Link href={`/blog/${post.slug}`} className="hover:text-brand-teal">
                         {post.title}
-                      </h3>
-                    </Link>
+                      </Link>
+                    </h3>
                     <p className="section-copy mb-6 flex-grow text-brand-navy/70">{post.excerpt}</p>
-                    <Link href={`/blog/${post.slug}`} className="mt-auto inline-flex items-center gap-2 font-bold text-brand-teal transition-colors hover:text-brand-navy">
-                      Read More <ArrowRight className="h-4 w-4" />
+                    <Link href={`/blog/${post.slug}`} className="mt-auto inline-flex items-center gap-2 font-bold text-brand-teal">
+                      Read article <ArrowRight className="h-4 w-4" />
                     </Link>
                   </div>
                 </SectionReveal>
@@ -178,14 +147,41 @@ export default function Blog() {
               <p className="mt-3 text-brand-navy/70">Check back later for more content in this category.</p>
             </div>
           )}
+        </div>
+      </section>
 
-          {filteredPosts.length > 0 && (
-            <div className="mt-16 text-center">
-              <button className="rounded-full bg-brand-beige px-8 py-4 font-bold text-brand-navy shadow-md transition-all hover:bg-brand-navy hover:text-white">
-                Load More Articles
+      <section className="section-space relative overflow-hidden bg-[#eef2f3]">
+        <div className="page-shell relative z-10">
+          <SectionReveal className="mx-auto max-w-2xl rounded-[1.75rem] border border-brand-navy/10 bg-white p-8 shadow-[0_20px_60px_rgba(0,48,73,0.1)]">
+            <h3 className="text-center text-2xl font-bold text-brand-navy">Get notified when we publish</h3>
+
+            <form className="mt-6 flex flex-col gap-4 sm:flex-row" onSubmit={handleSubscribe}>
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email address"
+                className="field-surface h-12 flex-1 rounded-xl border border-brand-navy/15 px-4 text-brand-navy placeholder:text-brand-navy/45 focus:outline-none focus:ring-2 focus:ring-brand-teal/40"
+              />
+              <button
+                type="submit"
+                disabled={subscribeStatus === "loading"}
+                className="inline-flex h-12 items-center justify-center rounded-xl bg-brand-navy px-6 font-bold text-white transition-colors hover:bg-brand-teal disabled:cursor-not-allowed disabled:opacity-60"
+              >
+                {subscribeStatus === "loading" ? "Submitting..." : "Notify Me"}
               </button>
-            </div>
-          )}
+            </form>
+
+            {subscribeStatus === "success" && (
+              <p className="mt-4 text-center text-sm font-semibold text-brand-teal">
+                You&apos;re on the list! We&apos;ll email you when new articles go live.
+              </p>
+            )}
+            {subscribeStatus === "error" && (
+              <p className="mt-4 text-center text-sm font-semibold text-red-600">{subscribeError}</p>
+            )}
+          </SectionReveal>
         </div>
       </section>
     </PageTransition>
