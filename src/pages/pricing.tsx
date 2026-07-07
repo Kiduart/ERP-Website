@@ -7,17 +7,16 @@ import { FloatingIcons } from "@/components/animations/FloatingIcons";
 import { ArrowRight, Check, HelpCircle } from "lucide-react";
 import { Link } from "wouter";
 import { pricingPlans } from "@/data/pricing";
+import { pricingFaqs } from "@/data/pricingFaqs";
+
+const pricingAssurances = [
+  "Guided onboarding",
+  "No setup surprises",
+  "Flexible plan changes",
+  "Full data export",
+];
 
 export default function Pricing() {
-  const faqs = [
-    { q: "How is pricing calculated?", a: "Based on the number of active students enrolled in your institution per month. Teacher accounts, staff logins, and parent access are completely free , you only pay for students." },
-    { q: "Are there setup or onboarding fees?", a: "Professional and Enterprise plans include full onboarding and data migration at no extra cost. Basic plans have a one-time setup fee. We will confirm the exact amount during your demo." },
-    { q: "Can we add modules after signing up?", a: "Yes. You can upgrade your plan or add specific premium modules , such as Transport Tracking or Library Management , at any time, with prorated billing." },
-    { q: "Do you offer discounts for large districts?", a: "Yes. Our Enterprise plan includes volume-based pricing for districts managing more than 5,000 students across campuses. Contact our sales team for a custom quote." },
-    { q: "What happens to our data if we choose to leave?", a: "Your data belongs to your school. If you decide to move on, you can export all records in standard formats , CSV, Excel, and PDF , at no cost and with no data retention by us." },
-    { q: "Is the parent app included in all plans?", a: "The parent app is included in Professional and Enterprise plans. It is available on iOS and Android. Basic plan users can add it as an optional module." },
-  ];
-
   return (
     <PageTransition className="pt-20 pb-0">
       <PageSeoHead {...pageSeo.pricing} />
@@ -34,7 +33,7 @@ export default function Pricing() {
             <div className="section-kicker">Straightforward school ERP pricing</div>
             <h1 className="mt-6 text-[clamp(2rem,1.45rem+1.8vw,3.75rem)] font-bold text-brand-navy">Pricing that grows with your school</h1>
             <p className="mt-4 text-lg text-brand-navy/70">
-              You pay for active students. Staff accounts, teacher logins and parent app access are included at no extra cost regardless of how many people use the platform.
+              You pay for active students. Staff accounts, teacher logins, and parent portal access are included at no extra cost regardless of how many people use the platform.
             </p>
           </SectionReveal>
 
@@ -88,10 +87,14 @@ export default function Pricing() {
               </SectionReveal>
             ))}
           </div>
-          <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-            {["✓ Free onboarding included", "✓ No setup surprises", "✓ Cancel anytime", "✓ Full data export"].map((item) => (
-              <div key={item} className="rounded-xl border border-brand-navy/10 bg-brand-beige/20 px-4 py-3 text-sm font-medium text-brand-navy text-center">
-                {item}
+          <div className="mt-10 grid max-w-4xl grid-cols-2 gap-4 mx-auto md:grid-cols-4">
+            {pricingAssurances.map((item) => (
+              <div
+                key={item}
+                className="flex min-h-[3.25rem] items-center justify-center gap-2 rounded-xl border border-brand-navy/10 bg-brand-beige/20 px-4 py-3 text-center text-sm font-medium text-brand-navy"
+              >
+                <Check className="h-4 w-4 shrink-0 text-brand-teal" aria-hidden />
+                <span className="leading-snug">{item}</span>
               </div>
             ))}
           </div>
@@ -126,7 +129,7 @@ export default function Pricing() {
             <h2 className="text-3xl font-bold text-brand-navy">Common questions about pricing and plans</h2>
           </SectionReveal>
           <div className="grid md:grid-cols-2 gap-8">
-            {faqs.map((faq, idx) => (
+            {pricingFaqs.map((faq, idx) => (
               <SectionReveal key={idx} delay={idx * 0.05} className="bg-white p-6 rounded-2xl shadow-sm">
                 <h4 className="text-lg font-bold text-brand-navy mb-3 flex items-start gap-2">
                   <HelpCircle className="w-5 h-5 text-brand-orange shrink-0 mt-0.5" />

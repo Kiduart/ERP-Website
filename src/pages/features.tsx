@@ -1,7 +1,7 @@
 import { PageSeoHead } from "@/components/seo/PageSeoHead";
 import { pageSeo } from "@/lib/pageSeo";
 import { Link } from "wouter";
-import { ArrowRight, Bell, BrainCircuit, CalendarCheck, CreditCard, FileText, LayoutDashboard, ShieldCheck, Sparkles, UserCog, Users } from "lucide-react";
+import { ArrowRight, Bell, BrainCircuit, Bus, CalendarCheck, CreditCard, FileText, LayoutDashboard, Library, MessageSquare, Route, ShieldCheck, Sparkles, UserCog, Users } from "lucide-react";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
 import { FloatingIcons } from "@/components/animations/FloatingIcons";
 import { CtaSection } from "@/components/ui/CtaSection";
@@ -48,6 +48,16 @@ const featureCategories: { title: string; label: string; accent: string; items: 
         title: "Exam & Report Cards",
         description: "Create exams, publish marks, and generate report cards quickly while giving teachers and school leaders clearer performance visibility.",
       },
+      {
+        icon: Library,
+        title: "Library Management",
+        description: "Manage book cataloging, issue-return cycles, fines, reservations, and member records without maintaining separate registers.",
+      },
+      {
+        icon: Bus,
+        title: "Transport Operations",
+        description: "Manage vehicles, routes, drivers, maintenance schedules, and live trip visibility for safer, better-coordinated school transport.",
+      },
     ],
   },
   {
@@ -68,7 +78,7 @@ const featureCategories: { title: string; label: string; accent: string; items: 
       {
         icon: Bell,
         title: "Smart Notifications",
-        description: "Send timely alerts for attendance, fees, exams, and school updates with less manual work and better parent communication.",
+        description: "Send timely alerts for attendance, fees, exams, and school updates with less manual effort and clearer parent communication.",
       },
       {
         icon: LayoutDashboard,
@@ -85,12 +95,17 @@ const featureCategories: { title: string; label: string; accent: string; items: 
       {
         icon: UserCog,
         title: "Staff Management",
-        description: "Manage teacher and staff records, responsibilities, leave details, and daily operations from one organized admin workspace.",
+        description: "Manage teacher and staff records, onboarding details, designations, leave workflows, and daily HR tasks from one workspace.",
       },
       {
         icon: CreditCard,
         title: "Payroll System",
-        description: "Process salaries, deductions, and monthly payroll workflows more accurately while reducing repetitive HR tasks.",
+        description: "Process salaries, deductions, and monthly payroll cycles with cleaner approvals and fewer manual calculation errors.",
+      },
+      {
+        icon: Route,
+        title: "Discipline, PTM & Class Diary",
+        description: "Track student discipline entries, schedule PTM discussions, and maintain class diary notes so follow-ups do not get lost.",
       },
       {
         icon: ShieldCheck,
@@ -99,20 +114,47 @@ const featureCategories: { title: string; label: string; accent: string; items: 
       },
       {
         icon: LayoutDashboard,
-        title: "Reports & Analytics",
-        description: "Track admissions, collections, attendance, and academic performance through dashboards built for faster school-level decisions.",
+        title: "Full Reporting Suite",
+        description: "Generate academic, financial, attendance, student, and custom analytics reports from one reporting layer built for school leadership.",
       },
     ],
   },
   {
-    title: "Parent & Student Apps",
+    title: "Communication & Control",
+    label: "School groups and admin credibility",
+    accent: "text-brand-teal",
+    items: [
+      {
+        icon: MessageSquare,
+        title: "Multi-Channel Communication Stack",
+        description: "Run announcements, events, notices, and direct messages across email, SMS, and WhatsApp channels from one communication workflow.",
+      },
+      {
+        icon: LayoutDashboard,
+        title: "Multi-School Oversight",
+        description: "For school groups, track multiple schools from one view with centralized reporting and school-level visibility controls.",
+      },
+      {
+        icon: ShieldCheck,
+        title: "Module Entitlements & Access Controls",
+        description: "Enable modules based on plan and role, so each school team sees only the workflows they are meant to use.",
+      },
+      {
+        icon: UserCog,
+        title: "Billing & Helpdesk Workflows",
+        description: "Support billing operations and ticket workflows through built-in support/helpdesk capabilities for structured issue resolution.",
+      },
+    ],
+  },
+  {
+    title: "Parent & Student Access",
     label: "Best school ERP India experience",
     accent: "text-brand-navy",
     items: [
       {
         icon: Users,
-        title: "Parent App",
-        description: "Give parents a simple mobile experience to view attendance, fees, notices, and school updates without calling the office repeatedly.",
+        title: "Parent Portal (Web)",
+        description: "Give parents one web portal to view attendance, fees, notices, and school updates without repeated calls to the front office.",
       },
       {
         icon: LayoutDashboard,
@@ -136,7 +178,7 @@ const aiAssistantPoints = [
 ];
 
 const pageHighlights = [
-  { value: 16, suffix: "+", label: "operational modules" },
+  { value: 20, suffix: "+", label: "operational modules" },
   { value: 4, suffix: "", label: "role-focused categories" },
   { value: 1, suffix: "", label: "connected school platform" },
 ];
@@ -248,6 +290,31 @@ export default function Features() {
                 </SectionReveal>
               ))}
             </div>
+
+            <SectionReveal className="mt-14 rounded-3xl border border-brand-navy/10 bg-white p-7">
+              <h3 className="text-2xl font-bold text-brand-navy">Explore module deep-dives</h3>
+              <p className="mt-3 text-brand-navy/70">
+                Open a module page for detailed workflows, role impact, and day-to-day usage.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                {[
+                  { href: "/features/hr-payroll", label: "HR & Payroll" },
+                  { href: "/features/transport", label: "Transport Management" },
+                  { href: "/features/library", label: "Library Management" },
+                  { href: "/features/discipline-ptm-diary", label: "Discipline, PTM & Class Diary" },
+                  { href: "/features/reporting-suite", label: "Full Reporting Suite" },
+                  { href: "/features/organization-management", label: "Organization & Multi-School Management" },
+                ].map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="rounded-full border border-brand-navy/12 bg-brand-beige/20 px-4 py-2 text-sm font-semibold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </div>
+            </SectionReveal>
           </div>
         </section>
 

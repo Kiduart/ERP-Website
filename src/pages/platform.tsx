@@ -240,6 +240,44 @@ export default function Platform() {
         </div>
       </section>
 
+      <section className="section-space border-t border-brand-navy/5 bg-white">
+        <div className="page-shell">
+          <SectionReveal className="mx-auto mb-12 max-w-3xl text-center">
+            <div className="section-kicker">For school groups and network operators</div>
+            <h2 className="section-title mt-6 text-brand-navy">Platform controls beyond a single campus</h2>
+            <p className="section-copy mt-4 text-brand-navy/70">
+              If your organization runs multiple schools, KIDUART supports centralized control while keeping each school's day-to-day operations separate.
+            </p>
+          </SectionReveal>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            {[
+              {
+                title: "Organization-level school management",
+                desc: "Manage multiple schools under one structure with school-level visibility and governance.",
+              },
+              {
+                title: "Module entitlements and role controls",
+                desc: "Enable modules by plan and role so each school team only sees what they are authorized to use.",
+              },
+              {
+                title: "Billing and subscription workflows",
+                desc: "Track plan and billing operations in one place for cleaner finance coordination across school groups.",
+              },
+              {
+                title: "Support and helpdesk operations",
+                desc: "Handle support tickets through built-in workflows with clearer ownership and follow-up history.",
+              },
+            ].map((item) => (
+              <SectionReveal key={item.title} className="interactive-card rounded-2xl border border-brand-navy/10 bg-brand-beige/20 p-6">
+                <h3 className="text-xl font-bold text-brand-navy">{item.title}</h3>
+                <p className="mt-3 text-brand-navy/70 leading-7">{item.desc}</p>
+              </SectionReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <CtaSection />
     </PageTransition>
   );

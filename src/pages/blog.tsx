@@ -2,22 +2,28 @@ import { PageSeoHead } from "@/components/seo/PageSeoHead";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
 import { FloatingIcons } from "@/components/animations/FloatingIcons";
-import { BLOG_POST_IMAGES, getBlogListingPosts } from "@/data/blogData";
+import { type BlogListingPost } from "@/data/blogData";
+import { getBlogHeroImage, getCmsBlogListingPosts } from "@/lib/cms/content";
+import type { ContentMeta } from "@/lib/cms/types";
 import { pageSeo } from "@/lib/pageSeo";
 import { Calendar, ArrowRight } from "lucide-react";
 import { Link } from "wouter";
-import { useState, type FormEvent } from "react";
+import { useMemo, useState, type FormEvent } from "react";
+import type { GetStaticProps } from "next";
 
 type SubscribeStatus = "idle" | "loading" | "success" | "error";
 
-export default function Blog() {
-  const categories = ["All", "Education Technology", "School Management", "AI in Education", "Student Success"];
+type BlogPageProps = {
+  posts: BlogListingPost[];
+  contentMeta: ContentMeta;
+};
+
+export default function Blog({ posts }: BlogPageProps) {
+  const categories = useMemo(() => ["All", ...Array.from(new Set(posts.map((post) => post.category)))], [posts]);
   const [activeCategory, setActiveCategory] = useState("All");
   const [email, setEmail] = useState("");
   const [subscribeStatus, setSubscribeStatus] = useState<SubscribeStatus>("idle");
   const [subscribeError, setSubscribeError] = useState("");
-
-  const posts = getBlogListingPosts();
 
   const handleSubscribe = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -56,6 +62,9 @@ export default function Blog() {
           src="/images/banner/blog-hero.avif"
           alt="Blog hero background"
           className="absolute right-0 top-0 h-full w-full object-cover object-[72%_center]"
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(231,235,238,0.96)_0%,rgba(231,235,238,0.92)_38%,rgba(231,235,238,0.56)_60%,rgba(231,235,238,0.1)_100%)]" />
         <div className="absolute right-[9%] top-[18%] hidden h-[56%] w-[36%] max-w-[24rem] rounded-[2rem] border border-white/70 bg-white/20 md:block" />
@@ -106,9 +115,11 @@ export default function Blog() {
                 <SectionReveal key={post.slug} delay={idx * 0.1} className="group relative flex flex-col overflow-hidden rounded-[1.75rem] border border-brand-navy/10 bg-white shadow-lg shadow-brand-navy/5 transition-transform hover:-translate-y-1">
                   <Link href={`/blog/${post.slug}`} className="relative block h-52 overflow-hidden bg-gradient-to-br">
                     <img
-                      src={BLOG_POST_IMAGES[idx % BLOG_POST_IMAGES.length]}
+                      src={getBlogHeroImage(post, idx)}
                       alt={post.title}
                       className="absolute inset-0 h-full w-full object-cover opacity-60 transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                      decoding="async"
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
                         target.style.display = "none";
@@ -187,3 +198,12 @@ export default function Blog() {
     </PageTransition>
   );
 }
+
+export const getStaticProps: GetStaticProps<BlogPageProps> = async (context) => {
+  const preview = context.preview ?? false;
+  const result = await getCmsBlogListingPosts({ preview });
+  return {
+    props: { posts: result.data, contentMeta: result.meta },
+    revalidate: preview ? 1 : 300,
+  };
+};

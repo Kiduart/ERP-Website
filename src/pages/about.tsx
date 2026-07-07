@@ -213,17 +213,17 @@ export default function About() {
         <div className="page-shell text-center">
           <SectionReveal>
             <Trophy className="mx-auto mb-6 h-12 w-12 text-brand-yellow" />
-            <h2 className="mb-12 text-3xl font-bold text-brand-navy">Building toward recognized standards</h2>
+            <h2 className="mb-12 text-3xl font-bold text-brand-navy">Security controls we focus on in product</h2>
             <div className="flex flex-wrap justify-center gap-8 opacity-70 grayscale transition-all duration-500 hover:grayscale-0">
-              <div className="flex h-12 items-center rounded bg-brand-navy/5 px-6 font-bold text-brand-navy">SOC 2 (on roadmap)</div>
-              <div className="flex h-12 items-center rounded bg-brand-navy/5 px-6 font-bold text-brand-navy">DPDP-ready controls</div>
-              <div className="flex h-12 items-center rounded bg-brand-navy/5 px-6 font-bold text-brand-navy">ISO 27001 (in progress)</div>
+              <div className="flex h-12 items-center rounded bg-brand-navy/5 px-6 font-bold text-brand-navy">Role-based access controls</div>
+              <div className="flex h-12 items-center rounded bg-brand-navy/5 px-6 font-bold text-brand-navy">Dedicated school-level data isolation</div>
+              <div className="flex h-12 items-center rounded bg-brand-navy/5 px-6 font-bold text-brand-navy">Audit-friendly activity records</div>
             </div>
           </SectionReveal>
         </div>
       </section>
 
-      <CtaSection title="Ready to see it for your school?" subtitle="Book a 30-minute walkthrough tailored to your school's size, structure, and the specific problems you want to solve." />
+      <CtaSection title="Ready to see it for your school?" subtitle="Book a live walkthrough tailored to your school's size, structure, and the specific problems you want to solve." />
       {/* SEO-UPGRADE: Updated About page CTA to demo-focused action and clarity */}
     </PageTransition>
   );

@@ -144,14 +144,14 @@ export function HeroSection({
                 {eyebrow}
               </div>
             )}
-            <h3 className={cn(
+            <h1 className={cn(
               "mb-5 font-bold leading-none",
               isOverlay && "mx-auto max-w-4xl text-[clamp(1.75rem,1.12rem+1.5vw,2.6rem)] !text-brand-beige",
               isSplitDark && "max-w-2xl text-[clamp(1.8rem,1.18rem+1.45vw,3rem)] !text-brand-beige",
               isSplitLight && "max-w-3xl text-[clamp(1.8rem,1.15rem+1.5vw,3.05rem)] !text-brand-navy",
             )}>
               {title}
-            </h3>
+            </h1>
             {subtitle && (
               <p
                 className={cn(

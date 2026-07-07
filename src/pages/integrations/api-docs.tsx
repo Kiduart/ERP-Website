@@ -41,11 +41,11 @@ export default function ApiDocs() {
               <h2 className="text-3xl font-bold text-brand-navy">Authentication</h2>
             </div>
             <p className="text-lg text-brand-navy/70 mb-4">
-              Authenticate your API requests using API Keys. Include the key as a Bearer token in the <code className="bg-brand-navy/5 px-2 py-1 rounded text-brand-teal">Authorization</code> header.
+              Authenticate API requests using your issued access credentials. Include the token in the <code className="bg-brand-navy/5 px-2 py-1 rounded text-brand-teal">Authorization</code> header.
             </p>
             <div className="bg-[#1e1e2e] text-gray-300 p-6 rounded-2xl overflow-x-auto shadow-inner border border-gray-800">
               <pre className="font-mono text-sm">
-                <span className="text-purple-400">Authorization</span>: Bearer YOUR_API_KEY
+                <span className="text-purple-400">Authorization</span>: Bearer YOUR_ACCESS_TOKEN
               </pre>
             </div>
           </SectionReveal>
@@ -132,25 +132,25 @@ export default function ApiDocs() {
           <div className="grid md:grid-cols-2 gap-8">
             <SectionReveal delay={0.4} className="bg-brand-beige/30 p-8 rounded-3xl border border-brand-navy/5">
               <Shield className="w-10 h-10 text-brand-navy mb-4" />
-              <h3 className="text-2xl font-bold text-brand-navy mb-4">Rate Limits</h3>
+                <h3 className="text-2xl font-bold text-brand-navy mb-4">Access Limits</h3>
               <ul className="space-y-3 text-brand-navy/70">
-                <li className="flex justify-between border-b border-brand-navy/10 pb-2">
-                  <span>Basic Plan</span> <span className="font-bold text-brand-navy">1,000 req/hour</span>
+                  <li className="flex justify-between border-b border-brand-navy/10 pb-2">
+                  <span>Basic Plan</span> <span className="font-bold text-brand-navy">Contact support</span>
                 </li>
                 <li className="flex justify-between border-b border-brand-navy/10 pb-2">
-                  <span>Professional</span> <span className="font-bold text-brand-navy">10,000 req/hour</span>
+                  <span>Professional</span> <span className="font-bold text-brand-navy">Contact support</span>
                 </li>
                 <li className="flex justify-between pb-2">
-                  <span>Enterprise</span> <span className="font-bold text-brand-teal">Unlimited</span>
+                  <span>Enterprise</span> <span className="font-bold text-brand-teal">Custom limits</span>
                 </li>
               </ul>
             </SectionReveal>
 
             <SectionReveal delay={0.5} className="bg-white p-8 rounded-3xl border border-brand-navy/10 shadow-lg shadow-brand-navy/5">
               <h3 className="text-2xl font-bold text-brand-navy mb-4">Developer Tools</h3>
-              <p className="text-brand-navy/70 mb-6">Test your integration in our sandbox environment before going live.</p>
+              <p className="text-brand-navy/70 mb-6">Test your integration in a staged environment before go-live.</p>
               <div className="bg-brand-navy/5 p-4 rounded-xl font-mono text-sm text-center mb-6">
-                sandbox.kiduart.com
+                [INSERT VERIFIED SANDBOX URL]
               </div>
               <div className="flex gap-2">
                 {['JS/TS', 'Python', 'PHP'].map(sdk => (
@@ -172,7 +172,7 @@ export default function ApiDocs() {
 
       <CtaSection 
         title="Start Building With KIDUART API" 
-        subtitle="Get your API key when you sign up for any plan." 
+        subtitle="Get integration access details from our team based on your plan and use case." 
       />
     </PageTransition>
     </>

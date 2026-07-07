@@ -19,7 +19,7 @@ export const pageSeo = {
   features: {
     title: "School ERP Features & Modules for Indian Schools | KIDUART",
     description:
-      "Student records, fees, attendance, exams, parent app, and staff tools in one school ERP. Explore KIDUART modules built for Indian school teams.",
+      "Student records, fees, attendance, exams, parent portal, and staff tools in one school ERP. Explore KIDUART modules built for Indian school teams.",
     path: "/features",
     ogImage: `${SITE_ORIGIN}/images/banner/features-hero.jpg`,
     keywords:
@@ -42,21 +42,21 @@ export const pageSeo = {
   contact: {
     title: "Contact KIDUART | School ERP Sales & Support in India",
     description:
-      "Book a demo, ask product questions, or request support. KIDUART is based in Noida, Uttar Pradesh and responds within one business day.",
+      "Book a demo, ask product questions, or request support. KIDUART is based in Noida, Uttar Pradesh and provides guided support for school teams.",
     path: "/contact",
     ogImage: `${SITE_ORIGIN}/images/banner/contact-post-1.jpg`,
   },
   demo: {
     title: "Book a Free KIDUART School ERP Demo for Your School",
     description:
-      "Book a free 30-minute live demo. See admissions, fees, attendance, and reporting workflows in a real school context. No commitment required.",
+      "Book a free live demo. See admissions, fees, attendance, and reporting workflows in a real school context. No commitment required.",
     path: "/demo",
     ogImage: `${SITE_ORIGIN}/images/banner/home-hero.jpeg`,
   },
   security: {
     title: "School Data Security & Privacy for ERP | KIDUART",
     description:
-      "AES-256 encryption, role-based access, hourly backups, and DPDP-ready controls protect student, fee, and staff data on KIDUART.",
+      "KIDUART uses encryption controls, role-based access, audit logging, and school-level data isolation to protect student, fee, and staff data.",
     path: "/security",
     ogImage: `${SITE_ORIGIN}/images/banner/security-hero.jpg`,
   },

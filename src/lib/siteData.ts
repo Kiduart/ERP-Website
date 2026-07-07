@@ -30,11 +30,11 @@ export const HOME_IMPACT_HIGHLIGHTS: HomeImpactHighlight[] = [
   {
     area: "Communication",
     headline: "One channel",
-    label: "Attendance, fees, and notices to families from the same system",
+    label: "Attendance alerts, circulars, and parent notices from one place",
   },
   {
     area: "Security",
-    headline: "Role-based access",
-    label: "Encryption, backups, and permissions aligned with our security page",
+    headline: "One control",
+    label: "Role-based permissions, encryption, and backups for school data",
   },
 ];

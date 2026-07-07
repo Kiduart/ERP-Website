@@ -4,7 +4,7 @@
  */
 import { ReactNode } from "react";
 import { SectionReveal } from "@/components/ui/PageTransition";
-import { decorativeImgProps, heroImageAlt, heroImgProps, IMAGE_DIMENSIONS, lazyImgProps } from "@/lib/imageSeo";
+import { heroImageAlt, heroImgProps, IMAGE_DIMENSIONS, lazyImgProps } from "@/lib/imageSeo";
 import { cn } from "@/lib/utils";
 
 type BaseProps = {
@@ -115,7 +115,14 @@ export function EditorialMusicHero({
               "right-[18%] top-[52%]",
             ].map((position, idx) => (
               <div key={idx} className={cn("absolute h-14 w-14 overflow-hidden rounded-full border-[4px] border-white shadow-lg", position)}>
-                <img src={image} {...decorativeImgProps} {...lazyImgProps(IMAGE_DIMENSIONS.avatar)} className="h-full w-full object-cover" />
+                <img
+                  src={image}
+                  alt=""
+                  role="presentation"
+                  aria-hidden
+                  {...lazyImgProps(IMAGE_DIMENSIONS.avatar)}
+                  className="h-full w-full object-cover"
+                />
               </div>
             ))}
             <div className="absolute bottom-0 right-0 w-full max-w-[32rem]">

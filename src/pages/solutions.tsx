@@ -7,7 +7,6 @@ import { FloatingIcons } from "@/components/animations/FloatingIcons";
 import { CtaSection } from "@/components/ui/CtaSection";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { useState } from "react";
-import { CountUpNumber } from "@/components/ui/CountUpNumber";
 import { heroImgProps, IMAGE_DIMENSIONS, solutionCarouselAlt } from "@/lib/imageSeo";
 
 type RoleSolution = {
@@ -55,8 +54,8 @@ const roles: RoleSolution[] = [
       "Important alerts get missed",
     ],
     solution:
-      "See attendance, pay fees, and read school notices from one parent app instead of calling the office for each update.",
-    cta: "View Parent App Demo",
+      "See attendance, pay fees, and read school notices from one parent portal on web, without repeated calls to the school office.",
+    cta: "View Parent Portal Walkthrough",
   },
   {
     title: "For Students",
@@ -100,23 +99,16 @@ const districtFeatures = [
   "Role-based permissions for district and school-level teams",
 ];
 
-type ImpactStat = {
-  end: number;
-  label: string;
-  suffix?: string;
-  trailingText?: string;
-};
-
-const impactStats: ImpactStat[] = [
-  { end: 40, suffix: "%", label: "Less time on manual admin tasks" },
-  { end: 10, suffix: "+", trailingText: " hrs", label: "Hours saved on report card publishing per term" },
-  { end: 24, trailingText: "/7", label: "Parent communication sent from one place" },
+const impactHighlights = [
+  { value: "[INSERT VERIFIED NUMBER]", label: "Schools onboarded" },
+  { value: "[INSERT VERIFIED NUMBER]", label: "Average admin effort reduction" },
+  { value: "[INSERT VERIFIED NUMBER]", label: "Parent communication improvement signal" },
 ];
 
 const heroSnapshots = [
-  "5 stakeholder-ready views",
-  "10+ hrs saved weekly for teachers",
-  "24/7 parent visibility and alerts",
+  "Role-based views for core school teams",
+  "Parent portal access available now on web",
+  "Native parent app in development",
 ];
 
 
@@ -420,18 +412,13 @@ export default function Solutions() {
               <p className="section-kicker">Why This Matters</p>
               <h2 className="mt-4 text-4xl font-bold text-brand-navy">Better school systems create better daily outcomes</h2>
               <p className="mt-4 max-w-3xl text-lg leading-8 text-brand-navy/72">
-                Schools using KIDUART ERP reduce administrative workload by up to 40% and improve parent engagement significantly, giving staff more time for teaching, planning, and student support.
+                KIDUART is designed to reduce repetitive admin work and make parent communication more consistent, so school teams can spend more time on students and teaching quality.
               </p>
 
               <div className="mt-10 grid gap-6 md:grid-cols-3">
-                {impactStats.map((stat) => (
+                {impactHighlights.map((stat) => (
                   <div key={stat.label} className="rounded-3xl bg-brand-beige/20 px-6 py-8 text-center">
-                    <CountUpNumber
-                      end={stat.end}
-                      suffix={stat.suffix}
-                      trailingText={stat.trailingText}
-                      className="text-4xl font-extrabold text-brand-navy"
-                    />
+                    <div className="text-2xl font-extrabold text-brand-navy">{stat.value}</div>
                     <p className="mt-3 text-sm font-semibold uppercase tracking-[0.18em] text-brand-navy/60">{stat.label}</p>
                   </div>
                 ))}

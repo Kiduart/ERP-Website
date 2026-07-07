@@ -13,7 +13,7 @@ import {
 
 export default function Kiduorbit() {
   return (
-    <PageTransition className="pt-20 pb-0 tooo">
+    <PageTransition className="pt-20 pb-0">
       <PageSeoHead {...pageSeo.kiduorbit} />
       {/* HERO */}
       <section className="section-space bg-brand-navy relative overflow-hidden min-h-screen flex items-center" style={{ color: '#fcf6d3' }}>

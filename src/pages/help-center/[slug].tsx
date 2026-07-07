@@ -27,7 +27,7 @@ const helpArticlesData: Record<string, any> = {
   },
   "parent-portal-guide": {
     title: "Guide to the Parent Portal", category: "Getting Started", lastUpdated: "March 8, 2026",
-    content: `# Guide to the Parent Portal\n\nHelp your parents get the most out of the KIDUART parent experience.\n\n## Accessing the Parent Portal\nParents can access KIDUART via:\n- **Web**: parent.kiduart.com\n- **Mobile App**: Available on iOS and Android (search "KIDUART Parent")\n\n## Parent Account Setup\nAccounts are created automatically when you add parent information to student records. Parents receive an email with:\n- Their login credentials\n- A download link for the mobile app\n- A getting started guide\n\n## Key Parent Features\n- **Dashboard**: Overview of child's attendance, recent grades, upcoming events\n- **Attendance**: Real-time attendance status and history\n- **Grades**: Latest grades and report downloads\n- **Fees**: Current dues, payment history, online payment\n- **Messages**: Direct communication with teachers\n- **Notifications**: Configure what alerts they receive\n\n## Troubleshooting Parent Login Issues\nIf parents can't log in:\n1. Check their email for the welcome message (check spam)\n2. Use the **Forgot Password** link\n3. Contact your school admin to resend credentials`
+    content: `# Guide to the Parent Portal\n\nHelp your parents get the most out of the KIDUART parent experience.\n\n## Accessing the Parent Portal\nParents can access KIDUART via:\n- **Web**: Parent portal link shared by your school admin\n- **Native Mobile App**: Currently in development (coming soon)\n\n## Parent Account Setup\nAccounts are created automatically when you add parent information to student records. Parents receive an email with:\n- Their login credentials\n- A parent portal login guide\n- A getting started guide\n\n## Key Parent Features\n- **Dashboard**: Overview of child's attendance, recent grades, upcoming events\n- **Attendance**: Real-time attendance status and history\n- **Grades**: Latest grades and report downloads\n- **Fees**: Current dues, payment history, online payment\n- **Messages**: Direct communication with teachers\n- **Notifications**: Configure what alerts they receive\n\n## Troubleshooting Parent Login Issues\nIf parents can't log in:\n1. Check their email for the welcome message (check spam)\n2. Use the **Forgot Password** link\n3. Contact your school admin to resend credentials`
   },
   "reset-password": {
     title: "How to Reset Your Password", category: "Account Setup", lastUpdated: "January 10, 2026",
@@ -101,7 +101,7 @@ export default function HelpArticle() {
   };
 
   return (
-    <PageTransition className="pt-20 pb-0 tooo">
+    <PageTransition className="pt-20 pb-0">
       {/* Breadcrumb & Header */}
       <section className="section-space-tight bg-brand-navy text-white border-b border-white/10">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">

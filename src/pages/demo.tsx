@@ -78,10 +78,10 @@ export default function RequestDemo() {
 
       toast({
         title: "Demo request confirmed!",
-        description: "We will be in touch within one business day to finalise your session. Check your inbox for a confirmation shortly.",
+        description: "We will be in touch soon to finalise your session. Check your inbox for a confirmation shortly.",
       });
       // SEO-UPGRADE: Updated success toast copy for clarity on timeline and next steps
-      setSuccessMessage("Your request is in. We will be in touch within one business day to confirm your session time and understand your priorities.");
+      setSuccessMessage("Your request is in. We will be in touch soon to confirm your session time and understand your priorities.");
       // CONTENT: Updated success inline message with concrete response expectation
       form.reset({
         firstName: "",
@@ -164,7 +164,7 @@ export default function RequestDemo() {
                   <div className="flex gap-4">
                     <div className="w-8 h-8 rounded-full bg-brand-teal text-white font-bold flex items-center justify-center shrink-0 text-sm">2</div>
                     <div>
-                      <p className="font-semibold text-brand-navy text-sm">We reach out within a day</p>
+                      <p className="font-semibold text-brand-navy text-sm">We reach out promptly</p>
                       <p className="text-brand-navy/60 text-xs">A product specialist reviews your submission and contacts you to confirm timing and understand where you are and what your school looks like. We take it from there.</p>
                     </div>
                   </div>

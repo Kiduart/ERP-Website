@@ -20,11 +20,11 @@ const SUGGESTED_CHIPS = [
 ];
 
 const RESPONSES: Record<string, string> = {
-  "How does pricing work?": "Our pricing is based on number of students — starting at $2/student/month for Basic. We offer Professional and Enterprise plans. Visit our Pricing page for full details or request a demo for a custom quote!",
-  "Can I request a demo?": "Absolutely! Click the 'Request Demo' button in our navbar or visit /demo. Our team will schedule a personalized walkthrough within 24 hours.",
+  "How does pricing work?": "Our pricing is based on active student count. We offer multiple plans for different school sizes. Visit our Pricing page or request a demo for a custom quote.",
+  "Can I request a demo?": "Absolutely! Click the 'Request Demo' button in our navbar or visit /demo. Our team will schedule a personalized walkthrough.",
   "What features are included?": "KIDUART includes Student Management, Attendance, Gradebook, Fee Management, Timetable, Parent Communication, AI Analytics, and much more. Visit our Features page to explore all capabilities.",
-  "How do I set up my school?": "Setup is straightforward! After your demo, our onboarding team guides you through data migration and configuration. Most schools are live within 2 weeks.",
-  "Is my data secure?": "We use AES-256 encryption, role-based access, and regular backups. GDPR-style controls and education privacy practices are built in; ISO 27001 certification is in progress. See /security for current status.",
+  "How do I set up my school?": "Setup is straightforward. After your demo, our onboarding team guides you through data migration and configuration with a structured rollout.",
+  "Is my data secure?": "We use encryption controls, role-based access, MFA support, audit logging, and school-level data isolation. See /security for full details.",
   "How do integrations work?": "KIDUART integrates with Google Classroom, Moodle, Canvas, Zoom, Stripe, and more. Visit our Integrations page or check our API docs for custom integrations."
 };
 
@@ -32,6 +32,7 @@ const DEFAULT_RESPONSE = `Great question! Our sales team can help you better. Em
 
 export function ChatbotWidget() {
   const [isOpen, setIsOpen] = useState(false);
+  const [showNudge, setShowNudge] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     { id: "1", sender: "bot", text: "Hi! I'm KIDU, a Product Expert. How can we help you today?" }
   ]);
@@ -45,6 +46,19 @@ export function ChatbotWidget() {
   useEffect(() => {
     scrollToBottom();
   }, [messages, isOpen]);
+
+  useEffect(() => {
+    if (isOpen) {
+      setShowNudge(false);
+      return;
+    }
+
+    const timer = window.setTimeout(() => {
+      setShowNudge(true);
+    }, 10000);
+
+    return () => window.clearTimeout(timer);
+  }, [isOpen]);
 
   const handleSend = (text: string) => {
     if (!text.trim()) return;
@@ -78,8 +92,11 @@ export function ChatbotWidget() {
           <WhatsAppIcon className="h-7 w-7" />
         </a>
         <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="flex h-14 w-14 items-center justify-center rounded-full bg-brand-navy text-white shadow-xl transition-transform hover:scale-105"
+          onClick={() => {
+            setShowNudge(false);
+            setIsOpen(!isOpen);
+          }}
+          className={`flex h-14 w-14 items-center justify-center rounded-full bg-brand-navy text-white shadow-xl transition-transform hover:scale-105 ${showNudge ? "animate-pulse" : ""}`}
         >
           <MessageCircle className="w-7 h-7" />
         </button>

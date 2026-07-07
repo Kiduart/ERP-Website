@@ -42,7 +42,7 @@ export default function Login() {
   ];
 
   return (
-    <PageTransition className="pt-20 pb-0 tooo">
+    <PageTransition className="pt-20 pb-0">
       <section className="section-space bg-brand-beige/30 border-b border-brand-navy/5 relative overflow-hidden min-h-screen flex flex-col justify-center">
         <BackgroundBlobs blobs={[
           { color: "#fcbf49", size: 400, position: "top-left", opacity: 0.35 },

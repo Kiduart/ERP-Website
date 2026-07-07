@@ -1,11 +1,11 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { 
   GraduationCap, BookOpen, Pencil, Star, Atom, 
   BarChart2, Users, Brain, Lightbulb, Calculator, 
   Globe, Award, Clock, Bell, ShieldCheck,
   Lock, Eye, Mail, CreditCard
 } from "lucide-react";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const ICON_MAP: Record<string, React.ElementType> = {
   GraduationCap, BookOpen, Pencil, Star, Atom, 
@@ -22,8 +22,22 @@ interface FloatingIconsProps {
 
 export function FloatingIcons({ icons, count, heroMode = false }: FloatingIconsProps) {
   const COLORS = ['#003049', '#0c716b', '#fcbf49'];
+  const prefersReducedMotion = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 768px)");
+    const handleChange = () => setIsMobile(media.matches);
+    handleChange();
+    media.addEventListener("change", handleChange);
+    return () => media.removeEventListener("change", handleChange);
+  }, []);
 
   const renderedIcons = useMemo(() => {
+    if (prefersReducedMotion || isMobile) {
+      return [];
+    }
+
     return Array.from({ length: count }).map((_, i) => {
       // Seed pseudo-random values based on index to keep them stable
       const top = 10 + ((i * 37) % 80); // 10% to 90%
@@ -60,7 +74,7 @@ export function FloatingIcons({ icons, count, heroMode = false }: FloatingIconsP
         </motion.div>
       );
     });
-  }, [icons, count, heroMode]);
+  }, [icons, count, heroMode, prefersReducedMotion, isMobile]);
 
   return <>{renderedIcons}</>;
 }

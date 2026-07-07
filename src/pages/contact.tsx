@@ -88,7 +88,7 @@ export default function Contact() {
         help: "I want to schedule a demo",
         message: "",
       });
-      setSuccessMessage("Your message is on its way. We will respond within one business day.");
+      setSuccessMessage("Your message is on its way. Our team will respond as quickly as possible.");
       toast({
         title: "Message sent",
         description: "Our team has received your inquiry.",
@@ -105,12 +105,12 @@ export default function Contact() {
   };
 
   return (
-    <PageTransition className="pt-20 pb-0 tooo">
+    <PageTransition className="pt-20 pb-0">
       <PageSeoHead {...pageSeo.contact} />
       <BankingContactHero
         eyebrow="Talk to the team"
         title="We are easier to reach than you might expect."
-        subtitle="Book a demo, ask about pricing, or send a product question. You will reach our Noida team directly, and we aim to reply within one business day."
+        subtitle="Book a demo, ask about pricing, or send a product question. You will reach our Noida team directly, and we will follow up as quickly as possible."
         image="/images/banner/contact-post-1.jpg"
         actions={(
           <>

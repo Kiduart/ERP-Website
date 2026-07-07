@@ -5,32 +5,27 @@ import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CtaSection } from "@/components/ui/CtaSection";
 import { buildFaqPageSchema } from "@/lib/seoSchemas";
 import { ChevronDown, MessageCircleQuestion } from "lucide-react";
+import { pricingFaqs } from "@/data/pricingFaqs";
 
 export const faqData = {
-  "Pricing & Plans": [
-    { q: "How is pricing calculated?", a: "Pricing is based on the number of active students enrolled in your institution each month. Teacher accounts, staff logins and parent access are all included at no extra cost. You only pay for students. We price in INR for Indian schools. Visit the pricing page or book a demo to get a figure for your school's size." },
-    { q: "Are there setup or onboarding fees?", a: "Professional and Enterprise plans include full onboarding support and data migration from your existing system at no extra cost. For the Basic plan, a one-time setup fee applies. We confirm the exact amount during your demo so there are no surprises later." },
-    { q: "Can we add modules after signing up?", a: "Yes. You can upgrade your plan or add specific modules at any time. Billing adjusts on a prorated basis so you only pay for what you use from the day you add it." },
-    { q: "Do you offer discounts for large school groups?", a: "Yes. Schools managing more than 2,000 students or school groups with multiple campuses qualify for volume pricing. Contact our team for a custom quote." },
-    { q: "What happens to our data if we stop using KIDUART?", a: "Your data belongs to your school. If you decide to move on, you can export all records in standard formats, CSV, Excel and PDF, at no cost. We do not retain your data after the export period." }
-  ],
+  "Pricing & Plans": pricingFaqs,
   "Onboarding & Setup": [
-    { q: "How long does implementation take?", a: "Most schools are fully live within one to two weeks using our guided onboarding process. Larger institutions or those with complex existing data may take three to four weeks." },
+    { q: "How long does implementation take?", a: "Implementation timelines depend on your current data quality, process complexity, and training needs. We follow a structured onboarding plan and keep the rollout practical for school teams." },
     { q: "Do you migrate existing data?", a: "Yes. We handle the full data migration from your current system, whether that is spreadsheets, another ERP or a mix of both. Our team will map your existing data structure before we start." },
     { q: "Is training included?", a: "Yes. Live training sessions for all staff roles are included as part of onboarding. We train admins, teachers, finance staff and parent portal users separately so each group gets exactly what they need." },
-    { q: "What support is available during setup?", a: "A dedicated onboarding specialist is assigned to your institution for the first 30 days. After that, your account manager handles any follow-up questions." }
+    { q: "What support is available during setup?", a: "A dedicated onboarding specialist supports your team through setup, migration, and training milestones. After onboarding, your account manager handles follow-up support." }
   ],
   "Features & Modules": [
     { q: "Can I customize the platform?", a: "Yes, extensive customization for forms, reports, and workflows." },
-    { q: "Is there a mobile app?", a: "A mobile-optimised web experience works on any phone browser today. Dedicated iOS and Android apps for parents and teachers are in active development. Ask during your demo for the current timeline." },
+    { q: "Is there a mobile app?", a: "A mobile-optimised web experience works on any phone browser today. The native parent app is in development and will be announced when released." },
     { q: "Does it support multiple campuses?", a: "Yes, multi-campus management in Professional and Enterprise plans." },
-    { q: "Can parents access the platform?", a: "Yes, dedicated parent portal and mobile app." }
+    { q: "Can parents access the platform?", a: "Yes. Parents can use the dedicated parent portal on web today. Native app access is in development." }
   ],
   "Security & Privacy": [
-    { q: "How is student data protected?", a: "256-bit encryption, role-based access, regular security audits." },
-    { q: "Is KIDUART GDPR compliant?", a: "We follow GDPR-style data protection practices and design for education privacy requirements (including FERPA-aligned workflows where applicable). ISO 27001 certification is in progress — see our Security page for the latest status." },
+    { q: "How is student data protected?", a: "KIDUART uses encryption controls, role-based access, MFA support, audit logging, and dedicated data isolation per school." },
+    { q: "Is KIDUART formally certified under GDPR or ISO?", a: "We do not claim formal GDPR or ISO certification at this time. Our current security messaging is based on implemented product controls." },
     { q: "Who can access student data?", a: "Only authorized staff with role-specific permissions." },
-    { q: "Where is data hosted?", a: "Secure cloud infrastructure in certified data centers." }
+    { q: "Where is data hosted?", a: "Secure cloud infrastructure with controlled access and school-level data separation." }
   ],
   "Technical & Integrations": [
     { q: "What integrations are available?", a: "Google Classroom, Moodle, Canvas, Zoom, Stripe, and many more." },
@@ -40,7 +35,7 @@ export const faqData = {
   ],
   "Support": [
     { q: "What support channels are available?", a: "Email, live chat, phone, and dedicated account managers." },
-    { q: "What are support hours?", a: "24/7 for critical issues, business hours for general queries." },
+    { q: "What are support hours?", a: "Support is available through email and guided support channels. Final support windows are shared with each school during onboarding." },
     { q: "How do I submit a bug report?", a: "Through the help center at /help or email support@kiduart.com." }
   ]
 };
@@ -67,7 +62,7 @@ export default function FAQ() {
   };
 
   return (
-    <PageTransition className="pt-20 pb-0 tooo">
+    <PageTransition className="pt-20 pb-0">
       <Head>
         <title>School ERP FAQ | Common Questions About KIDUART</title>
         <meta
@@ -160,13 +155,13 @@ export default function FAQ() {
               </div>
               <div>
                 <h2 className="text-2xl font-bold text-brand-navy">Still have a question?</h2>
-                <p className="text-brand-navy/70">Ask us directly. We will respond within one business day.</p>
+                <p className="text-brand-navy/70">Ask us directly. Our team will respond as quickly as possible.</p>
               </div>
             </div>
 
             {formSubmitted ? (
               <div className="bg-brand-teal/10 border border-brand-teal/30 text-brand-teal p-6 rounded-xl text-center font-medium text-lg">
-                Received. We will get back to you within one business day.
+                Received. We will get back to you soon.
               </div>
             ) : (
               <form onSubmit={handleFormSubmit} className="space-y-6">

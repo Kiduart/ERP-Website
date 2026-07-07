@@ -20,6 +20,8 @@ export default function Document() {
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap"
         />
+        {/* DNS prefetch for analytics endpoint to reduce connect latency */}
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link
           rel="preload"
           as="image"

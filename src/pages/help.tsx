@@ -210,14 +210,14 @@ export default function HelpCenter() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <SectionReveal className="text-center mb-16">
             <h2 className="text-3xl font-bold text-brand-navy mb-4">Still Need Help?</h2>
-            <p className="text-lg text-brand-navy/70">Our support team is available 24/7 to assist you.</p>
+            <p className="text-lg text-brand-navy/70">Our support team is available to guide your school team through setup and day-to-day questions.</p>
           </SectionReveal>
 
           <div className="grid md:grid-cols-3 gap-8">
             <SectionReveal className="bg-white p-8 rounded-2xl text-center shadow-md flex flex-col items-center">
               <Mail className="w-10 h-10 text-brand-teal mx-auto mb-4" />
               <h3 className="text-xl font-bold text-brand-navy mb-2">Email Support</h3>
-              <p className="text-brand-navy/60 text-sm mb-6 flex-grow">Drop us an email and we&apos;ll get back to you within 2 hours.</p>
+              <p className="text-brand-navy/60 text-sm mb-6 flex-grow">Drop us an email and our team will respond as quickly as possible.</p>
               <a href="mailto:support@kiduart.com?subject=Support Request from Help Center" className="w-full py-3 rounded-xl border-2 border-brand-navy/10 font-bold text-brand-navy hover:bg-brand-navy hover:text-white transition-colors block text-center">
                 support@kiduart.com
               </a>
@@ -226,7 +226,7 @@ export default function HelpCenter() {
             <SectionReveal delay={0.1} className="bg-white p-8 rounded-2xl text-center shadow-md border-2 border-brand-teal flex flex-col items-center">
               <MessageCircle className="w-10 h-10 text-brand-teal mx-auto mb-4" />
               <h3 className="text-xl font-bold text-brand-navy mb-2">Live Chat</h3>
-              <p className="text-brand-navy/60 text-sm mb-6 flex-grow">Chat with our product experts in real-time right now.</p>
+              <p className="text-brand-navy/60 text-sm mb-6 flex-grow">Start a chat request and our team will connect with you as support agents become available.</p>
               <button onClick={() => setChatOpen(true)} className="w-full py-3 rounded-xl bg-brand-teal font-bold text-white hover:bg-brand-navy transition-colors">
                 Start Chat
               </button>
@@ -236,7 +236,7 @@ export default function HelpCenter() {
               <Ticket className="w-10 h-10 text-brand-teal mx-auto mb-4" />
               <h3 className="text-xl font-bold text-brand-navy mb-2">Support Ticket</h3>
               <p className="text-brand-navy/60 text-sm mb-6 flex-grow">Log in to your dashboard to submit and track detailed tickets.</p>
-              <a href="https://platform-1-nine.vercel.app/auth/login" target="_blank" rel="noreferrer" className="w-full py-3 rounded-xl border-2 border-brand-navy/10 font-bold text-brand-navy hover:bg-brand-navy hover:text-white transition-colors block text-center">
+              <a href="https://www.kiduart.com/login" target="_blank" rel="noreferrer" className="w-full py-3 rounded-xl border-2 border-brand-navy/10 font-bold text-brand-navy hover:bg-brand-navy hover:text-white transition-colors block text-center">
                 Open Portal
               </a>
             </SectionReveal>
@@ -254,7 +254,7 @@ export default function HelpCenter() {
                 <div>
                   <h3 className="font-bold">KIDUART Support</h3>
                   <div className="text-xs text-white/70 flex items-center gap-1">
-                    <span className="w-2 h-2 rounded-full bg-green-400"></span> Online
+                    <span className="w-2 h-2 rounded-full bg-green-400"></span> Chat request
                   </div>
                 </div>
               </div>

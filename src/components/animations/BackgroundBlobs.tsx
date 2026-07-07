@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 interface BlobProps {
   color: string;
@@ -12,6 +13,21 @@ interface BackgroundBlobsProps {
 }
 
 export function BackgroundBlobs({ blobs }: BackgroundBlobsProps) {
+  const prefersReducedMotion = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 768px)");
+    const handleChange = () => setIsMobile(media.matches);
+    handleChange();
+    media.addEventListener("change", handleChange);
+    return () => media.removeEventListener("change", handleChange);
+  }, []);
+
+  if (prefersReducedMotion || isMobile) {
+    return null;
+  }
+
   const getPositionStyles = (position: BlobProps["position"]) => {
     switch (position) {
       case "top-left": return { top: "-5%", left: "-5%" };

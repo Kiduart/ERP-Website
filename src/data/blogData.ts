@@ -192,7 +192,7 @@ Beyond marks and attendance, schools store health notes, family contacts, transp
 
 ## Privacy obligations
 
-Indian schools also serve families who expect GDPR-style rights when students study abroad. Baseline habits help everywhere:
+Indian schools also serve families who expect strong privacy standards, especially when students study abroad. Baseline habits help everywhere:
 
 - Document what you collect and why
 - Limit access by role

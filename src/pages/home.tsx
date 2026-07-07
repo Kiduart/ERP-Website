@@ -79,6 +79,30 @@ const modules = [
     color: "text-brand-bronze",
     bg: "bg-brand-bronze/10",
   },
+  {
+    slug: "hr-payroll",
+    icon: Users,
+    title: "HR & Payroll",
+    desc: "Manage staff records, leave approvals, payroll cycles, and performance notes from one HR workflow made for schools.",
+    color: "text-brand-navy",
+    bg: "bg-brand-navy/10",
+  },
+  {
+    slug: "transport",
+    icon: CalendarCheck,
+    title: "Transport Management",
+    desc: "Coordinate routes, drivers, vehicles, and maintenance with live transport visibility for parents and school operations teams.",
+    color: "text-brand-orange",
+    bg: "bg-brand-orange/10",
+  },
+  {
+    slug: "library",
+    icon: FileText,
+    title: "Library Operations",
+    desc: "Track catalog, issue-return, fines, reservations, and member activity without manual registers.",
+    color: "text-brand-teal",
+    bg: "bg-brand-teal/10",
+  },
 ];
 
 const aiFeatures = [
@@ -231,10 +255,12 @@ export default function Home() {
             </SectionReveal>
             <SectionReveal className="grid grid-cols-2 gap-4 text-center md:grid-cols-4 md:gap-6">
               {HOME_IMPACT_HIGHLIGHTS.map((stat) => (
-                <div key={stat.label} className="rounded-3xl border border-brand-navy/10 bg-brand-beige/20 px-4 py-6 shadow-sm">
+                <div key={stat.label} className="flex flex-col rounded-3xl border border-brand-navy/10 bg-brand-beige/20 px-4 py-6 shadow-sm">
                   <div className="text-xs font-semibold uppercase tracking-[0.24em] text-brand-teal/80">{stat.area}</div>
-                  <div className="stat-value mt-4 text-2xl font-extrabold text-brand-navy md:text-3xl">{stat.headline}</div>
-                  <div className="mt-3 text-sm font-medium leading-snug text-brand-navy/65">{stat.label}</div>
+                  <div className="stat-value mt-4 flex min-h-[2.75rem] items-center justify-center text-2xl font-extrabold leading-tight text-brand-navy md:min-h-[3.25rem] md:text-3xl">
+                    {stat.headline}
+                  </div>
+                  <div className="mt-3 flex-1 text-sm font-medium leading-snug text-brand-navy/65">{stat.label}</div>
                 </div>
               ))}
             </SectionReveal>
@@ -333,15 +359,15 @@ export default function Home() {
           <FloatingIcons icons={["CheckCircle2", "Users", "Star"]} count={4} />
           <div className="page-shell relative z-10">
             <SectionReveal className="text-center mb-16">
-              <h2 className="section-title text-brand-navy mb-4">Up and running in days, not months</h2>
+              <h2 className="section-title text-brand-navy mb-4">Smooth onboarding without disrupting school routines</h2>
               <p className="section-copy text-brand-navy/70 max-w-3xl mx-auto">
-                Most schools are fully operational within two weeks. Here is what the journey looks like.
+                We keep onboarding structured and practical, so your team can shift from setup to daily use with confidence.
               </p>
             </SectionReveal>
 
             <div className="grid md:grid-cols-3 gap-8">
               {howItWorks.map((item, idx) => (
-                <SectionReveal key={item.step} delay={idx * 0.08} className="rounded-3xl border border-brand-navy/10 bg-brand-beige/20 p-8">
+                <SectionReveal key={item.step} delay={idx * 0.08} className="interactive-card rounded-3xl border border-brand-navy/10 bg-brand-beige/20 p-8">
                   <div className="text-sm font-bold tracking-[0.25em] text-brand-teal uppercase">{item.step}</div>
                   <h3 className="mt-4 text-[clamp(1.3rem,1.1rem+0.6vw,1.8rem)] font-bold text-brand-navy">{item.title}</h3>
                   <p className="section-copy mt-4 text-brand-navy/70">{item.desc}</p>
@@ -549,9 +575,9 @@ export default function Home() {
             <SectionReveal className="mt-12">
               <div className="flex flex-wrap items-center justify-center gap-4">
                 {[
-                  "🔒 Data Secure — GDPR Compliant",
+                  "🔒 Built-in data protection controls",
                   "🇮🇳 Built for Indian Schools",
-                  "⚡ Live in 2 Weeks",
+                  "⚡ Structured onboarding support",
                 ].map((badge) => (
                   <div
                     key={badge}
@@ -669,7 +695,7 @@ export default function Home() {
                   { icon: Users, title: "Role-Based Access", desc: "Admins, teachers, and finance teams see only what they need." },
                   { icon: CheckCircle2, title: "Cloud Backup", desc: "Important school data stays recoverable and easier to manage." },
                 ].map((item, idx) => (
-                  <SectionReveal key={item.title} delay={idx * 0.08} className="rounded-2xl border border-brand-navy/10 bg-white p-5 shadow-sm">
+                  <SectionReveal key={item.title} delay={idx * 0.08} className="interactive-card rounded-2xl border border-brand-navy/10 bg-white p-5 shadow-sm">
                     <item.icon className="h-6 w-6 text-brand-teal" />
                     <h3 className="mt-4 text-lg font-bold text-brand-navy">{item.title}</h3>
                     <p className="mt-2 text-sm leading-6 text-brand-navy/70">{item.desc}</p>

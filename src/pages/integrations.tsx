@@ -6,53 +6,36 @@ import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
 import { FloatingIcons } from "@/components/animations/FloatingIcons";
 import { BookOpen, MessageSquare, CreditCard, PieChart, Code2, Blocks, Zap } from "lucide-react";
 import { Link } from "wouter";
+import integrationsData from "@/data/integrationsData";
+
+const categoryMeta = {
+  "Learning Systems": { icon: BookOpen, color: "text-brand-teal", bg: "bg-brand-teal/10" },
+  "Communication Tools": { icon: MessageSquare, color: "text-brand-orange", bg: "bg-brand-orange/10" },
+  "Payment Systems": { icon: CreditCard, color: "text-brand-yellow", bg: "bg-brand-yellow/20" },
+  "Analytics Platforms": { icon: PieChart, color: "text-brand-navy", bg: "bg-brand-navy/10" },
+} as const;
 
 export default function Integrations() {
-  const categories = [
-    {
-      title: "Learning Systems",
-      icon: BookOpen,
-      color: "text-brand-teal",
-      bg: "bg-brand-teal/10",
-      integrations: [
-        { name: "Moodle", desc: "Sync courses, grades, and assignments.", logo: "M", slug: "moodle" },
-        { name: "Google Classroom", desc: "Import classroom rosters and sync grades.", logo: "G", slug: "google-classroom" },
-        { name: "Canvas LMS", desc: "Two-way sync for courses, rosters, and grades.", logo: "C", slug: "canvas" }
-      ]
-    },
-    {
-      title: "Communication Tools",
-      icon: MessageSquare,
-      color: "text-brand-orange",
-      bg: "bg-brand-orange/10",
-      integrations: [
-        { name: "Zoom", desc: "Auto-generate meeting links for classes.", logo: "Z", slug: "zoom" },
-        { name: "Microsoft Teams", desc: "Create class teams and channels automatically.", logo: "T", slug: "microsoft-teams" }
-      ]
-    },
-    {
-      title: "Payment Systems",
-      icon: CreditCard,
-      color: "text-brand-yellow",
-      bg: "bg-brand-yellow/20",
-      integrations: [
-        { name: "Stripe", desc: "Accept global credit card payments securely.", logo: "S", slug: "stripe" },
-        { name: "PayPal", desc: "Easy fee collection and recurring payments.", logo: "P", slug: "paypal" }
-      ]
-    },
-    {
-      title: "Analytics Platforms",
-      icon: PieChart,
-      color: "text-brand-navy",
-      bg: "bg-brand-navy/10",
-      integrations: [
-        { name: "Google Analytics", desc: "Track parent portal engagement.", logo: "G", slug: "google-analytics" }
-      ]
-    }
-  ];
+  const categories = Object.entries(categoryMeta).map(([title, meta]) => ({
+    title,
+    ...meta,
+    integrations: Object.entries(integrationsData)
+      .filter(([, integration]) => integration.category === title)
+      .map(([slug, integration]) => ({
+        slug,
+        name: integration.name,
+        desc: integration.description,
+        logo: integration.name
+          .split(" ")
+          .map((word) => word[0])
+          .join("")
+          .slice(0, 2)
+          .toUpperCase(),
+      })),
+  }));
 
   return (
-    <PageTransition className="pt-20 pb-0 tooo">
+    <PageTransition className="pt-20 pb-0">
       <PageSeoHead
         title="School ERP Integrations — KIDUART"
         description="Connect KIDUART with Google Classroom, Zoom, Stripe, Moodle, Microsoft Teams and more. Keep class, fee, and communication data aligned across the tools your school already uses."

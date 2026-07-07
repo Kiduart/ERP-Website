@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { SectionReveal } from "@/components/ui/PageTransition";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
 import { FloatingIcons } from "@/components/animations/FloatingIcons";
-import { decorativeImgProps, heroImageAlt, heroImgProps, IMAGE_DIMENSIONS, lazyImgProps } from "@/lib/imageSeo";
+import { heroImageAlt, heroImgProps, IMAGE_DIMENSIONS, lazyImgProps } from "@/lib/imageSeo";
 import { cn } from "@/lib/utils";
 
 type BaseProps = {
@@ -67,7 +67,14 @@ export function CircleShowcaseHero({
               />
             </div>
             <div className="absolute bottom-4 right-8 z-20 h-28 w-28 overflow-hidden rounded-full border-[6px] border-white bg-white shadow-xl">
-              <img src={image} {...decorativeImgProps} {...lazyImgProps(IMAGE_DIMENSIONS.avatar)} className="h-full w-full object-cover" />
+              <img
+                src={image}
+                alt=""
+                role="presentation"
+                aria-hidden
+                {...lazyImgProps(IMAGE_DIMENSIONS.avatar)}
+                className="h-full w-full object-cover"
+              />
             </div>
           </div>
         </SectionReveal>

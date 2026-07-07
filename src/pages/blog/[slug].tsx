@@ -3,15 +3,22 @@ import { SchemaMarkup } from "@/components/seo/SchemaMarkup";
 import { BlogArticleBody } from "@/components/blog/BlogArticleBody";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CtaSection } from "@/components/ui/CtaSection";
-import { BLOG_POST_IMAGES, getBlogPost, getBlogListingPosts } from "@/data/blogData";
+import { type BlogListingPost } from "@/data/blogData";
+import { getBlogHeroImage, getCmsBlogListingPosts, getCmsBlogPost } from "@/lib/cms/content";
+import type { ContentMeta } from "@/lib/cms/types";
 import { blogPostPageSeo } from "@/lib/pageSeo";
 import { buildArticleSchema } from "@/lib/seoSchemas";
 import { ArrowLeft, Calendar } from "lucide-react";
-import { useParams, Link } from "wouter";
+import { Link } from "wouter";
+import type { GetStaticPaths, GetStaticProps } from "next";
 
-export default function BlogPostPage() {
-  const { slug } = useParams();
-  const post = slug ? getBlogPost(slug) : null;
+type BlogPostPageProps = {
+  post: BlogListingPost | null;
+  listingPosts: BlogListingPost[];
+  contentMeta: ContentMeta;
+};
+
+export default function BlogPostPage({ post, listingPosts }: BlogPostPageProps) {
 
   if (!post) {
     return (
@@ -25,10 +32,11 @@ export default function BlogPostPage() {
     );
   }
 
-  const imageIndex = getBlogListingPosts().findIndex((p) => p.slug === post.slug);
-  const heroImage = BLOG_POST_IMAGES[Math.max(0, imageIndex) % BLOG_POST_IMAGES.length];
+  const imageIndex = listingPosts.findIndex((p) => p.slug === post.slug);
+  const heroImage = getBlogHeroImage(post, Math.max(0, imageIndex));
+  const postMap = new Map(listingPosts.map((item) => [item.slug, item]));
   const related = post.relatedSlugs
-    .map((relatedSlug) => getBlogPost(relatedSlug))
+    .map((relatedSlug) => postMap.get(relatedSlug) ?? null)
     .filter((item): item is NonNullable<typeof item> => item !== null)
     .slice(0, 3);
 
@@ -109,3 +117,33 @@ export default function BlogPostPage() {
     </>
   );
 }
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const result = await getCmsBlogListingPosts();
+  return {
+    paths: result.data.map((post) => ({ params: { slug: post.slug } })),
+    fallback: "blocking",
+  };
+};
+
+export const getStaticProps: GetStaticProps<BlogPostPageProps> = async (context) => {
+  const preview = context.preview ?? false;
+  const slug = typeof context.params?.slug === "string" ? context.params.slug : "";
+  if (!slug) return { notFound: true };
+
+  const [postResult, listingResult] = await Promise.all([
+    getCmsBlogPost(slug, { preview }),
+    getCmsBlogListingPosts({ preview }),
+  ]);
+
+  if (!postResult.data) return { notFound: true, revalidate: preview ? 1 : 120 };
+
+  return {
+    props: {
+      post: postResult.data,
+      listingPosts: listingResult.data,
+      contentMeta: postResult.meta,
+    },
+    revalidate: preview ? 1 : 300,
+  };
+};

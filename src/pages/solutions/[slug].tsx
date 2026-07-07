@@ -1,4 +1,5 @@
 import { useParams, Link } from "wouter";
+import { PageSeoHead } from "@/components/seo/PageSeoHead";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CtaSection } from "@/components/ui/CtaSection";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
@@ -13,7 +14,7 @@ const solutionsData: Record<string, any> = {
     role: "Students", icon: GraduationCap, 
     headline: "Your Entire Academic Life, Organized.",
     challenges: ["Can't find assignments and deadlines in one place", "No visibility into attendance record", "Confusing fee payment process", "Disconnected communication with teachers"],
-    solutions: ["One student dashboard for timetable, marks, and fees", "Attendance history families can check anytime", "Online fee payments with digital receipts", "Messages to teachers through the parent app"],
+    solutions: ["One student dashboard for timetable, marks, and fees", "Attendance history families can check anytime", "Online fee payments with digital receipts", "Messages to teachers through the parent portal"],
     features: ["Personal dashboard", "Assignment tracker", "Grade history", "Digital timetable", "Fee payment portal", "Direct messaging"],
     dayInLife: ["Morning: Check today's timetable and classes", "Attendance: Teacher marks attendance in 30 seconds", "Grades: Instant notification when results published", "Fees: Parents pay online, student sees receipt", "Communication: Get messages from teachers directly"],
     testimonial: { quote: "I can see my timetable, marks, and fee status in one place instead of asking at the office.", name: "Grade 10 student", role: "Secondary school learner" },
@@ -22,8 +23,8 @@ const solutionsData: Record<string, any> = {
   "teachers": {
     role: "Teachers", icon: BookOpen,
     headline: "Spend Less Time on Admin. More Time Teaching.",
-    challenges: ["Manual attendance takes 10+ minutes per class", "Grade entry spread across multiple systems", "Difficult to communicate with all parents simultaneously", "No single view of each student's full history"],
-    solutions: ["Mark attendance in under 30 seconds on mobile", "Centralized gradebook with auto report generation", "Bulk messaging to all parents with one click", "Complete student profiles with history and notes"],
+    challenges: ["Manual attendance takes too long every period", "Grade entry spread across multiple systems", "Difficult to communicate with all parents simultaneously", "No single view of each student's full history"],
+    solutions: ["Mark attendance quickly on web or mobile", "Centralized gradebook with auto report generation", "Bulk messaging to parent groups from one place", "Complete student profiles with history and notes"],
     features: ["Mobile attendance", "Digital gradebook", "Parent messaging", "Student profiles", "Lesson planner", "Substitute management"],
     dayInLife: ["8:00 AM: Mark class attendance on mobile", "10:00 AM: Enter quiz scores in gradebook", "12:00 PM: Send homework reminder to parents", "2:00 PM: Review student performance dashboard", "3:00 PM: Generate weekly class report automatically"],
     testimonial: { quote: "Marking attendance and posting homework used to eat my last period. Now I finish admin before I leave campus.", name: "Senior secondary teacher", role: "Class teacher" },
@@ -43,7 +44,7 @@ const solutionsData: Record<string, any> = {
     role: "Parents", icon: Heart,
     headline: "Stay Informed. Stay Involved. Always.",
     challenges: ["Don't know how child is doing between parent-teacher meetings", "Miss important school announcements", "Fee payment requires visiting school", "No direct line to teachers"],
-    solutions: ["Real-time grade and attendance notifications", "Push notifications for all school communications", "Online fee payment from mobile", "Direct teacher messaging through parent app"],
+    solutions: ["Real-time grade and attendance notifications", "Notifications for school communications", "Online fee payment from the parent portal", "Direct teacher messaging through parent portal"],
     features: ["Child progress dashboard", "Attendance alerts", "Online fee payment", "Teacher messaging", "Event calendar", "Report downloads"],
     dayInLife: ["Morning: Check today's attendance notification", "Afternoon: Receive grade update from exam", "Evening: Pay monthly fees online in 2 minutes", "Weekend: Review monthly progress report", "Anytime: Message teacher directly"],
     testimonial: { quote: "I get absence alerts and fee reminders on my phone, so I am not finding out about problems at the gate.", name: "Working parent", role: "Parent of two students" },
@@ -86,6 +87,12 @@ export default function SolutionDetail() {
   ];
 
   return (
+    <>
+      <PageSeoHead
+        title={`${data.role} School ERP Solution | KIDUART`}
+        description={`${data.role} workflows in KIDUART for attendance, communication, academics, and operations with role-based access for Indian schools.`}
+        path={`/solutions/${slug}`}
+      />
     <PageTransition className="pt-20 pb-0">
       {/* HERO */}
       <section className="hero-viewport relative overflow-hidden bg-[linear-gradient(180deg,#edf4ff_0%,#f7faff_55%,#ffffff_100%)] py-14 md:py-16">
@@ -326,5 +333,6 @@ export default function SolutionDetail() {
 
       <CtaSection />
     </PageTransition>
+    </>
   );
 }

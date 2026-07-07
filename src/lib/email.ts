@@ -375,7 +375,7 @@ export async function sendContactInquiryEmail(payload: ContactEmailPayload) {
         "If your message is urgent, reply to this email and our support team will prioritize your request.",
       ],
       nextSteps: [
-        "A KIDUART specialist reviews your inquiry within one business day.",
+        "A KIDUART specialist reviews your inquiry promptly.",
         "We respond with next steps, resources, or a demo invitation if relevant.",
         "You can explore product pages while you wait using the links below.",
       ],
@@ -422,7 +422,7 @@ export async function sendDemoRequestEmail(payload: DemoEmailPayload) {
       intro:
         "A school leader requested a KIDUART product demo. This is a high-priority lead and should be reviewed promptly by the sales or onboarding team.",
       rows,
-      priorityBanner: "High priority — respond within one business day",
+      priorityBanner: "High priority lead — respond promptly",
       footerNote: "This lead came from the Book a Demo page. Confirm session timing and school context in your reply.",
     }),
   });
@@ -437,7 +437,7 @@ export async function sendDemoRequestEmail(payload: DemoEmailPayload) {
       requestLabel: "demo request",
       introParagraphs: [
         "Thank you for your interest in KIDUART. We received your demo request and our team is excited to show you how KIDUART fits your school's workflows.",
-        "A member of our team will reach out within one business day to confirm your session time and understand your priorities.",
+        "A member of our team will reach out promptly to confirm your session time and understand your priorities.",
       ],
       nextSteps: [
         "We review your school profile, role, and student count before the call.",
