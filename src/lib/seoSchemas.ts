@@ -98,3 +98,60 @@ export function buildArticleSchema({
     },
   };
 }
+
+export type InternJobPostingInput = {
+  title: string;
+  description: string;
+  applyUrl: string;
+};
+
+export function buildInternJobPostingSchema({
+  title,
+  description,
+  applyUrl,
+}: InternJobPostingInput): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@type": "JobPosting",
+    title,
+    description,
+    datePosted: new Date().toISOString().split("T")[0],
+    hiringOrganization: {
+      "@type": "Organization",
+      name: "KIDUART",
+      sameAs: SITE_URL,
+      logo: LOGO_URL,
+    },
+    jobLocation: {
+      "@type": "Place",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Noida",
+        addressRegion: "Uttar Pradesh",
+        addressCountry: "IN",
+      },
+    },
+    employmentType: "INTERN",
+    applicantLocationRequirements: {
+      "@type": "Country",
+      name: "India",
+    },
+    directApply: true,
+    url: applyUrl,
+  };
+}
+
+export function buildCareersFaqSchema(items: Array<{ q: string; a: string }>): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.a,
+      },
+    })),
+  };
+}

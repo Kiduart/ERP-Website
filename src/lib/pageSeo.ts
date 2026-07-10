@@ -81,6 +81,15 @@ export const pageSeo = {
     path: "/integrations/api-docs",
     ogImage: `${SITE_ORIGIN}/images/banner/home-hero.jpeg`,
   },
+  careers: {
+    title: "KIDUART Internships & Careers | Python, UI/UX & BD Jobs in Noida",
+    description:
+      "Apply for founding intern roles at KIDUART EdTech in Noida: Python intern, UI/UX design intern, and business development intern. Freshers welcome. Official application form on this page.",
+    path: "/careers",
+    ogImage: `${SITE_ORIGIN}/images/careers/founding-interns-hiring.png`,
+    keywords:
+      "KIDUART careers, KIDUART internship, EdTech jobs Noida, Python intern Noida, UI UX internship India, business development intern, school ERP jobs, fresher internship EdTech, startup internship Noida",
+  },
 } as const;
 
 export function featurePageSeo(slug: string, title: string, description: string): PageSeoHeadProps {
