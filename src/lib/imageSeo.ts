@@ -15,6 +15,18 @@ export const IMAGE_DIMENSIONS = {
   logo: { width: 160, height: 64 },
 } as const;
 
+/** Prefer modern formats when available for static hero assets */
+export function heroSrcSet(src: string): { src: string; webp?: string; avif?: string } {
+  if (src.endsWith("/home-hero.jpeg") || src.endsWith("/home-hero.jpg")) {
+    return {
+      src,
+      webp: "/images/banner/home-hero.webp",
+      avif: "/images/banner/home-hero.avif",
+    };
+  }
+  return { src };
+}
+
 type ImageDimensions = { width: number; height: number };
 
 /** Above-the-fold images: explicit dimensions, no lazy load */

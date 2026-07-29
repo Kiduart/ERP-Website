@@ -37,8 +37,12 @@ function normalizeQueryParams(query: Record<string, string | string[] | undefine
   );
 }
 
-export function Link({ children, ...props }: CompatLinkProps) {
-  return <NextLink {...props}>{children}</NextLink>;
+export function Link({ children, prefetch = false, ...props }: CompatLinkProps) {
+  return (
+    <NextLink prefetch={prefetch} {...props}>
+      {children}
+    </NextLink>
+  );
 }
 
 export function useLocation(): [

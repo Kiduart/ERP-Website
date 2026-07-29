@@ -1,7 +1,25 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { CSSProperties, ReactNode } from "react";
 
-export function PageTransition({ children, className = "" }: { children: ReactNode; className?: string }) {
+export function PageTransition({
+  children,
+  className = "",
+  instant = false,
+}: {
+  children: ReactNode;
+  className?: string;
+  instant?: boolean;
+}) {
+  const reduceMotion = useReducedMotion();
+  const isMobile =
+    typeof window !== "undefined"
+      ? window.matchMedia("(max-width: 768px)").matches
+      : false;
+
+  if (instant || reduceMotion || isMobile) {
+    return <div className={className}>{children}</div>;
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 15 }}
@@ -20,12 +38,29 @@ export function SectionReveal({
   className = "",
   delay = 0,
   style,
+  instant = false,
 }: {
   children: ReactNode;
   className?: string;
   delay?: number;
   style?: CSSProperties;
+  /** Skip entrance animation (critical for LCP / hero first paint) */
+  instant?: boolean;
 }) {
+  const reduceMotion = useReducedMotion();
+  const isMobile =
+    typeof window !== "undefined"
+      ? window.matchMedia("(max-width: 768px)").matches
+      : false;
+
+  if (instant || reduceMotion || isMobile) {
+    return (
+      <div className={className} style={style}>
+        {children}
+      </div>
+    );
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}

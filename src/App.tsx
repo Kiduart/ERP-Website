@@ -7,6 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { AccessibilityProvider } from "@/components/common/AccessibilityWidget";
+import { DeferredMount } from "@/components/common/DeferredMount";
 import { ScrollRestoration } from "@/components/common/ScrollRestoration";
 import { ScrollToTopButton } from "@/components/common/ScrollToTopButton";
 
@@ -57,20 +58,32 @@ export function AppShell({ children }: AppShellProps) {
       <AccessibilityProvider>
         <TooltipProvider>
           <ScrollRestoration />
-          <CursorEffect />
+          <DeferredMount timeoutMs={4000} onInteraction>
+            <CursorEffect />
+          </DeferredMount>
           <div className="relative flex min-h-screen flex-col overflow-hidden">
             <Navbar />
             <main className="relative z-10 flex-grow">{children}</main>
-            {shouldShowGetInTouch && <GetInTouchSection />}
+            {shouldShowGetInTouch && (
+              <DeferredMount timeoutMs={1800}>
+                <GetInTouchSection />
+              </DeferredMount>
+            )}
             <Footer />
-            <AccessibilityWidget />
+            <DeferredMount timeoutMs={3000} onInteraction>
+              <AccessibilityWidget />
+            </DeferredMount>
             <ScrollToTopButton />
-            <ChatbotWidget />
+            <DeferredMount timeoutMs={3000} onInteraction>
+              <ChatbotWidget />
+            </DeferredMount>
             {shouldShowStickyDemoBar && (
-              <StickyDemoBar
-                dismissed={stickyDemoBarDismissed}
-                onDismiss={() => setStickyDemoBarDismissed(true)}
-              />
+              <DeferredMount timeoutMs={2200}>
+                <StickyDemoBar
+                  dismissed={stickyDemoBarDismissed}
+                  onDismiss={() => setStickyDemoBarDismissed(true)}
+                />
+              </DeferredMount>
             )}
           </div>
           <Toaster />

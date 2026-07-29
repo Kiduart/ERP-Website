@@ -53,8 +53,8 @@
 
   --radius: 0.75rem;
   --font-display: swap;
-  --font-sans-family: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-serif-family: "DM Serif Display", Georgia, serif;
+  --font-sans-family: var(--font-inter), "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif-family: var(--font-dm-serif), "DM Serif Display", Georgia, serif;
   --a11y-font-scale: 1;
   --a11y-line-height: 1.6;
   --a11y-letter-spacing: 0em;

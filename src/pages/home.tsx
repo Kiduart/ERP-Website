@@ -12,7 +12,6 @@ import { HOME_IMPACT_HIGHLIGHTS } from "@/lib/siteData";
 import { CONTACT_PHONE_E164 } from "@/lib/contact";
 import { FloatingIcons } from "@/components/animations/FloatingIcons";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
-import { pricingPlans } from "@/data/pricing";
 import {
   ArrowRight,
   Bell,
@@ -213,7 +212,7 @@ export default function Home() {
       />
       <SchemaMarkup data={softwareApplicationSchema} />
 
-      <PageTransition className="pt-0 pb-0">
+      <PageTransition instant className="pt-0 pb-0">
         <HomeCurveHero
           title="School ERP software built around how Indian schools run"
           subtitle="One platform for admissions, fees, attendance, exams, and parent communication. No more switching between spreadsheets, WhatsApp, and paper registers."

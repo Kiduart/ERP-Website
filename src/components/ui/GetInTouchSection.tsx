@@ -86,15 +86,15 @@ export function GetInTouchSection() {
   return (
     <section className="bg-brand-beige px-4 py-20 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl px-4">
-        <div className="rounded-[2rem] border border-brand-navy/10 bg-brand-navy/75 px-6 py-8 text-brand-beige shadow-[0_20px_60px_rgba(0,48,73,0.08)] sm:px-10 sm:py-10 lg:px-14 lg:py-14">
-          <div className="flex items-center justify-between border-b border-brand-navy/10 pb-5 text-[10px] uppercase tracking-[0.58em] text-brand-beige/75">
+        <div className="rounded-[2rem] border border-brand-navy/10 bg-brand-navy px-6 py-8 text-brand-beige shadow-[0_20px_60px_rgba(0,48,73,0.08)] sm:px-10 sm:py-10 lg:px-14 lg:py-14">
+          <div className="flex items-center justify-between border-b border-white/15 pb-5 text-[10px] uppercase tracking-[0.58em] text-brand-beige/90">
             <span>Get Connected</span>
             <span>KIDUART ERP</span>
           </div>
 
           <div className="mt-10 grid gap-10 lg:grid-cols-[0.8fr_1.1fr] lg:items-end">
             <div className="rounded-[1.75rem]">
-              <p className="max-w-xs text-xs font-medium uppercase tracking-[0.34em] text-[#d9c8b3]">
+              <p className="max-w-xs text-xs font-medium uppercase tracking-[0.34em] text-[#f0e6d4]">
                 School operations, admissions, and AI-led growth
               </p>
               <h2 className="mt-6 max-w-xl font-serif text-4xl font-normal uppercase leading-[0.92] tracking-[-0.02em] text-[#f5efe6] sm:text-6xl lg:text-6xl">
@@ -125,18 +125,18 @@ export function GetInTouchSection() {
               <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid gap-5 sm:grid-cols-[0.8fr_1.1fr] ">
                   <label className="block">
-                    <span className="text-[11px] uppercase tracking-[0.28em] text-white/48">Full Name</span>
+                    <span className="text-[11px] uppercase tracking-[0.28em] text-white/75">Full Name</span>
                     <input
                       type="text"
                       placeholder="Your name"
                       required
                       value={formData.name}
                       onChange={(e) => handleChange("name", e.target.value)}
-                      className="field-surface-dark mt-3 w-full border-0 border-b border-white/14 px-0 py-3 text-sm text-white placeholder:text-white/28 focus:border-[#d6c1a8] focus:outline-none focus:ring-0"
+                      className="field-surface-dark mt-3 w-full border-0 border-b border-white/14 px-0 py-3 text-sm text-white placeholder:text-white/55 focus:border-[#d6c1a8] focus:outline-none focus:ring-0"
                     />
                   </label>
                   <label className="block">
-                    <span className="text-[11px] uppercase tracking-[0.28em] text-white/48">Phone</span>
+                    <span className="text-[11px] uppercase tracking-[0.28em] text-white/75">Phone</span>
                     <div className="mt-3 grid grid-cols-[9rem_minmax(0,1fr)] gap-3">
                       <select
                         value={formData.code}
@@ -158,40 +158,43 @@ export function GetInTouchSection() {
                         placeholder="10 digit number"
                         value={formData.phone}
                         onChange={(e) => handleChange("phone", e.target.value)}
-                        className="field-surface-dark w-full border-0 border-b border-white/14 px-0 py-3 text-sm text-white placeholder:text-white/28 focus:border-[#d6c1a8] focus:outline-none focus:ring-0"
+                        className="field-surface-dark w-full border-0 border-b border-white/14 px-0 py-3 text-sm text-white placeholder:text-white/55 focus:border-[#d6c1a8] focus:outline-none focus:ring-0"
                       />
                     </div>
                   </label>
                 </div>
 
                 <label className="block">
-                  <span className="text-[11px] uppercase tracking-[0.28em] text-white/48">Email</span>
+                  <span className="text-[11px] uppercase tracking-[0.28em] text-white/75">Email</span>
                   <input
                     type="email"
                     placeholder="you@school.edu"
                     required
                     value={formData.email}
                     onChange={(e) => handleChange("email", e.target.value)}
-                    className="field-surface-dark mt-3 w-full border-0 border-b border-white/14 px-0 py-3 text-sm text-white placeholder:text-white/28 focus:border-[#d6c1a8] focus:outline-none focus:ring-0"
+                    className="field-surface-dark mt-3 w-full border-0 border-b border-white/14 px-0 py-3 text-sm text-white placeholder:text-white/55 focus:border-[#d6c1a8] focus:outline-none focus:ring-0"
                   />
                 </label>
 
                 <label className="block">
-                  <span className="text-[11px] uppercase tracking-[0.28em] text-white/48">Message</span>
+                  <span className="text-[11px] uppercase tracking-[0.28em] text-white/75">Message</span>
                   <textarea
                     rows={4}
                     placeholder="Share your current school workflow challenges or goals."
                     required
                     value={formData.message}
                     onChange={(e) => handleChange("message", e.target.value)}
-                    className="field-surface-dark mt-3 w-full resize-none border-0 border-b border-white/14 px-0 py-3 text-sm text-white placeholder:text-white/28 focus:border-[#d6c1a8] focus:outline-none focus:ring-0"
+                    className="field-surface-dark mt-3 w-full resize-none border-0 border-b border-white/14 px-0 py-3 text-sm text-white placeholder:text-white/55 focus:border-[#d6c1a8] focus:outline-none focus:ring-0"
                   />
                 </label>
 
                 <div className="flex flex-col gap-5 pt-2 sm:flex-row sm:items-center sm:justify-between">
-                  <div className="text-sm text-white/58">
+                  <div className="text-sm text-white/75">
                     Want a faster walkthrough?
-                    <Link href="/demo" className="ml-2 text-[#f5efe6] transition-colors hover:text-[#d6c1a8]">
+                    <Link
+                      href="/demo"
+                      className="ml-2 text-[#f5efe6] underline underline-offset-4 transition-colors hover:text-[#d6c1a8]"
+                    >
                       Request a demo
                     </Link>
                   </div>

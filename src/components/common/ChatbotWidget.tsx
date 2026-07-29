@@ -92,13 +92,17 @@ export function ChatbotWidget() {
           <WhatsAppIcon className="h-7 w-7" />
         </a>
         <button
+          type="button"
           onClick={() => {
             setShowNudge(false);
             setIsOpen(!isOpen);
           }}
+          aria-label={isOpen ? "Close chat" : "Open chat"}
+          aria-expanded={isOpen}
+          aria-controls="kiduart-chat-panel"
           className={`flex h-14 w-14 items-center justify-center rounded-full bg-brand-navy text-white shadow-xl transition-transform hover:scale-105 ${showNudge ? "animate-pulse" : ""}`}
         >
-          <MessageCircle className="w-7 h-7" />
+          <MessageCircle className="w-7 h-7" aria-hidden />
         </button>
       </div>
 
@@ -106,10 +110,13 @@ export function ChatbotWidget() {
       <AnimatePresence>
         {isOpen && (
           <motion.div
+            id="kiduart-chat-panel"
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             className="fixed bottom-24 right-6 z-50 flex w-[calc(100vw-2rem)] max-w-80 flex-col overflow-hidden rounded-2xl border border-brand-navy/10 bg-white shadow-2xl sm:max-w-96"
+            role="dialog"
+            aria-label="KIDUART support chat"
           >
             {/* Header */}
             <div className="bg-brand-navy p-4 flex items-center justify-between text-white">
@@ -125,8 +132,13 @@ export function ChatbotWidget() {
                   <p className="text-xs text-white/70">We typically reply in a few minutes</p>
                 </div>
               </div>
-              <button onClick={() => setIsOpen(false)} className="text-white/70 hover:text-white transition-colors">
-                <X className="w-5 h-5" />
+              <button
+                type="button"
+                onClick={() => setIsOpen(false)}
+                className="text-white/70 hover:text-white transition-colors"
+                aria-label="Close chat panel"
+              >
+                <X className="w-5 h-5" aria-hidden />
               </button>
             </div>
 
@@ -161,7 +173,11 @@ export function ChatbotWidget() {
 
             {/* Input Area */}
             <div className="p-3 bg-white border-t border-brand-navy/10 flex items-center gap-2">
+              <label htmlFor="kiduart-chat-input" className="sr-only">
+                Type your message
+              </label>
               <input
+                id="kiduart-chat-input"
                 type="text"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
@@ -170,11 +186,13 @@ export function ChatbotWidget() {
                 className="field-surface flex-1 border-none rounded-xl px-4 py-2 text-sm text-brand-navy focus:ring-2 focus:ring-brand-teal focus:outline-none"
               />
               <button
+                type="button"
                 onClick={() => handleSend(inputValue)}
                 className="w-10 h-10 rounded-xl bg-brand-teal text-white flex items-center justify-center hover:bg-brand-navy transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={!inputValue.trim()}
+                aria-label="Send message"
               >
-                <Send className="w-4 h-4" />
+                <Send className="w-4 h-4" aria-hidden />
               </button>
             </div>
           </motion.div>

@@ -23,9 +23,12 @@ interface FloatingIconsProps {
 export function FloatingIcons({ icons, count, heroMode = false }: FloatingIconsProps) {
   const COLORS = ['#003049', '#0c716b', '#fcbf49'];
   const prefersReducedMotion = useReducedMotion();
-  const [isMobile, setIsMobile] = useState(false);
+  // Default true so mobile/SSR skips icon work during LCP; flip to false only on desktop after mount
+  const [isMobile, setIsMobile] = useState(true);
+  const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
+    setHasMounted(true);
     const media = window.matchMedia("(max-width: 768px)");
     const handleChange = () => setIsMobile(media.matches);
     handleChange();
@@ -34,7 +37,7 @@ export function FloatingIcons({ icons, count, heroMode = false }: FloatingIconsP
   }, []);
 
   const renderedIcons = useMemo(() => {
-    if (prefersReducedMotion || isMobile) {
+    if (!hasMounted || prefersReducedMotion || isMobile) {
       return [];
     }
 
@@ -74,7 +77,7 @@ export function FloatingIcons({ icons, count, heroMode = false }: FloatingIconsP
         </motion.div>
       );
     });
-  }, [icons, count, heroMode, prefersReducedMotion, isMobile]);
+  }, [icons, count, heroMode, prefersReducedMotion, isMobile, hasMounted]);
 
   return <>{renderedIcons}</>;
 }

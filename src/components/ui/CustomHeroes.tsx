@@ -1,9 +1,58 @@
 import { ReactNode } from "react";
+import Image from "next/image";
 import { SectionReveal } from "@/components/ui/PageTransition";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
 import { FloatingIcons } from "@/components/animations/FloatingIcons";
-import { heroImageAlt, heroImgProps, IMAGE_DIMENSIONS, lazyImgProps } from "@/lib/imageSeo";
+import { heroImageAlt, heroImgProps, heroSrcSet, IMAGE_DIMENSIONS, lazyImgProps } from "@/lib/imageSeo";
 import { cn } from "@/lib/utils";
+
+function HeroPicture({
+  image,
+  alt,
+  className,
+  priority = false,
+  dimensions = IMAGE_DIMENSIONS.heroWide,
+}: {
+  image: string;
+  alt: string;
+  className?: string;
+  priority?: boolean;
+  dimensions?: { width: number; height: number };
+}) {
+  const sources = heroSrcSet(image);
+
+  if (sources.webp || sources.avif) {
+    return (
+      <picture className="absolute inset-0 block h-full w-full">
+        {sources.avif && <source srcSet={sources.avif} type="image/avif" />}
+        {sources.webp && <source srcSet={sources.webp} type="image/webp" />}
+        <img
+          src={sources.src}
+          alt={alt}
+          className={className}
+          width={dimensions.width}
+          height={dimensions.height}
+          loading={priority ? "eager" : "lazy"}
+          decoding="async"
+          fetchPriority={priority ? "high" : "auto"}
+        />
+      </picture>
+    );
+  }
+
+  return (
+    <img
+      src={image}
+      alt={alt}
+      className={className}
+      width={dimensions.width}
+      height={dimensions.height}
+      loading={priority ? "eager" : "lazy"}
+      decoding="async"
+      fetchPriority={priority ? "high" : "auto"}
+    />
+  );
+}
 
 type BaseProps = {
   eyebrow?: string;
@@ -150,26 +199,29 @@ export function HomeCurveHero({
   return (
     <section className="relative min-h-screen overflow-hidden">
       <div className="absolute inset-0">
-        <img
+        <Image
           src={image}
           alt={heroImageAlt(title)}
-          className="h-full w-full object-cover"
-          {...heroImgProps(IMAGE_DIMENSIONS.heroWide)}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
         />
-        <div className="absolute inset-0 bg-[#002e477d]" />
+        {/* Opaque-enough navy scrim so cream hero text stays AA-compliant over bright photo regions */}
+        <div className="absolute inset-0 bg-[#003049]/88" />
       </div>
 
       <FloatingIcons icons={["LayoutDashboard", "Users", "BarChart2"]} count={6} heroMode={true} />
 
       <div className="page-shell relative z-20 flex min-h-screen items-center justify-center pb-16 pt-36 md:pt-40">
-        <SectionReveal className="mx-auto max-w-4xl text-center text-brand-beige">
+        <SectionReveal instant className="mx-auto max-w-4xl text-center text-brand-beige">
           <div className="inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.26em] text-brand-yellow backdrop-blur-sm">
             AI school ERP platform
           </div>
-          <h1 className="mx-auto mt-6 max-w-4xl text-[clamp(2rem,1.35rem+1.55vw,3.1rem)] font-bold leading-[1.05] text-brand-beige">
+          <h1 className="mx-auto mt-6 max-w-4xl text-[clamp(2rem,1.35rem+1.55vw,3.1rem)] font-bold leading-[1.05] text-brand-beige [font-synthesis:none] font-[system-ui]">
             {title}
           </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-[clamp(1rem,0.95rem+0.14vw,1.05rem)] leading-8 text-brand-beige/88">
+          <p className="mx-auto mt-5 max-w-2xl text-[clamp(1rem,0.95rem+0.14vw,1.05rem)] leading-8 text-brand-beige/95">
             {subtitle}
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">{actions}</div>

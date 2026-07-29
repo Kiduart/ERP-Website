@@ -14,7 +14,7 @@ interface BackgroundBlobsProps {
 
 export function BackgroundBlobs({ blobs }: BackgroundBlobsProps) {
   const prefersReducedMotion = useReducedMotion();
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(true);
 
   useEffect(() => {
     const media = window.matchMedia("(max-width: 768px)");

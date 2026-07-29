@@ -77,13 +77,17 @@ export function Footer() {
             className="field-surface-dark mt-8 flex flex-col gap-3 rounded-[1.75rem] border border-white/10 p-2 sm:flex-row sm:items-center sm:rounded-full sm:pl-3"
             onSubmit={handleSubmit}
           >
+            <label htmlFor="footer-newsletter-email" className="sr-only">
+              Email address
+            </label>
             <input
+              id="footer-newsletter-email"
               type="email"
               placeholder="Your email address"
               required
               value={email}
               onChange={(event) => setEmail(event.target.value)}
-              className="field-surface-dark h-14 flex-1 rounded-full px-4 text-base text-white placeholder:text-white/55 focus:outline-none"
+              className="field-surface-dark h-14 flex-1 rounded-full px-4 text-base text-white placeholder:text-white/70 focus:outline-none"
             />
             <button
               type="submit"
@@ -128,14 +132,26 @@ export function Footer() {
             </div>
 
             <div className="mt-8 flex gap-4">
-              <a href="https://www.instagram.com/kiduart/" className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-brand-navy shadow-sm transition-colors hover:bg-brand-navy hover:text-white">
-                <Instagram className="h-5 w-5" />
+              <a
+                href="https://www.instagram.com/kiduart/"
+                className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-brand-navy shadow-sm transition-colors hover:bg-brand-navy hover:text-white"
+                aria-label="KIDUART on Instagram"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <Instagram className="h-5 w-5" aria-hidden />
               </a>
               {/* <a href="#" className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-brand-navy shadow-sm transition-colors hover:bg-brand-navy hover:text-white">
                 <Facebook className="h-5 w-5" />
               </a> */}
-              <a href="https://www.linkedin.com/company/kiduart" className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-brand-navy shadow-sm transition-colors hover:bg-brand-navy hover:text-white">
-                <Linkedin className="h-5 w-5" />
+              <a
+                href="https://www.linkedin.com/company/kiduart"
+                className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-brand-navy shadow-sm transition-colors hover:bg-brand-navy hover:text-white"
+                aria-label="KIDUART on LinkedIn"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                <Linkedin className="h-5 w-5" aria-hidden />
               </a>
             </div>
           </div>
@@ -194,7 +210,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-brand-navy/10 pt-6 text-center">
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-brand-navy/60">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-brand-navy/75">
             <span>&copy; {new Date().getFullYear()} KIDUART Inc. All rights reserved.</span>
           </div>
         </div>

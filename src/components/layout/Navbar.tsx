@@ -174,7 +174,7 @@ export function Navbar() {
               height={64}
               loading="eager"
               decoding="async"
-              fetchPriority="high"
+              fetchPriority="low"
             />
           </Link>
 
@@ -291,10 +291,14 @@ export function Navbar() {
               Request Demo
             </Link>
             <button
+              type="button"
               onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileOpen}
+              aria-controls="mobile-navigation"
               className={`lg:hidden rounded-lg p-2 ${transparentMode ? "text-white hover:bg-white/12" : "text-brand-navy hover:bg-white/50"}`}
             >
-              {mobileOpen ? <X /> : <Menu />}
+              {mobileOpen ? <X aria-hidden /> : <Menu aria-hidden />}
             </button>
           </div>
         </div>
@@ -304,6 +308,7 @@ export function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
+            id="mobile-navigation"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
