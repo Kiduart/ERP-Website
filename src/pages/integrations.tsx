@@ -1,63 +1,95 @@
+import type { GetStaticProps } from "next";
+import { Link } from "wouter";
 import { PageSeoHead } from "@/components/seo/PageSeoHead";
+import { SchemaMarkup } from "@/components/seo/SchemaMarkup";
+import { buildItemListSchema } from "@/lib/seoSchemas";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CtaSection } from "@/components/ui/CtaSection";
 import { CircleShowcaseHero } from "@/components/ui/CustomHeroes";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
 import { FloatingIcons } from "@/components/animations/FloatingIcons";
-import { BookOpen, MessageSquare, CreditCard, PieChart, Code2, Blocks, Zap } from "lucide-react";
-import { Link } from "wouter";
-import integrationsData from "@/data/integrationsData";
+import { ArrowRight, Code2, Zap } from "lucide-react";
+import { ProductIcon } from "@/components/product/ProductIcon";
+import { StatChip } from "@/components/product/ProductPrimitives";
+import integrationsData, { INTEGRATION_CATEGORIES } from "@/data/integrationsData";
+import type { IntegrationStatus } from "@/data/integrationsData";
 
-const categoryMeta = {
-  "Learning Systems": { icon: BookOpen, color: "text-brand-teal", bg: "bg-brand-teal/10" },
-  "Communication Tools": { icon: MessageSquare, color: "text-brand-orange", bg: "bg-brand-orange/10" },
-  "Payment Systems": { icon: CreditCard, color: "text-brand-yellow", bg: "bg-brand-yellow/20" },
-  "Analytics Platforms": { icon: PieChart, color: "text-brand-navy", bg: "bg-brand-navy/10" },
-} as const;
+type IntegrationCard = {
+  slug: string;
+  name: string;
+  description: string;
+  icon: string;
+  status: IntegrationStatus;
+};
 
-export default function Integrations() {
-  const categories = Object.entries(categoryMeta).map(([title, meta]) => ({
-    title,
-    ...meta,
-    integrations: Object.entries(integrationsData)
-      .filter(([, integration]) => integration.category === title)
-      .map(([slug, integration]) => ({
-        slug,
-        name: integration.name,
-        desc: integration.description,
-        logo: integration.name
-          .split(" ")
-          .map((word) => word[0])
-          .join("")
-          .slice(0, 2)
-          .toUpperCase(),
-      })),
-  }));
+type CategoryBlock = {
+  title: string;
+  slug: string;
+  icon: string;
+  blurb: string;
+  integrations: IntegrationCard[];
+};
 
+type IntegrationsPageProps = {
+  categories: CategoryBlock[];
+  liveCount: number;
+  plannedCount: number;
+};
+
+function StatusBadge({ status }: { status: IntegrationStatus }) {
+  if (status === "live") {
+    return (
+      <span className="inline-flex items-center gap-1.5 rounded-full border border-brand-teal/30 bg-white px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-brand-teal">
+        <span className="h-1.5 w-1.5 rounded-full bg-brand-teal" aria-hidden="true" />
+        Available now
+      </span>
+    );
+  }
+  return (
+    <span className="inline-flex items-center gap-1.5 rounded-full border border-brand-navy/[0.15] bg-brand-beige/50 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.14em] text-brand-navy/[0.78]">
+      <span className="h-1.5 w-1.5 rounded-full bg-brand-orange" aria-hidden="true" />
+      On the roadmap
+    </span>
+  );
+}
+
+export default function Integrations({ categories, liveCount, plannedCount }: IntegrationsPageProps) {
   return (
     <PageTransition className="pt-20 pb-0">
       <PageSeoHead
-        title="School ERP Integrations — KIDUART"
-        description="Connect KIDUART with Google Classroom, Zoom, Stripe, Moodle, Microsoft Teams and more. Keep class, fee, and communication data aligned across the tools your school already uses."
+        title="School ERP Integrations — Razorpay, WhatsApp, SMS, Google & Microsoft | KIDUART"
+        description={`Connect KIDUART with the tools your school already runs: Razorpay and Stripe fee payments, WhatsApp and SMS parent notifications, Google and Microsoft sign-in, Zoom, Teams and Meet classes, plus a REST API. ${liveCount} integrations available today.`}
         path="/integrations"
-        keywords="school ERP integrations, Google Classroom sync, Zoom school, Moodle integration, school fee payment gateway India"
+        keywords="school ERP integrations, Razorpay school fees, WhatsApp parent notification school, school SMS gateway India, Google Workspace school login, school ERP REST API"
       />
+      <SchemaMarkup
+        data={buildItemListSchema(
+          "KIDUART integrations",
+          categories.flatMap((category) =>
+            category.integrations.map((integration) => ({
+              name: integration.name,
+              path: `/integrations/${integration.slug}`,
+            })),
+          ),
+        )}
+      />
+
       <CircleShowcaseHero
         eyebrow="School ERP integrations"
-        title="Connect Your School Tools"
-        subtitle="Plug KIDUART into the classroom, payment, and communication tools your team already relies on, so data does not live in separate silos."
+        title="Connect the tools your school already runs"
+        subtitle={`Fee payments, parent messaging, school sign-in accounts, online classes and a REST API — ${liveCount} integrations are available today and ${plannedCount} more are openly listed as roadmap items rather than dressed up as features.`}
         image="/images/banner/integration-hero.jpg"
         actions={(
           <>
             <Link
-              href="/contact"
-              className="rounded-full bg-brand-orange px-7 py-3.5 text-sm font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-navy"
+              href="/demo"
+              className="rounded-full bg-brand-orange px-7 py-3.5 text-sm font-bold text-brand-navy transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-navy hover:text-brand-beige"
             >
-              Request Integration Help
+              Book a Free Demo
             </Link>
             <Link
               href="/integrations/api-docs"
-              className="inline-flex items-center justify-center gap-2 rounded-full border border-brand-navy/12 bg-white px-7 py-3.5 text-sm font-bold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
+              className="inline-flex items-center justify-center gap-2 rounded-full border border-brand-navy/[0.12] bg-white px-7 py-3.5 text-sm font-bold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
             >
               View API Docs
             </Link>
@@ -65,37 +97,72 @@ export default function Integrations() {
         )}
       />
 
-      <section className="section-space bg-white relative overflow-hidden">
-        <BackgroundBlobs blobs={[
-          { color: "#fcbf49", size: 300, position: "center-left", opacity: 0.15 },
-          { color: "#0c716b", size: 300, position: "center-right", opacity: 0.15 }
-        ]} />
+      <section className="section-space-tight border-b border-brand-navy/5 bg-white">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <SectionReveal className="grid gap-4 sm:grid-cols-3">
+            <StatChip value={liveCount} label="Live integrations" />
+            <StatChip value={categories.length} label="Integration areas" />
+            <StatChip value={plannedCount} label="Openly marked roadmap" />
+          </SectionReveal>
+          <SectionReveal className="mt-8 rounded-[1.75rem] border border-brand-navy/[0.1] bg-brand-beige/25 p-6 md:p-8">
+            <h2 className="text-xl font-bold text-brand-navy">
+              Why some logos on this page say &ldquo;roadmap&rdquo;
+            </h2>
+            <p className="mt-3 text-base leading-8 text-brand-navy/[0.76]">
+              Most vendor integration pages show a wall of logos and let you assume everything works. We split the
+              list: what is implemented in the product today, and what is a genuine roadmap item. If an integration
+              decides whether KIDUART fits your school, you should know its status before the demo, not after
+              signing.
+            </p>
+          </SectionReveal>
+        </div>
+      </section>
+
+      <section className="section-space relative overflow-hidden bg-brand-beige/20">
+        <BackgroundBlobs
+          blobs={[
+            { color: "#fcbf49", size: 300, position: "center-left", opacity: 0.14 },
+            { color: "#0c716b", size: 300, position: "center-right", opacity: 0.14 },
+          ]}
+        />
         <FloatingIcons icons={["CreditCard", "PieChart", "MessageSquare"]} count={4} />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="space-y-24">
-            {categories.map((category, idx) => (
-              <div key={idx}>
-                <SectionReveal className="flex items-center gap-4 mb-8 border-b border-brand-navy/5 pb-4">
-                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${category.bg}`}>
-                    <category.icon className={`w-6 h-6 ${category.color}`} />
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="space-y-20">
+            {categories.map((category) => (
+              <div key={category.slug} id={category.slug} className="scroll-mt-28">
+                <SectionReveal className="mb-8 grid gap-4 border-b border-brand-navy/[0.08] pb-6 md:grid-cols-[auto_1fr] md:items-start md:gap-6">
+                  <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-navy text-brand-beige">
+                    <ProductIcon name={category.icon} className="h-7 w-7" />
                   </div>
-                  <h2 className="text-2xl font-bold text-brand-navy">{category.title}</h2>
+                  <div>
+                    <h2 className="text-2xl font-bold text-brand-navy md:text-3xl">{category.title}</h2>
+                    <p className="mt-2 max-w-2xl text-base leading-7 text-brand-navy/[0.74]">{category.blurb}</p>
+                  </div>
                 </SectionReveal>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                   {category.integrations.map((integration, i) => (
-                    <SectionReveal key={i} delay={i * 0.1} className="bg-white rounded-2xl p-6 shadow-lg shadow-brand-navy/5 border border-brand-navy/5 flex flex-col h-full hover:shadow-xl hover:border-brand-teal/30 transition-all group">
-                      <div className="flex items-start justify-between mb-4">
-                        <div className={`w-14 h-14 rounded-xl bg-brand-navy/5 flex items-center justify-center text-2xl font-black text-brand-navy group-hover:scale-110 transition-transform ${category.color}`}>
-                          {integration.logo}
+                    <SectionReveal key={integration.slug} delay={Math.min(i, 5) * 0.06}>
+                      <Link
+                        href={`/integrations/${integration.slug}`}
+                        className="group flex h-full flex-col rounded-2xl border border-brand-navy/5 bg-white p-6 shadow-lg shadow-brand-navy/5 transition-all duration-300 hover:border-brand-teal/30 hover:shadow-xl"
+                      >
+                        <div className="mb-4 flex items-start justify-between gap-3">
+                          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-navy/[0.06] transition-transform group-hover:scale-110">
+                            <ProductIcon name={integration.icon} className="h-6 w-6 text-brand-navy" />
+                          </div>
+                          <StatusBadge status={integration.status} />
                         </div>
-                        <Link href={`/integrations/${integration.slug}`} className="px-4 py-1.5 bg-brand-beige/50 text-brand-navy text-xs font-bold rounded-full group-hover:bg-brand-teal group-hover:text-white transition-colors">
-                          Connect
-                        </Link>
-                      </div>
-                      <Link href={`/integrations/${integration.slug}`}>
-                        <h3 className="text-xl font-bold text-brand-navy mb-2 group-hover:text-brand-teal transition-colors">{integration.name}</h3>
+                        <h3 className="text-xl font-bold text-brand-navy transition-colors group-hover:text-brand-teal">
+                          {integration.name}
+                        </h3>
+                        <p className="mt-2.5 flex-1 text-sm leading-7 text-brand-navy/[0.74]">
+                          {integration.description}
+                        </p>
+                        <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-brand-teal">
+                          How it works <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                        </span>
                       </Link>
-                      <p className="text-brand-navy/70 text-sm flex-grow">{integration.desc}</p>
                     </SectionReveal>
                   ))}
                 </div>
@@ -105,54 +172,114 @@ export default function Integrations() {
         </div>
       </section>
 
-      {/* API Section */}
-      <section className="section-space bg-brand-navy text-white overflow-hidden relative" style={{ color: '#fcf6d3' }}>
-        <BackgroundBlobs blobs={[
-          { color: "#f77f00", size: 400, position: "top-left", opacity: 0.15 },
-          { color: "#0c716b", size: 400, position: "bottom-right", opacity: 0.15 }
-        ]} />
+      <section
+        className="section-space relative overflow-hidden bg-brand-navy text-white"
+        style={{ color: "#fcf6d3" }}
+      >
+        <BackgroundBlobs
+          blobs={[
+            { color: "#f77f00", size: 400, position: "top-left", opacity: 0.15 },
+            { color: "#0c716b", size: 400, position: "bottom-right", opacity: 0.15 },
+          ]}
+        />
         <FloatingIcons icons={["Code2", "Zap", "Blocks"]} count={4} />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
             <SectionReveal>
-              <h2 className="text-3xl lg:text-4xl font-bold mb-6">API for custom integrations</h2>
-              <p className="text-lg mb-8 leading-relaxed" style={{ color: 'rgba(252,246,211,0.7)' }}>Need to connect an internal tool or a niche platform? Your developers can use our REST API and webhooks to move data in and out of KIDUART on a schedule that suits your IT team.</p>
-              <ul className="space-y-4 mb-8">
-                {['REST endpoints', 'Published API reference', 'Webhooks for live events', 'Developer support channel'].map((item, i) => (
-                  <li key={i} className="flex items-center gap-3">
-                    <Zap className="w-5 h-5 text-brand-yellow" />
+              <h2 className="mb-6 text-3xl font-bold lg:text-4xl">Build your own with the REST API</h2>
+              <p className="mb-8 text-lg leading-8" style={{ color: "rgba(252,246,211,0.82)" }}>
+                Schools connect biometric attendance devices, their public website, or a reporting warehouse. Your
+                developers work against versioned REST endpoints using a scoped API key — never a shared staff login
+                — and webhooks push live events such as a confirmed fee payment.
+              </p>
+              <ul className="mb-8 space-y-3.5">
+                {[
+                  "Versioned REST endpoints under a stable base path",
+                  "Managed API keys with scoped permissions",
+                  "Webhooks for payment and record events",
+                  "Published endpoint reference for your team",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <Zap className="mt-1 h-5 w-5 shrink-0 text-brand-yellow" aria-hidden="true" />
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
-              <Link href="/integrations/api-docs" className="px-8 py-4 rounded-full bg-transparent border-2 border-white/30 text-white font-bold hover:bg-white/10 transition-all inline-flex items-center gap-2 w-fit">
-                <Code2 className="w-5 h-5" /> View API Docs
+              <Link
+                href="/integrations/api-docs"
+                className="inline-flex w-fit items-center gap-2 rounded-full border-2 border-white/30 bg-transparent px-8 py-4 font-bold text-white transition-all hover:bg-white/10"
+              >
+                <Code2 className="h-5 w-5" aria-hidden="true" /> View API Docs
               </Link>
             </SectionReveal>
+
             <SectionReveal delay={0.2} className="relative">
-              <div className="absolute inset-0 bg-brand-teal/20 blur-3xl rounded-full" />
-              <div className="relative bg-[#0d1117] rounded-2xl p-6 shadow-2xl border border-white/10 font-mono text-sm">
-                <div className="flex gap-2 mb-4">
-                  <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                  <div className="w-3 h-3 rounded-full bg-green-500"></div>
+              <div className="absolute inset-0 rounded-full bg-brand-teal/20 blur-3xl" />
+              <div className="relative rounded-2xl border border-white/10 bg-[#0d1117] p-6 font-mono text-sm shadow-2xl">
+                <div className="mb-4 flex gap-2" aria-hidden="true">
+                  <div className="h-3 w-3 rounded-full bg-red-500" />
+                  <div className="h-3 w-3 rounded-full bg-yellow-500" />
+                  <div className="h-3 w-3 rounded-full bg-green-500" />
                 </div>
-                <div className="text-blue-400 mb-2">// Fetch student data</div>
-                <div className="text-white"><span className="text-purple-400">const</span> response = <span className="text-purple-400">await</span> fetch(<span className="text-green-400">'https://api.kiduart.com/v1/students'</span>, {'{'}</div>
-                <div className="text-white ml-4">method: <span className="text-green-400">'GET'</span>,</div>
-                <div className="text-white ml-4">headers: {'{'}</div>
-                <div className="text-white ml-8"><span className="text-green-400">'Authorization'</span>: <span className="text-green-400">'Bearer YOUR_API_KEY'</span></div>
-                <div className="text-white ml-4">{'}'}</div>
-                <div className="text-white">{'}'});</div>
-                <div className="text-white mt-2"><span className="text-purple-400">const</span> data = <span className="text-purple-400">await</span> response.json();</div>
-                <div className="text-white">console.log(data);</div>
+                <div className="mb-2 text-blue-400">// Fetch students for a class</div>
+                <div className="text-white">
+                  <span className="text-purple-400">const</span> response ={" "}
+                  <span className="text-purple-400">await</span> fetch(
+                  <span className="text-green-400">&apos;https://api.kiduart.com/v1/students&apos;</span>, {"{"}
+                </div>
+                <div className="ml-4 text-white">
+                  method: <span className="text-green-400">&apos;GET&apos;</span>,
+                </div>
+                <div className="ml-4 text-white">headers: {"{"}</div>
+                <div className="ml-8 text-white">
+                  <span className="text-green-400">&apos;Authorization&apos;</span>:{" "}
+                  <span className="text-green-400">&apos;Bearer YOUR_API_KEY&apos;</span>
+                </div>
+                <div className="ml-4 text-white">{"}"}</div>
+                <div className="text-white">{"}"});</div>
+                <div className="mt-2 text-white">
+                  <span className="text-purple-400">const</span> data ={" "}
+                  <span className="text-purple-400">await</span> response.json();
+                </div>
               </div>
             </SectionReveal>
           </div>
         </div>
       </section>
 
-      <CtaSection />
+      <CtaSection
+        title="Tell us which tools your school cannot give up"
+        subtitle="Bring your payment gateway, messaging provider and school account setup to the demo. We will show exactly how each one connects — and say plainly if it does not yet."
+      />
     </PageTransition>
   );
 }
+
+export const getStaticProps: GetStaticProps<IntegrationsPageProps> = async () => {
+  const entries = Object.entries(integrationsData);
+
+  const categories: CategoryBlock[] = INTEGRATION_CATEGORIES.map((category) => ({
+    title: category.title,
+    slug: category.slug,
+    icon: category.icon,
+    blurb: category.blurb,
+    integrations: entries
+      .filter(([, integration]) => integration.category === category.title)
+      .sort(([, a], [, b]) => (a.status === b.status ? 0 : a.status === "live" ? -1 : 1))
+      .map(([slug, integration]) => ({
+        slug,
+        name: integration.name,
+        description: integration.description,
+        icon: integration.icon,
+        status: integration.status,
+      })),
+  })).filter((category) => category.integrations.length > 0);
+
+  return {
+    props: {
+      categories,
+      liveCount: entries.filter(([, integration]) => integration.status === "live").length,
+      plannedCount: entries.filter(([, integration]) => integration.status === "planned").length,
+    },
+  };
+};

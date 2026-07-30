@@ -256,7 +256,7 @@ function ToggleCard({
         <span
           className={cn(
             "inline-flex min-w-14 items-center justify-center rounded-full px-3 py-1.5 text-[11px] font-bold",
-            checked ? "bg-brand-teal text-white" : "bg-brand-navy/8 text-brand-navy/60",
+            checked ? "bg-brand-teal text-white" : "bg-brand-navy/[0.08] text-brand-navy/60",
           )}
         >
           {checked ? "ON" : "OFF"}
@@ -445,7 +445,7 @@ export function AccessibilityWidget() {
               <div className="flex items-start justify-between gap-4">
                 <div className="max-w-sm">
                   <p className="text-xl font-bold text-white">Accessibility Tools</p>
-                  <p className="mt-2 text-sm leading-6 text-white/72">
+                  <p className="mt-2 text-sm leading-6 text-white/[0.72]">
                     Adjust the complete website experience and keep your preferences saved until you reset them.
                   </p>
                 </div>

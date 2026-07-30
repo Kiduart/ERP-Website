@@ -45,6 +45,30 @@ const sections: LegalSection[] = [
     },
   },
   {
+    title: "Module-Wise Data We Process",
+    intro: [
+      "KIDUART ships 16 module areas, and a school switches on only the ones it uses. Because the modules decide what data exists in the system, this table maps each area to the data it processes — so you can see exactly what turning a module on means for personal data.",
+      "If your school does not use Transport, no route or vehicle allocation data exists for your students. The same is true for Hostel, Library, and every other area.",
+    ],
+    table: {
+      headers: ["Module area", "Personal data processed", "Purpose"],
+      rows: [
+        { cells: ["Admission", "Enquiry details, applicant and guardian names, contact numbers, application documents, interview evaluations", "Running the admission pipeline from enquiry to registration"] },
+        { cells: ["Student Management", "Student profile, enrolment, class and section history, documents, promotion and transfer records", "Maintaining the student record every other module reads from"] },
+        { cells: ["Parent Management", "Guardian records, parent-student linking, portal accounts, communication log", "Giving parents access to their own children's information"] },
+        { cells: ["Academic", "Attendance, timetable allocation, assignments, class diary, exam marks, grades, report cards, discipline and PTM records", "Delivering day-to-day teaching and assessment workflows"] },
+        { cells: ["Finance & Fee Management", "Fee structures assigned to a student, concessions, payments, receipts, dues, refunds", "Fee collection, reconciliation and financial reporting"] },
+        { cells: ["HR & Staff Management", "Staff profiles, department and designation, attendance, leave records, payroll and appraisal data", "School HR administration and salary processing"] },
+        { cells: ["Communication", "Notices and announcements sent, recipient groups, message delivery records", "Sending and evidencing school communication"] },
+        { cells: ["Library Management", "Membership, borrowing history, reservations, fines", "Running circulation without paper registers"] },
+        { cells: ["Transport Management", "Route and stop allocation for a student, vehicle and driver records, tracking data", "Operating school transport safely (only if the module is enabled)"] },
+        { cells: ["Hostel Management", "Room and bed allocation, hostel attendance, mess records, visitor log", "Residential care and accountability (only if the module is enabled)"] },
+        { cells: ["Security & Authentication", "Login identifiers, hashed passwords, MFA enrolment, session and device records, IP address, audit entries", "Authenticating users, protecting accounts and evidencing sensitive actions"] },
+        { cells: ["Reports, Dashboards & Analytics", "Aggregated academic, attendance and financial data derived from the records above", "Reporting to school leadership and statutory bodies"] },
+      ],
+    },
+  },
+  {
     title: "How We Collect Information",
     bullets: [
       "Directly from you when you fill forms, request a demo, contact us, subscribe, or communicate with us.",
@@ -88,6 +112,23 @@ const sections: LegalSection[] = [
     ],
   },
   {
+    title: "Service Providers We Rely On",
+    intro: [
+      "Some parts of the service require a third party, and those choices are yours to make with us during onboarding. Where a school brings its own account — a payment gateway or SMS provider, for example — that provider's own terms and privacy policy also apply to the data it handles.",
+    ],
+    table: {
+      headers: ["Provider category", "What it handles", "Data involved"],
+      rows: [
+        { cells: ["Payment gateway (for example Razorpay or Stripe)", "Online fee payments made by parents", "Payer name and contact, amount, transaction reference. Card and bank credentials are handled by the gateway, not by KIDUART"] },
+        { cells: ["SMS provider", "Attendance alerts, fee reminders, OTP messages", "Recipient mobile number and message content"] },
+        { cells: ["WhatsApp Business API", "Template notices and reminders to parents", "Recipient number and template message content"] },
+        { cells: ["Email delivery provider", "Circulars, receipts, verification and reset emails", "Recipient email address and message content"] },
+        { cells: ["Cloud hosting and storage", "Running the platform and storing uploaded documents", "All school data held in the platform, within the tenant separation described in our security page"] },
+        { cells: ["Identity providers (Google, Microsoft)", "Optional school-account sign-in", "The account identifier used to sign in, where a school enables it"] },
+      ],
+    },
+  },
+  {
     title: "Cookies and Analytics",
     intro: [
       "Our website may use cookies, server logs, pixels, and analytics technologies to understand usage, improve page performance, secure the website, and remember user preferences.",
@@ -98,7 +139,17 @@ const sections: LegalSection[] = [
     title: "Data Retention and Security",
     intro: [
       "We retain information only for as long as reasonably necessary for service delivery, school account administration, legal compliance, billing, security, audit, dispute resolution, and legitimate operational needs.",
-      "KIDUART uses access controls, encryption, backups, monitoring, and administrative safeguards designed to protect data against unauthorized access, loss, misuse, alteration, or disclosure.",
+      "Academic and financial history is retained while a school needs it, because schools are required to keep it — a transfer certificate needs the enrolment history and a fee dispute needs the ledger. Operational and diagnostic logs are kept for a limited window and then removed.",
+      "Security controls include role-based permissions, password hashing, optional authenticator-app multi-factor authentication, session and token management, tenant-level separation of each school's data, optional IP and location restrictions, and audit logging of sensitive actions. These are described in plain language, including what we do not yet claim, on our security page.",
+    ],
+  },
+  {
+    title: "Ending Your Service",
+    bullets: [
+      "On termination, your school can export student records, fee ledgers, attendance and academic data in standard formats such as CSV, Excel and PDF.",
+      "After the agreed export and wind-down window, we remove school data from our active systems, retaining only what applicable law requires us to keep.",
+      "We do not sell school, student or parent data, and we do not use student records to train models.",
+      "Backup copies are cycled out on our normal backup schedule rather than being retained indefinitely.",
     ],
   },
   {
@@ -137,12 +188,12 @@ export default function PrivacyPolicy() {
         eyebrow="Legal"
         title="Privacy Policy"
         subtitle="How KIDUART collects, uses, stores, shares, and protects personal data across its website, school ERP platform, demo requests, and related services."
-        effectiveLabel="Last updated: 28 May 2026"
+        effectiveLabel="Last updated: 29 July 2026"
         summary={[
-          "We collect information needed to run our website, respond to demo requests, onboard schools, and operate KIDUART services.",
-          "We may process school, staff, parent, student, finance, attendance, communication, and device-related data depending on modules used.",
+          "The modules your school switches on decide what data exists — section 5 maps each of the 16 module areas to the data it processes.",
+          "Access follows role: a parent sees their own children, a teacher their classes, an accountant the fee book.",
           "Schools using KIDUART are responsible for ensuring they are authorized to share personal data with us.",
-          "You may contact us to exercise privacy rights, withdraw consent where applicable, or raise grievances.",
+          "You can export everything and ask us to remove it; we do not sell school data or train models on student records.",
         ]}
         sections={sections}
       />

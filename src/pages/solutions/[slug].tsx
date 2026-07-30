@@ -1,338 +1,427 @@
-import { useParams, Link } from "wouter";
-import { PageSeoHead } from "@/components/seo/PageSeoHead";
-import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
-import { CtaSection } from "@/components/ui/CtaSection";
+import type { GetStaticPaths, GetStaticProps } from "next";
+import Image from "next/image";
+import { Link } from "wouter";
+import { ArrowRight, Check } from "lucide-react";
+import { PageSeoHead, SITE_ORIGIN } from "@/components/seo/PageSeoHead";
+import { SchemaMarkup } from "@/components/seo/SchemaMarkup";
+import { buildBreadcrumbSchema, buildFaqPageSchema } from "@/lib/seoSchemas";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
-import { FloatingIcons } from "@/components/animations/FloatingIcons";
-import { 
-  GraduationCap, BookOpen, Building2, Heart, Globe,
-  CheckCircle, XCircle, ArrowLeft, ArrowRight, Quote, Sparkles
-} from "lucide-react";
+import { CtaSection } from "@/components/ui/CtaSection";
+import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
+import { ProductIcon } from "@/components/product/ProductIcon";
+import {
+  ACCENTS,
+  Breadcrumbs,
+  SectionHeading,
+  type AccentName,
+} from "@/components/product/ProductPrimitives";
+import { findMatrixModule, getMatrixCategory } from "@/data/featureMatrix";
+import { AREA_NARRATIVE_BY_SLUG } from "@/data/productNarrative";
+import { PANEL_BY_SLUG } from "@/data/productPanels";
+import { PERSONA_SLUGS, PRODUCT_PERSONAS, getPersona } from "@/data/productPersonas";
 
-const solutionsData: Record<string, any> = {
-  "students": {
-    role: "Students", icon: GraduationCap, 
-    headline: "Your Entire Academic Life, Organized.",
-    challenges: ["Can't find assignments and deadlines in one place", "No visibility into attendance record", "Confusing fee payment process", "Disconnected communication with teachers"],
-    solutions: ["One student dashboard for timetable, marks, and fees", "Attendance history families can check anytime", "Online fee payments with digital receipts", "Messages to teachers through the parent portal"],
-    features: ["Personal dashboard", "Assignment tracker", "Grade history", "Digital timetable", "Fee payment portal", "Direct messaging"],
-    dayInLife: ["Morning: Check today's timetable and classes", "Attendance: Teacher marks attendance in 30 seconds", "Grades: Instant notification when results published", "Fees: Parents pay online, student sees receipt", "Communication: Get messages from teachers directly"],
-    testimonial: { quote: "I can see my timetable, marks, and fee status in one place instead of asking at the office.", name: "Grade 10 student", role: "Secondary school learner" },
-    color: "text-brand-orange", bg: "bg-brand-orange/20"
-  },
-  "teachers": {
-    role: "Teachers", icon: BookOpen,
-    headline: "Spend Less Time on Admin. More Time Teaching.",
-    challenges: ["Manual attendance takes too long every period", "Grade entry spread across multiple systems", "Difficult to communicate with all parents simultaneously", "No single view of each student's full history"],
-    solutions: ["Mark attendance quickly on web or mobile", "Centralized gradebook with auto report generation", "Bulk messaging to parent groups from one place", "Complete student profiles with history and notes"],
-    features: ["Mobile attendance", "Digital gradebook", "Parent messaging", "Student profiles", "Lesson planner", "Substitute management"],
-    dayInLife: ["8:00 AM: Mark class attendance on mobile", "10:00 AM: Enter quiz scores in gradebook", "12:00 PM: Send homework reminder to parents", "2:00 PM: Review student performance dashboard", "3:00 PM: Generate weekly class report automatically"],
-    testimonial: { quote: "Marking attendance and posting homework used to eat my last period. Now I finish admin before I leave campus.", name: "Senior secondary teacher", role: "Class teacher" },
-    color: "text-brand-teal", bg: "bg-brand-teal/20"
-  },
-  "administrators": {
-    role: "School Administrators", icon: Building2,
-    headline: "Run a Smarter School From One Dashboard.",
-    challenges: ["Data scattered across 5+ different systems", "No real-time visibility into school operations", "Manual report generation takes days", "Staff communication is fragmented"],
-    solutions: ["One admin dashboard for attendance, fees, and staffing", "Live operational metrics for leadership meetings", "Scheduled and on-demand reports", "Staff notices from one communication hub"],
-    features: ["School dashboard", "Staff management", "Enrollment tracking", "Financial overview", "Communication center", "Compliance reports"],
-    dayInLife: ["9:00 AM: Check daily attendance overview", "10:00 AM: Review fee collection status", "11:00 AM: Approve staff leave requests", "2:00 PM: Send school-wide announcement", "4:00 PM: Review weekly performance report"],
-    testimonial: { quote: "I can see attendance, fees, and staffing issues on one screen before the morning meeting instead of waiting for someone to email a sheet.", name: "School principal", role: "K-12 leadership" },
-    color: "text-brand-yellow", bg: "bg-brand-yellow/20"
-  },
-  "parents": {
-    role: "Parents", icon: Heart,
-    headline: "Stay Informed. Stay Involved. Always.",
-    challenges: ["Don't know how child is doing between parent-teacher meetings", "Miss important school announcements", "Fee payment requires visiting school", "No direct line to teachers"],
-    solutions: ["Real-time grade and attendance notifications", "Notifications for school communications", "Online fee payment from the parent portal", "Direct teacher messaging through parent portal"],
-    features: ["Child progress dashboard", "Attendance alerts", "Online fee payment", "Teacher messaging", "Event calendar", "Report downloads"],
-    dayInLife: ["Morning: Check today's attendance notification", "Afternoon: Receive grade update from exam", "Evening: Pay monthly fees online in 2 minutes", "Weekend: Review monthly progress report", "Anytime: Message teacher directly"],
-    testimonial: { quote: "I get absence alerts and fee reminders on my phone, so I am not finding out about problems at the gate.", name: "Working parent", role: "Parent of two students" },
-    color: "text-brand-orange", bg: "bg-brand-orange/20"
-  },
-  "school-districts": {
-    role: "School Districts", icon: Globe,
-    headline: "Manage Every School. See Everything. Control Nothing Less.",
-    challenges: ["No consolidated view across all campuses", "Inconsistent data collection methods", "Compliance reporting takes weeks to compile", "Staff performance tracking is manual"],
-    solutions: ["Multi-campus dashboard for group leadership", "Standard data collection across every branch", "Compliance packs generated from the same fields", "Central HR and performance views"],
-    features: ["Multi-campus dashboard", "District-wide analytics", "Compliance automation", "Centralized HR", "Policy management", "Executive reporting"],
-    dayInLife: ["9:00 AM: Review district-wide enrollment dashboard", "10:00 AM: Check compliance status across campuses", "11:00 AM: Review district performance metrics", "2:00 PM: Deploy policy update to all schools", "4:00 PM: Generate monthly executive report"],
-    testimonial: { quote: "Branch principals used to send different spreadsheets every month. Now we pull the same reports for every campus from one login.", name: "Group academic director", role: "Multi-branch schools" },
-    color: "text-brand-teal", bg: "bg-brand-teal/20"
-  }
+type ChallengeCard = {
+  problem: string;
+  cost: string;
+  solution: string;
+  modules: { areaSlug: string; moduleSlug: string; moduleName: string; featureCount: number }[];
 };
 
-export default function SolutionDetail() {
-  const { slug } = useParams();
-  const data = slug ? solutionsData[slug] : null;
+type SolutionDetailProps = {
+  persona: {
+    slug: string;
+    label: string;
+    pageLabel: string;
+    stage: string;
+    headline: string;
+    summary: string;
+    intro: string;
+    roleNames: string[];
+    dayInLife: { when: string; what: string }[];
+    toolsYouGet: string[];
+    faqs: { q: string; a: string }[];
+    image: string;
+    imageAlt: string;
+    icon: string;
+    accent: AccentName;
+  };
+  challenges: ChallengeCard[];
+  panels: { slug: string; label: string; stage: string }[];
+  areas: { slug: string; label: string; featureCount: number; moduleCount: number }[];
+  otherPersonas: { slug: string; label: string; pageLabel: string }[];
+};
 
-  if (!data) {
-    return (
-      <PageTransition className="pt-32 pb-24 text-center min-h-[60vh] flex flex-col items-center justify-center">
-        <h1 className="text-4xl font-bold text-brand-navy mb-6">Solution Not Found</h1>
-        <p className="text-xl text-brand-navy/70 mb-8">The role you are looking for doesn't exist.</p>
-        <Link href="/solutions" className="px-8 py-4 rounded-full bg-brand-navy text-white font-bold inline-flex items-center gap-2">
-          <ArrowLeft className="w-5 h-5" /> Back to Solutions
-        </Link>
-      </PageTransition>
-    );
-  }
-
-  const Icon = data.icon;
-  const otherSlugs = Object.keys(solutionsData).filter(s => s !== slug).slice(0, 3);
-  const heroStats = [
-    { value: data.features.length, label: "core workflows" },
-    { value: data.solutions.length, label: "practical fixes" },
-    { value: "1", label: "connected workspace" },
+export default function SolutionDetail({
+  persona,
+  challenges,
+  panels,
+  areas,
+  otherPersonas,
+}: SolutionDetailProps) {
+  const tokens = ACCENTS[persona.accent];
+  const trail = [
+    { name: "Home", path: "/" },
+    { name: "Solutions", path: "/solutions" },
+    { name: persona.label, path: `/solutions/${persona.slug}` },
   ];
 
   return (
     <>
       <PageSeoHead
-        title={`${data.role} School ERP Solution | KIDUART`}
-        description={`${data.role} workflows in KIDUART for attendance, communication, academics, and operations with role-based access for Indian schools.`}
-        path={`/solutions/${slug}`}
+        title={`School ERP ${persona.pageLabel} | KIDUART`}
+        description={persona.summary.length > 155 ? `${persona.summary.slice(0, 152)}...` : persona.summary}
+        path={`/solutions/${persona.slug}`}
+        ogImage={`${SITE_ORIGIN}${persona.image}`}
+        keywords={`school ERP ${persona.label.toLowerCase()}, school management software ${persona.label.toLowerCase()}, ${persona.roleNames
+          .map((role) => role.toLowerCase())
+          .join(", ")}`}
       />
-    <PageTransition className="pt-20 pb-0">
-      {/* HERO */}
-      <section className="hero-viewport relative overflow-hidden bg-[linear-gradient(180deg,#edf4ff_0%,#f7faff_55%,#ffffff_100%)] py-14 md:py-16">
-        <BackgroundBlobs blobs={[
-          { color: "#c6d8ff", size: 420, position: "top-left", opacity: 0.26 },
-          { color: "#d7e8ff", size: 420, position: "bottom-right", opacity: 0.22 }
-        ]} />
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.92),transparent_42%),radial-gradient(circle_at_bottom,rgba(255,255,255,0.74),transparent_34%)]" />
-        <FloatingIcons icons={["Sparkles", "BookOpen", "Users"]} count={4} heroMode={true} />
+      <SchemaMarkup
+        data={[buildBreadcrumbSchema(trail), buildFaqPageSchema({ [persona.label]: persona.faqs })]}
+      />
 
-        <div className="page-shell hero-viewport-inner relative z-10 flex flex-col items-center justify-center">
-          <nav className="mb-6 flex items-center justify-center gap-2 text-sm text-brand-navy/55">
-            <Link href="/" className="hover:text-brand-teal">Home</Link>
-            <span>/</span>
-            <Link href="/solutions" className="hover:text-brand-teal">Solutions</Link>
-            <span>/</span>
-            <span className="text-brand-navy/75">{data.role}</span>
-          </nav>
+      <PageTransition className="pt-20 pb-0">
+        <section className="relative overflow-hidden border-b border-brand-navy/[0.06] bg-white pb-14 pt-12">
+          <BackgroundBlobs blobs={[{ color: "#003049", size: 320, position: "top-right", opacity: 0.08 }]} />
+          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <Breadcrumbs trail={trail} />
 
-          <SectionReveal className="mx-auto max-w-4xl text-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-brand-navy/10 bg-white/85 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-brand-navy/70 shadow-sm">
-              <Sparkles className={`h-3.5 w-3.5 ${data.color}`} />
-              KIDUART for {data.role}
-            </div>
-            <h1 className="mx-auto mt-6 max-w-3xl text-[clamp(2.35rem,1.6rem+2.25vw,4.7rem)] font-bold leading-[0.96] text-brand-navy">
-              {data.headline}
-            </h1>
-
-            <p className="mx-auto mt-5 max-w-2xl text-[clamp(1rem,0.96rem+0.18vw,1.08rem)] leading-8 text-brand-navy/66">
-              {data.solutions[0]} and {data.solutions[1].charAt(0).toLowerCase() + data.solutions[1].slice(1)} with one clean experience tailored for {data.role.toLowerCase()}.
-            </p>
-
-            <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Link href="/demo" className="inline-flex items-center gap-2 rounded-full bg-brand-navy px-7 py-3.5 text-base font-bold text-white shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-teal">
-                Book Strategy Call <ArrowRight className="h-5 w-5" />
-              </Link>
-              <Link href="/solutions" className="inline-flex items-center gap-2 rounded-full border border-brand-navy/12 bg-white/80 px-7 py-3.5 text-base font-bold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal">
-                <ArrowLeft className="h-5 w-5" />
-                Back to Solutions
-              </Link>
-            </div>
-
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              {heroStats.map((item) => (
-                <div key={item.label} className="rounded-full border border-brand-navy/8 bg-white/80 px-4 py-2 text-sm font-semibold text-brand-navy shadow-sm">
-                  <span className={data.color}>{item.value}</span> {item.label}
+            <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+              <SectionReveal>
+                <div
+                  className={`inline-flex items-center gap-2.5 rounded-full border px-4 py-2 ${tokens.border} ${tokens.softBg}`}
+                >
+                  <ProductIcon name={persona.icon} className={`h-4 w-4 ${tokens.text}`} />
+                  <span className="text-xs font-bold uppercase tracking-[0.18em] text-brand-navy">
+                    {persona.stage}
+                  </span>
                 </div>
-              ))}
-            </div>
-          </SectionReveal>
 
-          {/* <SectionReveal delay={0.08} className="relative mx-auto mt-14 w-full max-w-5xl">
-            <div className="absolute -left-2 top-8 hidden rounded-2xl border border-brand-navy/8 bg-white/90 px-4 py-3 shadow-lg md:block">
-              <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-brand-navy/45">quick win</div>
-              <div className={`mt-1 text-lg font-bold ${data.color}`}>{data.features[0]}</div>
-            </div>
-            <div className="absolute -right-2 top-2 hidden rounded-2xl border border-brand-navy/8 bg-white/90 px-4 py-3 shadow-lg lg:block">
-              <div className="text-[11px] font-bold uppercase tracking-[0.18em] text-brand-navy/45">daily impact</div>
-              <div className="mt-1 text-lg font-bold text-brand-navy">Faster, clearer, connected</div>
-            </div>
+                <h1 className="mt-6 text-4xl font-bold leading-tight text-brand-navy md:text-5xl">
+                  {persona.headline}
+                </h1>
+                <p className="mt-5 text-lg leading-8 text-brand-navy/[0.78]">{persona.intro}</p>
 
-            <div className="rounded-[2rem] border border-brand-navy/8 bg-white/74 p-3 shadow-[0_24px_80px_rgba(34,74,150,0.12)] backdrop-blur-sm md:p-4">
-              <div className="grid gap-4 md:grid-cols-[1.1fr_0.9fr]">
-                <div className="rounded-[1.6rem] border border-brand-navy/6 bg-[linear-gradient(180deg,#ffffff,#f6f9ff)] p-6 text-left">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <div className="text-xs font-bold uppercase tracking-[0.24em] text-brand-navy/45">Role overview</div>
-                      <h2 className="mt-3 text-2xl font-bold text-brand-navy">{data.role} workspace</h2>
-                    </div>
-                    <div className={`flex h-12 w-12 items-center justify-center rounded-2xl ${data.bg}`}>
-                      <Icon className={`h-6 w-6 ${data.color}`} />
-                    </div>
-                  </div>
-
-                  <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                    {data.features.slice(0, 4).map((feature: string) => (
-                      <div key={feature} className="rounded-2xl border border-brand-navy/6 bg-white px-4 py-4 shadow-sm">
-                        <div className="text-sm font-semibold text-brand-navy">{feature}</div>
-                      </div>
+                <div className="mt-7 rounded-2xl border border-brand-navy/[0.1] bg-brand-beige/25 p-5">
+                  <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-navy">
+                    Roles this covers
+                  </p>
+                  <ul className="mt-3 flex flex-wrap gap-2">
+                    {persona.roleNames.map((role) => (
+                      <li
+                        key={role}
+                        className="rounded-full bg-white px-3 py-1.5 text-sm font-semibold text-brand-navy/[0.84]"
+                      >
+                        {role}
+                      </li>
                     ))}
-                  </div>
-
-                  <div className="mt-4 rounded-[1.4rem] bg-brand-navy px-5 py-5 text-white">
-                    <div className="text-xs font-bold uppercase tracking-[0.22em] text-brand-yellow">What changes first</div>
-                    <p className="mt-3 text-base leading-7 text-white/88">
-                      {data.solutions[2]}
-                    </p>
-                  </div>
+                  </ul>
                 </div>
 
-                <div className="grid gap-4">
-                  <div className="rounded-[1.6rem] border border-brand-navy/6 bg-white p-6 shadow-sm text-left">
-                    <div className="text-xs font-bold uppercase tracking-[0.24em] text-brand-navy/45">A better day</div>
-                    <div className="mt-4 space-y-3">
-                      {data.dayInLife.slice(0, 3).map((step: string) => {
-                        const [time, desc] = step.split(": ");
-                        return (
-                          <div key={step} className="rounded-2xl bg-brand-beige/30 px-4 py-4">
-                            <div className={`text-xs font-bold uppercase tracking-[0.2em] ${data.color}`}>{time}</div>
-                            <div className="mt-1 text-sm leading-6 text-brand-navy/75">{desc}</div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-
-                  <div className="rounded-[1.6rem] border border-brand-navy/6 bg-[linear-gradient(135deg,#0c716b,#0b5860)] p-6 text-left text-white shadow-sm">
-                    <div className="text-xs font-bold uppercase tracking-[0.24em] text-white/60">Proof point</div>
-                    <p className="mt-3 text-lg font-semibold leading-8">
-                      "{data.testimonial.quote}"
-                    </p>
-                    <div className="mt-4 text-sm font-medium text-white/70">{data.testimonial.name}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </SectionReveal> */}
-        </div>
-      </section>
-
-      {/* CHALLENGES VS SOLUTIONS */}
-      <section className="section-space bg-brand-beige/30">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-24">
-            <SectionReveal>
-              <div className="flex items-center gap-3 mb-8 pb-4 border-b border-brand-navy/10">
-                <XCircle className="w-8 h-8 text-red-500" />
-                <h2 className="text-3xl font-bold text-brand-navy">The Challenges</h2>
-              </div>
-              <ul className="space-y-6">
-                {data.challenges.map((c: string, i: number) => (
-                  <li key={i} className="bg-white p-6 rounded-2xl shadow-sm border border-brand-navy/5 text-brand-navy/80 text-lg">
-                    "{c}"
-                  </li>
-                ))}
-              </ul>
-            </SectionReveal>
-            
-            <SectionReveal delay={0.2}>
-              <div className="flex items-center gap-3 mb-8 pb-4 border-b border-brand-navy/10">
-                <CheckCircle className="w-8 h-8 text-brand-teal" />
-                <h2 className="text-3xl font-bold text-brand-navy">The Solution</h2>
-              </div>
-              <ul className="space-y-6">
-                {data.solutions.map((s: string, i: number) => (
-                  <li key={i} className="bg-brand-teal/10 p-6 rounded-2xl border border-brand-teal/20 text-brand-navy font-medium text-lg flex items-start gap-4">
-                    <div className="w-6 h-6 rounded-full bg-brand-teal/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <div className="w-2 h-2 rounded-full bg-brand-teal" />
-                    </div>
-                    {s}
-                  </li>
-                ))}
-              </ul>
-            </SectionReveal>
-          </div>
-        </div>
-      </section>
-
-      {/* KEY FEATURES */}
-      <section className="section-space bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <SectionReveal className="mb-16">
-            <h2 className="text-3xl font-bold text-brand-navy">Everything You Need</h2>
-          </SectionReveal>
-          <div className="flex flex-wrap justify-center gap-4">
-            {data.features.map((f: string, i: number) => (
-              <SectionReveal key={i} delay={i * 0.05}>
-                <div className="px-6 py-3 rounded-full bg-brand-navy text-white font-bold shadow-md">
-                  {f}
+                <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                  <Link
+                    href="/demo"
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-navy px-7 py-3.5 text-base font-bold text-brand-beige transition-all duration-300 hover:-translate-y-1 hover:bg-brand-teal"
+                  >
+                    Book a demo for this role
+                    <ArrowRight className="h-5 w-5" aria-hidden="true" />
+                  </Link>
+                  <Link
+                    href="/solutions"
+                    className="inline-flex items-center justify-center gap-2 rounded-full border border-brand-navy/[0.14] bg-white px-7 py-3.5 text-base font-bold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
+                  >
+                    All role solutions
+                  </Link>
                 </div>
               </SectionReveal>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* DAY IN THE LIFE */}
-      <section className="section-space bg-brand-navy text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionReveal className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4">A Day in the Life</h2>
-            <p className="text-white/70 text-lg">How {data.role.toLowerCase()} use KIDUART every day.</p>
-          </SectionReveal>
-
-          <div className="space-y-8 relative">
-            <div className="absolute left-6 top-4 bottom-4 w-px bg-white/10" />
-            {data.dayInLife.map((step: string, i: number) => {
-              const [time, desc] = step.split(': ');
-              return (
-                <SectionReveal key={i} delay={i * 0.1} className="relative pl-16">
-                  <div className="absolute left-4 -translate-x-1/2 w-4 h-4 rounded-full bg-brand-teal border-4 border-brand-navy" />
-                  <div className="bg-white/5 rounded-2xl p-6 border border-white/10">
-                    <span className="text-brand-yellow font-bold text-sm uppercase tracking-wider block mb-2">{time}</span>
-                    <span className="text-lg text-white/90">{desc}</span>
-                  </div>
-                </SectionReveal>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* TESTIMONIAL */}
-      <section className="section-space bg-brand-beige/20">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <SectionReveal className="bg-white p-12 rounded-[3rem] shadow-xl shadow-brand-navy/5 border border-brand-navy/5 relative">
-            <Quote className={`w-16 h-16 ${data.color} absolute top-8 left-8 opacity-20`} />
-            <p className="text-2xl md:text-3xl font-serif text-brand-navy leading-relaxed mb-8 italic relative z-10">
-              "{data.testimonial.quote}"
-            </p>
-            <div>
-              <div className="font-bold text-xl text-brand-navy">{data.testimonial.name}</div>
-              <div className={`font-medium ${data.color}`}>{data.testimonial.role}</div>
+              <SectionReveal delay={0.1}>
+                <div className="relative aspect-[16/10] overflow-hidden rounded-[2rem] border border-brand-navy/[0.08] shadow-xl shadow-brand-navy/5">
+                  <Image
+                    src={persona.image}
+                    alt={persona.imageAlt}
+                    fill
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 48vw"
+                    className="object-cover"
+                  />
+                </div>
+              </SectionReveal>
             </div>
-          </SectionReveal>
-        </div>
-      </section>
-
-      {/* RELATED SOLUTIONS */}
-      <section className="section-space-tight bg-white border-t border-brand-navy/5">
-        <div className="max-w-7xl mx-auto px-4">
-          <SectionReveal className="mb-8">
-            <h3 className="text-xl font-bold text-brand-navy text-center">Explore other roles</h3>
-          </SectionReveal>
-          <div className="flex flex-wrap justify-center gap-4">
-            {otherSlugs.map(s => {
-              const r = solutionsData[s];
-              const RIcon = r.icon;
-              return (
-                <Link key={s} href={`/solutions/${s}`} className="flex items-center gap-2 px-6 py-3 rounded-full border border-brand-navy/10 hover:border-brand-teal hover:bg-brand-teal/5 transition-all font-medium text-brand-navy">
-                  <RIcon className="w-5 h-5" /> {r.role}
-                </Link>
-              );
-            })}
           </div>
-        </div>
-      </section>
+        </section>
 
-      <CtaSection />
-    </PageTransition>
+        <section className="section-space relative overflow-hidden bg-brand-beige/25">
+          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <SectionReveal>
+              <SectionHeading
+                kicker="Challenges and answers"
+                title={`What ${persona.label.toLowerCase()} tell us goes wrong — and what replaces it`}
+                description="Each row names the manual problem, what it costs, and the module that removes it. Follow the module link to see how that module is built."
+              />
+            </SectionReveal>
+
+            <ol className="mt-10 space-y-5">
+              {challenges.map((challenge, index) => (
+                <li key={challenge.problem}>
+                  <SectionReveal
+                    delay={Math.min(index * 0.05, 0.2)}
+                    className="overflow-hidden rounded-[2rem] border border-brand-navy/[0.08] bg-white shadow-sm"
+                  >
+                    <div className="grid gap-0 md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
+                      <div className="border-b border-brand-navy/[0.08] bg-brand-beige/25 p-6 md:border-b-0 md:border-r md:p-8">
+                        <span className="inline-flex h-9 items-center gap-2 rounded-full bg-white px-3.5 text-xs font-bold uppercase tracking-[0.16em] text-brand-orange-ink">
+                          Challenge {String(index + 1).padStart(2, "0")}
+                        </span>
+                        <h3 className="mt-4 text-xl font-bold text-brand-navy">{challenge.problem}</h3>
+                        <p className="mt-3 text-sm leading-6 text-brand-navy/[0.8]">{challenge.cost}</p>
+                      </div>
+
+                      <div className="p-6 md:p-8">
+                        <span
+                          className={`inline-flex h-9 items-center gap-2 rounded-full px-3.5 text-xs font-bold uppercase tracking-[0.16em] ${tokens.softBg} ${tokens.text}`}
+                        >
+                          In KIDUART
+                        </span>
+                        <p className="mt-4 leading-7 text-brand-navy/[0.84]">{challenge.solution}</p>
+                        <ul className="mt-5 flex flex-wrap gap-2">
+                          {challenge.modules.map((module) => (
+                            <li key={`${module.areaSlug}-${module.moduleSlug}`}>
+                              <Link
+                                href={`/features/${module.areaSlug}/${module.moduleSlug}`}
+                                className="inline-flex items-center gap-1.5 rounded-full border border-brand-navy/[0.12] bg-brand-beige/25 px-3.5 py-1.5 text-sm font-semibold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
+                              >
+                                {module.moduleName}
+                                <span className="text-xs font-bold text-brand-navy/[0.75]">
+                                  {module.featureCount}
+                                </span>
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </SectionReveal>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        <section className="section-space relative overflow-hidden bg-white">
+          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
+              <SectionReveal>
+                <SectionHeading kicker="A typical day" title={`How the day runs for ${persona.label.toLowerCase()}`} />
+                <ol className="mt-8 space-y-0">
+                  {persona.dayInLife.map((step, index) => (
+                    <li key={step.when} className="relative flex gap-5 pb-8 last:pb-0">
+                      {index < persona.dayInLife.length - 1 ? (
+                        <span
+                          className="absolute left-[1.15rem] top-10 h-full w-px bg-brand-navy/[0.12]"
+                          aria-hidden="true"
+                        />
+                      ) : null}
+                      <span
+                        className={`relative z-10 mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-extrabold text-white ${tokens.solidBg}`}
+                        aria-hidden="true"
+                      >
+                        {index + 1}
+                      </span>
+                      <span>
+                        <span className="block text-xs font-bold uppercase tracking-[0.16em] text-brand-navy/[0.72]">
+                          {step.when}
+                        </span>
+                        <span className="mt-1.5 block leading-7 text-brand-navy/[0.86]">{step.what}</span>
+                      </span>
+                    </li>
+                  ))}
+                </ol>
+              </SectionReveal>
+
+              <SectionReveal delay={0.08} className="rounded-[2rem] border border-brand-navy/[0.08] bg-brand-beige/20 p-6 md:p-8">
+                <h2 className="text-2xl font-bold text-brand-navy">What you get on day one</h2>
+                <ul className="mt-6 space-y-2.5">
+                  {persona.toolsYouGet.map((tool) => (
+                    <li key={tool} className="flex items-start gap-3 rounded-2xl bg-white px-4 py-3">
+                      <span
+                        className={`mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${tokens.softBg}`}
+                        aria-hidden="true"
+                      >
+                        <Check className={`h-3 w-3 ${tokens.text}`} />
+                      </span>
+                      <span className="text-sm leading-6 text-brand-navy/[0.84]">{tool}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-7 border-t border-brand-navy/[0.1] pt-6">
+                  <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-navy">
+                    Panels this role signs into
+                  </p>
+                  <ul className="mt-3 flex flex-wrap gap-2">
+                    {panels.map((panel) => (
+                      <li key={panel.slug}>
+                        <Link
+                          href={`/platform/${panel.slug}`}
+                          className="inline-flex items-center gap-1.5 rounded-full border border-brand-navy/[0.12] bg-white px-3.5 py-1.5 text-sm font-semibold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
+                        >
+                          {panel.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </SectionReveal>
+            </div>
+          </div>
+        </section>
+
+        <section className="section-space-tight relative overflow-hidden border-y border-brand-navy/[0.06] bg-brand-beige/25">
+          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <SectionReveal>
+              <h2 className="text-2xl font-bold text-brand-navy">Module areas behind this role</h2>
+              <ul className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                {areas.map((area) => (
+                  <li key={area.slug}>
+                    <Link
+                      href={`/features/${area.slug}`}
+                      className="flex h-full flex-col rounded-2xl border border-brand-navy/[0.1] bg-white px-5 py-4 transition-colors hover:border-brand-teal/40"
+                    >
+                      <span className="text-base font-bold text-brand-navy">{area.label}</span>
+                      <span className="mt-2 text-xs font-semibold uppercase tracking-[0.14em] text-brand-navy/[0.7]">
+                        {area.moduleCount} modules · {area.featureCount} features
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </SectionReveal>
+          </div>
+        </section>
+
+        <section className="section-space relative overflow-hidden bg-white">
+          <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+            <SectionReveal>
+              <SectionHeading
+                kicker="Questions we get"
+                title={`${persona.pageLabel.replace("For ", "").replace(/^./, (c) => c.toUpperCase())} — straight answers`}
+                align="center"
+              />
+            </SectionReveal>
+
+            <div className="mt-10 space-y-4">
+              {persona.faqs.map((faq, index) => (
+                <SectionReveal
+                  key={faq.q}
+                  delay={Math.min(index * 0.05, 0.15)}
+                  className="rounded-3xl border border-brand-navy/[0.08] bg-brand-beige/20 p-6"
+                >
+                  <h3 className="text-lg font-bold text-brand-navy">{faq.q}</h3>
+                  <p className="mt-3 leading-7 text-brand-navy/[0.82]">{faq.a}</p>
+                </SectionReveal>
+              ))}
+            </div>
+
+            <SectionReveal delay={0.1} className="mt-12">
+              <p className="text-sm font-bold uppercase tracking-[0.16em] text-brand-navy">
+                Other roles
+              </p>
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {otherPersonas.map((other) => (
+                  <li key={other.slug}>
+                    <Link
+                      href={`/solutions/${other.slug}`}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-brand-navy/[0.12] bg-white px-4 py-2 text-sm font-semibold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
+                    >
+                      {other.pageLabel}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </SectionReveal>
+          </div>
+        </section>
+
+        <CtaSection
+          title={`See KIDUART from the ${persona.label.toLowerCase()} point of view`}
+          subtitle="We will run the demo in the panel this role uses, on a scenario you bring from your own school."
+        />
+      </PageTransition>
     </>
   );
 }
+
+export const getStaticPaths: GetStaticPaths = async () => ({
+  paths: PERSONA_SLUGS.map((slug) => ({ params: { slug } })),
+  fallback: false,
+});
+
+export const getStaticProps: GetStaticProps<SolutionDetailProps> = async (context) => {
+  const slug = String(context.params?.slug);
+  const persona = getPersona(slug);
+
+  if (!persona) return { notFound: true };
+
+  const challenges: ChallengeCard[] = persona.challenges.map((challenge) => ({
+    problem: challenge.problem,
+    cost: challenge.cost,
+    solution: challenge.solution,
+    modules: challenge.modules.flatMap((ref) => {
+      const category = getMatrixCategory(ref.area);
+      const matrixModule = findMatrixModule(category, ref.module);
+      if (!category || !matrixModule) return [];
+      return [
+        {
+          areaSlug: category.slug,
+          moduleSlug: matrixModule.slug,
+          moduleName: matrixModule.name,
+          featureCount: matrixModule.featureCount,
+        },
+      ];
+    }),
+  }));
+
+  return {
+    props: {
+      persona: {
+        slug: persona.slug,
+        label: persona.label,
+        pageLabel: persona.pageLabel,
+        stage: persona.stage,
+        headline: persona.headline,
+        summary: persona.summary,
+        intro: persona.intro,
+        roleNames: persona.roleNames,
+        dayInLife: persona.dayInLife,
+        toolsYouGet: persona.toolsYouGet,
+        faqs: persona.faqs,
+        image: persona.image,
+        imageAlt: persona.imageAlt,
+        icon: persona.icon,
+        accent: persona.accent,
+      },
+      challenges,
+      panels: persona.panels.flatMap((panelSlug) => {
+        const panel = PANEL_BY_SLUG[panelSlug];
+        return panel ? [{ slug: panel.slug, label: panel.label, stage: panel.stage }] : [];
+      }),
+      areas: persona.areas.flatMap((areaSlug) => {
+        const category = getMatrixCategory(areaSlug);
+        const narrative = AREA_NARRATIVE_BY_SLUG[areaSlug];
+        if (!category || !narrative) return [];
+        return [
+          {
+            slug: category.slug,
+            label: narrative.label,
+            featureCount: category.featureCount,
+            moduleCount: category.moduleCount,
+          },
+        ];
+      }),
+      otherPersonas: PRODUCT_PERSONAS.filter((entry) => entry.slug !== persona.slug)
+        .sort((a, b) => a.order - b.order)
+        .map((entry) => ({ slug: entry.slug, label: entry.label, pageLabel: entry.pageLabel })),
+    },
+  };
+};

@@ -1,0 +1,7096 @@
+{
+ "totals": {
+  "categories": 16,
+  "modules": 90,
+  "subModules": 137,
+  "features": 1368,
+  "baseFeatures": 765,
+  "standardFeatures": 603
+ },
+ "categories": [
+  {
+   "name": "Organization Management",
+   "slug": "organization-management",
+   "featureCount": 108,
+   "baseCount": 0,
+   "standardCount": 108,
+   "moduleCount": 13,
+   "modules": [
+    {
+     "name": "Academic Session",
+     "slug": "academic-session",
+     "featureCount": 7,
+     "subModules": [
+      {
+       "name": "School Session/Year Management",
+       "slug": "school-session-year-management",
+       "features": [
+        {
+         "name": "Activate Session",
+         "tier": "Standard"
+        },
+        {
+         "name": "Archive Session",
+         "tier": "Standard"
+        },
+        {
+         "name": "Create Session",
+         "tier": "Standard"
+        },
+        {
+         "name": "Restore Session",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Session",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Active Session",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Session",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Analytics",
+     "slug": "analytics",
+     "featureCount": 2,
+     "subModules": [
+      {
+       "name": "Organization Analytics & Health Score",
+       "slug": "organization-analytics-and-health-score",
+       "features": [
+        {
+         "name": "View Overview",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Trends",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Cross-School Reports",
+     "slug": "cross-school-reports",
+     "featureCount": 7,
+     "subModules": [
+      {
+       "name": "Consolidated & Custom Reports",
+       "slug": "consolidated-and-custom-reports",
+       "features": [
+        {
+         "name": "Export Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "Generate Custom Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Academic Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Attendance Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Enrollment Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Financial Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Teacher Performance Report",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Dashboard",
+     "slug": "dashboard",
+     "featureCount": 5,
+     "subModules": [
+      {
+       "name": "Organization Dashboard",
+       "slug": "organization-dashboard",
+       "features": [
+        {
+         "name": "Export Dashboard",
+         "tier": "Standard"
+        },
+        {
+         "name": "Save Dashboard Preferences",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Dashboard Overview",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Dashboard Preferences",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Dashboard Stats",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Member Management",
+     "slug": "member-management",
+     "featureCount": 6,
+     "subModules": [
+      {
+       "name": "Organization Member Administration",
+       "slug": "organization-member-administration",
+       "features": [
+        {
+         "name": "Add Member",
+         "tier": "Standard"
+        },
+        {
+         "name": "Remove Member",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Member",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Member Details",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Member Permissions",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Members",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Navigation",
+     "slug": "navigation",
+     "featureCount": 1,
+     "subModules": [
+      {
+       "name": "Dynamic Organization Sidebar",
+       "slug": "dynamic-organization-sidebar",
+       "features": [
+        {
+         "name": "View Sidebar",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Organization Settings",
+     "slug": "organization-settings",
+     "featureCount": 9,
+     "subModules": [
+      {
+       "name": "Profile, Branding & Preferences",
+       "slug": "profile-branding-and-preferences",
+       "features": [
+        {
+         "name": "Reset Delegation",
+         "tier": "Standard"
+        },
+        {
+         "name": "Reset To Defaults",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Branding",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Delegation",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Features",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Preferences",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Profile",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Delegation",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Settings",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "School Admin Management",
+     "slug": "school-admin-management",
+     "featureCount": 22,
+     "subModules": [
+      {
+       "name": "School Admin Account Management",
+       "slug": "school-admin-account-management",
+       "features": [
+        {
+         "name": "Accept Invitation",
+         "tier": "Standard"
+        },
+        {
+         "name": "Activate Admin",
+         "tier": "Standard"
+        },
+        {
+         "name": "Bulk Update Permissions",
+         "tier": "Standard"
+        },
+        {
+         "name": "Cancel Invitation",
+         "tier": "Standard"
+        },
+        {
+         "name": "Create Admin",
+         "tier": "Standard"
+        },
+        {
+         "name": "Deactivate Admin",
+         "tier": "Standard"
+        },
+        {
+         "name": "Delete Admin",
+         "tier": "Standard"
+        },
+        {
+         "name": "Export CSV",
+         "tier": "Standard"
+        },
+        {
+         "name": "Export Excel",
+         "tier": "Standard"
+        },
+        {
+         "name": "Resend Invitation",
+         "tier": "Standard"
+        },
+        {
+         "name": "Reset Admin Password",
+         "tier": "Standard"
+        },
+        {
+         "name": "Reset Permissions",
+         "tier": "Standard"
+        },
+        {
+         "name": "Send Batch Invitations",
+         "tier": "Standard"
+        },
+        {
+         "name": "Send Invitation",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Admin",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Permissions",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Role",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Admin Details",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Admin Permissions",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Admins",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Pending Invitations",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Roles",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "School Management",
+     "slug": "school-management",
+     "featureCount": 6,
+     "subModules": [
+      {
+       "name": "Multi-School Administration",
+       "slug": "multi-school-administration",
+       "features": [
+        {
+         "name": "View School Details",
+         "tier": "Standard"
+        },
+        {
+         "name": "View School Stats",
+         "tier": "Standard"
+        },
+        {
+         "name": "View School Students",
+         "tier": "Standard"
+        },
+        {
+         "name": "View School Teachers",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Schools",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Schools Comparison",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "School Settings",
+     "slug": "school-settings",
+     "featureCount": 2,
+     "subModules": [
+      {
+       "name": "School Profile Settings",
+       "slug": "school-profile-settings",
+       "features": [
+        {
+         "name": "Update Profile",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Profile",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Subscription",
+     "slug": "subscription",
+     "featureCount": 24,
+     "subModules": [
+      {
+       "name": "Org-Level Subscription & Billing",
+       "slug": "org-level-subscription-and-billing",
+       "features": [
+        {
+         "name": "Attach Subscription Addon",
+         "tier": "Standard"
+        },
+        {
+         "name": "Cancel Pending Plan Change",
+         "tier": "Standard"
+        },
+        {
+         "name": "Confirm Invoice Payment",
+         "tier": "Standard"
+        },
+        {
+         "name": "Create Billing Portal Session",
+         "tier": "Standard"
+        },
+        {
+         "name": "Downgrade Plan",
+         "tier": "Standard"
+        },
+        {
+         "name": "Download Invoice",
+         "tier": "Standard"
+        },
+        {
+         "name": "Initiate Invoice Payment",
+         "tier": "Standard"
+        },
+        {
+         "name": "List Invoices",
+         "tier": "Standard"
+        },
+        {
+         "name": "List Subscription Addons",
+         "tier": "Standard"
+        },
+        {
+         "name": "Remove Subscription Addon",
+         "tier": "Standard"
+        },
+        {
+         "name": "Submit Cash Payment",
+         "tier": "Standard"
+        },
+        {
+         "name": "Toggle Auto Renew",
+         "tier": "Standard"
+        },
+        {
+         "name": "Upgrade Plan",
+         "tier": "Standard"
+        },
+        {
+         "name": "Validate Downgrade",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Billing History",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Cash Payment Requests",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Current Subscription",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Downgrade Options",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Invoice Details",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Payment Details",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Payment History",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Upgrade Options",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Usage Alerts",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Usage Metrics",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Subscription & Billing",
+     "slug": "subscription-and-billing",
+     "featureCount": 8,
+     "subModules": [
+      {
+       "name": "Billing Management",
+       "slug": "billing-management",
+       "features": [
+        {
+         "name": "Download Invoice PDF",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Billing Summary",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Invoice Details",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Invoices",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Payments",
+         "tier": "Standard"
+        }
+       ]
+      },
+      {
+       "name": "Subscription Plan Management",
+       "slug": "subscription-plan-management",
+       "features": [
+        {
+         "name": "View Active Subscription",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Entitlements",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Modules",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Support",
+     "slug": "support",
+     "featureCount": 9,
+     "subModules": [
+      {
+       "name": "Organization Support Tickets",
+       "slug": "organization-support-tickets",
+       "features": [
+        {
+         "name": "Add Reply",
+         "tier": "Standard"
+        },
+        {
+         "name": "Create Ticket",
+         "tier": "Standard"
+        },
+        {
+         "name": "List Tickets",
+         "tier": "Standard"
+        },
+        {
+         "name": "Submit Satisfaction",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Ticket",
+         "tier": "Standard"
+        },
+        {
+         "name": "Upload Attachments",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Summary",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Ticket Details",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Academic",
+   "slug": "academic",
+   "featureCount": 338,
+   "baseCount": 236,
+   "standardCount": 102,
+   "moduleCount": 11,
+   "modules": [
+    {
+     "name": "Academic Calendar",
+     "slug": "academic-calendar",
+     "featureCount": 27,
+     "subModules": [
+      {
+       "name": "Academic Term Management",
+       "slug": "academic-term-management",
+       "features": [
+        {
+         "name": "Save Terms",
+         "tier": "Base"
+        },
+        {
+         "name": "View Default Dates",
+         "tier": "Base"
+        },
+        {
+         "name": "View Summary",
+         "tier": "Base"
+        },
+        {
+         "name": "View Terms",
+         "tier": "Base"
+        }
+       ]
+      },
+      {
+       "name": "Calendar & Events",
+       "slug": "calendar-and-events",
+       "features": [
+        {
+         "name": "Bulk Import",
+         "tier": "Standard"
+        },
+        {
+         "name": "Create Event",
+         "tier": "Base"
+        },
+        {
+         "name": "Create Holiday",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Event",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Holiday",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Event",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Holiday",
+         "tier": "Base"
+        },
+        {
+         "name": "View By Date Range",
+         "tier": "Base"
+        },
+        {
+         "name": "View Calendar Overview",
+         "tier": "Base"
+        },
+        {
+         "name": "View Calendar View",
+         "tier": "Base"
+        },
+        {
+         "name": "View Event Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Event Types",
+         "tier": "Base"
+        },
+        {
+         "name": "View Events",
+         "tier": "Base"
+        },
+        {
+         "name": "View Holiday Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Holidays",
+         "tier": "Base"
+        },
+        {
+         "name": "View Session Calendar",
+         "tier": "Base"
+        }
+       ]
+      },
+      {
+       "name": "Holiday Suggestions",
+       "slug": "holiday-suggestions",
+       "features": [
+        {
+         "name": "Add Selected Holidays",
+         "tier": "Base"
+        },
+        {
+         "name": "View School Holidays",
+         "tier": "Base"
+        },
+        {
+         "name": "View Suggestions",
+         "tier": "Base"
+        },
+        {
+         "name": "View Summary",
+         "tier": "Base"
+        }
+       ]
+      },
+      {
+       "name": "Working Days Configuration",
+       "slug": "working-days-configuration",
+       "features": [
+        {
+         "name": "Save Config",
+         "tier": "Base"
+        },
+        {
+         "name": "View Config",
+         "tier": "Base"
+        },
+        {
+         "name": "View Summary",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Assignments",
+     "slug": "assignments",
+     "featureCount": 6,
+     "subModules": [
+      {
+       "name": "Assignment Management",
+       "slug": "assignment-management",
+       "features": [
+        {
+         "name": "Create Assignment",
+         "tier": "Base"
+        },
+        {
+         "name": "Grade Submission",
+         "tier": "Base"
+        },
+        {
+         "name": "List Assignments",
+         "tier": "Base"
+        },
+        {
+         "name": "Submit Assignment",
+         "tier": "Base"
+        },
+        {
+         "name": "View Assignment Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Submissions",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Attendance",
+     "slug": "attendance",
+     "featureCount": 86,
+     "subModules": [
+      {
+       "name": "Attendance Configuration",
+       "slug": "attendance-configuration",
+       "features": [
+        {
+         "name": "Reset To Default",
+         "tier": "Base"
+        },
+        {
+         "name": "Toggle Attendance System",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Defaulter Thresholds",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Late Arrival Settings",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Leave Policy",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Marking Methods",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Notification Settings",
+         "tier": "Base"
+        },
+        {
+         "name": "Update School Timing",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Settings",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Working Days",
+         "tier": "Base"
+        },
+        {
+         "name": "Validate Settings",
+         "tier": "Base"
+        },
+        {
+         "name": "View Default Template",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Leave Policy Settings",
+         "tier": "Base"
+        },
+        {
+         "name": "View Settings",
+         "tier": "Base"
+        },
+        {
+         "name": "View Working Days Configuration",
+         "tier": "Base"
+        }
+       ]
+      },
+      {
+       "name": "Attendance Reports",
+       "slug": "attendance-reports",
+       "features": [
+        {
+         "name": "Export To CSV",
+         "tier": "Standard"
+        },
+        {
+         "name": "Export To Excel",
+         "tier": "Standard"
+        },
+        {
+         "name": "Export To P D F",
+         "tier": "Standard"
+        },
+        {
+         "name": "Generate Action Plan",
+         "tier": "Base"
+        },
+        {
+         "name": "Generate Consolidated Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "Generate Daily Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "Generate Defaulters Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "Generate Leave Summary Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "Generate Monthly Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "Generate Parent Notification List",
+         "tier": "Base"
+        },
+        {
+         "name": "Generate Teacher Report",
+         "tier": "Standard"
+        }
+       ]
+      },
+      {
+       "name": "Student Attendance Marking",
+       "slug": "student-attendance-marking",
+       "features": [
+        {
+         "name": "Calculate Percentage",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Attendance",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Bulk Attendance",
+         "tier": "Standard"
+        },
+        {
+         "name": "Import Attendance",
+         "tier": "Base"
+        },
+        {
+         "name": "Mark Attendance",
+         "tier": "Base"
+        },
+        {
+         "name": "Mark Biometric Attendance",
+         "tier": "Base"
+        },
+        {
+         "name": "Mark Bulk Attendance",
+         "tier": "Standard"
+        },
+        {
+         "name": "Mark Class Attendance",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Attendance",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Bulk Attendance",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Attendance Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Attendance Records",
+         "tier": "Base"
+        },
+        {
+         "name": "View Class Attendance",
+         "tier": "Base"
+        },
+        {
+         "name": "View Class Comparison",
+         "tier": "Base"
+        },
+        {
+         "name": "View Class Summary",
+         "tier": "Base"
+        },
+        {
+         "name": "View Import Template",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Monthly Summary",
+         "tier": "Base"
+        },
+        {
+         "name": "View Statistics",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Student Summary",
+         "tier": "Base"
+        },
+        {
+         "name": "View Today Statistics",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Working Days",
+         "tier": "Base"
+        }
+       ]
+      },
+      {
+       "name": "Student Leave Management",
+       "slug": "student-leave-management",
+       "features": [
+        {
+         "name": "Apply Leave (Student)",
+         "tier": "Base"
+        },
+        {
+         "name": "Apply Leave (Teacher)",
+         "tier": "Base"
+        },
+        {
+         "name": "Bulk Approve Leaves (Student)",
+         "tier": "Standard"
+        },
+        {
+         "name": "Bulk Approve Leaves (Teacher)",
+         "tier": "Standard"
+        },
+        {
+         "name": "Cancel Leave (Student)",
+         "tier": "Base"
+        },
+        {
+         "name": "Cancel Leave (Teacher)",
+         "tier": "Base"
+        },
+        {
+         "name": "Credit Compensatory Leave",
+         "tier": "Base"
+        },
+        {
+         "name": "Process Approval (Student)",
+         "tier": "Standard"
+        },
+        {
+         "name": "Process Approval (Teacher)",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Leave (Student)",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Leave (Teacher)",
+         "tier": "Base"
+        },
+        {
+         "name": "View Approval History (Student)",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Approval History (Teacher)",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Class Leave Summary",
+         "tier": "Base"
+        },
+        {
+         "name": "View Department Leave Summary",
+         "tier": "Base"
+        },
+        {
+         "name": "View Leave Applications (Student)",
+         "tier": "Base"
+        },
+        {
+         "name": "View Leave Applications (Teacher)",
+         "tier": "Base"
+        },
+        {
+         "name": "View Leave Balance",
+         "tier": "Base"
+        },
+        {
+         "name": "View Leave Details (Student)",
+         "tier": "Base"
+        },
+        {
+         "name": "View Leave Details (Teacher)",
+         "tier": "Base"
+        },
+        {
+         "name": "View Pending Approvals (Student)",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Pending Approvals (Teacher)",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Student Leave Balance",
+         "tier": "Base"
+        },
+        {
+         "name": "View Student Leave History",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Teacher Leave History",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Teachers Balance",
+         "tier": "Base"
+        }
+       ]
+      },
+      {
+       "name": "Teacher/Staff Class Attendance",
+       "slug": "teacher-staff-class-attendance",
+       "features": [
+        {
+         "name": "Assign Substitute",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Attendance",
+         "tier": "Base"
+        },
+        {
+         "name": "Mark Attendance",
+         "tier": "Base"
+        },
+        {
+         "name": "Mark Bulk Attendance",
+         "tier": "Standard"
+        },
+        {
+         "name": "Remove Substitute",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Attendance",
+         "tier": "Base"
+        },
+        {
+         "name": "View Absent Teachers Today",
+         "tier": "Base"
+        },
+        {
+         "name": "View Attendance Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Attendance Records",
+         "tier": "Base"
+        },
+        {
+         "name": "View Available Substitutes",
+         "tier": "Base"
+        },
+        {
+         "name": "View Department Attendance",
+         "tier": "Base"
+        },
+        {
+         "name": "View Substitute Assignments",
+         "tier": "Base"
+        },
+        {
+         "name": "View Teacher Summary",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Class Diary",
+     "slug": "class-diary",
+     "featureCount": 7,
+     "subModules": [
+      {
+       "name": "Daily Class Diary/Homework Log",
+       "slug": "daily-class-diary-homework-log",
+       "features": [
+        {
+         "name": "Add Attachments",
+         "tier": "Base"
+        },
+        {
+         "name": "Create Daily Class Diary/Homework Log",
+         "tier": "Base"
+        },
+        {
+         "name": "List",
+         "tier": "Base"
+        },
+        {
+         "name": "Remove",
+         "tier": "Base"
+        },
+        {
+         "name": "Remove Attachment",
+         "tier": "Base"
+        },
+        {
+         "name": "Update",
+         "tier": "Base"
+        },
+        {
+         "name": "View Details",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Classes & Sections",
+     "slug": "classes-and-sections",
+     "featureCount": 35,
+     "subModules": [
+      {
+       "name": "Class Management",
+       "slug": "class-management",
+       "features": [
+        {
+         "name": "Create Class",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Class",
+         "tier": "Base"
+        },
+        {
+         "name": "Export To CSV",
+         "tier": "Standard"
+        },
+        {
+         "name": "Export To Excel",
+         "tier": "Standard"
+        },
+        {
+         "name": "Export To P D F",
+         "tier": "Standard"
+        },
+        {
+         "name": "Restore Class",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Class",
+         "tier": "Base"
+        },
+        {
+         "name": "View Class Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Class Statistics",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Classes",
+         "tier": "Base"
+        }
+       ]
+      },
+      {
+       "name": "Class Teacher Assignment",
+       "slug": "class-teacher-assignment",
+       "features": [
+        {
+         "name": "Assign Class Teacher",
+         "tier": "Base"
+        },
+        {
+         "name": "Assign Subject Teacher",
+         "tier": "Base"
+        },
+        {
+         "name": "Bulk Assign Subject Teachers",
+         "tier": "Standard"
+        },
+        {
+         "name": "Remove Class Teacher",
+         "tier": "Base"
+        },
+        {
+         "name": "Remove Subject Teacher",
+         "tier": "Base"
+        }
+       ]
+      },
+      {
+       "name": "Section Management",
+       "slug": "section-management",
+       "features": [
+        {
+         "name": "Create Section",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Section",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Section",
+         "tier": "Base"
+        },
+        {
+         "name": "View Section Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Section Statistics",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Sections",
+         "tier": "Base"
+        }
+       ]
+      },
+      {
+       "name": "Timetable Management",
+       "slug": "timetable-management",
+       "features": [
+        {
+         "name": "Add Period",
+         "tier": "Base"
+        },
+        {
+         "name": "Assign Substitute",
+         "tier": "Base"
+        },
+        {
+         "name": "Create Timetable",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Timetable",
+         "tier": "Base"
+        },
+        {
+         "name": "Export To P D F",
+         "tier": "Standard"
+        },
+        {
+         "name": "Publish Timetable",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Period (Periods)",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Timetable",
+         "tier": "Base"
+        },
+        {
+         "name": "Validate Timetable",
+         "tier": "Base"
+        },
+        {
+         "name": "View Statistics",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Teacher Timetable",
+         "tier": "Base"
+        },
+        {
+         "name": "View Timetable By Class Section",
+         "tier": "Base"
+        },
+        {
+         "name": "View Timetable Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Timetables",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Curriculum",
+     "slug": "curriculum",
+     "featureCount": 28,
+     "subModules": [
+      {
+       "name": "Curriculum Management",
+       "slug": "curriculum-management",
+       "features": [
+        {
+         "name": "Add Chapter",
+         "tier": "Base"
+        },
+        {
+         "name": "Add Unit",
+         "tier": "Base"
+        },
+        {
+         "name": "Create Curriculum",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Curriculum",
+         "tier": "Base"
+        },
+        {
+         "name": "Export To CSV",
+         "tier": "Standard"
+        },
+        {
+         "name": "Export To Excel",
+         "tier": "Standard"
+        },
+        {
+         "name": "Export To P D F",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Curriculum",
+         "tier": "Base"
+        },
+        {
+         "name": "View Curriculum Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Curriculum Progress",
+         "tier": "Base"
+        },
+        {
+         "name": "View Curriculums",
+         "tier": "Base"
+        },
+        {
+         "name": "View School Syllabus Overview",
+         "tier": "Base"
+        }
+       ]
+      },
+      {
+       "name": "Lesson Planning",
+       "slug": "lesson-planning",
+       "features": [
+        {
+         "name": "Add Lesson Plan",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Lesson Plan",
+         "tier": "Base"
+        },
+        {
+         "name": "Export To P D F",
+         "tier": "Standard"
+        },
+        {
+         "name": "List Lesson Plans",
+         "tier": "Base"
+        },
+        {
+         "name": "Mark Lesson Complete",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Lesson Plan",
+         "tier": "Base"
+        },
+        {
+         "name": "View Lesson Progress",
+         "tier": "Base"
+        },
+        {
+         "name": "View Lessons By Chapter",
+         "tier": "Base"
+        }
+       ]
+      },
+      {
+       "name": "Syllabus Management",
+       "slug": "syllabus-management",
+       "features": [
+        {
+         "name": "Export Progress To CSV",
+         "tier": "Standard"
+        },
+        {
+         "name": "Export Progress To P D F",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Completion Timeline",
+         "tier": "Base"
+        },
+        {
+         "name": "View Pending Lessons",
+         "tier": "Base"
+        },
+        {
+         "name": "View Syllabus Overview",
+         "tier": "Base"
+        },
+        {
+         "name": "View Syllabus Progress",
+         "tier": "Base"
+        },
+        {
+         "name": "View Syllabus Statistics",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Unit Progress",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Discipline",
+     "slug": "discipline",
+     "featureCount": 5,
+     "subModules": [
+      {
+       "name": "Discipline & Conduct Records",
+       "slug": "discipline-and-conduct-records",
+       "features": [
+        {
+         "name": "Add Follow Up",
+         "tier": "Base"
+        },
+        {
+         "name": "Create Discipline & Conduct Records",
+         "tier": "Base"
+        },
+        {
+         "name": "List",
+         "tier": "Base"
+        },
+        {
+         "name": "Update",
+         "tier": "Base"
+        },
+        {
+         "name": "View Details",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Examination",
+     "slug": "examination",
+     "featureCount": 109,
+     "subModules": [
+      {
+       "name": "Exam Scheduling",
+       "slug": "exam-scheduling",
+       "features": [
+        {
+         "name": "Change Status",
+         "tier": "Standard"
+        },
+        {
+         "name": "Create Exam",
+         "tier": "Base"
+        },
+        {
+         "name": "Create Schedule",
+         "tier": "Standard"
+        },
+        {
+         "name": "Download Admit Card",
+         "tier": "Base"
+        },
+        {
+         "name": "Export To Excel",
+         "tier": "Standard"
+        },
+        {
+         "name": "Generate Schedule P D F",
+         "tier": "Standard"
+        },
+        {
+         "name": "Publish Schedule",
+         "tier": "Standard"
+        },
+        {
+         "name": "Queue Bulk Admit Cards",
+         "tier": "Standard"
+        },
+        {
+         "name": "Send Reminder",
+         "tier": "Base"
+        },
+        {
+         "name": "Send Result Notification",
+         "tier": "Base"
+        },
+        {
+         "name": "Send Schedule Notification",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Exam",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Schedule",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Bulk Admit Card Results",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Exam Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Exams",
+         "tier": "Base"
+        },
+        {
+         "name": "View Notification Stats",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Schedule",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Statistics",
+         "tier": "Standard"
+        }
+       ]
+      },
+      {
+       "name": "Exam Weightage Configuration",
+       "slug": "exam-weightage-configuration",
+       "features": [
+        {
+         "name": "Add Weightage",
+         "tier": "Standard"
+        },
+        {
+         "name": "Bulk Save",
+         "tier": "Standard"
+        },
+        {
+         "name": "Calculate Grade",
+         "tier": "Base"
+        },
+        {
+         "name": "Create Grading System",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Grading System",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Weightage",
+         "tier": "Standard"
+        },
+        {
+         "name": "Export To Excel",
+         "tier": "Standard"
+        },
+        {
+         "name": "Set Default",
+         "tier": "Base"
+        },
+        {
+         "name": "Toggle Status",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Grading System",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Weightage",
+         "tier": "Standard"
+        },
+        {
+         "name": "Validate Weightage",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Board Preset",
+         "tier": "Base"
+        },
+        {
+         "name": "View Grading System Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Grading Systems",
+         "tier": "Base"
+        },
+        {
+         "name": "View Statistics",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Weightages",
+         "tier": "Standard"
+        }
+       ]
+      },
+      {
+       "name": "Examination Background Jobs",
+       "slug": "examination-background-jobs",
+       "features": [
+        {
+         "name": "View Job Status",
+         "tier": "Standard"
+        }
+       ]
+      },
+      {
+       "name": "Grading System",
+       "slug": "grading-system",
+       "features": [
+        {
+         "name": "Add Weightage",
+         "tier": "Standard"
+        },
+        {
+         "name": "Bulk Save",
+         "tier": "Standard"
+        },
+        {
+         "name": "Calculate Batch",
+         "tier": "Base"
+        },
+        {
+         "name": "Calculate C G P A",
+         "tier": "Base"
+        },
+        {
+         "name": "Calculate Class Stats",
+         "tier": "Standard"
+        },
+        {
+         "name": "Calculate Grade",
+         "tier": "Base"
+        },
+        {
+         "name": "Calculate Improvement",
+         "tier": "Base"
+        },
+        {
+         "name": "Calculate Weighted",
+         "tier": "Base"
+        },
+        {
+         "name": "Check Promotion",
+         "tier": "Standard"
+        },
+        {
+         "name": "Create Grading System",
+         "tier": "Base"
+        },
+        {
+         "name": "Create Policy",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Grading System",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Policy",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Weightage",
+         "tier": "Standard"
+        },
+        {
+         "name": "Export To Excel",
+         "tier": "Standard"
+        },
+        {
+         "name": "Lock Scheme",
+         "tier": "Base"
+        },
+        {
+         "name": "Set Default",
+         "tier": "Base"
+        },
+        {
+         "name": "Set Default (Promotion Policy)",
+         "tier": "Base"
+        },
+        {
+         "name": "Toggle Status",
+         "tier": "Standard"
+        },
+        {
+         "name": "Unlock Scheme",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Grading System",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Policy",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Weightage",
+         "tier": "Standard"
+        },
+        {
+         "name": "Validate Weightage",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Board Preset",
+         "tier": "Base"
+        },
+        {
+         "name": "View Board Presets",
+         "tier": "Base"
+        },
+        {
+         "name": "View Grading System Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Grading Systems",
+         "tier": "Base"
+        },
+        {
+         "name": "View Policies (Promotion Policy)",
+         "tier": "Base"
+        },
+        {
+         "name": "View Policy Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Statistics",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Weightages",
+         "tier": "Standard"
+        }
+       ]
+      },
+      {
+       "name": "Marks Entry & Management",
+       "slug": "marks-entry-and-management",
+       "features": [
+        {
+         "name": "Approve Single Marks",
+         "tier": "Standard"
+        },
+        {
+         "name": "Bulk Approve Marks",
+         "tier": "Standard"
+        },
+        {
+         "name": "Bulk Marks Entry",
+         "tier": "Standard"
+        },
+        {
+         "name": "Calculate Class Rank",
+         "tier": "Base"
+        },
+        {
+         "name": "Calculate Grade",
+         "tier": "Base"
+        },
+        {
+         "name": "Calculate Ranks",
+         "tier": "Base"
+        },
+        {
+         "name": "Create Marks Entry",
+         "tier": "Base"
+        },
+        {
+         "name": "Export To Excel",
+         "tier": "Standard"
+        },
+        {
+         "name": "Recalculate Exam Grades",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Marks Entry",
+         "tier": "Base"
+        },
+        {
+         "name": "Validate Grade Coverage",
+         "tier": "Base"
+        },
+        {
+         "name": "View Exam Approval Status",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Marks",
+         "tier": "Base"
+        },
+        {
+         "name": "View Marks Entry Sheet",
+         "tier": "Base"
+        },
+        {
+         "name": "View My Pending Marks",
+         "tier": "Base"
+        },
+        {
+         "name": "View Pending Approvals",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Toppers",
+         "tier": "Base"
+        }
+       ]
+      },
+      {
+       "name": "Result Processing & Publishing",
+       "slug": "result-processing-and-publishing",
+       "features": [
+        {
+         "name": "Create Request",
+         "tier": "Base"
+        },
+        {
+         "name": "Download Report Card",
+         "tier": "Standard"
+        },
+        {
+         "name": "Download Transcript",
+         "tier": "Base"
+        },
+        {
+         "name": "Email Report Card",
+         "tier": "Standard"
+        },
+        {
+         "name": "Export To Excel",
+         "tier": "Standard"
+        },
+        {
+         "name": "Generate Bulk Transcripts",
+         "tier": "Standard"
+        },
+        {
+         "name": "Generate Exam Results",
+         "tier": "Base"
+        },
+        {
+         "name": "Generate Report Cards",
+         "tier": "Standard"
+        },
+        {
+         "name": "Generate Result",
+         "tier": "Base"
+        },
+        {
+         "name": "Generate Transcript",
+         "tier": "Base"
+        },
+        {
+         "name": "List Requests",
+         "tier": "Base"
+        },
+        {
+         "name": "Publish Results",
+         "tier": "Base"
+        },
+        {
+         "name": "Resolve Request",
+         "tier": "Base"
+        },
+        {
+         "name": "Schedule Publication",
+         "tier": "Standard"
+        },
+        {
+         "name": "Unpublish Result",
+         "tier": "Base"
+        },
+        {
+         "name": "View Class Analytics",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Publication Status",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Request",
+         "tier": "Base"
+        },
+        {
+         "name": "View Result Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Results",
+         "tier": "Base"
+        },
+        {
+         "name": "View Student Analytics",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Student Result",
+         "tier": "Base"
+        },
+        {
+         "name": "View Subject Analytics",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Houses",
+     "slug": "houses",
+     "featureCount": 7,
+     "subModules": [
+      {
+       "name": "School House Management",
+       "slug": "school-house-management",
+       "features": [
+        {
+         "name": "Assign Students",
+         "tier": "Base"
+        },
+        {
+         "name": "Create House",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete House",
+         "tier": "Base"
+        },
+        {
+         "name": "Update House",
+         "tier": "Base"
+        },
+        {
+         "name": "View House Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View House Students",
+         "tier": "Base"
+        },
+        {
+         "name": "View Houses",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Parent-Teacher Meetings",
+     "slug": "parent-teacher-meetings",
+     "featureCount": 4,
+     "subModules": [
+      {
+       "name": "PTM Scheduling",
+       "slug": "ptm-scheduling",
+       "features": [
+        {
+         "name": "Create PTM Scheduling",
+         "tier": "Base"
+        },
+        {
+         "name": "List",
+         "tier": "Base"
+        },
+        {
+         "name": "Update",
+         "tier": "Base"
+        },
+        {
+         "name": "View Details",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Subjects",
+     "slug": "subjects",
+     "featureCount": 24,
+     "subModules": [
+      {
+       "name": "Subject Category Management",
+       "slug": "subject-category-management",
+       "features": [
+        {
+         "name": "Create Category",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Category",
+         "tier": "Base"
+        },
+        {
+         "name": "Toggle Active",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Category",
+         "tier": "Base"
+        },
+        {
+         "name": "View Categories",
+         "tier": "Base"
+        },
+        {
+         "name": "View Category Details",
+         "tier": "Base"
+        }
+       ]
+      },
+      {
+       "name": "Subject Management",
+       "slug": "subject-management",
+       "features": [
+        {
+         "name": "Create Subject",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Subject",
+         "tier": "Base"
+        },
+        {
+         "name": "Export To CSV",
+         "tier": "Standard"
+        },
+        {
+         "name": "Export To Excel",
+         "tier": "Standard"
+        },
+        {
+         "name": "Export To P D F",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Subject",
+         "tier": "Base"
+        },
+        {
+         "name": "View Subject Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Subject Statistics",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Subjects",
+         "tier": "Base"
+        },
+        {
+         "name": "View Subjects By Class",
+         "tier": "Base"
+        },
+        {
+         "name": "View Subjects By Grade",
+         "tier": "Base"
+        }
+       ]
+      },
+      {
+       "name": "Subject-Teacher Allocation",
+       "slug": "subject-teacher-allocation",
+       "features": [
+        {
+         "name": "Allocate Subject To Class",
+         "tier": "Base"
+        },
+        {
+         "name": "Bulk Allocate To Class",
+         "tier": "Standard"
+        },
+        {
+         "name": "Export To P D F",
+         "tier": "Standard"
+        },
+        {
+         "name": "Remove Allocation",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Allocation",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Allocation Statistics",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Allocations By Class",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Admission",
+   "slug": "admission",
+   "featureCount": 27,
+   "baseCount": 22,
+   "standardCount": 5,
+   "moduleCount": 1,
+   "modules": [
+    {
+     "name": "Admission Workflow",
+     "slug": "admission-workflow",
+     "featureCount": 27,
+     "subModules": [
+      {
+       "name": "Admission Process Management",
+       "slug": "admission-process-management",
+       "features": [
+        {
+         "name": "Create/Submit Applications Approve",
+         "tier": "Base"
+        },
+        {
+         "name": "Create/Submit Applications Reject",
+         "tier": "Base"
+        },
+        {
+         "name": "Create/Submit Enquiries Convert",
+         "tier": "Base"
+        },
+        {
+         "name": "View Workflow",
+         "tier": "Base"
+        }
+       ]
+      },
+      {
+       "name": "Application Management",
+       "slug": "application-management",
+       "features": [
+        {
+         "name": "Create Application",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Application",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Application",
+         "tier": "Base"
+        },
+        {
+         "name": "View Application Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Applications",
+         "tier": "Base"
+        }
+       ]
+      },
+      {
+       "name": "Enquiry/Lead Management",
+       "slug": "enquiry-lead-management",
+       "features": [
+        {
+         "name": "Add Follow Up",
+         "tier": "Base"
+        },
+        {
+         "name": "Convert To Application",
+         "tier": "Base"
+        },
+        {
+         "name": "Create Enquiry",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Enquiry",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Enquiry",
+         "tier": "Base"
+        },
+        {
+         "name": "View Enquiries",
+         "tier": "Base"
+        },
+        {
+         "name": "View Enquiry Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Stats",
+         "tier": "Standard"
+        }
+       ]
+      },
+      {
+       "name": "Interview Scheduling & Evaluation",
+       "slug": "interview-scheduling-and-evaluation",
+       "features": [
+        {
+         "name": "Cancel Interview",
+         "tier": "Base"
+        },
+        {
+         "name": "Record Interview Feedback",
+         "tier": "Base"
+        },
+        {
+         "name": "Reschedule Interview",
+         "tier": "Standard"
+        },
+        {
+         "name": "Schedule Interview",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Interview Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Scheduled Interviews",
+         "tier": "Standard"
+        }
+       ]
+      },
+      {
+       "name": "Student Registration",
+       "slug": "student-registration",
+       "features": [
+        {
+         "name": "Cancel Registration",
+         "tier": "Base"
+        },
+        {
+         "name": "Complete Registration",
+         "tier": "Base"
+        },
+        {
+         "name": "View Pending Registrations",
+         "tier": "Base"
+        },
+        {
+         "name": "View Registration Status",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Student Management",
+   "slug": "student-management",
+   "featureCount": 89,
+   "baseCount": 60,
+   "standardCount": 29,
+   "moduleCount": 8,
+   "modules": [
+    {
+     "name": "Admission",
+     "slug": "admission",
+     "featureCount": 4,
+     "subModules": [
+      {
+       "name": "Student Admission Records",
+       "slug": "student-admission-records",
+       "features": [
+        {
+         "name": "Cancel Admission",
+         "tier": "Base"
+        },
+        {
+         "name": "Process New Admission",
+         "tier": "Base"
+        },
+        {
+         "name": "Process Transfer Admission",
+         "tier": "Standard"
+        },
+        {
+         "name": "Verify Admission Eligibility",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Bulk Operations",
+     "slug": "bulk-operations",
+     "featureCount": 3,
+     "subModules": [
+      {
+       "name": "Bulk Student Data Operations",
+       "slug": "bulk-student-data-operations",
+       "features": [
+        {
+         "name": "Bulk Delete Students",
+         "tier": "Standard"
+        },
+        {
+         "name": "Bulk Update Students",
+         "tier": "Standard"
+        },
+        {
+         "name": "Validate Bulk Import",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Documents",
+     "slug": "documents",
+     "featureCount": 6,
+     "subModules": [
+      {
+       "name": "Student Document Management",
+       "slug": "student-document-management",
+       "features": [
+        {
+         "name": "Delete Document",
+         "tier": "Base"
+        },
+        {
+         "name": "Reject Document",
+         "tier": "Base"
+        },
+        {
+         "name": "Request Reupload",
+         "tier": "Base"
+        },
+        {
+         "name": "Upload Document",
+         "tier": "Base"
+        },
+        {
+         "name": "Verify Document",
+         "tier": "Base"
+        },
+        {
+         "name": "View Student Documents",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Enrollment",
+     "slug": "enrollment",
+     "featureCount": 7,
+     "subModules": [
+      {
+       "name": "Student Enrollment Management",
+       "slug": "student-enrollment-management",
+       "features": [
+        {
+         "name": "Complete Enrollment",
+         "tier": "Base"
+        },
+        {
+         "name": "Enroll Step1",
+         "tier": "Base"
+        },
+        {
+         "name": "Enroll Step2",
+         "tier": "Base"
+        },
+        {
+         "name": "Enroll Step3",
+         "tier": "Base"
+        },
+        {
+         "name": "Init Enrollment",
+         "tier": "Base"
+        },
+        {
+         "name": "Verify Documents",
+         "tier": "Base"
+        },
+        {
+         "name": "View Enrollment Progress",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Promotion",
+     "slug": "promotion",
+     "featureCount": 8,
+     "subModules": [
+      {
+       "name": "Student Promotion/Class Progression",
+       "slug": "student-promotion-class-progression",
+       "features": [
+        {
+         "name": "Bulk Promote Students",
+         "tier": "Standard"
+        },
+        {
+         "name": "Demote Student",
+         "tier": "Base"
+        },
+        {
+         "name": "Download Promotion Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "Generate Promotion Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "Promote Entire Class",
+         "tier": "Base"
+        },
+        {
+         "name": "Promote Single Student",
+         "tier": "Base"
+        },
+        {
+         "name": "Rollback Promotion",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Promotion History",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Student Directory",
+     "slug": "student-directory",
+     "featureCount": 20,
+     "subModules": [
+      {
+       "name": "Student Record Management",
+       "slug": "student-record-management",
+       "features": [
+        {
+         "name": "Approve",
+         "tier": "Standard"
+        },
+        {
+         "name": "Bulk Photo Upload",
+         "tier": "Standard"
+        },
+        {
+         "name": "Create/Submit Bulk Import",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Student",
+         "tier": "Base"
+        },
+        {
+         "name": "Download Student Export",
+         "tier": "Standard"
+        },
+        {
+         "name": "Export Students",
+         "tier": "Standard"
+        },
+        {
+         "name": "List",
+         "tier": "Base"
+        },
+        {
+         "name": "Reject",
+         "tier": "Base"
+        },
+        {
+         "name": "Search Students",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Student",
+         "tier": "Base"
+        },
+        {
+         "name": "Upload Photo",
+         "tier": "Base"
+        },
+        {
+         "name": "View Academic Record",
+         "tier": "Base"
+        },
+        {
+         "name": "View Import Template",
+         "tier": "Base"
+        },
+        {
+         "name": "View Profile Sections",
+         "tier": "Base"
+        },
+        {
+         "name": "View Student By Admission Number",
+         "tier": "Base"
+        },
+        {
+         "name": "View Student Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Student Profile",
+         "tier": "Base"
+        },
+        {
+         "name": "View Student Statistics",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Student Timetable",
+         "tier": "Base"
+        },
+        {
+         "name": "View Students",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Student Portal",
+     "slug": "student-portal",
+     "featureCount": 31,
+     "subModules": [
+      {
+       "name": "Student Assignment Submission Portal",
+       "slug": "student-assignment-submission-portal",
+       "features": [
+        {
+         "name": "List Assignments",
+         "tier": "Base"
+        },
+        {
+         "name": "Submit Assignment",
+         "tier": "Base"
+        },
+        {
+         "name": "View Assignment Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Submission",
+         "tier": "Base"
+        }
+       ]
+      },
+      {
+       "name": "Student Self-Service Portal",
+       "slug": "student-self-service-portal",
+       "features": [
+        {
+         "name": "Apply My Leave",
+         "tier": "Base"
+        },
+        {
+         "name": "Cancel My Leave",
+         "tier": "Base"
+        },
+        {
+         "name": "Create Profile Change Request",
+         "tier": "Base"
+        },
+        {
+         "name": "Download My Admit Card",
+         "tier": "Base"
+        },
+        {
+         "name": "Download Report Card",
+         "tier": "Standard"
+        },
+        {
+         "name": "List My Admit Cards",
+         "tier": "Base"
+        },
+        {
+         "name": "List My Results",
+         "tier": "Base"
+        },
+        {
+         "name": "List Profile Change Requests",
+         "tier": "Base"
+        },
+        {
+         "name": "Patch Me",
+         "tier": "Base"
+        },
+        {
+         "name": "Scope Check",
+         "tier": "Base"
+        },
+        {
+         "name": "View Announcement",
+         "tier": "Base"
+        },
+        {
+         "name": "View Announcements",
+         "tier": "Base"
+        },
+        {
+         "name": "View Calendar",
+         "tier": "Base"
+        },
+        {
+         "name": "View Dashboard",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Me",
+         "tier": "Base"
+        },
+        {
+         "name": "View My Attendance",
+         "tier": "Base"
+        },
+        {
+         "name": "View My Curriculum",
+         "tier": "Base"
+        },
+        {
+         "name": "View My Curriculum Detail",
+         "tier": "Base"
+        },
+        {
+         "name": "View My Diary",
+         "tier": "Base"
+        },
+        {
+         "name": "View My Discipline",
+         "tier": "Base"
+        },
+        {
+         "name": "View My Fees",
+         "tier": "Base"
+        },
+        {
+         "name": "View My Leave History",
+         "tier": "Standard"
+        },
+        {
+         "name": "View My Library",
+         "tier": "Base"
+        },
+        {
+         "name": "View My Result By Exam",
+         "tier": "Base"
+        },
+        {
+         "name": "View Profile Change Request",
+         "tier": "Base"
+        },
+        {
+         "name": "View Today Schedule",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Week Schedule",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Transfer",
+     "slug": "transfer",
+     "featureCount": 10,
+     "subModules": [
+      {
+       "name": "Student Transfer Certificate Management",
+       "slug": "student-transfer-certificate-management",
+       "features": [
+        {
+         "name": "Approve Transfer",
+         "tier": "Standard"
+        },
+        {
+         "name": "Cancel Transfer",
+         "tier": "Standard"
+        },
+        {
+         "name": "Download Transfer Certificate",
+         "tier": "Standard"
+        },
+        {
+         "name": "Finalize Transfer",
+         "tier": "Standard"
+        },
+        {
+         "name": "Generate Transfer Certificate",
+         "tier": "Standard"
+        },
+        {
+         "name": "Initiate Transfer",
+         "tier": "Standard"
+        },
+        {
+         "name": "Reject Transfer",
+         "tier": "Standard"
+        },
+        {
+         "name": "View School Transfer List",
+         "tier": "Standard"
+        },
+        {
+         "name": "View School Transfer Summary",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Transfer History",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Parent Management",
+   "slug": "parent-management",
+   "featureCount": 61,
+   "baseCount": 50,
+   "standardCount": 11,
+   "moduleCount": 4,
+   "modules": [
+    {
+     "name": "Parent Communication",
+     "slug": "parent-communication",
+     "featureCount": 5,
+     "subModules": [
+      {
+       "name": "Parent Communication Log",
+       "slug": "parent-communication-log",
+       "features": [
+        {
+         "name": "Send Bulk Messages",
+         "tier": "Standard"
+        },
+        {
+         "name": "Send Class Announcement",
+         "tier": "Base"
+        },
+        {
+         "name": "Send Individual Message",
+         "tier": "Base"
+        },
+        {
+         "name": "Send School Announcement",
+         "tier": "Base"
+        },
+        {
+         "name": "View Communication History",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Parent Directory",
+     "slug": "parent-directory",
+     "featureCount": 9,
+     "subModules": [
+      {
+       "name": "Parent Record Management",
+       "slug": "parent-record-management",
+       "features": [
+        {
+         "name": "Create Parent",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Parent",
+         "tier": "Base"
+        },
+        {
+         "name": "Export Parents",
+         "tier": "Standard"
+        },
+        {
+         "name": "Search Parents",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Parent",
+         "tier": "Base"
+        },
+        {
+         "name": "View Parent By Phone",
+         "tier": "Base"
+        },
+        {
+         "name": "View Parent Children",
+         "tier": "Base"
+        },
+        {
+         "name": "View Parent Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Parents",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Parent Linking",
+     "slug": "parent-linking",
+     "featureCount": 8,
+     "subModules": [
+      {
+       "name": "Parent-Student Linking",
+       "slug": "parent-student-linking",
+       "features": [
+        {
+         "name": "Bulk Link Students To Parent",
+         "tier": "Standard"
+        },
+        {
+         "name": "Find Siblings",
+         "tier": "Base"
+        },
+        {
+         "name": "Fix Broken Relationships",
+         "tier": "Base"
+        },
+        {
+         "name": "Link Siblings Automatically",
+         "tier": "Standard"
+        },
+        {
+         "name": "Link Student To Parent",
+         "tier": "Base"
+        },
+        {
+         "name": "Unlink Student From Parent",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Parent Student Link",
+         "tier": "Base"
+        },
+        {
+         "name": "Validate Relationship",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Parent Portal",
+     "slug": "parent-portal",
+     "featureCount": 39,
+     "subModules": [
+      {
+       "name": "Parent Self-Service Portal",
+       "slug": "parent-self-service-portal",
+       "features": [
+        {
+         "name": "Apply Child Leave",
+         "tier": "Base"
+        },
+        {
+         "name": "Cancel Child Leave",
+         "tier": "Base"
+        },
+        {
+         "name": "Confirm Child Payment",
+         "tier": "Base"
+        },
+        {
+         "name": "Download Admit Card",
+         "tier": "Base"
+        },
+        {
+         "name": "Download Report Card",
+         "tier": "Standard"
+        },
+        {
+         "name": "Initiate Child Payment",
+         "tier": "Base"
+        },
+        {
+         "name": "List Admit Cards",
+         "tier": "Base"
+        },
+        {
+         "name": "List Assignments",
+         "tier": "Base"
+        },
+        {
+         "name": "List Curriculum",
+         "tier": "Base"
+        },
+        {
+         "name": "List Discipline",
+         "tier": "Base"
+        },
+        {
+         "name": "List Published Results",
+         "tier": "Base"
+        },
+        {
+         "name": "List Sessions",
+         "tier": "Base"
+        },
+        {
+         "name": "Message Teacher",
+         "tier": "Base"
+        },
+        {
+         "name": "Respond To Session",
+         "tier": "Base"
+        },
+        {
+         "name": "Scope Check Child",
+         "tier": "Base"
+        },
+        {
+         "name": "View Announcements",
+         "tier": "Base"
+        },
+        {
+         "name": "View Assignment",
+         "tier": "Base"
+        },
+        {
+         "name": "View Attendance Day",
+         "tier": "Base"
+        },
+        {
+         "name": "View Calendar",
+         "tier": "Base"
+        },
+        {
+         "name": "View Child Attendance",
+         "tier": "Base"
+        },
+        {
+         "name": "View Child Detail",
+         "tier": "Base"
+        },
+        {
+         "name": "View Child Fees",
+         "tier": "Base"
+        },
+        {
+         "name": "View Child Leave History",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Child Payment Status",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Child Receipts",
+         "tier": "Base"
+        },
+        {
+         "name": "View Child Transport",
+         "tier": "Base"
+        },
+        {
+         "name": "View Curriculum",
+         "tier": "Base"
+        },
+        {
+         "name": "View Dashboard",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Diary",
+         "tier": "Base"
+        },
+        {
+         "name": "View Discipline",
+         "tier": "Base"
+        },
+        {
+         "name": "View Me",
+         "tier": "Base"
+        },
+        {
+         "name": "View Message Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Message Thread",
+         "tier": "Base"
+        },
+        {
+         "name": "View Messages",
+         "tier": "Base"
+        },
+        {
+         "name": "View My Children",
+         "tier": "Base"
+        },
+        {
+         "name": "View Published Result By Exam",
+         "tier": "Base"
+        },
+        {
+         "name": "View Session",
+         "tier": "Base"
+        },
+        {
+         "name": "View Today Schedule",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Week Schedule",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "HR & Staff Management",
+   "slug": "hr-and-staff-management",
+   "featureCount": 176,
+   "baseCount": 136,
+   "standardCount": 40,
+   "moduleCount": 8,
+   "modules": [
+    {
+     "name": "Leave Management",
+     "slug": "leave-management",
+     "featureCount": 18,
+     "subModules": [
+      {
+       "name": "Staff Leave Management",
+       "slug": "staff-leave-management",
+       "features": [
+        {
+         "name": "Apply Leave",
+         "tier": "Base"
+        },
+        {
+         "name": "Approve Leave",
+         "tier": "Standard"
+        },
+        {
+         "name": "Cancel Leave",
+         "tier": "Base"
+        },
+        {
+         "name": "Create Leave Type",
+         "tier": "Base"
+        },
+        {
+         "name": "Create/Submit Leaves Balance Adjust",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Leave Type",
+         "tier": "Base"
+        },
+        {
+         "name": "Reject Leave",
+         "tier": "Base"
+        },
+        {
+         "name": "Toggle Status",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Leave",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Leave Type",
+         "tier": "Base"
+        },
+        {
+         "name": "View Leave Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Leave Type Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Leave Types",
+         "tier": "Base"
+        },
+        {
+         "name": "View Leaves",
+         "tier": "Base"
+        },
+        {
+         "name": "View Leaves Balance",
+         "tier": "Base"
+        },
+        {
+         "name": "View Leaves Balance My",
+         "tier": "Base"
+        },
+        {
+         "name": "View Pending Approvals",
+         "tier": "Standard"
+        },
+        {
+         "name": "Withdraw Leave",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Organization Structure",
+     "slug": "organization-structure",
+     "featureCount": 10,
+     "subModules": [
+      {
+       "name": "Department Management",
+       "slug": "department-management",
+       "features": [
+        {
+         "name": "Create Department",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Department",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Department",
+         "tier": "Base"
+        },
+        {
+         "name": "View Department Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Departments",
+         "tier": "Base"
+        }
+       ]
+      },
+      {
+       "name": "Designation Management",
+       "slug": "designation-management",
+       "features": [
+        {
+         "name": "Create Designation",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Designation",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Designation",
+         "tier": "Base"
+        },
+        {
+         "name": "View Designation Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Designations",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Payroll",
+     "slug": "payroll",
+     "featureCount": 23,
+     "subModules": [
+      {
+       "name": "Payroll Processing",
+       "slug": "payroll-processing",
+       "features": [
+        {
+         "name": "Add Deduction",
+         "tier": "Base"
+        },
+        {
+         "name": "Approve Payroll",
+         "tier": "Standard"
+        },
+        {
+         "name": "Bulk Generate Payslips",
+         "tier": "Standard"
+        },
+        {
+         "name": "Bulk Update Payment",
+         "tier": "Standard"
+        },
+        {
+         "name": "Create Adjustment",
+         "tier": "Base"
+        },
+        {
+         "name": "Create Payroll Processing",
+         "tier": "Base"
+        },
+        {
+         "name": "Download My Payslip",
+         "tier": "Base"
+        },
+        {
+         "name": "Evaluate Readiness",
+         "tier": "Base"
+        },
+        {
+         "name": "Generate Payslip",
+         "tier": "Base"
+        },
+        {
+         "name": "Lock Payroll",
+         "tier": "Standard"
+        },
+        {
+         "name": "Process Payroll",
+         "tier": "Standard"
+        },
+        {
+         "name": "Reject Payroll",
+         "tier": "Standard"
+        },
+        {
+         "name": "Send Payslip Email",
+         "tier": "Base"
+        },
+        {
+         "name": "Soft Delete",
+         "tier": "Base"
+        },
+        {
+         "name": "Update",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Payment",
+         "tier": "Base"
+        },
+        {
+         "name": "Verify Staff Bank",
+         "tier": "Base"
+        },
+        {
+         "name": "View",
+         "tier": "Base"
+        },
+        {
+         "name": "View Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View My Payslips",
+         "tier": "Base"
+        },
+        {
+         "name": "View Payroll Details",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Payroll Records",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Payroll Summary",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Performance",
+     "slug": "performance",
+     "featureCount": 15,
+     "subModules": [
+      {
+       "name": "Staff Performance Appraisal",
+       "slug": "staff-performance-appraisal",
+       "features": [
+        {
+         "name": "Acknowledge Review",
+         "tier": "Base"
+        },
+        {
+         "name": "Bulk Create Reviews",
+         "tier": "Standard"
+        },
+        {
+         "name": "Cancel Review",
+         "tier": "Base"
+        },
+        {
+         "name": "Create Review",
+         "tier": "Base"
+        },
+        {
+         "name": "Finalize Appraisal",
+         "tier": "Standard"
+        },
+        {
+         "name": "Submit Feedback",
+         "tier": "Base"
+        },
+        {
+         "name": "Submit Reviewer Review",
+         "tier": "Base"
+        },
+        {
+         "name": "Submit Self Review",
+         "tier": "Base"
+        },
+        {
+         "name": "View Analytics",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Appraisal Summary",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Feedback For Review",
+         "tier": "Base"
+        },
+        {
+         "name": "View Pending Reviews",
+         "tier": "Base"
+        },
+        {
+         "name": "View Review Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Reviews",
+         "tier": "Base"
+        },
+        {
+         "name": "View Staff Appraisal History",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Staff Attendance",
+     "slug": "staff-attendance",
+     "featureCount": 16,
+     "subModules": [
+      {
+       "name": "Staff Attendance Tracking",
+       "slug": "staff-attendance-tracking",
+       "features": [
+        {
+         "name": "Approve Correction",
+         "tier": "Standard"
+        },
+        {
+         "name": "Bulk Mark Attendance",
+         "tier": "Standard"
+        },
+        {
+         "name": "Delete Attendance",
+         "tier": "Base"
+        },
+        {
+         "name": "Export Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "Mark Attendance",
+         "tier": "Base"
+        },
+        {
+         "name": "Reject Correction",
+         "tier": "Base"
+        },
+        {
+         "name": "Request Correction",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Attendance",
+         "tier": "Base"
+        },
+        {
+         "name": "View Absenteeism Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Attendance",
+         "tier": "Base"
+        },
+        {
+         "name": "View Attendance Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Attendance Trend",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Department Summary",
+         "tier": "Base"
+        },
+        {
+         "name": "View Staff Monthly Summary",
+         "tier": "Base"
+        },
+        {
+         "name": "View Staff Summary",
+         "tier": "Base"
+        },
+        {
+         "name": "View Today Status",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Staff Directory",
+     "slug": "staff-directory",
+     "featureCount": 49,
+     "subModules": [
+      {
+       "name": "Non-Teaching Staff Management",
+       "slug": "non-teaching-staff-management",
+       "features": [
+        {
+         "name": "Activate Staff",
+         "tier": "Base"
+        },
+        {
+         "name": "Create Staff",
+         "tier": "Base"
+        },
+        {
+         "name": "Deactivate Staff",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Staff",
+         "tier": "Base"
+        },
+        {
+         "name": "Export CSV",
+         "tier": "Standard"
+        },
+        {
+         "name": "Export Excel",
+         "tier": "Standard"
+        },
+        {
+         "name": "Patch Profile Section",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Staff",
+         "tier": "Base"
+        },
+        {
+         "name": "Upload Documents",
+         "tier": "Base"
+        },
+        {
+         "name": "Upload Photo",
+         "tier": "Base"
+        },
+        {
+         "name": "View Attendance History",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Categories",
+         "tier": "Base"
+        },
+        {
+         "name": "View Profile",
+         "tier": "Base"
+        },
+        {
+         "name": "View Profile Completion",
+         "tier": "Base"
+        },
+        {
+         "name": "View Staff",
+         "tier": "Base"
+        },
+        {
+         "name": "View Staff Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Staff Leaves",
+         "tier": "Base"
+        }
+       ]
+      },
+      {
+       "name": "Staff Record Management",
+       "slug": "staff-record-management",
+       "features": [
+        {
+         "name": "Activate Staff",
+         "tier": "Base"
+        },
+        {
+         "name": "Add Applicant",
+         "tier": "Base"
+        },
+        {
+         "name": "Complete Task",
+         "tier": "Base"
+        },
+        {
+         "name": "Create Onboarding",
+         "tier": "Base"
+        },
+        {
+         "name": "Create Recruitment",
+         "tier": "Base"
+        },
+        {
+         "name": "Create Staff",
+         "tier": "Base"
+        },
+        {
+         "name": "Create/Submit Staff Bulk Import",
+         "tier": "Base"
+        },
+        {
+         "name": "Deactivate Staff",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Recruitment",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Staff",
+         "tier": "Base"
+        },
+        {
+         "name": "Process Approval Action",
+         "tier": "Standard"
+        },
+        {
+         "name": "Schedule Interview",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Applicant Status",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Bank Details",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Onboarding",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Onboarding Status",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Recruitment",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Staff",
+         "tier": "Base"
+        },
+        {
+         "name": "Verify Document",
+         "tier": "Base"
+        },
+        {
+         "name": "View Designations By Department",
+         "tier": "Base"
+        },
+        {
+         "name": "View Employee Bank Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Onboarding Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Onboarding Progress",
+         "tier": "Base"
+        },
+        {
+         "name": "View Onboarding Stats",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Onboardings",
+         "tier": "Base"
+        },
+        {
+         "name": "View Recruitment Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Recruitment Stats",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Recruitments",
+         "tier": "Base"
+        },
+        {
+         "name": "View Staff",
+         "tier": "Base"
+        },
+        {
+         "name": "View Staff Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Staff Import Template",
+         "tier": "Base"
+        },
+        {
+         "name": "View Staff Stats",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Teacher Directory",
+     "slug": "teacher-directory",
+     "featureCount": 30,
+     "subModules": [
+      {
+       "name": "Teacher Record Management",
+       "slug": "teacher-record-management",
+       "features": [
+        {
+         "name": "Activate Teacher",
+         "tier": "Base"
+        },
+        {
+         "name": "Assign Class",
+         "tier": "Base"
+        },
+        {
+         "name": "Assign Subjects",
+         "tier": "Base"
+        },
+        {
+         "name": "Create Teacher",
+         "tier": "Base"
+        },
+        {
+         "name": "Create/Submit Bulk Delete",
+         "tier": "Base"
+        },
+        {
+         "name": "Create/Submit Bulk Import",
+         "tier": "Base"
+        },
+        {
+         "name": "Create/Submit Bulk Update",
+         "tier": "Base"
+        },
+        {
+         "name": "Deactivate Teacher",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Document",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Teacher",
+         "tier": "Base"
+        },
+        {
+         "name": "Export CSV",
+         "tier": "Standard"
+        },
+        {
+         "name": "Export Excel",
+         "tier": "Standard"
+        },
+        {
+         "name": "Patch Profile Section",
+         "tier": "Base"
+        },
+        {
+         "name": "Remove Class",
+         "tier": "Base"
+        },
+        {
+         "name": "Remove Subject",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Teacher",
+         "tier": "Base"
+        },
+        {
+         "name": "Upload Documents",
+         "tier": "Base"
+        },
+        {
+         "name": "Upload Photo",
+         "tier": "Base"
+        },
+        {
+         "name": "View Attendance History",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Import Template",
+         "tier": "Base"
+        },
+        {
+         "name": "View Profile",
+         "tier": "Base"
+        },
+        {
+         "name": "View Profile Completion",
+         "tier": "Base"
+        },
+        {
+         "name": "View Teacher Classes",
+         "tier": "Base"
+        },
+        {
+         "name": "View Teacher Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Teacher Leaves",
+         "tier": "Base"
+        },
+        {
+         "name": "View Teacher Performance",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Teacher Schedule",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Teacher Subjects",
+         "tier": "Base"
+        },
+        {
+         "name": "View Teacher Workload",
+         "tier": "Base"
+        },
+        {
+         "name": "View Teachers",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Teacher Portal",
+     "slug": "teacher-portal",
+     "featureCount": 15,
+     "subModules": [
+      {
+       "name": "Teacher Self-Service Portal",
+       "slug": "teacher-self-service-portal",
+       "features": [
+        {
+         "name": "Mark Class Attendance",
+         "tier": "Base"
+        },
+        {
+         "name": "Mark Period Delivery",
+         "tier": "Base"
+        },
+        {
+         "name": "Message Class Parents",
+         "tier": "Base"
+        },
+        {
+         "name": "View Class Curriculum",
+         "tier": "Base"
+        },
+        {
+         "name": "View Class Detail",
+         "tier": "Base"
+        },
+        {
+         "name": "View Class Parents",
+         "tier": "Base"
+        },
+        {
+         "name": "View Class Students",
+         "tier": "Base"
+        },
+        {
+         "name": "View Me",
+         "tier": "Base"
+        },
+        {
+         "name": "View My Attendance",
+         "tier": "Base"
+        },
+        {
+         "name": "View My Classes",
+         "tier": "Base"
+        },
+        {
+         "name": "View My Subjects",
+         "tier": "Base"
+        },
+        {
+         "name": "View My Substitutions",
+         "tier": "Base"
+        },
+        {
+         "name": "View Period Deliveries",
+         "tier": "Base"
+        },
+        {
+         "name": "View Today Schedule",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Week Schedule",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Finance & Fee Management",
+   "slug": "finance-and-fee-management",
+   "featureCount": 105,
+   "baseCount": 47,
+   "standardCount": 58,
+   "moduleCount": 5,
+   "modules": [
+    {
+     "name": "Due Management",
+     "slug": "due-management",
+     "featureCount": 16,
+     "subModules": [
+      {
+       "name": "Fee Due Tracking & Reminders",
+       "slug": "fee-due-tracking-and-reminders",
+       "features": [
+        {
+         "name": "Apply Penalties",
+         "tier": "Base"
+        },
+        {
+         "name": "Initialize Dues",
+         "tier": "Base"
+        },
+        {
+         "name": "Mark Overdue Dues",
+         "tier": "Base"
+        },
+        {
+         "name": "Recalculate Dues",
+         "tier": "Base"
+        },
+        {
+         "name": "Send Bulk Reminders",
+         "tier": "Standard"
+        },
+        {
+         "name": "Send Student Reminder",
+         "tier": "Base"
+        },
+        {
+         "name": "View Allocation Dues",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Class Due Overview",
+         "tier": "Base"
+        },
+        {
+         "name": "View Overdue Dues",
+         "tier": "Base"
+        },
+        {
+         "name": "View Penalty Preview",
+         "tier": "Base"
+        },
+        {
+         "name": "View Penalty Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Reminder History",
+         "tier": "Standard"
+        },
+        {
+         "name": "View School Due Summary",
+         "tier": "Base"
+        },
+        {
+         "name": "View Student Due Stats",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Student Dues",
+         "tier": "Base"
+        },
+        {
+         "name": "Waive Penalty",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Expenses",
+     "slug": "expenses",
+     "featureCount": 13,
+     "subModules": [
+      {
+       "name": "Expense Management",
+       "slug": "expense-management",
+       "features": [
+        {
+         "name": "Approve Expense",
+         "tier": "Standard"
+        },
+        {
+         "name": "Create Category",
+         "tier": "Base"
+        },
+        {
+         "name": "Create Expense",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Expense",
+         "tier": "Base"
+        },
+        {
+         "name": "Reject Expense",
+         "tier": "Base"
+        },
+        {
+         "name": "Setup Default Categories",
+         "tier": "Base"
+        },
+        {
+         "name": "Submit Expense",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Expense",
+         "tier": "Base"
+        },
+        {
+         "name": "Upload Receipt",
+         "tier": "Base"
+        },
+        {
+         "name": "View Categories",
+         "tier": "Base"
+        },
+        {
+         "name": "View Expense Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Expenses",
+         "tier": "Base"
+        },
+        {
+         "name": "View Summary",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Fee Collection",
+     "slug": "fee-collection",
+     "featureCount": 20,
+     "subModules": [
+      {
+       "name": "Fee Payment Collection",
+       "slug": "fee-payment-collection",
+       "features": [
+        {
+         "name": "Confirm Payment",
+         "tier": "Base"
+        },
+        {
+         "name": "Initiate Payment",
+         "tier": "Base"
+        },
+        {
+         "name": "Record Manual Payment",
+         "tier": "Base"
+        },
+        {
+         "name": "View Payment Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Payments",
+         "tier": "Base"
+        },
+        {
+         "name": "View Student Payment Summary",
+         "tier": "Base"
+        }
+       ]
+      },
+      {
+       "name": "Fee Receipt Generation",
+       "slug": "fee-receipt-generation",
+       "features": [
+        {
+         "name": "Cancel Receipt",
+         "tier": "Base"
+        },
+        {
+         "name": "View Receipt Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Receipt PDF",
+         "tier": "Base"
+        },
+        {
+         "name": "View Student Receipts",
+         "tier": "Base"
+        }
+       ]
+      },
+      {
+       "name": "Fee Refund Management",
+       "slug": "fee-refund-management",
+       "features": [
+        {
+         "name": "Confirm Manual Refund",
+         "tier": "Standard"
+        },
+        {
+         "name": "Initiate Refund",
+         "tier": "Standard"
+        },
+        {
+         "name": "Process Gateway Refund",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Refund Details",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Refunds",
+         "tier": "Standard"
+        }
+       ]
+      },
+      {
+       "name": "Online Payment Gateway Webhooks",
+       "slug": "online-payment-gateway-webhooks",
+       "features": [
+        {
+         "name": "Handle Razorpay Webhook",
+         "tier": "Standard"
+        },
+        {
+         "name": "Handle Stripe Webhook",
+         "tier": "Standard"
+        }
+       ]
+      },
+      {
+       "name": "Online Payment Processing",
+       "slug": "online-payment-processing",
+       "features": [
+        {
+         "name": "Confirm Payment",
+         "tier": "Base"
+        },
+        {
+         "name": "Initiate Payment",
+         "tier": "Base"
+        },
+        {
+         "name": "View Payment Details",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Fee Structure",
+     "slug": "fee-structure",
+     "featureCount": 41,
+     "subModules": [
+      {
+       "name": "Class/Student Fee Allocation",
+       "slug": "class-student-fee-allocation",
+       "features": [
+        {
+         "name": "Allocate To Class",
+         "tier": "Standard"
+        },
+        {
+         "name": "Allocate To Students",
+         "tier": "Standard"
+        },
+        {
+         "name": "Revoke Allocation",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Allocation",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Allocations",
+         "tier": "Standard"
+        }
+       ]
+      },
+      {
+       "name": "Fee Concession & Discounts",
+       "slug": "fee-concession-and-discounts",
+       "features": [
+        {
+         "name": "Assign Students",
+         "tier": "Standard"
+        },
+        {
+         "name": "Create Concession",
+         "tier": "Standard"
+        },
+        {
+         "name": "Delete Concession",
+         "tier": "Standard"
+        },
+        {
+         "name": "Revoke Students",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Concession",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Concession Details",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Concessions",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Student Concessions",
+         "tier": "Base"
+        }
+       ]
+      },
+      {
+       "name": "Fee Head/Category Management",
+       "slug": "fee-head-category-management",
+       "features": [
+        {
+         "name": "Bulk Delete Categories",
+         "tier": "Standard"
+        },
+        {
+         "name": "Create Category",
+         "tier": "Standard"
+        },
+        {
+         "name": "Delete Category",
+         "tier": "Standard"
+        },
+        {
+         "name": "Reorder Categories",
+         "tier": "Standard"
+        },
+        {
+         "name": "Setup Default Categories",
+         "tier": "Standard"
+        },
+        {
+         "name": "Toggle Category Status",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Category",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Categories",
+         "tier": "Base"
+        },
+        {
+         "name": "View Category Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Category Stats",
+         "tier": "Standard"
+        }
+       ]
+      },
+      {
+       "name": "Fee Structure Management",
+       "slug": "fee-structure-management",
+       "features": [
+        {
+         "name": "Archive Fee Structure",
+         "tier": "Standard"
+        },
+        {
+         "name": "Clone Fee Structure",
+         "tier": "Standard"
+        },
+        {
+         "name": "Create Fee Structure",
+         "tier": "Standard"
+        },
+        {
+         "name": "Delete Fee Structure",
+         "tier": "Standard"
+        },
+        {
+         "name": "Publish Fee Structure",
+         "tier": "Standard"
+        },
+        {
+         "name": "Unarchive Fee Structure",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Fee Structure",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Fee Structure Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Fee Structure Stats",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Fee Structures",
+         "tier": "Base"
+        }
+       ]
+      },
+      {
+       "name": "Fee Structure Templates",
+       "slug": "fee-structure-templates",
+       "features": [
+        {
+         "name": "Apply Template",
+         "tier": "Standard"
+        },
+        {
+         "name": "Clone Template",
+         "tier": "Standard"
+        },
+        {
+         "name": "Create Template",
+         "tier": "Standard"
+        },
+        {
+         "name": "Delete Template",
+         "tier": "Standard"
+        },
+        {
+         "name": "Toggle Template Status",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Template",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Template Details",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Templates",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Finance Reports",
+     "slug": "finance-reports",
+     "featureCount": 15,
+     "subModules": [
+      {
+       "name": "Finance Reporting",
+       "slug": "finance-reporting",
+       "features": [
+        {
+         "name": "Export Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "Reconcile Payments Vs Dues",
+         "tier": "Standard"
+        },
+        {
+         "name": "Reconcile Payments Vs Receipts",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Cash Book",
+         "tier": "Base"
+        },
+        {
+         "name": "View Class Wise Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Collection Summary",
+         "tier": "Base"
+        },
+        {
+         "name": "View Concession Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Daily Reconciliation",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Day Book",
+         "tier": "Base"
+        },
+        {
+         "name": "View Defaulter List",
+         "tier": "Base"
+        },
+        {
+         "name": "View Fee Category Wise Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Income Statement",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Monthly Trend",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Outstanding Summary",
+         "tier": "Base"
+        },
+        {
+         "name": "View Pending Gateway Payments",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Communication",
+   "slug": "communication",
+   "featureCount": 56,
+   "baseCount": 51,
+   "standardCount": 5,
+   "moduleCount": 4,
+   "modules": [
+    {
+     "name": "Announcements",
+     "slug": "announcements",
+     "featureCount": 11,
+     "subModules": [
+      {
+       "name": "Announcement Management",
+       "slug": "announcement-management",
+       "features": [
+        {
+         "name": "Create Announcement Management",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete",
+         "tier": "Base"
+        },
+        {
+         "name": "Notify",
+         "tier": "Base"
+        },
+        {
+         "name": "Publish",
+         "tier": "Base"
+        },
+        {
+         "name": "Request Publish",
+         "tier": "Base"
+        },
+        {
+         "name": "Update",
+         "tier": "Base"
+        },
+        {
+         "name": "View",
+         "tier": "Base"
+        },
+        {
+         "name": "View Active",
+         "tier": "Base"
+        },
+        {
+         "name": "View Archived",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Draft",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Events",
+     "slug": "events",
+     "featureCount": 15,
+     "subModules": [
+      {
+       "name": "Event Management",
+       "slug": "event-management",
+       "features": [
+        {
+         "name": "Cancel",
+         "tier": "Base"
+        },
+        {
+         "name": "Create Event Management",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete",
+         "tier": "Base"
+        },
+        {
+         "name": "Mark Reminder Sent",
+         "tier": "Base"
+        },
+        {
+         "name": "Rsvp",
+         "tier": "Base"
+        },
+        {
+         "name": "Update",
+         "tier": "Base"
+        },
+        {
+         "name": "View",
+         "tier": "Base"
+        },
+        {
+         "name": "View By Date Range",
+         "tier": "Base"
+        },
+        {
+         "name": "View Calendar View",
+         "tier": "Base"
+        },
+        {
+         "name": "View Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Event Types",
+         "tier": "Base"
+        },
+        {
+         "name": "View Holidays",
+         "tier": "Base"
+        },
+        {
+         "name": "View Important Events",
+         "tier": "Base"
+        },
+        {
+         "name": "View Rsvps",
+         "tier": "Base"
+        },
+        {
+         "name": "View Upcoming",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Messaging",
+     "slug": "messaging",
+     "featureCount": 19,
+     "subModules": [
+      {
+       "name": "Email Messaging",
+       "slug": "email-messaging",
+       "features": [
+        {
+         "name": "Send",
+         "tier": "Base"
+        },
+        {
+         "name": "Send Bulk",
+         "tier": "Standard"
+        },
+        {
+         "name": "View History",
+         "tier": "Standard"
+        }
+       ]
+      },
+      {
+       "name": "In-App/Direct Messaging",
+       "slug": "in-app-direct-messaging",
+       "features": [
+        {
+         "name": "Create/Submit Templates",
+         "tier": "Base"
+        },
+        {
+         "name": "Create/Submit Templates Render",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete",
+         "tier": "Base"
+        },
+        {
+         "name": "Mark Read",
+         "tier": "Base"
+        },
+        {
+         "name": "Remove Templates",
+         "tier": "Base"
+        },
+        {
+         "name": "Send",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Templates",
+         "tier": "Base"
+        },
+        {
+         "name": "View Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Inbox",
+         "tier": "Base"
+        },
+        {
+         "name": "View Sent",
+         "tier": "Base"
+        },
+        {
+         "name": "View Templates",
+         "tier": "Base"
+        },
+        {
+         "name": "View Thread",
+         "tier": "Base"
+        },
+        {
+         "name": "View Unread Count",
+         "tier": "Base"
+        }
+       ]
+      },
+      {
+       "name": "SMS Messaging",
+       "slug": "sms-messaging",
+       "features": [
+        {
+         "name": "Send",
+         "tier": "Base"
+        },
+        {
+         "name": "Send Bulk",
+         "tier": "Standard"
+        },
+        {
+         "name": "View History",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Notices",
+     "slug": "notices",
+     "featureCount": 11,
+     "subModules": [
+      {
+       "name": "Notice Board Management",
+       "slug": "notice-board-management",
+       "features": [
+        {
+         "name": "Create Notice Board Management",
+         "tier": "Base"
+        },
+        {
+         "name": "Create/Submit Upload",
+         "tier": "Base"
+        },
+        {
+         "name": "Deactivate",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete",
+         "tier": "Base"
+        },
+        {
+         "name": "Pin",
+         "tier": "Base"
+        },
+        {
+         "name": "Unpin",
+         "tier": "Base"
+        },
+        {
+         "name": "Update",
+         "tier": "Base"
+        },
+        {
+         "name": "View",
+         "tier": "Base"
+        },
+        {
+         "name": "View By Category",
+         "tier": "Base"
+        },
+        {
+         "name": "View Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Pinned",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Library Management",
+   "slug": "library-management",
+   "featureCount": 65,
+   "baseCount": 0,
+   "standardCount": 65,
+   "moduleCount": 7,
+   "modules": [
+    {
+     "name": "Books",
+     "slug": "books",
+     "featureCount": 9,
+     "subModules": [
+      {
+       "name": "Book Catalog Management",
+       "slug": "book-catalog-management",
+       "features": [
+        {
+         "name": "Add Book",
+         "tier": "Standard"
+        },
+        {
+         "name": "Add Copies",
+         "tier": "Standard"
+        },
+        {
+         "name": "Bulk Add Books",
+         "tier": "Standard"
+        },
+        {
+         "name": "Delete Book",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Book",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Book Status",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Book Details",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Book Stats",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Books",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Borrowing",
+     "slug": "borrowing",
+     "featureCount": 11,
+     "subModules": [
+      {
+       "name": "Book Borrowing/Circulation",
+       "slug": "book-borrowing-circulation",
+       "features": [
+        {
+         "name": "Bulk Issue",
+         "tier": "Standard"
+        },
+        {
+         "name": "Issue Book",
+         "tier": "Standard"
+        },
+        {
+         "name": "Mark Overdue",
+         "tier": "Standard"
+        },
+        {
+         "name": "Renew Borrowing",
+         "tier": "Standard"
+        },
+        {
+         "name": "Report Lost",
+         "tier": "Standard"
+        },
+        {
+         "name": "Return Book",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Book History",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Borrowing Details",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Borrowing Stats",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Borrowings",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Member History",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Fines",
+     "slug": "fines",
+     "featureCount": 9,
+     "subModules": [
+      {
+       "name": "Library Fine Management",
+       "slug": "library-fine-management",
+       "features": [
+        {
+         "name": "Collect Payment",
+         "tier": "Standard"
+        },
+        {
+         "name": "Create Manual Fine",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Fine By Borrowing",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Fine Details",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Fine Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Fine Stats",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Fines",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Member Fines",
+         "tier": "Standard"
+        },
+        {
+         "name": "Waive Fine",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Issuing",
+     "slug": "issuing",
+     "featureCount": 9,
+     "subModules": [
+      {
+       "name": "Book Issue & Return",
+       "slug": "book-issue-and-return",
+       "features": [
+        {
+         "name": "Class Batch Issue",
+         "tier": "Standard"
+        },
+        {
+         "name": "Lookup Book",
+         "tier": "Standard"
+        },
+        {
+         "name": "Lookup Member",
+         "tier": "Standard"
+        },
+        {
+         "name": "Quick Issue",
+         "tier": "Standard"
+        },
+        {
+         "name": "Quick Return",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Desk Stats",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Member Active Issues",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Overdue Notices",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Today Issues",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Members",
+     "slug": "members",
+     "featureCount": 10,
+     "subModules": [
+      {
+       "name": "Library Membership Management",
+       "slug": "library-membership-management",
+       "features": [
+        {
+         "name": "Bulk Enroll",
+         "tier": "Standard"
+        },
+        {
+         "name": "Delete Member",
+         "tier": "Standard"
+        },
+        {
+         "name": "Enroll Member",
+         "tier": "Standard"
+        },
+        {
+         "name": "Renew Card",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Member",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Member Status",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Member Details",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Member Stats",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Members",
+         "tier": "Standard"
+        },
+        {
+         "name": "Waive Fine",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Reports",
+     "slug": "reports",
+     "featureCount": 8,
+     "subModules": [
+      {
+       "name": "Library Reports",
+       "slug": "library-reports",
+       "features": [
+        {
+         "name": "View Borrowing Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Fine Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Inventory Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Member Activity Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Overdue Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Overview Stats",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Popular Books Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Reservation Report",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Reservations",
+     "slug": "reservations",
+     "featureCount": 9,
+     "subModules": [
+      {
+       "name": "Book Reservation",
+       "slug": "book-reservation",
+       "features": [
+        {
+         "name": "Cancel Reservation",
+         "tier": "Standard"
+        },
+        {
+         "name": "Create Reservation",
+         "tier": "Standard"
+        },
+        {
+         "name": "Expire Holds",
+         "tier": "Standard"
+        },
+        {
+         "name": "Mark Ready",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Book Reservation Queue",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Member Reservations",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Reservation Details",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Reservation Stats",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Reservations",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Transport Management",
+   "slug": "transport-management",
+   "featureCount": 39,
+   "baseCount": 0,
+   "standardCount": 39,
+   "moduleCount": 5,
+   "modules": [
+    {
+     "name": "Drivers",
+     "slug": "drivers",
+     "featureCount": 6,
+     "subModules": [
+      {
+       "name": "Driver Management",
+       "slug": "driver-management",
+       "features": [
+        {
+         "name": "Create Driver",
+         "tier": "Standard"
+        },
+        {
+         "name": "Delete Driver",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Driver",
+         "tier": "Standard"
+        },
+        {
+         "name": "Verify License",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Driver Details",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Drivers",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Maintenance",
+     "slug": "maintenance",
+     "featureCount": 5,
+     "subModules": [
+      {
+       "name": "Vehicle Maintenance Management",
+       "slug": "vehicle-maintenance-management",
+       "features": [
+        {
+         "name": "Complete Maintenance",
+         "tier": "Standard"
+        },
+        {
+         "name": "Schedule Maintenance",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Maintenance",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Maintenance History",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Upcoming Maintenance",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Routes",
+     "slug": "routes",
+     "featureCount": 13,
+     "subModules": [
+      {
+       "name": "Transport Route Management",
+       "slug": "transport-route-management",
+       "features": [
+        {
+         "name": "Add Stop",
+         "tier": "Standard"
+        },
+        {
+         "name": "Assign Student To Route",
+         "tier": "Standard"
+        },
+        {
+         "name": "Assign Vehicle To Route",
+         "tier": "Standard"
+        },
+        {
+         "name": "Bulk Assign Students",
+         "tier": "Standard"
+        },
+        {
+         "name": "Create Route",
+         "tier": "Standard"
+        },
+        {
+         "name": "Delete Route",
+         "tier": "Standard"
+        },
+        {
+         "name": "Remove Stop",
+         "tier": "Standard"
+        },
+        {
+         "name": "Remove Student From Route",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Route",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Route Details",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Routes",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Student Transport Details",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Students On Route",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Tracking",
+     "slug": "tracking",
+     "featureCount": 8,
+     "subModules": [
+      {
+       "name": "Live Vehicle Tracking",
+       "slug": "live-vehicle-tracking",
+       "features": [
+        {
+         "name": "Calculate E T A",
+         "tier": "Standard"
+        },
+        {
+         "name": "End Trip",
+         "tier": "Standard"
+        },
+        {
+         "name": "Send Delay Alert",
+         "tier": "Standard"
+        },
+        {
+         "name": "Start Trip",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Live Location",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Live Location",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Trip History",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Vehicles Live Map",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Vehicles",
+     "slug": "vehicles",
+     "featureCount": 7,
+     "subModules": [
+      {
+       "name": "Vehicle Fleet Management",
+       "slug": "vehicle-fleet-management",
+       "features": [
+        {
+         "name": "Assign Driver",
+         "tier": "Standard"
+        },
+        {
+         "name": "Check Availability",
+         "tier": "Standard"
+        },
+        {
+         "name": "Create Vehicle",
+         "tier": "Standard"
+        },
+        {
+         "name": "Delete Vehicle",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Vehicle",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Vehicle Details",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Vehicles",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Hostel Management",
+   "slug": "hostel-management",
+   "featureCount": 34,
+   "baseCount": 0,
+   "standardCount": 34,
+   "moduleCount": 5,
+   "modules": [
+    {
+     "name": "Allocation",
+     "slug": "allocation",
+     "featureCount": 7,
+     "subModules": [
+      {
+       "name": "Room/Bed Allocation",
+       "slug": "room-bed-allocation",
+       "features": [
+        {
+         "name": "Allocate Student",
+         "tier": "Standard"
+        },
+        {
+         "name": "Bulk Allocate",
+         "tier": "Standard"
+        },
+        {
+         "name": "Transfer Student",
+         "tier": "Standard"
+        },
+        {
+         "name": "Vacate Student",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Allocation Details",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Allocations",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Student Allocation",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Attendance",
+     "slug": "attendance",
+     "featureCount": 5,
+     "subModules": [
+      {
+       "name": "Hostel Attendance Tracking",
+       "slug": "hostel-attendance-tracking",
+       "features": [
+        {
+         "name": "Mark Attendance",
+         "tier": "Standard"
+        },
+        {
+         "name": "Submit Attendance",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Attendance Record",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Attendance",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Attendance Report",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Mess Management",
+     "slug": "mess-management",
+     "featureCount": 8,
+     "subModules": [
+      {
+       "name": "Hostel Mess/Meal Management",
+       "slug": "hostel-mess-meal-management",
+       "features": [
+        {
+         "name": "Create Weekly Menu",
+         "tier": "Standard"
+        },
+        {
+         "name": "Publish Menu",
+         "tier": "Standard"
+        },
+        {
+         "name": "Set Food Preference",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Menu",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Current Menu",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Food Preference",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Menus",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Preferences",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Rooms",
+     "slug": "rooms",
+     "featureCount": 8,
+     "subModules": [
+      {
+       "name": "Hostel Room Management",
+       "slug": "hostel-room-management",
+       "features": [
+        {
+         "name": "Check Availability",
+         "tier": "Standard"
+        },
+        {
+         "name": "Create Room",
+         "tier": "Standard"
+        },
+        {
+         "name": "Delete Room",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Bed Status",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Room",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Hostel Stats",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Room Details",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Rooms",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Visitor Management",
+     "slug": "visitor-management",
+     "featureCount": 6,
+     "subModules": [
+      {
+       "name": "Hostel Visitor Log",
+       "slug": "hostel-visitor-log",
+       "features": [
+        {
+         "name": "Approve Visitor",
+         "tier": "Standard"
+        },
+        {
+         "name": "Deny Visitor",
+         "tier": "Standard"
+        },
+        {
+         "name": "Mark Visitor Exit",
+         "tier": "Standard"
+        },
+        {
+         "name": "Register Visitor",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Student Visitor History",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Visitors",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Facilities & Inventory",
+   "slug": "facilities-and-inventory",
+   "featureCount": 22,
+   "baseCount": 0,
+   "standardCount": 22,
+   "moduleCount": 1,
+   "modules": [
+    {
+     "name": "Infrastructure",
+     "slug": "infrastructure",
+     "featureCount": 22,
+     "subModules": [
+      {
+       "name": "Facilities & Asset Management",
+       "slug": "facilities-and-asset-management",
+       "features": [
+        {
+         "name": "Create Building",
+         "tier": "Standard"
+        },
+        {
+         "name": "Create Floor",
+         "tier": "Standard"
+        },
+        {
+         "name": "Create Room",
+         "tier": "Standard"
+        },
+        {
+         "name": "Create Wing",
+         "tier": "Standard"
+        },
+        {
+         "name": "Delete Building",
+         "tier": "Standard"
+        },
+        {
+         "name": "Delete Floor",
+         "tier": "Standard"
+        },
+        {
+         "name": "Delete Room",
+         "tier": "Standard"
+        },
+        {
+         "name": "Delete Wing",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Building",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Floor",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Room",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Room Status",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Wing",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Available Rooms",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Building Details",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Building Floors",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Building Rooms",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Building Wings",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Buildings",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Floors By Building",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Room Details",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Rooms",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Reports & Analytics",
+   "slug": "reports-and-analytics",
+   "featureCount": 50,
+   "baseCount": 0,
+   "standardCount": 50,
+   "moduleCount": 7,
+   "modules": [
+    {
+     "name": "Academic Reports",
+     "slug": "academic-reports",
+     "featureCount": 10,
+     "subModules": [
+      {
+       "name": "Academic Performance Reports",
+       "slug": "academic-performance-reports",
+       "features": [
+        {
+         "name": "Export Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Class Performance",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Curriculum Completion",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Exam Comparison",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Fail Analysis",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Student Progress",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Subject Analysis",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Teacher Effectiveness",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Topper List",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Year Over Year",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Attendance Reports",
+     "slug": "attendance-reports",
+     "featureCount": 6,
+     "subModules": [
+      {
+       "name": "Attendance Analytics",
+       "slug": "attendance-analytics",
+       "features": [
+        {
+         "name": "Export Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Attendance Defaulters",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Class Attendance",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Monthly Attendance",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Student Attendance",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Teacher Attendance",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Custom Reports",
+     "slug": "custom-reports",
+     "featureCount": 8,
+     "subModules": [
+      {
+       "name": "Custom Report Builder",
+       "slug": "custom-report-builder",
+       "features": [
+        {
+         "name": "Clone Report Config",
+         "tier": "Standard"
+        },
+        {
+         "name": "Create Report Config",
+         "tier": "Standard"
+        },
+        {
+         "name": "Delete Report Config",
+         "tier": "Standard"
+        },
+        {
+         "name": "Execute Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "Export Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "List Report Configs",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Report Config",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Report Config",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Financial Reports",
+     "slug": "financial-reports",
+     "featureCount": 8,
+     "subModules": [
+      {
+       "name": "Financial Reporting",
+       "slug": "financial-reporting",
+       "features": [
+        {
+         "name": "Export Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Concession Analysis",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Fee Collection Summary",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Fee Defaulter List",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Monthly Revenue",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Outstanding Dues",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Payment Mode Analysis",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Refund Report",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "School Analytics",
+     "slug": "school-analytics",
+     "featureCount": 8,
+     "subModules": [
+      {
+       "name": "School-wide Analytics Dashboard",
+       "slug": "school-wide-analytics-dashboard",
+       "features": [
+        {
+         "name": "View Attendance Analytics",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Attendance Risk",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Exam Analytics",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Fee Analytics",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Fee Default Prediction",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Performance Forecast",
+         "tier": "Standard"
+        },
+        {
+         "name": "View School Overview",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Trend Analysis",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Student Reports",
+     "slug": "student-reports",
+     "featureCount": 6,
+     "subModules": [
+      {
+       "name": "Student Report Cards & Profiles",
+       "slug": "student-report-cards-and-profiles",
+       "features": [
+        {
+         "name": "Export Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Admission Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Alumni Database",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Strength Analysis",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Student Directory",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Transfer Report",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Teacher Reports",
+     "slug": "teacher-reports",
+     "featureCount": 4,
+     "subModules": [
+      {
+       "name": "Teacher-Facing Reports",
+       "slug": "teacher-facing-reports",
+       "features": [
+        {
+         "name": "View Attendance Report",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Class Performance",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Pending Tasks",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Summary",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Dashboard & Insights",
+   "slug": "dashboard-and-insights",
+   "featureCount": 28,
+   "baseCount": 20,
+   "standardCount": 8,
+   "moduleCount": 2,
+   "modules": [
+    {
+     "name": "Dashboard",
+     "slug": "dashboard",
+     "featureCount": 26,
+     "subModules": [
+      {
+       "name": "Admin Dashboard Widgets",
+       "slug": "admin-dashboard-widgets",
+       "features": [
+        {
+         "name": "Delete Notification",
+         "tier": "Base"
+        },
+        {
+         "name": "Mark All As Read",
+         "tier": "Base"
+        },
+        {
+         "name": "Mark As Read",
+         "tier": "Base"
+        },
+        {
+         "name": "Save Dashboard Preferences",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Admission Funnel",
+         "tier": "Base"
+        },
+        {
+         "name": "View Available Widgets",
+         "tier": "Base"
+        },
+        {
+         "name": "View Dashboard Insights",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Dashboard Overview",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Dashboard Preferences",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Dashboard Stats",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Hr Summary",
+         "tier": "Base"
+        },
+        {
+         "name": "View Infrastructure Summary",
+         "tier": "Base"
+        },
+        {
+         "name": "View Library Stats",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Live Attendance",
+         "tier": "Base"
+        },
+        {
+         "name": "View Quick Actions",
+         "tier": "Base"
+        },
+        {
+         "name": "View Recent Activity",
+         "tier": "Base"
+        },
+        {
+         "name": "View Recent Notifications",
+         "tier": "Base"
+        },
+        {
+         "name": "View Transport Stats",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Unread Count",
+         "tier": "Base"
+        }
+       ]
+      },
+      {
+       "name": "Parent Dashboard",
+       "slug": "parent-dashboard",
+       "features": [
+        {
+         "name": "View Parent Overview",
+         "tier": "Base"
+        },
+        {
+         "name": "View Parent Widget",
+         "tier": "Base"
+        }
+       ]
+      },
+      {
+       "name": "Student Dashboard",
+       "slug": "student-dashboard",
+       "features": [
+        {
+         "name": "View Student Overview",
+         "tier": "Base"
+        },
+        {
+         "name": "View Student Widget",
+         "tier": "Base"
+        }
+       ]
+      },
+      {
+       "name": "Teacher Dashboard",
+       "slug": "teacher-dashboard",
+       "features": [
+        {
+         "name": "View Teacher Overview",
+         "tier": "Base"
+        },
+        {
+         "name": "View Teacher Stats",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Teacher Widget",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Navigation",
+     "slug": "navigation",
+     "featureCount": 2,
+     "subModules": [
+      {
+       "name": "Dynamic School Sidebar",
+       "slug": "dynamic-school-sidebar",
+       "features": [
+        {
+         "name": "Refresh Sidebar",
+         "tier": "Base"
+        },
+        {
+         "name": "View Sidebar",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Security & Authentication",
+   "slug": "security-and-authentication",
+   "featureCount": 163,
+   "baseCount": 136,
+   "standardCount": 27,
+   "moduleCount": 8,
+   "modules": [
+    {
+     "name": "API Access",
+     "slug": "api-access",
+     "featureCount": 9,
+     "subModules": [
+      {
+       "name": "API Key Management",
+       "slug": "api-key-management",
+       "features": [
+        {
+         "name": "Create A P I Key",
+         "tier": "Base"
+        },
+        {
+         "name": "Revoke A P I Key",
+         "tier": "Base"
+        },
+        {
+         "name": "Rotate A P I Key",
+         "tier": "Base"
+        },
+        {
+         "name": "Test A P I Key",
+         "tier": "Base"
+        },
+        {
+         "name": "Update A P I Key",
+         "tier": "Base"
+        },
+        {
+         "name": "View A P I Key",
+         "tier": "Base"
+        },
+        {
+         "name": "View A P I Keys",
+         "tier": "Base"
+        },
+        {
+         "name": "View Available Scopes",
+         "tier": "Base"
+        },
+        {
+         "name": "View Key Usage",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Access Control",
+     "slug": "access-control",
+     "featureCount": 1,
+     "subModules": [
+      {
+       "name": "Role & Permission Access Overview",
+       "slug": "role-and-permission-access-overview",
+       "features": [
+        {
+         "name": "View Access Overview",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Access Security",
+     "slug": "access-security",
+     "featureCount": 15,
+     "subModules": [
+      {
+       "name": "Geo-Restriction & Location Security",
+       "slug": "geo-restriction-and-location-security",
+       "features": [
+        {
+         "name": "Check Current Access",
+         "tier": "Base"
+        },
+        {
+         "name": "Create Restriction",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Restriction",
+         "tier": "Base"
+        },
+        {
+         "name": "Lookup I P Location",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Restriction",
+         "tier": "Base"
+        },
+        {
+         "name": "View Geo Stats",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Restrictions",
+         "tier": "Base"
+        }
+       ]
+      },
+      {
+       "name": "IP Allow/Block List",
+       "slug": "ip-allow-block-list",
+       "features": [
+        {
+         "name": "Add Bulk I Ps",
+         "tier": "Standard"
+        },
+        {
+         "name": "Add I P",
+         "tier": "Base"
+        },
+        {
+         "name": "Check I P Access",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete I P",
+         "tier": "Base"
+        },
+        {
+         "name": "Update I P",
+         "tier": "Base"
+        },
+        {
+         "name": "View I P Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View I P Stats",
+         "tier": "Standard"
+        },
+        {
+         "name": "View I Ps",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Authentication Communications",
+     "slug": "authentication-communications",
+     "featureCount": 10,
+     "subModules": [
+      {
+       "name": "SMS/OTP Template Management",
+       "slug": "sms-otp-template-management",
+       "features": [
+        {
+         "name": "Create Template",
+         "tier": "Standard"
+        },
+        {
+         "name": "Delete Template",
+         "tier": "Standard"
+        },
+        {
+         "name": "Export Templates",
+         "tier": "Standard"
+        },
+        {
+         "name": "Render Template",
+         "tier": "Standard"
+        },
+        {
+         "name": "Seed Default Templates",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Template",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Template",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Template Stats",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Templates",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Templates By Category",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Core Authentication",
+     "slug": "core-authentication",
+     "featureCount": 108,
+     "subModules": [
+      {
+       "name": "Email/Phone Verification",
+       "slug": "email-phone-verification",
+       "features": [
+        {
+         "name": "Resend Verification",
+         "tier": "Base"
+        },
+        {
+         "name": "Send Email Verification",
+         "tier": "Base"
+        },
+        {
+         "name": "Send Phone Verification",
+         "tier": "Base"
+        },
+        {
+         "name": "Verify Email",
+         "tier": "Base"
+        },
+        {
+         "name": "Verify Identity",
+         "tier": "Base"
+        },
+        {
+         "name": "Verify Phone",
+         "tier": "Base"
+        },
+        {
+         "name": "View Verification Attempts",
+         "tier": "Base"
+        },
+        {
+         "name": "View Verification Status",
+         "tier": "Standard"
+        }
+       ]
+      },
+      {
+       "name": "Login, MFA, Session & Password Security",
+       "slug": "login-mfa-session-and-password-security",
+       "features": [
+        {
+         "name": "Change Password",
+         "tier": "Base"
+        },
+        {
+         "name": "Complete Wizard",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete All Sessions",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete All Sessions (Revoke All)",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Profile Picture",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Session",
+         "tier": "Base"
+        },
+        {
+         "name": "Disable M F A",
+         "tier": "Base"
+        },
+        {
+         "name": "Forgot Password",
+         "tier": "Base"
+        },
+        {
+         "name": "List Mine",
+         "tier": "Base"
+        },
+        {
+         "name": "Login",
+         "tier": "Base"
+        },
+        {
+         "name": "Logout",
+         "tier": "Base"
+        },
+        {
+         "name": "Refresh Token",
+         "tier": "Base"
+        },
+        {
+         "name": "Regenerate Backup Codes",
+         "tier": "Base"
+        },
+        {
+         "name": "Register",
+         "tier": "Base"
+        },
+        {
+         "name": "Register (Device Tokens)",
+         "tier": "Base"
+        },
+        {
+         "name": "Reset Password",
+         "tier": "Base"
+        },
+        {
+         "name": "Revoke",
+         "tier": "Base"
+        },
+        {
+         "name": "Setup M F A",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Preferences",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Profile",
+         "tier": "Base"
+        },
+        {
+         "name": "Upload Profile Picture",
+         "tier": "Base"
+        },
+        {
+         "name": "Use Backup Code",
+         "tier": "Base"
+        },
+        {
+         "name": "Validate Reset Token",
+         "tier": "Base"
+        },
+        {
+         "name": "Verify And Enable M F A",
+         "tier": "Base"
+        },
+        {
+         "name": "Verify M F A Login",
+         "tier": "Base"
+        },
+        {
+         "name": "View Login History",
+         "tier": "Standard"
+        },
+        {
+         "name": "View M F A Status",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Me",
+         "tier": "Base"
+        },
+        {
+         "name": "View Profile",
+         "tier": "Base"
+        },
+        {
+         "name": "View Q R Code",
+         "tier": "Base"
+        },
+        {
+         "name": "View Session Details",
+         "tier": "Base"
+        },
+        {
+         "name": "View Session Stats",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Sessions",
+         "tier": "Base"
+        }
+       ]
+      },
+      {
+       "name": "OAuth/Social Login",
+       "slug": "oauth-social-login",
+       "features": [
+        {
+         "name": "Create/Submit Link Google",
+         "tier": "Base"
+        },
+        {
+         "name": "Create/Submit Link Microsoft",
+         "tier": "Base"
+        },
+        {
+         "name": "Remove Unlink",
+         "tier": "Base"
+        },
+        {
+         "name": "View Google",
+         "tier": "Base"
+        },
+        {
+         "name": "View Google Callback",
+         "tier": "Base"
+        },
+        {
+         "name": "View Microsoft",
+         "tier": "Base"
+        },
+        {
+         "name": "View Microsoft Callback",
+         "tier": "Base"
+        }
+       ]
+      },
+      {
+       "name": "Password Reset & Recovery",
+       "slug": "password-reset-and-recovery",
+       "features": [
+        {
+         "name": "Change Password",
+         "tier": "Base"
+        },
+        {
+         "name": "Forgot Password",
+         "tier": "Base"
+        },
+        {
+         "name": "Reset Password",
+         "tier": "Base"
+        },
+        {
+         "name": "Set Password Policy",
+         "tier": "Base"
+        },
+        {
+         "name": "Validate Password",
+         "tier": "Base"
+        },
+        {
+         "name": "Verify Reset Token",
+         "tier": "Base"
+        },
+        {
+         "name": "View Password History",
+         "tier": "Standard"
+        }
+       ]
+      },
+      {
+       "name": "Universal Login, MFA & Password Security",
+       "slug": "universal-login-mfa-and-password-security",
+       "features": [
+        {
+         "name": "Admin Create User",
+         "tier": "Base"
+        },
+        {
+         "name": "Admin Get Users",
+         "tier": "Base"
+        },
+        {
+         "name": "Admin Terminate User Sessions",
+         "tier": "Base"
+        },
+        {
+         "name": "Admin Update User Status",
+         "tier": "Standard"
+        },
+        {
+         "name": "Change Password",
+         "tier": "Base"
+        },
+        {
+         "name": "Check Password Strength",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Account",
+         "tier": "Base"
+        },
+        {
+         "name": "Delete Profile Picture",
+         "tier": "Base"
+        },
+        {
+         "name": "Disable M F A",
+         "tier": "Base"
+        },
+        {
+         "name": "Forgot Password",
+         "tier": "Base"
+        },
+        {
+         "name": "Generate Strong Password",
+         "tier": "Base"
+        },
+        {
+         "name": "Login",
+         "tier": "Base"
+        },
+        {
+         "name": "Logout",
+         "tier": "Base"
+        },
+        {
+         "name": "Logout All",
+         "tier": "Base"
+        },
+        {
+         "name": "Me",
+         "tier": "Base"
+        },
+        {
+         "name": "Refresh Session",
+         "tier": "Base"
+        },
+        {
+         "name": "Refresh Token",
+         "tier": "Base"
+        },
+        {
+         "name": "Regenerate Backup Codes",
+         "tier": "Base"
+        },
+        {
+         "name": "Register",
+         "tier": "Base"
+        },
+        {
+         "name": "Resend Verification",
+         "tier": "Base"
+        },
+        {
+         "name": "Reset Password",
+         "tier": "Base"
+        },
+        {
+         "name": "Revoke Device Trust",
+         "tier": "Base"
+        },
+        {
+         "name": "Send Email Verification",
+         "tier": "Base"
+        },
+        {
+         "name": "Send Phone Verification",
+         "tier": "Base"
+        },
+        {
+         "name": "Setup M F A",
+         "tier": "Base"
+        },
+        {
+         "name": "Status",
+         "tier": "Standard"
+        },
+        {
+         "name": "Terminate All Sessions",
+         "tier": "Base"
+        },
+        {
+         "name": "Terminate Other Sessions",
+         "tier": "Base"
+        },
+        {
+         "name": "Terminate Session",
+         "tier": "Base"
+        },
+        {
+         "name": "Trust Device",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Notification Settings",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Preferences",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Profile",
+         "tier": "Base"
+        },
+        {
+         "name": "Upload Profile Picture",
+         "tier": "Base"
+        },
+        {
+         "name": "Use Backup Code",
+         "tier": "Base"
+        },
+        {
+         "name": "Validate Password",
+         "tier": "Base"
+        },
+        {
+         "name": "Verify And Enable M F A",
+         "tier": "Base"
+        },
+        {
+         "name": "Verify Email",
+         "tier": "Base"
+        },
+        {
+         "name": "Verify Identity",
+         "tier": "Base"
+        },
+        {
+         "name": "Verify M F A And Login",
+         "tier": "Base"
+        },
+        {
+         "name": "Verify M F A Login",
+         "tier": "Base"
+        },
+        {
+         "name": "Verify Phone",
+         "tier": "Base"
+        },
+        {
+         "name": "Verify Reset Token",
+         "tier": "Base"
+        },
+        {
+         "name": "View Activity Log",
+         "tier": "Base"
+        },
+        {
+         "name": "View Current Session",
+         "tier": "Base"
+        },
+        {
+         "name": "View M F A Status",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Notification Settings",
+         "tier": "Base"
+        },
+        {
+         "name": "View Password Policy",
+         "tier": "Base"
+        },
+        {
+         "name": "View Profile",
+         "tier": "Base"
+        },
+        {
+         "name": "View Session Stats",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Sessions",
+         "tier": "Base"
+        },
+        {
+         "name": "View Verification Attempts",
+         "tier": "Base"
+        },
+        {
+         "name": "View Verification Status",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Navigation",
+     "slug": "navigation",
+     "featureCount": 3,
+     "subModules": [
+      {
+       "name": "Unified Role-Based Sidebar",
+       "slug": "unified-role-based-sidebar",
+       "features": [
+        {
+         "name": "Refresh Sidebar",
+         "tier": "Base"
+        },
+        {
+         "name": "View Sidebar",
+         "tier": "Base"
+        },
+        {
+         "name": "View Sidebar Permissions",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Roles & Permissions",
+     "slug": "roles-and-permissions",
+     "featureCount": 5,
+     "subModules": [
+      {
+       "name": "My Roles & Permissions View",
+       "slug": "my-roles-and-permissions-view",
+       "features": [
+        {
+         "name": "View My Permissions",
+         "tier": "Base"
+        },
+        {
+         "name": "View School Roles Permissions",
+         "tier": "Base"
+        }
+       ]
+      },
+      {
+       "name": "Role/Permission Delegation",
+       "slug": "role-permission-delegation",
+       "features": [
+        {
+         "name": "Reset Delegation",
+         "tier": "Standard"
+        },
+        {
+         "name": "Update Delegation",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Delegation",
+         "tier": "Standard"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "name": "Session & Tokens",
+     "slug": "session-and-tokens",
+     "featureCount": 12,
+     "subModules": [
+      {
+       "name": "Session Management",
+       "slug": "session-management",
+       "features": [
+        {
+         "name": "Extend Session",
+         "tier": "Base"
+        },
+        {
+         "name": "Revoke All Sessions",
+         "tier": "Base"
+        },
+        {
+         "name": "Revoke Other Sessions",
+         "tier": "Base"
+        },
+        {
+         "name": "Revoke Session",
+         "tier": "Base"
+        },
+        {
+         "name": "Verify M F A",
+         "tier": "Base"
+        },
+        {
+         "name": "View Current Session",
+         "tier": "Base"
+        },
+        {
+         "name": "View Session Stats",
+         "tier": "Standard"
+        },
+        {
+         "name": "View Sessions",
+         "tier": "Base"
+        }
+       ]
+      },
+      {
+       "name": "Token Management",
+       "slug": "token-management",
+       "features": [
+        {
+         "name": "Refresh Token",
+         "tier": "Base"
+        },
+        {
+         "name": "Revoke All User Tokens",
+         "tier": "Base"
+        },
+        {
+         "name": "Revoke Token",
+         "tier": "Base"
+        },
+        {
+         "name": "Validate Token",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "name": "Support",
+   "slug": "support",
+   "featureCount": 7,
+   "baseCount": 7,
+   "standardCount": 0,
+   "moduleCount": 1,
+   "modules": [
+    {
+     "name": "Help & Support",
+     "slug": "help-and-support",
+     "featureCount": 7,
+     "subModules": [
+      {
+       "name": "Support Ticket Management",
+       "slug": "support-ticket-management",
+       "features": [
+        {
+         "name": "Add Reply",
+         "tier": "Base"
+        },
+        {
+         "name": "Create Ticket",
+         "tier": "Base"
+        },
+        {
+         "name": "List Tickets",
+         "tier": "Base"
+        },
+        {
+         "name": "Submit Satisfaction",
+         "tier": "Base"
+        },
+        {
+         "name": "Update Ticket",
+         "tier": "Base"
+        },
+        {
+         "name": "Upload Attachments",
+         "tier": "Base"
+        },
+        {
+         "name": "View Ticket Details",
+         "tier": "Base"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

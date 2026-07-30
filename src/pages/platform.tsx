@@ -1,284 +1,257 @@
-import { PageSeoHead } from "@/components/seo/PageSeoHead";
-import { pageSeo } from "@/lib/pageSeo";
-import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
-import { CtaSection } from "@/components/ui/CtaSection";
-import { ImageBackdropHero } from "@/components/ui/CustomHeroes";
-import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
-import { FloatingIcons } from "@/components/animations/FloatingIcons";
+import type { GetStaticProps } from "next";
+import Image from "next/image";
 import { Link } from "wouter";
-import {
-  LayoutDashboard,
-  BookOpen,
-  Users,
-  DollarSign,
-  GraduationCap,
-  Heart,
-  Calculator,
-  TrendingUp,
-  ShieldCheck,
-  Building2,
-  ArrowRight,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { PageSeoHead } from "@/components/seo/PageSeoHead";
+import { SchemaMarkup } from "@/components/seo/SchemaMarkup";
+import { pageSeo } from "@/lib/pageSeo";
+import { buildBreadcrumbSchema, buildItemListSchema } from "@/lib/seoSchemas";
+import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
+import { CtaSection } from "@/components/ui/CtaSection";
+import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
+import { ImageBackdropHero } from "@/components/ui/CustomHeroes";
+import { ProductIcon } from "@/components/product/ProductIcon";
+import { ACCENTS, SectionHeading, StatChip, type AccentName } from "@/components/product/ProductPrimitives";
+import { MATRIX_TOTALS, getMatrixCategory } from "@/data/featureMatrix";
+import { PRODUCT_PANELS } from "@/data/productPanels";
+import { AREA_NARRATIVE_BY_SLUG } from "@/data/productNarrative";
 
-export default function Platform() {
-  const dashboards = [
-    {
-      title: "Admin Dashboard",
-      icon: LayoutDashboard,
-      capabilities: ["Enrollment and admission tracking", "Staff oversight and records", "Campus-wide operational analytics", "Document management and compliance"],
-      color: "text-brand-teal",
-      bg: "bg-brand-teal/10",
-      href: "/features/student-management",
-      cta: "Explore admin workflows"
-    },
-    {
-      title: "Teacher Dashboard",
-      icon: BookOpen,
-      capabilities: ["Attendance marking for each class", "Gradebook and exam records", "Lesson planning and notes", "Direct messaging with parents"],
-      color: "text-brand-orange",
-      bg: "bg-brand-orange/10",
-      href: "/features/attendance",
-      cta: "Explore teacher tools"
-    },
-    {
-      title: "HR Dashboard",
-      icon: Users,
-      capabilities: ["Staff profile management", "Leave application and approval", "Monthly payroll processing", "Performance review records"],
-      color: "text-brand-navy",
-      bg: "bg-brand-navy/10",
-      href: "/features/student-management",
-      cta: "Explore HR features"
-    },
-    {
-      title: "Finance Dashboard",
-      icon: DollarSign,
-      capabilities: ["Fee collection and receipt tracking", "Expense recording and categories", "Budget and variance reports", "Payment gateway reconciliation"],
-      color: "text-brand-yellow",
-      bg: "bg-brand-yellow/20",
-      href: "/features/fee-management",
-      cta: "Explore finance tools"
-    },
-    {
-      title: "Student Dashboard",
-      icon: GraduationCap,
-      capabilities: ["Personal grades and report history", "Attendance record and trends", "Assignment submissions and deadlines", "Class timetable and schedule updates"],
-      color: "text-brand-teal",
-      bg: "bg-brand-teal/10",
-      href: "/features/reports",
-      cta: "Explore student view"
-    },
-    {
-      title: "Parent Dashboard",
-      icon: Heart,
-      capabilities: ["Child's daily attendance", "Fee payment and receipt history", "Direct communication with class teacher", "School notices and exam alerts"],
-      color: "text-brand-orange",
-      bg: "bg-brand-orange/10",
-      href: "/features/communication",
-      cta: "Explore parent features"
-    },
-    {
-      title: "Accounting Dashboard",
-      icon: Calculator,
-      capabilities: ["Income and expense ledger", "Invoice creation and management", "Tax summary and GST reports", "Full audit trail by transaction"],
-      color: "text-brand-navy",
-      bg: "bg-brand-navy/10",
-      href: "/features/fee-management",
-      cta: "Explore accounting controls"
-    },
-    {
-      title: "Director Dashboard",
-      icon: TrendingUp,
-      capabilities: ["School-wide performance analytics", "Key indicator monitoring by term", "Strategic planning data views", "Executive summary reports"],
-      color: "text-brand-teal",
-      bg: "bg-brand-teal/10",
-      href: "/features/reports",
-      cta: "Explore director view"
-    },
-    {
-      title: "System Admin Panel",
-      icon: ShieldCheck,
-      capabilities: ["User role creation and permissions", "System configuration and settings", "Integration management and API keys", "Security logs and access history"],
-      color: "text-brand-orange",
-      bg: "bg-brand-orange/10",
-      href: "/features/communication",
-      cta: "Explore access management"
-    },
-    {
-      title: "Multi-Campus Panel",
-      icon: Building2,
-      capabilities: ["Oversight across all campuses", "Centralised policy and calendar management", "Cross-campus reporting and benchmarks", "Compliance tracking by location"],
-      color: "text-brand-navy",
-      bg: "bg-brand-navy/10",
-      href: "/features/reports",
-      cta: "Explore multi-campus tools"
-    },
-  ];
+type PanelCard = {
+  slug: string;
+  order: number;
+  label: string;
+  shortLabel: string;
+  stage: string;
+  headline: string;
+  summary: string;
+  audience: string[];
+  image: string;
+  imageAlt: string;
+  icon: string;
+  accent: AccentName;
+  featureCount: number;
+  areaLabels: string[];
+};
 
+type PlatformPageProps = {
+  panels: PanelCard[];
+  totals: typeof MATRIX_TOTALS;
+};
+
+export default function Platform({ panels, totals }: PlatformPageProps) {
   return (
-    <PageTransition className="pt-20 pb-0">
-      <PageSeoHead {...pageSeo.platform} />
-      <ImageBackdropHero
-        eyebrow="Built for every role in your school"
-        title="One platform. A separate dashboard for every team that uses it."
-        subtitle="Admins, teachers, finance officers, HR teams, students, parents, and school directors all work differently. KIDUART gives each role a view that matches their actual responsibilities , not a one-size screen that serves no one particularly well."
-        image="/images/banner/platform-hero.jpg"
-        fullHeight={true}
-        overlayClassName="bg-[linear-gradient(135deg,rgba(250,248,240,0.78),rgba(250,248,240,0.54))]"
-        floatingIcons={["LayoutDashboard", "Users", "BarChart2"]}
-        actions={(
-          <>
-            <Link
-              href="/demo"
-              className="w-full sm:w-auto rounded-full bg-brand-navy px-8 py-4 text-base font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-teal"
-            >
-              Request Demo
-            </Link>
-            <Link
-              href="/features"
-              className="w-full sm:w-auto rounded-full border border-brand-navy/14 bg-white/70 px-8 py-4 text-base font-bold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
-            >
-              Explore Features
-            </Link>
-          </>
-        )}
+    <>
+      <PageSeoHead
+        {...pageSeo.platform}
+        title="School ERP Platform: 10 Role-Based Panels & Dashboards | KIDUART"
+        description="One platform, ten role panels — system admin, organisation, director, school admin, academic, teacher, finance, HR, parent and student. Each panel shows only what that role needs."
+      />
+      <SchemaMarkup
+        data={[
+          buildBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Platform", path: "/platform" },
+          ]),
+          buildItemListSchema(
+            "KIDUART role-based panels",
+            panels.map((panel) => ({ name: panel.label, path: `/platform/${panel.slug}` })),
+          ),
+        ]}
       />
 
-      <section className="section-space relative overflow-hidden bg-white">
-        <BackgroundBlobs
-          blobs={[
-            { color: "hsl(var(--blob-yellow))", size: 300, position: "center-left", opacity: 0.15 },
-            { color: "hsl(var(--blob-teal))", size: 300, position: "center-right", opacity: 0.15 },
-          ]}
+      <PageTransition className="pt-20 pb-0">
+        <ImageBackdropHero
+          eyebrow="One platform, ten panels"
+          title="The same school data, shaped for the person looking at it"
+          subtitle={`A principal, an accountant, a class teacher and a parent should never share a screen. KIDUART ships ten role panels over one database — ${totals.modules} modules and ${totals.features} features, filtered by role and permission.`}
+          image="/images/banner/platform-hero.jpg"
         />
-        <FloatingIcons icons={["BookOpen", "Calculator", "Lightbulb"]} count={4} />
-        <div className="page-shell relative z-10">
-          <SectionReveal className="mx-auto mb-16 max-w-3xl text-center">
-            <div className="section-kicker">Role-based views</div>
-            <h2 className="section-title mt-6 text-brand-navy">Which dashboard is built for your team?</h2>
-            <p className="section-copy mt-4 text-brand-navy/70">
-              Each card below represents a real stakeholder role in your school. Click through to explore the specific workflows each dashboard handles.
-            </p>
-          </SectionReveal>
 
-          <div className="grid gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
-            {/* {dashboards.map((dash, idx) => (
-              <SectionReveal key={dash.title} delay={idx * 0.05}>
-                <Link href={dash.href} className="group relative block h-full">
-                  <div
-                    className="relative mx-auto flex min-h-[25rem] max-w-[21rem] flex-col justify-end overflow-hidden px-8 pb-9 pt-8 text-brand-beige shadow-[0_24px_65px_rgba(0,48,73,0.14)] transition-transform duration-300 group-hover:-translate-y-1"
-                    style={{ clipPath: "polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0 50%)" }}
-                  >
-                    <img src={dash.image} alt={dash.title} className="absolute inset-0 h-full w-full object-cover" />
-                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,48,73,0.34),rgba(0,48,73,0.88))]" />
-                    <div className="absolute inset-x-0 bottom-0 h-24 bg-[linear-gradient(180deg,transparent,rgba(0,48,73,0.92))]" />
+        <section className="section-space-tight relative overflow-hidden border-y border-brand-navy/5 bg-white">
+          <BackgroundBlobs blobs={[{ color: "#0c716b", size: 300, position: "center-right", opacity: 0.1 }]} />
+          <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            <SectionReveal>
+              <SectionHeading
+                kicker="Set up in this order"
+                title="Panels arrive in layers, the same way a school group rolls out"
+                description="The platform console provisions the organisation, the organisation adds campuses, each campus runs its own school desk, and the classroom, finance, family and student panels sit on top of that structure."
+              />
+            </SectionReveal>
 
-                    <div className="relative z-10">
-                      <div className={`mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/15 ${dash.bg} backdrop-blur-sm`}>
-                        <dash.icon className={`h-7 w-7 ${dash.color}`} />
+            <SectionReveal delay={0.08} className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              <StatChip value={panels.length} label="Role panels" />
+              <StatChip value={totals.categories} label="Module areas" />
+              <StatChip value={totals.modules} label="Functional modules" />
+              <StatChip value={totals.features} label="Features" />
+            </SectionReveal>
+          </div>
+        </section>
+
+        <section className="section-space relative overflow-hidden bg-brand-beige/25">
+          <BackgroundBlobs
+            blobs={[
+              { color: "#003049", size: 360, position: "top-left", opacity: 0.09 },
+              { color: "#f77f00", size: 320, position: "bottom-right", opacity: 0.1 },
+            ]}
+          />
+          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <ol className="space-y-8">
+              {panels.map((panel, index) => {
+                const tokens = ACCENTS[panel.accent];
+                const reversed = index % 2 === 1;
+
+                return (
+                  <li key={panel.slug}>
+                    <SectionReveal
+                      delay={Math.min(index * 0.04, 0.16)}
+                      className="overflow-hidden rounded-[2rem] border border-brand-navy/[0.08] bg-white shadow-sm"
+                    >
+                      <div
+                        className={`grid gap-0 lg:grid-cols-2 ${reversed ? "lg:[&>*:first-child]:order-2" : ""}`}
+                      >
+                        <div className="relative min-h-[220px] bg-brand-beige/40">
+                          <Image
+                            src={panel.image}
+                            alt={panel.imageAlt}
+                            fill
+                            sizes="(max-width: 1024px) 100vw, 50vw"
+                            className="object-cover"
+                            loading={index < 2 ? "eager" : "lazy"}
+                          />
+                        </div>
+
+                        <div className="p-6 md:p-9">
+                          <div className="flex flex-wrap items-center gap-3">
+                            <span
+                              className={`inline-flex h-10 w-10 items-center justify-center rounded-2xl ${tokens.softBg}`}
+                            >
+                              <ProductIcon name={panel.icon} className={`h-5 w-5 ${tokens.text}`} />
+                            </span>
+                            <span className="text-xs font-bold uppercase tracking-[0.18em] text-brand-navy/[0.78]">
+                              {panel.stage}
+                            </span>
+                          </div>
+
+                          <h3 className="mt-5 text-2xl font-bold text-brand-navy md:text-3xl">
+                            {panel.label}
+                          </h3>
+                          <p className="mt-3 text-base font-semibold leading-7 text-brand-navy">
+                            {panel.headline}
+                          </p>
+                          <p className="mt-3 leading-7 text-brand-navy/[0.78]">{panel.summary}</p>
+
+                          <dl className="mt-6 grid gap-4 sm:grid-cols-2">
+                            <div>
+                              <dt className="text-xs font-bold uppercase tracking-[0.16em] text-brand-navy/[0.72]">
+                                Who signs in
+                              </dt>
+                              <dd className="mt-2 text-sm leading-6 text-brand-navy/[0.82]">
+                                {panel.audience.join(" · ")}
+                              </dd>
+                            </div>
+                            <div>
+                              <dt className="text-xs font-bold uppercase tracking-[0.16em] text-brand-navy/[0.72]">
+                                Modules behind it
+                              </dt>
+                              <dd className="mt-2 text-sm leading-6 text-brand-navy/[0.82]">
+                                {panel.areaLabels.join(" · ")} — {panel.featureCount} features
+                              </dd>
+                            </div>
+                          </dl>
+
+                          <Link
+                            href={`/platform/${panel.slug}`}
+                            className="mt-7 inline-flex items-center gap-2 rounded-full bg-brand-navy px-6 py-3 text-sm font-bold text-brand-beige transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-teal"
+                          >
+                            Explore the {panel.shortLabel} panel
+                            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                          </Link>
+                        </div>
                       </div>
-                      <h3 className="text-[clamp(1.2rem,1.05rem+0.42vw,1.45rem)] font-bold text-brand-beige">{dash.title}</h3>
-                      <ul className="mt-4 space-y-2">
-                        {dash.capabilities.slice(0, 3).map((cap) => (
-                          <li key={cap} className="flex items-start gap-2 text-sm leading-6 text-brand-beige/82">
-                            <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-brand-yellow" />
-                            <span>{cap}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      <div className="mt-6 inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.18em] text-brand-yellow transition-colors group-hover:text-white">
-                        {dash.cta} <ArrowRight className="h-4 w-4" />
-                      </div>
-                    </div>
-                  </div>
+                    </SectionReveal>
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
+        </section>
+
+        <section className="section-space relative overflow-hidden bg-brand-navy" style={{ color: "#fcf6d3" }}>
+          <BackgroundBlobs
+            blobs={[
+              { color: "#fcbf49", size: 380, position: "top-right", opacity: 0.16 },
+              { color: "#0c716b", size: 380, position: "bottom-left", opacity: 0.16 },
+            ]}
+          />
+          <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            <SectionReveal className="max-w-3xl">
+              <p className="text-sm font-bold uppercase tracking-[0.22em] text-brand-yellow">
+                Access is the design, not a setting
+              </p>
+              <h2 className="mt-5 text-3xl font-bold text-brand-beige md:text-4xl">
+                Panels are generated from roles and permissions
+              </h2>
+              <p className="mt-4 text-lg leading-8 text-brand-beige/85">
+                Navigation is built from what a role is entitled to open, so a teacher never sees
+                payroll and a parent only sees their own children. Sessions, multi-factor
+                authentication, IP and geo controls sit underneath every panel.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link
+                  href="/features/security-and-authentication"
+                  className="inline-flex items-center gap-2 rounded-full border border-brand-yellow/40 bg-brand-yellow/10 px-6 py-3 text-sm font-bold text-brand-yellow transition-colors hover:bg-brand-yellow hover:text-brand-navy"
+                >
+                  See the security module
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
-              </SectionReveal>
-            ))} */}
-
-            {dashboards.map((dash, idx) => (
-              <SectionReveal key={idx} delay={idx * 0.05}>
-                <div className="bg-white rounded-2xl p-8 shadow-lg shadow-brand-navy/5 border border-brand-navy/5 flex flex-col h-full hover:shadow-xl hover:border-brand-teal/30 transition-all duration-300 group">
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className={`w-14 h-14 rounded-xl ${dash.bg} flex items-center justify-center group-hover:scale-110 transition-transform`}>
-                      <dash.icon className={`w-7 h-7 ${dash.color}`} />
-                    </div>
-                    <h3 className="text-xl font-bold text-brand-navy">{dash.title}</h3>
-                  </div>
-                  
-                  <ul className="space-y-3 mb-8 flex-grow">
-                    {dash.capabilities.map((cap, i) => (
-                      <li key={i} className="flex items-start gap-3 text-brand-navy/80">
-                        <div className="w-5 h-5 rounded-full bg-brand-navy/5 flex items-center justify-center text-brand-teal text-xs mt-0.5 flex-shrink-0">✓</div>
-                        <span>{cap}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  
-                  <Link href= {dash.href} className="inline-flex items-center text-brand-teal font-bold hover:text-brand-navy transition-colors group/link mt-auto">
-                    Explore {dash.title} <ArrowRight className="w-4 h-4 ml-2 group-hover/link:translate-x-1 transition-transform" />
-                  </Link>
-                </div>
-              </SectionReveal>
-            ))}
+                <Link
+                  href="/security"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3 text-sm font-bold text-brand-beige transition-colors hover:border-white/40"
+                >
+                  How we protect school data
+                </Link>
+              </div>
+            </SectionReveal>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="section-space border-t border-brand-navy/5 bg-brand-beige/20">
-        <div className="mx-auto max-w-4xl px-4 text-center">
-          <SectionReveal>
-            <h2 className="text-3xl font-bold text-brand-navy">Want to see the dashboard built for your role?</h2>
-            <p className="mt-4 text-lg text-brand-navy/70">
-              Tell us which team you are part of and we will walk through the exact view , and workflows , that apply to your day-to-day work.
-            </p>
-            <Link
-              href="/demo"
-              className="mt-8 w-full sm:w-auto inline-flex items-center gap-2 rounded-full bg-brand-navy px-8 py-4 text-lg font-bold text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:bg-brand-teal hover:shadow-brand-teal/25"
-            >
-              Book a personalised walkthrough
-            </Link>
-          </SectionReveal>
-        </div>
-      </section>
-
-      <section className="section-space border-t border-brand-navy/5 bg-white">
-        <div className="page-shell">
-          <SectionReveal className="mx-auto mb-12 max-w-3xl text-center">
-            <div className="section-kicker">For school groups and network operators</div>
-            <h2 className="section-title mt-6 text-brand-navy">Platform controls beyond a single campus</h2>
-            <p className="section-copy mt-4 text-brand-navy/70">
-              If your organization runs multiple schools, KIDUART supports centralized control while keeping each school's day-to-day operations separate.
-            </p>
-          </SectionReveal>
-
-          <div className="grid gap-6 md:grid-cols-2">
-            {[
-              {
-                title: "Organization-level school management",
-                desc: "Manage multiple schools under one structure with school-level visibility and governance.",
-              },
-              {
-                title: "Module entitlements and role controls",
-                desc: "Enable modules by plan and role so each school team only sees what they are authorized to use.",
-              },
-              {
-                title: "Billing and subscription workflows",
-                desc: "Track plan and billing operations in one place for cleaner finance coordination across school groups.",
-              },
-              {
-                title: "Support and helpdesk operations",
-                desc: "Handle support tickets through built-in workflows with clearer ownership and follow-up history.",
-              },
-            ].map((item) => (
-              <SectionReveal key={item.title} className="interactive-card rounded-2xl border border-brand-navy/10 bg-brand-beige/20 p-6">
-                <h3 className="text-xl font-bold text-brand-navy">{item.title}</h3>
-                <p className="mt-3 text-brand-navy/70 leading-7">{item.desc}</p>
-              </SectionReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <CtaSection />
-    </PageTransition>
+        <CtaSection
+          title="Ask for a demo in the panel your team will actually use"
+          subtitle="Tell us the roles joining the call and we will open those panels — not a generic admin tour."
+        />
+      </PageTransition>
+    </>
   );
 }
+
+export const getStaticProps: GetStaticProps<PlatformPageProps> = async () => {
+  const panels: PanelCard[] = [...PRODUCT_PANELS]
+    .sort((a, b) => a.order - b.order)
+    .map((panel) => {
+      const featureCount = panel.areas.reduce(
+        (sum, areaSlug) => sum + (getMatrixCategory(areaSlug)?.featureCount ?? 0),
+        0,
+      );
+
+      return {
+        slug: panel.slug,
+        order: panel.order,
+        label: panel.label,
+        shortLabel: panel.shortLabel,
+        stage: panel.stage,
+        headline: panel.headline,
+        summary: panel.summary,
+        audience: panel.audience,
+        image: panel.image,
+        imageAlt: panel.imageAlt,
+        icon: panel.icon,
+        accent: panel.accent,
+        featureCount,
+        areaLabels: panel.areas.map(
+          (areaSlug) => AREA_NARRATIVE_BY_SLUG[areaSlug]?.label ?? areaSlug,
+        ),
+      };
+    });
+
+  return { props: { panels, totals: MATRIX_TOTALS } };
+};

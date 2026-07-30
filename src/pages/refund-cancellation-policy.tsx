@@ -32,6 +32,28 @@ const sections: LegalSection[] = [
     ],
   },
   {
+    title: "School Fees Paid by Parents Are Not KIDUART Charges",
+    highlight:
+      "This policy covers what a school pays KIDUART for the platform. It does not cover school fees a parent pays to a school through KIDUART. Those payments settle into the school's own bank account under the school's own merchant agreement with its payment gateway, so any refund of a school fee is decided and issued by the school, recorded in its fee module, and processed through its gateway.",
+    bullets: [
+      "Parents with a question about a fee payment or receipt should contact their school's accounts office, not KIDUART.",
+      "Schools can record a fee refund against a student in the finance module so the ledger and the dues list stay accurate.",
+      "KIDUART can assist a school in tracing a transaction record, but cannot reverse a payment on the school's behalf.",
+    ],
+  },
+  {
+    title: "Mid-Term Changes to Modules and Student Count",
+    intro: [
+      "Because subscription charges follow active student count and the module areas a school has enabled, changes during a term are handled as adjustments rather than refunds.",
+    ],
+    bullets: [
+      "Adding a module area mid-term is charged on a prorated basis from the activation date.",
+      "Disabling a module area stops future charges for it from the next billing cycle and does not create a refund for the current cycle.",
+      "Student count changes are reconciled at the billing cycle agreed in your order form rather than adjusted daily.",
+      "Historical records created through a disabled module remain available to the school unless deletion is requested in writing.",
+    ],
+  },
+  {
     title: "Refund Eligibility",
     table: {
       headers: ["Scenario", "Refund status", "Notes"],
@@ -126,9 +148,9 @@ export default function RefundCancellationPolicy() {
         eyebrow="Billing Policy"
         title="Refund / Cancellation Policy"
         subtitle="This policy explains how KIDUART handles subscription cancellations, service cancellations, refund requests, and payment-related queries."
-        effectiveLabel="Effective date: 28 May 2026"
+        effectiveLabel="Effective date: 29 July 2026"
         summary={[
-          "Certain KIDUART services may be subscription-based, implementation-based, or one-time paid services.",
+          "This policy covers what a school pays KIDUART — not school fees a parent pays to a school through the platform.",
           "Cancellations may stop future renewals, but refunds are available only in limited cases described below.",
           "Setup, onboarding, migration, training, and professional service charges are generally non-refundable once initiated.",
           "Approved refunds are usually processed back to the original payment method within the stated timeline.",

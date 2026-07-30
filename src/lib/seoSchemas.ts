@@ -29,6 +29,37 @@ export const softwareApplicationSchema: JsonLd = {
   },
 };
 
+export type BreadcrumbEntry = { name: string; path: string };
+
+export function buildBreadcrumbSchema(entries: BreadcrumbEntry[]): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: entries.map((entry, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: entry.name,
+      item: `${SITE_URL}${entry.path}`,
+    })),
+  };
+}
+
+/** Lists modules or features so search engines see the depth of a module area. */
+export function buildItemListSchema(name: string, items: { name: string; path?: string }[]): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name,
+    numberOfItems: items.length,
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      ...(item.path ? { url: `${SITE_URL}${item.path}` } : {}),
+    })),
+  };
+}
+
 export type FaqItem = { q: string; a: string };
 export type FaqData = Record<string, FaqItem[]>;
 

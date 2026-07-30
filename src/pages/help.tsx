@@ -114,7 +114,7 @@ export default function HelpCenter() {
       <section className="hero-viewport relative overflow-hidden bg-[#f5f0e6]">
         <div className="page-shell hero-viewport-inner relative z-10 grid items-center gap-10 py-8 md:py-10 lg:grid-cols-[0.92fr_1.08fr]">
           <SectionReveal className="max-w-xl">
-            <div className="mb-5 inline-flex rounded-full bg-brand-orange/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-brand-orange">
+            <div className="mb-5 inline-flex rounded-full bg-brand-orange/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-brand-orange-ink">
               Help Center
             </div>
             <h1 className="text-[clamp(2.25rem,1.6rem+2.35vw,4.6rem)] font-bold leading-[0.98] text-brand-navy">
@@ -153,7 +153,7 @@ export default function HelpCenter() {
                 <div className="absolute inset-0 rounded-[1rem] border border-white/60" />
                 <div className="absolute left-1/2 top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-white/90 bg-brand-orange/80 shadow-md" />
               </div>
-              <div className="absolute bottom-5 left-5 rounded-2xl bg-white/92 px-4 py-3 text-sm font-medium text-brand-navy shadow-lg">
+              <div className="absolute bottom-5 left-5 rounded-2xl bg-white/[0.92] px-4 py-3 text-sm font-medium text-brand-navy shadow-lg">
                 Move to explore
               </div>
             </div>

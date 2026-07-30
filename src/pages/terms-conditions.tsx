@@ -37,6 +37,31 @@ const sections: LegalSection[] = [
     ],
   },
   {
+    title: "Plans, Modules, and What Is Enabled",
+    intro: [
+      "KIDUART is organised into module areas, and each area contains functional modules and features. What a Customer can access depends on the plan and the module areas enabled for that Customer, as recorded in the applicable proposal, order form, or invoice.",
+      "Subscription charges are calculated on active student count for the billing period unless a different basis is agreed in writing. Staff, teacher, student, and parent logins are included within the enabled scope and are not charged per user.",
+    ],
+    bullets: [
+      "Module areas may be added during a term; charges for additions apply on a prorated basis from the date of activation.",
+      "Removing a module area does not delete historical records already created through it unless the Customer requests deletion in writing.",
+      "Features described on our website as roadmap items are not part of the Services until released, and no plan grants a right to unreleased functionality.",
+      "Feature counts published on our website describe the product's overall scope and are not a commitment that every listed feature is enabled for a given Customer's plan.",
+    ],
+  },
+  {
+    title: "Integrations and Customer-Provided Accounts",
+    intro: [
+      "Several integrations operate on accounts held by the Customer — a payment gateway, an SMS provider, an email delivery service, or a school identity provider, for example. In those cases KIDUART transmits data to that provider on the Customer's instruction, and the provider's own terms, pricing, and privacy practices apply to that data.",
+    ],
+    bullets: [
+      "The Customer is responsible for maintaining valid credentials, sender registrations, and regulatory approvals required by its providers.",
+      "Payment settlement occurs between the Customer and its payment gateway under the Customer's own merchant agreement; KIDUART records transactions and issues receipts but is not a party to the settlement.",
+      "Where API access is granted, the Customer is responsible for safeguarding issued API keys and for the actions performed using them, and must request revocation promptly if a key is exposed.",
+      "Integration availability may change if a third-party provider alters or withdraws its interfaces.",
+    ],
+  },
+  {
     title: "Website Use",
     bullets: [
       "You may use the website only for lawful, informational, and business purposes related to evaluating, learning about, or engaging with KIDUART.",
@@ -166,9 +191,9 @@ export default function TermsConditions() {
         eyebrow="Legal Agreement"
         title="Terms & Conditions"
         subtitle="These Terms & Conditions govern access to and use of the KIDUART website, platform, products, and related services."
-        effectiveLabel="Effective date: 28 May 2026"
+        effectiveLabel="Effective date: 29 July 2026"
         summary={[
-          "These Terms apply to both website visitors and authorized users of KIDUART services.",
+          "Access depends on the plan and module areas enabled for your school; billing is on active student count, not per user.",
           "Schools are responsible for authorized account use and the lawfulness of data they submit.",
           "Separate commercial agreements, proposals, order forms, SLAs, or DPAs may override specific service-level terms where expressly stated.",
           "Misuse, unauthorized access, credential sharing, scraping, or unlawful data use may lead to suspension or termination.",

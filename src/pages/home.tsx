@@ -2,153 +2,47 @@ import { PageSeoHead } from "@/components/seo/PageSeoHead";
 import { SchemaMarkup } from "@/components/seo/SchemaMarkup";
 import { pageSeo } from "@/lib/pageSeo";
 import { softwareApplicationSchema } from "@/lib/seoSchemas";
-import { Fragment } from "react";
+import type { GetStaticProps } from "next";
 import { Link } from "wouter";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CtaSection } from "@/components/ui/CtaSection";
 import { HomeCurveHero } from "@/components/ui/CustomHeroes";
-import { ComingSoonBadge, ComingSoonContentMask } from "@/components/common/ComingSoonOverlay";
-import { HOME_IMPACT_HIGHLIGHTS } from "@/lib/siteData";
+import { SchoolJourney } from "@/components/ui/SchoolJourney";
+import { SystemSwitchboard } from "@/components/ui/SystemSwitchboard";
+import { CapabilityAtlas, type AtlasArea } from "@/components/ui/CapabilityAtlas";
+import { IntelligenceConsole } from "@/components/ui/IntelligenceConsole";
+import { RolloutRunway } from "@/components/ui/RolloutRunway";
+import { FoundingCharter } from "@/components/ui/FoundingCharter";
+import { VendorChecklist } from "@/components/ui/VendorChecklist";
+import { ProductIcon } from "@/components/product/ProductIcon";
+import { AREA_NARRATIVES } from "@/data/productNarrative";
+import { MATRIX_CATEGORIES, MATRIX_TOTALS, countSubModules, topModules } from "@/data/featureMatrix";
 import { CONTACT_PHONE_E164 } from "@/lib/contact";
 import { FloatingIcons } from "@/components/animations/FloatingIcons";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
 import {
   ArrowRight,
-  Bell,
-  Brain,
-  CalendarCheck,
   CheckCircle2,
   CreditCard,
-  Building2,
-  FileText,
   MessageSquare,
   PieChart,
   ShieldCheck,
-  Sparkles,
   Users,
-  X,
 } from "lucide-react";
 
-const modules = [
-  {
-    slug: "student-management",
-    icon: Users,
-    title: "Student Management", // CONTENT: Simplified module name for clearer UX copy
-    desc: "Every student's records in one place. Profiles, documents, parent contacts and class history are all accessible to the right people without anyone hunting through files or calling another department.", // CONTENT: Replaced module description with audit-approved copy
-    color: "text-brand-teal",
-    bg: "bg-brand-teal/10",
-  },
-  {
-    slug: "fee-management",
-    icon: CreditCard,
-    title: "Fee Management",
-    desc: "Automated invoices, due-date reminders, payment tracking, and receipts. Finance teams close the month without chasing parents on WhatsApp.", // CONTENT: Added practical finance outcome
-    color: "text-brand-orange",
-    bg: "bg-brand-orange/10",
-  },
-  {
-    slug: "attendance",
-    icon: CalendarCheck,
-    title: "Attendance Tracking",
-    desc: "Teachers mark attendance in seconds. Irregular patterns get flagged before they become a problem. Parents get notified the same day.", // CONTENT: Focused on speed and intervention value
-    color: "text-brand-navy",
-    bg: "bg-brand-navy/10",
-  },
-  {
-    slug: "reports",
-    icon: FileText,
-    title: "Exam & Report Cards",
-    desc: "Build exam schedules, record marks, and publish report cards without a single spreadsheet. Academic data flows straight from the system.", // CONTENT: Emphasized spreadsheet-free reporting
-    color: "text-brand-yellow",
-    bg: "bg-brand-yellow/20",
-  },
-  {
-    slug: "communication",
-    icon: MessageSquare,
-    title: "Parent Communication",
-    desc: "Fee reminders, attendance alerts, exam notices and school circulars sent from one place with delivery tracking built in.", // CONTENT: Removed em dash and matched audit copy
-    color: "text-brand-teal",
-    bg: "bg-brand-teal/10",
-  },
-  {
-    slug: "reports",
-    icon: PieChart,
-    title: "Analytics Dashboard", // CONTENT: Tightened title language
-    desc: "Admissions, collections, attendance trends, and academic performance in one view. Role-based access means every team sees what matters to them.", // CONTENT: Clarified role-based analytics benefit
-    color: "text-brand-bronze",
-    bg: "bg-brand-bronze/10",
-  },
-  {
-    slug: "hr-payroll",
-    icon: Users,
-    title: "HR & Payroll",
-    desc: "Manage staff records, leave approvals, payroll cycles, and performance notes from one HR workflow made for schools.",
-    color: "text-brand-navy",
-    bg: "bg-brand-navy/10",
-  },
-  {
-    slug: "transport",
-    icon: CalendarCheck,
-    title: "Transport Management",
-    desc: "Coordinate routes, drivers, vehicles, and maintenance with live transport visibility for parents and school operations teams.",
-    color: "text-brand-orange",
-    bg: "bg-brand-orange/10",
-  },
-  {
-    slug: "library",
-    icon: FileText,
-    title: "Library Operations",
-    desc: "Track catalog, issue-return, fines, reservations, and member activity without manual registers.",
-    color: "text-brand-teal",
-    bg: "bg-brand-teal/10",
-  },
-];
-
-const aiFeatures = [
-  {
-    icon: Brain,
-    title: "Attendance Pattern Alerts", // CONTENT: Reframed AI capability in plain language
-    desc: "When a student's attendance starts slipping below normal, the system surfaces it early, before a parent call is needed or a session is at risk.", // CONTENT: Added concrete early-warning scenario
-  },
-  {
-    icon: Bell,
-    title: "Fee Risk Detection", // CONTENT: Corrected phrasing and sharpened intent
-    desc: "KIDUART identifies accounts showing signs of payment delay and queues them for follow-up, so your finance team focuses on the right ones first.", // CONTENT: Explained prioritization workflow
-  },
-  {
-    icon: FileText,
-    title: "Faster Report Card Generation", // CONTENT: Updated title to outcome-first wording
-    desc: "Academic data flows directly into report card templates. Staff review instead of re-entering, and publishing takes minutes instead of days.", // CONTENT: Highlighted data flow and time savings
-  },
-  {
-    icon: Sparkles,
-    title: "Communication Drafts for Staff", // CONTENT: Clarified feature use case
-    desc: "Drafting fee reminders, exam notices, and attendance circulars takes less effort when the system suggests the wording based on context.", // CONTENT: Tied AI writing help to routine communications
-  },
-];
-
-const howItWorks = [
-  {
-    step: "01",
-    title: "Configure your school", // CONTENT: Updated onboarding step title per requested journey language
-    desc: "Set up classes, sections, fee structures, academic sessions, staff roles, and access permissions. Our onboarding team works with you through every step.", // CONTENT: Added setup scope and support expectation
-  },
-  {
-    step: "02",
-    title: "Your team takes over", // CONTENT: Shifted step framing to post-setup adoption
-    desc: "Admins, teachers, and finance staff each log into a dashboard built for their role. No one sees more than they need to, and no one has to be trained twice.", // CONTENT: Clarified role-scoped access and training efficiency
-  },
-  {
-    step: "03",
-    title: "Decisions get easier", // CONTENT: Rewrote step title to leadership outcome
-    desc: "With live data on attendance, fees, and academic performance, school leadership can act on facts, not guesswork or end-of-term reports.", // CONTENT: Emphasized real-time decision quality
-  },
+const integrationTeasers = [
+  { name: "Razorpay", href: "/integrations/razorpay" },
+  { name: "WhatsApp Business", href: "/integrations/whatsapp-business" },
+  { name: "SMS notifications", href: "/integrations/sms-notifications" },
+  { name: "Google sign-in", href: "/integrations/google-workspace" },
+  { name: "Zoom", href: "/integrations/zoom" },
+  { name: "REST API", href: "/integrations/rest-api" },
 ];
 
 const faqs = [
   {
     q: "What does your school ERP software manage?",
-    a: "KIDUART covers the full lifecycle of school administration, from processing new admissions and maintaining student records to tracking daily attendance, managing fee collections, scheduling exams, generating report cards, and sending notices to parents. Everything runs from one dashboard, which means your admin team stops switching between spreadsheets, WhatsApp, and disconnected tools.",
+    a: "KIDUART covers the school operations journey from student records and fee collection to attendance, exams, transport, library, HR, and parent communication. Everything runs from one dashboard so your admin team stops switching between spreadsheets, WhatsApp, and paper registers.",
   },
   {
     q: "Is this suitable for schools in India?",
@@ -156,34 +50,20 @@ const faqs = [
   },
   {
     q: "How does AI help school management?",
-    a: "The AI layer works on patterns in your own school data. It surfaces students with irregular attendance before the problem becomes serious, flags accounts at risk of fee delays so your finance team can act early, speeds up report card generation by pre-filling structured data, and suggests clearer wording for parent circulars.",
+    a: "The AI layer works on patterns in your own school data. It surfaces irregular attendance early, prioritizes fee accounts that need follow-up, speeds report card publishing from structured marks, and helps staff draft clearer parent circulars.",
   },
   {
     q: "Can different staff have different access?",
     a: "Yes. KIDUART uses role-based access control. A class teacher sees attendance and gradebook data for their sections. A finance officer sees fee accounts and payment history. The principal sees the full school dashboard. Parents access only their child's profile.",
   },
 ];
-// SEO-UPGRADE: Replaced FAQ answers with high-intent, India-specific operational copy
 
-const comparisons = [
-  {
-    title: "Built for complete school operations",
-    ours: "Admissions, fees, attendance, exams, reports, and communication in one connected workflow.",
-    other: "Disconnected modules or manual spreadsheet-heavy processes.",
-  },
-  {
-    title: "AI with practical school use cases",
-    ours: "Attendance insights, fee alerts, report workflows, and communication support for real admin teams.",
-    other: "Generic AI messaging without operational clarity.",
-  },
-  {
-    title: "Role-based dashboards",
-    ours: "Clear views for school leaders, teachers, office staff, and finance teams.",
-    other: "One-size-fits-all screens that slow down daily work.",
-  },
-];
+type HomeProps = {
+  areaCards: AtlasArea[];
+  totals: typeof MATRIX_TOTALS;
+};
 
-export default function Home() {
+export default function Home({ areaCards, totals }: HomeProps) {
   return (
     <>
       <PageSeoHead {...pageSeo.home} />
@@ -214,27 +94,42 @@ export default function Home() {
 
       <PageTransition instant className="pt-0 pb-0">
         <HomeCurveHero
-          title="School ERP software built around how Indian schools run"
-          subtitle="One platform for admissions, fees, attendance, exams, and parent communication. No more switching between spreadsheets, WhatsApp, and paper registers."
-          // SEO-UPGRADE: Strengthened hero subtitle with trust and workflow pain-point language
+          title="Complete school operations, from admission records to parent updates"
+          subtitle="KIDUART connects student records, fees, attendance, exams, transport, library, HR, and communication in one ERP built for how Indian schools actually work."
           image="/images/banner/home-hero.jpeg"
           actions={(
             <>
               <Link
                 href="/demo"
-                className="w-full sm:w-auto rounded-full bg-white px-8 py-4 text-center text-lg font-bold text-brand-navy shadow-xl transition-all duration-300 hover:-translate-y-1 hover:bg-brand-beige"
+                className="w-full sm:w-auto rounded-full bg-brand-navy px-8 py-4 text-center text-lg font-bold text-brand-beige shadow-xl shadow-brand-navy/20 transition-all duration-300 hover:-translate-y-1 hover:bg-brand-teal"
               >
-                Get Free Demo
+                Book a Free Demo
               </Link>
               <Link
-                href="/pricing"
-                className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:bg-white/15"
+                href="/features"
+                className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-full border border-brand-navy/25 bg-white px-8 py-4 text-lg font-bold text-brand-navy transition-all duration-300 hover:border-brand-teal hover:text-brand-teal"
               >
-                Start Free Trial <ArrowRight className="h-5 w-5" />
+                Explore Modules <ArrowRight className="h-5 w-5" />
               </Link>
             </>
           )}
         />
+
+        <section className="section-space-tight relative overflow-hidden border-b border-brand-navy/5 bg-brand-beige/40">
+          <div className="page-shell relative z-10">
+            <SectionReveal className="mx-auto mb-10 max-w-3xl text-center">
+              <div className="section-kicker">School operations journey</div>
+              <h2 className="section-title mt-6 text-brand-navy">Follow the path your school runs every day</h2>
+              <p className="section-copy mt-4 text-brand-navy/70">
+                Pick any step to see what that module does. Each piece hands off to the next, so information entered once keeps moving through the school year.
+              </p>
+            </SectionReveal>
+
+            <SectionReveal>
+              <SchoolJourney />
+            </SectionReveal>
+          </div>
+        </section>
 
         <section className="section-space-tight relative overflow-hidden border-y border-brand-navy/5 bg-white">
           <BackgroundBlobs
@@ -247,21 +142,14 @@ export default function Home() {
           <div className="page-shell relative z-10">
             <SectionReveal className="mx-auto mb-12 max-w-3xl text-center">
               <div className="section-kicker">Built for daily school work</div>
-              <h2 className="section-title mt-6 text-brand-navy">What changes when operations sit in one system</h2>
+              <h2 className="section-title mt-6 text-brand-navy">What changes when everything sits in one system</h2>
               <p className="section-copy mt-4 text-brand-navy/70">
-                These are the outcomes we design for — not deployment statistics. Book a demo to see how they map to your school.
+                Flip the switch to see the same six jobs the way most schools run them today, and the way
+                they run once records, fees, attendance and communication share one system.
               </p>
             </SectionReveal>
-            <SectionReveal className="grid grid-cols-2 gap-4 text-center md:grid-cols-4 md:gap-6">
-              {HOME_IMPACT_HIGHLIGHTS.map((stat) => (
-                <div key={stat.label} className="flex flex-col rounded-3xl border border-brand-navy/10 bg-brand-beige/20 px-4 py-6 shadow-sm">
-                  <div className="text-xs font-semibold uppercase tracking-[0.24em] text-brand-teal/80">{stat.area}</div>
-                  <div className="stat-value mt-4 flex min-h-[2.75rem] items-center justify-center text-2xl font-extrabold leading-tight text-brand-navy md:min-h-[3.25rem] md:text-3xl">
-                    {stat.headline}
-                  </div>
-                  <div className="mt-3 flex-1 text-sm font-medium leading-snug text-brand-navy/65">{stat.label}</div>
-                </div>
-              ))}
+            <SectionReveal>
+              <SystemSwitchboard />
             </SectionReveal>
           </div>
         </section>
@@ -276,31 +164,30 @@ export default function Home() {
           <FloatingIcons icons={["Users", "Calendar", "CreditCard", "MessageSquare", "PieChart"]} count={5} />
 
           <div className="page-shell relative z-10">
-            <SectionReveal className="mx-auto mb-16 max-w-4xl text-center">
-              <div className="section-kicker">Core ERP modules</div>
-              <h2 className="section-title mt-6 text-brand-navy">Every school workflow in one connected system</h2>
-              {/* SEO-UPGRADE: Simplified modules heading to core value proposition */}
+            <SectionReveal className="mx-auto mb-12 max-w-4xl text-center">
+              <div className="section-kicker">Capability atlas</div>
+              <h2 className="section-title mt-6 text-brand-navy">
+                Your whole school, mapped into {totals.categories} working areas
+              </h2>
               <p className="section-copy mt-4 text-brand-navy/70">
-                From the first admission inquiry to the final exam report, each module is built around the tasks your admin team does every single day.
+                Filter by the part of school you want to fix first. Each area shows how deep it runs
+                — {totals.modules} modules and{" "}
+                {totals.features.toLocaleString("en-IN")} capabilities are live in the product today.
               </p>
             </SectionReveal>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {modules.map((feature, idx) => (
-                <SectionReveal key={feature.title} delay={idx * 0.08}>
-                  <Link
-                    href={`/features/${feature.slug}`}
-                    className="block bg-white rounded-2xl p-8 shadow-lg shadow-brand-navy/5 border border-brand-navy/5 hover:shadow-xl hover:border-brand-teal/30 transition-all duration-300 group h-full cursor-pointer"
-                  >
-                    <div className={`w-14 h-14 rounded-xl ${feature.bg} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                      <feature.icon className={`w-7 h-7 ${feature.color}`} />
-                    </div>
-                    <h3 className="text-[clamp(1.15rem,1rem+0.45vw,1.4rem)] font-bold text-brand-navy mb-3 group-hover:text-brand-teal transition-colors">{feature.title}</h3>
-                    <p className="section-copy text-brand-navy/70">{feature.desc}</p>
-                  </Link>
-                </SectionReveal>
-              ))}
-            </div>
+            <SectionReveal>
+              <CapabilityAtlas areas={areaCards} />
+            </SectionReveal>
+
+            <SectionReveal className="mt-12 text-center">
+              <Link
+                href="/features"
+                className="inline-flex items-center gap-2 rounded-full bg-brand-navy px-8 py-4 text-base font-bold text-brand-beige transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-teal"
+              >
+                See the full capability map <ArrowRight className="h-5 w-5" />
+              </Link>
+            </SectionReveal>
           </div>
         </section>
 
@@ -312,39 +199,31 @@ export default function Home() {
             ]}
           />
           <FloatingIcons icons={["Brain", "Atom", "Lightbulb"]} count={4} />
-          <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20 pointer-events-none">
-            <div className="absolute top-[-10%] right-[-5%] w-96 h-96 rounded-full bg-brand-teal blur-[100px]" />
-            <div className="absolute bottom-[-10%] left-[-5%] w-96 h-96 rounded-full bg-brand-orange blur-[100px]" />
+          {/* Alpha lives in the colour itself so contrast checkers can blend it with the navy behind */}
+          <div className="pointer-events-none absolute left-0 top-0 h-full w-full overflow-hidden">
+            <div className="absolute right-[-5%] top-[-10%] h-96 w-96 rounded-full bg-[rgba(12,115,111,0.2)] blur-[100px]" />
+            <div className="absolute bottom-[-10%] left-[-5%] h-96 w-96 rounded-full bg-[rgba(245,129,0,0.2)] blur-[100px]" />
           </div>
 
           <div className="page-shell relative z-10">
-            <SectionReveal className="mx-auto mb-16 max-w-3xl text-center">
+            <SectionReveal className="mx-auto mb-12 max-w-3xl text-center">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-brand-yellow font-semibold text-sm mb-6 border border-white/20">
-                AI built for school workflows
+                The signal layer
               </div>
-              <h2 className="section-title mb-4 text-brand-beige">Where AI actually helps your school staff</h2>
+              <h2 className="section-title mb-4 text-brand-beige">
+                Your school data is already watching. This is what it says.
+              </h2>
               <p className="section-copy" style={{ color: "rgb(var(--hero-muted-rgb) / 0.7)" }}>
-                Not a chatbot. Not a gimmick. KIDUART's AI layer works on patterns in your own school data to surface things your team would otherwise miss.
+                Not a chatbot bolted on top. KIDUART runs trend, risk and scoring models over your own
+                attendance, fee and exam records, then hands your team a short list worth acting on.
+                Pick any workflow to see exactly what it reads, what it computes, and who gets the
+                result.
               </p>
             </SectionReveal>
 
-            <div className="grid md:grid-cols-2 gap-6">
-              {aiFeatures.map((item, idx) => (
-                <SectionReveal
-                  key={item.title}
-                  delay={idx * 0.1}
-                  className="flex gap-6 p-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors"
-                >
-                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-brand-yellow/20 flex items-center justify-center">
-                    <item.icon className="w-6 h-6 text-brand-yellow" />
-                  </div>
-                  <div>
-                    <h3 className="text-[clamp(1.1rem,0.98rem+0.45vw,1.35rem)] font-bold mb-2 text-brand-beige">{item.title}</h3>
-                    <p className="section-copy" style={{ color: "rgb(var(--hero-muted-rgb) / 0.7)" }}>{item.desc}</p>
-                  </div>
-                </SectionReveal>
-              ))}
-            </div>
+            <SectionReveal>
+              <IntelligenceConsole />
+            </SectionReveal>
           </div>
         </section>
 
@@ -357,22 +236,33 @@ export default function Home() {
           />
           <FloatingIcons icons={["CheckCircle2", "Users", "Star"]} count={4} />
           <div className="page-shell relative z-10">
-            <SectionReveal className="text-center mb-16">
-              <h2 className="section-title text-brand-navy mb-4">Smooth onboarding without disrupting school routines</h2>
-              <p className="section-copy text-brand-navy/70 max-w-3xl mx-auto">
-                We keep onboarding structured and practical, so your team can shift from setup to daily use with confidence.
+            <SectionReveal className="mx-auto mb-12 max-w-3xl text-center">
+              <div className="section-kicker">The rollout runway</div>
+              <h2 className="section-title mt-6 text-brand-navy">
+                From your old spreadsheets to a live school, in five steps
+              </h2>
+              <p className="section-copy mt-4 text-brand-navy/70">
+                No mid-term freeze and no blank screens. Every step below runs on tooling that already
+                exists — import templates that validate before they save, fee structures that clone
+                across classes, permissions set per role, and a parallel run you sign off before the
+                switch.
               </p>
             </SectionReveal>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              {howItWorks.map((item, idx) => (
-                <SectionReveal key={item.step} delay={idx * 0.08} className="interactive-card rounded-3xl border border-brand-navy/10 bg-brand-beige/20 p-8">
-                  <div className="text-sm font-bold tracking-[0.25em] text-brand-teal uppercase">{item.step}</div>
-                  <h3 className="mt-4 text-[clamp(1.3rem,1.1rem+0.6vw,1.8rem)] font-bold text-brand-navy">{item.title}</h3>
-                  <p className="section-copy mt-4 text-brand-navy/70">{item.desc}</p>
-                </SectionReveal>
-              ))}
-            </div>
+            <SectionReveal>
+              <RolloutRunway />
+            </SectionReveal>
+
+            <SectionReveal className="mx-auto mt-10 max-w-3xl rounded-2xl border border-brand-navy/[0.08] bg-brand-beige/30 px-6 py-5 text-center">
+              <p className="text-sm leading-7 text-brand-navy/80">
+                How long each step takes depends on how clean your existing records are, so we plan
+                the dates with you instead of quoting an average we have not measured yet.{" "}
+                <Link href="/demo" className="font-bold text-brand-teal underline underline-offset-4">
+                  Book a walkthrough
+                </Link>{" "}
+                and we will map your session structure on the call.
+              </p>
+            </SectionReveal>
           </div>
         </section>
 
@@ -455,7 +345,7 @@ export default function Home() {
                 </SectionReveal>
 
                 <SectionReveal className="rounded-[2rem] border border-brand-navy/10 bg-white p-7 shadow-lg">
-                  <p className="text-sm uppercase tracking-[0.25em] text-brand-orange">Teacher View</p>
+                  <p className="text-sm uppercase tracking-[0.25em] text-brand-orange-ink">Teacher View</p>
                   <h3 className="mt-3 text-2xl font-bold text-brand-navy">Daily classroom workflow</h3>
                   <p className="mt-3 text-brand-navy/70">Manage attendance, class updates, and student performance from one clean interface.</p>
                   <div className="mt-6 rounded-2xl bg-brand-navy px-5 py-6 text-white">
@@ -487,103 +377,37 @@ export default function Home() {
           />
           <FloatingIcons icons={["Heart", "Star", "Users"]} count={4} />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <SectionReveal className="text-center mb-10">
-              <h2 className="text-4xl font-bold text-brand-navy mb-4">What school teams tell us</h2>
-              <p className="mx-auto max-w-2xl text-brand-navy/70">
-                Verified customer stories are on the way. In the meantime, these themes come up again and again when we speak with administrators, teachers, and finance staff during onboarding.
+            <SectionReveal className="mx-auto mb-12 max-w-3xl text-center">
+              <div className="section-kicker">Proof, not adjectives</div>
+              <h2 className="section-title mt-6 text-brand-navy">
+                No testimonials yet — and we are not going to invent them
+              </h2>
+              <p className="section-copy mt-4 text-brand-navy/70">
+                KIDUART is new to Indian schools. Rather than fill this space with stock photos and
+                quotes nobody said, here is the charter we sign with our first schools, and the exact
+                format their stories will take once they are real and verified.
               </p>
             </SectionReveal>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              {[
-                {
-                  id: "theme-1",
-                  title: "Admissions and daily operations",
-                  label: "Common admin priorities",
-                  lines: [
-                    "Less time reconciling spreadsheets between the front office and accounts.",
-                    "Attendance and notices handled from one place instead of three apps.",
-                    "Staff spend fewer hours on follow-ups that should not need a phone call.",
-                  ],
-                },
-                {
-                  id: "theme-2",
-                  title: "Finance and parent communication",
-                  label: "What finance teams ask for",
-                  lines: [
-                    "Clearer view of who has paid, who is due, and which reminders went out.",
-                    "Receipts and fee history parents can check without calling the school.",
-                    "Month-end closing that does not depend on chasing WhatsApp screenshots.",
-                  ],
-                },
-                {
-                  id: "theme-3",
-                  title: "Leadership and reporting",
-                  label: "What principals want to see",
-                  lines: [
-                    "Exam and report card work that does not start from a blank Excel file.",
-                    "Updates to families that match the channel the school already uses.",
-                    "A single picture of attendance, fees, and academics before Monday morning meetings.",
-                  ],
-                },
-              ].map((card, idx) => (
-                <SectionReveal
-                  key={card.id}
-                  delay={idx * 0.08}
-                  className="relative overflow-hidden rounded-2xl border border-brand-navy/10 bg-brand-beige/20 p-8"
-                >
-                  <ComingSoonBadge />
-
-                  <div className="flex items-center gap-4">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full border border-brand-teal/20 bg-brand-teal/10 text-brand-teal">
-                      <Building2 className="h-6 w-6" />
-                    </div>
-                    <div>
-                      <div className="font-bold text-brand-navy">{card.title}</div>
-                      <div className="mt-1 text-sm font-semibold tracking-tight text-brand-teal/80">
-                        {card.label}
-                      </div>
-                    </div>
-                  </div>
-
-                  <ComingSoonContentMask className="mt-5 space-y-2">
-                    {card.lines.map((line) => (
-                      <p key={line} className="text-brand-navy/70 leading-7 text-sm">
-                        {line}
-                      </p>
-                    ))}
-                  </ComingSoonContentMask>
-                </SectionReveal>
-              ))}
-            </div>
-
-            <SectionReveal className="mt-10">
-              <div className="flex flex-col items-center gap-4">
-                <p className="text-lg font-semibold text-brand-navy">
-                  Using KIDUART and willing to share your experience? We would like to hear from you.
-                </p>
-                <Link
-                  href="/demo"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-brand-yellow px-8 py-4 text-base font-bold text-brand-navy shadow-xl hover:bg-white transition-colors duration-300"
-                >
-                  Request Demo <ArrowRight className="h-5 w-5" />
-                </Link>
-              </div>
+            <SectionReveal>
+              <FoundingCharter />
             </SectionReveal>
 
-            <SectionReveal className="mt-12">
-              <div className="flex flex-wrap items-center justify-center gap-4">
+            <SectionReveal className="mt-10">
+              <div className="flex flex-wrap items-center justify-center gap-3">
                 {[
-                  "🔒 Built-in data protection controls",
-                  "🇮🇳 Built for Indian Schools",
-                  "⚡ Structured onboarding support",
-                ].map((badge) => (
-                  <div
-                    key={badge}
-                    className="rounded-full border border-brand-navy/10 bg-brand-beige/20 px-6 py-3 text-sm font-semibold text-brand-navy/90"
+                  { label: "Security controls, layer by layer", href: "/security" },
+                  { label: "What we do with school data", href: "/privacy-policy" },
+                  { label: "Every module area, in the open", href: "/features" },
+                ].map((proof) => (
+                  <Link
+                    key={proof.href}
+                    href={proof.href}
+                    className="inline-flex items-center gap-2 rounded-full border border-brand-navy/12 bg-brand-beige/30 px-5 py-2.5 text-sm font-semibold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
                   >
-                    {badge}
-                  </div>
+                    {proof.label}
+                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </Link>
                 ))}
               </div>
             </SectionReveal>
@@ -599,78 +423,50 @@ export default function Home() {
           />
           <FloatingIcons icons={["CheckCircle2", "ShieldCheck", "Users"]} count={4} />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <SectionReveal className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-brand-beige mb-4">Why choose us over generic school software?</h2>
-              <p className="text-lg max-w-3xl mx-auto text-brand-beige/75">
-                Here is how KIDUART stacks up against generic school software in everyday use.
+            <SectionReveal className="mx-auto mb-12 max-w-3xl text-center">
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-brand-yellow">
+                The buyer&apos;s due-diligence list
+              </div>
+              <h2 className="section-title mb-4 mt-6 text-brand-beige">
+                Nine questions to ask us — and every other ERP vendor
+              </h2>
+              <p className="section-copy" style={{ color: "rgb(var(--hero-muted-rgb) / 0.75)" }}>
+                A comparison table written by us will always end with us winning. So here is the list
+                we would carry into a demo if we were buying, including the questions vendors prefer
+                you never ask. Tick the ones that matter to your school.
               </p>
-              {/* SEO-UPGRADE: Replaced placeholder comparison sentence with clear buyer-oriented copy */}
             </SectionReveal>
 
-            <SectionReveal className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 shadow-2xl">
-              <div className="hidden md:grid md:grid-cols-[0.9fr_1.05fr_1.05fr]">
-                <div className="border-b border-r border-white/10 bg-white/5 px-8 py-6">
-                  <h3 className="text-sm font-bold uppercase tracking-[0.24em] text-brand-yellow">Comparison</h3>
-                </div>
-                <div className="border-b border-r border-white/10 bg-brand-teal/15 px-8 py-6">
-                  <div className="flex items-center gap-3 font-bold text-brand-beige">
-                    <CheckCircle2 className="h-5 w-5 text-brand-yellow" />
-                    <span>KIDUART ERP</span>
-                  </div>
-                </div>
-                <div className="border-b border-white/10 bg-white/5 px-8 py-6">
-                  <div className="flex items-center gap-3 font-bold text-brand-beige">
-                    <X className="h-5 w-5 text-brand-orange" />
-                    <span>Generic Alternatives</span>
-                  </div>
-                </div>
+            <SectionReveal>
+              <VendorChecklist />
+            </SectionReveal>
+          </div>
+        </section>
 
-                {comparisons.map((item, idx) => (
-                  <Fragment key={item.title}>
-                    <div className={`border-r border-white/10 px-8 py-8 ${idx !== comparisons.length - 1 ? "border-b" : ""} border-white/10`}>
-                      <h3 className="text-2xl font-bold text-brand-beige">{item.title}</h3>
-                    </div>
-                    <div className={`border-r border-white/10 bg-brand-teal/10 px-8 py-8 ${idx !== comparisons.length - 1 ? "border-b" : ""} border-white/10`}>
-                      <p className="leading-7 text-brand-beige/85">{item.ours}</p>
-                    </div>
-                    <div className={`px-8 py-8 ${idx !== comparisons.length - 1 ? "border-b" : ""} border-white/10`}>
-                      <p className="leading-7 text-brand-beige/70">{item.other}</p>
-                    </div>
-                  </Fragment>
-                ))}
-              </div>
-
-              <div className="md:hidden">
-                <div className="grid grid-cols-3 border-b border-white/10 bg-white/5">
-                  <div className="px-4 py-4 text-xs font-bold uppercase tracking-[0.18em] text-brand-yellow">Comparison</div>
-                  <div className="border-l border-white/10 px-4 py-4 text-xs font-bold uppercase tracking-[0.18em] text-brand-beige">KIDUART</div>
-                  <div className="border-l border-white/10 px-4 py-4 text-xs font-bold uppercase tracking-[0.18em] text-brand-beige">Others</div>
-                </div>
-
-                {comparisons.map((item, idx) => (
-                  <div key={item.title} className={idx !== comparisons.length - 1 ? "border-b border-white/10" : ""}>
-                    <div className="px-4 py-5">
-                      <h3 className="text-lg font-bold text-brand-beige">{item.title}</h3>
-                    </div>
-                    <div className="grid grid-cols-1">
-                      <div className="border-t border-white/10 bg-brand-teal/10 px-4 py-4">
-                        <div className="mb-2 flex items-center gap-2 text-sm font-semibold text-brand-beige">
-                          <CheckCircle2 className="h-4 w-4 text-brand-yellow" />
-                          <span>KIDUART ERP</span>
-                        </div>
-                        <p className="text-sm leading-6 text-brand-beige/85">{item.ours}</p>
-                      </div>
-                      <div className="border-t border-white/10 px-4 py-4">
-                        <div className="mb-2 flex items-center gap-2 text-sm font-semibold text-brand-beige">
-                          <X className="h-4 w-4 text-brand-orange" />
-                          <span>Generic Alternatives</span>
-                        </div>
-                        <p className="text-sm leading-6 text-brand-beige/70">{item.other}</p>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+        <section className="section-space relative overflow-hidden bg-white border-y border-brand-navy/5">
+          <div className="page-shell relative z-10">
+            <SectionReveal className="mx-auto mb-10 max-w-3xl text-center">
+              <div className="section-kicker">Seamless integrations</div>
+              <h2 className="section-title mt-6 text-brand-navy">Works with the tools schools already use</h2>
+              <p className="section-copy mt-4 text-brand-navy/70">
+                Connect classrooms, virtual meetings, and fee payments without forcing your team into a disconnected stack.
+              </p>
+            </SectionReveal>
+            <SectionReveal className="flex flex-wrap items-center justify-center gap-3">
+              {integrationTeasers.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="rounded-full border border-brand-navy/10 bg-brand-beige/30 px-5 py-3 text-sm font-semibold text-brand-navy transition-colors hover:border-brand-teal/40 hover:bg-white hover:text-brand-teal"
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </SectionReveal>
+            <SectionReveal className="mt-8 text-center">
+              <Link href="/integrations" className="inline-flex items-center gap-2 text-sm font-bold text-brand-teal hover:text-brand-navy">
+                View all integrations <ArrowRight className="h-4 w-4" />
+              </Link>
             </SectionReveal>
           </div>
         </section>
@@ -706,11 +502,31 @@ export default function Home() {
         </section>
 
         <CtaSection
-          title="See KIDUART in action, free with no obligation"
-          subtitle="One of our product specialists will walk you through the platform live. Ask whatever you want. We cover everything relevant to your school's setup."
+          title="Walk the full school journey in a live demo"
+          subtitle="See student records, fees, attendance, exams, transport, library, HR, and parent updates working together. Ask about your fee book, class structure, and staff roles."
         />
-        {/* SEO-UPGRADE: Updated CTA to reduce friction and set demo expectations */}
       </PageTransition>
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps<HomeProps> = async () => ({
+  props: {
+    areaCards: MATRIX_CATEGORIES.map((category) => {
+      const narrative = AREA_NARRATIVES.find((entry) => entry.slug === category.slug);
+      return {
+        slug: category.slug,
+        label: narrative?.label ?? category.name,
+        stage: narrative?.stage ?? "",
+        summary: narrative?.summary ?? "",
+        icon: narrative?.icon ?? "Layers",
+        accent: narrative?.accent ?? "teal",
+        moduleCount: category.moduleCount,
+        subModuleCount: countSubModules(category),
+        featureCount: category.featureCount,
+        topModules: topModules(category, 3).map((entry) => entry.name),
+      };
+    }),
+    totals: MATRIX_TOTALS,
+  },
+});

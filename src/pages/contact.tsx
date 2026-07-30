@@ -117,7 +117,7 @@ export default function Contact() {
             <a href={`mailto:${CONTACT_EMAIL}`} className="rounded-full bg-brand-navy px-7 py-3.5 text-sm font-bold text-white transition-colors hover:bg-brand-teal">
               Email Sales
             </a>
-            <a href={`mailto:${CONTACT_EMAIL}`} className="rounded-full border border-brand-navy/12 bg-white px-7 py-3.5 text-sm font-bold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal">
+            <a href={`mailto:${CONTACT_EMAIL}`} className="rounded-full border border-brand-navy/[0.12] bg-white px-7 py-3.5 text-sm font-bold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal">
               Contact Support
             </a>
           </>

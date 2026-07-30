@@ -127,7 +127,7 @@ export default function RequestDemo() {
                 This is not a recorded walkthrough. It is a live session shaped around your school's size, structure and the specific workflow problems you want to solve. Bring your hardest questions. The specialist will have real answers.
               </p>
               {/* SEO-UPGRADE: Rewrote subtitle to set live-demo expectation and qualify intent */}
-              <div className="mb-8 flex flex-wrap items-center gap-4 text-sm text-brand-navy/72">
+              <div className="mb-8 flex flex-wrap items-center gap-4 text-sm text-brand-navy/[0.72]">
                 <span className="font-semibold">Not ready to book yet?</span>
                 {/* SEO-UPGRADE: Improved WhatsApp CTA pretext for pre-booking confidence */}
                 <a href={WHATSAPP_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 font-semibold text-brand-navy shadow-sm transition-colors hover:text-brand-teal">
@@ -169,7 +169,7 @@ export default function RequestDemo() {
                     </div>
                   </div>
                   <div className="flex gap-4">
-                    <div className="w-8 h-8 rounded-full bg-brand-orange text-white font-bold flex items-center justify-center shrink-0 text-sm">3</div>
+                    <div className="w-8 h-8 rounded-full bg-brand-orange text-brand-navy font-bold flex items-center justify-center shrink-0 text-sm">3</div>
                     <div>
                       <p className="font-semibold text-brand-navy text-sm">Your personalised session</p>
                       <p className="text-brand-navy/60 text-xs">A live screen-share of KIDUART configured around the workflows that matter to your school. You leave with a clear picture of fit and a realistic implementation timeline.</p>

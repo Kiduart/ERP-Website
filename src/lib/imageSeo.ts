@@ -1,3 +1,5 @@
+import HERO_VARIANTS from "@/data/heroImageVariants.json";
+
 /** Hero / primary image alt: heading plus brand context */
 export function heroImageAlt(title: string): string {
   return `${title} - KIDUART School ERP`;
@@ -12,17 +14,17 @@ export const IMAGE_DIMENSIONS = {
   teamPanel: { width: 400, height: 288 },
   avatar: { width: 48, height: 48 },
   dashboard: { width: 1200, height: 750 },
-  logo: { width: 160, height: 64 },
+  logo: { width: 512, height: 160 },
 } as const;
 
-/** Prefer modern formats when available for static hero assets */
+/**
+ * Prefer modern formats when available for static hero assets.
+ * Variants come from `npm run build:heroes`.
+ */
 export function heroSrcSet(src: string): { src: string; webp?: string; avif?: string } {
-  if (src.endsWith("/home-hero.jpeg") || src.endsWith("/home-hero.jpg")) {
-    return {
-      src,
-      webp: "/images/banner/home-hero.webp",
-      avif: "/images/banner/home-hero.avif",
-    };
+  const variants = (HERO_VARIANTS as Record<string, { avif?: string; webp?: string }>)[src];
+  if (variants) {
+    return { src, avif: variants.avif, webp: variants.webp };
   }
   return { src };
 }

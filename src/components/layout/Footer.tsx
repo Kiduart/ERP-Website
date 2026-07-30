@@ -1,8 +1,108 @@
 import { Link } from "wouter";
-import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Twitter } from "lucide-react";
+import { Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { CONTACT_EMAIL, CONTACT_LOCATION, CONTACT_PHONE_DISPLAY } from "@/lib/contact";
 import { useState, type FormEvent } from "react";
 import { useToast } from "@/hooks/use-toast";
+
+type FooterLink = { label: string; href: string; soon?: boolean };
+
+const NAV_COLUMNS: { heading: string; links: FooterLink[] }[] = [
+  {
+    heading: "Product",
+    links: [
+      { label: "Features", href: "/features" },
+      { label: "Platform", href: "/platform" },
+      { label: "Solutions", href: "/solutions" },
+      { label: "Integrations", href: "/integrations" },
+      { label: "Pricing", href: "/pricing" },
+      { label: "Security", href: "/security" },
+    ],
+  },
+  {
+    heading: "Company",
+    links: [
+      { label: "About Us", href: "/about" },
+      { label: "Contact Us", href: "/contact" },
+      { label: "Careers", href: "/careers", soon: true },
+      { label: "Customer Stories", href: "/stories", soon: true },
+    ],
+  },
+  {
+    heading: "Resources",
+    links: [
+      { label: "Help Center", href: "/help" },
+      { label: "FAQ", href: "/faq" },
+      { label: "Blog & Insights", href: "/blog", soon: true },
+    ],
+  },
+  {
+    heading: "Legal",
+    links: [
+      { label: "Privacy Policy", href: "/privacy-policy" },
+      { label: "Terms & Conditions", href: "/terms-conditions" },
+      { label: "Refund / Cancellation", href: "/refund-cancellation-policy" },
+    ],
+  },
+];
+
+const EXPLORE_COLUMNS: { heading: string; links: FooterLink[] }[] = [
+  {
+    heading: "Module areas",
+    links: [
+      { label: "Academics", href: "/features/academic" },
+      { label: "Fees & Finance", href: "/features/finance-and-fee-management" },
+      { label: "Student Records", href: "/features/student-management" },
+      { label: "HR & Staff", href: "/features/hr-and-staff-management" },
+      { label: "Admissions", href: "/features/admission" },
+      { label: "Communication", href: "/features/communication" },
+      { label: "Library", href: "/features/library-management" },
+      { label: "Transport", href: "/features/transport-management" },
+      { label: "Hostel", href: "/features/hostel-management" },
+      { label: "Reports & Analytics", href: "/features/reports-and-analytics" },
+      { label: "Security & Access", href: "/features/security-and-authentication" },
+      { label: "Multi-Campus HQ", href: "/features/organization-management" },
+    ],
+  },
+  {
+    heading: "Role panels",
+    links: [
+      { label: "System admin", href: "/platform/system-admin" },
+      { label: "Organisation", href: "/platform/organization" },
+      { label: "Director", href: "/platform/director" },
+      { label: "School admin", href: "/platform/school-admin" },
+      { label: "Academic", href: "/platform/academic" },
+      { label: "Teacher", href: "/platform/teacher" },
+      { label: "Finance", href: "/platform/finance" },
+      { label: "HR & staff", href: "/platform/hr" },
+      { label: "Parent", href: "/platform/parent" },
+      { label: "Student", href: "/platform/student" },
+    ],
+  },
+  {
+    heading: "Solutions by role",
+    links: [
+      { label: "School groups", href: "/solutions/organizations" },
+      { label: "Principals", href: "/solutions/school-administration" },
+      { label: "Admin staff", href: "/solutions/administrators" },
+      { label: "Academic coordinators", href: "/solutions/academic-coordinators" },
+      { label: "Teachers", href: "/solutions/teachers" },
+      { label: "Accountants", href: "/solutions/accountants" },
+      { label: "Parents", href: "/solutions/parents" },
+      { label: "Students", href: "/solutions/students" },
+    ],
+  },
+];
+
+const linkClass =
+  "hover-underline-group inline-flex min-h-6 items-center gap-2 py-0.5 text-sm leading-6 text-brand-navy/75 transition-colors hover:text-brand-navy";
+
+function SoonBadge() {
+  return (
+    <span className="rounded-full bg-brand-yellow px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-brand-navy">
+      Soon
+    </span>
+  );
+}
 
 export function Footer() {
   const { toast } = useToast();
@@ -61,7 +161,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="border-t border-brand-navy/10 bg-brand-beige pt-10 pb-8 sm:pt-14">
+    <footer className="border-t border-brand-navy/10 bg-brand-beige pb-8 pt-10 sm:pt-14">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="rounded-[2rem] bg-brand-navy px-6 py-8 text-white shadow-[0_24px_60px_rgba(0,48,73,0.18)] sm:px-8 sm:py-10 lg:px-12 lg:py-12">
           <div className="max-w-3xl">
@@ -99,39 +199,46 @@ export function Footer() {
           </form>
         </div>
 
-        <div className="grid grid-cols-1 gap-12 py-16 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-[1.2fr_0.7fr_0.7fr_0.8fr_0.95fr]">
-          <div className="max-w-sm">
+        <div className="mt-14 grid gap-10 lg:grid-cols-12 lg:gap-8">
+          <div className="lg:col-span-4 lg:pr-8">
             <Link href="/" className="inline-flex items-center">
               <img
                 src="/logo.png"
                 alt="KIDUART school ERP"
-                className="h-20 w-auto"
-                width={160}
-                height={80}
+                className="h-12 w-auto sm:h-14"
+                width={512}
+                height={160}
                 loading="lazy"
                 decoding="async"
               />
             </Link>
-            <p className="mt-6 text-sm leading-7 text-brand-navy/70">
-              KIDUART builds school ERP software for Indian educational institutions , helping admin teams, teachers, and finance staff do their jobs without the friction.
+            <p className="mt-5 max-w-sm text-sm leading-7 text-brand-navy/75">
+              KIDUART builds school ERP software for Indian educational institutions, helping admin
+              teams, teachers, and finance staff do their jobs without the friction.
             </p>
 
             <div className="mt-6 space-y-3 text-sm text-brand-navy/75">
-              <a href="tel:+919217534128" className="flex items-center gap-3 transition-colors hover:text-brand-teal">
-                <Phone className="h-4 w-4 text-brand-teal" />
+              <a
+                href="tel:+919217534128"
+                className="flex items-center gap-3 transition-colors hover:text-brand-teal"
+              >
+                <Phone className="h-4 w-4 shrink-0 text-brand-teal" aria-hidden />
                 <span>{CONTACT_PHONE_DISPLAY}</span>
               </a>
-              <a href={`mailto:${CONTACT_EMAIL}`} className="flex items-center gap-3 transition-colors hover:text-brand-teal">
-                <Mail className="h-4 w-4 text-brand-teal" />
+              <a
+                href={`mailto:${CONTACT_EMAIL}`}
+                className="flex items-center gap-3 transition-colors hover:text-brand-teal"
+              >
+                <Mail className="h-4 w-4 shrink-0 text-brand-teal" aria-hidden />
                 <span>{CONTACT_EMAIL}</span>
               </a>
-              <div className="flex items-start gap-3">
-                <MapPin className="mt-0.5 h-4 w-4 text-brand-teal" />
+              <p className="flex items-start gap-3">
+                <MapPin className="mt-1 h-4 w-4 shrink-0 text-brand-teal" aria-hidden />
                 <span>{CONTACT_LOCATION}</span>
-              </div>
+              </p>
             </div>
 
-            <div className="mt-8 flex gap-4">
+            <div className="mt-7 flex gap-3">
               <a
                 href="https://www.instagram.com/kiduart/"
                 className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-brand-navy shadow-sm transition-colors hover:bg-brand-navy hover:text-white"
@@ -141,9 +248,6 @@ export function Footer() {
               >
                 <Instagram className="h-5 w-5" aria-hidden />
               </a>
-              {/* <a href="#" className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-brand-navy shadow-sm transition-colors hover:bg-brand-navy hover:text-white">
-                <Facebook className="h-5 w-5" />
-              </a> */}
               <a
                 href="https://www.linkedin.com/company/kiduart"
                 className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-brand-navy shadow-sm transition-colors hover:bg-brand-navy hover:text-white"
@@ -156,63 +260,52 @@ export function Footer() {
             </div>
           </div>
 
-          <div>
-            <h4 className="mb-6 text-sm font-bold uppercase tracking-[0.25em] text-brand-teal">Company</h4>
-            <ul className="space-y-4">
-              <li><Link href="/about" className="hover-underline-group inline-flex text-sm text-brand-navy/75 transition-colors hover:text-brand-navy"><span className="center-gradient-underline">About Us</span></Link></li>
-              <li>
-                <Link href="/careers" className="hover-underline-group inline-flex items-center gap-2 text-sm text-brand-navy/75 transition-colors hover:text-brand-navy">
-                  <span className="center-gradient-underline">Careers</span>
-                  <span className="rounded-full bg-brand-yellow px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-brand-navy">Soon</span>
-                </Link>
-              </li>
-              <li>
-                <Link href="/stories" className="hover-underline-group inline-flex items-center gap-2 text-sm text-brand-navy/75 transition-colors hover:text-brand-navy">
-                  <span className="center-gradient-underline">Customer Stories</span>
-                  <span className="rounded-full bg-brand-yellow px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-brand-navy">Soon</span>
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="mb-6 text-sm font-bold uppercase tracking-[0.25em] text-brand-teal">Product</h4>
-            <ul className="space-y-4">
-              <li><Link href="/features" className="hover-underline-group inline-flex text-sm text-brand-navy/75 transition-colors hover:text-brand-navy"><span className="center-gradient-underline">Features</span></Link></li>
-              <li><Link href="/integrations" className="hover-underline-group inline-flex text-sm text-brand-navy/75 transition-colors hover:text-brand-navy"><span className="center-gradient-underline">Integrations</span></Link></li>
-              <li><Link href="/pricing" className="hover-underline-group inline-flex text-sm text-brand-navy/75 transition-colors hover:text-brand-navy"><span className="center-gradient-underline">Pricing</span></Link></li>
-              <li><Link href="/security" className="hover-underline-group inline-flex text-sm text-brand-navy/75 transition-colors hover:text-brand-navy"><span className="center-gradient-underline">Security</span></Link></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="mb-6 text-sm font-bold uppercase tracking-[0.25em] text-brand-teal">Resources</h4>
-            <ul className="space-y-4">
-              <li>
-                <Link href="/blog" className="hover-underline-group inline-flex items-center gap-2 text-sm text-brand-navy/75 transition-colors hover:text-brand-navy">
-                  <span className="center-gradient-underline">Blog & Insights</span>
-                  <span className="rounded-full bg-brand-yellow px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-brand-navy">Soon</span>
-                </Link>
-              </li>
-              <li><Link href="/help" className="hover-underline-group inline-flex text-sm text-brand-navy/75 transition-colors hover:text-brand-navy"><span className="center-gradient-underline">Help Center</span></Link></li>
-              <li><Link href="/contact" className="hover-underline-group inline-flex text-sm text-brand-navy/75 transition-colors hover:text-brand-navy"><span className="center-gradient-underline">Contact Us</span></Link></li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="mb-6 text-sm font-bold uppercase tracking-[0.25em] text-brand-teal">Legal</h4>
-            <ul className="space-y-4">
-              <li><Link href="/privacy-policy" className="hover-underline-group inline-flex text-sm text-brand-navy/75 transition-colors hover:text-brand-navy"><span className="center-gradient-underline">Privacy Policy</span></Link></li>
-              <li><Link href="/terms-conditions" className="hover-underline-group inline-flex text-sm text-brand-navy/75 transition-colors hover:text-brand-navy"><span className="center-gradient-underline">Terms & Conditions</span></Link></li>
-              <li><Link href="/refund-cancellation-policy" className="hover-underline-group inline-flex text-sm text-brand-navy/75 transition-colors hover:text-brand-navy"><span className="center-gradient-underline">Refund / Cancellation Policy</span></Link></li>
-            </ul>
+          <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4 lg:col-span-8">
+            {NAV_COLUMNS.map((column) => (
+              <nav key={column.heading} aria-label={column.heading}>
+                <h4 className="mb-5 text-xs font-bold uppercase tracking-[0.22em] text-brand-teal">
+                  {column.heading}
+                </h4>
+                <ul className="space-y-3">
+                  {column.links.map((link) => (
+                    <li key={link.href}>
+                      <Link href={link.href} className={linkClass}>
+                        <span className="center-gradient-underline">{link.label}</span>
+                        {link.soon && <SoonBadge />}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            ))}
           </div>
         </div>
 
-        <div className="border-t border-brand-navy/10 pt-6 text-center">
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-brand-navy/75">
-            <span>&copy; {new Date().getFullYear()} KIDUART Inc. All rights reserved.</span>
-          </div>
+        <div className="mt-14 grid gap-10 border-t border-brand-navy/10 pt-10 md:grid-cols-3 md:gap-8">
+          {EXPLORE_COLUMNS.map((column) => (
+            <nav key={column.heading} aria-label={column.heading}>
+              <h4 className="mb-5 text-xs font-bold uppercase tracking-[0.22em] text-brand-teal">
+                {column.heading}
+              </h4>
+              <ul className="grid grid-cols-2 gap-x-6 gap-y-2.5">
+                {column.links.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="inline-flex min-h-6 items-center py-0.5 text-sm leading-6 text-brand-navy/75 underline-offset-4 transition-colors hover:text-brand-navy hover:underline"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
+        </div>
+
+        <div className="mt-12 flex flex-col gap-3 border-t border-brand-navy/10 pt-6 text-sm text-brand-navy/75 sm:flex-row sm:items-center sm:justify-between">
+          <p>&copy; {new Date().getFullYear()} KIDUART Inc. All rights reserved.</p>
+          <p>School ERP built in India, for Indian schools.</p>
         </div>
       </div>
     </footer>

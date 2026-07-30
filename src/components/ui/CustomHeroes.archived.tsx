@@ -37,16 +37,16 @@ export function SoftImageHero({
             <h1 className="mt-6 max-w-lg text-[clamp(2rem,1.3rem+1.8vw,3.35rem)] font-bold leading-[1.02] text-brand-navy">
               {title}
             </h1>
-            <p className="mt-5 max-w-lg text-[clamp(1rem,0.95rem+0.14vw,1.05rem)] leading-8 text-brand-navy/72">
+            <p className="mt-5 max-w-lg text-[clamp(1rem,0.95rem+0.14vw,1.05rem)] leading-8 text-brand-navy/[0.72]">
               {subtitle}
             </p>
             {actions && <div className="mt-8 flex flex-col gap-4 sm:flex-row">{actions}</div>}
           </SectionReveal>
 
           <SectionReveal delay={0.08} className="relative">
-            <div className="absolute right-14 top-14 h-32 w-44 rounded-[999px] border border-brand-navy/18" />
+            <div className="absolute right-14 top-14 h-32 w-44 rounded-[999px] border border-brand-navy/[0.18]" />
             <div className="absolute right-6 top-20 h-1 w-56 rounded-full bg-brand-navy/20" />
-            <div className="absolute right-0 top-32 h-1 w-60 rounded-full bg-brand-navy/12" />
+            <div className="absolute right-0 top-32 h-1 w-60 rounded-full bg-brand-navy/[0.12]" />
             <div className="absolute right-8 top-44 h-1 w-52 rounded-full bg-brand-navy/10" />
             <div className="absolute right-24 top-8 h-14 w-14 rounded-full border-[5px] border-white bg-brand-orange/20 shadow-md" />
             <div className="absolute left-12 top-24 h-16 w-16 rounded-full border-[5px] border-white bg-brand-teal/20 shadow-md" />
@@ -87,7 +87,7 @@ export function EditorialMusicHero({
             <h1 className="mt-6 max-w-md text-[clamp(2.2rem,1.6rem+1.7vw,4rem)] font-bold leading-[0.98] text-brand-navy">
               {title}
             </h1>
-            <p className="mt-5 max-w-md text-base leading-8 text-brand-navy/68">{subtitle}</p>
+            <p className="mt-5 max-w-md text-base leading-8 text-brand-navy/[0.68]">{subtitle}</p>
             <div className="mt-8 max-w-md overflow-hidden rounded-full bg-white p-2 shadow-lg shadow-brand-navy/10">
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                 <input
@@ -104,9 +104,9 @@ export function EditorialMusicHero({
           </SectionReveal>
 
           <SectionReveal delay={0.08} className="relative min-h-[20rem] lg:min-h-[28rem]">
-            <div className="absolute left-0 top-10 h-[2px] w-full bg-brand-navy/12" />
+            <div className="absolute left-0 top-10 h-[2px] w-full bg-brand-navy/[0.12]" />
             <div className="absolute left-0 top-20 h-[2px] w-full bg-brand-navy/10" />
-            <div className="absolute left-0 top-32 h-[2px] w-full bg-brand-navy/8" />
+            <div className="absolute left-0 top-32 h-[2px] w-full bg-brand-navy/[0.08]" />
             {[
               "left-[12%] top-[8%]",
               "left-[22%] top-[22%]",
@@ -219,7 +219,7 @@ export function PlayfulSplitHero({
   return (
     <section className={cn("relative overflow-hidden bg-[#fbfaf3] py-20", className)}>
       <div className="absolute inset-0 opacity-50">
-        <div className="absolute left-[8%] top-[18%] h-6 w-6 rounded-full bg-brand-navy/8" />
+        <div className="absolute left-[8%] top-[18%] h-6 w-6 rounded-full bg-brand-navy/[0.08]" />
         <div className="absolute left-[18%] top-[44%] h-4 w-4 rounded-full bg-brand-orange/20" />
         <div className="absolute right-[12%] top-[20%] h-8 w-8 rounded-full bg-brand-teal/10" />
         <div className="absolute right-[16%] bottom-[22%] h-5 w-5 rounded-full bg-brand-navy/10" />
@@ -234,13 +234,13 @@ export function PlayfulSplitHero({
           <h1 className="mt-6 max-w-xl text-[clamp(2.1rem,1.5rem+1.7vw,3.7rem)] font-bold leading-[1.02] text-brand-navy">
             {title}
           </h1>
-          <p className="mt-5 max-w-lg text-base leading-8 text-brand-navy/66">{subtitle}</p>
+          <p className="mt-5 max-w-lg text-base leading-8 text-brand-navy/[0.66]">{subtitle}</p>
           {actions && <div className="mt-8 flex flex-col gap-4 sm:flex-row">{actions}</div>}
         </SectionReveal>
 
         <SectionReveal delay={0.08} className="relative">
           <div className="relative mx-auto max-w-[32rem]">
-            <div className="absolute right-4 top-10 h-48 w-44 rounded-[2rem] bg-brand-orange/18" />
+            <div className="absolute right-4 top-10 h-48 w-44 rounded-[2rem] bg-brand-orange/[0.18]" />
             <div className="absolute bottom-0 right-0 h-44 w-40 rounded-[2rem] bg-brand-teal/85" />
             <div className="absolute bottom-4 left-10 h-44 w-36 rounded-[2rem] border-[12px] border-white" />
             <div className="overflow-hidden rounded-[2.5rem]">
@@ -286,11 +286,11 @@ export function PricingShowcaseHero({
             <div key={plan.name} className={cn("rounded-[1.75rem] p-8 shadow-[0_20px_50px_rgba(0,48,73,0.08)]", plan.tone)}>
               <div className="text-lg font-semibold">{plan.name}</div>
               <div className="mt-5 text-5xl font-bold">{plan.price}</div>
-              <div className={cn("mt-2 text-sm", plan.name === "Basic Plan" ? "text-white/72" : "text-brand-navy/55")}>per user per month</div>
+              <div className={cn("mt-2 text-sm", plan.name === "Basic Plan" ? "text-white/[0.72]" : "text-brand-navy/55")}>per user per month</div>
               <button className={cn("mt-8 rounded-full px-6 py-3 text-sm font-bold", plan.name === "Basic Plan" ? "bg-white text-[#123b1d]" : "bg-brand-beige text-brand-navy")}>
                 Join Membership
               </button>
-              <div className={cn("mt-8 space-y-3 text-sm", plan.name === "Basic Plan" ? "text-white/72" : "text-brand-navy/60")}>
+              <div className={cn("mt-8 space-y-3 text-sm", plan.name === "Basic Plan" ? "text-white/[0.72]" : "text-brand-navy/60")}>
                 <div>Unlimited operations</div>
                 <div>Attendance and communication</div>
                 <div>Weekly reports included</div>
@@ -369,7 +369,7 @@ export function TechBackdropHero({
             </div>
           )}
           <h1 className="mt-6 text-[clamp(2.1rem,1.5rem+1.6vw,3.5rem)] font-bold leading-[1.02]">{title}</h1>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-white/78">{subtitle}</p>
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-white/[0.78]">{subtitle}</p>
           {actions && <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">{actions}</div>}
         </SectionReveal>
       </div>

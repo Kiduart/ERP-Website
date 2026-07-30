@@ -175,7 +175,7 @@ export default function Careers({
         <FloatingIcons icons={["Users", "Briefcase"]} count={4} />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <SectionReveal className="text-center mb-12">
-            <div className="mb-4 inline-flex rounded-full bg-brand-orange/15 px-4 py-2 text-xs font-bold uppercase tracking-[0.22em] text-brand-orange">
+            <div className="mb-4 inline-flex rounded-full bg-brand-orange/15 px-4 py-2 text-xs font-bold uppercase tracking-[0.22em] text-brand-orange-ink">
               {campaign.badge}
             </div>
             <h2 className="text-3xl font-bold text-brand-navy mb-4">{openRoles.heading}</h2>
@@ -209,7 +209,7 @@ export default function Careers({
 
           <SectionReveal className="mt-12 text-center">
             <h3 className="text-[clamp(1.8rem,1.4rem+1.2vw,2.5rem)] font-bold text-brand-navy">{campaign.title}</h3>
-            <p className="mt-3 text-lg font-semibold text-brand-orange">{campaign.subtitle}</p>
+            <p className="mt-3 text-lg font-semibold text-brand-orange-ink">{campaign.subtitle}</p>
             <p className="mx-auto mt-4 max-w-2xl text-brand-navy/70">{campaign.intro}</p>
           </SectionReveal>
 

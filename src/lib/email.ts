@@ -49,6 +49,12 @@ type NewsletterEmailPayload = {
   email: string;
 };
 
+type CapabilitySheetPayload = {
+  email: string;
+  school: string;
+  context: string;
+};
+
 type EmailConfig = {
   user: string;
   pass: string;
@@ -495,6 +501,60 @@ export async function sendNewsletterSubscriptionEmail(payload: NewsletterEmailPa
       signature: "KIDUART Team",
       primaryCta: { label: "Explore Platform", href: `${SITE_ORIGIN}/platform` },
       secondaryCta: { label: "Book a Demo", href: `${SITE_ORIGIN}/demo` },
+    }),
+  });
+}
+
+export async function sendCapabilitySheetEmail(payload: CapabilitySheetPayload) {
+  const config = getEmailConfig();
+
+  if (!config) {
+    console.info("Capability sheet request captured locally:", payload);
+    return;
+  }
+
+  const rows = [
+    renderRow("School", payload.school),
+    renderRow("Email", payload.email),
+    renderRow("Requested from", payload.context || "Not provided"),
+  ].join("");
+
+  await transporter.sendMail({
+    from: getFromAddress(config, "KIDUART Website"),
+    to: config.mailTo,
+    replyTo: payload.email,
+    subject: `Capability Sheet Request — ${payload.school}`,
+    html: getEmailShell({
+      title: "Capability Sheet Request",
+      headerSubtitle: "Qualified product-interest lead",
+      intro:
+        "A school asked for the full capability sheet from a module page. Send the current sheet and offer a walkthrough of the area they were reading.",
+      rows,
+      priorityBanner: "Send the sheet and follow up with a demo offer",
+      footerNote: "Reply directly to this thread to reach the requester.",
+    }),
+  });
+
+  await transporter.sendMail({
+    from: getFromAddress(config, "KIDUART Team"),
+    to: payload.email,
+    subject: "Your KIDUART capability sheet is on the way",
+    html: getAutoReplyHtml({
+      recipientName: "there",
+      headline: "We received your capability sheet request",
+      requestLabel: "capability sheet request",
+      introParagraphs: [
+        "Thanks for your interest in KIDUART. Our team will email you the full capability sheet for the area you were reading within one working day.",
+        "If it helps, we can also walk through the same list live against your school's classes, fee heads and staff structure.",
+      ],
+      nextSteps: [
+        "We prepare the current capability sheet for your requested area.",
+        "You receive it by email, along with a short note on what is relevant to your school size.",
+        "If you want a walkthrough, reply to that email and we will schedule it.",
+      ],
+      signature: "KIDUART Team",
+      primaryCta: { label: "Book a Demo", href: `${SITE_ORIGIN}/demo` },
+      secondaryCta: { label: "Explore Features", href: `${SITE_ORIGIN}/features` },
     }),
   });
 }

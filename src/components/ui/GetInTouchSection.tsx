@@ -100,12 +100,12 @@ export function GetInTouchSection() {
               <h2 className="mt-6 max-w-xl font-serif text-4xl font-normal uppercase leading-[0.92] tracking-[-0.02em] text-[#f5efe6] sm:text-6xl lg:text-6xl">
                 Let&apos;s Get In Touch
               </h2>
-              <p className="mt-6 max-w-lg text-base leading-7 text-white/72">
+              <p className="mt-6 max-w-lg text-base leading-7 text-white/[0.72]">
                 Tell us what your institution needs and our team will help you shape the right ERP
                 setup for admissions, academics, finance, communication, and AI-enabled workflows.
               </p>
 
-              <div className="mt-10 flex flex-wrap gap-6 text-sm text-white/78">
+              <div className="mt-10 flex flex-wrap gap-6 text-sm text-white/[0.78]">
                 <div className="flex items-center gap-3">
                   <Phone className="h-4 w-4 text-[#d6c1a8]" />
                   <span>{CONTACT_PHONE_DISPLAY}</span>
@@ -132,7 +132,7 @@ export function GetInTouchSection() {
                       required
                       value={formData.name}
                       onChange={(e) => handleChange("name", e.target.value)}
-                      className="field-surface-dark mt-3 w-full border-0 border-b border-white/14 px-0 py-3 text-sm text-white placeholder:text-white/55 focus:border-[#d6c1a8] focus:outline-none focus:ring-0"
+                      className="field-surface-dark mt-3 w-full border-0 border-b border-white/[0.14] px-0 py-3 text-sm text-white placeholder:text-white/55 focus:border-[#d6c1a8] focus:outline-none focus:ring-0"
                     />
                   </label>
                   <label className="block">
@@ -158,7 +158,7 @@ export function GetInTouchSection() {
                         placeholder="10 digit number"
                         value={formData.phone}
                         onChange={(e) => handleChange("phone", e.target.value)}
-                        className="field-surface-dark w-full border-0 border-b border-white/14 px-0 py-3 text-sm text-white placeholder:text-white/55 focus:border-[#d6c1a8] focus:outline-none focus:ring-0"
+                        className="field-surface-dark w-full border-0 border-b border-white/[0.14] px-0 py-3 text-sm text-white placeholder:text-white/55 focus:border-[#d6c1a8] focus:outline-none focus:ring-0"
                       />
                     </div>
                   </label>
@@ -172,7 +172,7 @@ export function GetInTouchSection() {
                     required
                     value={formData.email}
                     onChange={(e) => handleChange("email", e.target.value)}
-                    className="field-surface-dark mt-3 w-full border-0 border-b border-white/14 px-0 py-3 text-sm text-white placeholder:text-white/55 focus:border-[#d6c1a8] focus:outline-none focus:ring-0"
+                    className="field-surface-dark mt-3 w-full border-0 border-b border-white/[0.14] px-0 py-3 text-sm text-white placeholder:text-white/55 focus:border-[#d6c1a8] focus:outline-none focus:ring-0"
                   />
                 </label>
 
@@ -184,7 +184,7 @@ export function GetInTouchSection() {
                     required
                     value={formData.message}
                     onChange={(e) => handleChange("message", e.target.value)}
-                    className="field-surface-dark mt-3 w-full resize-none border-0 border-b border-white/14 px-0 py-3 text-sm text-white placeholder:text-white/55 focus:border-[#d6c1a8] focus:outline-none focus:ring-0"
+                    className="field-surface-dark mt-3 w-full resize-none border-0 border-b border-white/[0.14] px-0 py-3 text-sm text-white placeholder:text-white/55 focus:border-[#d6c1a8] focus:outline-none focus:ring-0"
                   />
                 </label>
 
@@ -202,7 +202,7 @@ export function GetInTouchSection() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="inline-flex h-14 w-14 items-center justify-center rounded-full border border-white/14 bg-white text-brand-navy transition-all duration-300 hover:translate-x-1 hover:bg-[#f2e7da] disabled:cursor-not-allowed disabled:opacity-60"
+                    className="inline-flex h-14 w-14 items-center justify-center rounded-full border border-white/[0.14] bg-white text-brand-navy transition-all duration-300 hover:translate-x-1 hover:bg-[#f2e7da] disabled:cursor-not-allowed disabled:opacity-60"
                     aria-label="Submit inquiry"
                   >
                     <ArrowUpRight className="h-6 w-6" />

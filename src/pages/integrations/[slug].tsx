@@ -1,203 +1,347 @@
+import type { GetStaticPaths, GetStaticProps } from "next";
+import { Link } from "wouter";
 import { PageSeoHead } from "@/components/seo/PageSeoHead";
+import { SchemaMarkup } from "@/components/seo/SchemaMarkup";
 import { integrationPageSeo } from "@/lib/pageSeo";
-import { useParams, Link } from "wouter";
+import { buildBreadcrumbSchema, buildFaqPageSchema } from "@/lib/seoSchemas";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CtaSection } from "@/components/ui/CtaSection";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
 import { FloatingIcons } from "@/components/animations/FloatingIcons";
-import { CheckCircle, ArrowLeft, ArrowRight, Check, ChevronDown } from "lucide-react";
-import { useState } from "react";
+import { ArrowRight, Check, ChevronDown, Info } from "lucide-react";
+import { ProductIcon } from "@/components/product/ProductIcon";
+import { ACCENTS, Breadcrumbs, TextLink } from "@/components/product/ProductPrimitives";
+import { cn } from "@/lib/utils";
 import integrationsData from "@/data/integrationsData";
+import type { IntegrationEntry } from "@/data/integrationsData";
+import { AREA_NARRATIVE_BY_SLUG } from "@/data/productNarrative";
+import { findMatrixModule, getMatrixCategory } from "@/data/featureMatrix";
 
-export default function IntegrationDetail() {
-  const { slug } = useParams();
-  const data = slug ? integrationsData[slug] : null;
-  const [openFaq, setOpenFaq] = useState<number | null>(null);
+type LinkedModule = {
+  areaSlug: string;
+  areaLabel: string;
+  moduleName: string;
+  moduleSlug: string;
+  featureCount: number;
+};
 
-  if (!data) {
-    return (
-      <PageTransition className="pt-32 pb-24 text-center min-h-[60vh] flex flex-col items-center justify-center">
-        <h1 className="text-4xl font-bold text-brand-navy mb-6">Integration Not Found</h1>
-        <p className="text-xl text-brand-navy/70 mb-8">The integration you are looking for doesn't exist.</p>
-        <Link href="/integrations" className="px-8 py-4 rounded-full bg-brand-navy text-white font-bold inline-flex items-center gap-2">
-          <ArrowLeft className="w-5 h-5" /> Back to Integrations
-        </Link>
-      </PageTransition>
-    );
-  }
+type RelatedIntegration = {
+  slug: string;
+  name: string;
+  description: string;
+  icon: string;
+};
 
-  const Icon = data.icon;
+type IntegrationPageProps = {
+  slug: string;
+  integration: IntegrationEntry;
+  linkedModules: LinkedModule[];
+  related: RelatedIntegration[];
+};
+
+export default function IntegrationDetail({
+  slug,
+  integration,
+  linkedModules,
+  related,
+}: IntegrationPageProps) {
+  const tokens = ACCENTS[integration.accent];
+  const isPlanned = integration.status === "planned";
 
   return (
     <>
-      <PageSeoHead {...integrationPageSeo(slug!, data.name, data.description)} />
+      <PageSeoHead {...integrationPageSeo(slug, integration.name, integration.description)} />
+      <SchemaMarkup
+        data={buildBreadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Integrations", path: "/integrations" },
+          { name: integration.name, path: `/integrations/${slug}` },
+        ])}
+      />
+      <SchemaMarkup data={buildFaqPageSchema({ integration: integration.faqs })} />
+
       <PageTransition className="pt-20 pb-0">
-      {/* Hero */}
-      <section className="hero-viewport relative overflow-hidden bg-[#f5f0e6]">
-        <BackgroundBlobs blobs={[
-          { color: "#fcbf49", size: 360, position: "top-left", opacity: 0.14 },
-          { color: "#0c716b", size: 360, position: "bottom-right", opacity: 0.14 }
-        ]} />
-        <FloatingIcons icons={["Blocks", "Zap", "Code2"]} count={4} heroMode={true} />
+        <section className="relative overflow-hidden bg-[#f5f0e6]">
+          <BackgroundBlobs
+            blobs={[
+              { color: "#fcbf49", size: 360, position: "top-left", opacity: 0.14 },
+              { color: "#0c716b", size: 360, position: "bottom-right", opacity: 0.14 },
+            ]}
+          />
+          <FloatingIcons icons={["Blocks", "Zap", "Code2"]} count={4} heroMode />
 
-        <div className="page-shell hero-viewport-inner relative z-10 grid items-center gap-10 py-8 md:py-10">
-          <SectionReveal className="max-w-3xl">
-            <nav className="mb-6 flex items-center gap-2 text-sm text-brand-navy/55">
-              <Link href="/" className="hover:text-brand-teal">Home</Link>
-              <span>/</span>
-              <Link href="/integrations" className="hover:text-brand-teal">Integrations</Link>
-              <span>/</span>
-              <span className="text-brand-navy/75">{data.name}</span>
-            </nav>
+          <div className="page-shell relative z-10 py-14 md:py-20">
+            <Breadcrumbs
+              trail={[
+                { name: "Home", path: "/" },
+                { name: "Integrations", path: "/integrations" },
+                { name: integration.name, path: `/integrations/${slug}` },
+              ]}
+            />
 
-            <div className="mb-5 inline-flex rounded-full bg-brand-orange/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-brand-orange">
-              {data.category}
-            </div>
-            <h1 className="text-[clamp(2.25rem,1.6rem+2.2vw,4.5rem)] font-bold leading-[0.98] text-brand-navy">
-              Connect {data.name}
-              <br />
-              with KIDUART
-              <br />
-              without extra friction
-            </h1>
-            <p className="mt-6 max-w-lg text-[clamp(1rem,0.96rem+0.2vw,1.08rem)] leading-7 text-brand-navy/65">
-              {data.description}
-            </p>
-            <button className="mt-8 inline-flex items-center gap-2 rounded-full bg-brand-navy px-8 py-4 text-base font-bold text-white shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-teal">
-              Connect Integration <ArrowRight className="w-5 h-5" />
-            </button>
-          </SectionReveal>
-
-          {/* <SectionReveal delay={0.08} className="relative">
-            <div className="relative mx-auto w-full max-w-4xl overflow-hidden rounded-[2rem] border border-brand-navy/10 bg-white shadow-[0_28px_70px_rgba(0,48,73,0.14)]">
-              <div className="grid gap-4 p-5 md:grid-cols-[0.9fr_1.1fr] md:p-6">
-                <div className="rounded-[1.6rem] bg-[linear-gradient(180deg,#ffffff,#f5f8ff)] p-6">
-                  <div className={`mb-5 flex h-16 w-16 items-center justify-center rounded-2xl ${data.bg}`}>
-                    <Icon className={`h-8 w-8 ${data.color}`} />
-                  </div>
-                  <div className="text-sm font-bold uppercase tracking-[0.22em] text-brand-navy/45">How it connects</div>
-                  <h2 className="mt-3 text-2xl font-bold text-brand-navy">{data.name}</h2>
-                  <p className="mt-3 text-sm leading-7 text-brand-navy/65">
-                    Designed to keep student data, assignments, attendance, and workflows aligned between both systems.
-                  </p>
-                  <div className="mt-5 rounded-[1.2rem] bg-brand-navy px-4 py-4 text-white">
-                    <div className="text-xs font-bold uppercase tracking-[0.22em] text-brand-yellow">Best for</div>
-                    <div className="mt-2 text-sm leading-6 text-white/85">{data.requirements[0]}</div>
-                  </div>
-                </div>
-
-                <div className="space-y-3 rounded-[1.6rem] bg-brand-beige/35 p-5">
-                  <div className="text-sm font-bold uppercase tracking-[0.22em] text-brand-teal">What you get</div>
-                  {data.benefits.slice(0, 4).map((benefit: string) => (
-                    <div key={benefit} className="rounded-2xl border border-brand-navy/6 bg-white px-4 py-4 shadow-sm">
-                      <div className="flex items-start gap-3">
-                        <CheckCircle className={`mt-0.5 h-5 w-5 shrink-0 ${data.color}`} />
-                        <span className="text-sm leading-6 text-brand-navy/76">{benefit}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </SectionReveal> */}
-        </div>
-      </section>
-
-      {/* Benefits */}
-      <section className="section-space bg-brand-beige/30 relative overflow-hidden">
-        <BackgroundBlobs blobs={[
-          { color: "#fcbf49", size: 300, position: "center-left", opacity: 0.15 },
-          { color: "#0c716b", size: 300, position: "center-right", opacity: 0.15 }
-        ]} />
-        <FloatingIcons icons={["CheckCircle2", "Star", "Lightbulb"]} count={4} />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <SectionReveal className="mb-12 text-center">
-            <h2 className="text-3xl lg:text-4xl font-bold text-brand-navy mb-4">Key Benefits</h2>
-            <p className="text-lg text-brand-navy/70">What you can achieve with KIDUART and {data.name}.</p>
-          </SectionReveal>
-          
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {data.benefits.map((benefit: string, idx: number) => (
-              <SectionReveal key={idx} delay={idx * 0.1}>
-                <div className="bg-white rounded-2xl p-6 shadow-sm border border-brand-navy/5 h-full">
-                  <CheckCircle className={`w-8 h-8 ${data.color} mb-4`} />
-                  <p className="font-medium text-brand-navy">{benefit}</p>
-                </div>
-              </SectionReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Setup & Requirements */}
-      <section className="section-space bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-3 gap-16">
-            <div className="lg:col-span-2">
+            <div className="grid gap-10 lg:grid-cols-[1.25fr_1fr] lg:items-start">
               <SectionReveal>
-                <h2 className="text-3xl font-bold text-brand-navy mb-8">Step-by-step Setup</h2>
-                <div className="space-y-8">
-                  {data.steps.map((step: string, idx: number) => (
-                    <div key={idx} className="flex gap-4">
-                      <div className={`w-10 h-10 rounded-full ${data.bg} ${data.color} flex items-center justify-center font-bold flex-shrink-0 text-lg`}>
-                        {idx + 1}
-                      </div>
-                      <p className="text-lg text-brand-navy/80 pt-1">{step}</p>
-                    </div>
-                  ))}
+                <div className="flex flex-wrap items-center gap-3">
+                  <span
+                    className={cn("flex h-14 w-14 items-center justify-center rounded-2xl", tokens.softBg)}
+                  >
+                    <ProductIcon name={integration.icon} className={cn("h-7 w-7", tokens.text)} />
+                  </span>
+                  <span className="rounded-full bg-brand-navy/[0.06] px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-brand-navy">
+                    {integration.category}
+                  </span>
+                  {isPlanned ? (
+                    <span className="rounded-full border border-brand-orange/40 bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-brand-orange-ink">
+                      On the roadmap
+                    </span>
+                  ) : (
+                    <span className="rounded-full border border-brand-teal/40 bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-brand-teal">
+                      Available now
+                    </span>
+                  )}
+                </div>
+
+                <h1 className="mt-6 text-[clamp(2rem,1.5rem+1.8vw,3.5rem)] font-bold leading-[1.05] text-brand-navy">
+                  {integration.name} with KIDUART
+                </h1>
+                <p className="mt-5 max-w-2xl text-lg leading-8 text-brand-navy/[0.76]">{integration.intro}</p>
+
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <Link
+                    href="/demo"
+                    className="inline-flex items-center gap-2 rounded-full bg-brand-navy px-7 py-3.5 text-sm font-bold text-brand-beige transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-teal"
+                  >
+                    Book a demo <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </Link>
+                  <Link
+                    href="/integrations"
+                    className="inline-flex items-center gap-2 rounded-full border border-brand-navy/20 bg-white px-7 py-3.5 text-sm font-bold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
+                  >
+                    All integrations
+                  </Link>
                 </div>
               </SectionReveal>
-            </div>
-            
-            <div>
-              <SectionReveal delay={0.2} className="bg-brand-navy/5 rounded-3xl p-8 border border-brand-navy/10 sticky top-32">
-                <h3 className="text-xl font-bold text-brand-navy mb-6">Requirements</h3>
-                <ul className="space-y-4">
-                  {data.requirements.map((req: string, idx: number) => (
-                    <li key={idx} className="flex gap-3">
-                      <Check className="w-5 h-5 text-brand-teal flex-shrink-0 mt-0.5" />
-                      <span className="text-brand-navy/80">{req}</span>
+
+              <SectionReveal delay={0.12} className="rounded-[2rem] border border-brand-navy/[0.1] bg-white p-7 shadow-xl shadow-brand-navy/[0.06]">
+                <h2 className="text-sm font-bold uppercase tracking-[0.18em] text-brand-navy">
+                  {isPlanned ? "What is planned" : "What you get"}
+                </h2>
+                <ul className="mt-5 space-y-3">
+                  {integration.benefits.map((benefit) => (
+                    <li key={benefit} className="flex items-start gap-3">
+                      <span
+                        className={cn(
+                          "mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full",
+                          tokens.softBg,
+                        )}
+                        aria-hidden="true"
+                      >
+                        <Check className={cn("h-3 w-3", tokens.text)} />
+                      </span>
+                      <span className="text-sm leading-7 text-brand-navy/[0.82]">{benefit}</span>
                     </li>
                   ))}
                 </ul>
               </SectionReveal>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* FAQs */}
-      <section className="section-space bg-brand-beige/20 border-t border-brand-navy/5">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionReveal className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-brand-navy mb-4">Frequently Asked Questions</h2>
-          </SectionReveal>
-          
-          <div className="space-y-4">
-            {data.faqs.map((faq: any, idx: number) => (
-              <SectionReveal key={idx} delay={idx * 0.1}>
-                <div 
-                  className={`bg-white rounded-2xl p-6 shadow-sm border border-brand-navy/5 cursor-pointer transition-all ${openFaq === idx ? 'ring-2 ring-brand-teal' : 'hover:border-brand-navy/20'}`}
-                  onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                >
-                  <div className="flex justify-between items-center gap-4">
-                    <h3 className="text-lg font-bold text-brand-navy">{faq.q}</h3>
-                    <ChevronDown className={`w-5 h-5 text-brand-navy/50 transition-transform ${openFaq === idx ? 'rotate-180' : ''}`} />
-                  </div>
-                  {openFaq === idx && (
-                    <p className="text-brand-navy/70 mt-4 text-lg leading-relaxed border-t border-brand-navy/5 pt-4">
+        {isPlanned ? (
+          <section className="border-y border-brand-orange/20 bg-brand-orange/[0.07]">
+            <div className="page-shell flex items-start gap-4 py-6">
+              <Info className="mt-0.5 h-5 w-5 shrink-0 text-brand-orange" aria-hidden="true" />
+              <p className="text-sm leading-7 text-brand-navy/[0.82]">
+                <strong className="font-bold text-brand-navy">This integration is not live yet.</strong> It is a
+                roadmap item, listed here so you can plan around it honestly. If it decides whether KIDUART fits your
+                school, tell us during the demo — we prioritise by what schools actually block on.
+              </p>
+            </div>
+          </section>
+        ) : null}
+
+        {linkedModules.length > 0 ? (
+          <section className="section-space-tight border-b border-brand-navy/5 bg-white">
+            <div className="page-shell">
+              <SectionReveal className="mx-auto max-w-3xl text-center">
+                <p className="section-kicker">Where it lands in the product</p>
+                <h2 className="mt-4 text-3xl font-bold text-brand-navy">
+                  The modules this integration touches
+                </h2>
+                <p className="mt-4 text-base leading-8 text-brand-navy/[0.74]">
+                  An integration is only useful if it writes into the module your staff already work in. These are the
+                  exact modules involved.
+                </p>
+              </SectionReveal>
+
+              <div className="mt-10 grid gap-5 md:grid-cols-2">
+                {linkedModules.map((entry) => (
+                  <SectionReveal
+                    key={`${entry.areaSlug}-${entry.moduleSlug}`}
+                    className="rounded-2xl border border-brand-navy/[0.1] bg-brand-beige/20 p-6"
+                  >
+                    <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-teal">
+                      {entry.areaLabel}
+                    </p>
+                    <h3 className="mt-2 text-xl font-bold text-brand-navy">{entry.moduleName}</h3>
+                    <p className="mt-2 text-sm font-semibold text-brand-navy/[0.7]">
+                      {entry.featureCount} features in this module
+                    </p>
+                    <TextLink href={`/features/${entry.areaSlug}/${entry.moduleSlug}`} className="mt-4">
+                      Open {entry.moduleName}
+                    </TextLink>
+                  </SectionReveal>
+                ))}
+              </div>
+            </div>
+          </section>
+        ) : null}
+
+        <section className="section-space bg-brand-beige/25">
+          <div className="page-shell">
+            <div className="grid gap-14 lg:grid-cols-[1.6fr_1fr] lg:items-start">
+              <SectionReveal>
+                <p className="section-kicker">{isPlanned ? "How to register interest" : "Setup, step by step"}</p>
+                <h2 className="mt-4 text-3xl font-bold text-brand-navy">
+                  {isPlanned ? "What happens if you need this" : `Connecting ${integration.name}`}
+                </h2>
+                <ol className="mt-8 space-y-6">
+                  {integration.steps.map((step, idx) => (
+                    <li key={step} className="flex gap-4">
+                      <span
+                        className={cn(
+                          "flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl text-sm font-extrabold text-white",
+                          tokens.solidBg,
+                        )}
+                        aria-hidden="true"
+                      >
+                        {String(idx + 1).padStart(2, "0")}
+                      </span>
+                      <p className="pt-2 text-base leading-7 text-brand-navy/[0.82]">{step}</p>
+                    </li>
+                  ))}
+                </ol>
+              </SectionReveal>
+
+              <SectionReveal
+                delay={0.15}
+                className="rounded-[2rem] border border-brand-navy/[0.1] bg-white p-7 lg:sticky lg:top-28"
+              >
+                <h2 className="text-xl font-bold text-brand-navy">What you need on your side</h2>
+                <ul className="mt-5 space-y-4">
+                  {integration.requirements.map((req) => (
+                    <li key={req} className="flex gap-3">
+                      <Check className="mt-0.5 h-5 w-5 shrink-0 text-brand-teal" aria-hidden="true" />
+                      <span className="text-sm leading-7 text-brand-navy/[0.82]">{req}</span>
+                    </li>
+                  ))}
+                </ul>
+              </SectionReveal>
+            </div>
+          </div>
+        </section>
+
+        <section className="section-space border-y border-brand-navy/5 bg-white">
+          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+            <SectionReveal className="mb-10 text-center">
+              <p className="section-kicker">Questions schools ask</p>
+              <h2 className="mt-4 text-3xl font-bold text-brand-navy">
+                {integration.name}, answered plainly
+              </h2>
+            </SectionReveal>
+
+            <div className="space-y-4">
+              {integration.faqs.map((faq) => (
+                <SectionReveal key={faq.q}>
+                  <details className="group rounded-2xl border border-brand-navy/[0.1] bg-brand-beige/20 p-6 transition-colors open:border-brand-teal/40">
+                    <summary className="flex cursor-pointer items-center justify-between gap-4 text-lg font-bold text-brand-navy marker:content-none">
+                      {faq.q}
+                      <ChevronDown
+                        className="h-5 w-5 shrink-0 text-brand-navy/50 transition-transform group-open:rotate-180"
+                        aria-hidden="true"
+                      />
+                    </summary>
+                    <p className="mt-4 border-t border-brand-navy/[0.08] pt-4 text-base leading-7 text-brand-navy/[0.78]">
                       {faq.a}
                     </p>
-                  )}
-                </div>
-              </SectionReveal>
-            ))}
+                  </details>
+                </SectionReveal>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <CtaSection title="Ready to Connect?" subtitle="Start your integration with a free demo." />
-    </PageTransition>
+        {related.length > 0 ? (
+          <section className="section-space-tight bg-brand-beige/25">
+            <div className="page-shell">
+              <SectionReveal className="mb-8">
+                <p className="section-kicker">Also in {integration.category.toLowerCase()}</p>
+                <h2 className="mt-3 text-2xl font-bold text-brand-navy">Related integrations</h2>
+              </SectionReveal>
+              <div className="grid gap-5 md:grid-cols-3">
+                {related.map((entry) => (
+                  <SectionReveal key={entry.slug}>
+                    <Link
+                      href={`/integrations/${entry.slug}`}
+                      className="group flex h-full flex-col rounded-2xl border border-brand-navy/[0.1] bg-white p-6 transition-all duration-300 hover:border-brand-teal/40 hover:shadow-lg"
+                    >
+                      <ProductIcon name={entry.icon} className="h-6 w-6 text-brand-teal" />
+                      <h3 className="mt-4 text-lg font-bold text-brand-navy group-hover:text-brand-teal">
+                        {entry.name}
+                      </h3>
+                      <p className="mt-2 flex-1 text-sm leading-7 text-brand-navy/[0.74]">{entry.description}</p>
+                    </Link>
+                  </SectionReveal>
+                ))}
+              </div>
+            </div>
+          </section>
+        ) : null}
+
+        <CtaSection
+          title={`See ${integration.name} in a live demo`}
+          subtitle="We will run the connection on screen with your own scenario — your fee book, your parent groups, your school accounts."
+        />
+      </PageTransition>
     </>
   );
 }
+
+export const getStaticPaths: GetStaticPaths = async () => ({
+  paths: Object.keys(integrationsData).map((slug) => ({ params: { slug } })),
+  fallback: false,
+});
+
+export const getStaticProps: GetStaticProps<IntegrationPageProps> = async ({ params }) => {
+  const slug = params?.slug as string;
+  const integration = integrationsData[slug];
+
+  if (!integration) return { notFound: true };
+
+  const linkedModules: LinkedModule[] = integration.modules.flatMap((ref) => {
+    const category = getMatrixCategory(ref.area);
+    const matrixModule = findMatrixModule(category, ref.module);
+    if (!category || !matrixModule) return [];
+    return [
+      {
+        areaSlug: category.slug,
+        areaLabel: AREA_NARRATIVE_BY_SLUG[category.slug]?.label ?? category.name,
+        moduleName: matrixModule.name,
+        moduleSlug: matrixModule.slug,
+        featureCount: matrixModule.featureCount,
+      },
+    ];
+  });
+
+  const related: RelatedIntegration[] = Object.entries(integrationsData)
+    .filter(([entrySlug, entry]) => entrySlug !== slug && entry.category === integration.category)
+    .slice(0, 3)
+    .map(([entrySlug, entry]) => ({
+      slug: entrySlug,
+      name: entry.name,
+      description: entry.description,
+      icon: entry.icon,
+    }));
+
+  return { props: { slug, integration, linkedModules, related } };
+};

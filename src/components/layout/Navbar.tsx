@@ -25,13 +25,86 @@ type DropdownGroup = {
   items: DropdownItem[];
 };
 
-const NAV_LINKS: NavLink[] = [
-  { label: "Features", href: "/features" },
-  { label: "Solutions", href: "/solutions" },
-  { label: "Platform", href: "/platform" },
-];
+const NAV_LINKS: NavLink[] = [];
+
+/** Wider panels for the product menus that carry more links. */
+const DROPDOWN_WIDTH: Record<string, string> = {
+  Features: "left-0 w-[36rem] p-4",
+  Solutions: "left-0 w-[34rem] p-4",
+  Platform: "left-0 w-[34rem] p-4",
+  Resources: "left-0 w-[28rem] p-4",
+  More: "left-1/2 w-[34rem] -translate-x-1/2 p-4",
+};
 
 const DROPDOWNS: Record<string, DropdownGroup[]> = {
+  Features: [
+    {
+      title: "Core operations",
+      items: [
+        { label: "All 16 module areas", href: "/features", note: "90 modules, 1368 features" },
+        { label: "Academics", href: "/features/academic", note: "Attendance, exams, curriculum" },
+        { label: "Fees & Finance", href: "/features/finance-and-fee-management", note: "Structures, collection, dues" },
+        { label: "Student Records", href: "/features/student-management", note: "Profiles to transfer certificates" },
+        { label: "Admissions", href: "/features/admission", note: "Enquiry to registration" },
+        { label: "HR & Staff", href: "/features/hr-and-staff-management", note: "Leave, payroll, appraisal" },
+      ],
+    },
+    {
+      title: "Campus & platform",
+      items: [
+        { label: "Communication", href: "/features/communication", note: "Notices, events, messaging" },
+        { label: "Library", href: "/features/library-management", note: "Catalog, issue-return, fines" },
+        { label: "Transport", href: "/features/transport-management", note: "Routes, drivers, tracking" },
+        { label: "Hostel", href: "/features/hostel-management", note: "Rooms, mess, visitors" },
+        { label: "Reports & Analytics", href: "/features/reports-and-analytics", note: "Custom report builder" },
+        { label: "Security & Access", href: "/features/security-and-authentication", note: "MFA, roles, sessions" },
+      ],
+    },
+  ],
+  Solutions: [
+    {
+      title: "Leadership & office",
+      items: [
+        { label: "All role solutions", href: "/solutions", note: "Eight roles, eight jobs" },
+        { label: "School groups", href: "/solutions/organizations", note: "Multi-campus oversight" },
+        { label: "Principals & leadership", href: "/solutions/school-administration", note: "One weekly picture" },
+        { label: "Admin & front office", href: "/solutions/administrators", note: "The busiest desk" },
+        { label: "Accountants", href: "/solutions/accountants", note: "Fee book and dues list" },
+      ],
+    },
+    {
+      title: "Classroom & family",
+      items: [
+        { label: "Academic coordinators", href: "/solutions/academic-coordinators", note: "Curriculum and exams" },
+        { label: "Teachers", href: "/solutions/teachers", note: "Attendance in a few taps" },
+        { label: "Parents", href: "/solutions/parents", note: "Attendance, fees, results" },
+        { label: "Students", href: "/solutions/students", note: "Timetable and assignments" },
+      ],
+    },
+  ],
+  Platform: [
+    {
+      title: "Admin panels",
+      items: [
+        { label: "All 10 role panels", href: "/platform", note: "One database, ten views" },
+        { label: "System admin console", href: "/platform/system-admin", note: "Modules, roles, billing" },
+        { label: "Organisation panel", href: "/platform/organization", note: "Multi-campus HQ" },
+        { label: "Director & leadership", href: "/platform/director", note: "Weekly decision view" },
+        { label: "School admin desk", href: "/platform/school-admin", note: "Daily operations" },
+        { label: "Academic coordinator", href: "/platform/academic", note: "Planning and exams" },
+      ],
+    },
+    {
+      title: "Daily users",
+      items: [
+        { label: "Teacher workspace", href: "/platform/teacher", note: "Attendance, marks, diary" },
+        { label: "Finance & accounts", href: "/platform/finance", note: "Collection and reports" },
+        { label: "HR & staff", href: "/platform/hr", note: "Leave and payroll" },
+        { label: "Parent portal", href: "/platform/parent", note: "For every linked child" },
+        { label: "Student portal", href: "/platform/student", note: "Timetable to results" },
+      ],
+    },
+  ],
   Resources: [
     {
       title: "Insights",
@@ -169,9 +242,9 @@ export function Navbar() {
             <img
               src="/logo.png"
               alt="KIDUART school ERP"
-              className="h-10 w-auto md:h-16"
-              width={160}
-              height={64}
+              className="h-9 w-auto md:h-12"
+              width={512}
+              height={160}
               loading="eager"
               decoding="async"
               fetchPriority="low"
@@ -188,7 +261,7 @@ export function Navbar() {
                 className={`hover-underline-group px-3 py-2 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5 ${
                   location === link.href
                     ? transparentMode
-                      ? "text-brand-navy font-bolder bg-white/12"
+                      ? "text-brand-navy font-bolder bg-white/[0.12]"
                       : "text-brand-teal bg-white/50"
                     : transparentMode
                       ? "text-brand-navy font-bolder hover:bg-white/40"
@@ -226,7 +299,7 @@ export function Navbar() {
                       exit="exit"
                       style={{ transformOrigin: "top center" }}
                       className={`absolute top-full pt-4 overflow-hidden rounded-[1.5rem] border border-white/55 bg-white shadow-[0_26px_70px_rgba(0,48,73,0.16)] backdrop-blur-xl ${
-                        title === "More" ? "left-1/2 w-[34rem] -translate-x-1/2 p-4" : "left-0 w-[28rem] p-4"
+                        DROPDOWN_WIDTH[title] ?? "left-0 w-[28rem] p-4"
                       }`}
                     >
                       <div className={`grid gap-4 ${groups.length > 1 ? "md:grid-cols-2" : "grid-cols-1"}`}>
@@ -234,7 +307,7 @@ export function Navbar() {
                           <motion.div
                             key={group.title}
                             variants={dropdownGroupVariants}
-                            className="rounded-[1.15rem] border border-brand-navy/20 bg-white/72 p-3"
+                            className="rounded-[1.15rem] border border-brand-navy/20 bg-white/[0.72] p-3"
                           >
                             <div className="px-3 pb-2 text-[11px] font-bold uppercase tracking-[0.22em] text-brand-teal/85">
                               {group.title}
@@ -254,7 +327,7 @@ export function Navbar() {
                                       {item.soon && <span className={SOON_BADGE_CLASS}>Soon</span>}
                                     </div>
                                     {item.note && (
-                                      <div className="mt-1 text-xs leading-5 text-brand-navy/52">
+                                      <div className="mt-1 text-xs leading-5 text-brand-navy/[0.52]">
                                         {item.note}
                                       </div>
                                     )}
@@ -296,7 +369,7 @@ export function Navbar() {
               aria-label={mobileOpen ? "Close menu" : "Open menu"}
               aria-expanded={mobileOpen}
               aria-controls="mobile-navigation"
-              className={`lg:hidden rounded-lg p-2 ${transparentMode ? "text-white hover:bg-white/12" : "text-brand-navy hover:bg-white/50"}`}
+              className={`lg:hidden rounded-lg p-2 ${transparentMode ? "text-brand-navy hover:bg-white/40" : "text-brand-navy hover:bg-white/50"}`}
             >
               {mobileOpen ? <X aria-hidden /> : <Menu aria-hidden />}
             </button>

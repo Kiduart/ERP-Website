@@ -1,215 +1,85 @@
-import { PageSeoHead } from "@/components/seo/PageSeoHead";
-import { pageSeo } from "@/lib/pageSeo";
+import type { GetStaticProps } from "next";
 import { Link } from "wouter";
-import { ArrowRight, Bell, BrainCircuit, Bus, CalendarCheck, CreditCard, FileText, LayoutDashboard, Library, MessageSquare, Route, ShieldCheck, Sparkles, UserCog, Users } from "lucide-react";
+import { ArrowRight, BrainCircuit, Sparkles } from "lucide-react";
+import { PageSeoHead } from "@/components/seo/PageSeoHead";
+import { SchemaMarkup } from "@/components/seo/SchemaMarkup";
+import { pageSeo } from "@/lib/pageSeo";
+import { buildBreadcrumbSchema, buildItemListSchema } from "@/lib/seoSchemas";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
-import { FloatingIcons } from "@/components/animations/FloatingIcons";
 import { CtaSection } from "@/components/ui/CtaSection";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CircleShowcaseHero } from "@/components/ui/CustomHeroes";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { WHATSAPP_URL } from "@/lib/contact";
+import { CapabilityMap, type CapabilityArea } from "@/components/product/CapabilityMap";
+import { MATRIX_CATEGORIES, MATRIX_TOTALS, countSubModules, topModules } from "@/data/featureMatrix";
+import { AREA_NARRATIVE_BY_SLUG } from "@/data/productNarrative";
+import { PRODUCT_PANELS } from "@/data/productPanels";
 
-type FeatureItem = {
-  icon: typeof Users;
-  title: string;
-  description: string;
+type FeaturesPageProps = {
+  areas: CapabilityArea[];
+  totals: typeof MATRIX_TOTALS;
+  panels: { slug: string; shortLabel: string }[];
 };
 
-const featureCategories: { title: string; label: string; accent: string; items: FeatureItem[] }[] = [
-  {
-    title: "Core Modules",
-    label: "School ERP features",
-    accent: "text-brand-teal",
-    items: [
-      {
-        icon: Users,
-        title: "Student Management",
-        description: "Centralize student profiles, academic records, documents, and parent details in one secure system so your team always works with updated data.",
-      },
-      {
-        icon: FileText,
-        title: "Admission Management",
-        description: "Handle inquiries, application forms, document verification, and enrollment workflows faster without juggling spreadsheets or offline paperwork.",
-      },
-      {
-        icon: CalendarCheck,
-        title: "Attendance System",
-        description: "Track student attendance in real time with automated reports and AI-based insights to identify irregular patterns early.",
-      },
-      {
-        icon: CreditCard,
-        title: "Fee Management",
-        description: "Automate fee collection, due reminders, receipts, and payment tracking so finance teams reduce follow-ups and improve cash flow visibility.",
-      },
-      {
-        icon: FileText,
-        title: "Exam & Report Cards",
-        description: "Create exams, publish marks, and generate report cards quickly while giving teachers and school leaders clearer performance visibility.",
-      },
-      {
-        icon: Library,
-        title: "Library Management",
-        description: "Manage book cataloging, issue-return cycles, fines, reservations, and member records without maintaining separate registers.",
-      },
-      {
-        icon: Bus,
-        title: "Transport Operations",
-        description: "Manage vehicles, routes, drivers, maintenance schedules, and live trip visibility for safer, better-coordinated school transport.",
-      },
-    ],
-  },
-  {
-    title: "AI Features",
-    label: "Intelligence for routine school work",
-    accent: "text-brand-yellow",
-    items: [
-      {
-        icon: BrainCircuit,
-        title: "AI Attendance Insights",
-        description: "Detect absenteeism trends and get actionable insights that help your admin team intervene before attendance issues get worse.",
-      },
-      {
-        icon: Sparkles,
-        title: "Auto Timetable Generator",
-        description: "Generate balanced, conflict-free class schedules in minutes based on sections, staff availability, and subject requirements.",
-      },
-      {
-        icon: Bell,
-        title: "Smart Notifications",
-        description: "Send timely alerts for attendance, fees, exams, and school updates with less manual effort and clearer parent communication.",
-      },
-      {
-        icon: LayoutDashboard,
-        title: "Performance Predictions",
-        description: "Spot academic risk signals earlier with AI-supported trend analysis so teachers and school leaders can plan timely support.",
-      },
-    ],
-  },
-  {
-    title: "Admin Tools",
-    label: "School management software modules",
-    accent: "text-brand-orange",
-    items: [
-      {
-        icon: UserCog,
-        title: "Staff Management",
-        description: "Manage teacher and staff records, onboarding details, designations, leave workflows, and daily HR tasks from one workspace.",
-      },
-      {
-        icon: CreditCard,
-        title: "Payroll System",
-        description: "Process salaries, deductions, and monthly payroll cycles with cleaner approvals and fewer manual calculation errors.",
-      },
-      {
-        icon: Route,
-        title: "Discipline, PTM & Class Diary",
-        description: "Track student discipline entries, schedule PTM discussions, and maintain class diary notes so follow-ups do not get lost.",
-      },
-      {
-        icon: ShieldCheck,
-        title: "Role-Based Access",
-        description: "Control who sees what with secure permissions for admins, teachers, accountants, coordinators, parents, and students.",
-      },
-      {
-        icon: LayoutDashboard,
-        title: "Full Reporting Suite",
-        description: "Generate academic, financial, attendance, student, and custom analytics reports from one reporting layer built for school leadership.",
-      },
-    ],
-  },
-  {
-    title: "Communication & Control",
-    label: "School groups and admin credibility",
-    accent: "text-brand-teal",
-    items: [
-      {
-        icon: MessageSquare,
-        title: "Multi-Channel Communication Stack",
-        description: "Run announcements, events, notices, and direct messages across email, SMS, and WhatsApp channels from one communication workflow.",
-      },
-      {
-        icon: LayoutDashboard,
-        title: "Multi-School Oversight",
-        description: "For school groups, track multiple schools from one view with centralized reporting and school-level visibility controls.",
-      },
-      {
-        icon: ShieldCheck,
-        title: "Module Entitlements & Access Controls",
-        description: "Enable modules based on plan and role, so each school team sees only the workflows they are meant to use.",
-      },
-      {
-        icon: UserCog,
-        title: "Billing & Helpdesk Workflows",
-        description: "Support billing operations and ticket workflows through built-in support/helpdesk capabilities for structured issue resolution.",
-      },
-    ],
-  },
-  {
-    title: "Parent & Student Access",
-    label: "Best school ERP India experience",
-    accent: "text-brand-navy",
-    items: [
-      {
-        icon: Users,
-        title: "Parent Portal (Web)",
-        description: "Give parents one web portal to view attendance, fees, notices, and school updates without repeated calls to the front office.",
-      },
-      {
-        icon: LayoutDashboard,
-        title: "Student Dashboard",
-        description: "Help students stay on top of class updates, exam schedules, results, and important tasks from one personalized dashboard.",
-      },
-      {
-        icon: Bell,
-        title: "Notifications & Alerts",
-        description: "Deliver instant reminders and alerts so parents and students never miss deadlines, events, exams, or payment updates.",
-      },
-    ],
-  },
-];
-
 const aiAssistantPoints = [
-  "Timetable generation that avoids teacher conflicts and room clashes automatically",
-  "Student performance trend analysis that surfaces concerns before exam week",
-  "Communication drafts for fee reminders, attendance alerts, and school notices",
-  "Fee defaulter prediction based on payment history and seasonal patterns",
+  "Timetable generation that avoids teacher conflicts and room clashes",
+  "Attendance patterns flagged before they become a term-long problem",
+  "Draft messages for fee reminders, attendance alerts and school notices",
+  "Fee follow-up lists ordered by payment history rather than guesswork",
 ];
 
-const pageHighlights = [
-  { value: 20, suffix: "+", label: "operational modules" },
-  { value: 4, suffix: "", label: "role-focused categories" },
-  { value: 1, suffix: "", label: "connected school platform" },
-];
+export default function Features({ areas, totals, panels }: FeaturesPageProps) {
+  const highlights = [
+    { value: totals.categories, suffix: "", label: "module areas" },
+    { value: totals.modules, suffix: "", label: "functional modules" },
+    { value: totals.subModules, suffix: "", label: "sub-modules" },
+    { value: totals.features, suffix: "", label: "shipped features" },
+  ];
 
-export default function Features() {
   return (
     <>
-      <PageSeoHead {...pageSeo.features} />
+      <PageSeoHead
+        {...pageSeo.features}
+        title={`School ERP Features: ${totals.modules} Modules, ${totals.features} Features | KIDUART`}
+        description={`Explore all ${totals.categories} module areas of the KIDUART school ERP — ${totals.modules} functional modules and ${totals.features} features covering admissions, academics, fees, HR, transport, hostel, library and security.`}
+      />
+      <SchemaMarkup
+        data={[
+          buildBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Features", path: "/features" },
+          ]),
+          buildItemListSchema(
+            "KIDUART school ERP module areas",
+            areas.map((area) => ({ name: area.label, path: `/features/${area.slug}` })),
+          ),
+        ]}
+      />
 
       <PageTransition className="pt-20 pb-0">
         <CircleShowcaseHero
-          eyebrow="What KIDUART covers"
-          title="Every module your school's admin team reaches for, every day"
-          subtitle="From the first admission enquiry to the final report card, grouped the way office, academic, and finance teams already divide the work."
+          eyebrow={`${totals.modules} modules · ${totals.features} features`}
+          title="Every module your school actually runs, documented feature by feature"
+          subtitle={`KIDUART ships ${totals.features} features across ${totals.modules} functional modules in ${totals.categories} areas — from the first admission enquiry to consolidated multi-campus reporting. This page is the full map, not a highlight reel.`}
           image="/images/banner/features-hero.jpg"
-          actions={(
+          actions={
             <>
-            <Link
-              href="/demo"
-              className="w-full sm:w-auto rounded-full bg-brand-orange px-8 py-4 text-center text-base font-bold text-white shadow-xl transition-all duration-300 hover:-translate-y-1 hover:bg-brand-navy"
-            >
-              Book Free Demo
-            </Link>
-            <Link
-              href="/contact"
-              className="w-full sm:w-auto flex items-center justify-center gap-2 rounded-full border border-brand-navy/12 bg-white px-8 py-4 text-base font-bold text-brand-navy transition-colors duration-300 hover:border-brand-teal hover:text-brand-teal"
-            >
-              Talk to Sales <ArrowRight className="h-5 w-5" />
-            </Link>
+              <Link
+                href="/demo"
+                className="w-full rounded-full bg-brand-orange px-8 py-4 text-center text-base font-bold text-brand-navy shadow-xl transition-all duration-300 hover:-translate-y-1 hover:bg-brand-navy hover:text-brand-beige sm:w-auto"
+              >
+                Book Free Demo
+              </Link>
+              <Link
+                href="/pricing"
+                className="flex w-full items-center justify-center gap-2 rounded-full border border-brand-navy/[0.12] bg-white px-8 py-4 text-base font-bold text-brand-navy transition-colors duration-300 hover:border-brand-teal hover:text-brand-teal sm:w-auto"
+              >
+                See what each plan includes <ArrowRight className="h-5 w-5" />
+              </Link>
             </>
-          )}
+          }
         />
 
         <section className="section-space-tight relative overflow-hidden border-y border-brand-navy/5 bg-white">
@@ -219,19 +89,48 @@ export default function Features() {
               { color: "#0c716b", size: 280, position: "center-right", opacity: 0.14 },
             ]}
           />
-          <div className="relative z-10 mx-auto grid max-w-6xl gap-6 px-4 text-center sm:px-6 md:grid-cols-3 lg:px-8">
-            {pageHighlights.map((highlight, index) => (
-              <SectionReveal
-                key={highlight.label}
-                delay={index * 0.08}
-                className="rounded-3xl border border-brand-navy/8 bg-brand-beige/20 px-6 py-8"
-              >
-                <div className="text-4xl font-extrabold text-brand-navy">
-                  <AnimatedCounter end={highlight.value} suffix={highlight.suffix} />
+          <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div className="grid gap-6 text-center sm:grid-cols-2 lg:grid-cols-4">
+              {highlights.map((highlight, index) => (
+                <SectionReveal
+                  key={highlight.label}
+                  delay={index * 0.06}
+                  className="rounded-3xl border border-brand-navy/[0.08] bg-brand-beige/20 px-6 py-8"
+                >
+                  <div className="text-4xl font-extrabold text-brand-navy">
+                    <AnimatedCounter end={highlight.value} suffix={highlight.suffix} />
+                  </div>
+                  <p className="mt-2 text-sm font-semibold uppercase tracking-[0.18em] text-brand-navy/[0.72]">
+                    {highlight.label}
+                  </p>
+                </SectionReveal>
+              ))}
+            </div>
+
+            <SectionReveal delay={0.1} className="mt-8">
+              <div className="rounded-3xl border border-brand-navy/[0.08] bg-white p-6 md:p-8">
+                <h2 className="text-2xl font-bold text-brand-navy">
+                  Counted from the product, not from marketing
+                </h2>
+                <p className="mt-3 leading-7 text-brand-navy/[0.78]">
+                  These numbers come straight from our capability matrix — the same sheet our
+                  engineering and implementation teams work from. Every module listed on this site
+                  exists in the platform today, so a single school and a multi-campus group can both
+                  start with what they actually run.
+                </p>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {panels.map((panel) => (
+                    <Link
+                      key={panel.slug}
+                      href={`/platform/${panel.slug}`}
+                      className="rounded-full border border-brand-navy/[0.12] bg-brand-beige/25 px-3.5 py-1.5 text-sm font-semibold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
+                    >
+                      {panel.shortLabel} panel
+                    </Link>
+                  ))}
                 </div>
-                <p className="mt-2 text-sm font-semibold uppercase tracking-[0.18em] text-brand-navy/60">{highlight.label}</p>
-              </SectionReveal>
-            ))}
+              </div>
+            </SectionReveal>
           </div>
         </section>
 
@@ -242,79 +141,19 @@ export default function Features() {
               { color: "#f77f00", size: 340, position: "bottom-right", opacity: 0.12 },
             ]}
           />
-          <FloatingIcons icons={["Users", "CreditCard", "Bell", "ShieldCheck"]} count={5} />
-
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <SectionReveal className="mx-auto mb-16 max-w-4xl text-center">
-              <p className="section-kicker">Structured Modules</p>
-              <h2 className="mt-4 text-4xl font-bold text-brand-navy">Every part of school operations, in one place</h2>
-              <p className="mt-4 text-lg leading-8 text-brand-navy/70">
-                Modules follow school routines, not a software catalogue sorted for demos.
+            <SectionReveal className="mx-auto mb-12 max-w-3xl text-center">
+              <p className="section-kicker">Capability map</p>
+              <h2 className="mt-4 text-4xl font-bold text-brand-navy">
+                Pick the area you are evaluating
+              </h2>
+              <p className="mt-4 text-lg leading-8 text-brand-navy/[0.74]">
+                Each area opens into its own page with every module and sub-module it contains, plus
+                the capabilities schools ask about most — so you can judge the depth for yourself.
               </p>
             </SectionReveal>
 
-            <div className="space-y-16">
-              {featureCategories.map((category, categoryIndex) => (
-                <SectionReveal
-                  key={category.title}
-                  delay={categoryIndex * 0.05}
-                  className=""
-                >
-                  <div className="mb-8 flex flex-col gap-3 border-b border-brand-navy/8 pb-6 md:flex-row md:items-end md:justify-between">
-                    <div>
-                      <p className={`section-kicker ${category.accent}`}>{category.label}</p>
-                      <h3 className="mt-3 text-3xl font-bold text-brand-navy">{category.title}</h3>
-                    </div>
-                    <p className="max-w-2xl text-brand-navy/65">
-                      Each module is designed to reduce a specific kind of manual work. Together, they eliminate the need to re-enter the same data in multiple places.
-                    </p>
-                  </div>
-
-                  <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-                    {category.items.map((item, itemIndex) => (
-                      <div
-                        key={item.title}
-                        className="flex h-full flex-col rounded-3xl border border-brand-navy/8 bg-white/95 shadow-lg shadow-brand-navy/5 p-7 transition-all duration-300 hover:-translate-y-1 hover:border-brand-teal/25 hover:shadow-md"
-                      >
-                        <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-white shadow-sm">
-                          <item.icon className={`h-7 w-7 ${category.accent}`} />
-                        </div>
-                        <h4 className="text-xl font-bold text-brand-navy">{item.title}</h4>
-                        <p className="mt-3 flex-grow leading-7 text-brand-navy/72">{item.description}</p>
-                        <div className="mt-5 text-sm font-semibold uppercase tracking-[0.2em] text-brand-navy/45">
-                          Module {String(itemIndex + 1).padStart(2, "0")}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </SectionReveal>
-              ))}
-            </div>
-
-            <SectionReveal className="mt-14 rounded-3xl border border-brand-navy/10 bg-white p-7">
-              <h3 className="text-2xl font-bold text-brand-navy">Explore module deep-dives</h3>
-              <p className="mt-3 text-brand-navy/70">
-                Open a module page for detailed workflows, role impact, and day-to-day usage.
-              </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                {[
-                  { href: "/features/hr-payroll", label: "HR & Payroll" },
-                  { href: "/features/transport", label: "Transport Management" },
-                  { href: "/features/library", label: "Library Management" },
-                  { href: "/features/discipline-ptm-diary", label: "Discipline, PTM & Class Diary" },
-                  { href: "/features/reporting-suite", label: "Full Reporting Suite" },
-                  { href: "/features/organization-management", label: "Organization & Multi-School Management" },
-                ].map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="rounded-full border border-brand-navy/12 bg-brand-beige/20 px-4 py-2 text-sm font-semibold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </SectionReveal>
+            <CapabilityMap areas={areas} />
           </div>
         </section>
 
@@ -325,52 +164,62 @@ export default function Features() {
               { color: "#0c716b", size: 420, position: "bottom-left", opacity: 0.16 },
             ]}
           />
-          <FloatingIcons icons={["Brain", "Sparkles", "Bell", "LayoutDashboard"]} count={4} />
-
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
               <SectionReveal>
                 <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-brand-yellow">
-                  AI that does a real job
+                  The intelligence layer
                 </div>
-                <h2 className="mt-6 text-4xl font-bold text-brand-beige">The AI layer works on your data, not generic templates</h2>
+                <h2 className="mt-6 text-4xl font-bold text-brand-beige">
+                  KIDUORBIT works on your school's data, not generic templates
+                </h2>
                 <p className="mt-5 max-w-2xl text-lg leading-8 text-brand-beige/80">
-                  KIDUART flags timetable clashes, fee accounts that need a call, and students whose attendance or marks are trending the wrong way. Staff still make the call; the system narrows where to look first.
+                  Because attendance, fees, exams and staff records already sit in one system, the
+                  analytics layer can point staff at the right classroom, the right ledger and the
+                  right conversation. People still make the call; the platform narrows where to look.
                 </p>
                 <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                  {aiAssistantPoints.map((point, index) => (
+                  {aiAssistantPoints.map((point) => (
                     <div
                       key={point}
                       className="rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-brand-beige/90"
                     >
                       <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-brand-yellow/15">
-                        <Sparkles className="h-5 w-5 text-brand-yellow" />
+                        <Sparkles className="h-5 w-5 text-brand-yellow" aria-hidden="true" />
                       </div>
                       <p>{point}</p>
                     </div>
                   ))}
                 </div>
+                <Link
+                  href="/kiduorbit"
+                  className="mt-8 inline-flex items-center gap-2 rounded-full border border-brand-yellow/40 bg-brand-yellow/10 px-6 py-3 text-base font-bold text-brand-yellow transition-colors hover:bg-brand-yellow hover:text-brand-navy"
+                >
+                  Read how KIDUORBIT works <ArrowRight className="h-5 w-5" aria-hidden="true" />
+                </Link>
               </SectionReveal>
 
               <SectionReveal delay={0.12} className="rounded-[2rem] border border-white/10 bg-white/5 p-7 shadow-2xl">
                 <div className="rounded-[1.75rem] border border-white/10 bg-brand-beige p-6 text-brand-navy">
                   <div className="flex items-center justify-between border-b border-brand-navy/10 pb-4">
                     <div>
-                      <p className="text-sm font-bold uppercase tracking-[0.24em] text-brand-teal">AI Command Center</p>
-                      <h3 className="mt-2 text-2xl font-bold">What you can ask KIDUART AI</h3>
+                      <p className="text-sm font-bold uppercase tracking-[0.24em] text-brand-teal">
+                        Ask the platform
+                      </p>
+                      <h3 className="mt-2 text-2xl font-bold">Questions staff actually have</h3>
                     </div>
-                    <BrainCircuit className="h-10 w-10 text-brand-orange" />
+                    <BrainCircuit className="h-10 w-10 text-brand-orange" aria-hidden="true" />
                   </div>
 
                   <div className="mt-6 space-y-4">
                     {[
-                      "Build a conflict-free timetable for Classes 8 through 10 starting next week",
-                      "Draft a fee reminder for parents who missed the October deadline",
-                      "Show me students whose attendance dropped more than 15% last month",
-                      "Which sections have the largest gap between expected and actual marks?",
+                      "Which sections dropped below 80% attendance this month?",
+                      "Who is pending on the second instalment after concessions?",
+                      "Where does the timetable clash if two teachers are on leave?",
+                      "Which campus is behind on collection this quarter?",
                     ].map((task) => (
                       <div key={task} className="rounded-2xl bg-white px-4 py-4 shadow-sm">
-                        <p className="text-sm leading-6 text-brand-navy/75">{task}</p>
+                        <p className="text-sm leading-6 text-brand-navy/[0.78]">{task}</p>
                       </div>
                     ))}
                   </div>
@@ -383,28 +232,31 @@ export default function Features() {
         <section className="section-space relative overflow-hidden bg-white">
           <BackgroundBlobs blobs={[{ color: "#0c716b", size: 320, position: "center-right", opacity: 0.12 }]} />
           <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <SectionReveal className="rounded-[2rem] border border-brand-navy/8 bg-brand-beige/20 p-8 text-center md:p-12">
-              <p className="section-kicker">Built for Real Schools</p>
-              <h2 className="mt-4 text-4xl font-bold text-brand-navy">See how these school ERP features work in real school operations</h2>
-              <p className="mx-auto mt-4 max-w-3xl text-lg leading-8 text-brand-navy/70">
-                Book a demo around your fee structure, class setup, and reporting cycle so you can judge the fit on your terms.
+            <SectionReveal className="rounded-[2rem] border border-brand-navy/[0.08] bg-brand-beige/20 p-8 text-center md:p-12">
+              <p className="section-kicker">Built for real schools</p>
+              <h2 className="mt-4 text-4xl font-bold text-brand-navy">
+                Bring your fee structure and class setup — we will run the demo on it
+              </h2>
+              <p className="mx-auto mt-4 max-w-3xl text-lg leading-8 text-brand-navy/[0.74]">
+                A module list only proves depth. A demo on your own session, sections and fee heads
+                proves fit. Pick whichever modules matter most and we will walk those first.
               </p>
               <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
                 <Link
                   href="/demo"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-brand-navy px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-brand-teal"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-navy px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-brand-teal sm:w-auto"
                 >
                   Book a free demo
-                  <ArrowRight className="h-5 w-5" />
+                  <ArrowRight className="h-5 w-5" aria-hidden="true" />
                 </Link>
                 <a
                   href={WHATSAPP_URL}
                   target="_blank"
                   rel="noreferrer"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-brand-navy/15 bg-white px-8 py-4 text-lg font-bold text-brand-navy transition-colors hover:border-brand-teal/35 hover:text-brand-teal"
+                  className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-brand-navy/15 bg-white px-8 py-4 text-lg font-bold text-brand-navy transition-colors hover:border-brand-teal/35 hover:text-brand-teal sm:w-auto"
                 >
                   <WhatsAppIcon className="h-5 w-5" />
-                  Ask About Your Use Case
+                  Ask about your use case
                 </a>
               </div>
             </SectionReveal>
@@ -419,3 +271,34 @@ export default function Features() {
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps<FeaturesPageProps> = async () => {
+  const areas: CapabilityArea[] = MATRIX_CATEGORIES.map((category) => {
+    const narrative = AREA_NARRATIVE_BY_SLUG[category.slug];
+    return {
+      slug: category.slug,
+      label: narrative?.label ?? category.name,
+      stage: narrative?.stage ?? category.name,
+      headline: narrative?.headline ?? category.name,
+      summary: narrative?.summary ?? "",
+      featureCount: category.featureCount,
+      moduleCount: category.moduleCount,
+      subModuleCount: countSubModules(category),
+      icon: narrative?.icon ?? "LayoutDashboard",
+      accent: narrative?.accent ?? "navy",
+      topModules: topModules(category, 5).map((module) => ({
+        name: module.name,
+        slug: module.slug,
+        featureCount: module.featureCount,
+      })),
+    };
+  });
+
+  return {
+    props: {
+      areas,
+      totals: MATRIX_TOTALS,
+      panels: PRODUCT_PANELS.map((panel) => ({ slug: panel.slug, shortLabel: panel.shortLabel })),
+    },
+  };
+};

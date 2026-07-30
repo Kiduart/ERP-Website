@@ -7,8 +7,18 @@ import { FloatingIcons } from "@/components/animations/FloatingIcons";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ArrowRight, BellRing, Lightbulb, Linkedin, Sparkles, Target, Trophy } from "lucide-react";
 import Link from "next/link";
+import type { GetStaticProps } from "next";
+import { MATRIX_TOTALS } from "@/data/featureMatrix";
+import { PRODUCT_PANELS } from "@/data/productPanels";
+import { PRODUCT_PERSONAS } from "@/data/productPersonas";
 
-export default function About() {
+type AboutProps = {
+  totals: typeof MATRIX_TOTALS;
+  panelCount: number;
+  personaCount: number;
+};
+
+export default function About({ totals, panelCount, personaCount }: AboutProps) {
   const pillars = [
     {
       title: "Our Mission",
@@ -89,7 +99,7 @@ export default function About() {
             </Link>
             <Link
               href="/contact"
-              className="rounded-full border border-brand-navy/14 bg-white/70 px-8 py-4 text-base font-bold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
+              className="rounded-full border border-brand-navy/[0.14] bg-white/70 px-8 py-4 text-base font-bold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
             >
               Talk to Us
             </Link>
@@ -118,7 +128,7 @@ export default function About() {
           <div className="grid gap-8 md:grid-cols-2">
             {pillars.map((pillar, index) => (
               <SectionReveal key={pillar.title} delay={index * 0.1}>
-                <div className={`flex h-full flex-col rounded-[2rem] border border-brand-navy/6 p-10 shadow-lg shadow-brand-navy/5 ${pillar.tone}`}>
+                <div className={`flex h-full flex-col rounded-[2rem] border border-brand-navy/[0.06] p-10 shadow-lg shadow-brand-navy/5 ${pillar.tone}`}>
                   <div className={`mb-6 flex h-14 w-14 items-center justify-center rounded-2xl ${pillar.iconWrap}`}>
                     <pillar.icon className={`h-7 w-7 ${pillar.iconColor}`} />
                   </div>
@@ -144,13 +154,13 @@ export default function About() {
             <div className="grid gap-4 sm:grid-cols-2">
                 <SectionReveal delay={0.14}>
                   <div className="text-center">
-                    {/* rounded-[2rem] border border-brand-navy/8 bg-white p-8 text-center shadow-lg shadow-brand-navy/5 */}
-                    <div className="mx-auto mb-6 flex h-48 w-48 items-center justify-center rounded-full border-4 border-white bg-brand-navy/4 shadow-xl">
+                    {/* rounded-[2rem] border border-brand-navy/[0.08] bg-white p-8 text-center shadow-lg shadow-brand-navy/5 */}
+                    <div className="mx-auto mb-6 flex h-48 w-48 items-center justify-center rounded-full border-4 border-white bg-brand-navy/[0.04] shadow-xl">
                       <Skeleton className="h-full w-full rounded-full bg-brand-navy/10" />
                     </div>
                     <Skeleton className="mx-auto h-6 w-40 rounded-full bg-brand-navy/10" />
                     <Skeleton className="mx-auto mt-3 h-4 w-52 rounded-full bg-brand-teal/15" />
-                    <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand-beige px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-brand-orange">
+                    <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand-beige px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-brand-orange-ink">
                       <Sparkles className="h-3.5 w-3.5" />
                       Profile coming soon
                     </div>
@@ -158,13 +168,13 @@ export default function About() {
                 </SectionReveal>
                 <SectionReveal>
                   <div className="text-center">
-                    {/* rounded-[2rem] border border-brand-navy/8 bg-white p-8 text-center shadow-lg shadow-brand-navy/5 */}
-                    <div className="mx-auto mb-6 flex h-48 w-48 items-center justify-center rounded-full border-4 border-white bg-brand-navy/4 shadow-xl">
+                    {/* rounded-[2rem] border border-brand-navy/[0.08] bg-white p-8 text-center shadow-lg shadow-brand-navy/5 */}
+                    <div className="mx-auto mb-6 flex h-48 w-48 items-center justify-center rounded-full border-4 border-white bg-brand-navy/[0.04] shadow-xl">
                       <Skeleton className="h-full w-full rounded-full bg-brand-navy/10" />
                     </div>
                     <Skeleton className="mx-auto h-6 w-40 rounded-full bg-brand-navy/10" />
                     <Skeleton className="mx-auto mt-3 h-4 w-52 rounded-full bg-brand-teal/15" />
-                    <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand-beige px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-brand-orange">
+                    <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand-beige px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-brand-orange-ink">
                       <Sparkles className="h-3.5 w-3.5" />
                       Profile coming soon
                     </div>
@@ -180,7 +190,7 @@ export default function About() {
                     Stay in the loop
                   </div>
                   <h3 className="mt-6 text-2xl font-bold text-brand-navy">Stay close to what we are building</h3>
-                  <p className="mt-4 text-base leading-7 text-brand-navy/68">
+                  <p className="mt-4 text-base leading-7 text-brand-navy/[0.68]">
                     We share product updates, school management insights, and company milestones on LinkedIn. Follow KIDUART to get early looks at what is coming next.
                   </p>
                 </div>
@@ -197,7 +207,7 @@ export default function About() {
                   </a>
                   <Link
                     href="/contact"
-                    className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-brand-navy/12 bg-brand-beige/60 px-6 py-3.5 text-sm font-bold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-brand-navy/[0.12] bg-brand-beige/60 px-6 py-3.5 text-sm font-bold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
                   >
                     Subscribe for updates
                     <ArrowRight className="h-4 w-4" />
@@ -210,16 +220,66 @@ export default function About() {
       </section>
 
       <section className="section-space bg-white">
-        <div className="page-shell text-center">
-          <SectionReveal>
-            <Trophy className="mx-auto mb-6 h-12 w-12 text-brand-yellow" />
-            <h2 className="mb-12 text-3xl font-bold text-brand-navy">Security controls we focus on in product</h2>
-            <div className="flex flex-wrap justify-center gap-8 opacity-70 grayscale transition-all duration-500 hover:grayscale-0">
-              <div className="flex h-12 items-center rounded bg-brand-navy/5 px-6 font-bold text-brand-navy">Role-based access controls</div>
-              <div className="flex h-12 items-center rounded bg-brand-navy/5 px-6 font-bold text-brand-navy">Dedicated school-level data isolation</div>
-              <div className="flex h-12 items-center rounded bg-brand-navy/5 px-6 font-bold text-brand-navy">Audit-friendly activity records</div>
-            </div>
+        <div className="page-shell">
+          <SectionReveal className="mx-auto max-w-3xl text-center">
+            <div className="section-kicker">What we have built so far</div>
+            <h2 className="section-title mt-6 text-brand-navy">
+              {totals.modules} modules, {totals.features.toLocaleString("en-IN")} features, one school record
+            </h2>
+            <p className="section-copy mt-4 text-brand-navy/70">
+              We keep a single capability matrix as the source of truth for the product, and this website is generated
+              from it. That is why the numbers on our features, platform and pricing pages agree with each other — they
+              come from the same file our engineering team maintains, not from a slide deck.
+            </p>
           </SectionReveal>
+
+          <SectionReveal className="mx-auto mt-12 grid max-w-5xl grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
+            {[
+              { value: totals.categories, label: "Module areas", href: "/features" },
+              { value: totals.modules, label: "Modules", href: "/features" },
+              { value: totals.subModules, label: "Sub-modules", href: "/features" },
+              { value: totals.features.toLocaleString("en-IN"), label: "Features", href: "/features" },
+              { value: panelCount, label: "Role panels", href: "/platform" },
+              { value: personaCount, label: "Role solutions", href: "/solutions" },
+            ].map((stat) => (
+              <Link
+                key={stat.label}
+                href={stat.href}
+                className="rounded-2xl border border-brand-navy/[0.1] bg-brand-beige/20 px-4 py-5 text-center transition-colors hover:border-brand-teal/40"
+              >
+                <div className="text-2xl font-extrabold text-brand-navy">{stat.value}</div>
+                <div className="mt-1.5 text-xs font-bold uppercase tracking-[0.14em] text-brand-navy/[0.72]">
+                  {stat.label}
+                </div>
+              </Link>
+            ))}
+          </SectionReveal>
+
+          <div className="mx-auto mt-14 grid max-w-5xl gap-6 md:grid-cols-3">
+            {[
+              {
+                title: "We build around roles, not screens",
+                copy: "Ten panels ship with the product because a class teacher, an accountant and a trustee need different things from the same record. Short training is a design outcome, not a promise.",
+              },
+              {
+                title: "We do not publish numbers we cannot back",
+                copy: "You will not find invented adoption statistics or unverified time savings on this site. Where a claim needs live school data, we mark it coming soon until we have it.",
+              },
+              {
+                title: "We build for Indian school reality",
+                copy: "Fee heads and concessions, board-specific grading, transfer certificates, transport routes, SMS for parents without smartphones — the details that decide whether software survives a real school year.",
+              },
+            ].map((item) => (
+              <SectionReveal
+                key={item.title}
+                className="rounded-[1.75rem] border border-brand-navy/[0.08] bg-brand-beige/20 p-7"
+              >
+                <Trophy className="h-8 w-8 text-brand-yellow" aria-hidden="true" />
+                <h3 className="mt-5 text-xl font-bold text-brand-navy">{item.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-brand-navy/[0.76]">{item.copy}</p>
+              </SectionReveal>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -228,3 +288,11 @@ export default function About() {
     </PageTransition>
   );
 }
+
+export const getStaticProps: GetStaticProps<AboutProps> = async () => ({
+  props: {
+    totals: MATRIX_TOTALS,
+    panelCount: PRODUCT_PANELS.length,
+    personaCount: PRODUCT_PERSONAS.length,
+  },
+});

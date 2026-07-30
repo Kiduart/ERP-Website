@@ -1,407 +1,249 @@
-import Head from "next/head";
+import type { GetStaticProps } from "next";
+import Image from "next/image";
 import { Link } from "wouter";
-import { ArrowRight, BookOpen, Building, Building2, CheckCircle2, Presentation, Users } from "lucide-react";
-import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import { PageSeoHead } from "@/components/seo/PageSeoHead";
+import { SchemaMarkup } from "@/components/seo/SchemaMarkup";
+import { SITE_ORIGIN } from "@/components/seo/PageSeoHead";
+import { buildBreadcrumbSchema, buildItemListSchema } from "@/lib/seoSchemas";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
-import { FloatingIcons } from "@/components/animations/FloatingIcons";
 import { CtaSection } from "@/components/ui/CtaSection";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
-import { useState } from "react";
-import { heroImgProps, IMAGE_DIMENSIONS, solutionCarouselAlt } from "@/lib/imageSeo";
+import { ProductIcon } from "@/components/product/ProductIcon";
+import { ACCENTS, SectionHeading, StatChip, type AccentName } from "@/components/product/ProductPrimitives";
+import { MATRIX_TOTALS } from "@/data/featureMatrix";
+import { PRODUCT_PERSONAS } from "@/data/productPersonas";
 
-type RoleSolution = {
-  title: string;
-  shortValue: string;
+type PersonaCard = {
   slug: string;
-  icon: typeof Users;
-  accent: string;
-  cardClass: string;
-  iconClass: string;
-  challenges: string[];
-  solution: string;
-  cta: string;
+  label: string;
+  pageLabel: string;
+  stage: string;
+  headline: string;
+  summary: string;
+  roleNames: string[];
+  leadChallenge: { problem: string; solution: string };
+  challengeCount: number;
+  image: string;
+  imageAlt: string;
+  icon: string;
+  accent: AccentName;
 };
 
-const roles: RoleSolution[] = [
-  {
-    title: "For Teachers",
-    shortValue: "Less time on attendance and marks, more time in class.",
-    slug: "teachers",
-    icon: Presentation,
-    accent: "text-brand-teal",
-    cardClass: "bg-white text-brand-navy border border-brand-navy/10",
-    iconClass: "text-brand-teal",
-    challenges: [
-      "Too much manual attendance and grading",
-      "Time wasted on admin work",
-      "Scattered student data",
-    ],
-    solution:
-      "Mark attendance quickly, enter marks once, and send class updates without juggling separate apps.",
-    cta: "See How It Works for Teachers",
-  },
-  {
-    title: "For Parents",
-    shortValue: "Keep families connected with instant visibility and faster communication.",
-    slug: "parents",
-    icon: Users,
-    accent: "text-brand-orange",
-    cardClass: "bg-brand-teal text-white",
-    iconClass: "text-brand-beige",
-    challenges: [
-      "No clear view of daily attendance",
-      "Fee payments feel slow and manual",
-      "Important alerts get missed",
-    ],
-    solution:
-      "See attendance, pay fees, and read school notices from one parent portal on web, without repeated calls to the school office.",
-    cta: "View Parent Portal Walkthrough",
-  },
-  {
-    title: "For Students",
-    shortValue: "Help students stay organized, informed, and accountable every day.",
-    slug: "students",
-    icon: BookOpen,
-    accent: "text-brand-navy",
-    cardClass: "bg-brand-beige text-brand-navy",
-    iconClass: "text-brand-orange",
-    challenges: [
-      "Timetable changes are easy to miss",
-      "Assignments are scattered",
-      "Performance tracking is unclear",
-    ],
-    solution:
-      "Give students one dashboard to view timetables, follow assignments, and track performance so they can stay focused without confusion.",
-    cta: "Explore Student Dashboard",
-  },
-  {
-    title: "For School Administrators",
-    shortValue: "Get complete control of your school operations in one place.",
-    slug: "administrators",
-    icon: Building2,
-    accent: "text-brand-yellow",
-    cardClass: "bg-brand-navy text-white",
-    iconClass: "text-brand-yellow",
-    challenges: [
-      "Operations run across disconnected tools",
-      "Reporting takes too much manual effort",
-      "Oversight is hard across teams",
-    ],
-    solution:
-      "Manage admissions, attendance, fees, staff, and reports from one ERP dashboard with automation that improves speed, visibility, and control.",
-    cta: "See Admin Workflows in Action",
-  },
-];
+type SolutionsPageProps = {
+  personas: PersonaCard[];
+  totals: typeof MATRIX_TOTALS;
+};
 
-const districtFeatures = [
-  "Multi-school dashboard for centralized oversight",
-  "Centralized reporting across campuses and branches",
-  "Role-based permissions for district and school-level teams",
-];
-
+/** Numbers stay unpublished until they come from real school data. */
 const impactHighlights = [
-  { value: "[INSERT VERIFIED NUMBER]", label: "Schools onboarded" },
-  { value: "[INSERT VERIFIED NUMBER]", label: "Average admin effort reduction" },
-  { value: "[INSERT VERIFIED NUMBER]", label: "Parent communication improvement signal" },
-];
-
-const heroSnapshots = [
-  "Role-based views for core school teams",
-  "Parent portal access available now on web",
-  "Native parent app in development",
-];
-
-
-const cards = [
   {
-    id: 1,
-    img: "/images/banner/solution-hero-2.jpg",
+    label: "Schools onboarded",
+    note: "We will publish this once our first cohort completes a full academic session.",
   },
   {
-    id: 2,
-    img: "/images/banner/solution-hero-1.jpg",
+    label: "Admin effort saved",
+    note: "Measured per school after go-live, from real module usage rather than estimates.",
   },
   {
-    id: 3,
-    img: "/images/banner/solution-hero-3.jpg",
+    label: "Parent communication reach",
+    note: "Reported from message delivery logs once volumes are meaningful.",
   },
 ];
 
-export default function Solutions() {
-  const [active, setActive] = useState<number | null>(1);
-  const [searchTerm, setSearchTerm] = useState("");
+export default function Solutions({ personas, totals }: SolutionsPageProps) {
   return (
     <>
-      <Head>
-        <title>School ERP Solutions for Teachers, Parents, Students & Administrators</title>
-        <meta
-          name="description"
-          content="Explore school ERP solutions for teachers, parents, students, administrators, and districts. Discover ERP for schools India teams can use to reduce admin work and improve engagement."
-        />
-        <meta
-          name="keywords"
-          content="school ERP solutions, school management system for teachers, ERP for schools India, school ERP for parents, school ERP for administrators"
-        />
-        <link rel="canonical" href="https://www.kiduart.com/solutions" />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="KIDUART" />
-        <meta property="og:title" content="School ERP Solutions for Teachers, Parents, Students & Administrators" />
-        <meta property="og:description" content="Explore school ERP solutions for teachers, parents, students, administrators, and districts. Discover ERP for schools India teams can use to reduce admin work and improve engagement." />
-        <meta property="og:url" content="https://www.kiduart.com/solutions" />
-        <meta property="og:image" content="https://www.kiduart.com/images/banner/home-hero.jpeg" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="School ERP Solutions for Teachers, Parents, Students & Administrators" />
-        <meta name="twitter:description" content="Explore school ERP solutions for teachers, parents, students, administrators, and districts. Discover ERP for schools India teams can use to reduce admin work and improve engagement." />
-      </Head>
+      <PageSeoHead
+        title="School ERP Solutions by Role: Teachers, Parents, Finance, Admin | KIDUART"
+        description="Role-based school ERP solutions for school groups, principals, admin staff, academic coordinators, teachers, accountants, parents and students — with the daily challenges each one faces."
+        path="/solutions"
+        ogImage={`${SITE_ORIGIN}/images/banner/solution-hero-1.jpg`}
+        keywords="school ERP for teachers, school ERP for parents, school ERP for accountants, school management software for principals, multi campus school software"
+      />
+      <SchemaMarkup
+        data={[
+          buildBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Solutions", path: "/solutions" },
+          ]),
+          buildItemListSchema(
+            "KIDUART school ERP solutions by role",
+            personas.map((persona) => ({ name: persona.pageLabel, path: `/solutions/${persona.slug}` })),
+          ),
+        ]}
+      />
 
       <PageTransition className="pt-20 pb-0">
-        <section className="section-space relative overflow-hidden bg-[linear-gradient(180deg,#f6f7fb,#ffffff)]">
+        <section className="relative overflow-hidden border-b border-brand-navy/[0.06] bg-white pb-14 pt-12 md:pb-20">
           <BackgroundBlobs
             blobs={[
-              { color: "hsl(var(--blob-yellow))", size: 360, position: "top-left", opacity: 0.12 },
-              { color: "hsl(var(--blob-teal))", size: 360, position: "bottom-right", opacity: 0.1 },
+              { color: "#003049", size: 340, position: "top-left", opacity: 0.08 },
+              { color: "#f77f00", size: 300, position: "bottom-right", opacity: 0.1 },
             ]}
           />
+          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+              <SectionReveal>
+                <p className="section-kicker">Solutions by role</p>
+                <h1 className="mt-5 text-4xl font-bold leading-tight text-brand-navy md:text-5xl">
+                  Eight roles, eight different jobs, one school platform
+                </h1>
+                <p className="mt-5 text-lg leading-8 text-brand-navy/[0.78]">
+                  A principal, an accountant and a class teacher have almost nothing in common in
+                  their daily work — so a single generic dashboard fails all three. Each page below
+                  starts from the problems that role actually reports, then names the module that
+                  removes it. All of it is drawn from the {totals.features} features KIDUART ships today.
+                </p>
+                <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                  <Link
+                    href="/demo"
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-orange px-7 py-3.5 text-base font-bold text-brand-navy transition-all duration-300 hover:-translate-y-1 hover:bg-brand-navy hover:text-brand-beige"
+                  >
+                    Book a role-specific demo
+                    <ArrowRight className="h-5 w-5" aria-hidden="true" />
+                  </Link>
+                  <Link
+                    href="/platform"
+                    className="inline-flex items-center justify-center gap-2 rounded-full border border-brand-navy/[0.14] bg-white px-7 py-3.5 text-base font-bold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
+                  >
+                    See the 10 role panels
+                  </Link>
+                </div>
+              </SectionReveal>
 
-          <div className="page-shell relative z-10 grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr]">
+              <SectionReveal delay={0.1} className="grid grid-cols-2 gap-4">
+                <StatChip value={personas.length} label="Role solutions" />
+                <StatChip value={totals.modules} label="Functional modules" />
+                <StatChip value={totals.features} label="Features shipped" />
+                <StatChip value={totals.categories} label="Module areas" />
+                <div className="col-span-2 overflow-hidden rounded-[1.75rem] border border-brand-navy/[0.08]">
+                  <div className="relative aspect-[16/9]">
+                    <Image
+                      src="/images/banner/solution-hero-1.jpg"
+                      alt="School staff working together on daily school operations"
+                      fill
+                      priority
+                      sizes="(max-width: 1024px) 100vw, 45vw"
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+              </SectionReveal>
+            </div>
+          </div>
+        </section>
+
+        <section className="section-space relative overflow-hidden bg-brand-beige/25">
+          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <SectionReveal>
-              <div className="section-kicker inline-flex rounded-full border border-brand-navy/10 bg-white px-4 py-2">
-                Role-based school ERP solutions
-              </div>
-              <h1 className="mt-6 max-w-xl text-[clamp(2.15rem,1.4rem+1.9vw,3.6rem)] font-bold leading-[1.03] text-brand-navy">
-                Find the right solution for every team in your school.
-              </h1>
-              <p className="mt-5 max-w-xl text-[clamp(1rem,0.95rem+0.15vw,1.05rem)] leading-8 text-brand-navy/72">
-                Explore how teachers, parents, students, and administrators each get workflows designed for their daily responsibilities instead of one generic screen for everyone.
-              </p>
-
-              <div className="mt-8 flex max-w-xl items-center gap-3 rounded-full border border-brand-navy/10 bg-white px-4 py-3 shadow-lg shadow-brand-navy/5">
-                <input
-                  type="search"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  placeholder="Search by team, workflow, or outcome"
-                  className="w-full min-w-0 appearance-none rounded-full border-0 bg-transparent text-sm font-medium text-brand-navy/70 outline-none shadow-none ring-0 placeholder:text-brand-navy/45 focus:border-0 focus:outline-none focus:ring-0 focus:shadow-none focus-visible:outline-none focus-visible:ring-0 focus-visible:shadow-none"
-                />
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-navy text-white">
-                  <ArrowRight className="h-4 w-4" />
-                </div>
-              </div>
-
-              <div className="mt-6 flex flex-wrap gap-2">
-                {["Teachers", "Parents", "Students", "School admins", "District teams"].map((item) => (
-                  <div key={item} className="rounded-full bg-brand-beige px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-brand-navy/70">
-                    {item}
-                  </div>
-                ))}
-              </div>
+              <SectionHeading
+                kicker="Pick the role you are buying for"
+                title="Start from the person who will use it every day"
+                description="Each role page lists the challenges that role reports, the modules that answer them, a typical day, and the panel they sign in to."
+              />
             </SectionReveal>
 
-            <SectionReveal delay={0.08} className="relative hidden lg:block">
-              {/* Background shapes */}
-              {/* <div className="absolute right-6 top-12 h-[19rem] w-[14rem] rounded-[2rem] bg-brand-teal" />
-              <div className="absolute right-0 top-24 h-[19rem] w-[14rem] rounded-[2rem] bg-brand-navy/12" /> */}
-
-              <div className="relative mx-auto w-[30rem] h-[28rem]">
-                {/* Floating stats card */}
-                <div className="absolute left-10 -bottom-10 z-50 rounded-[1.5rem] border border-brand-navy/10 bg-white px-5 py-4 shadow-xl">
-                  <div className="text-center text-sm font-semibold text-brand-navy/50">
-                    Live snapshots
-                  </div>
-                  <div className="mt-3 space-y-1">
-                    {heroSnapshots.map((item) => (
-                      <div
-                        key={item}
-                        className="rounded-xl bg-brand-beige/60 px-4 py-1 text-sm font-bold text-brand-navy"
-                      >
-                        {item}
+            <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+              {personas.map((persona, index) => {
+                const tokens = ACCENTS[persona.accent];
+                return (
+                  <SectionReveal key={persona.slug} delay={Math.min(index * 0.04, 0.2)} className="h-full">
+                    <Link
+                      href={`/solutions/${persona.slug}`}
+                      className="group flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-brand-navy/[0.08] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand-teal/40"
+                    >
+                      <div className="relative aspect-[16/10] bg-brand-beige/40">
+                        <Image
+                          src={persona.image}
+                          alt={persona.imageAlt}
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
+                          className="object-cover"
+                        />
                       </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Cards */}
-                <div className="relative flex items-center justify-center h-full">
-                  {cards.map((card, index) => {
-                    const isActive = active === card.id;
-
-                    return (
-                      <div
-                        key={card.id}
-                        onMouseEnter={() => setActive(card.id)}
-                        className={`
-          absolute cursor-pointer transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]
-
-          ${index === 0 ? "translate-x-[0px] translate-y-[0px] rotate-[0deg] z-20" : ""}
-          ${index === 1 ? "translate-x-[50px] translate-y-[30px] rotate-[6deg] z-20" : ""}
-          ${index === 2 ? "translate-x-[110px] translate-y-[60px] rotate-[12deg] z-10" : ""}
-
-          ${isActive
-                            ? "scale-105 z-30 shadow-[0_40px_100px_rgba(0,0,0,0.25)]"
-                            : "scale-95 opacity-70"}
-        `}
-                      >
-                        <div className="w-[18rem] rounded-[2rem] border border-black/10 bg-[#2b211b] p-3">
-                          <img
-                            src={card.img}
-                            alt={solutionCarouselAlt(card.img)}
-                            className="h-[23rem] w-full rounded-[1.5rem] object-cover"
-                            {...heroImgProps(IMAGE_DIMENSIONS.carouselCard)}
-                          />
-                        </div>
+                      <div className="flex flex-1 flex-col p-6">
+                        <span className="flex items-center gap-2.5">
+                          <span
+                            className={`inline-flex h-9 w-9 items-center justify-center rounded-xl ${tokens.softBg}`}
+                          >
+                            <ProductIcon name={persona.icon} className={`h-4 w-4 ${tokens.text}`} />
+                          </span>
+                          <span className="text-xs font-bold uppercase tracking-[0.16em] text-brand-navy/[0.74]">
+                            {persona.stage}
+                          </span>
+                        </span>
+                        <span className="mt-4 text-xl font-bold text-brand-navy">{persona.pageLabel}</span>
+                        <span className="mt-3 flex-grow text-sm leading-6 text-brand-navy/[0.78]">
+                          {persona.summary}
+                        </span>
+                        <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-brand-navy group-hover:text-brand-teal">
+                          {persona.challengeCount} challenges answered
+                          <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                        </span>
                       </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </SectionReveal>
-
+                    </Link>
+                  </SectionReveal>
+                );
+              })}
+            </div>
           </div>
         </section>
 
         <section className="section-space relative overflow-hidden bg-white">
-          <BackgroundBlobs
-            blobs={[
-              { color: "#fcbf49", size: 320, position: "top-left", opacity: 0.14 },
-              { color: "#0c716b", size: 320, position: "bottom-right", opacity: 0.14 },
-            ]}
-          />
-          <FloatingIcons icons={["Star", "Award", "Lightbulb"]} count={4} />
-
+          <BackgroundBlobs blobs={[{ color: "#0c716b", size: 340, position: "center-left", opacity: 0.1 }]} />
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <SectionReveal className="mx-auto mb-16 max-w-4xl text-center">
-              <p className="section-kicker">Role-Based School ERP Solutions</p>
-              <h2 className="mt-4 text-4xl font-bold text-brand-navy">Every stakeholder gets a clearer path, not just more software</h2>
-              <p className="mt-4 text-lg leading-8 text-brand-navy/70">
-                This page focuses on outcomes, not generic ERP features. Each solution is built around what teachers, parents, students, and administrators need to do faster and better.
-              </p>
+            <SectionReveal>
+              <SectionHeading
+                kicker="The honest ledger"
+                title="Where school days actually leak time"
+                description="One line per role: the problem we hear most often, and the module that removes it. No transformation language, just the mechanism."
+              />
             </SectionReveal>
 
-            <div className="grid gap-8 md:grid-cols-2">
-              {roles.map((role, index) => (
-                <motion.div
-                  key={role.title}
-                  initial={{ opacity: 0, y: 90, x: index % 2 === 0 ? -50 : 50, rotate: index % 2 === 0 ? -4 : 4, scale: 0.92 }}
-                  whileInView={{ opacity: 1, y: 0, x: 0, rotate: 0, scale: 1 }}
-                  viewport={{ once: true, margin: "-120px" }}
-                  transition={{ duration: 0.75, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                  className={`flex h-full flex-col rounded-[2rem] p-8 shadow-lg shadow-brand-navy/5 ${role.cardClass}`}
-                  style={role.cardClass.includes("bg-brand-navy") ? { color: "#fcf6d3" } : undefined}
-                >
-                  <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/15 shadow-sm">
-                    <role.icon className={`h-8 w-8 ${role.iconClass}`} />
-                  </div>
-
-                  <h3 className="text-3xl font-bold">{role.title}</h3>
-                  <p className="mt-3 text-lg leading-7 opacity-85">{role.shortValue}</p>
-
-                  <div className="mt-8">
-                    <p className="text-sm font-bold uppercase tracking-[0.22em] opacity-65">Challenges</p>
-                    <div className="mt-4 space-y-3">
-                      {role.challenges.map((challenge) => (
-                        <div key={challenge} className="flex items-start gap-3">
-                          <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 opacity-75" />
-                          <span className="leading-7">{challenge}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="my-8 h-px bg-current opacity-15" />
-
-                  <div className="flex flex-grow flex-col">
-                    <p className="text-sm font-bold uppercase tracking-[0.22em] opacity-65">Solution</p>
-                    <p className="mt-4 text-lg font-medium leading-8">{role.solution}</p>
-
-                    <Link
-                      href={`/solutions/${role.slug}`}
-                      className="mt-8 inline-flex items-center gap-2 font-bold transition-opacity hover:opacity-80"
+            <SectionReveal delay={0.08} className="mt-10 overflow-hidden rounded-[2rem] border border-brand-navy/[0.08]">
+              <ul className="divide-y divide-brand-navy/[0.08]">
+                {personas.map((persona, index) => {
+                  const tokens = ACCENTS[persona.accent];
+                  return (
+                    <li
+                      key={persona.slug}
+                      className={`grid gap-4 p-6 md:grid-cols-[minmax(0,10rem)_1fr_1fr] md:items-start md:gap-8 ${
+                        index % 2 === 0 ? "bg-white" : "bg-brand-beige/20"
+                      }`}
                     >
-                      {role.cta}
-                      <ArrowRight className="h-5 w-5" />
-                    </Link>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="section-space relative overflow-hidden bg-brand-navy" style={{ color: "#fcf6d3" }}>
-          <BackgroundBlobs
-            blobs={[
-              { color: "#fcbf49", size: 380, position: "top-right", opacity: 0.16 },
-              { color: "#0c716b", size: 380, position: "bottom-left", opacity: 0.16 },
-            ]}
-          />
-          <FloatingIcons icons={["Building", "Users", "ShieldCheck", "BarChart2"]} count={4} />
-
-          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid items-center gap-10 lg:grid-cols-[0.95fr_1.05fr]">
-              <SectionReveal>
-                <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-brand-yellow">
-                  Enterprise District Solution
-                </div>
-                <h2 className="mt-6 text-4xl font-bold text-brand-beige">Built for district leaders and multi-campus organizations</h2>
-                <p className="mt-5 max-w-2xl text-lg leading-8 text-brand-beige/80">
-                  If you manage multiple schools, you need more than a basic ERP. KIDUART gives district teams centralized visibility, stronger governance, and faster decision-making across locations.
-                </p>
-
-                <div className="mt-8 space-y-4">
-                  {districtFeatures.map((feature) => (
-                    <div key={feature} className="flex items-start gap-3 rounded-2xl border border-white/10 bg-white/5 px-5 py-4">
-                      <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-brand-yellow" />
-                      <span className="text-brand-beige/90">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <Link
-                  href="/solutions/school-districts"
-                  className="mt-8 inline-flex items-center gap-2 font-bold text-brand-yellow transition-opacity hover:opacity-80"
-                >
-                  Explore District-Level ERP
-                  <ArrowRight className="h-5 w-5" />
-                </Link>
-              </SectionReveal>
-
-              <SectionReveal delay={0.12} className="rounded-[2rem] border border-white/10 bg-white/5 p-7 shadow-2xl">
-                <div className="rounded-[1.75rem] border border-white/10 bg-brand-beige p-6 text-brand-navy">
-                  <div className="flex items-center justify-between border-b border-brand-navy/10 pb-4">
-                    <div>
-                      <p className="section-kicker">District Overview</p>
-                      <h3 className="mt-2 text-2xl font-bold">One command view across schools</h3>
-                    </div>
-                    <Building className="h-10 w-10 text-brand-orange" />
-                  </div>
-
-                  <div className="mt-6 grid gap-4 md:grid-cols-3">
-                    {[
-                      { label: "Schools Connected", value: "12" },
-                      { label: "Live Reports", value: "48" },
-                      { label: "Role Profiles", value: "22" },
-                    ].map((item) => (
-                      <div key={item.label} className="rounded-2xl bg-white px-4 py-5 shadow-sm">
-                        <p className="text-sm text-brand-navy/55">{item.label}</p>
-                        <p className="mt-2 text-2xl font-extrabold">{item.value}</p>
+                      <div className="flex items-center gap-2.5">
+                        <span className={`h-8 w-1.5 rounded-full ${tokens.bar}`} aria-hidden="true" />
+                        <span className="text-sm font-bold text-brand-navy">{persona.label}</span>
                       </div>
-                    ))}
-                  </div>
-
-                  <div className="mt-4 space-y-3">
-                    {[
-                      "Compare attendance, fees, and academic trends across branches",
-                      "Standardize reporting for leadership reviews and audits",
-                      "Control access by district office, principal, finance, and staff roles",
-                    ].map((point) => (
-                      <div key={point} className="rounded-2xl bg-brand-beige/35 px-4 py-4">
-                        <p className="text-sm leading-6 text-brand-navy/78">{point}</p>
+                      <div>
+                        <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-orange-ink">
+                          The problem
+                        </p>
+                        <p className="mt-2 text-sm leading-6 text-brand-navy/[0.84]">
+                          {persona.leadChallenge.problem}
+                        </p>
                       </div>
-                    ))}
-                  </div>
-                </div>
-              </SectionReveal>
-            </div>
+                      <div>
+                        <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-teal">
+                          What KIDUART does
+                        </p>
+                        <p className="mt-2 text-sm leading-6 text-brand-navy/[0.84]">
+                          {persona.leadChallenge.solution}
+                        </p>
+                        <Link
+                          href={`/solutions/${persona.slug}`}
+                          className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold text-brand-navy underline-offset-4 hover:text-brand-teal hover:underline"
+                        >
+                          Read the {persona.label.toLowerCase()} page
+                          <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                        </Link>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            </SectionReveal>
           </div>
         </section>
 
@@ -409,29 +251,71 @@ export default function Solutions() {
           <BackgroundBlobs blobs={[{ color: "#003049", size: 380, position: "center-left", opacity: 0.12 }]} />
           <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <SectionReveal className="rounded-[2rem] border border-brand-navy/10 bg-white p-8 shadow-xl shadow-brand-navy/5 md:p-12">
-              <p className="section-kicker">Why This Matters</p>
-              <h2 className="mt-4 text-4xl font-bold text-brand-navy">Better school systems create better daily outcomes</h2>
-              <p className="mt-4 max-w-3xl text-lg leading-8 text-brand-navy/72">
-                KIDUART is designed to reduce repetitive admin work and make parent communication more consistent, so school teams can spend more time on students and teaching quality.
+              <p className="section-kicker">Why this matters</p>
+              <h2 className="mt-4 text-4xl font-bold text-brand-navy">
+                Better school systems create better daily outcomes
+              </h2>
+              <p className="mt-4 max-w-3xl text-lg leading-8 text-brand-navy/[0.74]">
+                KIDUART is built to remove repetitive admin work and make parent communication
+                consistent, so school teams spend more time on students and teaching quality.
               </p>
 
               <div className="mt-10 grid gap-6 md:grid-cols-3">
                 {impactHighlights.map((stat) => (
-                  <div key={stat.label} className="rounded-3xl bg-brand-beige/20 px-6 py-8 text-center">
-                    <div className="text-2xl font-extrabold text-brand-navy">{stat.value}</div>
-                    <p className="mt-3 text-sm font-semibold uppercase tracking-[0.18em] text-brand-navy/60">{stat.label}</p>
+                  <div
+                    key={stat.label}
+                    className="rounded-3xl border border-brand-navy/10 bg-brand-beige/20 px-6 py-8 text-center"
+                  >
+                    <span className="inline-flex items-center gap-2 rounded-full border border-brand-navy/15 bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-brand-navy">
+                      <span className="h-1.5 w-1.5 rounded-full bg-brand-orange" aria-hidden="true" />
+                      Coming soon
+                    </span>
+                    <p className="mt-4 text-sm font-semibold uppercase tracking-[0.18em] text-brand-navy/[0.82]">
+                      {stat.label}
+                    </p>
+                    <p className="mt-3 text-sm leading-6 text-brand-navy/[0.72]">{stat.note}</p>
                   </div>
                 ))}
               </div>
+              <p className="mt-6 text-sm leading-6 text-brand-navy/[0.7]">
+                We would rather show you the product than a number we cannot back yet. Every figure on
+                this site will be published only after it comes from live school data.
+              </p>
             </SectionReveal>
           </div>
         </section>
 
         <CtaSection
-          title="Book a Demo for Your School Team"
-          subtitle="See how KIDUART delivers school ERP solutions for teachers, parents, students, administrators, and multi-school groups."
+          title="Book a demo for the roles joining the call"
+          subtitle="Tell us who will be on the call — leadership, accounts, academics or class teachers — and we will run the walkthrough in their panels."
         />
       </PageTransition>
     </>
   );
 }
+
+export const getStaticProps: GetStaticProps<SolutionsPageProps> = async () => ({
+  props: {
+    personas: [...PRODUCT_PERSONAS]
+      .sort((a, b) => a.order - b.order)
+      .map((persona) => ({
+        slug: persona.slug,
+        label: persona.label,
+        pageLabel: persona.pageLabel,
+        stage: persona.stage,
+        headline: persona.headline,
+        summary: persona.summary,
+        roleNames: persona.roleNames,
+        leadChallenge: {
+          problem: persona.challenges[0].problem,
+          solution: persona.challenges[0].solution,
+        },
+        challengeCount: persona.challenges.length,
+        image: persona.image,
+        imageAlt: persona.imageAlt,
+        icon: persona.icon,
+        accent: persona.accent,
+      })),
+    totals: MATRIX_TOTALS,
+  },
+});

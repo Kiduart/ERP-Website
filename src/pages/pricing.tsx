@@ -1,25 +1,49 @@
+import type { GetStaticProps } from "next";
 import { PageSeoHead } from "@/components/seo/PageSeoHead";
+import { SchemaMarkup } from "@/components/seo/SchemaMarkup";
 import { pageSeo } from "@/lib/pageSeo";
+import { buildFaqPageSchema } from "@/lib/seoSchemas";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CtaSection } from "@/components/ui/CtaSection";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
 import { FloatingIcons } from "@/components/animations/FloatingIcons";
-import { ArrowRight, Check, HelpCircle } from "lucide-react";
+import { ArrowRight, Check, HelpCircle, Minus } from "lucide-react";
 import { Link } from "wouter";
+import { ProductIcon } from "@/components/product/ProductIcon";
+import { StatChip } from "@/components/product/ProductPrimitives";
 import { pricingPlans } from "@/data/pricing";
 import { pricingFaqs } from "@/data/pricingFaqs";
+import { AREA_NARRATIVES } from "@/data/productNarrative";
+import { MATRIX_CATEGORIES, MATRIX_TOTALS } from "@/data/featureMatrix";
 
 const pricingAssurances = [
-  "Guided onboarding",
-  "No setup surprises",
-  "Flexible plan changes",
-  "Full data export",
+  "All logins included — staff, teachers, students, parents",
+  "Only the module areas you switch on",
+  "Guided onboarding in product order",
+  "Full data export whenever you ask",
 ];
 
-export default function Pricing() {
+type CoverageArea = {
+  slug: string;
+  label: string;
+  icon: string;
+  moduleCount: number;
+  featureCount: number;
+  inCore: boolean;
+};
+
+type PricingPageProps = {
+  coverage: CoverageArea[];
+  totals: typeof MATRIX_TOTALS;
+  coreAreaCount: number;
+};
+
+export default function Pricing({ coverage, totals, coreAreaCount }: PricingPageProps) {
   return (
     <PageTransition className="pt-20 pb-0">
       <PageSeoHead {...pageSeo.pricing} />
+      <SchemaMarkup data={buildFaqPageSchema({ pricing: pricingFaqs })} />
+
       <section className="section-space bg-brand-beige/20 relative overflow-hidden">
         <BackgroundBlobs
           blobs={[
@@ -29,56 +53,71 @@ export default function Pricing() {
         />
         <FloatingIcons icons={["Star", "Award", "Lightbulb"]} count={4} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionReveal className="mx-auto mb-14 max-w-3xl text-center">
+          <SectionReveal className="mx-auto mb-12 max-w-3xl text-center">
             <div className="section-kicker">Straightforward school ERP pricing</div>
-            <h1 className="mt-6 text-[clamp(2rem,1.45rem+1.8vw,3.75rem)] font-bold text-brand-navy">Pricing that grows with your school</h1>
-            <p className="mt-4 text-lg text-brand-navy/70">
-              You pay for active students. Staff accounts, teacher logins, and parent portal access are included at no extra cost regardless of how many people use the platform.
+            <h1 className="mt-6 text-[clamp(2rem,1.45rem+1.8vw,3.75rem)] font-bold text-brand-navy">
+              Pay per student, switch on the modules you actually run
+            </h1>
+            <p className="mt-4 text-lg leading-8 text-brand-navy/[0.72]">
+              KIDUART ships {totals.categories} module areas, {totals.modules} functional modules and{" "}
+              {totals.features.toLocaleString("en-IN")} features. You pay for active students — staff, teacher,
+              student and parent logins are included — and your plan decides which of those areas are switched on.
             </p>
+          </SectionReveal>
+
+          <SectionReveal className="mx-auto mb-14 grid max-w-4xl grid-cols-2 gap-4 md:grid-cols-4">
+            <StatChip value={totals.categories} label="Module areas" />
+            <StatChip value={totals.modules} label="Functional modules" />
+            <StatChip value={totals.features.toLocaleString("en-IN")} label="Features" />
+            <StatChip value="0" label="Per-user charges" />
           </SectionReveal>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto relative z-20">
             {pricingPlans.map((plan, idx) => (
-              <SectionReveal key={idx} delay={idx * 0.1} className={`bg-white rounded-3xl p-8 shadow-2xl relative ${plan.isPopular ? "border-2 border-brand-teal scale-105" : "border border-brand-navy/10 mt-8 mb-8"}`}>
+              <SectionReveal
+                key={plan.name}
+                delay={idx * 0.1}
+                className={`relative flex flex-col rounded-3xl bg-white p-8 shadow-2xl ${
+                  plan.isPopular ? "border-2 border-brand-teal lg:scale-105" : "border border-brand-navy/10 md:my-8"
+                }`}
+              >
                 {plan.isPopular && (
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-teal text-white px-4 py-1 rounded-full text-sm font-bold tracking-wide">
-                    MOST POPULAR
+                  <div className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-teal px-4 py-1 text-sm font-bold tracking-wide text-white">
+                    MOST CHOSEN
                   </div>
                 )}
-                <h3 className="text-2xl font-bold text-brand-navy mb-2">{plan.name}</h3>
-                <p className="text-brand-navy/60 text-sm mb-6">{plan.desc}</p>
-                <div className="mb-8 pb-8 border-b border-brand-navy/10">
-                  {plan.isPopular ? (
-                    <div className="space-y-1">
-                      <div className="text-brand-teal font-bold text-sm uppercase tracking-wide">Most chosen plan</div>
-                      <div className="text-2xl font-extrabold text-brand-navy">Tailored for your school</div>
-                      <div className="text-brand-navy/60 text-sm">Pricing based on student count — talk to us</div>
-                    </div>
-                  ) : plan.price === "Custom" ? (
-                    <div className="space-y-1">
-                      <div className="text-brand-navy font-extrabold text-2xl">Enterprise pricing</div>
-                      <div className="text-brand-navy/60 text-sm">Custom quote for large districts</div>
-                    </div>
-                  ) : (
-                    <div className="space-y-1">
-                      <div className="text-brand-navy font-extrabold text-2xl">Get a quote</div>
-                      <div className="text-brand-navy/60 text-sm">Starts affordable — tailored to your school size</div>
-                    </div>
-                  )}
+                <h2 className="text-2xl font-bold text-brand-navy">{plan.name}</h2>
+                <p className="mt-2 text-sm leading-6 text-brand-navy/[0.7]">{plan.desc}</p>
+
+                <div className="mt-6 border-b border-brand-navy/10 pb-6">
+                  <div className="text-2xl font-extrabold text-brand-navy">
+                    {plan.price === "Custom" ? "Custom quote" : "Get a quote"}
+                  </div>
+                  <div className="mt-1 text-sm text-brand-navy/[0.7]">
+                    {plan.price === "Custom" ? "Priced per campus and student count" : `Priced ${plan.unit}`}
+                  </div>
+                  <p className="mt-4 rounded-2xl bg-brand-beige/40 px-4 py-3 text-sm font-semibold leading-6 text-brand-navy">
+                    Best for: {plan.bestFor}
+                  </p>
                 </div>
-                <ul className="space-y-4 mb-8">
-                  {plan.features.map((feat, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-brand-teal shrink-0 mt-0.5" />
-                      <span className="text-brand-navy/80 font-medium text-sm">{feat}</span>
+
+                <p className="mt-6 text-xs font-bold uppercase tracking-[0.18em] text-brand-teal">
+                  {plan.areas.length} module {plan.areas.length === 1 ? "area" : "areas"} included
+                </p>
+                <ul className="mt-4 mb-8 flex-1 space-y-3.5">
+                  {plan.features.map((feat) => (
+                    <li key={feat} className="flex items-start gap-3">
+                      <Check className="mt-0.5 h-5 w-5 shrink-0 text-brand-teal" aria-hidden="true" />
+                      <span className="text-sm font-medium leading-6 text-brand-navy/[0.82]">{feat}</span>
                     </li>
                   ))}
                 </ul>
+
                 <Link
                   href={plan.price === "Custom" ? "/contact" : "/demo"}
-                  className={`block w-full py-4 text-center rounded-xl font-bold transition-all ${
+                  className={`block w-full rounded-xl py-4 text-center font-bold transition-all ${
                     plan.isPopular
-                      ? "bg-brand-teal text-white hover:bg-brand-navy shadow-lg hover:shadow-brand-teal/25"
+                      ? "bg-brand-teal text-white shadow-lg hover:bg-brand-navy hover:shadow-brand-teal/25"
                       : "bg-brand-beige text-brand-navy hover:bg-brand-navy hover:text-white"
                   }`}
                 >
@@ -87,32 +126,156 @@ export default function Pricing() {
               </SectionReveal>
             ))}
           </div>
-          <div className="mt-10 grid max-w-4xl grid-cols-2 gap-4 mx-auto md:grid-cols-4">
+
+          <div className="mx-auto mt-12 grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {pricingAssurances.map((item) => (
               <div
                 key={item}
-                className="flex min-h-[3.25rem] items-center justify-center gap-2 rounded-xl border border-brand-navy/10 bg-brand-beige/20 px-4 py-3 text-center text-sm font-medium text-brand-navy"
+                className="flex items-start gap-2.5 rounded-2xl border border-brand-navy/10 bg-white px-4 py-4 text-sm font-medium leading-6 text-brand-navy"
               >
-                <Check className="h-4 w-4 shrink-0 text-brand-teal" aria-hidden />
-                <span className="leading-snug">{item}</span>
+                <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-teal" aria-hidden="true" />
+                <span>{item}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section-space-tight bg-white border-t border-brand-navy/5 relative overflow-hidden">
-        <BackgroundBlobs blobs={[{ color: "#f77f00", size: 300, position: "top-right", opacity: 0.15 }]} />
-        <FloatingIcons icons={["Lightbulb", "Brain", "Award"]} count={4} />
-        <div className="max-w-5xl mx-auto px-4 text-center">
+      <section className="section-space relative overflow-hidden border-y border-brand-navy/5 bg-white">
+        <BackgroundBlobs blobs={[{ color: "#003049", size: 340, position: "top-right", opacity: 0.1 }]} />
+        <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <SectionReveal className="mx-auto max-w-3xl text-center">
+            <p className="section-kicker">What each plan covers</p>
+            <h2 className="mt-4 text-3xl font-bold text-brand-navy md:text-4xl">
+              Every module area, and which plan turns it on
+            </h2>
+            <p className="mt-4 text-lg leading-8 text-brand-navy/[0.74]">
+              Core carries the {coreAreaCount} areas a school cannot run a day without. Complete adds the rest.
+              Group applies Complete across every campus under one organisation. Open any area to read its full
+              module list before you decide.
+            </p>
+          </SectionReveal>
+
+          <SectionReveal className="mt-12 overflow-hidden rounded-[2rem] border border-brand-navy/10 shadow-xl shadow-brand-navy/5">
+            <table className="w-full border-collapse text-left">
+              <caption className="sr-only">
+                Module areas included in the Core, Complete and Group plans
+              </caption>
+              <thead>
+                <tr className="bg-brand-navy text-brand-beige">
+                  <th scope="col" className="px-5 py-4 text-sm font-bold uppercase tracking-[0.14em]">
+                    Module area
+                  </th>
+                  <th scope="col" className="px-3 py-4 text-center text-sm font-bold uppercase tracking-[0.14em]">
+                    Core
+                  </th>
+                  <th scope="col" className="px-3 py-4 text-center text-sm font-bold uppercase tracking-[0.14em]">
+                    Complete
+                  </th>
+                  <th scope="col" className="px-3 py-4 text-center text-sm font-bold uppercase tracking-[0.14em]">
+                    Group
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {coverage.map((area, idx) => (
+                  <tr
+                    key={area.slug}
+                    className={idx % 2 === 0 ? "bg-white" : "bg-brand-beige/25"}
+                  >
+                    <th scope="row" className="px-5 py-4 font-normal">
+                      <Link
+                        href={`/features/${area.slug}`}
+                        className="group flex items-start gap-3 underline-offset-4 hover:underline"
+                      >
+                        <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-teal/10">
+                          <ProductIcon name={area.icon} className="h-4 w-4 text-brand-teal" />
+                        </span>
+                        <span>
+                          <span className="block font-bold text-brand-navy group-hover:text-brand-teal">
+                            {area.label}
+                          </span>
+                          <span className="mt-0.5 block text-xs font-semibold text-brand-navy/[0.7]">
+                            {area.moduleCount} modules · {area.featureCount} features
+                          </span>
+                        </span>
+                      </Link>
+                    </th>
+                    <td className="px-3 py-4 text-center">
+                      {area.inCore ? (
+                        <>
+                          <Check className="mx-auto h-5 w-5 text-brand-teal" aria-hidden="true" />
+                          <span className="sr-only">Included in Core</span>
+                        </>
+                      ) : (
+                        <>
+                          <Minus className="mx-auto h-5 w-5 text-brand-navy/30" aria-hidden="true" />
+                          <span className="sr-only">Not in Core</span>
+                        </>
+                      )}
+                    </td>
+                    <td className="px-3 py-4 text-center">
+                      <Check className="mx-auto h-5 w-5 text-brand-teal" aria-hidden="true" />
+                      <span className="sr-only">Included in Complete</span>
+                    </td>
+                    <td className="px-3 py-4 text-center">
+                      <Check className="mx-auto h-5 w-5 text-brand-teal" aria-hidden="true" />
+                      <span className="sr-only">Included in Group</span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </SectionReveal>
+
+          <SectionReveal className="mt-8">
+            <p className="max-w-3xl text-base leading-8 text-brand-navy/[0.74]">
+              When an area is included in your plan, it arrives complete — the everyday actions your staff repeat
+              and the configuration around them, like grading rules, fee templates, permissions and report
+              formats. Nothing inside an area you already have is held back as a paid unlock.
+            </p>
+          </SectionReveal>
+        </div>
+      </section>
+
+      <section className="section-space-tight relative overflow-hidden border-b border-brand-navy/5 bg-brand-beige/20">
+        <div className="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
           <SectionReveal>
-            <h3 className="text-2xl font-bold text-brand-navy mb-8">Optional modules available on any plan</h3>
-            <div className="grid sm:grid-cols-3 gap-6">
-              {["AI Insights Assistant", "GPS Transport Tracking", "Digital Library System"].map((addon, i) => (
-                <div key={i} className="p-6 border border-brand-navy/10 rounded-2xl bg-brand-beige/10">
-                  <h4 className="font-bold text-brand-navy mb-2">{addon}</h4>
-                  <Link href="/demo" className="mt-3 inline-flex items-center gap-1 text-sm font-bold text-brand-teal hover:text-brand-navy transition-colors">
-                    Ask about this module <ArrowRight className="w-4 h-4" />
+            <h2 className="text-2xl font-bold text-brand-navy md:text-3xl">
+              Ask about these during the demo
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-8 text-brand-navy/[0.74]">
+              These areas depend heavily on how your campus runs, so we scope them with you instead of guessing.
+            </p>
+            <div className="mt-8 grid gap-6 sm:grid-cols-3">
+              {[
+                {
+                  slug: "transport-management",
+                  title: "Transport & tracking",
+                  note: "Routes, vehicles, drivers and live tracking — only if you run your own buses.",
+                },
+                {
+                  slug: "hostel-management",
+                  title: "Hostel & mess",
+                  note: "Bed-level allocation, hostel attendance, mess and visitor log for boarding schools.",
+                },
+                {
+                  slug: "dashboard-and-insights",
+                  title: "Dashboards & insights",
+                  note: "Role dashboards and AI-assisted alerts layered on your live records.",
+                },
+              ].map((addon) => (
+                <div
+                  key={addon.slug}
+                  className="rounded-2xl border border-brand-navy/10 bg-white p-6 text-left"
+                >
+                  <h3 className="font-bold text-brand-navy">{addon.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-brand-navy/[0.72]">{addon.note}</p>
+                  <Link
+                    href={`/features/${addon.slug}`}
+                    className="mt-4 inline-flex items-center gap-1 text-sm font-bold text-brand-teal transition-colors hover:text-brand-navy"
+                  >
+                    See the modules <ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </Link>
                 </div>
               ))}
@@ -121,28 +284,58 @@ export default function Pricing() {
         </div>
       </section>
 
-      <section className="section-space bg-brand-beige/30 border-t border-brand-navy/5 relative overflow-hidden">
-        <BackgroundBlobs blobs={[{ color: "#0c716b", size: 300, position: "bottom-left", opacity: 0.15 }]} />
+      <section className="section-space bg-white relative overflow-hidden">
+        <BackgroundBlobs blobs={[{ color: "#0c716b", size: 300, position: "bottom-left", opacity: 0.12 }]} />
         <FloatingIcons icons={["MessageSquare", "Users"]} count={4} />
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionReveal className="text-center mb-16">
+        <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+          <SectionReveal className="mb-12 text-center">
             <h2 className="text-3xl font-bold text-brand-navy">Common questions about pricing and plans</h2>
           </SectionReveal>
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid gap-6 md:grid-cols-2">
             {pricingFaqs.map((faq, idx) => (
-              <SectionReveal key={idx} delay={idx * 0.05} className="bg-white p-6 rounded-2xl shadow-sm">
-                <h4 className="text-lg font-bold text-brand-navy mb-3 flex items-start gap-2">
-                  <HelpCircle className="w-5 h-5 text-brand-orange shrink-0 mt-0.5" />
+              <SectionReveal
+                key={faq.q}
+                delay={Math.min(idx, 5) * 0.05}
+                className="rounded-2xl border border-brand-navy/[0.08] bg-brand-beige/20 p-6"
+              >
+                <h3 className="mb-3 flex items-start gap-2 text-lg font-bold text-brand-navy">
+                  <HelpCircle className="mt-0.5 h-5 w-5 shrink-0 text-brand-orange" aria-hidden="true" />
                   {faq.q}
-                </h4>
-                <p className="text-brand-navy/70 text-sm leading-relaxed ml-7">{faq.a}</p>
+                </h3>
+                <p className="ml-7 text-sm leading-7 text-brand-navy/[0.74]">{faq.a}</p>
               </SectionReveal>
             ))}
           </div>
         </div>
       </section>
 
-      <CtaSection />
+      <CtaSection
+        title="Get a price against your real student count"
+        subtitle="Bring your class structure, fee book and module wish list to the demo — we will show the panels and quote the plan that fits."
+      />
     </PageTransition>
   );
 }
+
+export const getStaticProps: GetStaticProps<PricingPageProps> = async () => {
+  const corePlan = pricingPlans.find((plan) => plan.name === "Core");
+  const coreAreas = new Set(corePlan?.areas ?? []);
+
+  return {
+    props: {
+      coverage: MATRIX_CATEGORIES.map((category) => {
+        const narrative = AREA_NARRATIVES.find((entry) => entry.slug === category.slug);
+        return {
+          slug: category.slug,
+          label: narrative?.label ?? category.name,
+          icon: narrative?.icon ?? "Layers",
+          moduleCount: category.moduleCount,
+          featureCount: category.featureCount,
+          inCore: coreAreas.has(category.slug),
+        };
+      }),
+      totals: MATRIX_TOTALS,
+      coreAreaCount: coreAreas.size,
+    },
+  };
+};

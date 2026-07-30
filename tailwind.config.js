@@ -61,6 +61,9 @@ export default {
           yellow: "hsl(var(--brand-yellow) / <alpha-value>)",
           orange: "hsl(var(--brand-orange) / <alpha-value>)",
           bronze: "hsl(var(--brand-bronze) / <alpha-value>)",
+          // Darkened variants for small text on light surfaces (WCAG AA)
+          "orange-ink": "hsl(var(--brand-orange-ink) / <alpha-value>)",
+          "bronze-ink": "hsl(var(--brand-bronze-ink) / <alpha-value>)",
         },
       },
 

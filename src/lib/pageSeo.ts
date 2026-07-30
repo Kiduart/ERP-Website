@@ -102,6 +102,47 @@ export function featurePageSeo(slug: string, title: string, description: string)
   };
 }
 
+function clampDescription(description: string): string {
+  return description.length > 155 ? `${description.slice(0, 152)}...` : description;
+}
+
+/** Module-area page, e.g. /features/finance-and-fee-management */
+export function areaPageSeo(area: {
+  slug: string;
+  label: string;
+  headline: string;
+  featureCount: number;
+  moduleCount: number;
+  summary: string;
+}): PageSeoHeadProps {
+  return {
+    title: `${area.label} Module for Schools — ${area.featureCount} Features | KIDUART`,
+    description: clampDescription(area.summary),
+    path: `/features/${area.slug}`,
+    ogImage: `${SITE_ORIGIN}/images/banner/features-hero.jpg`,
+    keywords: `${area.label.toLowerCase()} school ERP, ${area.label.toLowerCase()} module, school management software ${area.label.toLowerCase()}, KIDUART ${area.label.toLowerCase()}`,
+  };
+}
+
+/** Single module page, e.g. /features/academic/examination */
+export function moduleFeaturePageSeo(params: {
+  areaSlug: string;
+  areaLabel: string;
+  moduleSlug: string;
+  moduleName: string;
+  featureCount: number;
+  subModuleCount: number;
+}): PageSeoHeadProps {
+  return {
+    title: `${params.moduleName} — ${params.featureCount} School ERP Features | KIDUART`,
+    description: clampDescription(
+      `${params.moduleName} in KIDUART covers ${params.featureCount} features across ${params.subModuleCount} sub-modules, part of the ${params.areaLabel} module area for schools.`,
+    ),
+    path: `/features/${params.areaSlug}/${params.moduleSlug}`,
+    ogImage: `${SITE_ORIGIN}/images/banner/features-hero.jpg`,
+  };
+}
+
 export function integrationPageSeo(slug: string, name: string, description: string): PageSeoHeadProps {
   const trimmed = description.length > 155 ? `${description.slice(0, 152)}...` : description;
   return {

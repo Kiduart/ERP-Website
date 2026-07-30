@@ -15,14 +15,14 @@ export default function NotFound() {
             "url('https://images.unsplash.com/photo-1513258496099-48168024aec0?auto=format&fit=crop&q=80')",
         }}
       />
-      <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-black/72 to-[#101829]/90" />
+      <div className="absolute inset-0 bg-gradient-to-br from-black/85 via-black/[0.72] to-[#101829]/90" />
 
       <div className="relative z-10 w-full max-w-4xl rounded-[2rem] border border-white/10 bg-white/5 px-6 py-10 text-center shadow-[0_35px_80px_rgba(0,0,0,0.45)] backdrop-blur-sm sm:px-10 sm:py-14">
         <p className="text-xs font-semibold uppercase tracking-[0.34em] text-[#8fb8ff]">404 Error</p>
         <h1 className="mt-6 text-5xl font-bold leading-none text-white sm:text-6xl lg:text-7xl">
           This page is sleeping.
         </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-white/72 sm:text-lg">
+        <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-white/[0.72] sm:text-lg">
           The link may be broken, the page may have moved, or the content has not been published
           yet. The good news is the rest of the site is still awake and ready to help.
         </p>

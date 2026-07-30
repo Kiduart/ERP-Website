@@ -1,59 +1,23 @@
 import Head from "next/head";
 import { useState } from "react";
+import { Link } from "wouter";
 import { SchemaMarkup } from "@/components/seo/SchemaMarkup";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CtaSection } from "@/components/ui/CtaSection";
 import { buildFaqPageSchema } from "@/lib/seoSchemas";
 import { ChevronDown, MessageCircleQuestion } from "lucide-react";
-import { pricingFaqs } from "@/data/pricingFaqs";
+import { ProductIcon } from "@/components/product/ProductIcon";
+import { StatChip } from "@/components/product/ProductPrimitives";
+import { SITE_FAQ_GROUPS, SITE_FAQ_SCHEMA_DATA } from "@/data/siteFaqs";
+import { MATRIX_TOTALS } from "@/data/featureMatrix";
 
-export const faqData = {
-  "Pricing & Plans": pricingFaqs,
-  "Onboarding & Setup": [
-    { q: "How long does implementation take?", a: "Implementation timelines depend on your current data quality, process complexity, and training needs. We follow a structured onboarding plan and keep the rollout practical for school teams." },
-    { q: "Do you migrate existing data?", a: "Yes. We handle the full data migration from your current system, whether that is spreadsheets, another ERP or a mix of both. Our team will map your existing data structure before we start." },
-    { q: "Is training included?", a: "Yes. Live training sessions for all staff roles are included as part of onboarding. We train admins, teachers, finance staff and parent portal users separately so each group gets exactly what they need." },
-    { q: "What support is available during setup?", a: "A dedicated onboarding specialist supports your team through setup, migration, and training milestones. After onboarding, your account manager handles follow-up support." }
-  ],
-  "Features & Modules": [
-    { q: "Can I customize the platform?", a: "Yes, extensive customization for forms, reports, and workflows." },
-    { q: "Is there a mobile app?", a: "A mobile-optimised web experience works on any phone browser today. The native parent app is in development and will be announced when released." },
-    { q: "Does it support multiple campuses?", a: "Yes, multi-campus management in Professional and Enterprise plans." },
-    { q: "Can parents access the platform?", a: "Yes. Parents can use the dedicated parent portal on web today. Native app access is in development." }
-  ],
-  "Security & Privacy": [
-    { q: "How is student data protected?", a: "KIDUART uses encryption controls, role-based access, MFA support, audit logging, and dedicated data isolation per school." },
-    { q: "Is KIDUART formally certified under GDPR or ISO?", a: "We do not claim formal GDPR or ISO certification at this time. Our current security messaging is based on implemented product controls." },
-    { q: "Who can access student data?", a: "Only authorized staff with role-specific permissions." },
-    { q: "Where is data hosted?", a: "Secure cloud infrastructure with controlled access and school-level data separation." }
-  ],
-  "Technical & Integrations": [
-    { q: "What integrations are available?", a: "Google Classroom, Moodle, Canvas, Zoom, Stripe, and many more." },
-    { q: "Is there an API?", a: "Yes, REST API with full documentation at /integrations/api-docs." },
-    { q: "What browsers are supported?", a: "All modern browsers (Chrome, Firefox, Safari, Edge)." },
-    { q: "Is the platform offline-capable?", a: "Core features work offline, syncing when connection restores." }
-  ],
-  "Support": [
-    { q: "What support channels are available?", a: "Email, live chat, phone, and dedicated account managers." },
-    { q: "What are support hours?", a: "Support is available through email and guided support channels. Final support windows are shared with each school during onboarding." },
-    { q: "How do I submit a bug report?", a: "Through the help center at /help or email support@kiduart.com." }
-  ]
-};
+/** Kept exported for anything that wants the flat question set. */
+export const faqData = SITE_FAQ_SCHEMA_DATA;
 
-const categories = Object.keys(faqData) as Array<keyof typeof faqData>;
+const totalQuestions = SITE_FAQ_GROUPS.reduce((sum, group) => sum + group.items.length, 0);
 
 export default function FAQ() {
-  const [activeCategory, setActiveCategory] = useState<keyof typeof faqData>("Pricing & Plans");
-  const [openItems, setOpenItems] = useState<number[]>([]);
   const [formSubmitted, setFormSubmitted] = useState(false);
-
-  const toggleItem = (index: number) => {
-    if (openItems.includes(index)) {
-      setOpenItems(openItems.filter(i => i !== index));
-    } else {
-      setOpenItems([...openItems, index]);
-    }
-  };
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,122 +28,175 @@ export default function FAQ() {
   return (
     <PageTransition className="pt-20 pb-0">
       <Head>
-        <title>School ERP FAQ | Common Questions About KIDUART</title>
+        <title>School ERP FAQ — Modules, Pricing, Security & Integrations | KIDUART</title>
         <meta
           name="description"
-          content="Answers to the most common questions about KIDUART school ERP: pricing, onboarding, features, security, integrations and support. Cannot find your answer? Ask us directly."
+          content="Straight answers about KIDUART school ERP: what the 16 module areas and 90 modules cover, how per-student pricing works, which integrations are live, how student data is protected, and what we have not built yet."
         />
         <link rel="canonical" href="https://www.kiduart.com/faq" />
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="KIDUART" />
-        <meta property="og:title" content="School ERP FAQ | Common Questions About KIDUART" />
-        <meta property="og:description" content="Answers to the most common questions about KIDUART school ERP: pricing, onboarding, features, security, integrations and support. Cannot find your answer? Ask us directly." />
+        <meta property="og:title" content="School ERP FAQ — Modules, Pricing, Security & Integrations | KIDUART" />
+        <meta
+          property="og:description"
+          content="Answers about modules, role panels, pricing, onboarding, security and integrations for KIDUART school ERP — including what is still on the roadmap."
+        />
         <meta property="og:url" content="https://www.kiduart.com/faq" />
         <meta property="og:image" content="https://www.kiduart.com/images/banner/home-hero.jpeg" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="School ERP FAQ | Common Questions About KIDUART" />
-        <meta name="twitter:description" content="Answers to the most common questions about KIDUART school ERP: pricing, onboarding, features, security, integrations and support. Cannot find your answer? Ask us directly." />
       </Head>
-      <SchemaMarkup data={buildFaqPageSchema(faqData)} />
-      <section className="section-space bg-brand-beige/30 border-b border-brand-navy/5">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <SchemaMarkup data={buildFaqPageSchema(SITE_FAQ_SCHEMA_DATA)} />
+
+      <section className="section-space border-b border-brand-navy/5 bg-brand-beige/30">
+        <div className="mx-auto max-w-5xl px-4 text-center sm:px-6 lg:px-8">
           <SectionReveal>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-navy mb-6">
+            <div className="section-kicker">{totalQuestions} questions, answered directly</div>
+            <h1 className="mt-6 text-4xl font-bold text-brand-navy md:text-5xl lg:text-6xl">
               Frequently asked questions
             </h1>
-            <p className="text-xl text-brand-navy/70">
-              Everything most schools want to know before making a decision. If your question is not here, ask us directly using the form at the bottom.
+            <p className="mx-auto mt-6 max-w-3xl text-xl leading-9 text-brand-navy/[0.72]">
+              What the modules cover, how pricing is calculated, what protects student data, and which integrations
+              are actually live. Where something is not built yet, the answer says so.
             </p>
           </SectionReveal>
+
+          <SectionReveal delay={0.1} className="mx-auto mt-12 grid max-w-3xl grid-cols-2 gap-4 md:grid-cols-4">
+            <StatChip value={MATRIX_TOTALS.categories} label="Module areas" />
+            <StatChip value={MATRIX_TOTALS.modules} label="Modules" />
+            <StatChip value={MATRIX_TOTALS.features.toLocaleString("en-IN")} label="Features" />
+            <StatChip value="10" label="Role panels" />
+          </SectionReveal>
         </div>
       </section>
 
-      <section className="section-space-tight bg-white min-h-[600px]">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Categories */}
-          <SectionReveal delay={0.1} className="mb-12">
-            <div className="flex flex-wrap justify-center gap-2">
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => { setActiveCategory(cat); setOpenItems([]); }}
-                  className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-                    activeCategory === cat 
-                      ? "bg-brand-navy text-white shadow-md" 
-                      : "bg-brand-beige/20 text-brand-navy/70 hover:bg-brand-beige/50"
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
+      <section className="section-space bg-white">
+        <div className="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-[minmax(0,16rem)_minmax(0,1fr)] lg:gap-16 lg:px-8">
+          <aside className="lg:sticky lg:top-28 lg:self-start">
+            <p className="text-sm font-bold uppercase tracking-[0.18em] text-brand-navy">Jump to a topic</p>
+            <nav aria-label="FAQ topics" className="mt-4">
+              <ul className="flex gap-2 overflow-x-auto pb-2 lg:flex-col lg:space-y-1.5 lg:overflow-visible lg:pb-0">
+                {SITE_FAQ_GROUPS.map((group) => (
+                  <li key={group.id} className="shrink-0 lg:shrink">
+                    <a
+                      href={`#faq-${group.id}`}
+                      className="flex items-center gap-2.5 rounded-2xl border border-brand-navy/[0.1] bg-white px-4 py-2.5 text-sm font-semibold text-brand-navy transition-colors hover:border-brand-teal/40 hover:text-brand-teal"
+                    >
+                      <ProductIcon name={group.icon} className="h-4 w-4 text-brand-teal" />
+                      <span className="whitespace-nowrap lg:whitespace-normal">{group.title}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+            <div className="mt-8 hidden rounded-2xl border border-brand-navy/[0.1] bg-brand-beige/25 p-5 lg:block">
+              <p className="text-sm leading-7 text-brand-navy/[0.78]">
+                Looking for the full capability list instead?
+              </p>
+              <Link
+                href="/features"
+                className="mt-3 inline-flex text-sm font-bold text-brand-navy underline underline-offset-4 hover:text-brand-teal"
+              >
+                Browse all {MATRIX_TOTALS.categories} module areas
+              </Link>
             </div>
-          </SectionReveal>
+          </aside>
 
-          {/* FAQ Accordion */}
-          <SectionReveal delay={0.2} className="max-w-3xl mx-auto">
-            <div className="space-y-4">
-              {faqData[activeCategory].map((faq, idx) => {
-                const isOpen = openItems.includes(idx);
-                return (
-                  <div 
-                    key={idx} 
-                    className={`border rounded-2xl transition-all duration-300 overflow-hidden ${isOpen ? 'border-brand-teal/30 bg-brand-teal/5' : 'border-brand-navy/10 bg-white hover:border-brand-navy/30'}`}
-                  >
-                    <button 
-                      onClick={() => toggleItem(idx)}
-                      className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none"
-                    >
-                      <span className="text-lg font-bold text-brand-navy pr-8">{faq.q}</span>
-                      <ChevronDown className={`w-6 h-6 text-brand-teal flex-shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
-                    </button>
-                    <div 
-                      className={`px-6 overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-40 pb-5 opacity-100' : 'max-h-0 opacity-0'}`}
-                    >
-                      <p className="text-brand-navy/70 text-lg leading-relaxed">{faq.a}</p>
-                    </div>
+          <div className="space-y-14">
+            {SITE_FAQ_GROUPS.map((group) => (
+              <section key={group.id} id={`faq-${group.id}`} className="scroll-mt-28">
+                <SectionReveal className="mb-6 flex items-start gap-4 border-b border-brand-navy/[0.08] pb-5">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-brand-navy text-brand-beige">
+                    <ProductIcon name={group.icon} className="h-6 w-6" />
+                  </span>
+                  <div>
+                    <h2 className="text-2xl font-bold text-brand-navy">{group.title}</h2>
+                    <p className="mt-1.5 text-sm leading-7 text-brand-navy/[0.74]">{group.blurb}</p>
                   </div>
-                );
-              })}
-            </div>
-          </SectionReveal>
+                </SectionReveal>
+
+                <div className="space-y-3">
+                  {group.items.map((faq, idx) => (
+                    <SectionReveal key={faq.q} delay={Math.min(idx, 4) * 0.04}>
+                      <details className="group rounded-2xl border border-brand-navy/[0.1] bg-white transition-colors open:border-brand-teal/40 open:bg-brand-teal/[0.04]">
+                        <summary className="flex cursor-pointer items-center justify-between gap-6 px-6 py-5 text-left marker:content-none">
+                          <span className="text-lg font-bold text-brand-navy">{faq.q}</span>
+                          <ChevronDown
+                            className="h-5 w-5 shrink-0 text-brand-teal transition-transform duration-300 group-open:rotate-180"
+                            aria-hidden="true"
+                          />
+                        </summary>
+                        <p className="px-6 pb-5 text-base leading-8 text-brand-navy/[0.78]">{faq.a}</p>
+                      </details>
+                    </SectionReveal>
+                  ))}
+                </div>
+              </section>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Ask a Question Form */}
-      <section className="section-space bg-brand-beige/20 border-y border-brand-navy/5">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionReveal className="bg-white rounded-3xl p-8 md:p-12 shadow-xl shadow-brand-navy/5 border border-brand-navy/10">
-            <div className="flex items-center gap-4 mb-8">
-              <div className="w-12 h-12 bg-brand-orange/10 rounded-full flex items-center justify-center">
-                <MessageCircleQuestion className="w-6 h-6 text-brand-orange" />
+      <section className="section-space border-y border-brand-navy/5 bg-brand-beige/20">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <SectionReveal className="rounded-3xl border border-brand-navy/10 bg-white p-8 shadow-xl shadow-brand-navy/5 md:p-12">
+            <div className="mb-8 flex items-center gap-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-orange/10">
+                <MessageCircleQuestion className="h-6 w-6 text-brand-orange" aria-hidden="true" />
               </div>
               <div>
                 <h2 className="text-2xl font-bold text-brand-navy">Still have a question?</h2>
-                <p className="text-brand-navy/70">Ask us directly. Our team will respond as quickly as possible.</p>
+                <p className="text-brand-navy/[0.72]">Ask us directly. Our team will respond as quickly as possible.</p>
               </div>
             </div>
 
             {formSubmitted ? (
-              <div className="bg-brand-teal/10 border border-brand-teal/30 text-brand-teal p-6 rounded-xl text-center font-medium text-lg">
+              <div className="rounded-xl border border-brand-teal/30 bg-brand-teal/10 p-6 text-center text-lg font-medium text-brand-teal">
                 Received. We will get back to you soon.
               </div>
             ) : (
               <form onSubmit={handleFormSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid gap-6 md:grid-cols-2">
                   <div>
-                    <label className="block text-sm font-medium text-brand-navy mb-2">Name</label>
-                    <input required type="text" className="field-surface w-full px-4 py-3 rounded-xl border border-brand-navy/20 focus:outline-none focus:ring-2 focus:ring-brand-teal" placeholder="John Doe" />
+                    <label htmlFor="faq-name" className="mb-2 block text-sm font-medium text-brand-navy">
+                      Name
+                    </label>
+                    <input
+                      id="faq-name"
+                      required
+                      type="text"
+                      className="field-surface w-full rounded-xl border border-brand-navy/20 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-teal"
+                      placeholder="Your name"
+                    />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-brand-navy mb-2">Email</label>
-                    <input required type="email" className="field-surface w-full px-4 py-3 rounded-xl border border-brand-navy/20 focus:outline-none focus:ring-2 focus:ring-brand-teal" placeholder="john@school.edu" />
+                    <label htmlFor="faq-email" className="mb-2 block text-sm font-medium text-brand-navy">
+                      Email
+                    </label>
+                    <input
+                      id="faq-email"
+                      required
+                      type="email"
+                      className="field-surface w-full rounded-xl border border-brand-navy/20 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-teal"
+                      placeholder="you@school.edu"
+                    />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-brand-navy mb-2">Question</label>
-                  <textarea required rows={4} className="field-surface w-full px-4 py-3 rounded-xl border border-brand-navy/20 focus:outline-none focus:ring-2 focus:ring-brand-teal resize-none" placeholder="How does the..." />
+                  <label htmlFor="faq-question" className="mb-2 block text-sm font-medium text-brand-navy">
+                    Question
+                  </label>
+                  <textarea
+                    id="faq-question"
+                    required
+                    rows={4}
+                    className="field-surface w-full resize-none rounded-xl border border-brand-navy/20 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-teal"
+                    placeholder="Ask about a module, a role panel, pricing or an integration"
+                  />
                 </div>
-                <button type="submit" className="w-full px-8 py-4 rounded-full bg-brand-navy text-white font-bold text-lg hover:bg-brand-teal transition-colors">
+                <button
+                  type="submit"
+                  className="w-full rounded-full bg-brand-navy px-8 py-4 text-lg font-bold text-white transition-colors hover:bg-brand-teal"
+                >
                   Send your question
                 </button>
               </form>
@@ -188,7 +205,10 @@ export default function FAQ() {
         </div>
       </section>
 
-      <CtaSection title="Ready to see KIDUART in action?" subtitle="Book a free demo and we will walk through the features and workflows most relevant to your school." />
+      <CtaSection
+        title="Ready to see KIDUART in action?"
+        subtitle="Book a free demo and we will walk through the modules and panels most relevant to your school — and answer the questions this page did not cover."
+      />
     </PageTransition>
   );
 }

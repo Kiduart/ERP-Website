@@ -3,7 +3,7 @@ import Image from "next/image";
 import { SectionReveal } from "@/components/ui/PageTransition";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
 import { FloatingIcons } from "@/components/animations/FloatingIcons";
-import { heroImageAlt, heroImgProps, heroSrcSet, IMAGE_DIMENSIONS, lazyImgProps } from "@/lib/imageSeo";
+import { heroImageAlt, heroSrcSet, IMAGE_DIMENSIONS } from "@/lib/imageSeo";
 import { cn } from "@/lib/utils";
 
 function HeroPicture({
@@ -12,46 +12,43 @@ function HeroPicture({
   className,
   priority = false,
   dimensions = IMAGE_DIMENSIONS.heroWide,
+  sizes = "100vw",
+  wrapperClassName,
+  decorative = false,
 }: {
   image: string;
   alt: string;
   className?: string;
   priority?: boolean;
   dimensions?: { width: number; height: number };
+  sizes?: string;
+  wrapperClassName?: string;
+  decorative?: boolean;
 }) {
   const sources = heroSrcSet(image);
+  const altText = decorative ? "" : alt;
+  const imgProps = {
+    ...(decorative ? { role: "presentation" as const, "aria-hidden": true } : {}),
+    className,
+    width: dimensions.width,
+    height: dimensions.height,
+    loading: priority ? ("eager" as const) : ("lazy" as const),
+    decoding: "async" as const,
+    fetchPriority: priority ? ("high" as const) : ("auto" as const),
+    sizes,
+  };
 
   if (sources.webp || sources.avif) {
     return (
-      <picture className="absolute inset-0 block h-full w-full">
-        {sources.avif && <source srcSet={sources.avif} type="image/avif" />}
-        {sources.webp && <source srcSet={sources.webp} type="image/webp" />}
-        <img
-          src={sources.src}
-          alt={alt}
-          className={className}
-          width={dimensions.width}
-          height={dimensions.height}
-          loading={priority ? "eager" : "lazy"}
-          decoding="async"
-          fetchPriority={priority ? "high" : "auto"}
-        />
+      <picture className={wrapperClassName}>
+        {sources.avif && <source srcSet={sources.avif} sizes={sizes} type="image/avif" />}
+        {sources.webp && <source srcSet={sources.webp} sizes={sizes} type="image/webp" />}
+        <img src={sources.src} alt={altText} {...imgProps} />
       </picture>
     );
   }
 
-  return (
-    <img
-      src={image}
-      alt={alt}
-      className={className}
-      width={dimensions.width}
-      height={dimensions.height}
-      loading={priority ? "eager" : "lazy"}
-      decoding="async"
-      fetchPriority={priority ? "high" : "auto"}
-    />
-  );
+  return <img src={image} alt={altText} {...imgProps} />;
 }
 
 type BaseProps = {
@@ -89,17 +86,17 @@ export function CircleShowcaseHero({
           <h1 className="mt-6 max-w-xl text-[clamp(2rem,1.25rem+1.75vw,3.3rem)] font-bold leading-[1.05] text-brand-navy">
             {title}
           </h1>
-          <p className="mt-5 max-w-xl text-[clamp(1rem,0.95rem+0.16vw,1.06rem)] leading-8 text-brand-navy/74">
+          <p className="mt-5 max-w-xl text-[clamp(1rem,0.95rem+0.16vw,1.06rem)] leading-8 text-brand-navy/[0.74]">
             {subtitle}
           </p>
           {actions && <div className="mt-8 flex flex-col gap-4 sm:flex-row">{actions}</div>}
         </SectionReveal>
 
         <SectionReveal delay={0.08} className="relative hidden lg:block">
-          <div className="absolute right-4 top-6 h-24 w-24 rounded-full border border-brand-navy/12" />
+          <div className="absolute right-4 top-6 h-24 w-24 rounded-full border border-brand-navy/[0.12]" />
           <div className="absolute -right-4 top-24 h-8 w-8 rounded-full bg-brand-orange/70" />
           <div className="absolute -left-2 bottom-8 h-10 w-10 rounded-full bg-brand-yellow/70 shadow-lg" />
-          <div className="absolute left-6 top-12 h-56 w-56 rounded-full border border-brand-teal/12" />
+          <div className="absolute left-6 top-12 h-56 w-56 rounded-full border border-brand-teal/[0.12]" />
 
           <div className="relative mx-auto w-[31rem]">
             <div className="absolute -right-2 top-10 h-[24rem] w-[24rem] rounded-full border-[10px] border-brand-navy/10 bg-white" />
@@ -108,21 +105,25 @@ export function CircleShowcaseHero({
               <div className="mt-2 text-base font-semibold text-brand-navy">Designed for daily admin and classroom work</div>
             </div>
             <div className="relative z-10 ml-auto h-[27rem] w-[27rem] overflow-hidden rounded-full border-[10px] border-white bg-white shadow-[0_30px_80px_rgba(0,48,73,0.14)]">
-              <img
-                src={image}
+              <HeroPicture
+                image={image}
                 alt={heroImageAlt(title)}
+                priority
+                dimensions={IMAGE_DIMENSIONS.heroWide}
+                sizes="(max-width: 1024px) 0px, 432px"
                 className="h-full w-full object-cover"
-                {...heroImgProps(IMAGE_DIMENSIONS.heroPortrait)}
+                wrapperClassName="block h-full w-full"
               />
             </div>
             <div className="absolute bottom-4 right-8 z-20 h-28 w-28 overflow-hidden rounded-full border-[6px] border-white bg-white shadow-xl">
-              <img
-                src={image}
+              <HeroPicture
+                image={image}
                 alt=""
-                role="presentation"
-                aria-hidden
-                {...lazyImgProps(IMAGE_DIMENSIONS.avatar)}
+                decorative
+                dimensions={IMAGE_DIMENSIONS.heroWide}
+                sizes="112px"
                 className="h-full w-full object-cover"
+                wrapperClassName="block h-full w-full"
               />
             </div>
           </div>
@@ -154,11 +155,13 @@ export function ImageBackdropHero({
   return (
     <section className={cn("relative overflow-hidden py-14 md:py-18", fullHeight && "hero-viewport flex items-center", className)}>
       <div className="absolute inset-0">
-        <img
-          src={image}
+        <HeroPicture
+          image={image}
           alt={heroImageAlt(title)}
+          priority
           className="h-full w-full object-cover"
-          {...heroImgProps(IMAGE_DIMENSIONS.heroWide)}
+          wrapperClassName="block h-full w-full"
+          sizes="100vw"
         />
         <div className={cn("absolute inset-0", overlayClassName)} />
       </div>
@@ -168,14 +171,14 @@ export function ImageBackdropHero({
       <div className={cn("page-shell relative z-10 w-full", fullHeight && "hero-viewport-inner flex items-center")}>
         <SectionReveal className={center ? "mx-auto max-w-4xl text-center" : "max-w-3xl"}>
           {eyebrow && (
-            <div className="inline-flex rounded-full border border-brand-navy/12 bg-white/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-brand-orange">
+            <div className="inline-flex rounded-full border border-brand-navy/[0.12] bg-white/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-brand-orange-ink">
               {eyebrow}
             </div>
           )}
           <h1 className="mt-6 text-[clamp(2rem,1.25rem+1.8vw,2.95rem)] font-bold leading-[1.04] text-brand-navy">
             {title}
           </h1>
-          <p className={cn("mt-5 text-[clamp(1rem,0.95rem+0.14vw,1.05rem)] leading-8 text-brand-navy/72", center && "mx-auto max-w-2xl")}>
+          <p className={cn("mt-5 text-[clamp(1rem,0.95rem+0.14vw,1.05rem)] leading-8 text-brand-navy/[0.72]", center && "mx-auto max-w-2xl")}>
             {subtitle}
           </p>
           {actions && <div className={cn("mt-8 flex flex-col gap-4 sm:flex-row", center && "justify-center")}>{actions}</div>}
@@ -207,21 +210,24 @@ export function HomeCurveHero({
           sizes="100vw"
           className="object-cover"
         />
-        {/* Opaque-enough navy scrim so cream hero text stays AA-compliant over bright photo regions */}
-        <div className="absolute inset-0 bg-[#003049]/88" />
+        {/* Light haze only — keeps the photo, logo and navbar readable instead of darkening the page */}
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.42)_0%,rgba(252,249,240,0.18)_45%,rgba(255,255,255,0.38)_100%)]" />
+        {/* Feathered wash behind the copy — no card edge, so the classroom stays visible around it */}
+        <div className="absolute inset-0 bg-[radial-gradient(58%_46%_at_50%_54%,rgba(255,255,255,0.72)_0%,rgba(255,255,255,0.4)_58%,rgba(255,255,255,0)_100%)]" />
       </div>
 
       <FloatingIcons icons={["LayoutDashboard", "Users", "BarChart2"]} count={6} heroMode={true} />
 
       <div className="page-shell relative z-20 flex min-h-screen items-center justify-center pb-16 pt-36 md:pt-40">
-        <SectionReveal instant className="mx-auto max-w-4xl text-center text-brand-beige">
-          <div className="inline-flex rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.26em] text-brand-yellow backdrop-blur-sm">
+        <SectionReveal instant className="mx-auto max-w-3xl text-center">
+          <div className="inline-flex rounded-full border border-brand-teal/40 bg-white/85 px-4 py-2 text-xs font-semibold uppercase tracking-[0.26em] text-brand-navy backdrop-blur-sm">
             AI school ERP platform
           </div>
-          <h1 className="mx-auto mt-6 max-w-4xl text-[clamp(2rem,1.35rem+1.55vw,3.1rem)] font-bold leading-[1.05] text-brand-beige [font-synthesis:none] font-[system-ui]">
+          {/* White halo instead of a panel: dark brand text stays legible over the photo's busy areas */}
+          <h1 className="mx-auto mt-6 max-w-3xl text-[clamp(2.05rem,1.4rem+1.7vw,3.35rem)] font-bold leading-[1.06] text-brand-navy [text-shadow:0_1px_0_rgba(255,255,255,0.9),0_2px_16px_rgba(255,255,255,0.95)]">
             {title}
           </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-[clamp(1rem,0.95rem+0.14vw,1.05rem)] leading-8 text-brand-beige/95">
+          <p className="mx-auto mt-5 max-w-2xl text-[clamp(1rem,0.95rem+0.14vw,1.08rem)] font-medium leading-8 text-brand-navy/[0.88] [text-shadow:0_1px_0_rgba(255,255,255,0.9),0_1px_12px_rgba(255,255,255,0.95)]">
             {subtitle}
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">{actions}</div>
@@ -246,11 +252,14 @@ export function BankingContactHero({
           <div className="relative mx-auto max-w-[30rem]">
             <div className="absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-teal/10" />
             <div className="relative mx-auto h-74 w-74 overflow-hidden rounded-full border-[12px] border-white shadow-[0_30px_70px_rgba(0,48,73,0.12)]">
-              <img
-                src={image}
+              <HeroPicture
+                image={image}
                 alt={heroImageAlt(title)}
+                priority
+                dimensions={IMAGE_DIMENSIONS.heroWide}
+                sizes="(max-width: 640px) 90vw, 480px"
                 className="h-full w-full object-cover"
-                {...heroImgProps(IMAGE_DIMENSIONS.heroPortrait)}
+                wrapperClassName="block h-full w-full"
               />
             </div>
             {[
@@ -275,10 +284,10 @@ export function BankingContactHero({
           <h1 className="mt-6 max-w-lg text-[clamp(2rem,1.45rem+1.45vw,3.4rem)] font-bold leading-[1.02] text-brand-navy">
             {title}
           </h1>
-          <p className="mt-5 max-w-xl text-base leading-8 text-brand-navy/68">{subtitle}</p>
+          <p className="mt-5 max-w-xl text-base leading-8 text-brand-navy/[0.68]">{subtitle}</p>
           <div className="mt-8 grid gap-3 sm:grid-cols-2">
             {["Fast response", "Live demo support", "Priority setup", "High security"].map((item) => (
-              <div key={item} className="rounded-2xl border border-brand-navy/8 bg-white px-5 py-4 text-sm font-semibold text-brand-navy shadow-sm">
+              <div key={item} className="rounded-2xl border border-brand-navy/[0.08] bg-white px-5 py-4 text-sm font-semibold text-brand-navy shadow-sm">
                 {item}
               </div>
             ))}

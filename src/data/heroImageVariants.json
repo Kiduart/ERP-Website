@@ -1,0 +1,46 @@
+{
+  "/images/banner/features-hero.jpg": {
+    "avif": "/images/banner/responsive/features-hero-640.avif 640w, /images/banner/responsive/features-hero-1024.avif 1024w, /images/banner/responsive/features-hero-1600.avif 1600w",
+    "webp": "/images/banner/responsive/features-hero-640.webp 640w, /images/banner/responsive/features-hero-1024.webp 1024w, /images/banner/responsive/features-hero-1600.webp 1600w"
+  },
+  "/images/banner/platform-hero.jpg": {
+    "avif": "/images/banner/responsive/platform-hero-640.avif 640w, /images/banner/responsive/platform-hero-1024.avif 1024w, /images/banner/responsive/platform-hero-1600.avif 1600w",
+    "webp": "/images/banner/responsive/platform-hero-640.webp 640w, /images/banner/responsive/platform-hero-1024.webp 1024w, /images/banner/responsive/platform-hero-1600.webp 1600w"
+  },
+  "/images/banner/integration-hero.jpg": {
+    "avif": "/images/banner/responsive/integration-hero-640.avif 640w",
+    "webp": "/images/banner/responsive/integration-hero-640.webp 640w"
+  },
+  "/images/banner/security-hero.jpg": {
+    "avif": "/images/banner/responsive/security-hero-640.avif 640w",
+    "webp": "/images/banner/responsive/security-hero-640.webp 640w"
+  },
+  "/images/banner/solution-hero-1.jpg": {
+    "avif": "/images/banner/responsive/solution-hero-1-640.avif 640w",
+    "webp": "/images/banner/responsive/solution-hero-1-640.webp 640w"
+  },
+  "/images/banner/solution-hero-2.jpg": {
+    "avif": "/images/banner/responsive/solution-hero-2-640.avif 640w, /images/banner/responsive/solution-hero-2-1024.avif 1024w",
+    "webp": "/images/banner/responsive/solution-hero-2-640.webp 640w, /images/banner/responsive/solution-hero-2-1024.webp 1024w"
+  },
+  "/images/banner/solution-hero-3.jpg": {
+    "avif": "/images/banner/responsive/solution-hero-3-640.avif 640w",
+    "webp": "/images/banner/responsive/solution-hero-3-640.webp 640w"
+  },
+  "/images/banner/contact-post-1.jpg": {
+    "avif": "/images/banner/responsive/contact-post-1-640.avif 640w",
+    "webp": "/images/banner/responsive/contact-post-1-640.webp 640w"
+  },
+  "/images/banner/career-post-1.jpg": {
+    "avif": "/images/banner/responsive/career-post-1-640.avif 640w, /images/banner/responsive/career-post-1-1024.avif 1024w",
+    "webp": "/images/banner/responsive/career-post-1-640.webp 640w, /images/banner/responsive/career-post-1-1024.webp 1024w"
+  },
+  "/images/banner/help-center-hero-1.jpg": {
+    "avif": "/images/banner/responsive/help-center-hero-1-640.avif 640w, /images/banner/responsive/help-center-hero-1-1024.avif 1024w",
+    "webp": "/images/banner/responsive/help-center-hero-1-640.webp 640w, /images/banner/responsive/help-center-hero-1-1024.webp 1024w"
+  },
+  "/images/banner/home-hero.jpeg": {
+    "avif": "/images/banner/responsive/home-hero-640.avif 640w, /images/banner/responsive/home-hero-1024.avif 1024w, /images/banner/responsive/home-hero-1600.avif 1600w",
+    "webp": "/images/banner/responsive/home-hero-640.webp 640w, /images/banner/responsive/home-hero-1024.webp 1024w, /images/banner/responsive/home-hero-1600.webp 1600w"
+  }
+}
