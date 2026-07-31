@@ -7,6 +7,8 @@ type AnimatedCounterProps = {
   prefix?: string;
   suffix?: string;
   className?: string;
+  /** Replay the count every time the number scrolls back into view */
+  replay?: boolean;
 };
 
 export function AnimatedCounter({
@@ -16,20 +18,31 @@ export function AnimatedCounter({
   prefix = "",
   suffix = "",
   className,
+  replay = true,
 }: AnimatedCounterProps) {
   const ref = useRef<HTMLSpanElement | null>(null);
-  const [value, setValue] = useState(0);
-  const [started, setStarted] = useState(false);
+  const wasVisible = useRef(false);
+  /** Server and first client render show the real number, so crawlers never read a zero. */
+  const [value, setValue] = useState(end);
+  const [run, setRun] = useState(0);
 
   useEffect(() => {
     const node = ref.current;
-    if (!node) return;
+    if (!node || typeof IntersectionObserver === "undefined") return;
+
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) {
+      setValue(end);
+      return;
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setStarted(true);
-          observer.disconnect();
+          if (wasVisible.current) return;
+          wasVisible.current = true;
+          setRun((current) => current + 1);
+        } else if (replay) {
+          wasVisible.current = false;
         }
       },
       { threshold: 0.35 },
@@ -37,13 +50,14 @@ export function AnimatedCounter({
 
     observer.observe(node);
     return () => observer.disconnect();
-  }, []);
+  }, [end, replay]);
 
   useEffect(() => {
-    if (!started) return;
+    if (run === 0) return;
 
     let frame = 0;
     let startTime = 0;
+    setValue(0);
 
     const tick = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
@@ -58,12 +72,12 @@ export function AnimatedCounter({
 
     frame = window.requestAnimationFrame(tick);
     return () => window.cancelAnimationFrame(frame);
-  }, [duration, end, started]);
+  }, [duration, end, run]);
 
   const formatted = new Intl.NumberFormat("en-IN", {
     minimumFractionDigits: decimals,
     maximumFractionDigits: decimals,
-  }).format(started ? value : 0);
+  }).format(value);
 
   return (
     <span ref={ref} className={className}>

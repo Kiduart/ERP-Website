@@ -112,3 +112,83 @@ export function VendorChecklist() {
     </div>
   );
 }
+
+export function VendorChecklistTeaser() {
+  const sample = VENDOR_QUESTIONS.slice(0, 3);
+  const [activeId, setActiveId] = useState(sample[0]?.id ?? "");
+  const active = sample.find((item) => item.id === activeId) ?? sample[0];
+
+  return (
+    <div className="console-panel overflow-hidden rounded-[2rem] border border-white/12 bg-white/[0.05]">
+      <div className="grid lg:grid-cols-[0.82fr_1.18fr]">
+        <div className="border-b border-white/10 p-5 sm:p-6 lg:border-b-0 lg:border-r">
+          <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-yellow">
+            Try three questions here
+          </p>
+          <div className="mt-4 space-y-2" role="tablist" aria-label="ERP vendor questions">
+            {sample.map((item, index) => {
+              const isActive = item.id === active?.id;
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  aria-controls={`vendor-teaser-panel-${item.id}`}
+                  onClick={() => setActiveId(item.id)}
+                  className={`flex w-full items-start gap-3 rounded-2xl border px-4 py-3 text-left transition-colors ${
+                    isActive
+                      ? "border-brand-yellow/55 bg-brand-yellow/[0.1]"
+                      : "border-white/12 bg-white/[0.04] hover:border-white/30"
+                  }`}
+                >
+                  <span className="font-mono text-xs font-bold text-brand-yellow" aria-hidden="true">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-sm font-semibold leading-6 text-brand-beige">{item.question}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {active ? (
+          <div
+            key={active.id}
+            id={`vendor-teaser-panel-${active.id}`}
+            role="tabpanel"
+            className="console-panel p-5 sm:p-6"
+          >
+            <div className="grid gap-5 sm:grid-cols-2">
+              <div>
+                <h3 className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-brand-orange">
+                  <TriangleAlert className="h-4 w-4" aria-hidden="true" />
+                  The risk
+                </h3>
+                <p className="mt-3 text-sm leading-7" style={MUTED}>
+                  {active.risk}
+                </p>
+              </div>
+              <div>
+                <h3 className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-brand-yellow">
+                  <ShieldCheck className="h-4 w-4" aria-hidden="true" />
+                  What a verifiable answer sounds like
+                </h3>
+                <p className="mt-3 text-sm leading-7" style={MUTED}>
+                  {active.answer}
+                </p>
+              </div>
+            </div>
+            <Link
+              href="/vendor-checklist"
+              className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand-yellow px-6 py-3 text-sm font-bold text-brand-navy transition-colors hover:bg-brand-beige"
+            >
+              Open all {VENDOR_QUESTIONS.length} questions
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          </div>
+        ) : null}
+      </div>
+    </div>
+  );
+}

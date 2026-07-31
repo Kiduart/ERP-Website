@@ -1,6 +1,7 @@
 import type { GetStaticProps } from "next";
 import { Link } from "wouter";
-import { ArrowRight, BrainCircuit, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { PageSeoHead } from "@/components/seo/PageSeoHead";
 import { SchemaMarkup } from "@/components/seo/SchemaMarkup";
 import { pageSeo } from "@/lib/pageSeo";
@@ -10,9 +11,8 @@ import { CtaSection } from "@/components/ui/CtaSection";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CircleShowcaseHero } from "@/components/ui/CustomHeroes";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
-import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
-import { WHATSAPP_URL } from "@/lib/contact";
 import { CapabilityMap, type CapabilityArea } from "@/components/product/CapabilityMap";
+import { IntelligenceLayer } from "@/components/product/IntelligenceLayer";
 import { MATRIX_CATEGORIES, MATRIX_TOTALS, countSubModules, topModules } from "@/data/featureMatrix";
 import { AREA_NARRATIVE_BY_SLUG } from "@/data/productNarrative";
 import { PRODUCT_PANELS } from "@/data/productPanels";
@@ -22,13 +22,6 @@ type FeaturesPageProps = {
   totals: typeof MATRIX_TOTALS;
   panels: { slug: string; shortLabel: string }[];
 };
-
-const aiAssistantPoints = [
-  "Timetable generation that avoids teacher conflicts and room clashes",
-  "Attendance patterns flagged before they become a term-long problem",
-  "Draft messages for fee reminders, attendance alerts and school notices",
-  "Fee follow-up lists ordered by payment history rather than guesswork",
-];
 
 export default function Features({ areas, totals, panels }: FeaturesPageProps) {
   const highlights = [
@@ -90,40 +83,64 @@ export default function Features({ areas, totals, panels }: FeaturesPageProps) {
             ]}
           />
           <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <div className="grid gap-6 text-center sm:grid-cols-2 lg:grid-cols-4">
-              {highlights.map((highlight, index) => (
-                <SectionReveal
-                  key={highlight.label}
-                  delay={index * 0.06}
-                  className="rounded-3xl border border-brand-navy/[0.08] bg-brand-beige/20 px-6 py-8"
-                >
-                  <div className="text-4xl font-extrabold text-brand-navy">
-                    <AnimatedCounter end={highlight.value} suffix={highlight.suffix} />
-                  </div>
-                  <p className="mt-2 text-sm font-semibold uppercase tracking-[0.18em] text-brand-navy/[0.72]">
-                    {highlight.label}
-                  </p>
-                </SectionReveal>
-              ))}
-            </div>
+            <SectionReveal className="fabric-board overflow-hidden rounded-[2.25rem] border border-brand-navy/[0.12] bg-white/70 p-4 shadow-2xl shadow-brand-navy/[0.08] backdrop-blur-sm sm:p-5">
+              <div className="flex flex-wrap items-center justify-between gap-3 px-2 pb-4 pt-1">
+                <p className="inline-flex items-center gap-2 text-[0.68rem] font-bold uppercase tracking-[0.18em] text-brand-teal">
+                  <span className="console-live-dot h-1.5 w-1.5 rounded-full bg-brand-teal" aria-hidden="true" />
+                  Live count from the capability matrix
+                </p>
+                <p className="text-xs font-semibold text-brand-navy/[0.72]">
+                  Updated whenever a module ships — never rounded up
+                </p>
+              </div>
 
-            <SectionReveal delay={0.1} className="mt-8">
-              <div className="rounded-3xl border border-brand-navy/[0.08] bg-white p-6 md:p-8">
+              <dl className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                {highlights.map((highlight, index) => (
+                  <div
+                    key={highlight.label}
+                    className="relative overflow-hidden rounded-[1.5rem] border border-brand-navy/[0.1] bg-white px-6 py-7"
+                  >
+                    <span className="absolute right-5 top-6 flex gap-1" aria-hidden="true">
+                      {highlights.map((_, dot) => (
+                        <span
+                          key={dot}
+                          className={cn(
+                            "h-1.5 w-1.5 rounded-full",
+                            dot <= index ? "bg-brand-teal" : "bg-brand-navy/[0.14]",
+                          )}
+                        />
+                      ))}
+                    </span>
+                    <dd className="text-[clamp(2.1rem,1.6rem+1.4vw,2.9rem)] font-extrabold leading-none text-brand-navy">
+                      <AnimatedCounter end={highlight.value} suffix={highlight.suffix} />
+                    </dd>
+                    <dt className="mt-3 text-xs font-bold uppercase tracking-[0.16em] text-brand-navy/[0.72]">
+                      {highlight.label}
+                    </dt>
+                    <span className="console-rail relative mt-4 block" aria-hidden="true" />
+                  </div>
+                ))}
+              </dl>
+
+              <div className="contact-form-panel mt-3 rounded-[1.5rem] border border-brand-navy/[0.1] p-6 md:p-8">
                 <h2 className="text-2xl font-bold text-brand-navy">
                   Counted from the product, not from marketing
                 </h2>
-                <p className="mt-3 leading-7 text-brand-navy/[0.78]">
+                <p className="mt-3 max-w-3xl leading-7 text-brand-navy/[0.78]">
                   These numbers come straight from our capability matrix — the same sheet our
                   engineering and implementation teams work from. Every module listed on this site
                   exists in the platform today, so a single school and a multi-campus group can both
                   start with what they actually run.
                 </p>
-                <div className="mt-5 flex flex-wrap gap-2">
+                <p className="mt-5 text-[0.68rem] font-bold uppercase tracking-[0.16em] text-brand-navy/[0.72]">
+                  Shipped into {panels.length} role panels
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2">
                   {panels.map((panel) => (
                     <Link
                       key={panel.slug}
                       href={`/platform/${panel.slug}`}
-                      className="rounded-full border border-brand-navy/[0.12] bg-brand-beige/25 px-3.5 py-1.5 text-sm font-semibold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
+                      className="rounded-full border border-brand-navy/[0.12] bg-white px-3.5 py-1.5 text-sm font-semibold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
                     >
                       {panel.shortLabel} panel
                     </Link>
@@ -165,100 +182,22 @@ export default function Features({ areas, totals, panels }: FeaturesPageProps) {
             ]}
           />
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
-              <SectionReveal>
-                <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-brand-yellow">
-                  The intelligence layer
-                </div>
-                <h2 className="mt-6 text-4xl font-bold text-brand-beige">
-                  KIDUORBIT works on your school's data, not generic templates
-                </h2>
-                <p className="mt-5 max-w-2xl text-lg leading-8 text-brand-beige/80">
-                  Because attendance, fees, exams and staff records already sit in one system, the
-                  analytics layer can point staff at the right classroom, the right ledger and the
-                  right conversation. People still make the call; the platform narrows where to look.
-                </p>
-                <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                  {aiAssistantPoints.map((point) => (
-                    <div
-                      key={point}
-                      className="rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-brand-beige/90"
-                    >
-                      <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-brand-yellow/15">
-                        <Sparkles className="h-5 w-5 text-brand-yellow" aria-hidden="true" />
-                      </div>
-                      <p>{point}</p>
-                    </div>
-                  ))}
-                </div>
-                <Link
-                  href="/kiduorbit"
-                  className="mt-8 inline-flex items-center gap-2 rounded-full border border-brand-yellow/40 bg-brand-yellow/10 px-6 py-3 text-base font-bold text-brand-yellow transition-colors hover:bg-brand-yellow hover:text-brand-navy"
-                >
-                  Read how KIDUORBIT works <ArrowRight className="h-5 w-5" aria-hidden="true" />
-                </Link>
-              </SectionReveal>
-
-              <SectionReveal delay={0.12} className="rounded-[2rem] border border-white/10 bg-white/5 p-7 shadow-2xl">
-                <div className="rounded-[1.75rem] border border-white/10 bg-brand-beige p-6 text-brand-navy">
-                  <div className="flex items-center justify-between border-b border-brand-navy/10 pb-4">
-                    <div>
-                      <p className="text-sm font-bold uppercase tracking-[0.24em] text-brand-teal">
-                        Ask the platform
-                      </p>
-                      <h3 className="mt-2 text-2xl font-bold">Questions staff actually have</h3>
-                    </div>
-                    <BrainCircuit className="h-10 w-10 text-brand-orange" aria-hidden="true" />
-                  </div>
-
-                  <div className="mt-6 space-y-4">
-                    {[
-                      "Which sections dropped below 80% attendance this month?",
-                      "Who is pending on the second instalment after concessions?",
-                      "Where does the timetable clash if two teachers are on leave?",
-                      "Which campus is behind on collection this quarter?",
-                    ].map((task) => (
-                      <div key={task} className="rounded-2xl bg-white px-4 py-4 shadow-sm">
-                        <p className="text-sm leading-6 text-brand-navy/[0.78]">{task}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </SectionReveal>
-            </div>
-          </div>
-        </section>
-
-        <section className="section-space relative overflow-hidden bg-white">
-          <BackgroundBlobs blobs={[{ color: "#0c716b", size: 320, position: "center-right", opacity: 0.12 }]} />
-          <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <SectionReveal className="rounded-[2rem] border border-brand-navy/[0.08] bg-brand-beige/20 p-8 text-center md:p-12">
-              <p className="section-kicker">Built for real schools</p>
-              <h2 className="mt-4 text-4xl font-bold text-brand-navy">
-                Bring your fee structure and class setup — we will run the demo on it
-              </h2>
-              <p className="mx-auto mt-4 max-w-3xl text-lg leading-8 text-brand-navy/[0.74]">
-                A module list only proves depth. A demo on your own session, sections and fee heads
-                proves fit. Pick whichever modules matter most and we will walk those first.
+            <SectionReveal className="mx-auto mb-10 max-w-3xl text-center">
+              <p className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-brand-yellow">
+                The intelligence layer
               </p>
-              <div className="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
-                <Link
-                  href="/demo"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-navy px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:-translate-y-1 hover:bg-brand-teal sm:w-auto"
-                >
-                  Book a free demo
-                  <ArrowRight className="h-5 w-5" aria-hidden="true" />
-                </Link>
-                <a
-                  href={WHATSAPP_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-brand-navy/15 bg-white px-8 py-4 text-lg font-bold text-brand-navy transition-colors hover:border-brand-teal/35 hover:text-brand-teal sm:w-auto"
-                >
-                  <WhatsAppIcon className="h-5 w-5" />
-                  Ask about your use case
-                </a>
-              </div>
+              <h2 className="mt-6 text-[clamp(1.9rem,1.5rem+1.6vw,2.6rem)] font-bold text-brand-beige">
+                KIDUORBIT reads the same modules — it does not ask you for new data
+              </h2>
+              <p className="mt-5 text-lg leading-8 text-brand-beige/80">
+                Attendance marks, fee ledgers, exam scores and vehicle pings are already being
+                recorded by the modules above. KIDUORBIT scores them and hands staff a ranked list to
+                act on. People still make the call; the platform narrows where to look.
+              </p>
+            </SectionReveal>
+
+            <SectionReveal delay={0.1}>
+              <IntelligenceLayer />
             </SectionReveal>
           </div>
         </section>

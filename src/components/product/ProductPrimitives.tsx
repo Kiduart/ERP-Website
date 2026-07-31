@@ -1,7 +1,8 @@
 import type { ReactNode } from "react";
 import { Link } from "wouter";
-import { ArrowUpRight, Check, ChevronRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, ChevronRight, Lock } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 
 export type AccentName = "navy" | "teal" | "orange" | "yellow" | "bronze";
 
@@ -84,27 +85,82 @@ export function StatChip({
   value,
   label,
   className,
+  animate = false,
 }: {
   value: string | number;
   label: string;
   className?: string;
+  animate?: boolean;
 }) {
+  const numeric = typeof value === "number" ? value : Number(value);
+  const canAnimate = animate && Number.isFinite(numeric);
+
   return (
     <div
       className={cn(
-        "rounded-2xl border border-brand-navy/[0.1] bg-white/90 px-4 py-3 text-left",
+        "rounded-2xl border border-brand-navy/[0.1] bg-white px-4 py-4 text-left shadow-sm shadow-brand-navy/[0.04]",
         className,
       )}
     >
-      <div className="text-2xl font-extrabold leading-none text-brand-navy">{value}</div>
-      <p className="mt-1 text-xs font-semibold uppercase tracking-[0.16em] text-brand-navy/[0.72]">
+      <div className="text-[clamp(1.5rem,1.2rem+0.8vw,2rem)] font-extrabold leading-none text-brand-navy">
+        {canAnimate ? <AnimatedCounter end={numeric} /> : value}
+      </div>
+      <p className="mt-2 text-xs font-semibold uppercase tracking-[0.16em] text-brand-navy/[0.72]">
         {label}
       </p>
+      <span className="console-rail relative mt-3 block" aria-hidden="true" />
     </div>
   );
 }
 
-/** Numbered rail for a module area's daily flow — CSS only, no client JS. */
+/**
+ * Gated-capability cue. Scrolls to the on-page capability-sheet form so visitors
+ * know exactly how to unlock the rest — used on every area and module page.
+ */
+export function HiddenCapabilitiesLink({
+  count,
+  label,
+  href = "#capability-sheet",
+  className,
+}: {
+  count: number;
+  /** Short context shown after the count, e.g. "in Examination" */
+  label?: string;
+  href?: string;
+  className?: string;
+}) {
+  return (
+    <a
+      href={href}
+      className={cn(
+        "group/lock flex w-full items-start gap-2.5 rounded-xl border border-dashed border-brand-navy/25 bg-white/70 px-3.5 py-2.5 text-left text-sm leading-6 text-brand-navy transition-colors hover:border-brand-teal/50 hover:bg-brand-teal/[0.06] hover:text-brand-teal",
+        className,
+      )}
+    >
+      <span
+        className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-navy/[0.08] transition-colors group-hover/lock:bg-brand-teal/15"
+        aria-hidden="true"
+      >
+        <Lock className="h-3 w-3 text-brand-navy/60 group-hover/lock:text-brand-teal" />
+      </span>
+      <span className="min-w-0 flex-1">
+        <span className="font-semibold">
+          {count} more{label ? ` ${label}` : ""}
+        </span>
+        <span className="text-brand-navy/[0.72] group-hover/lock:text-brand-teal/80">
+          {" "}
+          — request the full sheet
+        </span>
+      </span>
+      <ArrowRight
+        className="mt-1 h-3.5 w-3.5 shrink-0 text-brand-navy/40 transition-transform group-hover/lock:translate-x-0.5 group-hover/lock:text-brand-teal"
+        aria-hidden="true"
+      />
+    </a>
+  );
+}
+
+/** Numbered runway for a module area's daily flow. */
 export function FlowRail({
   steps,
   accent = "teal",
@@ -115,33 +171,50 @@ export function FlowRail({
   const tokens = ACCENTS[accent];
 
   return (
-    <ol className="relative grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-      {steps.map((step, index) => (
-        <li
-          key={step.title}
-          className={cn(
-            "group relative flex h-full flex-col rounded-3xl border bg-white/95 p-6 shadow-sm transition-transform duration-300 hover:-translate-y-1",
-            tokens.border,
-          )}
-        >
-          <span
+    <div className="fabric-board overflow-hidden rounded-[2rem] border border-brand-navy/[0.1] bg-white/70 p-4 shadow-xl shadow-brand-navy/[0.06] sm:p-5">
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-3 px-1">
+        <p className="inline-flex items-center gap-2 text-[0.68rem] font-bold uppercase tracking-[0.18em] text-brand-teal">
+          <span className="console-live-dot h-1.5 w-1.5 rounded-full bg-brand-teal" aria-hidden="true" />
+          Daily sequence
+        </p>
+        <p className="text-xs font-semibold text-brand-navy/[0.72]">{steps.length} steps in order</p>
+      </div>
+
+      <ol className="relative grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute left-8 right-8 top-[2.15rem] hidden h-px bg-gradient-to-r from-transparent via-brand-navy/20 to-transparent xl:block"
+        />
+        {steps.map((step, index) => (
+          <li
+            key={step.title}
             className={cn(
-              "mb-4 inline-flex h-10 w-10 items-center justify-center rounded-2xl text-sm font-extrabold text-white",
-              tokens.solidBg,
+              "group relative flex h-full flex-col rounded-[1.35rem] border bg-white p-5 transition-shadow duration-300 hover:shadow-lg hover:shadow-brand-navy/[0.08]",
+              tokens.border,
             )}
-            aria-hidden="true"
           >
-            {String(index + 1).padStart(2, "0")}
-          </span>
-          <h3 className="text-lg font-bold text-brand-navy">{step.title}</h3>
-          <p className="mt-2 flex-grow text-sm leading-6 text-brand-navy/[0.76]">{step.detail}</p>
-          <span
-            className={cn("mt-4 h-1 w-12 rounded-full transition-all duration-300 group-hover:w-20", tokens.bar)}
-            aria-hidden="true"
-          />
-        </li>
-      ))}
-    </ol>
+            <span
+              className={cn(
+                "mb-4 inline-flex h-10 w-10 items-center justify-center rounded-2xl text-sm font-extrabold text-white ring-4 ring-white",
+                tokens.solidBg,
+              )}
+              aria-hidden="true"
+            >
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <h3 className="text-base font-bold text-brand-navy">{step.title}</h3>
+            <p className="mt-2 flex-grow text-sm leading-6 text-brand-navy/[0.76]">{step.detail}</p>
+            <span
+              className={cn(
+                "mt-4 h-1 w-10 rounded-full transition-all duration-300 group-hover:w-16",
+                tokens.bar,
+              )}
+              aria-hidden="true"
+            />
+          </li>
+        ))}
+      </ol>
+    </div>
   );
 }
 

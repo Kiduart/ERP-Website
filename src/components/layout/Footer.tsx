@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import { Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 import { CONTACT_EMAIL, CONTACT_LOCATION, CONTACT_PHONE_DISPLAY } from "@/lib/contact";
 import { useState, type FormEvent } from "react";
 import { useToast } from "@/hooks/use-toast";
@@ -32,6 +32,7 @@ const NAV_COLUMNS: { heading: string; links: FooterLink[] }[] = [
     links: [
       { label: "Help Center", href: "/help" },
       { label: "FAQ", href: "/faq" },
+      { label: "ERP Vendor Checklist", href: "/vendor-checklist" },
       { label: "Blog & Insights", href: "/blog", soon: true },
     ],
   },
@@ -45,60 +46,35 @@ const NAV_COLUMNS: { heading: string; links: FooterLink[] }[] = [
   },
 ];
 
-const EXPLORE_COLUMNS: { heading: string; links: FooterLink[] }[] = [
+const DESTINATIONS = [
   {
-    heading: "Module areas",
-    links: [
-      { label: "Academics", href: "/features/academic" },
-      { label: "Fees & Finance", href: "/features/finance-and-fee-management" },
-      { label: "Student Records", href: "/features/student-management" },
-      { label: "HR & Staff", href: "/features/hr-and-staff-management" },
-      { label: "Admissions", href: "/features/admission" },
-      { label: "Communication", href: "/features/communication" },
-      { label: "Library", href: "/features/library-management" },
-      { label: "Transport", href: "/features/transport-management" },
-      { label: "Hostel", href: "/features/hostel-management" },
-      { label: "Reports & Analytics", href: "/features/reports-and-analytics" },
-      { label: "Security & Access", href: "/features/security-and-authentication" },
-      { label: "Multi-Campus HQ", href: "/features/organization-management" },
-    ],
+    href: "/features",
+    kicker: "16 areas · 90 modules",
+    title: "Features",
+    detail: "The full capability map, area by area.",
   },
   {
-    heading: "Role panels",
-    links: [
-      { label: "System admin", href: "/platform/system-admin" },
-      { label: "Organisation", href: "/platform/organization" },
-      { label: "Director", href: "/platform/director" },
-      { label: "School admin", href: "/platform/school-admin" },
-      { label: "Academic", href: "/platform/academic" },
-      { label: "Teacher", href: "/platform/teacher" },
-      { label: "Finance", href: "/platform/finance" },
-      { label: "HR & staff", href: "/platform/hr" },
-      { label: "Parent", href: "/platform/parent" },
-      { label: "Student", href: "/platform/student" },
-    ],
+    href: "/platform",
+    kicker: "10 role panels",
+    title: "Platform",
+    detail: "What each role opens on their own dashboard.",
   },
   {
-    heading: "Solutions by role",
-    links: [
-      { label: "School groups", href: "/solutions/organizations" },
-      { label: "Principals", href: "/solutions/school-administration" },
-      { label: "Admin staff", href: "/solutions/administrators" },
-      { label: "Academic coordinators", href: "/solutions/academic-coordinators" },
-      { label: "Teachers", href: "/solutions/teachers" },
-      { label: "Accountants", href: "/solutions/accountants" },
-      { label: "Parents", href: "/solutions/parents" },
-      { label: "Students", href: "/solutions/students" },
-    ],
+    href: "/solutions",
+    kicker: "8 role journeys",
+    title: "Solutions",
+    detail: "How a principal, teacher or accountant works day to day.",
   },
-];
+] as const;
 
-const linkClass =
-  "hover-underline-group inline-flex min-h-6 items-center gap-2 py-0.5 text-sm leading-6 text-brand-navy/75 transition-colors hover:text-brand-navy";
+const CLOSING_LINE = ["Built in India", "For Indian schools", "Your data stays yours"] as const;
+
+const navLinkClass =
+  "hover-underline-group inline-flex min-h-6 items-center gap-2 py-0.5 text-sm leading-6 text-brand-navy/[0.72] transition-colors hover:text-brand-teal";
 
 function SoonBadge() {
   return (
-    <span className="rounded-full bg-brand-yellow px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-brand-navy">
+    <span className="rounded-full bg-brand-yellow px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider !text-brand-navy">
       Soon
     </span>
   );
@@ -126,9 +102,7 @@ export function Footer() {
     try {
       const response = await fetch("/api/newsletter", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
 
@@ -140,7 +114,7 @@ export function Footer() {
         throw new Error(
           typeof result === "object" && result && "error" in result
             ? String(result.error)
-            : "Unable to subscribe right now."
+            : "Unable to subscribe right now.",
         );
       }
 
@@ -161,140 +135,156 @@ export function Footer() {
   };
 
   return (
-    <footer className="border-t border-brand-navy/10 bg-brand-beige pb-8 pt-10 sm:pt-14">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="rounded-[2rem] bg-brand-navy px-6 py-8 text-white shadow-[0_24px_60px_rgba(0,48,73,0.18)] sm:px-8 sm:py-10 lg:px-12 lg:py-12">
-          <div className="max-w-3xl">
-            <h3 className="text-3xl font-bold leading-tight text-white sm:text-4xl">
-              Stay ahead of what is happening in school management.
-            </h3>
-            <p className="mt-4 max-w-2xl text-base leading-8 text-white/75 sm:text-lg">
-              Product updates, practical school operations content, and insights from our team , delivered to your inbox. No noise.
-            </p>
-          </div>
-
-          <form
-            className="field-surface-dark mt-8 flex flex-col gap-3 rounded-[1.75rem] border border-white/10 p-2 sm:flex-row sm:items-center sm:rounded-full sm:pl-3"
-            onSubmit={handleSubmit}
-          >
-            <label htmlFor="footer-newsletter-email" className="sr-only">
-              Email address
-            </label>
-            <input
-              id="footer-newsletter-email"
-              type="email"
-              placeholder="Your email address"
-              required
-              value={email}
-              onChange={(event) => setEmail(event.target.value)}
-              className="field-surface-dark h-14 flex-1 rounded-full px-4 text-base text-white placeholder:text-white/70 focus:outline-none"
-            />
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="inline-flex h-14 items-center justify-center rounded-full bg-white px-8 text-base font-semibold text-brand-navy transition-transform hover:-translate-y-0.5"
-            >
-              {isSubmitting ? "Subscribing..." : "Subscribe"}
-            </button>
-          </form>
-        </div>
-
-        <div className="mt-14 grid gap-10 lg:grid-cols-12 lg:gap-8">
-          <div className="lg:col-span-4 lg:pr-8">
-            <Link href="/" className="inline-flex items-center">
+    <footer className="footer-cream relative overflow-hidden border-t border-brand-navy/[0.08] bg-brand-beige text-brand-navy">
+      <div className="page-shell relative z-10 pt-14 sm:pt-16">
+        <div className="grid gap-10 border-b border-brand-navy/[0.1] pb-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)] lg:items-end lg:gap-16">
+          <div>
+            <Link href="/" className="inline-block">
               <img
                 src="/logo.png"
                 alt="KIDUART school ERP"
-                className="h-12 w-auto sm:h-14"
+                className="h-10 w-auto sm:h-11"
                 width={512}
                 height={160}
                 loading="lazy"
                 decoding="async"
               />
             </Link>
-            <p className="mt-5 max-w-sm text-sm leading-7 text-brand-navy/75">
-              KIDUART builds school ERP software for Indian educational institutions, helping admin
-              teams, teachers, and finance staff do their jobs without the friction.
+            <p className="mt-7 max-w-lg text-[clamp(1.35rem,1.1rem+0.9vw,1.85rem)] font-bold leading-snug text-brand-navy">
+              School operations, closed for the day —
+              <span className="text-brand-teal"> open again when you are ready.</span>
+            </p>
+            <p className="mt-4 max-w-md text-sm leading-7 text-brand-navy/[0.72]">
+              Admissions, fees, attendance, exams, transport, hostel, library, HR and parent
+              communication — one system for Indian schools.
             </p>
 
-            <div className="mt-6 space-y-3 text-sm text-brand-navy/75">
+            <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm">
               <a
                 href="tel:+919217534128"
-                className="flex items-center gap-3 transition-colors hover:text-brand-teal"
+                className="inline-flex items-center gap-2 font-semibold text-brand-navy transition-colors hover:text-brand-teal"
               >
-                <Phone className="h-4 w-4 shrink-0 text-brand-teal" aria-hidden />
-                <span>{CONTACT_PHONE_DISPLAY}</span>
+                <Phone className="h-4 w-4 text-brand-teal" aria-hidden />
+                {CONTACT_PHONE_DISPLAY}
               </a>
               <a
                 href={`mailto:${CONTACT_EMAIL}`}
-                className="flex items-center gap-3 transition-colors hover:text-brand-teal"
+                className="inline-flex items-center gap-2 font-semibold text-brand-navy transition-colors hover:text-brand-teal"
               >
-                <Mail className="h-4 w-4 shrink-0 text-brand-teal" aria-hidden />
-                <span>{CONTACT_EMAIL}</span>
+                <Mail className="h-4 w-4 text-brand-teal" aria-hidden />
+                {CONTACT_EMAIL}
               </a>
-              <p className="flex items-start gap-3">
-                <MapPin className="mt-1 h-4 w-4 shrink-0 text-brand-teal" aria-hidden />
-                <span>{CONTACT_LOCATION}</span>
-              </p>
+              <span className="inline-flex items-center gap-2 font-semibold text-brand-navy/[0.72]">
+                <MapPin className="h-4 w-4 text-brand-teal" aria-hidden />
+                {CONTACT_LOCATION}
+              </span>
             </div>
 
-            <div className="mt-7 flex gap-3">
+            <div className="mt-6 flex gap-2.5">
               <a
                 href="https://www.instagram.com/kiduart/"
-                className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-brand-navy shadow-sm transition-colors hover:bg-brand-navy hover:text-white"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-navy/15 bg-white text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
                 aria-label="KIDUART on Instagram"
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <Instagram className="h-5 w-5" aria-hidden />
+                <Instagram className="h-4 w-4" aria-hidden />
               </a>
               <a
                 href="https://www.linkedin.com/company/kiduart"
-                className="flex h-11 w-11 items-center justify-center rounded-full bg-white text-brand-navy shadow-sm transition-colors hover:bg-brand-navy hover:text-white"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-navy/15 bg-white text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
                 aria-label="KIDUART on LinkedIn"
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <Linkedin className="h-5 w-5" aria-hidden />
+                <Linkedin className="h-4 w-4" aria-hidden />
               </a>
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4 lg:col-span-8">
-            {NAV_COLUMNS.map((column) => (
-              <nav key={column.heading} aria-label={column.heading}>
-                <h4 className="mb-5 text-xs font-bold uppercase tracking-[0.22em] text-brand-teal">
-                  {column.heading}
-                </h4>
-                <ul className="space-y-3">
-                  {column.links.map((link) => (
-                    <li key={link.href}>
-                      <Link href={link.href} className={linkClass}>
-                        <span className="center-gradient-underline">{link.label}</span>
-                        {link.soon && <SoonBadge />}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-            ))}
-          </div>
+          <form
+            onSubmit={handleSubmit}
+            className="rounded-[1.5rem] border border-brand-navy/[0.1] bg-white p-5 shadow-sm sm:p-6"
+          >
+            <p className="text-[0.68rem] font-bold uppercase tracking-[0.2em] text-brand-teal">
+              The monthly note
+            </p>
+            <p className="mt-2 text-sm leading-6 text-brand-navy/[0.74]">
+              What actually changes in school operations — once a month, no drip.
+            </p>
+            <label htmlFor="footer-newsletter-email" className="sr-only">
+              Email address
+            </label>
+            <div className="mt-4 flex gap-2">
+              <input
+                id="footer-newsletter-email"
+                type="email"
+                placeholder="you@school.edu"
+                required
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                className="h-12 w-full flex-1 rounded-full border border-brand-navy/[0.14] bg-brand-beige/40 px-5 text-sm text-brand-navy placeholder:text-brand-navy/50 focus:border-brand-teal focus:outline-none focus:ring-2 focus:ring-brand-teal/20"
+              />
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="inline-flex h-12 shrink-0 items-center justify-center rounded-full bg-brand-navy px-5 text-sm font-bold text-brand-beige transition-colors hover:bg-brand-teal disabled:opacity-60"
+              >
+                {isSubmitting ? "…" : "Subscribe"}
+              </button>
+            </div>
+            <p className="mt-3 text-xs leading-5 text-brand-navy/[0.65]">
+              Unsubscribe in one click.{" "}
+              <Link href="/privacy-policy" className="font-semibold underline underline-offset-2 hover:text-brand-teal">
+                Privacy
+              </Link>
+            </p>
+          </form>
         </div>
 
-        <div className="mt-14 grid gap-10 border-t border-brand-navy/10 pt-10 md:grid-cols-3 md:gap-8">
-          {EXPLORE_COLUMNS.map((column) => (
+        <nav aria-label="Where to go next" className="border-b border-brand-navy/[0.1] py-10">
+          <p className="text-[0.68rem] font-bold uppercase tracking-[0.2em] text-brand-navy/[0.72]">
+            Where to go next
+          </p>
+          <ul className="mt-5 grid gap-0 sm:grid-cols-3">
+            {DESTINATIONS.map((door, index) => (
+              <li
+                key={door.href}
+                className={index > 0 ? "border-t border-brand-navy/[0.1] sm:border-l sm:border-t-0" : ""}
+              >
+                <Link
+                  href={door.href}
+                  className="group flex h-full flex-col px-0 py-5 sm:px-6 sm:first:pl-0 sm:last:pr-0"
+                >
+                  <span className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-brand-teal">
+                    {door.kicker}
+                  </span>
+                  <span className="mt-2 flex items-baseline gap-2 text-[clamp(1.5rem,1.2rem+0.8vw,2rem)] font-bold text-brand-navy transition-colors group-hover:text-brand-teal">
+                    {door.title}
+                    <ArrowUpRight
+                      className="h-5 w-5 translate-y-0.5 opacity-50 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100"
+                      aria-hidden
+                    />
+                  </span>
+                  <span className="mt-2 text-sm leading-6 text-brand-navy/[0.68]">{door.detail}</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="grid grid-cols-2 gap-x-6 gap-y-9 py-10 sm:grid-cols-4">
+          {NAV_COLUMNS.map((column) => (
             <nav key={column.heading} aria-label={column.heading}>
-              <h4 className="mb-5 text-xs font-bold uppercase tracking-[0.22em] text-brand-teal">
+              <h2 className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-brand-navy/[0.72]">
                 {column.heading}
-              </h4>
-              <ul className="grid grid-cols-2 gap-x-6 gap-y-2.5">
+              </h2>
+              <ul className="space-y-2.5">
                 {column.links.map((link) => (
                   <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="inline-flex min-h-6 items-center py-0.5 text-sm leading-6 text-brand-navy/75 underline-offset-4 transition-colors hover:text-brand-navy hover:underline"
-                    >
-                      {link.label}
+                    <Link href={link.href} className={navLinkClass}>
+                      <span className="center-gradient-underline">{link.label}</span>
+                      {link.soon && <SoonBadge />}
                     </Link>
                   </li>
                 ))}
@@ -302,10 +292,24 @@ export function Footer() {
             </nav>
           ))}
         </div>
+      </div>
 
-        <div className="mt-12 flex flex-col gap-3 border-t border-brand-navy/10 pt-6 text-sm text-brand-navy/75 sm:flex-row sm:items-center sm:justify-between">
-          <p>&copy; {new Date().getFullYear()} KIDUART Inc. All rights reserved.</p>
-          <p>School ERP built in India, for Indian schools.</p>
+      <div className="relative">
+        <p className="footer-wordmark footer-wordmark-cream" aria-hidden="true">
+          KIDUART
+        </p>
+        <div className="page-shell relative z-10">
+          <div className="flex flex-col gap-4 border-t border-brand-navy/[0.1] py-6 text-sm text-brand-navy/[0.65] sm:flex-row sm:items-center sm:justify-between">
+            <p>&copy; {new Date().getFullYear()} KIDUART Inc. All rights reserved.</p>
+            <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-semibold tracking-wide text-brand-navy/[0.7]">
+              {CLOSING_LINE.map((part, index) => (
+                <span key={part} className="inline-flex items-center gap-3">
+                  {index > 0 && <span className="text-brand-navy/25" aria-hidden="true">·</span>}
+                  {part}
+                </span>
+              ))}
+            </p>
+          </div>
         </div>
       </div>
     </footer>

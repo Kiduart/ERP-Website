@@ -5,7 +5,7 @@ import { BankingContactHero } from "@/components/ui/CustomHeroes";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
 import { FloatingIcons } from "@/components/animations/FloatingIcons";
 import { PhoneCall, Mail, LifeBuoy, MapPin, Send } from "lucide-react";
-import { CONTACT_EMAIL, CONTACT_LOCATION, CONTACT_PHONE_DISPLAY, COUNTRY_CODES, DEFAULT_COUNTRY_CODE } from "@/lib/contact";
+import { CONTACT_EMAIL, CONTACT_LOCATION, CONTACT_PHONE_DISPLAY, DEFAULT_COUNTRY_CODE } from "@/lib/contact";
 import { useToast } from "@/hooks/use-toast";
 import { useState, type FormEvent } from "react";
 
@@ -207,18 +207,11 @@ export default function Contact() {
                     </div>
                   </div>
 
-                  <div className="grid md:grid-cols-[14rem_minmax(0,1fr)] gap-6">
-                    <div className="space-y-2">
-                      <label className="text-sm font-bold text-brand-navy">Country Code</label>
-                      <select value={formData.code} onChange={(e) => handleChange("code", e.target.value)} className="field-surface w-full border border-brand-navy/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-teal focus:border-transparent transition-all">
-                        {COUNTRY_CODES.map((code) => (
-                          <option key={code.value} value={code.value}>{code.label}</option>
-                        ))}
-                      </select>
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-bold text-brand-navy">Phone Number</label>
-                      <input required type="tel" inputMode="numeric" pattern="[0-9]{10}" maxLength={10} value={formData.phone} onChange={(e) => handleChange("phone", e.target.value.replace(/\D/g, "").slice(0, 10))} className="field-surface w-full border border-brand-navy/10 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-brand-teal focus:border-transparent transition-all" placeholder="10 digit number" />
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-brand-navy" htmlFor="contact-phone">Phone Number</label>
+                    <div className="field-surface flex items-center rounded-xl border border-brand-navy/10 transition-all focus-within:ring-2 focus-within:ring-brand-teal">
+                      <span className="border-r border-brand-navy/10 px-4 py-3 text-sm font-bold text-brand-navy">+91</span>
+                      <input id="contact-phone" required type="tel" inputMode="numeric" pattern="[0-9]{10}" maxLength={10} value={formData.phone} onChange={(e) => handleChange("phone", e.target.value.replace(/\D/g, "").slice(0, 10))} className="w-full bg-transparent px-4 py-3 focus:outline-none" placeholder="10 digit number" />
                     </div>
                   </div>
                   

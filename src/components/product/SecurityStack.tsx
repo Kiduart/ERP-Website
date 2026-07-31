@@ -1,21 +1,41 @@
-import { useEffect, useRef, useState } from "react";
-import { Check } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { Check, MousePointerClick } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ACCENTS } from "@/components/product/ProductPrimitives";
 import { ProductIcon } from "@/components/product/ProductIcon";
 import type { SecurityLayer } from "@/data/securityPosture";
 
 /**
- * Defence-in-depth read as a stack: a plate diagram tracks which layer is on
- * screen while every layer's copy stays rendered for crawlers.
+ * Defence-in-depth as a sticky rail + inner-scrolling stack. On desktop the
+ * layer write-ups scroll inside their own pane so the rail stays put and tracks
+ * progress; on narrow screens it falls back to normal page flow. Every layer's
+ * copy stays in the DOM for crawlers.
  */
 export function SecurityStack({ layers }: { layers: SecurityLayer[] }) {
   const [activeId, setActiveId] = useState(layers[0]?.id ?? "");
+  const [panelScroll, setPanelScroll] = useState(false);
+  const [progress, setProgress] = useState(0);
   const sectionRefs = useRef(new Map<string, HTMLElement>());
+  const railRefs = useRef(new Map<string, HTMLAnchorElement>());
+  const paneRef = useRef<HTMLDivElement | null>(null);
+
+  const activeIndex = Math.max(
+    0,
+    layers.findIndex((layer) => layer.id === activeId),
+  );
+
+  useEffect(() => {
+    const query = window.matchMedia("(min-width: 1024px)");
+    const update = () => setPanelScroll(query.matches);
+    update();
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, []);
 
   useEffect(() => {
     if (typeof IntersectionObserver === "undefined") return;
 
+    const root = panelScroll ? paneRef.current : null;
     const observer = new IntersectionObserver(
       (entries) => {
         const visible = entries
@@ -25,20 +45,64 @@ export function SecurityStack({ layers }: { layers: SecurityLayer[] }) {
           setActiveId(visible.target.dataset.layer);
         }
       },
-      { rootMargin: "-25% 0px -55% 0px", threshold: [0, 0.3, 0.6] },
+      {
+        root,
+        rootMargin: panelScroll ? "0px 0px -68% 0px" : "-25% 0px -55% 0px",
+        threshold: [0, 0.25, 0.5],
+      },
     );
 
     sectionRefs.current.forEach((node) => observer.observe(node));
     return () => observer.disconnect();
-  }, [layers]);
+  }, [layers, panelScroll]);
+
+  useEffect(() => {
+    const pane = paneRef.current;
+    if (!pane || !panelScroll) return;
+
+    const onScroll = () => {
+      const scrollable = pane.scrollHeight - pane.clientHeight;
+      setProgress(scrollable > 0 ? Math.min(1, pane.scrollTop / scrollable) : 0);
+    };
+
+    onScroll();
+    pane.addEventListener("scroll", onScroll, { passive: true });
+    return () => pane.removeEventListener("scroll", onScroll);
+  }, [panelScroll, layers]);
+
+  useEffect(() => {
+    if (!panelScroll) return;
+    railRefs.current.get(activeId)?.scrollIntoView({ block: "nearest" });
+  }, [activeId, panelScroll]);
 
   const register = (id: string) => (node: HTMLElement | null) => {
     if (node) sectionRefs.current.set(id, node);
     else sectionRefs.current.delete(id);
   };
 
+  const jumpTo = useCallback(
+    (event: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+      const node = sectionRefs.current.get(id);
+      const pane = paneRef.current;
+      if (!node) return;
+
+      event.preventDefault();
+      setActiveId(id);
+
+      const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+      const behavior: ScrollBehavior = reduce ? "auto" : "smooth";
+
+      if (panelScroll && pane) {
+        pane.scrollTo({ top: Math.max(0, node.offsetTop - 8), behavior });
+      } else {
+        node.scrollIntoView({ behavior, block: "start" });
+      }
+    },
+    [panelScroll],
+  );
+
   return (
-    <div className="grid gap-10 lg:grid-cols-[minmax(0,19rem)_minmax(0,1fr)] lg:gap-14">
+    <div className="grid gap-8 lg:grid-cols-[minmax(0,18rem)_minmax(0,1fr)] lg:gap-10">
       <div className="lg:sticky lg:top-28 lg:self-start">
         <p className="text-sm font-bold uppercase tracking-[0.18em] text-brand-navy">
           {layers.length} layers, outside in
@@ -47,8 +111,20 @@ export function SecurityStack({ layers }: { layers: SecurityLayer[] }) {
           Each plate is a separate control. A gap in one does not open the record underneath it.
         </p>
 
-        <nav aria-label="Security layers" className="mt-6">
-          <ol className="flex gap-2 overflow-x-auto pb-2 lg:block lg:space-y-1.5 lg:overflow-visible lg:pb-0">
+        <div className="mt-4 hidden items-center gap-3 lg:flex">
+          <span className="h-1.5 flex-1 overflow-hidden rounded-full bg-brand-navy/[0.1]">
+            <span
+              className="block h-full rounded-full bg-brand-teal transition-[width] duration-200"
+              style={{ width: `${Math.round(progress * 100)}%` }}
+            />
+          </span>
+          <span className="text-xs font-bold tabular-nums text-brand-navy/[0.72]" aria-live="polite">
+            {activeIndex + 1}/{layers.length}
+          </span>
+        </div>
+
+        <nav aria-label="Security layers" className="mt-5">
+          <ol className="capability-scroll flex gap-2 overflow-x-auto pb-2 lg:max-h-[58vh] lg:flex-col lg:overflow-x-visible lg:overflow-y-auto lg:pb-0 lg:pr-1.5">
             {layers.map((layer) => {
               const isActive = layer.id === activeId;
               const tokens = ACCENTS[layer.accent];
@@ -56,11 +132,16 @@ export function SecurityStack({ layers }: { layers: SecurityLayer[] }) {
                 <li key={layer.id} className="shrink-0 lg:shrink">
                   <a
                     href={`#layer-${layer.id}`}
+                    onClick={(event) => jumpTo(event, layer.id)}
                     aria-current={isActive ? "true" : undefined}
+                    ref={(node) => {
+                      if (node) railRefs.current.set(layer.id, node);
+                      else railRefs.current.delete(layer.id);
+                    }}
                     className={cn(
                       "group flex items-center gap-3 rounded-2xl border px-4 py-3 text-sm font-semibold transition-all duration-300",
                       isActive
-                        ? "border-brand-navy/25 bg-brand-navy text-brand-beige lg:translate-x-2"
+                        ? "border-brand-navy/25 bg-brand-navy text-brand-beige"
                         : "border-brand-navy/[0.1] bg-white text-brand-navy hover:border-brand-teal/40 hover:text-brand-teal",
                     )}
                   >
@@ -80,9 +161,20 @@ export function SecurityStack({ layers }: { layers: SecurityLayer[] }) {
             })}
           </ol>
         </nav>
+
+        <p className="mt-4 hidden items-center gap-2 text-xs font-semibold text-brand-navy/[0.7] lg:flex">
+          <MousePointerClick className="h-3.5 w-3.5 text-brand-teal" aria-hidden="true" />
+          Scroll inside the stack or pick a layer
+        </p>
       </div>
 
-      <div className="space-y-6">
+      <div
+        ref={paneRef}
+        tabIndex={0}
+        role="region"
+        aria-label="Security layers detail"
+        className="capability-scroll relative space-y-6 lg:max-h-[76vh] lg:overflow-y-auto lg:pr-3"
+      >
         {layers.map((layer) => {
           const tokens = ACCENTS[layer.accent];
           const isActive = layer.id === activeId;
@@ -93,13 +185,17 @@ export function SecurityStack({ layers }: { layers: SecurityLayer[] }) {
               data-layer={layer.id}
               ref={register(layer.id)}
               className={cn(
-                "relative scroll-mt-28 overflow-hidden rounded-[2rem] border bg-white p-6 transition-shadow duration-300 md:p-8",
+                "relative scroll-mt-28 overflow-hidden rounded-[2rem] border bg-white p-6 transition-shadow duration-300 md:p-8 lg:scroll-mt-4",
                 tokens.border,
                 isActive ? "shadow-xl shadow-brand-navy/[0.08]" : "shadow-sm",
               )}
             >
               <span
-                className={cn("absolute inset-x-0 top-0 h-1.5 transition-opacity duration-300", tokens.bar, isActive ? "opacity-100" : "opacity-40")}
+                className={cn(
+                  "absolute inset-x-0 top-0 h-1.5 transition-opacity duration-300",
+                  tokens.bar,
+                  isActive ? "opacity-100" : "opacity-40",
+                )}
                 aria-hidden="true"
               />
 
@@ -125,7 +221,10 @@ export function SecurityStack({ layers }: { layers: SecurityLayer[] }) {
                     className="flex items-start gap-2.5 rounded-2xl border border-brand-navy/[0.08] bg-brand-beige/20 px-4 py-3"
                   >
                     <span
-                      className={cn("mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full", tokens.softBg)}
+                      className={cn(
+                        "mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full",
+                        tokens.softBg,
+                      )}
                       aria-hidden="true"
                     >
                       <Check className={cn("h-3 w-3", tokens.text)} />

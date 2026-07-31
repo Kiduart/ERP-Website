@@ -1,8 +1,11 @@
 import { Link } from "wouter";
-import { ArrowUpRight, ChevronDown, Layers, Lock } from "lucide-react";
+import { ArrowUpRight, ChevronDown, Layers } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { ACCENTS, type AccentName } from "@/components/product/ProductPrimitives";
-
+import {
+  ACCENTS,
+  HiddenCapabilitiesLink,
+  type AccentName,
+} from "@/components/product/ProductPrimitives";
 import type { PublicModule } from "@/data/featureMatrix";
 
 export type ShelfModule = PublicModule;
@@ -33,17 +36,18 @@ export function ModuleShelf({
         return (
           <details
             key={module.slug}
+            id={`module-${module.slug}`}
             open={defaultOpenFirst && index === 0}
             className={cn(
-              "group overflow-hidden rounded-3xl border bg-white/95 shadow-sm transition-colors",
+              "group scroll-mt-28 overflow-hidden rounded-[1.75rem] border bg-white shadow-sm shadow-brand-navy/[0.04] transition-shadow open:shadow-lg open:shadow-brand-navy/[0.08]",
               tokens.border,
             )}
           >
-            <summary className="flex cursor-pointer list-none flex-col gap-3 p-6 md:flex-row md:items-center md:justify-between">
+            <summary className="flex cursor-pointer list-none flex-col gap-3 p-5 md:flex-row md:items-center md:justify-between md:p-6">
               <span className="flex items-start gap-4">
                 <span
                   className={cn(
-                    "mt-0.5 inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl",
+                    "mt-0.5 inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl",
                     tokens.softBg,
                   )}
                   aria-hidden="true"
@@ -51,18 +55,26 @@ export function ModuleShelf({
                   <Layers className={cn("h-5 w-5", tokens.text)} />
                 </span>
                 <span>
-                  <h3 className="text-lg font-bold text-brand-navy">{module.name}</h3>
+                  <span className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-brand-navy/[0.72]">
+                    Module {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="mt-1 text-lg font-bold text-brand-navy md:text-xl">{module.name}</h3>
                   <span className="mt-1 block text-sm text-brand-navy/[0.74]">
                     {module.featureCount} features · {module.subModules.length} {subModuleLabel}
                   </span>
                 </span>
               </span>
               <span className="flex items-center gap-3 md:shrink-0">
-                <span className="text-sm font-semibold text-brand-navy/[0.72] group-open:hidden">
-                  Show capabilities
-                </span>
-                <span className="hidden text-sm font-semibold text-brand-navy/[0.72] group-open:inline">
-                  Hide capabilities
+                <span
+                  className={cn(
+                    "rounded-full border px-3 py-1.5 text-xs font-bold uppercase tracking-[0.12em]",
+                    tokens.border,
+                    tokens.softBg,
+                    tokens.text,
+                  )}
+                >
+                  <span className="group-open:hidden">Show capabilities</span>
+                  <span className="hidden group-open:inline">Hide capabilities</span>
                 </span>
                 <ChevronDown
                   className="h-5 w-5 text-brand-navy/50 transition-transform duration-300 group-open:rotate-180"
@@ -71,7 +83,7 @@ export function ModuleShelf({
               </span>
             </summary>
 
-            <div className="border-t border-brand-navy/[0.08] bg-brand-beige/20 px-6 py-6">
+            <div className="border-t border-brand-navy/[0.08] bg-brand-beige/20 px-5 py-6 md:px-6">
               <div className="space-y-6">
                 {module.subModules.map((subModule) => (
                   <section key={subModule.slug} aria-label={subModule.name}>
@@ -88,7 +100,7 @@ export function ModuleShelf({
                       {subModule.features.map((feature) => (
                         <li
                           key={`${subModule.slug}-${feature.name}`}
-                          className="flex items-start gap-2 rounded-xl bg-white px-3 py-2 text-sm leading-6 text-brand-navy/[0.82]"
+                          className="flex items-start gap-2 rounded-xl bg-white px-3 py-2.5 text-sm leading-6 text-brand-navy/[0.82]"
                         >
                           <span
                             className={cn("mt-2 h-1.5 w-1.5 shrink-0 rounded-full", tokens.bar)}
@@ -98,9 +110,8 @@ export function ModuleShelf({
                         </li>
                       ))}
                       {subModule.hiddenFeatureCount > 0 && (
-                        <li className="flex items-start gap-2 rounded-xl border border-dashed border-brand-navy/20 px-3 py-2 text-sm leading-6 text-brand-navy/[0.72]">
-                          <Lock className="mt-1 h-3.5 w-3.5 shrink-0 text-brand-navy/50" aria-hidden="true" />
-                          {subModule.hiddenFeatureCount} more, shown in the demo
+                        <li className="sm:col-span-2 xl:col-span-1">
+                          <HiddenCapabilitiesLink count={subModule.hiddenFeatureCount} />
                         </li>
                       )}
                     </ul>
@@ -108,19 +119,22 @@ export function ModuleShelf({
                 ))}
               </div>
 
-              <div className="mt-6 flex flex-wrap items-center gap-3">
+              <div className="mt-6 flex flex-wrap items-center gap-3 border-t border-brand-navy/[0.08] pt-5">
                 <Link
                   href={`/features/${areaSlug}/${module.slug}`}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-brand-navy/[0.14] bg-white px-5 py-2.5 text-sm font-bold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
+                  className="inline-flex items-center gap-2 rounded-full bg-brand-navy px-6 py-3 text-sm font-bold text-brand-beige shadow-md shadow-brand-navy/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-teal"
                 >
                   Open {module.name} module page
                   <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
                 {module.hiddenFeatureCount > 0 && (
-                  <p className="text-sm text-brand-navy/[0.72]">
-                    {module.hiddenFeatureCount} further capabilities in this module are covered in a
-                    walkthrough.
-                  </p>
+                  <a
+                    href="#capability-sheet"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-brand-navy/[0.14] bg-white px-5 py-3 text-sm font-bold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
+                  >
+                    Request remaining {module.hiddenFeatureCount}
+                    <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                  </a>
                 )}
               </div>
             </div>

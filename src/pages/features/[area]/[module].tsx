@@ -1,6 +1,6 @@
 import type { GetStaticPaths, GetStaticProps } from "next";
 import { Link } from "wouter";
-import { ArrowRight, Check, Lock } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { PageSeoHead } from "@/components/seo/PageSeoHead";
 import { SchemaMarkup } from "@/components/seo/SchemaMarkup";
 import { moduleFeaturePageSeo } from "@/lib/pageSeo";
@@ -13,6 +13,7 @@ import { CapabilitySheetRequest } from "@/components/product/CapabilitySheetRequ
 import {
   ACCENTS,
   Breadcrumbs,
+  HiddenCapabilitiesLink,
   StatChip,
   type AccentName,
 } from "@/components/product/ProductPrimitives";
@@ -37,6 +38,10 @@ export default function FeatureModule({ area, productModule, counts, siblings, p
     { name: area.label, path: `/features/${area.slug}` },
     { name: productModule.name, path: `/features/${area.slug}/${productModule.slug}` },
   ];
+  const visibleFeatureCount = productModule.subModules.reduce(
+    (sum, sub) => sum + sub.features.length,
+    0,
+  );
 
   return (
     <>
@@ -62,11 +67,16 @@ export default function FeatureModule({ area, productModule, counts, siblings, p
 
       <PageTransition className="pt-20 pb-0">
         <section className="relative overflow-hidden border-b border-brand-navy/[0.06] bg-white pb-12 pt-12 md:pb-16">
-          <BackgroundBlobs blobs={[{ color: "#0c716b", size: 300, position: "top-right", opacity: 0.09 }]} />
+          <BackgroundBlobs
+            blobs={[
+              { color: "#0c716b", size: 300, position: "top-right", opacity: 0.09 },
+              { color: "#003049", size: 280, position: "bottom-left", opacity: 0.07 },
+            ]}
+          />
           <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <Breadcrumbs trail={trail} />
 
-            <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
+            <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start lg:gap-10">
               <SectionReveal>
                 <Link
                   href={`/features/${area.slug}`}
@@ -78,21 +88,80 @@ export default function FeatureModule({ area, productModule, counts, siblings, p
                   </span>
                 </Link>
 
-                <h1 className="mt-6 text-4xl font-bold leading-tight text-brand-navy md:text-5xl">
+                <p className="mt-5 text-sm font-bold uppercase tracking-[0.16em] text-brand-navy/[0.72]">
+                  Functional module · {area.label}
+                </p>
+                <h1 className="mt-3 text-[clamp(2rem,1.5rem+2vw,3.25rem)] font-bold leading-[1.12] text-brand-navy">
                   {productModule.name}
                 </h1>
-                <p className="mt-5 text-lg leading-8 text-brand-navy/[0.78]">
+                <p className="mt-5 max-w-xl text-lg leading-8 text-brand-navy/[0.78]">
                   {productModule.name} ships {counts.features} capabilities across {counts.subModules}{" "}
                   {counts.subModules === 1 ? "sub-module" : "sub-modules"}, as part of the{" "}
                   {area.label.toLowerCase()} area. Each sub-module below lists what your team will use
                   most often; the rest we walk through live, against your own school setup.
                 </p>
+
+                <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                  <Link
+                    href="/demo"
+                    className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-navy px-7 py-3.5 text-base font-bold text-brand-beige transition-all duration-300 hover:-translate-y-1 hover:bg-brand-teal"
+                  >
+                    Demo {productModule.name}
+                    <ArrowRight className="h-5 w-5" aria-hidden="true" />
+                  </Link>
+                  {productModule.hiddenFeatureCount > 0 && (
+                    <a
+                      href="#capability-sheet"
+                      className="inline-flex items-center justify-center gap-2 rounded-full border border-brand-navy/[0.14] bg-white px-7 py-3.5 text-base font-bold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
+                    >
+                      Request full sheet ({productModule.hiddenFeatureCount} more)
+                    </a>
+                  )}
+                </div>
               </SectionReveal>
 
-              <SectionReveal delay={0.1} className="space-y-4">
-                <div className="grid grid-cols-2 gap-3">
-                  <StatChip value={counts.features} label="Features" />
-                  <StatChip value={counts.subModules} label="Sub-modules" />
+              <SectionReveal delay={0.1}>
+                <div className="fabric-board overflow-hidden rounded-[2rem] border border-brand-navy/[0.12] bg-white/75 p-4 shadow-2xl shadow-brand-navy/[0.08] backdrop-blur-sm sm:p-5">
+                  <div className="flex flex-wrap items-center justify-between gap-2 px-1 pb-3">
+                    <p className="inline-flex items-center gap-2 text-[0.68rem] font-bold uppercase tracking-[0.18em] text-brand-teal">
+                      <span className="console-live-dot h-1.5 w-1.5 rounded-full bg-brand-teal" aria-hidden="true" />
+                      Module depth
+                    </p>
+                    <p className="text-xs font-semibold text-brand-navy/[0.72]">
+                      {visibleFeatureCount} listed · {productModule.hiddenFeatureCount} gated
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-2.5">
+                    <StatChip value={counts.features} label="Features" animate />
+                    <StatChip value={counts.subModules} label="Sub-modules" animate />
+                  </div>
+
+                  <div className="mt-3 rounded-[1.35rem] border border-brand-navy/[0.1] bg-white p-5">
+                    <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-navy/[0.72]">
+                      Sub-modules inside
+                    </p>
+                    <ul className="mt-3 space-y-2">
+                      {productModule.subModules.map((subModule, index) => (
+                        <li key={subModule.slug}>
+                          <a
+                            href={`#sub-${subModule.slug}`}
+                            className="flex items-center justify-between gap-3 rounded-xl border border-brand-navy/[0.08] bg-brand-beige/25 px-3.5 py-2.5 text-sm transition-colors hover:border-brand-teal/40 hover:text-brand-teal"
+                          >
+                            <span className="font-semibold text-brand-navy">
+                              <span className="mr-2 text-xs font-bold text-brand-navy/[0.72]">
+                                {String(index + 1).padStart(2, "0")}
+                              </span>
+                              {subModule.name}
+                            </span>
+                            <span className="text-xs font-bold tabular-nums text-brand-navy/[0.72]">
+                              {subModule.featureCount}
+                            </span>
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </SectionReveal>
             </div>
@@ -100,23 +169,40 @@ export default function FeatureModule({ area, productModule, counts, siblings, p
         </section>
 
         <section className="section-space relative overflow-hidden bg-brand-beige/25">
+          <BackgroundBlobs blobs={[{ color: "#0c716b", size: 280, position: "center-left", opacity: 0.08 }]} />
           <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <div className="space-y-8">
+            <SectionReveal className="mb-8">
+              <p className="section-kicker">Capabilities by sub-module</p>
+              <h2 className="mt-4 text-3xl font-bold text-brand-navy md:text-4xl">
+                What {productModule.name.toLowerCase()} covers day to day
+              </h2>
+              <p className="mt-4 max-w-3xl text-lg leading-8 text-brand-navy/[0.74]">
+                The capabilities schools ask about most are listed below. Anything gated jumps
+                straight to the sheet request so you can get the rest in writing.
+              </p>
+            </SectionReveal>
+
+            <div className="space-y-6">
               {productModule.subModules.map((subModule, index) => (
-                <SectionReveal
-                  key={subModule.slug}
-                  delay={Math.min(index * 0.05, 0.2)}
-                  className="rounded-[2rem] border border-brand-navy/[0.08] bg-white p-6 shadow-sm md:p-8"
-                >
-                  <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-brand-navy/[0.08] pb-5">
-                    <h2 className="text-2xl font-bold text-brand-navy">{subModule.name}</h2>
+                <div key={subModule.slug} id={`sub-${subModule.slug}`} className="scroll-mt-28">
+                  <SectionReveal
+                    delay={Math.min(index * 0.05, 0.2)}
+                    className="overflow-hidden rounded-[1.75rem] border border-brand-navy/[0.1] bg-white shadow-sm shadow-brand-navy/[0.04]"
+                  >
+                  <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-brand-navy/[0.08] bg-brand-beige/20 px-6 py-5 md:px-8">
+                    <div>
+                      <p className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-brand-navy/[0.72]">
+                        Sub-module {String(index + 1).padStart(2, "0")}
+                      </p>
+                      <h2 className="mt-1 text-2xl font-bold text-brand-navy">{subModule.name}</h2>
+                    </div>
                     <p className="text-sm font-semibold uppercase tracking-[0.16em] text-brand-navy/[0.72]">
                       {subModule.featureCount}{" "}
                       {subModule.featureCount === 1 ? "capability" : "capabilities"}
                     </p>
                   </div>
 
-                  <ul className="mt-6 grid gap-2.5 sm:grid-cols-2">
+                  <ul className="grid gap-2.5 p-6 sm:grid-cols-2 md:p-8">
                     {subModule.features.map((feature) => (
                       <li
                         key={`${subModule.slug}-${feature.name}`}
@@ -134,21 +220,16 @@ export default function FeatureModule({ area, productModule, counts, siblings, p
                       </li>
                     ))}
                     {subModule.hiddenFeatureCount > 0 && (
-                      <li className="flex items-start gap-3 rounded-2xl border border-dashed border-brand-navy/20 px-4 py-3">
-                        <span
-                          className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-navy/[0.06]"
-                          aria-hidden="true"
-                        >
-                          <Lock className="h-3 w-3 text-brand-navy/60" />
-                        </span>
-                        <span className="text-sm leading-6 text-brand-navy/[0.75]">
-                          {subModule.hiddenFeatureCount} further capabilities in {subModule.name} —
-                          walked through on a demo call.
-                        </span>
+                      <li className="sm:col-span-2">
+                        <HiddenCapabilitiesLink
+                          count={subModule.hiddenFeatureCount}
+                          label={`in ${subModule.name}`}
+                        />
                       </li>
                     )}
                   </ul>
-                </SectionReveal>
+                  </SectionReveal>
+                </div>
               ))}
             </div>
 
@@ -167,14 +248,15 @@ export default function FeatureModule({ area, productModule, counts, siblings, p
         <section className="section-space-tight relative overflow-hidden bg-white">
           <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div className="grid gap-6 lg:grid-cols-2">
-              <SectionReveal className="rounded-[2rem] border border-brand-navy/[0.08] bg-brand-beige/20 p-6 md:p-8">
-                <h2 className="text-2xl font-bold text-brand-navy">Other modules in {area.label}</h2>
+              <SectionReveal className="rounded-[2rem] border border-brand-navy/[0.1] bg-brand-beige/20 p-6 md:p-8">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-teal">Same area</p>
+                <h2 className="mt-2 text-2xl font-bold text-brand-navy">Other modules in {area.label}</h2>
                 <ul className="mt-5 space-y-2.5">
                   {siblings.map((sibling) => (
                     <li key={sibling.slug}>
                       <Link
                         href={`/features/${area.slug}/${sibling.slug}`}
-                        className="flex items-center justify-between gap-4 rounded-2xl bg-white px-4 py-3 transition-colors hover:text-brand-teal"
+                        className="flex items-center justify-between gap-4 rounded-2xl border border-brand-navy/[0.08] bg-white px-4 py-3.5 transition-colors hover:border-brand-teal/40 hover:text-brand-teal"
                       >
                         <span className="text-sm font-bold text-brand-navy">{sibling.name}</span>
                         <span className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-navy/[0.7]">
@@ -186,15 +268,16 @@ export default function FeatureModule({ area, productModule, counts, siblings, p
                 </ul>
                 <Link
                   href={`/features/${area.slug}`}
-                  className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-brand-navy underline-offset-4 hover:text-brand-teal hover:underline"
+                  className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand-navy px-5 py-2.5 text-sm font-bold text-brand-beige transition-colors hover:bg-brand-teal"
                 >
                   Back to {area.label}
                   <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </Link>
               </SectionReveal>
 
-              <SectionReveal delay={0.08} className="rounded-[2rem] border border-brand-navy/[0.08] bg-brand-navy p-6 text-brand-beige md:p-8">
-                <h2 className="text-2xl font-bold text-brand-beige">Which panel uses this</h2>
+              <SectionReveal delay={0.08} className="rounded-[2rem] border border-brand-navy/[0.1] bg-brand-navy p-6 text-brand-beige md:p-8">
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-yellow">Role panels</p>
+                <h2 className="mt-2 text-2xl font-bold text-brand-beige">Which panel uses this</h2>
                 <p className="mt-3 text-sm leading-6 text-brand-beige/80">
                   Roles reach {productModule.name.toLowerCase()} through these dashboards, with permissions
                   deciding what each person can open.
@@ -204,7 +287,7 @@ export default function FeatureModule({ area, productModule, counts, siblings, p
                     <li key={panel.slug}>
                       <Link
                         href={`/platform/${panel.slug}`}
-                        className="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-bold text-brand-beige transition-colors hover:border-brand-yellow/50 hover:text-brand-yellow"
+                        className="flex items-center justify-between gap-4 rounded-2xl border border-white/10 bg-white/5 px-4 py-3.5 text-sm font-bold text-brand-beige transition-colors hover:border-brand-yellow/50 hover:text-brand-yellow"
                       >
                         {panel.label}
                         <ArrowRight className="h-4 w-4" aria-hidden="true" />

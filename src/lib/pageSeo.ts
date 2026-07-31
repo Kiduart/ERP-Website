@@ -143,13 +143,19 @@ export function moduleFeaturePageSeo(params: {
   };
 }
 
-export function integrationPageSeo(slug: string, name: string, description: string): PageSeoHeadProps {
+export function integrationPageSeo(
+  slug: string,
+  name: string,
+  description: string,
+  keywords?: string,
+): PageSeoHeadProps {
   const trimmed = description.length > 155 ? `${description.slice(0, 152)}...` : description;
   return {
     title: `${name} Integration for KIDUART School ERP`,
     description: trimmed,
     path: `/integrations/${slug}`,
     ogImage: `${SITE_ORIGIN}/images/banner/home-hero.jpeg`,
+    ...(keywords ? { keywords } : {}),
   };
 }
 

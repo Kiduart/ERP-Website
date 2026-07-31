@@ -10,8 +10,9 @@ import { PANEL_SLUGS, PRODUCT_PANELS } from "../src/data/productPanels";
 import { PRODUCT_PERSONAS } from "../src/data/productPersonas";
 import { SCHOOL_OPERATIONS_JOURNEY } from "../src/lib/siteData";
 import { pricingPlans } from "../src/data/pricing";
-import { SECURITY_LAYERS } from "../src/data/securityPosture";
+import { SECURITY_LAYERS, SECURITY_SCENARIOS } from "../src/data/securityPosture";
 import integrationsData, { INTEGRATION_CATEGORIES } from "../src/data/integrationsData";
+import { CONTACT_INTENTS } from "../src/data/contactIntents";
 
 const errors: string[] = [];
 const categorySlugs = new Set(MATRIX_CATEGORIES.map((category) => category.slug));
@@ -103,6 +104,32 @@ for (const [slug, integration] of Object.entries(integrationsData)) {
 for (const layer of SECURITY_LAYERS) {
   if (!moduleKeys.has(`security-and-authentication::${layer.module}`)) {
     errors.push(`security layer "${layer.id}" references unknown module "${layer.module}"`);
+  }
+}
+
+const areaHrefs = new Set(MATRIX_CATEGORIES.map((category) => `/features/${category.slug}`));
+for (const intent of CONTACT_INTENTS) {
+  for (const area of intent.areas) {
+    if (!areaHrefs.has(area.href)) {
+      errors.push(`contact intent "${intent.id}" links to unknown area "${area.href}"`);
+    }
+  }
+}
+
+const layerIds = new Set(SECURITY_LAYERS.map((layer) => layer.id));
+const layerControls = new Set(SECURITY_LAYERS.flatMap((layer) => layer.controls));
+for (const scenario of SECURITY_SCENARIOS) {
+  const layer = SECURITY_LAYERS.find((entry) => entry.id === scenario.stoppedBy);
+  if (!layerIds.has(scenario.stoppedBy)) {
+    errors.push(`security scenario "${scenario.id}" references unknown layer "${scenario.stoppedBy}"`);
+  }
+  for (const control of scenario.controls) {
+    if (!layerControls.has(control)) {
+      errors.push(`security scenario "${scenario.id}" claims a control no layer lists: "${control}"`);
+    }
+  }
+  if (layer && !scenario.controls.some((control) => layer.controls.includes(control))) {
+    errors.push(`security scenario "${scenario.id}" lists no control from layer "${layer.id}"`);
   }
 }
 

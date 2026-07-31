@@ -8,11 +8,12 @@ import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CtaSection } from "@/components/ui/CtaSection";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
 import { FloatingIcons } from "@/components/animations/FloatingIcons";
-import { ArrowRight, Check, ChevronDown, Info } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, ChevronDown, Info, KeyRound, Receipt, Shield } from "lucide-react";
 import { ProductIcon } from "@/components/product/ProductIcon";
+import { IntegrationStatusPill } from "@/components/product/IntegrationStatusPill";
 import { ACCENTS, Breadcrumbs, TextLink } from "@/components/product/ProductPrimitives";
 import { cn } from "@/lib/utils";
-import integrationsData from "@/data/integrationsData";
+import integrationsData, { INTEGRATION_STATUS_META } from "@/data/integrationsData";
 import type { IntegrationEntry } from "@/data/integrationsData";
 import { AREA_NARRATIVE_BY_SLUG } from "@/data/productNarrative";
 import { findMatrixModule, getMatrixCategory } from "@/data/featureMatrix";
@@ -30,6 +31,7 @@ type RelatedIntegration = {
   name: string;
   description: string;
   icon: string;
+  status: IntegrationEntry["status"];
 };
 
 type IntegrationPageProps = {
@@ -39,6 +41,14 @@ type IntegrationPageProps = {
   related: RelatedIntegration[];
 };
 
+const MUTED = { color: "rgb(var(--hero-muted-rgb) / 0.8)" };
+
+const OWNERSHIP_CARDS = [
+  { key: "credentials", label: "Who holds the credentials", icon: KeyRound },
+  { key: "data", label: "Where the data sits", icon: Shield },
+  { key: "billing", label: "Who gets billed", icon: Receipt },
+] as const;
+
 export default function IntegrationDetail({
   slug,
   integration,
@@ -47,10 +57,14 @@ export default function IntegrationDetail({
 }: IntegrationPageProps) {
   const tokens = ACCENTS[integration.accent];
   const isPlanned = integration.status === "planned";
+  const isGuided = integration.status === "guided";
+  const statusMeta = INTEGRATION_STATUS_META[integration.status];
 
   return (
     <>
-      <PageSeoHead {...integrationPageSeo(slug, integration.name, integration.description)} />
+      <PageSeoHead
+        {...integrationPageSeo(slug, integration.name, integration.description, integration.keywords)}
+      />
       <SchemaMarkup
         data={buildBreadcrumbSchema([
           { name: "Home", path: "/" },
@@ -82,29 +96,30 @@ export default function IntegrationDetail({
             <div className="grid gap-10 lg:grid-cols-[1.25fr_1fr] lg:items-start">
               <SectionReveal>
                 <div className="flex flex-wrap items-center gap-3">
-                  <span
-                    className={cn("flex h-14 w-14 items-center justify-center rounded-2xl", tokens.softBg)}
-                  >
+                  <span className={cn("flex h-14 w-14 items-center justify-center rounded-2xl", tokens.softBg)}>
                     <ProductIcon name={integration.icon} className={cn("h-7 w-7", tokens.text)} />
                   </span>
                   <span className="rounded-full bg-brand-navy/[0.06] px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-brand-navy">
                     {integration.category}
                   </span>
-                  {isPlanned ? (
-                    <span className="rounded-full border border-brand-orange/40 bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-brand-orange-ink">
-                      On the roadmap
-                    </span>
-                  ) : (
-                    <span className="rounded-full border border-brand-teal/40 bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-brand-teal">
-                      Available now
-                    </span>
-                  )}
+                  <IntegrationStatusPill status={integration.status} className="px-4 py-1.5 text-xs" />
                 </div>
 
                 <h1 className="mt-6 text-[clamp(2rem,1.5rem+1.8vw,3.5rem)] font-bold leading-[1.05] text-brand-navy">
                   {integration.name} with KIDUART
                 </h1>
-                <p className="mt-5 max-w-2xl text-lg leading-8 text-brand-navy/[0.76]">{integration.intro}</p>
+                <p className="mt-5 max-w-2xl text-lg leading-8 text-brand-navy/[0.78]">{integration.intro}</p>
+
+                <div className="mt-6 flex flex-wrap gap-2">
+                  {integration.providers.map((provider) => (
+                    <span
+                      key={provider}
+                      className="rounded-lg border border-brand-navy/[0.12] bg-white px-3 py-1.5 text-xs font-bold text-brand-navy/[0.8]"
+                    >
+                      {provider}
+                    </span>
+                  ))}
+                </div>
 
                 <div className="mt-8 flex flex-wrap gap-3">
                   <Link
@@ -122,7 +137,10 @@ export default function IntegrationDetail({
                 </div>
               </SectionReveal>
 
-              <SectionReveal delay={0.12} className="rounded-[2rem] border border-brand-navy/[0.1] bg-white p-7 shadow-xl shadow-brand-navy/[0.06]">
+              <SectionReveal
+                delay={0.12}
+                className="rounded-[2rem] border border-brand-navy/[0.1] bg-white p-7 shadow-xl shadow-brand-navy/[0.06]"
+              >
                 <h2 className="text-sm font-bold uppercase tracking-[0.18em] text-brand-navy">
                   {isPlanned ? "What is planned" : "What you get"}
                 </h2>
@@ -147,18 +165,101 @@ export default function IntegrationDetail({
           </div>
         </section>
 
-        {isPlanned ? (
-          <section className="border-y border-brand-orange/20 bg-brand-orange/[0.07]">
+        {isPlanned || isGuided ? (
+          <section
+            className={cn(
+              "border-y",
+              isPlanned ? "border-brand-orange/20 bg-brand-orange/[0.07]" : "border-brand-teal/20 bg-brand-teal/[0.06]",
+            )}
+          >
             <div className="page-shell flex items-start gap-4 py-6">
-              <Info className="mt-0.5 h-5 w-5 shrink-0 text-brand-orange" aria-hidden="true" />
+              <Info
+                className={cn("mt-0.5 h-5 w-5 shrink-0", isPlanned ? "text-brand-orange" : "text-brand-teal")}
+                aria-hidden="true"
+              />
               <p className="text-sm leading-7 text-brand-navy/[0.82]">
-                <strong className="font-bold text-brand-navy">This integration is not live yet.</strong> It is a
-                roadmap item, listed here so you can plan around it honestly. If it decides whether KIDUART fits your
-                school, tell us during the demo — we prioritise by what schools actually block on.
+                <strong className="font-bold text-brand-navy">{statusMeta.long}.</strong> {statusMeta.note}
+                {isPlanned
+                  ? " If it decides whether KIDUART fits your school, tell us during the demo — we prioritise by what schools actually block on."
+                  : " Bring the account details to the demo and we will scope the setup call there and then."}
               </p>
             </div>
           </section>
         ) : null}
+
+        <section className="section-space relative overflow-hidden bg-brand-navy" style={{ color: "#fcf6d3" }}>
+          <BackgroundBlobs
+            blobs={[
+              { color: "#fcbf49", size: 380, position: "top-left", opacity: 0.14 },
+              { color: "#0c716b", size: 380, position: "bottom-right", opacity: 0.14 },
+            ]}
+          />
+          <div className="page-shell relative z-10">
+            <SectionReveal className="max-w-3xl">
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-brand-yellow">
+                {isPlanned ? "Where this stands" : "The connection, hop by hop"}
+              </p>
+              <h2 className="mt-4 text-3xl font-bold text-brand-beige md:text-4xl">
+                How {integration.name} actually works here
+              </h2>
+              <p className="mt-4 text-base leading-8" style={MUTED}>
+                {isPlanned
+                  ? "This is not live yet, so here is exactly what you can do today and what will change when it ships."
+                  : "No hand-waving about being 'seamlessly integrated'. This is the path a single event takes, end to end."}
+              </p>
+            </SectionReveal>
+
+            <div className="relative mt-12">
+              <span
+                aria-hidden="true"
+                className="console-rail pointer-events-none absolute left-6 right-6 top-5 hidden lg:block"
+              />
+              <ol className="relative grid gap-8 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+                {integration.flow.map((step, index) => (
+                  <li key={step.label}>
+                    <SectionReveal delay={Math.min(index, 3) * 0.08}>
+                      <span
+                        aria-hidden="true"
+                        className="flex h-10 w-10 items-center justify-center rounded-full border border-brand-yellow/50 bg-brand-navy text-sm font-extrabold text-brand-yellow"
+                      >
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <h3 className="mt-4 text-lg font-bold text-brand-beige">{step.label}</h3>
+                      <p className="mt-2 text-sm leading-7" style={MUTED}>
+                        {step.detail}
+                      </p>
+                    </SectionReveal>
+                  </li>
+                ))}
+              </ol>
+            </div>
+
+            <SectionReveal className="mt-14">
+              <h3 className="text-sm font-bold uppercase tracking-[0.18em] text-brand-yellow">
+                Keys, data and the bill
+              </h3>
+              <div className="mt-5 grid gap-5 md:grid-cols-3">
+                {OWNERSHIP_CARDS.map((card) => {
+                  const Icon = card.icon;
+                  return (
+                    <div
+                      key={card.key}
+                      className="console-panel rounded-2xl border border-white/12 bg-white/[0.05] p-6"
+                    >
+                      <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-yellow/[0.16] text-brand-yellow">
+                        <Icon className="h-5 w-5" aria-hidden="true" />
+                      </span>
+                      <p className="mt-4 text-sm font-bold text-brand-beige">{card.label}</p>
+                      <p className="mt-2 text-sm leading-7" style={MUTED}>
+                        {integration.ownership[card.key]}
+                      </p>
+                    </div>
+                  );
+                })}
+              </div>
+            </SectionReveal>
+          </div>
+        </section>
 
         {linkedModules.length > 0 ? (
           <section className="section-space-tight border-b border-brand-navy/5 bg-white">
@@ -166,15 +267,15 @@ export default function IntegrationDetail({
               <SectionReveal className="mx-auto max-w-3xl text-center">
                 <p className="section-kicker">Where it lands in the product</p>
                 <h2 className="mt-4 text-3xl font-bold text-brand-navy">
-                  The modules this integration touches
+                  The modules this integration writes into
                 </h2>
-                <p className="mt-4 text-base leading-8 text-brand-navy/[0.74]">
-                  An integration is only useful if it writes into the module your staff already work in. These are the
-                  exact modules involved.
+                <p className="mt-4 text-base leading-8 text-brand-navy/[0.76]">
+                  An integration is only useful if it writes into the module your staff already work in.
+                  These are the exact modules involved.
                 </p>
               </SectionReveal>
 
-              <div className="mt-10 grid gap-5 md:grid-cols-2">
+              <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
                 {linkedModules.map((entry) => (
                   <SectionReveal
                     key={`${entry.areaSlug}-${entry.moduleSlug}`}
@@ -184,8 +285,8 @@ export default function IntegrationDetail({
                       {entry.areaLabel}
                     </p>
                     <h3 className="mt-2 text-xl font-bold text-brand-navy">{entry.moduleName}</h3>
-                    <p className="mt-2 text-sm font-semibold text-brand-navy/[0.7]">
-                      {entry.featureCount} features in this module
+                    <p className="mt-2 text-sm font-semibold text-brand-navy/[0.74]">
+                      {entry.featureCount} capabilities in this module
                     </p>
                     <TextLink href={`/features/${entry.areaSlug}/${entry.moduleSlug}`} className="mt-4">
                       Open {entry.moduleName}
@@ -205,9 +306,12 @@ export default function IntegrationDetail({
                 <h2 className="mt-4 text-3xl font-bold text-brand-navy">
                   {isPlanned ? "What happens if you need this" : `Connecting ${integration.name}`}
                 </h2>
-                <ol className="mt-8 space-y-6">
+                <ol className="mt-8 space-y-5">
                   {integration.steps.map((step, idx) => (
-                    <li key={step} className="flex gap-4">
+                    <li
+                      key={step}
+                      className="flex gap-4 rounded-2xl border border-brand-navy/[0.08] bg-white p-5 transition-colors hover:border-brand-teal/35"
+                    >
                       <span
                         className={cn(
                           "flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl text-sm font-extrabold text-white",
@@ -236,6 +340,12 @@ export default function IntegrationDetail({
                     </li>
                   ))}
                 </ul>
+                <Link
+                  href="/demo"
+                  className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand-orange px-5 py-3 text-sm font-bold text-brand-navy transition-colors hover:bg-brand-navy hover:text-brand-beige"
+                >
+                  Scope this on a call <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
               </SectionReveal>
             </div>
           </div>
@@ -245,9 +355,7 @@ export default function IntegrationDetail({
           <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
             <SectionReveal className="mb-10 text-center">
               <p className="section-kicker">Questions schools ask</p>
-              <h2 className="mt-4 text-3xl font-bold text-brand-navy">
-                {integration.name}, answered plainly
-              </h2>
+              <h2 className="mt-4 text-3xl font-bold text-brand-navy">{integration.name}, answered plainly</h2>
             </SectionReveal>
 
             <div className="space-y-4">
@@ -283,13 +391,16 @@ export default function IntegrationDetail({
                   <SectionReveal key={entry.slug}>
                     <Link
                       href={`/integrations/${entry.slug}`}
-                      className="group flex h-full flex-col rounded-2xl border border-brand-navy/[0.1] bg-white p-6 transition-all duration-300 hover:border-brand-teal/40 hover:shadow-lg"
+                      className="group flex h-full flex-col rounded-2xl border border-brand-navy/[0.1] bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-teal/40 hover:shadow-lg"
                     >
-                      <ProductIcon name={entry.icon} className="h-6 w-6 text-brand-teal" />
+                      <div className="flex items-start justify-between gap-3">
+                        <ProductIcon name={entry.icon} className="h-6 w-6 text-brand-teal" />
+                        <IntegrationStatusPill status={entry.status} />
+                      </div>
                       <h3 className="mt-4 text-lg font-bold text-brand-navy group-hover:text-brand-teal">
                         {entry.name}
                       </h3>
-                      <p className="mt-2 flex-1 text-sm leading-7 text-brand-navy/[0.74]">{entry.description}</p>
+                      <p className="mt-2 flex-1 text-sm leading-7 text-brand-navy/[0.76]">{entry.description}</p>
                     </Link>
                   </SectionReveal>
                 ))}
@@ -341,6 +452,7 @@ export const getStaticProps: GetStaticProps<IntegrationPageProps> = async ({ par
       name: entry.name,
       description: entry.description,
       icon: entry.icon,
+      status: entry.status,
     }));
 
   return { props: { slug, integration, linkedModules, related } };

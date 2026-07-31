@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, MousePointerClick } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ACCENTS, type AccentName } from "@/components/product/ProductPrimitives";
 import { ProductIcon } from "@/components/product/ProductIcon";
@@ -20,16 +20,35 @@ export type CapabilityArea = {
 };
 
 /**
- * Sticky index rail + full area write-ups. Every area's copy stays in the DOM
- * (good for crawlers); the rail simply tracks which one is on screen.
+ * Index rail + area write-ups. On desktop the write-ups scroll inside their own
+ * pane so the rail stays put and keeps tracking position; on narrow screens the
+ * pane falls back to normal page flow. Every area's copy stays in the DOM.
  */
 export function CapabilityMap({ areas }: { areas: CapabilityArea[] }) {
   const [activeSlug, setActiveSlug] = useState(areas[0]?.slug ?? "");
+  const [panelScroll, setPanelScroll] = useState(false);
+  const [progress, setProgress] = useState(0);
   const sectionRefs = useRef(new Map<string, HTMLElement>());
+  const railRefs = useRef(new Map<string, HTMLAnchorElement>());
+  const paneRef = useRef<HTMLDivElement | null>(null);
+
+  const activeIndex = Math.max(
+    0,
+    areas.findIndex((area) => area.slug === activeSlug),
+  );
+
+  useEffect(() => {
+    const query = window.matchMedia("(min-width: 1024px)");
+    const update = () => setPanelScroll(query.matches);
+    update();
+    query.addEventListener("change", update);
+    return () => query.removeEventListener("change", update);
+  }, []);
 
   useEffect(() => {
     if (typeof IntersectionObserver === "undefined") return;
 
+    const root = panelScroll ? paneRef.current : null;
     const observer = new IntersectionObserver(
       (entries) => {
         const visible = entries
@@ -39,39 +58,98 @@ export function CapabilityMap({ areas }: { areas: CapabilityArea[] }) {
           setActiveSlug(visible.target.dataset.slug);
         }
       },
-      { rootMargin: "-30% 0px -55% 0px", threshold: [0, 0.25, 0.5] },
+      {
+        root,
+        rootMargin: panelScroll ? "0px 0px -68% 0px" : "-30% 0px -55% 0px",
+        threshold: [0, 0.25, 0.5],
+      },
     );
 
     sectionRefs.current.forEach((node) => observer.observe(node));
     return () => observer.disconnect();
-  }, [areas]);
+  }, [areas, panelScroll]);
+
+  useEffect(() => {
+    const pane = paneRef.current;
+    if (!pane || !panelScroll) return;
+
+    const onScroll = () => {
+      const scrollable = pane.scrollHeight - pane.clientHeight;
+      setProgress(scrollable > 0 ? Math.min(1, pane.scrollTop / scrollable) : 0);
+    };
+
+    onScroll();
+    pane.addEventListener("scroll", onScroll, { passive: true });
+    return () => pane.removeEventListener("scroll", onScroll);
+  }, [panelScroll, areas]);
+
+  useEffect(() => {
+    if (!panelScroll) return;
+    railRefs.current.get(activeSlug)?.scrollIntoView({ block: "nearest" });
+  }, [activeSlug, panelScroll]);
 
   const registerSection = (slug: string) => (node: HTMLElement | null) => {
-    if (node) {
-      sectionRefs.current.set(slug, node);
-    } else {
-      sectionRefs.current.delete(slug);
-    }
+    if (node) sectionRefs.current.set(slug, node);
+    else sectionRefs.current.delete(slug);
   };
 
+  const jumpTo = useCallback(
+    (event: React.MouseEvent<HTMLAnchorElement>, slug: string) => {
+      const node = sectionRefs.current.get(slug);
+      const pane = paneRef.current;
+      if (!node) return;
+
+      event.preventDefault();
+      setActiveSlug(slug);
+
+      const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+      const behavior: ScrollBehavior = reduce ? "auto" : "smooth";
+
+      if (panelScroll && pane) {
+        pane.scrollTo({ top: Math.max(0, node.offsetTop - 8), behavior });
+      } else {
+        node.scrollIntoView({ behavior, block: "start" });
+      }
+    },
+    [panelScroll],
+  );
+
   return (
-    <div className="grid gap-10 lg:grid-cols-[minmax(0,17rem)_minmax(0,1fr)] lg:gap-14">
+    <div className="grid gap-8 lg:grid-cols-[minmax(0,18rem)_minmax(0,1fr)] lg:gap-10">
       <div className="lg:sticky lg:top-28 lg:self-start">
         <p className="text-sm font-bold uppercase tracking-[0.18em] text-brand-navy">
-          16 module areas
+          {areas.length} module areas
         </p>
         <p className="mt-2 text-sm leading-6 text-brand-navy/[0.74]">
           Grouped the way schools divide work — office, academic, finance, campus and platform.
         </p>
+
+        <div className="mt-4 hidden items-center gap-3 lg:flex">
+          <span className="h-1.5 flex-1 overflow-hidden rounded-full bg-brand-navy/[0.1]">
+            <span
+              className="block h-full rounded-full bg-brand-teal transition-[width] duration-200"
+              style={{ width: `${Math.round(progress * 100)}%` }}
+            />
+          </span>
+          <span className="text-xs font-bold tabular-nums text-brand-navy/[0.72]" aria-live="polite">
+            {activeIndex + 1}/{areas.length}
+          </span>
+        </div>
+
         <nav aria-label="Module areas" className="mt-5">
-          <ul className="flex gap-2 overflow-x-auto pb-2 lg:flex-col lg:overflow-visible lg:pb-0">
+          <ul className="capability-scroll flex gap-2 overflow-x-auto pb-2 lg:max-h-[58vh] lg:flex-col lg:overflow-x-visible lg:overflow-y-auto lg:pb-0 lg:pr-1.5">
             {areas.map((area) => {
               const isActive = area.slug === activeSlug;
               return (
                 <li key={area.slug} className="shrink-0 lg:shrink">
                   <a
                     href={`#area-${area.slug}`}
+                    onClick={(event) => jumpTo(event, area.slug)}
                     aria-current={isActive ? "true" : undefined}
+                    ref={(node) => {
+                      if (node) railRefs.current.set(area.slug, node);
+                      else railRefs.current.delete(area.slug);
+                    }}
                     className={cn(
                       "flex items-center justify-between gap-3 rounded-2xl border px-4 py-2.5 text-sm font-semibold transition-colors",
                       isActive
@@ -89,11 +167,23 @@ export function CapabilityMap({ areas }: { areas: CapabilityArea[] }) {
             })}
           </ul>
         </nav>
+
+        <p className="mt-4 hidden items-center gap-2 text-xs font-semibold text-brand-navy/[0.7] lg:flex">
+          <MousePointerClick className="h-3.5 w-3.5 text-brand-teal" aria-hidden="true" />
+          Scroll inside the panel or pick an area
+        </p>
       </div>
 
-      <div className="space-y-6">
+      <div
+        ref={paneRef}
+        tabIndex={0}
+        role="region"
+        aria-label="Module area details"
+        className="capability-scroll relative space-y-6 lg:max-h-[76vh] lg:overflow-y-auto lg:pr-3"
+      >
         {areas.map((area) => {
           const tokens = ACCENTS[area.accent];
+          const isActive = area.slug === activeSlug;
           return (
             <section
               key={area.slug}
@@ -101,8 +191,9 @@ export function CapabilityMap({ areas }: { areas: CapabilityArea[] }) {
               data-slug={area.slug}
               ref={registerSection(area.slug)}
               className={cn(
-                "scroll-mt-28 rounded-[2rem] border bg-white/95 p-6 shadow-sm md:p-8",
+                "scroll-mt-28 rounded-[2rem] border bg-white/95 p-6 shadow-sm transition-shadow duration-300 md:p-8 lg:scroll-mt-4",
                 tokens.border,
+                isActive ? "shadow-xl shadow-brand-navy/[0.08]" : "shadow-sm",
               )}
             >
               <div className="flex flex-wrap items-start justify-between gap-4">

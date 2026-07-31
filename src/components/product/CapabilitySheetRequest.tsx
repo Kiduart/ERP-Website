@@ -74,7 +74,10 @@ export function CapabilitySheetRequest({
   };
 
   return (
-    <div className="overflow-hidden rounded-[2rem] border border-brand-navy/10 bg-brand-navy p-6 text-white md:p-9">
+    <div
+      id="capability-sheet"
+      className="scroll-mt-28 overflow-hidden rounded-[2rem] border border-brand-navy/10 bg-brand-navy p-6 text-white md:p-9"
+    >
       <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
         <div>
           <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.16em] text-brand-yellow">

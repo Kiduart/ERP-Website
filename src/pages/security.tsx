@@ -9,11 +9,13 @@ import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
 import { FloatingIcons } from "@/components/animations/FloatingIcons";
 import { ArrowRight, Info } from "lucide-react";
 import { SecurityStack } from "@/components/product/SecurityStack";
+import { SecurityPerimeter } from "@/components/ui/SecurityPerimeter";
 import { StatChip } from "@/components/product/ProductPrimitives";
 import {
   DATA_HANDLING_PRINCIPLES,
   SECURITY_HONESTY,
   SECURITY_LAYERS,
+  SECURITY_SCENARIOS,
   type SecurityLayer,
 } from "@/data/securityPosture";
 import { getMatrixCategory } from "@/data/featureMatrix";
@@ -86,6 +88,39 @@ export default function Security({ layers, areaFeatureCount, areaModuleCount }: 
               </div>
             </SectionReveal>
           </div>
+        </div>
+      </section>
+
+      <section className="section-space relative overflow-hidden border-b border-brand-navy/5 bg-white">
+        <BackgroundBlobs
+          blobs={[
+            { color: "#0c716b", size: 340, position: "top-left", opacity: 0.1 },
+            { color: "#f77f00", size: 320, position: "bottom-right", opacity: 0.1 },
+          ]}
+        />
+        <div className="page-shell relative z-10">
+          <SectionReveal className="mx-auto mb-10 max-w-3xl text-center">
+            <p className="section-kicker">Threats, translated into school situations</p>
+            <h2 className="mt-5 text-3xl font-bold text-brand-navy md:text-4xl">
+              What happens when a password leaks, a teacher leaves, or a mark changes quietly?
+            </h2>
+            <p className="mt-4 text-lg leading-8 text-brand-navy/[0.74]">
+              Work through every scenario. Each answer points to the exact defence layer and the
+              controls that exist in the product today.
+            </p>
+          </SectionReveal>
+
+          <SectionReveal>
+            <SecurityPerimeter
+              layers={layers}
+              scenarios={SECURITY_SCENARIOS}
+              stats={{
+                layers: layers.length,
+                modules: areaModuleCount,
+                capabilities: areaFeatureCount,
+              }}
+            />
+          </SectionReveal>
         </div>
       </section>
 

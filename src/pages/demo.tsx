@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { CheckCircle2 } from "lucide-react";
-import { CONTACT_PHONE_DISPLAY, COUNTRY_CODES, DEFAULT_COUNTRY_CODE, WHATSAPP_URL } from "@/lib/contact";
+import { CONTACT_PHONE_DISPLAY, DEFAULT_COUNTRY_CODE, WHATSAPP_URL } from "@/lib/contact";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { useState } from "react";
 
@@ -205,24 +205,15 @@ export default function RequestDemo() {
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-6">
-                    <FormField control={form.control} name="code" render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-brand-navy">Country Code</FormLabel>
-                        <Select onValueChange={field.onChange} value={field.value}>
-                          <FormControl><SelectTrigger className="field-surface"><SelectValue placeholder="Select code" /></SelectTrigger></FormControl>
-                          <SelectContent>
-                            {COUNTRY_CODES.map((code) => (
-                              <SelectItem key={code.value} value={code.value}>{code.label}</SelectItem>
-                            ))}
-                          </SelectContent>
-                        </Select>
-                        <FormMessage />
-                      </FormItem>
-                    )} />
                     <FormField control={form.control} name="phone" render={({ field }) => (
                       <FormItem className="md:col-span-1">
                         <FormLabel className="text-brand-navy">Phone Number</FormLabel>
-                        <FormControl><Input placeholder="10 digit number" inputMode="numeric" maxLength={10} {...field} onChange={(e) => field.onChange(e.target.value.replace(/\D/g, "").slice(0, 10))} className="field-surface" /></FormControl>
+                        <FormControl>
+                          <div className="field-surface flex items-center rounded-md border border-brand-navy/10 focus-within:ring-2 focus-within:ring-brand-teal">
+                            <span className="border-r border-brand-navy/10 px-3 py-2 text-sm font-bold text-brand-navy">+91</span>
+                            <Input placeholder="10 digit number" inputMode="numeric" maxLength={10} {...field} onChange={(e) => field.onChange(e.target.value.replace(/\D/g, "").slice(0, 10))} className="border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0" />
+                          </div>
+                        </FormControl>
                         <FormMessage />
                       </FormItem>
                     )} />

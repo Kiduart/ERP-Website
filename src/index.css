@@ -732,3 +732,352 @@ html.a11y-reduced-motion *::after {
     transform: none;
   }
 }
+
+/* Integration fabric: a connector board where each lane branches off one spine */
+.fabric-board {
+  background-image: radial-gradient(rgba(0, 48, 73, 0.055) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.fabric-lane {
+  position: relative;
+  padding-left: 2.1rem;
+  padding-top: 0.85rem;
+}
+
+/* elbow from the spine into the card */
+.fabric-lane::before {
+  content: "";
+  position: absolute;
+  left: 0.85rem;
+  top: 2.45rem;
+  width: 1.05rem;
+  height: 1px;
+  background: rgba(12, 113, 107, 0.35);
+}
+
+/* connection node */
+.fabric-lane::after {
+  content: "";
+  position: absolute;
+  left: 0.6rem;
+  top: 2.2rem;
+  height: 7px;
+  width: 7px;
+  border-radius: 999px;
+  background: #0c716b;
+  opacity: 0.5;
+  transition:
+    opacity 250ms ease,
+    box-shadow 250ms ease;
+}
+
+.fabric-lane:hover::after,
+.fabric-lane:focus-within::after {
+  opacity: 1;
+  box-shadow: 0 0 0 4px rgba(12, 113, 107, 0.12);
+}
+
+.fabric-trace {
+  position: absolute;
+  left: 0.85rem;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  overflow: hidden;
+  background: rgba(0, 48, 73, 0.14);
+}
+
+/* the spine stops at the last branch instead of running into empty space */
+.fabric-lane:last-child .fabric-trace {
+  bottom: auto;
+  height: 2.45rem;
+}
+
+.fabric-trace::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: -40%;
+  height: 40%;
+  background: linear-gradient(180deg, rgba(12, 113, 107, 0) 0%, rgba(12, 113, 107, 0.9) 100%);
+  animation: fabric-flow 3.2s linear infinite;
+}
+
+.fabric-lane:nth-child(2) .fabric-trace::after {
+  animation-delay: 0.4s;
+}
+
+.fabric-lane:nth-child(3) .fabric-trace::after {
+  animation-delay: 0.8s;
+}
+
+.fabric-lane:nth-child(4) .fabric-trace::after {
+  animation-delay: 1.2s;
+}
+
+.fabric-lane:nth-child(n + 5) .fabric-trace::after {
+  animation-delay: 1.6s;
+}
+
+@keyframes fabric-flow {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(350%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fabric-trace::after {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+/* Light-theme horizontal rail used by connection-flow sections */
+.wire-rail {
+  height: 2px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(12, 113, 107, 0) 0%,
+    rgba(12, 113, 107, 0.28) 12%,
+    rgba(12, 113, 107, 0.28) 88%,
+    rgba(12, 113, 107, 0) 100%
+  );
+}
+
+.wire-rail::after {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  width: 24%;
+  background: linear-gradient(90deg, rgba(12, 113, 107, 0) 0%, rgba(12, 113, 107, 0.85) 100%);
+  animation: wire-rail-pulse 3.6s linear infinite;
+}
+
+@keyframes wire-rail-pulse {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  88% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(320%);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wire-rail::after {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+/* Closing CTA: soft light bloom over the navy plus a faint engineering grid. */
+.cta-aurora {
+  position: absolute;
+  inset: -30% -10% auto -10%;
+  height: 70%;
+  pointer-events: none;
+  background:
+    radial-gradient(45% 60% at 22% 40%, rgba(12, 113, 107, 0.42) 0%, rgba(12, 113, 107, 0) 70%),
+    radial-gradient(40% 55% at 78% 30%, rgba(247, 127, 0, 0.28) 0%, rgba(247, 127, 0, 0) 72%);
+  filter: blur(10px);
+}
+
+.cta-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(245, 235, 224, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245, 235, 224, 0.05) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(70% 60% at 50% 40%, #000 0%, transparent 78%);
+  -webkit-mask-image: radial-gradient(70% 60% at 50% 40%, #000 0%, transparent 78%);
+}
+
+/* Contact block: light surface with a warm bloom instead of a third navy slab. */
+.contact-canvas {
+  background:
+    radial-gradient(60% 70% at 12% 10%, rgba(12, 113, 107, 0.08) 0%, rgba(12, 113, 107, 0) 62%),
+    radial-gradient(55% 65% at 92% 85%, rgba(247, 127, 0, 0.1) 0%, rgba(247, 127, 0, 0) 65%);
+}
+
+/* Warm bloom behind the navy half of the contact board */
+.contact-halo {
+  position: absolute;
+  inset: -40% -20% auto -30%;
+  height: 85%;
+  pointer-events: none;
+  background:
+    radial-gradient(45% 55% at 25% 35%, rgba(12, 113, 107, 0.5) 0%, rgba(12, 113, 107, 0) 70%),
+    radial-gradient(38% 48% at 80% 20%, rgba(252, 191, 73, 0.16) 0%, rgba(252, 191, 73, 0) 72%);
+  filter: blur(6px);
+}
+
+/* Numbered track: a spine with square nodes, matching the runway and fabric rails */
+.contact-track {
+  position: relative;
+  padding-left: 2.15rem;
+}
+
+.contact-track::before {
+  content: "";
+  position: absolute;
+  left: 0.72rem;
+  top: 0.75rem;
+  bottom: 0.75rem;
+  width: 2px;
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    rgba(252, 191, 73, 0.7) 0%,
+    rgba(252, 191, 73, 0.25) 60%,
+    rgba(252, 191, 73, 0) 100%
+  );
+}
+
+.contact-node {
+  box-shadow: 0 0 0 3px rgba(0, 48, 73, 1);
+}
+
+/* Capability map: the write-up pane scrolls on its own, so it needs a quiet scrollbar */
+.capability-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 48, 73, 0.28) transparent;
+  overscroll-behavior: contain;
+}
+
+.capability-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.capability-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.capability-scroll::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(0, 48, 73, 0.24);
+}
+
+.capability-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 48, 73, 0.4);
+}
+
+/* Contact desk: warm paper surface, not another navy console */
+.contact-desk {
+  background:
+    radial-gradient(55% 60% at 8% 0%, rgba(12, 113, 107, 0.09) 0%, rgba(12, 113, 107, 0) 58%),
+    radial-gradient(50% 55% at 95% 100%, rgba(247, 127, 0, 0.08) 0%, rgba(247, 127, 0, 0) 60%),
+    linear-gradient(180deg, rgba(252, 246, 234, 0.55) 0%, rgba(255, 255, 255, 0.9) 100%);
+}
+
+.contact-thread {
+  background-image:
+    linear-gradient(rgba(0, 48, 73, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 48, 73, 0.03) 1px, transparent 1px);
+  background-size: 28px 28px;
+  background-position: -1px -1px;
+}
+
+@keyframes contact-ticket-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.contact-ticket {
+  animation: contact-ticket-in 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-ticket {
+    animation: none;
+  }
+}
+
+/* Footer colophon: quiet close, one hairline rule, no machine-grid noise */
+.footer-colophon {
+  background:
+    radial-gradient(50% 40% at 50% -10%, rgba(12, 113, 107, 0.28) 0%, rgba(12, 113, 107, 0) 70%),
+    #003049;
+}
+
+.footer-colophon-rule {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    rgba(12, 113, 107, 0) 0%,
+    rgba(12, 113, 107, 0.85) 18%,
+    rgba(252, 191, 73, 0.9) 50%,
+    rgba(12, 113, 107, 0.85) 82%,
+    rgba(12, 113, 107, 0) 100%
+  );
+}
+
+/* Footer reads as one grounded slab: machine grid, top bloom, huge quiet wordmark */
+.footer-slab {
+  background-image: radial-gradient(rgba(245, 235, 224, 0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.footer-glow {
+  position: absolute;
+  inset: -18% -10% auto -10%;
+  height: 55%;
+  pointer-events: none;
+  background:
+    radial-gradient(45% 70% at 18% 0%, rgba(12, 113, 107, 0.42) 0%, rgba(12, 113, 107, 0) 68%),
+    radial-gradient(40% 60% at 82% 6%, rgba(252, 191, 73, 0.14) 0%, rgba(252, 191, 73, 0) 70%);
+}
+
+.footer-wordmark {
+  position: absolute;
+  left: 50%;
+  bottom: -0.18em;
+  transform: translateX(-50%);
+  margin: 0;
+  width: max-content;
+  font-size: clamp(4rem, 15vw, 13rem);
+  font-weight: 800;
+  line-height: 0.8;
+  letter-spacing: 0.06em;
+  color: rgba(252, 246, 211, 0.05);
+  pointer-events: none;
+  user-select: none;
+  mask-image: linear-gradient(180deg, transparent 0%, #000 55%, #000 100%);
+  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 55%, #000 100%);
+}
+
+.footer-wordmark-cream {
+  color: rgba(0, 48, 73, 0.045);
+}
+
+/* Form half reads as a lit panel rather than a flat white card */
+.contact-form-panel {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(252, 246, 234, 0.9) 100%),
+    radial-gradient(60% 50% at 85% 8%, rgba(12, 113, 107, 0.09) 0%, rgba(12, 113, 107, 0) 62%);
+  background-blend-mode: normal;
+}

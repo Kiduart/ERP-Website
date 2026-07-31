@@ -13,31 +13,25 @@ import { CapabilityAtlas, type AtlasArea } from "@/components/ui/CapabilityAtlas
 import { IntelligenceConsole } from "@/components/ui/IntelligenceConsole";
 import { RolloutRunway } from "@/components/ui/RolloutRunway";
 import { FoundingCharter } from "@/components/ui/FoundingCharter";
-import { VendorChecklist } from "@/components/ui/VendorChecklist";
-import { ProductIcon } from "@/components/product/ProductIcon";
+import { VendorChecklistTeaser } from "@/components/ui/VendorChecklist";
+import {
+  IntegrationFabric,
+  type FabricCategory,
+  type FabricStatus,
+} from "@/components/ui/IntegrationFabric";
+import {
+  SecurityPerimeter,
+  type PerimeterLayer,
+  type PerimeterScenario,
+} from "@/components/ui/SecurityPerimeter";
 import { AREA_NARRATIVES } from "@/data/productNarrative";
 import { MATRIX_CATEGORIES, MATRIX_TOTALS, countSubModules, topModules } from "@/data/featureMatrix";
+import integrationsData, { INTEGRATION_CATEGORIES } from "@/data/integrationsData";
+import { SECURITY_LAYERS, SECURITY_SCENARIOS } from "@/data/securityPosture";
 import { CONTACT_PHONE_E164 } from "@/lib/contact";
 import { FloatingIcons } from "@/components/animations/FloatingIcons";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
-import {
-  ArrowRight,
-  CheckCircle2,
-  CreditCard,
-  MessageSquare,
-  PieChart,
-  ShieldCheck,
-  Users,
-} from "lucide-react";
-
-const integrationTeasers = [
-  { name: "Razorpay", href: "/integrations/razorpay" },
-  { name: "WhatsApp Business", href: "/integrations/whatsapp-business" },
-  { name: "SMS notifications", href: "/integrations/sms-notifications" },
-  { name: "Google sign-in", href: "/integrations/google-workspace" },
-  { name: "Zoom", href: "/integrations/zoom" },
-  { name: "REST API", href: "/integrations/rest-api" },
-];
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 const faqs = [
   {
@@ -61,9 +55,22 @@ const faqs = [
 type HomeProps = {
   areaCards: AtlasArea[];
   totals: typeof MATRIX_TOTALS;
+  integrationBoard: FabricCategory[];
+  integrationCounts: { live: number; guided: number; planned: number; total: number };
+  securityLayers: PerimeterLayer[];
+  securityScenarios: PerimeterScenario[];
+  securityStats: { layers: number; modules: number; capabilities: number };
 };
 
-export default function Home({ areaCards, totals }: HomeProps) {
+export default function Home({
+  areaCards,
+  totals,
+  integrationBoard,
+  integrationCounts,
+  securityLayers,
+  securityScenarios,
+  securityStats,
+}: HomeProps) {
   return (
     <>
       <PageSeoHead {...pageSeo.home} />
@@ -414,7 +421,7 @@ export default function Home({ areaCards, totals }: HomeProps) {
           </div>
         </section>
 
-        <section className="section-space bg-brand-navy border-y border-white/10 relative overflow-hidden" style={{ color: "#fcf6d3" }}>
+        <section className="section-space-tight relative overflow-hidden border-y border-white/10 bg-brand-navy" style={{ color: "#fcf6d3" }}>
           <BackgroundBlobs
             blobs={[
               { color: "#fcbf49", size: 360, position: "top-left", opacity: 0.14 },
@@ -423,81 +430,109 @@ export default function Home({ areaCards, totals }: HomeProps) {
           />
           <FloatingIcons icons={["CheckCircle2", "ShieldCheck", "Users"]} count={4} />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <SectionReveal className="mx-auto mb-12 max-w-3xl text-center">
+            <SectionReveal className="mx-auto mb-9 max-w-3xl text-center">
               <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-brand-yellow">
                 The buyer&apos;s due-diligence list
               </div>
               <h2 className="section-title mb-4 mt-6 text-brand-beige">
-                Nine questions to ask us — and every other ERP vendor
+                Three questions that reveal more than a polished demo
               </h2>
               <p className="section-copy" style={{ color: "rgb(var(--hero-muted-rgb) / 0.75)" }}>
-                A comparison table written by us will always end with us winning. So here is the list
-                we would carry into a demo if we were buying, including the questions vendors prefer
-                you never ask. Tick the ones that matter to your school.
+                Test the questions here, then take the complete nine-question checklist into every
+                school ERP call. It covers payment ownership, data isolation, exports, privacy,
+                permissions, audit trails and whether the screens in a demo are actually live.
               </p>
             </SectionReveal>
 
             <SectionReveal>
-              <VendorChecklist />
+              <VendorChecklistTeaser />
             </SectionReveal>
           </div>
         </section>
 
-        <section className="section-space relative overflow-hidden bg-white border-y border-brand-navy/5">
+        <section className="section-space relative overflow-hidden border-y border-brand-navy/5 bg-brand-beige/25">
+          <BackgroundBlobs
+            blobs={[
+              { color: "#0c716b", size: 340, position: "top-left", opacity: 0.12 },
+              { color: "#f77f00", size: 340, position: "bottom-right", opacity: 0.12 },
+            ]}
+          />
           <div className="page-shell relative z-10">
             <SectionReveal className="mx-auto mb-10 max-w-3xl text-center">
-              <div className="section-kicker">Seamless integrations</div>
-              <h2 className="section-title mt-6 text-brand-navy">Works with the tools schools already use</h2>
+              <div className="section-kicker">The connector board</div>
+              <h2 className="section-title mt-6 text-brand-navy">
+                Keep the tools you pay for. Stop retyping between them.
+              </h2>
               <p className="section-copy mt-4 text-brand-navy/70">
-                Connect classrooms, virtual meetings, and fee payments without forcing your team into a disconnected stack.
+                Your payment gateway, your SMS sender ID, your WhatsApp number, your Google or Microsoft
+                accounts — they stay yours. KIDUART wires them into the record they belong to, and marks
+                honestly which ones are live today, which need a setup call, and which are still roadmap.
               </p>
             </SectionReveal>
-            <SectionReveal className="flex flex-wrap items-center justify-center gap-3">
-              {integrationTeasers.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="rounded-full border border-brand-navy/10 bg-brand-beige/30 px-5 py-3 text-sm font-semibold text-brand-navy transition-colors hover:border-brand-teal/40 hover:bg-white hover:text-brand-teal"
-                >
-                  {item.name}
-                </Link>
-              ))}
+
+            <SectionReveal>
+              <IntegrationFabric categories={integrationBoard} counts={integrationCounts} />
             </SectionReveal>
-            <SectionReveal className="mt-8 text-center">
-              <Link href="/integrations" className="inline-flex items-center gap-2 text-sm font-bold text-brand-teal hover:text-brand-navy">
-                View all integrations <ArrowRight className="h-4 w-4" />
+
+            <SectionReveal className="mt-8 flex flex-wrap items-center justify-center gap-3">
+              <Link
+                href="/integrations"
+                className="inline-flex items-center gap-2 rounded-full bg-brand-navy px-6 py-3 text-sm font-bold text-brand-beige transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-teal"
+              >
+                See all {integrationCounts.total} integrations <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+              <Link
+                href="/integrations/api-docs"
+                className="inline-flex items-center gap-2 rounded-full border border-brand-navy/[0.15] bg-white px-6 py-3 text-sm font-bold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
+              >
+                Read the API reference
               </Link>
             </SectionReveal>
           </div>
         </section>
 
-        <section className="section-space my-20 bg-brand-beige/30 relative overflow-hidden">
-          <BackgroundBlobs blobs={[{ color: "#f77f00", size: 300, position: "center-right", opacity: 0.15 }]} />
+        <section className="section-space-tight relative overflow-hidden border-t border-brand-navy/5 bg-white">
+          <BackgroundBlobs
+            blobs={[
+              { color: "#0c716b", size: 320, position: "top-left", opacity: 0.1 },
+              { color: "#f77f00", size: 300, position: "bottom-right", opacity: 0.1 },
+            ]}
+          />
           <FloatingIcons icons={["ShieldCheck", "Lock", "Eye"]} count={4} />
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="">
-              {/* <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center"> */}
-              <SectionReveal>
-                <h2 className="text-center text-3xl font-bold text-brand-navy mb-3">Security for school data, not just a headline</h2>
-                <p className="text-center text-brand-navy/70 leading-7">
-                  Protect student, staff, and financial data with encryption, structured permissions, and reliable cloud backups built into your daily workflows.
-                </p>
-              </SectionReveal>
-              <div className="grid gap-8 lg:grid-cols-3 lg:items-center mt-12">
-                {/* <div className="grid gap-4 sm:grid-cols-3"> */}
-                {[
-                  { icon: ShieldCheck, title: "Data Encryption", desc: "Sensitive records stay protected across core school workflows." },
-                  { icon: Users, title: "Role-Based Access", desc: "Admins, teachers, and finance teams see only what they need." },
-                  { icon: CheckCircle2, title: "Cloud Backup", desc: "Important school data stays recoverable and easier to manage." },
-                ].map((item, idx) => (
-                  <SectionReveal key={item.title} delay={idx * 0.08} className="interactive-card rounded-2xl border border-brand-navy/10 bg-white p-5 shadow-sm">
-                    <item.icon className="h-6 w-6 text-brand-teal" />
-                    <h3 className="mt-4 text-lg font-bold text-brand-navy">{item.title}</h3>
-                    <p className="mt-2 text-sm leading-6 text-brand-navy/70">{item.desc}</p>
-                  </SectionReveal>
-                ))}
-              </div>
-            </div>
+          <div className="page-shell relative z-10">
+            <SectionReveal className="mx-auto mb-9 max-w-3xl text-center">
+              <div className="section-kicker">Security, tested against real situations</div>
+              <h2 className="section-title mt-6 text-brand-navy">
+                Ask what happens when it goes wrong, not whether we say &ldquo;bank-grade&rdquo;
+              </h2>
+              <p className="section-copy mt-4 text-brand-navy/70">
+                Try three real situations here. The complete security page documents all six defence
+                layers, data-handling rules, honest boundaries and the controls behind each claim.
+              </p>
+            </SectionReveal>
+
+            <SectionReveal>
+              <SecurityPerimeter
+                layers={securityLayers}
+                scenarios={securityScenarios}
+                stats={securityStats}
+              />
+            </SectionReveal>
+
+            <SectionReveal className="mt-8 flex flex-wrap items-center justify-center gap-3">
+              <Link
+                href="/security"
+                className="inline-flex items-center gap-2 rounded-full bg-brand-navy px-6 py-3 text-sm font-bold text-brand-beige transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-teal"
+              >
+                Open the complete security review <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+              <Link
+                href="/privacy-policy"
+                className="inline-flex items-center gap-2 rounded-full border border-brand-navy/[0.15] bg-white px-6 py-3 text-sm font-bold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
+              >
+                What we do with school data
+              </Link>
+            </SectionReveal>
           </div>
         </section>
 
@@ -510,8 +545,50 @@ export default function Home({ areaCards, totals }: HomeProps) {
   );
 }
 
+const STATUS_ORDER: Record<FabricStatus, number> = { live: 0, guided: 1, planned: 2 };
+
+const securityArea = MATRIX_CATEGORIES.find((category) => category.slug === "security-and-authentication");
+
 export const getStaticProps: GetStaticProps<HomeProps> = async () => ({
   props: {
+    integrationBoard: INTEGRATION_CATEGORIES.map((category) => ({
+      slug: category.slug,
+      title: category.title,
+      icon: category.icon,
+      blurb: category.blurb,
+      connectors: Object.entries(integrationsData)
+        .filter(([, entry]) => entry.category === category.title)
+        .sort(([, a], [, b]) => STATUS_ORDER[a.status] - STATUS_ORDER[b.status])
+        .map(([slug, entry]) => ({
+          slug,
+          name: entry.name,
+          description: entry.description,
+          icon: entry.icon,
+          status: entry.status,
+          providers: entry.providers.slice(0, 3),
+        })),
+    })).filter((category) => category.connectors.length > 0),
+    integrationCounts: {
+      live: Object.values(integrationsData).filter((entry) => entry.status === "live").length,
+      guided: Object.values(integrationsData).filter((entry) => entry.status === "guided").length,
+      planned: Object.values(integrationsData).filter((entry) => entry.status === "planned").length,
+      total: Object.keys(integrationsData).length,
+    },
+    securityLayers: SECURITY_LAYERS.map((layer) => ({
+      id: layer.id,
+      order: layer.order,
+      title: layer.title,
+      short: layer.short,
+      promise: layer.promise,
+      module: layer.module,
+      icon: layer.icon,
+    })),
+    securityScenarios: SECURITY_SCENARIOS.slice(0, 3),
+    securityStats: {
+      layers: SECURITY_LAYERS.length,
+      modules: securityArea?.moduleCount ?? 0,
+      capabilities: securityArea?.featureCount ?? 0,
+    },
     areaCards: MATRIX_CATEGORIES.map((category) => {
       const narrative = AREA_NARRATIVES.find((entry) => entry.slug === category.slug);
       return {
