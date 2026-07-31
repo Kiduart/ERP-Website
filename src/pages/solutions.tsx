@@ -116,7 +116,7 @@ export default function Solutions({ personas, totals }: SolutionsPageProps) {
                 <StatChip value={personas.length} label="Role solutions" />
                 <StatChip value={`${totals.modules}+`} label="Business workflows" />
                 <StatChip value={totals.categories} label="Functional areas" />
-                <StatChip value="Full" label="School operations" />
+                <StatChip value={0} label="Per-user charges" />
                 <div className="col-span-2 overflow-hidden rounded-[1.75rem] border border-brand-navy/[0.08]">
                   <div className="relative aspect-[16/9]">
                     <Image

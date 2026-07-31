@@ -56,7 +56,7 @@ export function SecurityPerimeter({
       <div className="flex flex-wrap items-center justify-between gap-4 border-b border-brand-navy/[0.08] pb-5">
         <dl className="flex flex-wrap items-center gap-x-8 gap-y-3">
           {[
-            { value: stats.layers, label: "defence layers" },
+            { value: "Six", label: "defence layers" },
             { value: "Role-based", label: "access control" },
             { value: "Per school", label: "data isolation" },
           ].map((stat) => (

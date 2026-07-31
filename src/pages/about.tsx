@@ -237,10 +237,10 @@ export default function About({ totals, panelCount, personaCount }: AboutProps) 
             {[
               { value: totals.categories, label: "Functional areas", href: "/features" },
               { value: `${totals.modules}+`, label: "Business workflows", href: "/features" },
-              { value: "Full", label: "School operations", href: "/features" },
               { value: panelCount, label: "Dedicated panels", href: "/platform" },
               { value: personaCount, label: "Role solutions", href: "/solutions" },
               { value: "0", label: "Per-user charges", href: "/pricing" },
+              { value: "Open", label: "Capability map", href: "/features" },
             ].map((stat) => (
               <Link
                 key={stat.label}

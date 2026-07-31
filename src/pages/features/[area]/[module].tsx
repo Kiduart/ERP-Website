@@ -14,7 +14,7 @@ import {
   ACCENTS,
   Breadcrumbs,
   HiddenCapabilitiesLink,
-  StatChip,
+  SignalList,
   type AccentName,
 } from "@/components/product/ProductPrimitives";
 import type { PublicModule } from "@/data/featureMatrix";
@@ -127,10 +127,24 @@ export default function FeatureModule({ area, productModule, counts, siblings, p
                     </p>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-2.5">
-                    <StatChip value="Workflows" label="Day-to-day use" />
-                    <StatChip value="Groups" label="Inside this module" />
-                  </div>
+                  <SignalList
+                    items={[
+                      {
+                        id: "workflows",
+                        title: "Day-to-day workflows",
+                        detail: "Jump into the groups schools use most",
+                        href: productModule.subModules[0]
+                          ? `#sub-${productModule.subModules[0].slug}`
+                          : "#capability-sheet",
+                      },
+                      {
+                        id: "sheet",
+                        title: "Complete module sheet",
+                        detail: "Ask for every remaining capability in writing",
+                        href: "#capability-sheet",
+                      },
+                    ]}
+                  />
 
                   <div className="mt-3 rounded-[1.35rem] border border-brand-navy/[0.1] bg-white p-5">
                     <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-navy/[0.72]">

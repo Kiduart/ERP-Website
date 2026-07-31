@@ -15,7 +15,7 @@ import {
   ACCENTS,
   Breadcrumbs,
   SectionHeading,
-  StatChip,
+  SignalList,
   type AccentName,
 } from "@/components/product/ProductPrimitives";
 import { findMatrixModule, getMatrixCategory } from "@/data/featureMatrix";
@@ -117,10 +117,27 @@ export default function PanelPage({ panel, modules, areas, neighbours }: PanelPa
                 </h1>
                 <p className="mt-5 text-lg leading-8 text-brand-navy/[0.78]">{panel.intro}</p>
 
-                <div className="mt-7 grid gap-3 sm:grid-cols-3">
-                  <StatChip value="Modules" label="In reach for this role" />
-                  <StatChip value="Workflows" label="Day-to-day use" />
-                  <StatChip value={panel.audience.length} label="Role types" />
+                <div className="mt-7">
+                  <SignalList
+                    items={[
+                      {
+                        id: "modules",
+                        title: "Modules in reach",
+                        detail: "Workflows this role opens most often",
+                        href: "#panel-modules",
+                      },
+                      {
+                        id: "day",
+                        title: "Day-one setup",
+                        detail: "First hour path so the panel is useful immediately",
+                      },
+                      {
+                        id: "roles",
+                        title: panel.audience.join(" · "),
+                        detail: "Who signs into this panel",
+                      },
+                    ]}
+                  />
                 </div>
 
                 <div className="mt-8 flex flex-col gap-4 sm:flex-row">
@@ -207,7 +224,7 @@ export default function PanelPage({ panel, modules, areas, neighbours }: PanelPa
           </div>
         </section>
 
-        <section className="section-space relative overflow-hidden bg-white">
+        <section id="panel-modules" className="section-space relative overflow-hidden bg-white">
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <SectionReveal>
               <SectionHeading

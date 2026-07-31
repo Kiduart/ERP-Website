@@ -246,23 +246,25 @@ export function Footer() {
           <p className="text-[0.68rem] font-bold uppercase tracking-[0.2em] text-brand-navy/[0.72]">
             Where to go next
           </p>
-          <ul className="mt-5 grid gap-0 sm:grid-cols-3">
+          <ul className="mt-5 grid gap-3 sm:grid-cols-3 sm:gap-4">
             {DESTINATIONS.map((door, index) => (
-              <li
-                key={door.href}
-                className={index > 0 ? "border-t border-brand-navy/[0.1] sm:border-l sm:border-t-0" : ""}
-              >
+              <li key={door.href}>
                 <Link
                   href={door.href}
-                  className="group flex h-full flex-col px-0 py-5 sm:px-6 sm:first:pl-0 sm:last:pr-0"
+                  className="group flex h-full flex-col rounded-[1.35rem] border border-brand-navy/[0.1] bg-white px-5 py-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-teal/40 hover:shadow-md hover:shadow-brand-navy/[0.06]"
                 >
-                  <span className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-brand-teal">
-                    {door.kicker}
+                  <span className="flex items-center justify-between gap-3">
+                    <span className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-brand-teal">
+                      {door.kicker}
+                    </span>
+                    <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-brand-beige text-[0.65rem] font-extrabold text-brand-navy/[0.7] transition-colors group-hover:bg-brand-teal group-hover:text-white">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
                   </span>
-                  <span className="mt-2 flex items-baseline gap-2 text-[clamp(1.5rem,1.2rem+0.8vw,2rem)] font-bold text-brand-navy transition-colors group-hover:text-brand-teal">
+                  <span className="mt-3 flex items-baseline gap-2 text-[clamp(1.35rem,1.15rem+0.6vw,1.75rem)] font-bold text-brand-navy transition-colors group-hover:text-brand-teal">
                     {door.title}
                     <ArrowUpRight
-                      className="h-5 w-5 translate-y-0.5 opacity-50 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100"
+                      className="h-4 w-4 translate-y-0.5 opacity-50 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:opacity-100"
                       aria-hidden
                     />
                   </span>

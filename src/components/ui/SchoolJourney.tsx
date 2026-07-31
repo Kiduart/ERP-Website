@@ -49,12 +49,12 @@ export function SchoolJourney() {
       >
         <span
           aria-hidden="true"
-          className="pointer-events-none absolute bottom-4 left-[1.4375rem] top-4 hidden w-px bg-brand-navy/[0.12] lg:block"
+          className="pointer-events-none absolute bottom-4 left-[1.4375rem] top-4 z-0 hidden w-px bg-brand-navy/[0.12] lg:block"
         />
         <span
           aria-hidden="true"
           style={{ height: `${progress}%` }}
-          className="pointer-events-none absolute left-[1.4375rem] top-4 hidden w-px bg-brand-teal transition-[height] duration-500 ease-out lg:block"
+          className="pointer-events-none absolute left-[1.4375rem] top-4 z-0 hidden w-px bg-brand-teal transition-[height] duration-500 ease-out lg:block"
         />
 
         {steps.map((step, index) => {
@@ -75,23 +75,24 @@ export function SchoolJourney() {
               tabIndex={isActive ? 0 : -1}
               onClick={() => setActiveIndex(index)}
               onKeyDown={(event) => onTabKeyDown(event, index)}
-              className={`group relative flex min-w-[9.25rem] flex-shrink-0 snap-start flex-col items-start gap-2 rounded-2xl border p-3 text-left transition-all duration-300 lg:min-w-0 lg:flex-row lg:items-center lg:gap-3 lg:border-transparent lg:bg-transparent lg:p-2 ${
+              className={`group relative z-[1] flex min-w-[9.25rem] flex-shrink-0 snap-start flex-col items-start gap-2 rounded-2xl border p-3 text-left transition-all duration-300 lg:min-w-0 lg:flex-row lg:items-center lg:gap-3 lg:border-transparent lg:bg-transparent lg:p-2 ${
                 isActive
                   ? "border-brand-teal/40 bg-white shadow-md lg:bg-white lg:shadow-sm"
                   : "border-brand-navy/10 bg-white/70 hover:border-brand-teal/30 hover:bg-white lg:hover:bg-white/70"
               }`}
             >
+              {/* Opaque fill so the rail never shows through the tick/number */}
               <span
-                className={`relative z-10 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border text-xs font-bold transition-all duration-300 ${
+                className={`relative z-10 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full border text-xs font-bold ring-[3px] ring-brand-beige transition-all duration-300 ${
                   isActive
                     ? "border-brand-navy bg-brand-navy text-brand-beige"
                     : isDone
-                      ? "border-brand-teal/50 bg-brand-teal/10 text-brand-teal"
+                      ? "border-brand-teal bg-brand-teal text-white"
                       : "border-brand-navy/15 bg-white text-brand-navy/[0.78] group-hover:border-brand-teal/40 group-hover:text-brand-teal"
                 }`}
               >
                 {isDone ? (
-                  <Check className="h-4 w-4" aria-hidden="true" />
+                  <Check className="h-4 w-4" strokeWidth={2.75} aria-hidden="true" />
                 ) : (
                   String(index + 1).padStart(2, "0")
                 )}

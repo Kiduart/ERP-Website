@@ -68,8 +68,8 @@ export default function Pricing({ coverage, totals, coreAreaCount }: PricingPage
           <SectionReveal className="mx-auto mb-14 grid max-w-4xl grid-cols-2 gap-4 md:grid-cols-4">
             <StatChip value={totals.categories} label="Functional areas" />
             <StatChip value={`${totals.modules}+`} label="Business workflows" />
-            <StatChip value="Full" label="School operations stack" />
-            <StatChip value="0" label="Per-user charges" />
+            <StatChip value={0} label="Per-user charges" />
+            <StatChip value="INR" label="Quoted per school" />
           </SectionReveal>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto relative z-20">

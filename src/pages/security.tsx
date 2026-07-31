@@ -10,7 +10,6 @@ import { FloatingIcons } from "@/components/animations/FloatingIcons";
 import { ArrowRight, Info } from "lucide-react";
 import { SecurityStack } from "@/components/product/SecurityStack";
 import { SecurityPerimeter } from "@/components/ui/SecurityPerimeter";
-import { StatChip } from "@/components/product/ProductPrimitives";
 import {
   DATA_HANDLING_PRINCIPLES,
   SECURITY_HONESTY,
@@ -71,12 +70,31 @@ export default function Security({ layers, areaFeatureCount, areaModuleCount }: 
               </Link>
             </SectionReveal>
 
-            <SectionReveal delay={0.15} className="grid gap-4 sm:grid-cols-2">
-              <StatChip value={layers.length} label="Defence layers" />
-              <StatChip value="Role-based" label="Access control" />
-              <StatChip value="Per school" label="Data separation" />
-              <StatChip value="Audited" label="Sensitive actions" />
-              <div className="sm:col-span-2 rounded-2xl border border-brand-navy/[0.1] bg-brand-beige/25 p-5">
+            <SectionReveal delay={0.15} className="rounded-[2rem] border border-brand-navy/[0.1] bg-white p-5 shadow-sm sm:p-6">
+              <ul className="space-y-3">
+                {[
+                  { value: "Six", label: "Defence layers", detail: "Login to audit — stacked, not bolted on" },
+                  { value: "Role-based", label: "Access control", detail: "Teachers, finance and parents see only their desk" },
+                  { value: "Per school", label: "Data isolation", detail: "Each campus stays in its own tenant" },
+                  { value: "Audited", label: "Sensitive actions", detail: "Marks, fees and permissions leave a trail" },
+                ].map((item) => (
+                  <li
+                    key={item.label}
+                    className="flex items-start gap-4 rounded-2xl border border-brand-navy/[0.08] bg-brand-beige/25 px-4 py-3.5"
+                  >
+                    <span className="min-w-[6.5rem] shrink-0 text-base font-extrabold leading-tight text-brand-navy sm:min-w-[7.5rem] sm:text-lg">
+                      {item.value}
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block text-xs font-bold uppercase tracking-[0.14em] text-brand-teal">
+                        {item.label}
+                      </span>
+                      <span className="mt-1 block text-sm leading-6 text-brand-navy/[0.74]">{item.detail}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-4 rounded-2xl border border-brand-navy/[0.1] bg-brand-beige/25 p-5">
                 <h3 className="text-sm font-bold uppercase tracking-[0.16em] text-brand-navy">
                   The short version
                 </h3>

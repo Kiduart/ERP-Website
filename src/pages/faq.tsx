@@ -63,8 +63,8 @@ export default function FAQ() {
           <SectionReveal delay={0.1} className="mx-auto mt-12 grid max-w-3xl grid-cols-2 gap-4 md:grid-cols-4">
             <StatChip value={MATRIX_TOTALS.categories} label="Functional areas" />
             <StatChip value={`${MATRIX_TOTALS.modules}+`} label="Business workflows" />
-            <StatChip value="Full" label="School operations" />
-            <StatChip value="10" label="Dedicated panels" />
+            <StatChip value={10} label="Dedicated panels" />
+            <StatChip value={0} label="Per-user charges" />
           </SectionReveal>
         </div>
       </section>

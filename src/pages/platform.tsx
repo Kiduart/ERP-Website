@@ -82,7 +82,7 @@ export default function Platform({ panels, totals }: PlatformPageProps) {
               <StatChip value={panels.length} label="Dedicated user panels" />
               <StatChip value={totals.categories} label="Functional areas" />
               <StatChip value={`${totals.modules}+`} label="Business workflows" />
-              <StatChip value="Full" label="School operations platform" />
+              <StatChip value={0} label="Per-user charges" />
             </SectionReveal>
           </div>
         </section>

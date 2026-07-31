@@ -17,7 +17,7 @@ import {
   FlowRail,
   OutcomeList,
   SectionHeading,
-  StatChip,
+  SignalList,
   type AccentName,
 } from "@/components/product/ProductPrimitives";
 import {
@@ -145,11 +145,28 @@ export default function FeatureArea({ narrative, modules, counts, panels, siblin
                     <p className="text-xs font-semibold text-brand-navy/[0.72]">Live in the product</p>
                   </div>
 
-                  <div className="grid grid-cols-3 gap-2.5">
-                    <StatChip value="Modules" label="In this area" />
-                    <StatChip value="Workflows" label="Schools run daily" />
-                    <StatChip value="Depth" label="Capabilities covered" />
-                  </div>
+                  <SignalList
+                    items={[
+                      {
+                        id: "modules",
+                        title: "Modules in this area",
+                        detail: "Open any module below to judge depth yourself",
+                        href: "#modules",
+                      },
+                      {
+                        id: "workflows",
+                        title: "Daily school workflows",
+                        detail: "What staff and families actually open each day",
+                        href: "#modules",
+                      },
+                      {
+                        id: "sheet",
+                        title: "Full capability sheet",
+                        detail: "Request every remaining line when you need it",
+                        href: "#capability-sheet",
+                      },
+                    ]}
+                  />
 
                   <div className="mt-3 rounded-[1.35rem] border border-brand-navy/[0.1] bg-white p-5">
                     <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-navy/[0.72]">

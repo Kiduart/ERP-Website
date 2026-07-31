@@ -94,22 +94,76 @@ export function StatChip({
 }) {
   const numeric = typeof value === "number" ? value : Number(value);
   const canAnimate = animate && Number.isFinite(numeric);
+  const isLongWord =
+    typeof value === "string" && value.length > 4 && !/^\d+\+?$/.test(value.trim());
 
   return (
     <div
       className={cn(
-        "rounded-2xl border border-brand-navy/[0.1] bg-white px-4 py-4 text-left shadow-sm shadow-brand-navy/[0.04]",
+        "min-w-0 overflow-hidden rounded-2xl border border-brand-navy/[0.1] bg-white px-3.5 py-4 text-left shadow-sm shadow-brand-navy/[0.04] sm:px-4",
         className,
       )}
     >
-      <div className="text-[clamp(1.5rem,1.2rem+0.8vw,2rem)] font-extrabold leading-none text-brand-navy">
+      <div
+        className={cn(
+          "min-w-0 font-extrabold text-brand-navy",
+          isLongWord
+            ? "text-[clamp(1.05rem,0.92rem+0.55vw,1.45rem)] leading-tight tracking-tight"
+            : "text-[clamp(1.5rem,1.2rem+0.8vw,2rem)] leading-none",
+        )}
+      >
         {canAnimate ? <AnimatedCounter end={numeric} /> : value}
       </div>
-      <p className="mt-2 text-xs font-semibold uppercase tracking-[0.16em] text-brand-navy/[0.72]">
+      <p className="mt-2 text-[0.65rem] font-semibold uppercase leading-snug tracking-[0.14em] text-brand-navy/[0.72] sm:text-xs sm:tracking-[0.16em]">
         {label}
       </p>
       <span className="console-rail relative mt-3 block" aria-hidden="true" />
     </div>
+  );
+}
+
+/** Compact signal rows for area/module boards — avoids giant word-values overflowing cards. */
+export function SignalList({
+  items,
+}: {
+  items: { id: string; title: string; detail: string; href?: string }[];
+}) {
+  return (
+    <ul className="space-y-2">
+      {items.map((item, index) => {
+        const inner = (
+          <>
+            <span className="mt-0.5 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-navy text-[0.65rem] font-extrabold text-brand-beige">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <span className="min-w-0 flex-1">
+              <span className="block text-sm font-bold text-brand-navy">{item.title}</span>
+              <span className="mt-0.5 block text-xs leading-5 text-brand-navy/[0.7]">{item.detail}</span>
+            </span>
+            {item.href ? (
+              <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-brand-navy/35 transition-transform group-hover:translate-x-0.5 group-hover:text-brand-teal" aria-hidden />
+            ) : null}
+          </>
+        );
+
+        return (
+          <li key={item.id}>
+            {item.href ? (
+              <a
+                href={item.href}
+                className="group flex items-start gap-3 rounded-2xl border border-brand-navy/[0.08] bg-white px-3.5 py-3 transition-colors hover:border-brand-teal/40"
+              >
+                {inner}
+              </a>
+            ) : (
+              <div className="flex items-start gap-3 rounded-2xl border border-brand-navy/[0.08] bg-white px-3.5 py-3">
+                {inner}
+              </div>
+            )}
+          </li>
+        );
+      })}
+    </ul>
   );
 }
 

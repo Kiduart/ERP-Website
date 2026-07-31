@@ -24,11 +24,18 @@ type FeaturesPageProps = {
 };
 
 export default function Features({ areas, totals, panels }: FeaturesPageProps) {
-  const highlights: { value?: number; display?: string; suffix: string; label: string }[] = [
-    { value: totals.categories, suffix: "", label: "functional areas" },
-    { value: totals.modules, suffix: "+", label: "business workflows" },
-    { display: "Deep", suffix: "", label: "capability matrix" },
-    { display: "Full", suffix: "", label: "school operations platform" },
+  const highlights: {
+    value?: number;
+    display?: string;
+    suffix: string;
+    label: string;
+    href?: string;
+    action?: string;
+  }[] = [
+    { value: totals.categories, suffix: "", label: "functional areas", href: "#capability-map" },
+    { value: totals.modules, suffix: "+", label: "business workflows", href: "#capability-map" },
+    { value: panels.length, suffix: "", label: "dedicated panels", href: "/platform", action: "Open panels" },
+    { display: "0", suffix: "", label: "per-user charges", href: "/pricing", action: "See pricing" },
   ];
 
   return (
@@ -90,41 +97,60 @@ export default function Features({ areas, totals, panels }: FeaturesPageProps) {
                   Capability depth from the product matrix
                 </p>
                 <p className="text-xs font-semibold text-brand-navy/[0.72]">
-                  Soft counts where they help — never a feature ceiling
+                  Tap a card to explore — soft counts, no feature ceiling
                 </p>
               </div>
 
-              <dl className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-                {highlights.map((highlight, index) => (
-                  <div
-                    key={highlight.label}
-                    className="relative overflow-hidden rounded-[1.5rem] border border-brand-navy/[0.1] bg-white px-6 py-7"
-                  >
-                    <span className="absolute right-5 top-6 flex gap-1" aria-hidden="true">
-                      {highlights.map((_, dot) => (
-                        <span
-                          key={dot}
-                          className={cn(
-                            "h-1.5 w-1.5 rounded-full",
-                            dot <= index ? "bg-brand-teal" : "bg-brand-navy/[0.14]",
-                          )}
-                        />
-                      ))}
-                    </span>
-                    <dd className="text-[clamp(2.1rem,1.6rem+1.4vw,2.9rem)] font-extrabold leading-none text-brand-navy">
-                      {typeof highlight.value === "number" ? (
-                        <AnimatedCounter end={highlight.value} suffix={highlight.suffix} />
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                {highlights.map((highlight, index) => {
+                  const body = (
+                    <>
+                      <span className="absolute right-5 top-6 flex gap-1" aria-hidden="true">
+                        {highlights.map((_, dot) => (
+                          <span
+                            key={dot}
+                            className={cn(
+                              "h-1.5 w-1.5 rounded-full",
+                              dot <= index ? "bg-brand-teal" : "bg-brand-navy/[0.14]",
+                            )}
+                          />
+                        ))}
+                      </span>
+                      <span className="block text-[clamp(2.1rem,1.6rem+1.4vw,2.9rem)] font-extrabold leading-none text-brand-navy transition-colors group-hover:text-brand-teal">
+                        {typeof highlight.value === "number" ? (
+                          <AnimatedCounter end={highlight.value} suffix={highlight.suffix} />
+                        ) : (
+                          highlight.display
+                        )}
+                      </span>
+                      <span className="mt-3 block text-xs font-bold uppercase tracking-[0.16em] text-brand-navy/[0.72]">
+                        {highlight.label}
+                      </span>
+                      {highlight.action ? (
+                        <span className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-brand-teal">
+                          {highlight.action}
+                          <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+                        </span>
                       ) : (
-                        highlight.display
+                        <span className="console-rail relative mt-4 block" aria-hidden="true" />
                       )}
-                    </dd>
-                    <dt className="mt-3 text-xs font-bold uppercase tracking-[0.16em] text-brand-navy/[0.72]">
-                      {highlight.label}
-                    </dt>
-                    <span className="console-rail relative mt-4 block" aria-hidden="true" />
-                  </div>
-                ))}
-              </dl>
+                    </>
+                  );
+
+                  const className =
+                    "group relative min-w-0 overflow-hidden rounded-[1.5rem] border border-brand-navy/[0.1] bg-white px-5 py-7 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-teal/40 hover:shadow-lg hover:shadow-brand-navy/[0.06] sm:px-6";
+
+                  return highlight.href?.startsWith("/") ? (
+                    <Link key={highlight.label} href={highlight.href} className={className}>
+                      {body}
+                    </Link>
+                  ) : (
+                    <a key={highlight.label} href={highlight.href ?? "#capability-map"} className={className}>
+                      {body}
+                    </a>
+                  );
+                })}
+              </div>
 
               <div className="contact-form-panel mt-3 rounded-[1.5rem] border border-brand-navy/[0.1] p-6 md:p-8">
                 <h2 className="text-2xl font-bold text-brand-navy">
@@ -155,7 +181,7 @@ export default function Features({ areas, totals, panels }: FeaturesPageProps) {
           </div>
         </section>
 
-        <section className="section-space relative overflow-hidden bg-brand-beige/25">
+        <section id="capability-map" className="section-space relative overflow-hidden bg-brand-beige/25">
           <BackgroundBlobs
             blobs={[
               { color: "#003049", size: 380, position: "top-left", opacity: 0.1 },
