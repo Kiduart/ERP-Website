@@ -109,7 +109,7 @@ const DROPDOWNS: Record<string, DropdownGroup[]> = {
     {
       title: "Insights",
       items: [
-        { label: "Blog", href: "/blog", note: "Ideas, guides, and updates", soon: true },
+        { label: "Blog", href: "/blog", note: "Ideas, guides, and updates" },
         { label: "Customer Stories", href: "/stories", note: "See real school outcomes", soon: true },
       ],
     },
@@ -127,14 +127,14 @@ const DROPDOWNS: Record<string, DropdownGroup[]> = {
         { label: "Pricing", href: "/pricing", note: "Plans built for growing schools" },
         { label: "Security", href: "/security", note: "Data, compliance, and trust" },
         { label: "Integrations", href: "/integrations", note: "Connect your school stack" },
-        { label: "KIDUORBIT AI", href: "/kiduorbit", note: "Our AI workspace for schools" },
+        { label: "KIDUORBIT AI", href: "/kiduorbit", note: "Our AI workspace for schools", soon: true },
       ],
     },
     {
       title: "Company",
       items: [
         { label: "About", href: "/about", note: "Who we are building for" },
-        { label: "Careers", href: "/careers", note: "Join the team", soon: true },
+        { label: "Careers", href: "/careers", note: "Join the team" },
         { label: "Contact", href: "/contact", note: "Talk to KIDUART" },
       ],
     },
@@ -240,7 +240,7 @@ export function Navbar() {
           {/* Logo */}
           <Link href="/" onClick={() => trackNavClick("Home")} className="flex items-center gap-2 group shrink-0">
             <img
-              src="/logo.png"
+              src="/logo.webp"
               alt="KIDUART school ERP"
               className="h-9 w-auto md:h-12"
               width={512}

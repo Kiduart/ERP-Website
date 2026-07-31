@@ -1,8 +1,15 @@
-import type { ReactNode } from "react";
-import { Link } from "wouter";
-import { ArrowRight, ArrowUpRight, Check, ChevronRight, Lock } from "lucide-react";
+import { onSmoothHashClick } from "@/lib/smoothScroll";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Check,
+  ChevronRight,
+  Lock,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
+import type { ReactNode } from "react";
+import { Link } from "wouter";
 
 export type AccentName = "navy" | "teal" | "orange" | "yellow" | "bronze";
 
@@ -53,7 +60,11 @@ export const ACCENTS: Record<AccentName, AccentTokens> = {
   },
 };
 
-export function Breadcrumbs({ trail }: { trail: { name: string; path: string }[] }) {
+export function Breadcrumbs({
+  trail,
+}: {
+  trail: { name: string; path: string }[];
+}) {
   return (
     <nav aria-label="Breadcrumb" className="mb-6">
       <ol className="flex flex-wrap items-center gap-1 text-sm text-brand-navy/[0.72]">
@@ -62,15 +73,24 @@ export function Breadcrumbs({ trail }: { trail: { name: string; path: string }[]
           return (
             <li key={entry.path} className="flex items-center gap-1">
               {isLast ? (
-                <span aria-current="page" className="font-semibold text-brand-navy">
+                <span
+                  aria-current="page"
+                  className="font-semibold text-brand-navy"
+                >
                   {entry.name}
                 </span>
               ) : (
                 <>
-                  <Link href={entry.path} className="rounded font-medium underline-offset-4 hover:underline">
+                  <Link
+                    href={entry.path}
+                    className="rounded font-medium underline-offset-4 hover:underline"
+                  >
                     {entry.name}
                   </Link>
-                  <ChevronRight className="h-4 w-4 text-brand-navy/40" aria-hidden="true" />
+                  <ChevronRight
+                    className="h-4 w-4 text-brand-navy/40"
+                    aria-hidden="true"
+                  />
                 </>
               )}
             </li>
@@ -95,7 +115,9 @@ export function StatChip({
   const numeric = typeof value === "number" ? value : Number(value);
   const canAnimate = animate && Number.isFinite(numeric);
   const isLongWord =
-    typeof value === "string" && value.length > 4 && !/^\d+\+?$/.test(value.trim());
+    typeof value === "string" &&
+    value.length > 4 &&
+    !/^\d+\+?$/.test(value.trim());
 
   return (
     <div
@@ -122,7 +144,7 @@ export function StatChip({
   );
 }
 
-/** Compact signal rows for area/module boards — avoids giant word-values overflowing cards. */
+/** Compact signal rows for area/module boards  avoids giant word-values overflowing cards. */
 export function SignalList({
   items,
 }: {
@@ -137,11 +159,18 @@ export function SignalList({
               {String(index + 1).padStart(2, "0")}
             </span>
             <span className="min-w-0 flex-1">
-              <span className="block text-sm font-bold text-brand-navy">{item.title}</span>
-              <span className="mt-0.5 block text-xs leading-5 text-brand-navy/[0.7]">{item.detail}</span>
+              <span className="block text-sm font-bold text-brand-navy">
+                {item.title}
+              </span>
+              <span className="mt-0.5 block text-xs leading-5 text-brand-navy/[0.7]">
+                {item.detail}
+              </span>
             </span>
             {item.href ? (
-              <ArrowRight className="mt-1 h-4 w-4 shrink-0 text-brand-navy/35 transition-transform group-hover:translate-x-0.5 group-hover:text-brand-teal" aria-hidden />
+              <ArrowRight
+                className="mt-1 h-4 w-4 shrink-0 text-brand-navy/35 transition-transform group-hover:translate-x-0.5 group-hover:text-brand-teal"
+                aria-hidden
+              />
             ) : null}
           </>
         );
@@ -151,6 +180,10 @@ export function SignalList({
             {item.href ? (
               <a
                 href={item.href}
+                onClick={(event) => {
+                  if (item.href?.startsWith("#"))
+                    onSmoothHashClick(event, item.href);
+                }}
                 className="group flex items-start gap-3 rounded-2xl border border-brand-navy/[0.08] bg-white px-3.5 py-3 transition-colors hover:border-brand-teal/40"
               >
                 {inner}
@@ -169,7 +202,7 @@ export function SignalList({
 
 /**
  * Gated-capability cue. Scrolls to the on-page capability-sheet form so visitors
- * know exactly how to unlock the rest — used on every area and module page.
+ * know exactly how to unlock the rest  used on every area and module page.
  */
 export function HiddenCapabilitiesLink({
   count,
@@ -186,28 +219,29 @@ export function HiddenCapabilitiesLink({
   return (
     <a
       href={href}
+      onClick={(event) => onSmoothHashClick(event, href)}
       className={cn(
-        "group/lock flex w-full items-start gap-2.5 rounded-xl border border-dashed border-brand-navy/25 bg-white/70 px-3.5 py-2.5 text-left text-sm leading-6 text-brand-navy transition-colors hover:border-brand-teal/50 hover:bg-brand-teal/[0.06] hover:text-brand-teal",
+        "capability-cue group/lock flex w-full items-start gap-2.5 rounded-xl border border-dashed border-brand-teal/45 bg-brand-teal/[0.06] px-3.5 py-2.5 text-left text-sm leading-6 text-brand-navy transition-colors hover:border-brand-teal hover:bg-brand-teal/[0.1] hover:text-brand-teal",
         className,
       )}
     >
       <span
-        className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-navy/[0.08] transition-colors group-hover/lock:bg-brand-teal/15"
+        className="capability-cue-lock mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-teal/15"
         aria-hidden="true"
       >
-        <Lock className="h-3 w-3 text-brand-navy/60 group-hover/lock:text-brand-teal" />
+        <Lock className="h-3 w-3 text-brand-teal" />
       </span>
       <span className="min-w-0 flex-1">
-        <span className="font-semibold">
+        <span className="font-semibold text-brand-navy group-hover/lock:text-brand-teal">
           More capabilities{label ? ` ${label}` : ""}
         </span>
         <span className="text-brand-navy/[0.72] group-hover/lock:text-brand-teal/80">
           {" "}
-          — request the full sheet
+          request the full sheet
         </span>
       </span>
       <ArrowRight
-        className="mt-1 h-3.5 w-3.5 shrink-0 text-brand-navy/40 transition-transform group-hover/lock:translate-x-0.5 group-hover/lock:text-brand-teal"
+        className="capability-cue-arrow mt-1 h-3.5 w-3.5 shrink-0 text-brand-teal"
         aria-hidden="true"
       />
     </a>
@@ -228,10 +262,15 @@ export function FlowRail({
     <div className="fabric-board overflow-hidden rounded-[2rem] border border-brand-navy/[0.1] bg-white/70 p-4 shadow-xl shadow-brand-navy/[0.06] sm:p-5">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3 px-1">
         <p className="inline-flex items-center gap-2 text-[0.68rem] font-bold uppercase tracking-[0.18em] text-brand-teal">
-          <span className="console-live-dot h-1.5 w-1.5 rounded-full bg-brand-teal" aria-hidden="true" />
+          <span
+            className="console-live-dot h-1.5 w-1.5 rounded-full bg-brand-teal"
+            aria-hidden="true"
+          />
           Daily sequence
         </p>
-        <p className="text-xs font-semibold text-brand-navy/[0.72]">{steps.length} steps in order</p>
+        <p className="text-xs font-semibold text-brand-navy/[0.72]">
+          {steps.length} steps in order
+        </p>
       </div>
 
       <ol className="relative grid gap-3 md:grid-cols-2 xl:grid-cols-4">
@@ -256,8 +295,12 @@ export function FlowRail({
             >
               {String(index + 1).padStart(2, "0")}
             </span>
-            <h3 className="text-base font-bold text-brand-navy">{step.title}</h3>
-            <p className="mt-2 flex-grow text-sm leading-6 text-brand-navy/[0.76]">{step.detail}</p>
+            <h3 className="text-base font-bold text-brand-navy">
+              {step.title}
+            </h3>
+            <p className="mt-2 flex-grow text-sm leading-6 text-brand-navy/[0.76]">
+              {step.detail}
+            </p>
             <span
               className={cn(
                 "mt-4 h-1 w-10 rounded-full transition-all duration-300 group-hover:w-16",
@@ -272,7 +315,13 @@ export function FlowRail({
   );
 }
 
-export function OutcomeList({ items, accent = "teal" }: { items: string[]; accent?: AccentName }) {
+export function OutcomeList({
+  items,
+  accent = "teal",
+}: {
+  items: string[];
+  accent?: AccentName;
+}) {
   const tokens = ACCENTS[accent];
 
   return (
@@ -283,12 +332,17 @@ export function OutcomeList({ items, accent = "teal" }: { items: string[]; accen
           className="flex items-start gap-3 rounded-2xl border border-brand-navy/[0.08] bg-white/90 px-4 py-3"
         >
           <span
-            className={cn("mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full", tokens.softBg)}
+            className={cn(
+              "mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full",
+              tokens.softBg,
+            )}
             aria-hidden="true"
           >
             <Check className={cn("h-3.5 w-3.5", tokens.text)} />
           </span>
-          <span className="text-sm leading-6 text-brand-navy/[0.82]">{item}</span>
+          <span className="text-sm leading-6 text-brand-navy/[0.82]">
+            {item}
+          </span>
         </li>
       ))}
     </ul>
@@ -309,11 +363,17 @@ export function SectionHeading({
   children?: ReactNode;
 }) {
   return (
-    <div className={cn("max-w-3xl", align === "center" && "mx-auto text-center")}>
+    <div
+      className={cn("max-w-3xl", align === "center" && "mx-auto text-center")}
+    >
       <p className="section-kicker">{kicker}</p>
-      <h2 className="mt-4 text-3xl font-bold text-brand-navy md:text-4xl">{title}</h2>
+      <h2 className="mt-4 text-3xl font-bold text-brand-navy md:text-4xl">
+        {title}
+      </h2>
       {description ? (
-        <p className="mt-4 text-lg leading-8 text-brand-navy/[0.74]">{description}</p>
+        <p className="mt-4 text-lg leading-8 text-brand-navy/[0.74]">
+          {description}
+        </p>
       ) : null}
       {children}
     </div>

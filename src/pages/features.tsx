@@ -1,19 +1,29 @@
+import { onSmoothHashClick } from "@/lib/smoothScroll";
+import { cn } from "@/lib/utils";
 import type { GetStaticProps } from "next";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
-import { cn } from "@/lib/utils";
 import { PageSeoHead } from "@/components/seo/PageSeoHead";
 import { SchemaMarkup } from "@/components/seo/SchemaMarkup";
 import { pageSeo } from "@/lib/pageSeo";
 import { buildBreadcrumbSchema, buildItemListSchema } from "@/lib/seoSchemas";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
 import { CtaSection } from "@/components/ui/CtaSection";
+import { Stagger } from "@/components/ui/Stagger";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CircleShowcaseHero } from "@/components/ui/CustomHeroes";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
-import { CapabilityMap, type CapabilityArea } from "@/components/product/CapabilityMap";
+import {
+  CapabilityMap,
+  type CapabilityArea,
+} from "@/components/product/CapabilityMap";
 import { IntelligenceLayer } from "@/components/product/IntelligenceLayer";
-import { MATRIX_CATEGORIES, MATRIX_TOTALS, countSubModules, topModules } from "@/data/featureMatrix";
+import {
+  MATRIX_CATEGORIES,
+  MATRIX_TOTALS,
+  countSubModules,
+  topModules,
+} from "@/data/featureMatrix";
 import { AREA_NARRATIVE_BY_SLUG } from "@/data/productNarrative";
 import { PRODUCT_PANELS } from "@/data/productPanels";
 
@@ -32,10 +42,32 @@ export default function Features({ areas, totals, panels }: FeaturesPageProps) {
     href?: string;
     action?: string;
   }[] = [
-    { value: totals.categories, suffix: "", label: "functional areas", href: "#capability-map" },
-    { value: totals.modules, suffix: "+", label: "business workflows", href: "#capability-map" },
-    { value: panels.length, suffix: "", label: "dedicated panels", href: "/platform", action: "Open panels" },
-    { display: "0", suffix: "", label: "per-user charges", href: "/pricing", action: "See pricing" },
+    {
+      value: totals.categories,
+      suffix: "",
+      label: "functional areas",
+      href: "#capability-map",
+    },
+    {
+      value: totals.modules,
+      suffix: "+",
+      label: "business workflows",
+      href: "#capability-map",
+    },
+    {
+      value: panels.length,
+      suffix: "",
+      label: "dedicated panels",
+      href: "/platform",
+      action: "Open panels",
+    },
+    {
+      display: "0",
+      suffix: "",
+      label: "per-user charges",
+      href: "/pricing",
+      action: "See pricing",
+    },
   ];
 
   return (
@@ -43,7 +75,7 @@ export default function Features({ areas, totals, panels }: FeaturesPageProps) {
       <PageSeoHead
         {...pageSeo.features}
         title="School ERP Features: Modules & Capabilities | KIDUART"
-        description="Explore KIDUART school ERP module areas — admissions, academics, fees, HR, transport, hostel, library and security — with the workflows schools ask about most."
+        description="Explore KIDUART school ERP module areas  admissions, academics, fees, HR, transport, hostel, library and security  with the workflows schools ask about most."
       />
       <SchemaMarkup
         data={[
@@ -53,7 +85,10 @@ export default function Features({ areas, totals, panels }: FeaturesPageProps) {
           ]),
           buildItemListSchema(
             "KIDUART school ERP module areas",
-            areas.map((area) => ({ name: area.label, path: `/features/${area.slug}` })),
+            areas.map((area) => ({
+              name: area.label,
+              path: `/features/${area.slug}`,
+            })),
           ),
         ]}
       />
@@ -62,7 +97,7 @@ export default function Features({ areas, totals, panels }: FeaturesPageProps) {
         <CircleShowcaseHero
           eyebrow="School ERP capability map"
           title="Every module your school actually runs, documented feature by feature"
-          subtitle="From the first admission enquiry to consolidated multi-campus reporting — this page is the full map of what ships in the product today, not a highlight reel."
+          subtitle="From the first admission enquiry to consolidated multi-campus reporting  this page is the full map of what ships in the product today, not a highlight reel."
           image="/images/banner/features-hero.jpg"
           actions={
             <>
@@ -85,40 +120,64 @@ export default function Features({ areas, totals, panels }: FeaturesPageProps) {
         <section className="section-space-tight relative overflow-hidden border-y border-brand-navy/5 bg-white">
           <BackgroundBlobs
             blobs={[
-              { color: "#fcbf49", size: 280, position: "center-left", opacity: 0.14 },
-              { color: "#0c716b", size: 280, position: "center-right", opacity: 0.14 },
+              {
+                color: "#fcbf49",
+                size: 280,
+                position: "center-left",
+                opacity: 0.14,
+              },
+              {
+                color: "#0c716b",
+                size: 280,
+                position: "center-right",
+                opacity: 0.14,
+              },
             ]}
           />
           <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <SectionReveal className="fabric-board overflow-hidden rounded-[2.25rem] border border-brand-navy/[0.12] bg-white/70 p-4 shadow-2xl shadow-brand-navy/[0.08] backdrop-blur-sm sm:p-5">
               <div className="flex flex-wrap items-center justify-between gap-3 px-2 pb-4 pt-1">
                 <p className="inline-flex items-center gap-2 text-[0.68rem] font-bold uppercase tracking-[0.18em] text-brand-teal">
-                  <span className="console-live-dot h-1.5 w-1.5 rounded-full bg-brand-teal" aria-hidden="true" />
+                  <span
+                    className="console-live-dot h-1.5 w-1.5 rounded-full bg-brand-teal"
+                    aria-hidden="true"
+                  />
                   Capability depth from the product matrix
                 </p>
                 <p className="text-xs font-semibold text-brand-navy/[0.72]">
-                  Tap a card to explore — soft counts, no feature ceiling
+                  Tap a card to explore soft counts, no feature ceiling
                 </p>
               </div>
 
-              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              <Stagger
+                className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4"
+                itemClassName="motion-brick"
+              >
                 {highlights.map((highlight, index) => {
                   const body = (
                     <>
-                      <span className="absolute right-5 top-6 flex gap-1" aria-hidden="true">
+                      <span
+                        className="absolute right-5 top-6 flex gap-1"
+                        aria-hidden="true"
+                      >
                         {highlights.map((_, dot) => (
                           <span
                             key={dot}
                             className={cn(
                               "h-1.5 w-1.5 rounded-full",
-                              dot <= index ? "bg-brand-teal" : "bg-brand-navy/[0.14]",
+                              dot <= index
+                                ? "bg-brand-teal"
+                                : "bg-brand-navy/[0.14]",
                             )}
                           />
                         ))}
                       </span>
                       <span className="block text-[clamp(2.1rem,1.6rem+1.4vw,2.9rem)] font-extrabold leading-none text-brand-navy transition-colors group-hover:text-brand-teal">
                         {typeof highlight.value === "number" ? (
-                          <AnimatedCounter end={highlight.value} suffix={highlight.suffix} />
+                          <AnimatedCounter
+                            end={highlight.value}
+                            suffix={highlight.suffix}
+                          />
                         ) : (
                           highlight.display
                         )}
@@ -132,7 +191,10 @@ export default function Features({ areas, totals, panels }: FeaturesPageProps) {
                           <ArrowRight className="h-3.5 w-3.5" aria-hidden />
                         </span>
                       ) : (
-                        <span className="console-rail relative mt-4 block" aria-hidden="true" />
+                        <span
+                          className="console-rail relative mt-4 block"
+                          aria-hidden="true"
+                        />
                       )}
                     </>
                   );
@@ -141,26 +203,41 @@ export default function Features({ areas, totals, panels }: FeaturesPageProps) {
                     "group relative min-w-0 overflow-hidden rounded-[1.5rem] border border-brand-navy/[0.1] bg-white px-5 py-7 transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-teal/40 hover:shadow-lg hover:shadow-brand-navy/[0.06] sm:px-6";
 
                   return highlight.href?.startsWith("/") ? (
-                    <Link key={highlight.label} href={highlight.href} className={className}>
+                    <Link
+                      key={highlight.label}
+                      href={highlight.href}
+                      className={className}
+                    >
                       {body}
                     </Link>
                   ) : (
-                    <a key={highlight.label} href={highlight.href ?? "#capability-map"} className={className}>
+                    <a
+                      key={highlight.label}
+                      href={highlight.href ?? "#capability-map"}
+                      onClick={(event) =>
+                        onSmoothHashClick(
+                          event,
+                          highlight.href ?? "#capability-map",
+                        )
+                      }
+                      className={className}
+                    >
                       {body}
                     </a>
                   );
                 })}
-              </div>
+              </Stagger>
 
               <div className="contact-form-panel mt-3 rounded-[1.5rem] border border-brand-navy/[0.1] p-6 md:p-8">
                 <h2 className="text-2xl font-bold text-brand-navy">
                   Counted from the product, not from marketing
                 </h2>
                 <p className="mt-3 max-w-3xl leading-7 text-brand-navy/[0.78]">
-                  These numbers come straight from our capability matrix — the same sheet our
-                  engineering and implementation teams work from. Every module listed on this site
-                  exists in the platform today, so a single school and a multi-campus group can both
-                  start with what they actually run.
+                  These numbers come straight from our capability matrix the
+                  same sheet our engineering and implementation teams work from.
+                  Every module listed on this site exists in the platform today,
+                  so a single school and a multi-campus group can both start
+                  with what they actually run.
                 </p>
                 <p className="mt-5 text-[0.68rem] font-bold uppercase tracking-[0.16em] text-brand-navy/[0.72]">
                   Shipped into dedicated role panels
@@ -181,11 +258,24 @@ export default function Features({ areas, totals, panels }: FeaturesPageProps) {
           </div>
         </section>
 
-        <section id="capability-map" className="section-space relative overflow-hidden bg-brand-beige/25">
+        <section
+          id="capability-map"
+          className="section-space relative overflow-hidden bg-brand-beige/25"
+        >
           <BackgroundBlobs
             blobs={[
-              { color: "#003049", size: 380, position: "top-left", opacity: 0.1 },
-              { color: "#f77f00", size: 340, position: "bottom-right", opacity: 0.12 },
+              {
+                color: "#003049",
+                size: 380,
+                position: "top-left",
+                opacity: 0.1,
+              },
+              {
+                color: "#f77f00",
+                size: 340,
+                position: "bottom-right",
+                opacity: 0.12,
+              },
             ]}
           />
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -195,8 +285,9 @@ export default function Features({ areas, totals, panels }: FeaturesPageProps) {
                 Pick the area you are evaluating
               </h2>
               <p className="mt-4 text-lg leading-8 text-brand-navy/[0.74]">
-                Each area opens into its own page with every module and workflow group it contains, plus
-                the capabilities schools ask about most — so you can judge the depth for yourself.
+                Each area opens into its own page with every module and workflow
+                group it contains, plus the capabilities schools ask about most
+                so you can judge the depth for yourself.
               </p>
             </SectionReveal>
 
@@ -204,11 +295,24 @@ export default function Features({ areas, totals, panels }: FeaturesPageProps) {
           </div>
         </section>
 
-        <section className="section-space relative overflow-hidden bg-brand-navy" style={{ color: "#fcf6d3" }}>
+        <section
+          className="section-space relative overflow-hidden bg-brand-navy"
+          style={{ color: "#fcf6d3" }}
+        >
           <BackgroundBlobs
             blobs={[
-              { color: "#fcbf49", size: 420, position: "top-right", opacity: 0.16 },
-              { color: "#0c716b", size: 420, position: "bottom-left", opacity: 0.16 },
+              {
+                color: "#fcbf49",
+                size: 420,
+                position: "top-right",
+                opacity: 0.16,
+              },
+              {
+                color: "#0c716b",
+                size: 420,
+                position: "bottom-left",
+                opacity: 0.16,
+              },
             ]}
           />
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -217,12 +321,14 @@ export default function Features({ areas, totals, panels }: FeaturesPageProps) {
                 The intelligence layer
               </p>
               <h2 className="mt-6 text-[clamp(1.9rem,1.5rem+1.6vw,2.6rem)] font-bold text-brand-beige">
-                KIDUORBIT reads the same modules — it does not ask you for new data
+                KIDUORBIT reads the same modules it does not ask you for new
+                data
               </h2>
               <p className="mt-5 text-lg leading-8 text-brand-beige/80">
-                Attendance marks, fee ledgers, exam scores and vehicle pings are already being
-                recorded by the modules above. KIDUORBIT scores them and hands staff a ranked list to
-                act on. People still make the call; the platform narrows where to look.
+                Attendance marks, fee ledgers, exam scores and vehicle pings are
+                already being recorded by the modules above. KIDUORBIT scores
+                them and hands staff a ranked list to act on. People still make
+                the call; the platform narrows where to look.
               </p>
             </SectionReveal>
 
@@ -267,7 +373,10 @@ export const getStaticProps: GetStaticProps<FeaturesPageProps> = async () => {
     props: {
       areas,
       totals: MATRIX_TOTALS,
-      panels: PRODUCT_PANELS.map((panel) => ({ slug: panel.slug, shortLabel: panel.shortLabel })),
+      panels: PRODUCT_PANELS.map((panel) => ({
+        slug: panel.slug,
+        shortLabel: panel.shortLabel,
+      })),
     },
   };
 };

@@ -1,6 +1,9 @@
 import Head from "next/head";
 import { PageTransition } from "@/components/ui/PageTransition";
-import { LegalPolicyPage, type LegalSection } from "@/components/legal/LegalPolicyPage";
+import {
+  LegalPolicyPage,
+  type LegalSection,
+} from "@/components/legal/LegalPolicyPage";
 
 const sections: LegalSection[] = [
   {
@@ -52,7 +55,7 @@ const sections: LegalSection[] = [
   {
     title: "Integrations and Customer-Provided Accounts",
     intro: [
-      "Several integrations operate on accounts held by the Customer — a payment gateway, an SMS provider, an email delivery service, or a school identity provider, for example. In those cases KIDUART transmits data to that provider on the Customer's instruction, and the provider's own terms, pricing, and privacy practices apply to that data.",
+      "Several integrations operate on accounts held by the Customer  a payment gateway, an SMS provider, an email delivery service, or a school identity provider, for example. In those cases KIDUART transmits data to that provider on the Customer's instruction, and the provider's own terms, pricing, and privacy practices apply to that data.",
     ],
     bullets: [
       "The Customer is responsible for maintaining valid credentials, sender registrations, and regulatory approvals required by its providers.",
@@ -182,9 +185,18 @@ export default function TermsConditions() {
           content="Read the KIDUART Terms & Conditions for website use, school ERP access, accounts, customer data, payments, acceptable use, intellectual property, liability, and jurisdiction."
         />
         <link rel="canonical" href="https://www.kiduart.com/terms-conditions" />
-        <meta property="og:title" content="Terms & Conditions | KIDUART School ERP Terms of Use" />
-        <meta property="og:description" content="Terms governing access to and use of the KIDUART website, school ERP platform, products, and related services." />
-        <meta property="og:url" content="https://www.kiduart.com/terms-conditions" />
+        <meta
+          property="og:title"
+          content="Terms & Conditions | KIDUART School ERP Terms of Use"
+        />
+        <meta
+          property="og:description"
+          content="Terms governing access to and use of the KIDUART website, school ERP platform, products, and related services."
+        />
+        <meta
+          property="og:url"
+          content="https://www.kiduart.com/terms-conditions"
+        />
         <meta property="og:type" content="website" />
       </Head>
       <LegalPolicyPage

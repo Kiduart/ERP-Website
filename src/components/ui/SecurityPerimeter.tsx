@@ -41,8 +41,10 @@ export function SecurityPerimeter({
   const onTabKeyDown = (event: React.KeyboardEvent, index: number) => {
     const last = scenarios.length - 1;
     let next: number | null = null;
-    if (event.key === "ArrowDown" || event.key === "ArrowRight") next = index === last ? 0 : index + 1;
-    if (event.key === "ArrowUp" || event.key === "ArrowLeft") next = index === 0 ? last : index - 1;
+    if (event.key === "ArrowDown" || event.key === "ArrowRight")
+      next = index === last ? 0 : index + 1;
+    if (event.key === "ArrowUp" || event.key === "ArrowLeft")
+      next = index === 0 ? last : index - 1;
     if (event.key === "Home") next = 0;
     if (event.key === "End") next = last;
     if (next === null) return;
@@ -63,7 +65,9 @@ export function SecurityPerimeter({
             <div key={stat.label}>
               <dt className="sr-only">{stat.label}</dt>
               <dd>
-                <span className="text-2xl font-extrabold leading-none text-brand-navy">{stat.value}</span>
+                <span className="text-2xl font-extrabold leading-none text-brand-navy">
+                  {stat.value}
+                </span>
                 <span className="ml-2 text-xs font-bold uppercase tracking-[0.14em] text-brand-navy/[0.72]">
                   {stat.label}
                 </span>
@@ -72,7 +76,7 @@ export function SecurityPerimeter({
           ))}
         </dl>
         <p className="text-sm font-semibold text-brand-navy/[0.74]">
-          Controls that exist today — no certification we have not earned.
+          Controls that exist today no certification we have not earned.
         </p>
       </div>
 
@@ -111,12 +115,16 @@ export function SecurityPerimeter({
                 <span
                   aria-hidden="true"
                   className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg text-[0.65rem] font-extrabold ${
-                    isActive ? "bg-brand-yellow text-brand-navy" : "bg-brand-navy/[0.06] text-brand-navy/[0.78]"
+                    isActive
+                      ? "bg-brand-yellow text-brand-navy"
+                      : "bg-brand-navy/[0.06] text-brand-navy/[0.78]"
                   }`}
                 >
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <span className={`text-sm leading-6 ${isActive ? "font-bold text-brand-navy" : "font-semibold text-brand-navy/[0.82]"}`}>
+                <span
+                  className={`text-sm leading-6 ${isActive ? "font-bold text-brand-navy" : "font-semibold text-brand-navy/[0.82]"}`}
+                >
                   {scenario.question}
                 </span>
               </button>
@@ -126,7 +134,9 @@ export function SecurityPerimeter({
 
         <div className="min-w-0 lg:col-span-7">
           {scenarios.map((scenario, index) => {
-            const layer = layers.find((entry) => entry.id === scenario.stoppedBy);
+            const layer = layers.find(
+              (entry) => entry.id === scenario.stoppedBy,
+            );
             const isActive = index === activeIndex;
 
             return (
@@ -143,7 +153,10 @@ export function SecurityPerimeter({
                 }
               >
                 <div className="flex items-start gap-3">
-                  <ShieldAlert className="mt-0.5 h-5 w-5 shrink-0 text-brand-orange" aria-hidden="true" />
+                  <ShieldAlert
+                    className="mt-0.5 h-5 w-5 shrink-0 text-brand-orange"
+                    aria-hidden="true"
+                  />
                   <div>
                     <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-orange">
                       What is being attempted
@@ -172,19 +185,27 @@ export function SecurityPerimeter({
                         >
                           <span
                             className={`block text-[0.65rem] font-extrabold ${
-                              isHit ? "text-brand-yellow" : "text-brand-beige/60"
+                              isHit
+                                ? "text-brand-yellow"
+                                : "text-brand-beige/60"
                             }`}
                           >
                             {String(entry.order).padStart(2, "0")}
                           </span>
                           <span
                             className={`mt-0.5 block text-[0.72rem] font-bold leading-4 ${
-                              isHit ? "text-brand-yellow" : "text-brand-beige/70"
+                              isHit
+                                ? "text-brand-yellow"
+                                : "text-brand-beige/70"
                             }`}
                           >
                             {entry.short}
                           </span>
-                          {isHit ? <span className="sr-only">Handles this scenario</span> : null}
+                          {isHit ? (
+                            <span className="sr-only">
+                              Handles this scenario
+                            </span>
+                          ) : null}
                         </li>
                       );
                     })}
@@ -198,7 +219,8 @@ export function SecurityPerimeter({
                     </span>
                     <div className="min-w-0">
                       <p className="text-sm font-bold text-brand-beige">
-                        Layer {String(layer.order).padStart(2, "0")} · {layer.title}
+                        Layer {String(layer.order).padStart(2, "0")} ·{" "}
+                        {layer.title}
                       </p>
                       <p className="mt-1 text-xs leading-5" style={MUTED}>
                         {layer.promise}
@@ -225,7 +247,9 @@ export function SecurityPerimeter({
                       >
                         <Check className="h-3 w-3 text-brand-yellow" />
                       </span>
-                      <span className="text-sm leading-6 text-brand-beige">{control}</span>
+                      <span className="text-sm leading-6 text-brand-beige">
+                        {control}
+                      </span>
                     </li>
                   ))}
                 </ul>

@@ -1,4 +1,5 @@
 import { PageSeoHead } from "@/components/seo/PageSeoHead";
+import { InView } from "@/components/ui/InView";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CtaSection } from "@/components/ui/CtaSection";
 import { HeroSection } from "@/components/ui/HeroSection";
@@ -17,12 +18,14 @@ export default function VendorChecklistPage() {
         keywords="school ERP vendor checklist, school management software comparison, ERP due diligence questions, compare school ERP India, school data security checklist"
       />
 
-      <HeroSection
-        title="Do not compare school ERP demos. Compare the answers vendors give under pressure."
-        subtitle={`Take these ${VENDOR_QUESTIONS.length} questions into every school ERP call. Each one exposes a place where ownership, security, privacy, lock-in or roadmap claims usually become unclear.`}
-        image="/images/banner/security-hero.jpg"
-        layout="center"
-      />
+      <InView once className="motion-rise">
+        <HeroSection
+          title="Do not compare school ERP demos. Compare the answers vendors give under pressure."
+          subtitle={`Take these ${VENDOR_QUESTIONS.length} questions into every school ERP call. Each one exposes a place where ownership, security, privacy, lock-in or roadmap claims usually become unclear.`}
+          image="/images/banner/security-hero.jpg"
+          layout="center"
+        />
+      </InView>
 
       <section className="section-space relative overflow-hidden bg-brand-navy text-brand-beige">
         <BackgroundBlobs
@@ -47,9 +50,7 @@ export default function VendorChecklistPage() {
             </p>
           </SectionReveal>
 
-          <SectionReveal>
-            <VendorChecklist />
-          </SectionReveal>
+          <VendorChecklist />
         </div>
       </section>
 

@@ -6,7 +6,7 @@ export type PricingFaqItem = {
 export const pricingFaqs: PricingFaqItem[] = [
   {
     q: "How is pricing calculated?",
-    a: "Pricing is per active student per month, in INR. Staff, teacher, student and parent logins are included — there is no per-user charge, so a large teaching team does not change your bill. Which plan you need depends on which functional areas you switch on. Book a demo and we will price it against your actual student count and area list.",
+    a: "Pricing is per active student per month, in INR. Staff, teacher, student and parent logins are included  there is no per-user charge, so a large teaching team does not change your bill. Which plan you need depends on which functional areas you switch on. Book a demo and we will price it against your actual student count and area list.",
   },
   {
     q: "What is the difference between Core, Complete and Group?",

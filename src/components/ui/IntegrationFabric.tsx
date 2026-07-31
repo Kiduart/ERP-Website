@@ -123,14 +123,15 @@ export function IntegrationFabric({
         </div>
 
         <div className="min-w-0 lg:col-span-8">
-          {categories.map((category, index) => (
+          {categories.map((category, index) => {
+            if (index !== activeIndex) return null;
+            return (
             <section
               key={category.slug}
               id={`fabric-panel-${category.slug}`}
               role="tabpanel"
               aria-labelledby={`fabric-tab-${category.slug}`}
-              hidden={index !== activeIndex}
-              className={index === activeIndex ? "journey-panel-enter block" : "hidden"}
+              className="journey-panel-enter block"
             >
               <div className="fabric-core flex items-start gap-3 rounded-2xl border border-brand-navy/[0.12] bg-brand-navy px-5 py-4 text-brand-beige">
                 <Plug className="mt-0.5 h-5 w-5 shrink-0 text-brand-yellow" aria-hidden="true" />
@@ -180,7 +181,8 @@ export function IntegrationFabric({
                 ))}
               </ul>
             </section>
-          ))}
+            );
+          })}
         </div>
       </div>
     </div>

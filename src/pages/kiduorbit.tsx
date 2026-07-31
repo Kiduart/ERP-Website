@@ -1,251 +1,328 @@
 import { PageSeoHead } from "@/components/seo/PageSeoHead";
+import { SchemaMarkup } from "@/components/seo/SchemaMarkup";
 import { pageSeo } from "@/lib/pageSeo";
+import { OrbitCore } from "@/components/product/OrbitCore";
+import { OrbitSignalConsole } from "@/components/product/OrbitSignalConsole";
+import { IntelligenceConsole } from "@/components/ui/IntelligenceConsole";
+import { InView } from "@/components/ui/InView";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CtaSection } from "@/components/ui/CtaSection";
-import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
-import { FloatingIcons } from "@/components/animations/FloatingIcons";
+import { onSmoothHashClick } from "@/lib/smoothScroll";
+import { buildBreadcrumbSchema } from "@/lib/seoSchemas";
 import { Link } from "wouter";
-import { 
-  TrendingUp, FileText, Bell, MessageSquare, 
-  AlertTriangle, Calendar, Heart, Lightbulb,
-  Brain, ShieldCheck, CheckCircle2
-} from "lucide-react";
+import { ArrowRight, CheckCircle2, Database, ShieldCheck } from "lucide-react";
 
 export default function Kiduorbit() {
   return (
     <PageTransition className="pt-20 pb-0">
       <PageSeoHead {...pageSeo.kiduorbit} />
-      {/* HERO */}
-      <section className="section-space bg-brand-navy relative overflow-hidden min-h-screen flex items-center" style={{ color: '#fcf6d3' }}>
-        <BackgroundBlobs blobs={[
-          { color: "#fcbf49", size: 400, position: "top-left", opacity: 0.35 },
-          { color: "#0c716b", size: 400, position: "bottom-right", opacity: 0.35 }
-        ]} />
-        <FloatingIcons icons={["Brain", "Atom", "Lightbulb"]} count={6} heroMode={true} />
-        {/* Abstract AI visuals */}
-        <div className="absolute inset-0">
-          <div className="absolute top-[-20%] right-[-10%] w-[800px] h-[800px] bg-brand-teal/30 rounded-full blur-[120px] mix-blend-screen" />
-          <div className="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] bg-brand-orange/20 rounded-full blur-[100px] mix-blend-screen" />
-          {/* Grid pattern overlay */}
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff0a_1px,transparent_1px),linear-gradient(to_bottom,#ffffff0a_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)]" />
-        </div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center w-full">
-          <SectionReveal>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-yellow/20 text-brand-yellow font-bold text-sm mb-8 border border-brand-yellow/30 uppercase tracking-widest">
-              <Brain className="w-4 h-4" /> NEW · AI
-            </div>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 leading-tight">
-              Meet <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-teal via-white to-brand-orange">KIDUORBIT</span><br />
-              The AI Brain of KIDUART ERP
-            </h1>
-            <p className="text-xl max-w-3xl mx-auto mb-10 leading-relaxed" style={{ color: 'rgba(252,246,211,0.8)' }}>
-              KIDUORBIT reads patterns in your school&apos;s own attendance, fees, and academic data, then surfaces the students and accounts that need attention before small issues become crises.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href="#explore" className="w-full sm:w-auto px-8 py-4 rounded-full bg-brand-teal text-white font-bold text-lg hover:bg-white hover:text-brand-navy shadow-xl shadow-brand-teal/20 transition-all duration-300">
-                Explore KIDUORBIT
-              </a>
-              <Link href="/demo" className="w-full sm:w-auto px-8 py-4 rounded-full bg-transparent border border-white/30 text-white font-bold text-lg hover:bg-white/10 transition-all duration-300" style={{ color: '#fcf6d3' }}>
-                Request Demo
-              </Link>
-            </div>
-          </SectionReveal>
+      <SchemaMarkup
+        data={[
+          buildBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "KIDUORBIT AI", path: "/kiduorbit" },
+          ]),
+          {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            name: "KIDUORBIT AI",
+            url: "https://www.kiduart.com/kiduorbit",
+            description: pageSeo.kiduorbit.description,
+            isPartOf: {
+              "@type": "WebSite",
+              name: "KIDUART",
+              url: "https://www.kiduart.com",
+            },
+            about: {
+              "@type": "SoftwareApplication",
+              name: "KIDUORBIT",
+              applicationCategory: "EducationalApplication",
+              operatingSystem: "Web",
+              offers: {
+                "@type": "Offer",
+                availability: "https://schema.org/PreOrder",
+              },
+            },
+          },
+        ]}
+      />
+
+      {/* AI ops-room hero */}
+      <section className="relative overflow-hidden bg-brand-navy">
+        <div className="cta-aurora opacity-70" aria-hidden="true" />
+        <div className="cta-grid" aria-hidden="true" />
+        <div className="blog-signal-grid opacity-40" aria-hidden="true" />
+        <img
+          src="/images/blog/blog-kiduorbit-soon.png"
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover opacity-25 mix-blend-luminosity"
+          loading="eager"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(145deg,rgba(0,48,73,0.92)_0%,rgba(0,48,73,0.88)_50%,rgba(12,113,107,0.45)_100%)]" />
+
+        <div className="page-shell relative z-10 py-14 md:py-20">
+          <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
+            <SectionReveal instant>
+              <p className="inline-flex items-center gap-2 rounded-full border border-brand-yellow/40 bg-brand-yellow/10 px-3.5 py-1.5 text-[0.68rem] font-bold uppercase tracking-[0.2em] text-brand-yellow">
+                <span className="console-live-dot h-1.5 w-1.5 rounded-full bg-brand-yellow" />
+                KIDUORBIT · AI signal layer · Not launched
+              </p>
+              <h1 className="mt-6 text-[clamp(2.6rem,1.4rem+3.4vw,4.8rem)] font-bold leading-[0.92] tracking-tight text-brand-beige">
+                The AI brain
+                <span className="mt-1 block text-brand-yellow">
+                  orbiting your ERP
+                </span>
+              </h1>
+              <p className="mt-6 max-w-xl text-lg leading-8 text-brand-beige/80">
+                Pattern intelligence on attendance, fees, and academics your
+                teams already enter ranked review queues for staff, not chatbot
+                theatre. Next phase of KIDUART. Building now.
+              </p>
+              <p className="console-trace mt-6 max-w-xl overflow-x-auto rounded-xl border border-white/12 bg-brand-navy/50 px-4 py-3 font-mono text-xs text-brand-beige/70 md:text-sm">
+                <span className="text-brand-yellow">▸ </span>
+                tenant.streams → orbit.models → staff.review_queue
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a
+                  href="#orbit-console"
+                  onClick={(e) => onSmoothHashClick(e)}
+                  className="inline-flex items-center gap-2 rounded-full bg-brand-yellow px-6 py-3.5 text-sm font-bold text-brand-navy transition-transform hover:-translate-y-0.5"
+                >
+                  Open the orbit console
+                  <ArrowRight className="h-4 w-4" />
+                </a>
+                <Link
+                  href="/demo"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-6 py-3.5 text-sm font-bold text-brand-beige"
+                >
+                  Demo today&apos;s ERP first
+                </Link>
+              </div>
+            </SectionReveal>
+
+            <SectionReveal instant className="relative">
+              <OrbitCore />
+            </SectionReveal>
+          </div>
         </div>
       </section>
 
-      {/* WHAT IS KIDUORBIT */}
-      <section id="explore" className="section-space bg-white relative overflow-hidden">
-        <BackgroundBlobs blobs={[
-          { color: "#fcbf49", size: 300, position: "center-left", opacity: 0.15 },
-          { color: "#0c716b", size: 300, position: "center-right", opacity: 0.15 }
-        ]} />
-        <FloatingIcons icons={["Brain", "Lightbulb", "Star"]} count={4} />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <SectionReveal>
-              <h2 className="text-3xl lg:text-4xl font-bold text-brand-navy mb-6">Intelligence Embedded in Every Workflow</h2>
-              <p className="text-lg text-brand-navy/70 mb-8">
-                KIDUORBIT sits inside KIDUART and watches the numbers your teams already enter: who was absent, which fees are late, how marks are trending. It does not replace judgement; it gives staff a shorter list of what to look at first.
+      {/* Live strip */}
+      <section className="border-b border-brand-navy/10 bg-[#f4f7f8] py-6">
+        <div className="page-shell flex flex-wrap items-center justify-between gap-4">
+          <p className="font-mono text-xs font-bold uppercase tracking-[0.18em] text-brand-navy/50">
+            signal_status // no production switch yet
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {["Building", "Tenant-local", "Staff review", "Honest roadmap"].map(
+              (chip) => (
+                <span
+                  key={chip}
+                  className="rounded-full border border-brand-navy/10 bg-white px-3 py-1 text-[0.7rem] font-bold uppercase tracking-[0.12em] text-brand-navy"
+                >
+                  {chip}
+                </span>
+              ),
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* Orbit console  unique AI console */}
+      <section
+        id="orbit-console"
+        className="relative scroll-mt-28 overflow-hidden bg-brand-navy py-16 md:py-24"
+      >
+        <div className="cta-aurora opacity-50" aria-hidden="true" />
+        <div className="page-shell relative z-10">
+          <InView once className="motion-rise mb-12 max-w-2xl">
+            <p className="text-[0.7rem] font-bold uppercase tracking-[0.2em] text-brand-yellow">
+              Orbit console
+            </p>
+            <h2 className="mt-3 text-3xl font-bold tracking-tight text-brand-beige md:text-4xl">
+              Workflows we are wiring into the ring
+            </h2>
+            <p className="mt-4 text-brand-beige/70">
+              Same console dialect as the homepage signal layer scoped to what
+              KIDUORBIT will add. Building lanes pulse yellow; roadmap stays
+              muted.
+            </p>
+          </InView>
+          <OrbitSignalConsole />
+        </div>
+      </section>
+
+      {/* What it is */}
+      <section className="section-space bg-white">
+        <div className="page-shell grid gap-12 lg:grid-cols-2 lg:gap-16">
+          <InView once className="motion-rise">
+            <p className="section-kicker">Why orbit</p>
+            <h2 className="section-title mt-4 text-brand-navy">
+              Shorter scan lists. People keep the judgement.
+            </h2>
+            <p className="mt-5 text-lg leading-8 text-brand-navy/[0.74]">
+              Signal overload is the problem not lack of care. KIDUORBIT is
+              designed to surface patterns in data you already record, hand
+              staff a ranked review list, and leave decisions with people who
+              know the child.
+            </p>
+            <Link
+              href="/blog/kiduorbit-predictive-analytics"
+              className="mt-6 inline-flex items-center gap-2 text-sm font-bold text-brand-teal"
+            >
+              Full preview on the Signal Desk <ArrowRight className="h-4 w-4" />
+            </Link>
+          </InView>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="rounded-[1.35rem] border border-brand-teal/25 bg-brand-teal/[0.06] p-6 sm:col-span-2">
+              <p className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-brand-teal">
+                Will be
               </p>
-              <ul className="space-y-4">
+              <ul className="mt-4 grid gap-3 sm:grid-cols-2">
                 {[
-                  "Predictive analytics for student outcomes",
-                  "Intelligent automation of administrative workflows",
-                  "Smart notifications that eliminate alert fatigue",
-                  "Natural language queries for instantly accessible data",
-                  "AI-driven insights tailored for administrators, teachers, and parents"
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-4">
-                    <div className="mt-1 w-6 h-6 rounded-full bg-brand-teal/20 flex items-center justify-center flex-shrink-0">
-                      <div className="w-2 h-2 rounded-full bg-brand-teal" />
-                    </div>
-                    <span className="text-brand-navy font-medium">{item}</span>
+                  "Intelligence inside ERP modules",
+                  "Attendance · fees · academics patterns",
+                  "Flags for authorised roles only",
+                  "Human follow-up queues  not labels",
+                ].map((line) => (
+                  <li
+                    key={line}
+                    className="flex gap-2 text-sm text-brand-navy/[0.8]"
+                  >
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-brand-teal" />
+                    {line}
                   </li>
                 ))}
               </ul>
-            </SectionReveal>
-            <SectionReveal delay={0.2} className="relative">
-              <div className="aspect-square bg-gradient-to-tr from-brand-teal/10 to-brand-orange/10 rounded-full flex items-center justify-center relative shadow-inner border border-brand-navy/5">
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80')] bg-cover bg-center rounded-full opacity-10 mix-blend-overlay"></div>
-                <Brain className="w-32 h-32 text-brand-teal relative z-10 drop-shadow-2xl" />
-                {/* Orbiting dots */}
-                <div className="absolute w-full h-full animate-[spin_10s_linear_infinite]">
-                   <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-brand-orange rounded-full shadow-lg shadow-brand-orange/50" />
-                </div>
-                <div className="absolute w-3/4 h-3/4 animate-[spin_15s_linear_infinite_reverse]">
-                   <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-4 h-4 bg-brand-yellow rounded-full shadow-lg shadow-brand-yellow/50" />
-                </div>
-              </div>
-            </SectionReveal>
+            </div>
+            <div className="rounded-[1.35rem] border border-brand-navy/10 bg-[#f4f7f8] p-6 sm:col-span-2">
+              <p className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-brand-navy/50">
+                Will not be
+              </p>
+              <ul className="mt-4 space-y-2 text-sm text-brand-navy/[0.72]">
+                {[
+                  "A product without the operational ERP underneath",
+                  "Public at-risk boards or WhatsApp ranking lists",
+                  "Training on your students for resale elsewhere",
+                  "A switch you can flip in production today",
+                ].map((line) => (
+                  <li key={line} className="flex gap-2">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-navy/30" />
+                    {line}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* KEY AI CAPABILITIES */}
-      <section className="section-space bg-brand-beige/30 border-y border-brand-navy/5 relative overflow-hidden">
-        <BackgroundBlobs blobs={[
-          { color: "#f77f00", size: 300, position: "top-right", opacity: 0.15 }
-        ]} />
-        <FloatingIcons icons={["Atom", "Activity", "Star"]} count={4} />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <SectionReveal className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-brand-navy mb-4">Key AI Capabilities</h2>
-            <p className="text-lg text-brand-navy/70 max-w-2xl mx-auto">Practical AI features tied to everyday school work, not generic chatbots.</p>
-          </SectionReveal>
+      {/* Homepage intelligence  live today */}
+      <section className="relative overflow-hidden bg-brand-navy py-16 md:py-24">
+        <div className="cta-grid opacity-80" aria-hidden="true" />
+        <div className="page-shell relative z-10">
+          <InView once className="motion-rise mb-12 max-w-2xl">
+            <p className="text-[0.7rem] font-bold uppercase tracking-[0.2em] text-brand-yellow">
+              Already on the platform
+            </p>
+            <h2 className="mt-3 text-3xl font-bold tracking-tight text-brand-beige md:text-4xl">
+              The signal layer you can explore today
+            </h2>
+            <p className="mt-4 text-brand-beige/70">
+              Live models and building lanes from the homepage intelligence
+              console the foundation KIDUORBIT extends. Ask on demo which rows
+              are clickable in your tenant.
+            </p>
+          </InView>
+          <IntelligenceConsole />
+        </div>
+      </section>
 
-          <div className="grid md:grid-cols-2 gap-8">
+      {/* Data prerequisites */}
+      <section className="section-space bg-[#f4f7f8]">
+        <div className="page-shell">
+          <InView once className="motion-rise mx-auto max-w-2xl text-center">
+            <p className="section-kicker">Data ring</p>
+            <h2 className="section-title mt-4 text-brand-navy">
+              Nothing extra to type if the ERP is clean
+            </h2>
+          </InView>
+          <div className="mt-12 grid gap-4 md:grid-cols-3">
             {[
-              { title: "Predictive Student Performance", icon: TrendingUp, desc: "Identify at-risk students early using AI models trained on attendance, grades, and engagement data." },
-              { title: "Automated Report Generation", icon: FileText, desc: "Generates progress reports, attendance summaries, and financial reports automatically without manual entry." },
-              { title: "Smart Notifications Engine", icon: Bell, desc: "AI decides when and what to notify — reducing notification fatigue while ensuring critical alerts are seen." },
-              { title: "Natural Language Analytics", icon: MessageSquare, desc: "Ask 'How many students were absent last week?' and get instant answers with visual charts." },
-              { title: "AI Fee Defaulter Prediction", icon: AlertTriangle, desc: "Predict which families may default on payments based on historical patterns and take proactive action." },
-              { title: "Timetable Optimization", icon: Calendar, desc: "Suggests optimal timetables based on teacher availability, room capacity, and learning fatigue curves." },
-              { title: "Parent Sentiment Analysis", icon: Heart, desc: "Analyze communication patterns and flag parental concerns or dissatisfaction before they escalate." },
-              { title: "Adaptive Learning Insights", icon: Lightbulb, desc: "Track performance trends and suggest personalized learning paths or interventions for individual students." }
-            ].map((cap, idx) => (
-              <SectionReveal key={idx} delay={idx * 0.05}>
-                <div className="bg-white rounded-2xl p-8 shadow-sm border border-brand-navy/5 flex gap-6 hover:shadow-md hover:border-brand-teal/30 transition-all h-full">
-                  <div className="w-12 h-12 rounded-xl bg-brand-teal/10 flex items-center justify-center flex-shrink-0">
-                    <cap.icon className="w-6 h-6 text-brand-teal" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-brand-navy mb-2">{cap.title}</h3>
-                    <p className="text-brand-navy/70 leading-relaxed">{cap.desc}</p>
-                  </div>
-                </div>
-              </SectionReveal>
+              {
+                icon: Database,
+                title: "Streams in",
+                copy: "Attendance marks, fee ledger events, exam scores  produced by daily work inside KIDUART.",
+              },
+              {
+                icon: ShieldCheck,
+                title: "Stays in tenant",
+                copy: "Models run on your instance. We do not sell student data or train outside models on it.",
+              },
+              {
+                icon: CheckCircle2,
+                title: "Noise in → noise out",
+                copy: "Paper attendance or wrong fee heads will amplify. Solid ERP first; orbit second.",
+              },
+            ].map((card) => (
+              <div
+                key={card.title}
+                className="rounded-[1.35rem] border border-brand-navy/8 bg-white p-6"
+              >
+                <card.icon className="h-6 w-6 text-brand-teal" />
+                <h3 className="mt-4 text-lg font-bold text-brand-navy">
+                  {card.title}
+                </h3>
+                <p className="mt-2 text-sm leading-7 text-brand-navy/[0.72]">
+                  {card.copy}
+                </p>
+              </div>
             ))}
           </div>
-          <SectionReveal className="mt-6">
-            <p className="text-xs text-brand-navy/40 mt-4 italic">
-              * Based on pilot program data. Results may vary by school size and implementation.
-            </p>
-          </SectionReveal>
         </div>
       </section>
 
-      {/* HOW IT WORKS */}
+      {/* Ethics workflow */}
       <section className="section-space bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionReveal className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold text-brand-navy mb-4">How KIDUORBIT Works</h2>
-          </SectionReveal>
-          
-          <div className="relative">
-            <div className="hidden lg:block absolute top-1/2 left-0 w-full h-1 bg-brand-navy/5 -translate-y-1/2" />
-            <div className="grid lg:grid-cols-4 gap-8">
-              {[
-                { step: "01", title: "Data Collection", desc: "Gathers data from all ERP modules continuously in real-time." },
-                { step: "02", title: "AI Processing", desc: "Machine learning models recognize patterns, trends, and anomalies." },
-                { step: "03", title: "Insights Delivered", desc: "The right person gets the right insight at the exact right time." },
-                { step: "04", title: "Actions Automated", desc: "Routine decisions handled automatically, exceptions flagged for human review." }
-              ].map((step, idx) => (
-                <SectionReveal key={idx} delay={idx * 0.1} className="relative z-10 flex flex-col items-center text-center">
-                  <div className="w-16 h-16 rounded-full bg-brand-navy text-white font-bold text-xl flex items-center justify-center mb-6 shadow-xl border-4 border-white">
-                    {step.step}
-                  </div>
-                  <h3 className="text-xl font-bold text-brand-navy mb-3">{step.title}</h3>
-                  <p className="text-brand-navy/70">{step.desc}</p>
-                </SectionReveal>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* COMPARISON TABLE */}
-      <section className="section-space bg-brand-navy text-white relative overflow-hidden" style={{ color: '#fcf6d3' }}>
-        <BackgroundBlobs blobs={[
-          { color: "#fcbf49", size: 400, position: "bottom-left", opacity: 0.15 }
-        ]} />
-        <FloatingIcons icons={["Brain", "Atom"]} count={4} />
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <SectionReveal className="text-center mb-16">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4">The AI Advantage</h2>
-          </SectionReveal>
-          
-          <SectionReveal>
-            <div className="overflow-x-auto rounded-2xl border border-white/10 shadow-2xl">
-              <table className="w-full text-left border-collapse">
-                <thead>
-                  <tr>
-                    <th className="p-6 bg-white/5 font-bold text-lg border-b border-white/10 w-1/3">Feature</th>
-                    <th className="p-6 bg-white/5 font-bold text-lg border-b border-white/10 w-1/3">Traditional ERP</th>
-                    <th className="p-6 bg-brand-teal/20 text-brand-teal font-bold text-lg border-b border-white/10 w-1/3">KIDUART + KIDUORBIT</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-white/10">
-                  {[
-                    { feat: "Reports", trad: "Manual generation", new: "AI automated reports" },
-                    { feat: "Alerts", trad: "Rule-based only", new: "Intelligent AI alerts" },
-                    { feat: "Analytics", trad: "Static dashboards", new: "Predictive insights" },
-                    { feat: "Data queries", trad: "Requires IT support", new: "Natural language queries" },
-                    { feat: "Risk detection", trad: "None", new: "Early pattern alerts for staff review" }
-                  ].map((row, i) => (
-                    <tr key={i} className={i % 2 === 0 ? "bg-white/5" : ""}>
-                      <td className="p-6 font-medium">{row.feat}</td>
-                      <td className="p-6" style={{ color: 'rgba(252,246,211,0.7)' }}>{row.trad}</td>
-                      <td className="p-6 bg-brand-teal/10 font-medium flex items-center gap-2" style={{ color: '#fcf6d3' }}>
-                        <CheckCircle2 className="w-5 h-5 text-brand-teal" /> {row.new}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </SectionReveal>
-          <SectionReveal className="mt-6">
-            <p className="text-xs text-brand-beige/55 mt-4 italic">
-              * Based on pilot program data. Results may vary by school size and implementation.
-            </p>
-          </SectionReveal>
-        </div>
-      </section>
-
-      {/* TRUST */}
-      <section className="section-space-tight bg-brand-beige/30">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <div className="flex flex-wrap justify-center gap-6 lg:gap-12">
+        <div className="page-shell max-w-3xl">
+          <InView once className="motion-rise">
+            <p className="section-kicker">Human loop</p>
+            <h2 className="section-title mt-4 text-brand-navy">
+              An alert is a start never a verdict
+            </h2>
+          </InView>
+          <ol className="relative mt-10 space-y-0">
+            <span
+              aria-hidden="true"
+              className="absolute bottom-4 left-[0.85rem] top-4 w-px bg-brand-navy/10"
+            />
             {[
-              "Runs on your school data",
-              "Privacy controls built in",
-              "No selling student data",
-              "Updated with school feedback"
-            ].map((badge, idx) => (
-              <div key={idx} className="flex items-center gap-3 px-6 py-3 bg-white rounded-full border border-brand-navy/10 shadow-sm">
-                <ShieldCheck className="w-6 h-6 text-brand-teal" />
-                <span className="font-bold text-brand-navy">{badge}</span>
-              </div>
+              "Orbit adds a student or account to a review list",
+              "Assigned staff open profile context",
+              "Qualitative facts first  talk, check, call if policy allows",
+              "School decides support; flag cleared or monitored",
+            ].map((step, i) => (
+              <li key={step} className="relative flex gap-4 pb-6">
+                <span className="relative z-10 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-brand-yellow/50 bg-brand-navy font-mono text-[0.65rem] font-bold text-brand-yellow">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <p className="pt-0.5 text-sm leading-7 text-brand-navy/[0.8]">
+                  {step}
+                </p>
+              </li>
             ))}
+          </ol>
+          <div className="mt-4 rounded-[1.25rem] border border-brand-orange/20 bg-brand-orange/[0.06] p-5 text-sm leading-7 text-brand-navy/[0.78]">
+            Never publish “at-risk” lists on staff WhatsApp or notify parents of
+            algorithmic scores without human review. KIDUORBIT is for clarity
+            not labelling children.
           </div>
         </div>
       </section>
 
-      <CtaSection 
-        title="See KIDUORBIT on your school's data" 
-        subtitle="Walk through attendance alerts, fee risk flags, and report workflows with our team on a live demo." 
+      <CtaSection
+        title="See today’s KIDUART  then an honest orbit preview"
+        subtitle="Walk fees, attendance, and role panels first. Ask what is clickable now versus what ships in the KIDUORBIT phase."
       />
     </PageTransition>
   );

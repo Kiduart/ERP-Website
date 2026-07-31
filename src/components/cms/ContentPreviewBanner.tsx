@@ -16,17 +16,21 @@ function formatTimestamp(value: string | null): string {
   });
 }
 
-export function ContentPreviewBanner({ contentMeta }: ContentPreviewBannerProps) {
+export function ContentPreviewBanner({
+  contentMeta,
+}: ContentPreviewBannerProps) {
   if (!contentMeta?.preview) return null;
 
   return (
     <div className="sticky top-0 z-[120] border-b border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-950 shadow-md">
       <div className="page-shell flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="font-bold">Preview mode — draft CMS content</p>
+          <p className="font-bold">Preview mode draft CMS content</p>
           <p className="text-amber-900/80">
-            Source: {contentMeta.source === "sanity" ? "Sanity CMS" : "Local fallback"} · Last CMS update:{" "}
-            {formatTimestamp(contentMeta.updatedAt)} · Fetched: {formatTimestamp(contentMeta.fetchedAt)}
+            Source:{" "}
+            {contentMeta.source === "sanity" ? "Sanity CMS" : "Local fallback"}{" "}
+            · Last CMS update: {formatTimestamp(contentMeta.updatedAt)} ·
+            Fetched: {formatTimestamp(contentMeta.fetchedAt)}
           </p>
         </div>
         <Link

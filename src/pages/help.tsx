@@ -1,5 +1,6 @@
 import { PageSeoHead } from "@/components/seo/PageSeoHead";
 import { pageSeo } from "@/lib/pageSeo";
+import { Stagger } from "@/components/ui/Stagger";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
 import { FloatingIcons } from "@/components/animations/FloatingIcons";
@@ -170,17 +171,17 @@ export default function HelpCenter() {
         />
         <FloatingIcons icons={["Star", "Award", "Lightbulb"]} count={4} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {categories.map((cat, idx) => (
-              <SectionReveal key={idx} delay={idx * 0.1} className="bg-white rounded-2xl p-8 shadow-xl shadow-brand-navy/5 border border-brand-navy/5 hover:-translate-y-1 transition-transform cursor-pointer group">
+          <Stagger className="grid md:grid-cols-2 lg:grid-cols-4 gap-6" itemClassName="motion-brick">
+            {categories.map((cat) => (
+              <div key={cat.title} className="bg-white rounded-2xl p-8 shadow-xl shadow-brand-navy/5 border border-brand-navy/5 hover:-translate-y-1 transition-transform cursor-pointer group">
                 <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 ${cat.bg}`}>
                   <cat.icon className={`w-7 h-7 ${cat.color}`} />
                 </div>
                 <h3 className="text-xl font-bold text-brand-navy mb-2 group-hover:text-brand-teal transition-colors">{cat.title}</h3>
                 <p className="text-brand-navy/60 text-sm">{cat.desc}</p>
-              </SectionReveal>
+              </div>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
@@ -213,34 +214,34 @@ export default function HelpCenter() {
             <p className="text-lg text-brand-navy/70">Our support team is available to guide your school team through setup and day-to-day questions.</p>
           </SectionReveal>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            <SectionReveal className="bg-white p-8 rounded-2xl text-center shadow-md flex flex-col items-center">
+          <Stagger className="grid md:grid-cols-3 gap-8" itemClassName="motion-tile">
+            <div className="bg-white p-8 rounded-2xl text-center shadow-md flex flex-col items-center">
               <Mail className="w-10 h-10 text-brand-teal mx-auto mb-4" />
               <h3 className="text-xl font-bold text-brand-navy mb-2">Email Support</h3>
               <p className="text-brand-navy/60 text-sm mb-6 flex-grow">Drop us an email and our team will respond as quickly as possible.</p>
               <a href="mailto:support@kiduart.com?subject=Support Request from Help Center" className="w-full py-3 rounded-xl border-2 border-brand-navy/10 font-bold text-brand-navy hover:bg-brand-navy hover:text-white transition-colors block text-center">
                 support@kiduart.com
               </a>
-            </SectionReveal>
+            </div>
 
-            <SectionReveal delay={0.1} className="bg-white p-8 rounded-2xl text-center shadow-md border-2 border-brand-teal flex flex-col items-center">
+            <div className="bg-white p-8 rounded-2xl text-center shadow-md border-2 border-brand-teal flex flex-col items-center">
               <MessageCircle className="w-10 h-10 text-brand-teal mx-auto mb-4" />
               <h3 className="text-xl font-bold text-brand-navy mb-2">Live Chat</h3>
               <p className="text-brand-navy/60 text-sm mb-6 flex-grow">Start a chat request and our team will connect with you as support agents become available.</p>
               <button onClick={() => setChatOpen(true)} className="w-full py-3 rounded-xl bg-brand-teal font-bold text-white hover:bg-brand-navy transition-colors">
                 Start Chat
               </button>
-            </SectionReveal>
+            </div>
 
-            <SectionReveal delay={0.2} className="bg-white p-8 rounded-2xl text-center shadow-md flex flex-col items-center">
+            <div className="bg-white p-8 rounded-2xl text-center shadow-md flex flex-col items-center">
               <Ticket className="w-10 h-10 text-brand-teal mx-auto mb-4" />
               <h3 className="text-xl font-bold text-brand-navy mb-2">Support Ticket</h3>
               <p className="text-brand-navy/60 text-sm mb-6 flex-grow">Log in to your dashboard to submit and track detailed tickets.</p>
               <a href="https://www.kiduart.com/login" target="_blank" rel="noreferrer" className="w-full py-3 rounded-xl border-2 border-brand-navy/10 font-bold text-brand-navy hover:bg-brand-navy hover:text-white transition-colors block text-center">
                 Open Portal
               </a>
-            </SectionReveal>
-          </div>
+            </div>
+          </Stagger>
         </div>
       </section>
 

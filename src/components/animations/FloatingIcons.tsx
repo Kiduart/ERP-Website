@@ -1,17 +1,17 @@
-import { motion, useReducedMotion } from "framer-motion";
-import { 
-  GraduationCap, BookOpen, Pencil, Star, Atom, 
-  BarChart2, Users, Brain, Lightbulb, Calculator, 
+import { m, useReducedMotion } from "framer-motion";
+import {
+  GraduationCap, BookOpen, Pencil, Star, Atom,
+  BarChart2, Users, Brain, Lightbulb, Calculator,
   Globe, Award, Clock, Bell, ShieldCheck,
-  Lock, Eye, Mail, CreditCard
+  Lock, Eye, Mail, CreditCard,
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
 const ICON_MAP: Record<string, React.ElementType> = {
-  GraduationCap, BookOpen, Pencil, Star, Atom, 
-  BarChart2, Users, Brain, Lightbulb, Calculator, 
+  GraduationCap, BookOpen, Pencil, Star, Atom,
+  BarChart2, Users, Brain, Lightbulb, Calculator,
   Globe, Award, Clock, Bell, ShieldCheck,
-  Lock, Eye, Mail, CreditCard
+  Lock, Eye, Mail, CreditCard,
 };
 
 interface FloatingIconsProps {
@@ -21,11 +21,12 @@ interface FloatingIconsProps {
 }
 
 export function FloatingIcons({ icons, count, heroMode = false }: FloatingIconsProps) {
-  const COLORS = ['#003049', '#0c716b', '#fcbf49'];
+  const COLORS = ["#003049", "#0c716b", "#fcbf49"];
   const prefersReducedMotion = useReducedMotion();
-  // Default true so mobile/SSR skips icon work during LCP; flip to false only on desktop after mount
   const [isMobile, setIsMobile] = useState(true);
   const [hasMounted, setHasMounted] = useState(false);
+  const [inView, setInView] = useState(false);
+  const [host, setHost] = useState<HTMLSpanElement | null>(null);
 
   useEffect(() => {
     setHasMounted(true);
@@ -36,48 +37,63 @@ export function FloatingIcons({ icons, count, heroMode = false }: FloatingIconsP
     return () => media.removeEventListener("change", handleChange);
   }, []);
 
+  useEffect(() => {
+    if (!host || typeof IntersectionObserver === "undefined") {
+      setInView(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) setInView(true);
+      },
+      { rootMargin: "80px" },
+    );
+    observer.observe(host);
+    return () => observer.disconnect();
+  }, [host]);
+
   const renderedIcons = useMemo(() => {
-    if (!hasMounted || prefersReducedMotion || isMobile) {
+    if (!hasMounted || prefersReducedMotion || isMobile || !inView) {
       return [];
     }
 
     return Array.from({ length: count }).map((_, i) => {
-      // Seed pseudo-random values based on index to keep them stable
-      const top = 10 + ((i * 37) % 80); // 10% to 90%
-      const left = 5 + ((i * 23) % 90); // 5% to 95%
-      
-      const size = heroMode ? 28 + (i % 17) : 18 + (i % 15); // 28-44px or 18-32px
+      const top = 10 + ((i * 37) % 80);
+      const left = 5 + ((i * 23) % 90);
+      const size = heroMode ? 28 + (i % 17) : 18 + (i % 15);
       const color = COLORS[i % COLORS.length];
-      const opacity = heroMode ? 0.18 + ((i % 8) * 0.01) : 0.10 + ((i % 6) * 0.01);
-      
-      const duration = 4 + (i % 4); // 4-7s
-      const delay = (i % 4) * 0.75; // 0-3s
-      
+      const opacity = heroMode ? 0.18 + ((i % 8) * 0.01) : 0.1 + ((i % 6) * 0.01);
+      const duration = 4 + (i % 4);
+      const delay = (i % 4) * 0.75;
       const iconName = icons[i % icons.length];
       const IconComponent = ICON_MAP[iconName] || Star;
 
       return (
-        <motion.div
+        <m.div
           key={i}
           className="absolute"
-          style={{ top: `${top}%`, left: `${left}%`, color, zIndex: 0, pointerEvents: 'none' }}
+          style={{ top: `${top}%`, left: `${left}%`, color, zIndex: 0, pointerEvents: "none" }}
           animate={{
             y: [0, -12, 0],
             rotate: [0, 5, -5, 0],
-            opacity: [opacity, opacity * 1.5, opacity]
+            opacity: [opacity, opacity * 1.5, opacity],
           }}
           transition={{
             duration,
             repeat: Infinity,
             ease: "easeInOut",
-            delay
+            delay,
           }}
         >
           <IconComponent style={{ width: size, height: size }} />
-        </motion.div>
+        </m.div>
       );
     });
-  }, [icons, count, heroMode, prefersReducedMotion, isMobile, hasMounted]);
+  }, [icons, count, heroMode, prefersReducedMotion, isMobile, hasMounted, inView]);
 
-  return <>{renderedIcons}</>;
+  return (
+    <span ref={setHost} className="pointer-events-none absolute inset-0" aria-hidden="true">
+      {renderedIcons}
+    </span>
+  );
 }

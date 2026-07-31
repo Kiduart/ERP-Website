@@ -1,13 +1,9 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { Link } from "wouter";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-type StickyDemoBarProps = {
-  dismissed: boolean;
-  onDismiss: () => void;
-};
 
 function getScrollProgress(): number {
   if (typeof window === "undefined") return 0;
@@ -18,12 +14,31 @@ function getScrollProgress(): number {
   return window.scrollY / scrollable;
 }
 
-export function StickyDemoBar({ dismissed, onDismiss }: StickyDemoBarProps) {
+function setStickyBarHeight(px: string) {
+  document.documentElement.style.setProperty("--sticky-bar-height", px);
+}
+
+/**
+ * Bottom demo CTA after ~60% scroll.
+ * Floating widgets read --sticky-bar-height so they sit above this bar when visible,
+ * and drop to the bottom when it is gone (dismissed or not scrolled enough).
+ */
+export function StickyDemoBar() {
+  const router = useRouter();
+  const [dismissed, setDismissed] = useState(false);
   const [scrolledEnough, setScrolledEnough] = useState(false);
+
+  // Fresh chance on every route  dismiss should not stick across pages.
+  useEffect(() => {
+    setDismissed(false);
+  }, [router.pathname]);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolledEnough(getScrollProgress() >= 0.6);
+      const progress = getScrollProgress();
+      setScrolledEnough(progress >= 0.6);
+      // Scrolling back up clears dismiss so the bar can return on the next deep scroll.
+      if (progress < 0.4) setDismissed(false);
     };
 
     handleScroll();
@@ -33,9 +48,10 @@ export function StickyDemoBar({ dismissed, onDismiss }: StickyDemoBarProps) {
 
   const visible = scrolledEnough && !dismissed;
 
+  // Drive icon offset from visibility only  never bump height back to 64px after exit.
   useEffect(() => {
-    document.documentElement.style.setProperty("--sticky-bar-height", visible ? "64px" : "0px");
-    return () => document.documentElement.style.setProperty("--sticky-bar-height", "0px");
+    setStickyBarHeight(visible ? "64px" : "0px");
+    return () => setStickyBarHeight("0px");
   }, [visible]);
 
   return (
@@ -48,9 +64,6 @@ export function StickyDemoBar({ dismissed, onDismiss }: StickyDemoBarProps) {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
           transition={{ type: "spring", stiffness: 380, damping: 32 }}
-          onAnimationComplete={() => {
-            document.documentElement.style.setProperty("--sticky-bar-height", "64px");
-          }}
           className="fixed inset-x-0 bottom-0 z-[58] border-t border-white/10 bg-brand-navy px-4 py-3 shadow-[0_-12px_40px_rgba(0,48,73,0.28)] sm:px-6"
           style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
         >
@@ -72,10 +85,7 @@ export function StickyDemoBar({ dismissed, onDismiss }: StickyDemoBarProps) {
 
             <button
               type="button"
-              onClick={() => {
-                document.documentElement.style.setProperty("--sticky-bar-height", "0px");
-                onDismiss();
-              }}
+              onClick={() => setDismissed(true)}
               className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-full text-brand-beige/80 transition-colors hover:bg-white/10 hover:text-white sm:min-h-10 sm:min-w-10"
               aria-label="Dismiss demo bar"
             >

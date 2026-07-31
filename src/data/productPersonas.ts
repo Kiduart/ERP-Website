@@ -1,6 +1,6 @@
 /**
  * Role-first solution pages. Each challenge names the manual problem, then points
- * at the module that removes it — so the copy stays checkable against
+ * at the module that removes it  so the copy stays checkable against
  * feature-matrix.json and the backend rather than being aspirational.
  */
 
@@ -10,7 +10,7 @@ export type PersonaChallenge = {
   problem: string;
   cost: string;
   solution: string;
-  /** Module references — { area: category slug, module: module name } */
+  /** Module references  { area: category slug, module: module name } */
   modules: { area: string; module: string }[];
 };
 
@@ -48,13 +48,18 @@ export const PRODUCT_PERSONAS: ProductPersona[] = [
     order: 1,
     label: "School Groups",
     pageLabel: "For school groups and trusts",
-    roleNames: ["Organisation owner", "Organisation admin", "Group manager", "Trustee"],
+    roleNames: [
+      "Organisation owner",
+      "Organisation admin",
+      "Group manager",
+      "Trustee",
+    ],
     stage: "Multi-campus leadership",
     headline: "Run four campuses without four versions of the truth",
     summary:
       "Group leadership gets one organisation layer: campus comparison on shared definitions, delegated school admins, consolidated reports and a single subscription.",
     intro:
-      "The hardest part of running a group is not any single campus — it is that every campus reports differently. One school counts attendance monthly, another weekly; one sends fee summaries in a spreadsheet, another on WhatsApp. KIDUART puts an organisation layer above the schools so definitions are shared, each campus keeps its own data boundary, and the group sees a rollup it can actually act on.",
+      "The hardest part of running a group is not any single campus  it is that every campus reports differently. One school counts attendance monthly, another weekly; one sends fee summaries in a spreadsheet, another on WhatsApp. KIDUART puts an organisation layer above the schools so definitions are shared, each campus keeps its own data boundary, and the group sees a rollup it can actually act on.",
     challenges: [
       {
         problem: "Each campus reports in its own format",
@@ -72,7 +77,10 @@ export const PRODUCT_PERSONAS: ProductPersona[] = [
         solution:
           "School admin account management delegates each campus explicitly, and org member roles control the group layer itself.",
         modules: [
-          { area: "organization-management", module: "School Admin Management" },
+          {
+            area: "organization-management",
+            module: "School Admin Management",
+          },
           { area: "organization-management", module: "Member Management" },
         ],
       },
@@ -98,10 +106,22 @@ export const PRODUCT_PERSONAS: ProductPersona[] = [
       },
     ],
     dayInLife: [
-      { when: "Monday morning", what: "Open the organisation dashboard and read the health score per campus." },
-      { when: "Midweek", what: "Compare attendance and collection across campuses on the same definitions." },
-      { when: "Month end", what: "Generate a consolidated report for the board from live data." },
-      { when: "Quarter end", what: "Review subscription usage, invoices and add-ons at group level." },
+      {
+        when: "Monday morning",
+        what: "Open the organisation dashboard and read the health score per campus.",
+      },
+      {
+        when: "Midweek",
+        what: "Compare attendance and collection across campuses on the same definitions.",
+      },
+      {
+        when: "Month end",
+        what: "Generate a consolidated report for the board from live data.",
+      },
+      {
+        when: "Quarter end",
+        what: "Review subscription usage, invoices and add-ons at group level.",
+      },
     ],
     toolsYouGet: [
       "Organisation dashboard with campus health analytics",
@@ -187,10 +207,22 @@ export const PRODUCT_PERSONAS: ProductPersona[] = [
       },
     ],
     dayInLife: [
-      { when: "Before assembly", what: "Check today's attendance and staff availability on the dashboard." },
-      { when: "Mid-morning", what: "Review the fee dues list and any escalations from the front office." },
-      { when: "Afternoon", what: "Open academic performance reports for the sections under review." },
-      { when: "Friday", what: "Regenerate the weekly leadership report — no manual collation." },
+      {
+        when: "Before assembly",
+        what: "Check today's attendance and staff availability on the dashboard.",
+      },
+      {
+        when: "Mid-morning",
+        what: "Review the fee dues list and any escalations from the front office.",
+      },
+      {
+        when: "Afternoon",
+        what: "Open academic performance reports for the sections under review.",
+      },
+      {
+        when: "Friday",
+        what: "Regenerate the weekly leadership report  no manual collation.",
+      },
     ],
     toolsYouGet: [
       "School-wide analytics dashboard",
@@ -201,7 +233,12 @@ export const PRODUCT_PERSONAS: ProductPersona[] = [
       "Custom report builder for board formats",
     ],
     panels: ["director", "school-admin", "academic"],
-    areas: ["reports-and-analytics", "academic", "hr-and-staff-management", "finance-and-fee-management"],
+    areas: [
+      "reports-and-analytics",
+      "academic",
+      "hr-and-staff-management",
+      "finance-and-fee-management",
+    ],
     faqs: [
       {
         q: "Do I need to learn every module to use the leadership view?",
@@ -228,11 +265,12 @@ export const PRODUCT_PERSONAS: ProductPersona[] = [
     pageLabel: "For school admin and front-office staff",
     roleNames: ["School admin", "Admin staff", "Receptionist", "Clerk"],
     stage: "The busiest desk in the school",
-    headline: "The desk everyone walks up to, finally with one system behind it",
+    headline:
+      "The desk everyone walks up to, finally with one system behind it",
     summary:
       "Admissions, student and parent records, class allocation, notices, transport, hostel and library supervision from one workspace instead of six registers.",
     intro:
-      "The front office absorbs everything: a parent asking about a bus stop, a teacher needing a section list, an enquiry walking in, a certificate to be issued before lunch. Those requests only feel chaotic because the answers live in different places. KIDUART puts them on one desk — admission pipeline, student and parent records, class and section administration, communication, and the transport, hostel and library desks in the same workspace.",
+      "The front office absorbs everything: a parent asking about a bus stop, a teacher needing a section list, an enquiry walking in, a certificate to be issued before lunch. Those requests only feel chaotic because the answers live in different places. KIDUART puts them on one desk  admission pipeline, student and parent records, class and section administration, communication, and the transport, hostel and library desks in the same workspace.",
     challenges: [
       {
         problem: "Enquiries are noted in a register and forgotten",
@@ -273,10 +311,22 @@ export const PRODUCT_PERSONAS: ProductPersona[] = [
       },
     ],
     dayInLife: [
-      { when: "Before first bell", what: "Check the admin dashboard for absences, dues and pending approvals." },
-      { when: "Morning", what: "Log new enquiries and move applications to the interview stage." },
-      { when: "Afternoon", what: "Issue documents, update parent links, publish a class notice." },
-      { when: "End of day", what: "Review transport and hostel entries flagged by staff." },
+      {
+        when: "Before first bell",
+        what: "Check the admin dashboard for absences, dues and pending approvals.",
+      },
+      {
+        when: "Morning",
+        what: "Log new enquiries and move applications to the interview stage.",
+      },
+      {
+        when: "Afternoon",
+        what: "Issue documents, update parent links, publish a class notice.",
+      },
+      {
+        when: "End of day",
+        what: "Review transport and hostel entries flagged by staff.",
+      },
     ],
     toolsYouGet: [
       "Admin dashboard widgets for the day's exceptions",
@@ -287,7 +337,12 @@ export const PRODUCT_PERSONAS: ProductPersona[] = [
       "Transport, hostel, library and facilities desks",
     ],
     panels: ["school-admin", "academic", "finance"],
-    areas: ["admission", "student-management", "parent-management", "communication"],
+    areas: [
+      "admission",
+      "student-management",
+      "parent-management",
+      "communication",
+    ],
     faqs: [
       {
         q: "How many registers does this replace?",
@@ -318,7 +373,7 @@ export const PRODUCT_PERSONAS: ProductPersona[] = [
     summary:
       "Terms and calendar, curriculum with syllabus and lesson plans, subject-teacher allocation, timetable and the full examination configuration in one panel.",
     intro:
-      "Coordinators are the people who notice when the plan and the reality drift apart: a syllabus behind schedule, a teacher double-booked, an exam weightage that does not match the grading system. KIDUART keeps the academic plan in one place — calendar and terms, curriculum with lesson plans, subject and teacher allocation, timetable, and the examination cycle from weightage to published results.",
+      "Coordinators are the people who notice when the plan and the reality drift apart: a syllabus behind schedule, a teacher double-booked, an exam weightage that does not match the grading system. KIDUART keeps the academic plan in one place  calendar and terms, curriculum with lesson plans, subject and teacher allocation, timetable, and the examination cycle from weightage to published results.",
     challenges: [
       {
         problem: "Syllabus progress is only known by asking teachers",
@@ -356,10 +411,22 @@ export const PRODUCT_PERSONAS: ProductPersona[] = [
       },
     ],
     dayInLife: [
-      { when: "Start of term", what: "Set terms, working days and holidays; publish the timetable." },
-      { when: "Weekly", what: "Review lesson plan and syllabus coverage per subject." },
-      { when: "Before exams", what: "Confirm weightage, grading system and the exam schedule." },
-      { when: "After results", what: "Read academic performance reports and plan interventions." },
+      {
+        when: "Start of term",
+        what: "Set terms, working days and holidays; publish the timetable.",
+      },
+      {
+        when: "Weekly",
+        what: "Review lesson plan and syllabus coverage per subject.",
+      },
+      {
+        when: "Before exams",
+        what: "Confirm weightage, grading system and the exam schedule.",
+      },
+      {
+        when: "After results",
+        what: "Read academic performance reports and plan interventions.",
+      },
     ],
     toolsYouGet: [
       "Academic terms, calendar, holidays and working days",
@@ -395,13 +462,18 @@ export const PRODUCT_PERSONAS: ProductPersona[] = [
     order: 5,
     label: "Teachers",
     pageLabel: "For teachers",
-    roleNames: ["Teacher", "Class teacher", "Substitute teacher", "Teaching assistant"],
+    roleNames: [
+      "Teacher",
+      "Class teacher",
+      "Substitute teacher",
+      "Teaching assistant",
+    ],
     stage: "The classroom",
     headline: "Software that gets out of the way before the second bell",
     summary:
-      "Attendance in a few taps, marks entry for your own subjects, class diary, assignments and your own leave — nothing else on screen.",
+      "Attendance in a few taps, marks entry for your own subjects, class diary, assignments and your own leave  nothing else on screen.",
     intro:
-      "Teachers do not need a school ERP; they need four things to take less time. Marking attendance, recording marks, posting the diary and setting assignments should be the fastest part of the day, not homework after school. The teacher workspace shows only the classes you own, and everything you enter flows onward automatically — parents see the absence, leadership sees the trend, report cards read your marks.",
+      "Teachers do not need a school ERP; they need four things to take less time. Marking attendance, recording marks, posting the diary and setting assignments should be the fastest part of the day, not homework after school. The teacher workspace shows only the classes you own, and everything you enter flows onward automatically  parents see the absence, leadership sees the trend, report cards read your marks.",
     challenges: [
       {
         problem: "Attendance is marked on paper, then typed again",
@@ -439,10 +511,22 @@ export const PRODUCT_PERSONAS: ProductPersona[] = [
       },
     ],
     dayInLife: [
-      { when: "First period", what: "Open today's timetable and mark attendance in a few taps." },
-      { when: "Between classes", what: "Post the class diary entry and any homework." },
-      { when: "Free period", what: "Enter marks for the last assessment; check submissions." },
-      { when: "Before leaving", what: "Raise a leave request or review your own reports." },
+      {
+        when: "First period",
+        what: "Open today's timetable and mark attendance in a few taps.",
+      },
+      {
+        when: "Between classes",
+        what: "Post the class diary entry and any homework.",
+      },
+      {
+        when: "Free period",
+        what: "Enter marks for the last assessment; check submissions.",
+      },
+      {
+        when: "Before leaving",
+        what: "Raise a leave request or review your own reports.",
+      },
     ],
     toolsYouGet: [
       "Teacher dashboard for today's classes",
@@ -491,21 +575,27 @@ export const PRODUCT_PERSONAS: ProductPersona[] = [
         cost: "Errors carry into invoices and parent disputes.",
         solution:
           "Fee heads, structures and reusable templates are configured once and allocated per class or student.",
-        modules: [{ area: "finance-and-fee-management", module: "Fee Structure" }],
+        modules: [
+          { area: "finance-and-fee-management", module: "Fee Structure" },
+        ],
       },
       {
         problem: "Concessions are informal and hard to defend",
         cost: "Payable amounts differ depending on who is asked.",
         solution:
           "Concessions and discounts are recorded against the student so the payable figure is traceable.",
-        modules: [{ area: "finance-and-fee-management", module: "Fee Structure" }],
+        modules: [
+          { area: "finance-and-fee-management", module: "Fee Structure" },
+        ],
       },
       {
         problem: "Follow-ups happen through chats and memory",
         cost: "The same families are chased twice while others are missed.",
         solution:
           "Due tracking produces one dues list with reminder history, so follow-up is systematic.",
-        modules: [{ area: "finance-and-fee-management", module: "Due Management" }],
+        modules: [
+          { area: "finance-and-fee-management", module: "Due Management" },
+        ],
       },
       {
         problem: "Online payments and counter receipts do not reconcile",
@@ -519,10 +609,22 @@ export const PRODUCT_PERSONAS: ProductPersona[] = [
       },
     ],
     dayInLife: [
-      { when: "Morning", what: "Reconcile yesterday's online payments against the ledger." },
-      { when: "Counter hours", what: "Collect payments and issue receipts tied to the student record." },
-      { when: "Afternoon", what: "Work the dues list and send reminders to pending families." },
-      { when: "Month end", what: "Run collection, expense and outstanding reports." },
+      {
+        when: "Morning",
+        what: "Reconcile yesterday's online payments against the ledger.",
+      },
+      {
+        when: "Counter hours",
+        what: "Collect payments and issue receipts tied to the student record.",
+      },
+      {
+        when: "Afternoon",
+        what: "Work the dues list and send reminders to pending families.",
+      },
+      {
+        when: "Month end",
+        what: "Run collection, expense and outstanding reports.",
+      },
     ],
     toolsYouGet: [
       "Fee heads, structures, templates and allocations",
@@ -564,7 +666,7 @@ export const PRODUCT_PERSONAS: ProductPersona[] = [
     summary:
       "One portal per family: every linked child's attendance, dues and payments, results, circulars, PTM slots and transport details.",
     intro:
-      "Most parent frustration is not about the school — it is about not knowing. Was my child marked present today, what is still pending on fees, when are results out, which bus stop was changed. The parent portal answers those questions for each linked child, keeps circulars in one place, and lets you pay online instead of visiting a counter during work hours.",
+      "Most parent frustration is not about the school  it is about not knowing. Was my child marked present today, what is still pending on fees, when are results out, which bus stop was changed. The parent portal answers those questions for each linked child, keeps circulars in one place, and lets you pay online instead of visiting a counter during work hours.",
     challenges: [
       {
         problem: "Information arrives through forwarded messages",
@@ -603,9 +705,15 @@ export const PRODUCT_PERSONAS: ProductPersona[] = [
     ],
     dayInLife: [
       { when: "Morning", what: "See whether your child was marked present." },
-      { when: "Anytime", what: "Check dues and pay online with a receipt on record." },
+      {
+        when: "Anytime",
+        what: "Check dues and pay online with a receipt on record.",
+      },
       { when: "Exam season", what: "Open published results and report cards." },
-      { when: "As needed", what: "Read circulars, check PTM slots and transport details." },
+      {
+        when: "As needed",
+        what: "Read circulars, check PTM slots and transport details.",
+      },
     ],
     toolsYouGet: [
       "Attendance record for each linked child",
@@ -620,7 +728,7 @@ export const PRODUCT_PERSONAS: ProductPersona[] = [
     faqs: [
       {
         q: "Is there a mobile app for parents?",
-        a: "The parent portal works on mobile web today. A native parent app is in development — we will announce it when it is ready rather than promise a date.",
+        a: "The parent portal works on mobile web today. A native parent app is in development  we will announce it when it is ready rather than promise a date.",
       },
       {
         q: "Can both parents have access?",
@@ -647,7 +755,7 @@ export const PRODUCT_PERSONAS: ProductPersona[] = [
     summary:
       "A small, focused portal: what is on today, what is due, what was scored, and what is borrowed from the library.",
     intro:
-      "Students should not need to learn an ERP. The student portal keeps the surface deliberately small — personal timetable, assignments with submission, attendance history, published results, library borrowings and school notices. It works on a shared phone, and everything shown is the same record the school works from, so there is no version confusion before an exam.",
+      "Students should not need to learn an ERP. The student portal keeps the surface deliberately small  personal timetable, assignments with submission, attendance history, published results, library borrowings and school notices. It works on a shared phone, and everything shown is the same record the school works from, so there is no version confusion before an exam.",
     challenges: [
       {
         problem: "Assignment details spread across notebooks and chats",
@@ -672,13 +780,15 @@ export const PRODUCT_PERSONAS: ProductPersona[] = [
       {
         problem: "Attendance shortfall is discovered too late",
         cost: "No chance to correct before it affects eligibility.",
-        solution: "Own attendance record and leave requests are visible through the term.",
+        solution:
+          "Own attendance record and leave requests are visible through the term.",
         modules: [{ area: "academic", module: "Attendance" }],
       },
       {
         problem: "Library dues are a surprise",
         cost: "Fines accumulate quietly.",
-        solution: "Borrowings, reservations and dues are visible in the portal.",
+        solution:
+          "Borrowings, reservations and dues are visible in the portal.",
         modules: [
           { area: "library-management", module: "Borrowing" },
           { area: "library-management", module: "Fines" },
@@ -687,7 +797,10 @@ export const PRODUCT_PERSONAS: ProductPersona[] = [
     ],
     dayInLife: [
       { when: "Morning", what: "Check today's timetable and any notices." },
-      { when: "After class", what: "Open pending assignments and submit work." },
+      {
+        when: "After class",
+        what: "Open pending assignments and submit work.",
+      },
       { when: "Weekly", what: "Review attendance and library borrowings." },
       { when: "Result day", what: "Read published results and report cards." },
     ],
@@ -722,9 +835,10 @@ export const PRODUCT_PERSONAS: ProductPersona[] = [
   },
 ];
 
-export const PERSONA_BY_SLUG: Record<string, ProductPersona> = Object.fromEntries(
-  PRODUCT_PERSONAS.map((persona) => [persona.slug, persona]),
-);
+export const PERSONA_BY_SLUG: Record<string, ProductPersona> =
+  Object.fromEntries(
+    PRODUCT_PERSONAS.map((persona) => [persona.slug, persona]),
+  );
 
 export const PERSONA_SLUGS = PRODUCT_PERSONAS.map((persona) => persona.slug);
 

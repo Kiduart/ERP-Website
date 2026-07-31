@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { ArrowRight, Check, X } from "lucide-react";
 import { ProductIcon } from "@/components/product/ProductIcon";
+import { InView } from "@/components/ui/InView";
 import { SYSTEM_SWITCH_ITEMS } from "@/lib/siteData";
 
 const items = SYSTEM_SWITCH_ITEMS;
@@ -15,7 +16,7 @@ export function SystemSwitchboard() {
   const [connected, setConnected] = useState(true);
 
   return (
-    <div className="switchboard" data-state={connected ? "connected" : "scattered"}>
+    <InView once={false} className="switchboard home-rise" data-state={connected ? "connected" : "scattered"}>
       <div className="flex flex-col items-center gap-4">
         <div className="inline-flex items-center gap-3 rounded-full border border-brand-navy/10 bg-white p-1.5 shadow-sm">
           <button
@@ -58,11 +59,12 @@ export function SystemSwitchboard() {
         </p>
       </div>
 
-      <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-        {items.map((item) => (
+      <div className="home-stagger mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        {items.map((item, index) => (
           <article
             key={item.id}
-            className={`switchboard-card relative flex flex-col overflow-hidden rounded-[1.75rem] p-6 transition-all duration-500 ${
+            style={{ ["--stagger" as string]: index }}
+            className={`home-brick home-stagger-item switchboard-card relative flex flex-col overflow-hidden rounded-[1.75rem] p-6 ${
               connected
                 ? "border border-brand-navy/10 bg-white shadow-lg shadow-brand-navy/5"
                 : "border border-dashed border-brand-navy/20 bg-brand-beige/30"
@@ -154,6 +156,6 @@ export function SystemSwitchboard() {
           </article>
         ))}
       </div>
-    </div>
+    </InView>
   );
 }

@@ -25,10 +25,19 @@ export type IntelligenceWorkflow = {
 
 export const SIGNAL_STREAMS: { label: string; detail: string }[] = [
   { label: "Attendance marks", detail: "Every period, every class, every day" },
-  { label: "Fee ledger", detail: "Invoices, receipts, part payments, due dates" },
+  {
+    label: "Fee ledger",
+    detail: "Invoices, receipts, part payments, due dates",
+  },
   { label: "Exam marks", detail: "Subject scores across terms and sessions" },
-  { label: "Vehicle pings", detail: "Live route positions during pickup and drop" },
-  { label: "Library issues", detail: "Borrow and return records against loan periods" },
+  {
+    label: "Vehicle pings",
+    detail: "Live route positions during pickup and drop",
+  },
+  {
+    label: "Library issues",
+    detail: "Borrow and return records against loan periods",
+  },
   { label: "Login events", detail: "Device, location and session behaviour" },
   { label: "Staff records", detail: "Attendance, leave and appraisal history" },
 ];
@@ -46,7 +55,7 @@ export const INTELLIGENCE_WORKFLOWS: IntelligenceWorkflow[] = [
     model:
       "A regression runs over each student's trend line, projects the next 30 days, scores confidence from the fit, and tags the direction as improving, stable or declining against the threshold your school sets.",
     action:
-      "Class teachers and counsellors open a ranked at-risk list with critical cases on top, plus a parent notification list — weeks before a term is lost.",
+      "Class teachers and counsellors open a ranked at-risk list with critical cases on top, plus a parent notification list  weeks before a term is lost.",
     modules: [
       { label: "Attendance", href: "/features/academic" },
       { label: "Reports & Analytics", href: "/features/reports-and-analytics" },
@@ -77,7 +86,8 @@ export const INTELLIGENCE_WORKFLOWS: IntelligenceWorkflow[] = [
     outcome: "See the dip before the exam",
     icon: "LineChart",
     trace: "exam.marks → regression → next 2 exams projected",
-    signal: "Subject-wise marks for every student across past exams in the session.",
+    signal:
+      "Subject-wise marks for every student across past exams in the session.",
     model:
       "Scores are smoothed and projected two exams ahead, then each student and subject is labelled improving, stable or declining with a confidence value attached.",
     action:
@@ -112,7 +122,8 @@ export const INTELLIGENCE_WORKFLOWS: IntelligenceWorkflow[] = [
     outcome: "No manual follow-up lists",
     icon: "BellRing",
     trace: "dues → overdue flag → SMS · WhatsApp · email",
-    signal: "Fee allocations checked against receipts and due dates, every day.",
+    signal:
+      "Fee allocations checked against receipts and due dates, every day.",
     model:
       "Dues crossing their date are marked overdue automatically and grouped into a defaulter view by class, amount and days late.",
     action:
@@ -129,13 +140,17 @@ export const INTELLIGENCE_WORKFLOWS: IntelligenceWorkflow[] = [
     outcome: "Break-in attempts stopped",
     icon: "ShieldAlert",
     trace: "login.attempt → geo + pattern check → block · MFA · audit",
-    signal: "Every sign-in attempt with its device, IP location and session behaviour.",
+    signal:
+      "Every sign-in attempt with its device, IP location and session behaviour.",
     model:
       "Requests are screened against allowed geographies and suspicious-activity patterns before a session is issued.",
     action:
       "Risky attempts are blocked or pushed to a second factor, and the system admin sees the attempt in an audit trail that cannot be edited.",
     modules: [
-      { label: "Security & Access", href: "/features/security-and-authentication" },
+      {
+        label: "Security & Access",
+        href: "/features/security-and-authentication",
+      },
       { label: "System Admin panel", href: "/platform/system-admin" },
     ],
   },
@@ -146,11 +161,12 @@ export const INTELLIGENCE_WORKFLOWS: IntelligenceWorkflow[] = [
     outcome: "Minutes, not weekends",
     icon: "FileSpreadsheet",
     trace: "marks + grading scheme → results → cards + transcripts",
-    signal: "Mark entry from subject teachers, plus your own grading scheme and card templates.",
+    signal:
+      "Mark entry from subject teachers, plus your own grading scheme and card templates.",
     model:
       "Totals, grades and ranks are computed against your rules in bulk, with transcripts built from the same processed result.",
     action:
-      "Staff review and publish on a schedule instead of rebuilding spreadsheets — parents see the card in their portal the moment it goes live.",
+      "Staff review and publish on a schedule instead of rebuilding spreadsheets  parents see the card in their portal the moment it goes live.",
     modules: [
       { label: "Examination", href: "/features/academic" },
       { label: "Parents", href: "/features/parent-management" },
@@ -163,7 +179,8 @@ export const INTELLIGENCE_WORKFLOWS: IntelligenceWorkflow[] = [
     outcome: "Parents told before they call",
     icon: "Bus",
     trace: "vehicle.ping → route delay → alert to that route only",
-    signal: "Live vehicle positions during pickup and drop, plus each vehicle's service record.",
+    signal:
+      "Live vehicle positions during pickup and drop, plus each vehicle's service record.",
     model:
       "Routes running behind are identified while the trip is on, and vehicles approaching a service date are surfaced before the trip is assigned.",
     action:
@@ -180,10 +197,12 @@ export const INTELLIGENCE_WORKFLOWS: IntelligenceWorkflow[] = [
     outcome: "Circulation without registers",
     icon: "Library",
     trace: "issue.record → loan period check → notice + fine",
-    signal: "Issue and return records checked against each member's loan period.",
-    model: "Books past due are marked automatically and fines are computed on your own rules.",
+    signal:
+      "Issue and return records checked against each member's loan period.",
+    model:
+      "Books past due are marked automatically and fines are computed on your own rules.",
     action:
-      "Librarians send overdue notices, review fine reports, and waive charges where the school decides to — all recorded.",
+      "Librarians send overdue notices, review fine reports, and waive charges where the school decides to  all recorded.",
     modules: [{ label: "Library", href: "/features/library-management" }],
   },
   {
@@ -197,7 +216,7 @@ export const INTELLIGENCE_WORKFLOWS: IntelligenceWorkflow[] = [
     model:
       "A draft is prepared from that context so the notice starts with the right dates, classes and amounts already filled in.",
     action:
-      "Staff edit and send rather than write from a blank page. In development — it is not billed and not switched on yet.",
+      "Staff edit and send rather than write from a blank page. In development  it is not billed and not switched on yet.",
     modules: [{ label: "Communication", href: "/features/communication" }],
   },
   {
@@ -207,11 +226,15 @@ export const INTELLIGENCE_WORKFLOWS: IntelligenceWorkflow[] = [
     outcome: "Answers without report hunting",
     icon: "MessagesSquare",
     trace: "question → mapped report query → answer + numbers",
-    signal: "A typed question such as \"which classes dropped below 80% attendance last month\".",
-    model: "The question is mapped onto the reports you already have permission to see.",
+    signal:
+      'A typed question such as "which classes dropped below 80% attendance last month".',
+    model:
+      "The question is mapped onto the reports you already have permission to see.",
     action:
       "The answer comes back with the underlying figures and a link to the full report. In development.",
-    modules: [{ label: "Reports & Analytics", href: "/features/reports-and-analytics" }],
+    modules: [
+      { label: "Reports & Analytics", href: "/features/reports-and-analytics" },
+    ],
   },
   {
     id: "unified-risk",
@@ -221,7 +244,8 @@ export const INTELLIGENCE_WORKFLOWS: IntelligenceWorkflow[] = [
     icon: "Radar",
     trace: "attendance + marks + fees + discipline → single watchlist",
     signal: "The risk signals that today live in three separate screens.",
-    model: "They are combined into one score per student so nothing is judged on a single number.",
+    model:
+      "They are combined into one score per student so nothing is judged on a single number.",
     action:
       "Class teachers get one weekly watchlist with a suggested next step per student. In development.",
     modules: [

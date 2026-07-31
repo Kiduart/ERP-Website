@@ -1,4 +1,15 @@
-import { ArrowDownRight, ArrowRight, ArrowUpRight, Check, Clock3, Mail, MapPin, MousePointerClick, Phone, X } from "lucide-react";
+import {
+  ArrowDownRight,
+  ArrowRight,
+  ArrowUpRight,
+  Check,
+  Clock3,
+  Mail,
+  MapPin,
+  MousePointerClick,
+  Phone,
+  X,
+} from "lucide-react";
 import { Link } from "wouter";
 import { FormEvent, useMemo, useState } from "react";
 import {
@@ -22,7 +33,7 @@ type GetInTouchFormState = {
 };
 
 /**
- * Conversation desk — pick problems as tickets, watch the brief assemble,
+ * Conversation desk  pick problems as tickets, watch the brief assemble,
  * then leave details. Deliberately not a three-column console (that reads like
  * the footer); this is a light, interactive desk.
  */
@@ -46,13 +57,17 @@ export function GetInTouchSection() {
 
   const walkthrough = useMemo(() => {
     const seen = new Map<string, string>();
-    selected.forEach((intent) => intent.areas.forEach((area) => seen.set(area.href, area.label)));
+    selected.forEach((intent) =>
+      intent.areas.forEach((area) => seen.set(area.href, area.label)),
+    );
     return [...seen.entries()].map(([href, label]) => ({ href, label }));
   }, [selected]);
 
   const togglePicked = (id: string) => {
     setPicked((current) => {
-      const next = current.includes(id) ? current.filter((item) => item !== id) : [...current, id];
+      const next = current.includes(id)
+        ? current.filter((item) => item !== id)
+        : [...current, id];
       const intent = CONTACT_INTENTS.find((entry) => entry.id === id);
       if (intent && !current.includes(id)) {
         setFormData((form) =>
@@ -89,15 +104,19 @@ export function GetInTouchSection() {
         body: JSON.stringify({
           ...formData,
           help: selected.length
-            ? `Get in Touch — ${selected.map((intent) => intent.label).join(", ")}`
+            ? `Get in Touch  ${selected.map((intent) => intent.label).join(", ")}`
             : "Get in Touch form",
         }),
       });
 
-      const result = (await response.json().catch(() => null)) as { error?: string } | null;
+      const result = (await response.json().catch(() => null)) as {
+        error?: string;
+      } | null;
 
       if (!response.ok) {
-        throw new Error(result?.error || "Unable to send your message right now.");
+        throw new Error(
+          result?.error || "Unable to send your message right now.",
+        );
       }
 
       setFormData({
@@ -111,12 +130,16 @@ export function GetInTouchSection() {
 
       toast({
         title: "Message sent",
-        description: "Thanks for reaching out. Our team will get back to you shortly.",
+        description:
+          "Thanks for reaching out. Our team will get back to you shortly.",
       });
     } catch (error) {
       toast({
         title: "Unable to send message",
-        description: error instanceof Error ? error.message : "Please try again in a moment.",
+        description:
+          error instanceof Error
+            ? error.message
+            : "Please try again in a moment.",
         variant: "destructive",
       });
     } finally {
@@ -135,12 +158,12 @@ export function GetInTouchSection() {
             What is the school stuck on?
           </h2>
           <p className="mt-4 text-base leading-7 text-brand-navy/[0.76]">
-            Three short steps: pick what hurts, watch your brief fill itself in, then leave a number.
-            We reply on those exact screens — not a brochure.
+            Three short steps: pick what hurts, watch your brief fill itself in,
+            then leave a number. We reply on those exact screens not a brochure.
           </p>
         </div>
 
-        {/* Ticket picker — mosaic, not a tall checklist */}
+        {/* Ticket picker  mosaic, not a tall checklist */}
         <div className="mt-10">
           <div className="flex flex-wrap items-end justify-between gap-3">
             <div>
@@ -148,7 +171,8 @@ export function GetInTouchSection() {
                 Step 1 · Pick what hurts
               </p>
               <p className="mt-1 text-sm text-brand-navy/[0.72]">
-                Tap any chip below. Each one lands as a ticket in your brief — optional.
+                Tap any chip below. Each one lands as a ticket in your brief
+                optional.
               </p>
             </div>
             {picked.length > 0 && (
@@ -177,7 +201,10 @@ export function GetInTouchSection() {
                     }`}
                   >
                     {isOn ? (
-                      <Check className="h-3.5 w-3.5 text-brand-yellow" aria-hidden="true" />
+                      <Check
+                        className="h-3.5 w-3.5 text-brand-yellow"
+                        aria-hidden="true"
+                      />
                     ) : (
                       <ProductIcon name={intent.icon} className="h-3.5 w-3.5" />
                     )}
@@ -207,7 +234,10 @@ export function GetInTouchSection() {
                 </h3>
               </div>
               <span className="inline-flex items-center gap-1.5 rounded-full border border-brand-navy/[0.1] bg-brand-beige/50 px-3 py-1.5 text-xs font-semibold text-brand-navy/[0.72]">
-                <Clock3 className="h-3.5 w-3.5 text-brand-teal" aria-hidden="true" />
+                <Clock3
+                  className="h-3.5 w-3.5 text-brand-teal"
+                  aria-hidden="true"
+                />
                 Reply in one working day
               </span>
             </div>
@@ -216,16 +246,22 @@ export function GetInTouchSection() {
               <div className="mt-6 space-y-4">
                 <div className="rounded-2xl border border-dashed border-brand-teal/40 bg-brand-teal/[0.05] p-5">
                   <p className="inline-flex items-center gap-2 text-sm font-bold text-brand-navy">
-                    <MousePointerClick className="h-4 w-4 text-brand-teal" aria-hidden="true" />
+                    <MousePointerClick
+                      className="h-4 w-4 text-brand-teal"
+                      aria-hidden="true"
+                    />
                     How this works
                   </p>
                   <ol className="mt-4 space-y-3">
                     {[
-                      "Tap a problem chip above — it becomes a ticket here.",
+                      "Tap a problem chip above  it becomes a ticket here.",
                       "Tap again (or the ×) to remove anything you do not need.",
                       "Fill the form on the right. We reply on those exact screens.",
                     ].map((step, index) => (
-                      <li key={step} className="flex items-start gap-3 text-sm leading-6 text-brand-navy/[0.78]">
+                      <li
+                        key={step}
+                        className="flex items-start gap-3 text-sm leading-6 text-brand-navy/[0.78]"
+                      >
                         <span
                           className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-navy text-[0.7rem] font-bold text-brand-beige"
                           aria-hidden="true"
@@ -238,14 +274,15 @@ export function GetInTouchSection() {
                   </ol>
                 </div>
                 <p className="text-sm leading-6 text-brand-navy/[0.7]">
-                  Prefer to skip? Fill the form on the right in your own words — tickets are optional.
+                  Prefer to skip? Fill the form on the right in your own words
+                  tickets are optional.
                 </p>
               </div>
             ) : (
               <>
                 <p className="mt-4 text-sm leading-6 text-brand-navy/[0.74]">
-                  These tickets go with your message. Remove any with ×, then send from the form on
-                  the right.
+                  These tickets go with your message. Remove any with ×, then
+                  send from the form on the right.
                 </p>
                 <ol className="mt-4 space-y-3">
                   {selected.map((intent, index) => (
@@ -263,8 +300,12 @@ export function GetInTouchSection() {
                           <p className="text-[0.65rem] font-bold uppercase tracking-[0.14em] text-brand-navy/[0.55]">
                             Ticket {String(index + 1).padStart(2, "0")}
                           </p>
-                          <p className="mt-1 text-base font-bold text-brand-navy">{intent.label}</p>
-                          <p className="mt-1.5 text-sm leading-6 text-brand-navy/[0.74]">{intent.shows}</p>
+                          <p className="mt-1 text-base font-bold text-brand-navy">
+                            {intent.label}
+                          </p>
+                          <p className="mt-1.5 text-sm leading-6 text-brand-navy/[0.74]">
+                            {intent.shows}
+                          </p>
                         </div>
                         <button
                           type="button"
@@ -305,8 +346,14 @@ export function GetInTouchSection() {
             {selected.length > 0 && (
               <p className="mt-5 inline-flex items-center gap-2 rounded-full bg-brand-navy px-4 py-2 text-xs font-bold text-brand-beige">
                 Next → fill Step 3 on the right
-                <ArrowDownRight className="h-3.5 w-3.5 text-brand-yellow lg:hidden" aria-hidden="true" />
-                <ArrowRight className="hidden h-3.5 w-3.5 text-brand-yellow lg:inline" aria-hidden="true" />
+                <ArrowDownRight
+                  className="h-3.5 w-3.5 text-brand-yellow lg:hidden"
+                  aria-hidden="true"
+                />
+                <ArrowRight
+                  className="hidden h-3.5 w-3.5 text-brand-yellow lg:inline"
+                  aria-hidden="true"
+                />
               </p>
             )}
 
@@ -315,18 +362,27 @@ export function GetInTouchSection() {
                 href={`tel:+${CONTACT_PHONE_E164}`}
                 className="inline-flex items-center gap-1.5 hover:text-brand-teal"
               >
-                <Phone className="h-3.5 w-3.5 text-brand-teal" aria-hidden="true" />
+                <Phone
+                  className="h-3.5 w-3.5 text-brand-teal"
+                  aria-hidden="true"
+                />
                 {CONTACT_PHONE_DISPLAY}
               </a>
               <a
                 href={`mailto:${CONTACT_EMAIL}`}
                 className="inline-flex items-center gap-1.5 hover:text-brand-teal"
               >
-                <Mail className="h-3.5 w-3.5 text-brand-teal" aria-hidden="true" />
+                <Mail
+                  className="h-3.5 w-3.5 text-brand-teal"
+                  aria-hidden="true"
+                />
                 {CONTACT_EMAIL}
               </a>
               <span className="inline-flex items-center gap-1.5">
-                <MapPin className="h-3.5 w-3.5 text-brand-teal" aria-hidden="true" />
+                <MapPin
+                  className="h-3.5 w-3.5 text-brand-teal"
+                  aria-hidden="true"
+                />
                 {CONTACT_LOCATION}
               </span>
             </div>
@@ -340,7 +396,7 @@ export function GetInTouchSection() {
             <p className="mt-2 text-sm leading-6 text-brand-beige/[0.75]">
               {selected.length
                 ? `${selected.length} ticket${selected.length === 1 ? "" : "s"} attached. We will open those first.`
-                : "No tickets yet — that is fine. Tell us what you need in the message."}
+                : "No tickets yet  that is fine. Tell us what you need in the message."}
             </p>
 
             <form className="mt-6 flex flex-col gap-4" onSubmit={handleSubmit}>
@@ -374,7 +430,12 @@ export function GetInTouchSection() {
                     required
                     placeholder="10 digit number"
                     value={formData.phone}
-                    onChange={(e) => handleChange("phone", e.target.value.replace(/\D/g, "").slice(0, 10))}
+                    onChange={(e) =>
+                      handleChange(
+                        "phone",
+                        e.target.value.replace(/\D/g, "").slice(0, 10),
+                      )
+                    }
                     className="w-full bg-transparent px-3 py-3 text-sm text-brand-beige placeholder:text-brand-beige/50 focus:outline-none"
                   />
                 </div>
@@ -423,7 +484,10 @@ export function GetInTouchSection() {
 
               <p className="text-center text-xs text-brand-beige/[0.65]">
                 Prefer a live walkthrough?{" "}
-                <Link href="/demo" className="font-bold text-brand-yellow underline underline-offset-4 hover:text-brand-beige">
+                <Link
+                  href="/demo"
+                  className="font-bold text-brand-yellow underline underline-offset-4 hover:text-brand-beige"
+                >
                   Book a demo
                 </Link>
               </p>

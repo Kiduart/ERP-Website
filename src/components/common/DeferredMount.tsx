@@ -10,7 +10,7 @@ type DeferredMountProps = {
 
 /**
  * Defers mounting of non-critical UI (chat, a11y panel, cursor effects)
- * until the browser is idle or the user interacts — reduces TBT/LCP contention.
+ * until the browser is idle or the user interacts  reduces TBT/LCP contention.
  */
 export function DeferredMount({
   children,
@@ -25,12 +25,19 @@ export function DeferredMount({
     const enable = () => setReady(true);
 
     if (onInteraction) {
-      const events: Array<keyof WindowEventMap> = ["pointerdown", "keydown", "touchstart", "scroll"];
+      const events: Array<keyof WindowEventMap> = [
+        "pointerdown",
+        "keydown",
+        "touchstart",
+        "scroll",
+      ];
       const onFirst = () => {
         enable();
         events.forEach((event) => window.removeEventListener(event, onFirst));
       };
-      events.forEach((event) => window.addEventListener(event, onFirst, { once: true, passive: true }));
+      events.forEach((event) =>
+        window.addEventListener(event, onFirst, { once: true, passive: true }),
+      );
       const fallback = window.setTimeout(enable, timeoutMs);
       return () => {
         window.clearTimeout(fallback);

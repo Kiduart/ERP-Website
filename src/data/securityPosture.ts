@@ -28,12 +28,13 @@ export const SECURITY_LAYERS: SecurityLayer[] = [
     order: 1,
     title: "Identity and login",
     short: "Identity",
-    promise: "Every login is a verified person, not a shared password on a staffroom notice",
+    promise:
+      "Every login is a verified person, not a shared password on a staffroom notice",
     detail:
       "Login is the widest door in any school system, so it carries the most controls. Accounts verify email and phone, passwords are stored hashed with bcrypt, failed attempts lock an account, and staff can add an authenticator app as a second factor. Google and Microsoft sign-in are supported where a school already runs those accounts.",
     controls: [
       "Universal login for staff, teachers, students and parents",
-      "Password hashing with bcrypt — no plain-text password is ever stored",
+      "Password hashing with bcrypt  no plain-text password is ever stored",
       "Authenticator-app (TOTP) multi-factor with recovery backup codes",
       "Account lockout after repeated failed login attempts",
       "Password reset and recovery with expiring links",
@@ -48,14 +49,15 @@ export const SECURITY_LAYERS: SecurityLayer[] = [
     order: 2,
     title: "Roles and permissions",
     short: "Roles",
-    promise: "A class teacher never sees the fee ledger, and an accountant never sees exam marks",
+    promise:
+      "A class teacher never sees the fee ledger, and an accountant never sees exam marks",
     detail:
-      "Access is decided by role, not by trust. Roles carry explicit permissions, and permissions can be delegated downward — an organisation can restrict what a school admin is allowed to grant, but never expand it. Each role also gets its own sidebar, so people only navigate to what they can actually open.",
+      "Access is decided by role, not by trust. Roles carry explicit permissions, and permissions can be delegated downward  an organisation can restrict what a school admin is allowed to grant, but never expand it. Each role also gets its own sidebar, so people only navigate to what they can actually open.",
     controls: [
       "Role-based permissions across every module area",
       "Role and permission delegation from organisation to school",
       "A 'my roles and permissions' view so staff can see their own access",
-      "Unified role-based sidebar — menus reflect real permissions",
+      "Unified role-based sidebar  menus reflect real permissions",
       "Separate panels for organisation, school, teaching, finance, parent and student roles",
     ],
     module: "Roles & Permissions",
@@ -67,7 +69,8 @@ export const SECURITY_LAYERS: SecurityLayer[] = [
     order: 3,
     title: "School data isolation",
     short: "Isolation",
-    promise: "One school's records cannot be queried from another school's login",
+    promise:
+      "One school's records cannot be queried from another school's login",
     detail:
       "KIDUART is multi-tenant by design: each school's data lives in its own tenant database rather than sharing rows in one common table. Requests are resolved to a tenant before any query runs, which keeps the boundary structural instead of relying on a filter someone might forget.",
     controls: [
@@ -85,7 +88,8 @@ export const SECURITY_LAYERS: SecurityLayer[] = [
     order: 4,
     title: "Sessions and devices",
     short: "Sessions",
-    promise: "A forgotten login on a shared computer can be ended from anywhere",
+    promise:
+      "A forgotten login on a shared computer can be ended from anywhere",
     detail:
       "Sessions are tracked, not just issued. Staff can see where they are signed in and end other sessions; tokens can be refreshed and revoked, and logging out invalidates the token rather than only clearing the browser. Concurrent session limits apply per role.",
     controls: [
@@ -104,7 +108,8 @@ export const SECURITY_LAYERS: SecurityLayer[] = [
     order: 5,
     title: "Access perimeter",
     short: "Perimeter",
-    promise: "Admin access can be fenced to your campus network when you want it",
+    promise:
+      "Admin access can be fenced to your campus network when you want it",
     detail:
       "For schools that want tighter control, access can be restricted by IP or by location, so sensitive panels are only reachable from the campus network or an approved region. Request rate limits and standard hardening sit in front of the API for every school, whether or not those optional restrictions are switched on.",
     controls: [
@@ -123,9 +128,10 @@ export const SECURITY_LAYERS: SecurityLayer[] = [
     order: 6,
     title: "Audit trail and API access",
     short: "Audit trail",
-    promise: "When someone asks who changed a mark or a fee entry, there is an answer",
+    promise:
+      "When someone asks who changed a mark or a fee entry, there is an answer",
     detail:
-      "Sensitive actions — logins, MFA changes, password resets, permission changes and financial events — are written to an audit log. Where a school needs to connect another system, access goes through managed API keys rather than sharing a staff account password.",
+      "Sensitive actions  logins, MFA changes, password resets, permission changes and financial events  are written to an audit log. Where a school needs to connect another system, access goes through managed API keys rather than sharing a staff account password.",
     controls: [
       "Audit logging for authentication and sensitive record changes",
       "Managed API keys with scoped access instead of shared credentials",
@@ -144,7 +150,7 @@ export type SecurityScenario = {
   question: string;
   /** What actually happens in a school when this goes wrong */
   attempt: string;
-  /** Layer id in SECURITY_LAYERS that answers it — validated by check:content */
+  /** Layer id in SECURITY_LAYERS that answers it  validated by check:content */
   stoppedBy: string;
   /** What the product does about it */
   response: string;
@@ -167,7 +173,7 @@ export const SECURITY_SCENARIOS: SecurityScenario[] = [
     response:
       "Passwords are stored hashed with bcrypt, so a KIDUART database dump would not hand anyone a usable password in the first place. Repeated failed attempts lock the account, and staff accounts that handle money or marks can be required to pass an authenticator-app code before the login completes.",
     controls: [
-      "Password hashing with bcrypt — no plain-text password is ever stored",
+      "Password hashing with bcrypt  no plain-text password is ever stored",
       "Account lockout after repeated failed login attempts",
       "Authenticator-app (TOTP) multi-factor with recovery backup codes",
     ],
@@ -176,7 +182,7 @@ export const SECURITY_SCENARIOS: SecurityScenario[] = [
     id: "staff-exit",
     question: "A teacher resigns in the middle of the term",
     attempt:
-      "Their last day passes, but their login still exists — and in most schools nobody remembers to check what it can still open.",
+      "Their last day passes, but their login still exists  and in most schools nobody remembers to check what it can still open.",
     stoppedBy: "sessions",
     response:
       "Deactivating the user ends access rather than just hiding a menu. Their sessions can be revoked from the admin side, refresh tokens are invalidated instead of quietly living on, and if they signed in with a school Google or Microsoft account, disabling that account closes the second route too.",
@@ -232,14 +238,14 @@ export const SECURITY_SCENARIOS: SecurityScenario[] = [
     id: "curious-staff",
     question: "A staff member goes looking outside their job",
     attempt:
-      "An accountant opens exam marks. A class teacher browses the fee ledger. Not malicious, usually — just possible, in most school software.",
+      "An accountant opens exam marks. A class teacher browses the fee ledger. Not malicious, usually  just possible, in most school software.",
     stoppedBy: "roles",
     response:
       "Access is decided by role, not by trust. Each role carries explicit permissions and gets its own sidebar, so people do not navigate to screens they cannot open. An organisation can restrict what a school admin is allowed to grant, but never let them expand their own access.",
     controls: [
       "Role-based permissions across every module area",
       "Role and permission delegation from organisation to school",
-      "Unified role-based sidebar — menus reflect real permissions",
+      "Unified role-based sidebar  menus reflect real permissions",
     ],
   },
   {
@@ -249,7 +255,7 @@ export const SECURITY_SCENARIOS: SecurityScenario[] = [
       "A parent disputes a receipt, or a student's grade does not match the answer sheet, and the office has no way to prove who touched it.",
     stoppedBy: "accountability",
     response:
-      "Sensitive actions — logins, MFA changes, password resets, permission changes and financial events — are written to an audit log. When the question comes months later, there is a record to answer it with instead of a memory of who was on duty.",
+      "Sensitive actions  logins, MFA changes, password resets, permission changes and financial events  are written to an audit log. When the question comes months later, there is a record to answer it with instead of a memory of who was on duty.",
     controls: [
       "Audit logging for authentication and sensitive record changes",
       "Payment gateway webhooks verified before they are processed",
@@ -260,7 +266,7 @@ export const SECURITY_SCENARIOS: SecurityScenario[] = [
     id: "vendor-access",
     question: "A vendor asks for a login to connect their system",
     attempt:
-      "Your website developer or reporting vendor asks for 'an admin account' — and now a third party holds a staff password with full access.",
+      "Your website developer or reporting vendor asks for 'an admin account'  and now a third party holds a staff password with full access.",
     stoppedBy: "accountability",
     response:
       "They get a scoped API key instead, limited to what that integration genuinely needs and revocable on its own. Nobody has to share a staff password, and when the contract ends you revoke a key rather than changing everyone's login.",
@@ -277,7 +283,7 @@ export const SECURITY_HONESTY: { title: string; detail: string }[] = [
   {
     title: "We do not claim certifications we have not completed",
     detail:
-      "KIDUART is a growing product. We describe the controls that exist in the platform today and are happy to walk your IT reviewer through them on a call. When formal audits and certifications are completed, they will be published here with dates — not implied earlier.",
+      "KIDUART is a growing product. We describe the controls that exist in the platform today and are happy to walk your IT reviewer through them on a call. When formal audits and certifications are completed, they will be published here with dates  not implied earlier.",
   },
   {
     title: "Some controls are optional by design",
@@ -316,7 +322,7 @@ export const DATA_HANDLING_PRINCIPLES: PrivacyCommitment[] = [
   {
     title: "Retained while your school needs the record",
     detail:
-      "Academic and financial history is retained because schools are required to keep it — transfer certificates and fee records are the obvious example. Operational logs are kept for a limited window for troubleshooting and review.",
+      "Academic and financial history is retained because schools are required to keep it  transfer certificates and fee records are the obvious example. Operational logs are kept for a limited window for troubleshooting and review.",
   },
   {
     title: "Removed when you ask",

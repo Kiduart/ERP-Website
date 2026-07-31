@@ -1,4 +1,8 @@
-import { CONTACT_EMAIL, CONTACT_LOCATION, CONTACT_PHONE_DISPLAY } from "@/lib/contact";
+import {
+  CONTACT_EMAIL,
+  CONTACT_LOCATION,
+  CONTACT_PHONE_DISPLAY,
+} from "@/lib/contact";
 
 export const COMPANY = {
   name: "KIDUART",
@@ -23,7 +27,7 @@ export type SystemSwitchItem = {
 };
 
 /**
- * Homepage "flip the switch" block — the same six jobs, shown the way most schools
+ * Homepage "flip the switch" block  the same six jobs, shown the way most schools
  * run them today and the way they run inside one system.
  */
 export const SYSTEM_SWITCH_ITEMS: SystemSwitchItem[] = [
@@ -41,7 +45,11 @@ export const SYSTEM_SWITCH_ITEMS: SystemSwitchItem[] = [
       headline: "One student, one profile",
       detail:
         "Admission, documents, class and section history, guardians and contact details sit on a single record that follows the student through every session.",
-      signals: ["Admission to alumni", "Documents attached", "Session-wise history"],
+      signals: [
+        "Admission to alumni",
+        "Documents attached",
+        "Session-wise history",
+      ],
     },
     href: "/features/student-management",
   },
@@ -151,18 +159,18 @@ export type SchoolJourneyStep = {
   roles: string[];
   /** Where the numbers come from in feature-matrix.json */
   source: { area: string; module?: string };
-  /** Feature count for the source above — validated by npm run check:content */
+  /** Feature count for the source above  validated by npm run check:content */
   featureCount: number;
 };
 
-/** Homepage lifecycle path — every step maps to a real module area in feature-matrix.json */
+/** Homepage lifecycle path  every step maps to a real module area in feature-matrix.json */
 export const SCHOOL_OPERATIONS_JOURNEY: SchoolJourneyStep[] = [
   {
     id: "admissions",
     label: "Admissions",
     href: "/features/admission",
     blurb: "Enquiry to registered student",
-    stage: "Step 01 — A family walks in",
+    stage: "Step 01  A family walks in",
     detail:
       "The year starts with an enquiry, not a student. Enquiries, applications, interview evaluations and registration run as one pipeline, so nothing is lost between the phone call and the form.",
     points: [
@@ -181,7 +189,7 @@ export const SCHOOL_OPERATIONS_JOURNEY: SchoolJourneyStep[] = [
     label: "Student Records",
     href: "/features/student-management",
     blurb: "One profile the whole school reads",
-    stage: "Step 02 — The record everything reads from",
+    stage: "Step 02  The record everything reads from",
     detail:
       "Admission details, documents, guardians, enrollment, promotions and transfers live on one student profile. Attendance, fees and exams all read from it instead of keeping their own copies.",
     points: [
@@ -200,9 +208,9 @@ export const SCHOOL_OPERATIONS_JOURNEY: SchoolJourneyStep[] = [
     label: "Classes & Timetable",
     href: "/features/academic/classes-and-sections",
     blurb: "Sections, class teachers, periods",
-    stage: "Step 03 — The structure of the year",
+    stage: "Step 03  The structure of the year",
     detail:
-      "Classes and sections are created for the session, class teachers assigned, subjects allocated to staff, and the timetable published — the frame everything else hangs on.",
+      "Classes and sections are created for the session, class teachers assigned, subjects allocated to staff, and the timetable published  the frame everything else hangs on.",
     points: [
       "Class and section management per session",
       "Class teacher assignment",
@@ -219,7 +227,7 @@ export const SCHOOL_OPERATIONS_JOURNEY: SchoolJourneyStep[] = [
     label: "Attendance & Leave",
     href: "/features/academic/attendance",
     blurb: "Mark fast, inform parents same day",
-    stage: "Step 04 — The daily heartbeat",
+    stage: "Step 04  The daily heartbeat",
     detail:
       "Teachers mark a class in a few taps, student leave requests move through approval, staff attendance is tracked alongside, and attendance reports surface patterns while the term is still running.",
     points: [
@@ -238,7 +246,7 @@ export const SCHOOL_OPERATIONS_JOURNEY: SchoolJourneyStep[] = [
     label: "Exams & Results",
     href: "/features/academic/examination",
     blurb: "Schedule, marks, grades, report cards",
-    stage: "Step 05 — Assessment without rework",
+    stage: "Step 05  Assessment without rework",
     detail:
       "Exam schedules, weightage rules and grading systems are configured once. Teachers enter marks, results are processed and published, and report cards come out of the same data.",
     points: [
@@ -257,7 +265,7 @@ export const SCHOOL_OPERATIONS_JOURNEY: SchoolJourneyStep[] = [
     label: "Fees & Finance",
     href: "/features/finance-and-fee-management",
     blurb: "Structure, collection, dues, receipts",
-    stage: "Step 06 — Money without the chase",
+    stage: "Step 06  Money without the chase",
     detail:
       "The fee book drives everything: heads and structures set once, concessions on the record, counter and online collection with receipts, refunds, and one dues list that reminders work from.",
     points: [
@@ -276,9 +284,9 @@ export const SCHOOL_OPERATIONS_JOURNEY: SchoolJourneyStep[] = [
     label: "Parent Communication",
     href: "/features/communication",
     blurb: "Targeted notices with a record",
-    stage: "Step 07 — One voice to families",
+    stage: "Step 07  One voice to families",
     detail:
-      "Notices, announcements and events go to the right classes or staff groups over in-app, email and SMS — with a log the office can check when a parent says they were never told.",
+      "Notices, announcements and events go to the right classes or staff groups over in-app, email and SMS  with a log the office can check when a parent says they were never told.",
     points: [
       "Notice board and announcement management",
       "Event management tied to the school calendar",
@@ -295,7 +303,7 @@ export const SCHOOL_OPERATIONS_JOURNEY: SchoolJourneyStep[] = [
     label: "Transport",
     href: "/features/transport-management",
     blurb: "Routes, drivers, vehicles, tracking",
-    stage: "Step 08 — Every route accounted for",
+    stage: "Step 08  Every route accounted for",
     detail:
       "Routes and stops are planned with students mapped to them, drivers and vehicles have proper records, live tracking answers where-is-the-bus, and maintenance stays scheduled.",
     points: [
@@ -314,9 +322,9 @@ export const SCHOOL_OPERATIONS_JOURNEY: SchoolJourneyStep[] = [
     label: "Hostel & Campus",
     href: "/features/hostel-management",
     blurb: "Rooms, beds, mess, visitors",
-    stage: "Step 09 — Residential care on record",
+    stage: "Step 09  Residential care on record",
     detail:
-      "Boarding operations get bed-level allocation, hostel attendance separate from class attendance, mess planning, and a visitor log — alongside campus buildings, rooms and assets.",
+      "Boarding operations get bed-level allocation, hostel attendance separate from class attendance, mess planning, and a visitor log  alongside campus buildings, rooms and assets.",
     points: [
       "Hostel rooms with bed-level allocation",
       "Hostel attendance tracking",
@@ -333,7 +341,7 @@ export const SCHOOL_OPERATIONS_JOURNEY: SchoolJourneyStep[] = [
     label: "Library",
     href: "/features/library-management",
     blurb: "Catalog, circulation, fines",
-    stage: "Step 10 — Circulation without registers",
+    stage: "Step 10  Circulation without registers",
     detail:
       "The catalog knows what exists and who has it. Members, issue and return, reservations and fines run through one workflow, with reports showing what the collection is actually doing.",
     points: [
@@ -352,7 +360,7 @@ export const SCHOOL_OPERATIONS_JOURNEY: SchoolJourneyStep[] = [
     label: "HR & Payroll",
     href: "/features/hr-and-staff-management",
     blurb: "Staff, leave, salary, appraisal",
-    stage: "Step 11 — The team behind the classes",
+    stage: "Step 11  The team behind the classes",
     detail:
       "Teaching and non-teaching directories, departments and designations, staff attendance and leave approvals feed payroll directly, with appraisal records kept alongside.",
     points: [
@@ -371,7 +379,7 @@ export const SCHOOL_OPERATIONS_JOURNEY: SchoolJourneyStep[] = [
     label: "Reports & Leadership",
     href: "/features/reports-and-analytics",
     blurb: "Decisions from live records",
-    stage: "Step 12 — The picture leadership needs",
+    stage: "Step 12  The picture leadership needs",
     detail:
       "Because every step above writes to one system, reporting is reading rather than collecting: academic, attendance and financial reports, school analytics, and a builder for board formats.",
     points: [

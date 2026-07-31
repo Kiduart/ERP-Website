@@ -23,11 +23,11 @@ export const SITE_FAQ_GROUPS: SiteFaqGroup[] = [
     items: [
       {
         q: "How deep does KIDUART go across school operations?",
-        a: "The product is organised into functional areas — Organisation, Academic, Admission, Student and Parent Management, HR & Staff, Finance & Fees, Communication, Library, Transport, Hostel, Facilities & Inventory, Reports & Analytics, Dashboard & Insights, Security & Authentication, and Support — each with its own page on this site. Depth sits in the workflows inside those areas, not in a marketing feature count.",
+        a: "The product is organised into functional areas  Organisation, Academic, Admission, Student and Parent Management, HR & Staff, Finance & Fees, Communication, Library, Transport, Hostel, Facilities & Inventory, Reports & Analytics, Dashboard & Insights, Security & Authentication, and Support  each with its own page on this site. Depth sits in the workflows inside those areas, not in a marketing feature count.",
       },
       {
         q: "Which area is the deepest?",
-        a: "Academic — attendance, timetable, examinations, assignments, curriculum, class diary, discipline, houses and parent-teacher meetings all live there. HR & Staff, Security & Authentication, and Finance & Fees follow closely for schools that run those operations in-house.",
+        a: "Academic  attendance, timetable, examinations, assignments, curriculum, class diary, discipline, houses and parent-teacher meetings all live there. HR & Staff, Security & Authentication, and Finance & Fees follow closely for schools that run those operations in-house.",
       },
       {
         q: "Do we have to take every area?",
@@ -43,7 +43,7 @@ export const SITE_FAQ_GROUPS: SiteFaqGroup[] = [
       },
       {
         q: "Is there a mobile app?",
-        a: "The platform works in any modern phone browser today, and the parent and student portals are built for that. A native parent app is in development and will be announced when it ships — we do not list it as available now.",
+        a: "The platform works in any modern phone browser today, and the parent and student portals are built for that. A native parent app is in development and will be announced when it ships  we do not list it as available now.",
       },
       {
         q: "Does the platform work offline?",
@@ -59,7 +59,7 @@ export const SITE_FAQ_GROUPS: SiteFaqGroup[] = [
     items: [
       {
         q: "Who gets a login?",
-        a: "Ten role panels ship with the product: system admin, organisation, director and leadership, school admin, academic coordinator, teacher, finance and accounts, HR and staff, parent, and student. Every panel reads from the same database — a panel is a view, not a separate product.",
+        a: "Ten role panels ship with the product: system admin, organisation, director and leadership, school admin, academic coordinator, teacher, finance and accounts, HR and staff, parent, and student. Every panel reads from the same database  a panel is a view, not a separate product.",
       },
       {
         q: "Are logins charged per user?",
@@ -98,7 +98,7 @@ export const SITE_FAQ_GROUPS: SiteFaqGroup[] = [
       },
       {
         q: "How long does implementation take?",
-        a: "Most single-campus schools are running attendance and fee collection within a few weeks. The variable is data quality — clean class lists and a settled fee structure move fast; a decade of inconsistent spreadsheets takes longer to map.",
+        a: "Most single-campus schools are running attendance and fee collection within a few weeks. The variable is data quality  clean class lists and a settled fee structure move fast; a decade of inconsistent spreadsheets takes longer to map.",
       },
       {
         q: "Do you migrate our existing data?",
@@ -106,11 +106,11 @@ export const SITE_FAQ_GROUPS: SiteFaqGroup[] = [
       },
       {
         q: "Is training included?",
-        a: "Yes, and it is run per role rather than as one long session. Front office, teachers, accounts and leadership each learn their own panel, which is the whole point of role-based panels — the training is short because the screen matches the job.",
+        a: "Yes, and it is run per role rather than as one long session. Front office, teachers, accounts and leadership each learn their own panel, which is the whole point of role-based panels  the training is short because the screen matches the job.",
       },
       {
         q: "What happens mid-session if we join late?",
-        a: "Schools do join mid-session. We start with the modules that give immediate relief — usually student records, attendance and fees — and bring the rest in over the following weeks rather than pausing the school year.",
+        a: "Schools do join mid-session. We start with the modules that give immediate relief  usually student records, attendance and fees  and bring the rest in over the following weeks rather than pausing the school year.",
       },
     ],
   },
@@ -170,7 +170,7 @@ export const SITE_FAQ_GROUPS: SiteFaqGroup[] = [
       },
       {
         q: "Is there an API?",
-        a: "Yes — versioned REST endpoints with managed, scoped API keys rather than a shared staff login, plus webhooks for live events such as a confirmed payment. Documentation is at /integrations/api-docs.",
+        a: "Yes  versioned REST endpoints with managed, scoped API keys rather than a shared staff login, plus webhooks for live events such as a confirmed payment. Documentation is at /integrations/api-docs.",
       },
       {
         q: "Which browsers are supported?",
@@ -190,7 +190,7 @@ export const SITE_FAQ_GROUPS: SiteFaqGroup[] = [
       },
       {
         q: "Is support built into the product?",
-        a: "Yes. Support Ticket Management is a module, so a raised issue carries context — which school, which module, which user — instead of arriving as an ambiguous email. Organisations can also raise tickets at group level.",
+        a: "Yes. Support Ticket Management is a module, so a raised issue carries context  which school, which module, which user  instead of arriving as an ambiguous email. Organisations can also raise tickets at group level.",
       },
       {
         q: "What are your support hours?",
@@ -198,7 +198,7 @@ export const SITE_FAQ_GROUPS: SiteFaqGroup[] = [
       },
       {
         q: "How do we report a bug?",
-        a: "Raise a support ticket in the product or email support@kiduart.com. Include the module and what you expected — with role-based panels, the same action can look different depending on who performed it.",
+        a: "Raise a support ticket in the product or email support@kiduart.com. Include the module and what you expected  with role-based panels, the same action can look different depending on who performed it.",
       },
     ],
   },

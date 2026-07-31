@@ -1,14 +1,23 @@
-import { ACCENTS, type AccentName } from "@/components/product/ProductPrimitives";
+import {
+  ACCENTS,
+  type AccentName,
+} from "@/components/product/ProductPrimitives";
 import type { PanelLayout } from "@/data/productPanels";
 import { cn } from "@/lib/utils";
 
 /**
- * Decorative, code-drawn preview of each role panel. Purely illustrative — it is
+ * Decorative, code-drawn preview of each role panel. Purely illustrative  it is
  * hidden from assistive tech and carries no copy, so it can never contradict the
  * product while still giving every panel page its own visual signature.
  */
 
-function Line({ w = "w-full", tone = "bg-brand-navy/[0.12]" }: { w?: string; tone?: string }) {
+function Line({
+  w = "w-full",
+  tone = "bg-brand-navy/[0.12]",
+}: {
+  w?: string;
+  tone?: string;
+}) {
   return <span className={cn("block h-2 rounded-full", w, tone)} />;
 }
 
@@ -25,9 +34,17 @@ function Row({ accentBar }: { accentBar: string }) {
   );
 }
 
-function Tile({ accentBar, tall = false }: { accentBar: string; tall?: boolean }) {
+function Tile({
+  accentBar,
+  tall = false,
+}: {
+  accentBar: string;
+  tall?: boolean;
+}) {
   return (
-    <div className={cn("rounded-2xl bg-white p-3 shadow-sm", tall && "row-span-2")}>
+    <div
+      className={cn("rounded-2xl bg-white p-3 shadow-sm", tall && "row-span-2")}
+    >
       <span className={cn("block h-5 w-5 rounded-lg", accentBar)} />
       <span className="mt-3 block h-4 w-12 rounded-full bg-brand-navy/[0.16]" />
       <span className="mt-2 block h-2 w-16 rounded-full bg-brand-navy/[0.08]" />
@@ -56,8 +73,18 @@ function Bars({ accentBar }: { accentBar: string }) {
 function Sparkline({ accentBar }: { accentBar: string }) {
   return (
     <div className="relative h-20 overflow-hidden rounded-xl bg-brand-navy/[0.04]">
-      <span className={cn("absolute bottom-0 left-0 h-1 w-full", accentBar, "opacity-30")} />
-      <svg viewBox="0 0 200 60" className="h-full w-full" preserveAspectRatio="none">
+      <span
+        className={cn(
+          "absolute bottom-0 left-0 h-1 w-full",
+          accentBar,
+          "opacity-30",
+        )}
+      />
+      <svg
+        viewBox="0 0 200 60"
+        className="h-full w-full"
+        preserveAspectRatio="none"
+      >
         <polyline
           points="0,48 30,40 60,44 90,26 120,30 150,14 200,8"
           fill="none"
@@ -79,7 +106,11 @@ function CalendarGrid({ accentBar }: { accentBar: string }) {
           key={index}
           className={cn(
             "h-5 rounded-md",
-            index % 7 === 3 ? accentBar : index % 5 === 0 ? "bg-brand-navy/[0.16]" : "bg-brand-navy/[0.06]",
+            index % 7 === 3
+              ? accentBar
+              : index % 5 === 0
+                ? "bg-brand-navy/[0.16]"
+                : "bg-brand-navy/[0.06]",
           )}
         />
       ))}
@@ -91,14 +122,19 @@ function CheckList({ accentBar }: { accentBar: string }) {
   return (
     <div className="space-y-2">
       {Array.from({ length: 5 }).map((_, index) => (
-        <div key={index} className="flex items-center gap-3 rounded-xl bg-white px-3 py-2 shadow-sm">
+        <div
+          key={index}
+          className="flex items-center gap-3 rounded-xl bg-white px-3 py-2 shadow-sm"
+        >
           <span className="flex-1 space-y-1.5">
             <Line w="w-2/3" />
           </span>
           <span
             className={cn(
               "h-5 w-5 rounded-full",
-              index < 3 ? accentBar : "border-2 border-brand-navy/[0.16] bg-transparent",
+              index < 3
+                ? accentBar
+                : "border-2 border-brand-navy/[0.16] bg-transparent",
             )}
           />
         </div>
@@ -112,8 +148,13 @@ function CampusNodes({ accentBar }: { accentBar: string }) {
     <div className="relative rounded-2xl bg-white p-4 shadow-sm">
       <div className="grid grid-cols-4 gap-3">
         {Array.from({ length: 4 }).map((_, index) => (
-          <div key={index} className="rounded-xl bg-brand-beige/40 p-2 text-center">
-            <span className={cn("mx-auto block h-6 w-6 rounded-md", accentBar)} />
+          <div
+            key={index}
+            className="rounded-xl bg-brand-beige/40 p-2 text-center"
+          >
+            <span
+              className={cn("mx-auto block h-6 w-6 rounded-md", accentBar)}
+            />
             <span className="mx-auto mt-2 block h-2 w-8 rounded-full bg-brand-navy/[0.14]" />
           </div>
         ))}
@@ -155,7 +196,10 @@ function ToggleStack({ accentBar }: { accentBar: string }) {
   return (
     <div className="space-y-2.5">
       {Array.from({ length: 4 }).map((_, index) => (
-        <div key={index} className="flex items-center justify-between rounded-xl bg-white px-3 py-2.5 shadow-sm">
+        <div
+          key={index}
+          className="flex items-center justify-between rounded-xl bg-white px-3 py-2.5 shadow-sm"
+        >
           <span className="flex-1 space-y-1.5 pr-4">
             <Line w="w-2/3" />
             <Line w="w-1/3" tone="bg-brand-navy/[0.07]" />
@@ -166,7 +210,12 @@ function ToggleStack({ accentBar }: { accentBar: string }) {
               index % 2 === 0 ? accentBar : "bg-brand-navy/[0.14]",
             )}
           >
-            <span className={cn("h-4 w-4 rounded-full bg-white", index % 2 === 0 && "ml-auto")} />
+            <span
+              className={cn(
+                "h-4 w-4 rounded-full bg-white",
+                index % 2 === 0 && "ml-auto",
+              )}
+            />
           </span>
         </div>
       ))}
@@ -183,7 +232,10 @@ function PhoneCard({ accentBar }: { accentBar: string }) {
         {Array.from({ length: 15 }).map((_, index) => (
           <span
             key={index}
-            className={cn("h-3 rounded", index % 6 === 2 ? accentBar : "bg-brand-navy/[0.08]")}
+            className={cn(
+              "h-3 rounded",
+              index % 6 === 2 ? accentBar : "bg-brand-navy/[0.08]",
+            )}
           />
         ))}
       </div>

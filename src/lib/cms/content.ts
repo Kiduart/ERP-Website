@@ -226,5 +226,7 @@ export async function getCmsCareersPage(options: CmsFetchOptions = {}): Promise<
 
 export function getBlogHeroImage(post: BlogListingPost, index: number): string {
   const imageUrl = (post as BlogListingPost & { imageUrl?: string }).imageUrl;
-  return imageUrl || BLOG_POST_IMAGES[index % BLOG_POST_IMAGES.length];
+  if (imageUrl) return imageUrl;
+  if (post.coverImage) return post.coverImage;
+  return BLOG_POST_IMAGES[index % BLOG_POST_IMAGES.length];
 }

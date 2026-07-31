@@ -7,6 +7,7 @@ import { moduleFeaturePageSeo } from "@/lib/pageSeo";
 import { buildBreadcrumbSchema, buildItemListSchema } from "@/lib/seoSchemas";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
 import { CtaSection } from "@/components/ui/CtaSection";
+import { Stagger } from "@/components/ui/Stagger";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { ProductIcon } from "@/components/product/ProductIcon";
 import { CapabilitySheetRequest } from "@/components/product/CapabilitySheetRequest";
@@ -18,9 +19,16 @@ import {
   type AccentName,
 } from "@/components/product/ProductPrimitives";
 import type { PublicModule } from "@/data/featureMatrix";
-import { MATRIX_CATEGORIES, getMatrixCategory, toPublicModule } from "@/data/featureMatrix";
+import {
+  MATRIX_CATEGORIES,
+  MODULE_PAGE_FEATURE_SAMPLE,
+  getMatrixCategory,
+  toPublicModule,
+} from "@/data/featureMatrix";
+import { featureDetail } from "@/data/featureCopy";
 import { AREA_NARRATIVE_BY_SLUG } from "@/data/productNarrative";
 import { PANEL_BY_SLUG } from "@/data/productPanels";
+import { onSmoothHashClick } from "@/lib/smoothScroll";
 
 type ModulePageProps = {
   area: { slug: string; label: string; stage: string; icon: string; accent: AccentName };
@@ -107,9 +115,11 @@ export default function FeatureModule({ area, productModule, counts, siblings, p
                   {productModule.hiddenFeatureCount > 0 && (
                     <a
                       href="#capability-sheet"
-                      className="inline-flex items-center justify-center gap-2 rounded-full border border-brand-navy/[0.14] bg-white px-7 py-3.5 text-base font-bold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
+                      onClick={(event) => onSmoothHashClick(event)}
+                      className="capability-cue inline-flex items-center justify-center gap-2 rounded-full border border-dashed border-brand-teal/45 bg-brand-teal/[0.06] px-7 py-3.5 text-base font-bold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
                     >
                       Request the full sheet
+                      <ArrowRight className="capability-cue-arrow h-4 w-4 text-brand-teal" aria-hidden="true" />
                     </a>
                   )}
                 </div>
@@ -204,11 +214,15 @@ export default function FeatureModule({ area, productModule, counts, siblings, p
                     </div>
                   </div>
 
-                  <ul className="grid gap-2.5 p-6 sm:grid-cols-2 md:p-8">
+                  <Stagger
+                    as="ul"
+                    className="grid gap-2.5 p-6 sm:grid-cols-1 md:grid-cols-2 md:p-8"
+                    itemClassName="motion-stamp"
+                  >
                     {subModule.features.map((feature) => (
                       <li
                         key={`${subModule.slug}-${feature.name}`}
-                        className="flex items-start gap-3 rounded-2xl bg-brand-beige/25 px-4 py-3"
+                        className="flex items-start gap-3 rounded-2xl bg-brand-beige/25 px-4 py-3.5"
                       >
                         <span
                           className={`mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${tokens.softBg}`}
@@ -216,17 +230,25 @@ export default function FeatureModule({ area, productModule, counts, siblings, p
                         >
                           <Check className={`h-3 w-3 ${tokens.text}`} />
                         </span>
-                        <span className="text-sm leading-6 text-brand-navy/[0.84]">
-                          {feature.name}
+                        <span className="min-w-0">
+                          <span className="block text-sm font-semibold leading-5 text-brand-navy">
+                            {feature.name}
+                          </span>
+                          <span className="mt-1 block text-sm leading-6 text-brand-navy/[0.74]">
+                            {featureDetail(feature.name, {
+                              subModule: subModule.name,
+                              moduleName: productModule.name,
+                            })}
+                          </span>
                         </span>
                       </li>
                     ))}
                     {subModule.hiddenFeatureCount > 0 && (
-                      <li className="sm:col-span-2">
+                      <li className="sm:col-span-1 md:col-span-2">
                         <HiddenCapabilitiesLink label={`in ${subModule.name}`} />
                       </li>
                     )}
-                  </ul>
+                  </Stagger>
                   </SectionReveal>
                 </div>
               ))}
@@ -250,7 +272,7 @@ export default function FeatureModule({ area, productModule, counts, siblings, p
               <SectionReveal className="rounded-[2rem] border border-brand-navy/[0.1] bg-brand-beige/20 p-6 md:p-8">
                 <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-teal">Same area</p>
                 <h2 className="mt-2 text-2xl font-bold text-brand-navy">Other modules in {area.label}</h2>
-                <ul className="mt-5 space-y-2.5">
+                <Stagger as="ul" className="mt-5 space-y-2.5" itemClassName="motion-lane">
                   {siblings.map((sibling) => (
                     <li key={sibling.slug}>
                       <Link
@@ -264,7 +286,7 @@ export default function FeatureModule({ area, productModule, counts, siblings, p
                       </Link>
                     </li>
                   ))}
-                </ul>
+                </Stagger>
                 <Link
                   href={`/features/${area.slug}`}
                   className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand-navy px-5 py-2.5 text-sm font-bold text-brand-beige transition-colors hover:bg-brand-teal"
@@ -335,7 +357,7 @@ export const getStaticProps: GetStaticProps<ModulePageProps> = async (context) =
         icon: narrative.icon,
         accent: narrative.accent,
       },
-      productModule: toPublicModule(matrixModule),
+      productModule: toPublicModule(matrixModule, MODULE_PAGE_FEATURE_SAMPLE),
       counts: {
         features: matrixModule.featureCount,
         subModules: matrixModule.subModules.length,

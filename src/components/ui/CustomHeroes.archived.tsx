@@ -1,10 +1,15 @@
 /**
- * Archived hero layouts — not imported by any page (kept for reference / future reuse).
+ * Archived hero layouts  not imported by any page (kept for reference / future reuse).
  * Active heroes live in CustomHeroes.tsx and HeroSection.tsx.
  */
 import { ReactNode } from "react";
 import { SectionReveal } from "@/components/ui/PageTransition";
-import { heroImageAlt, heroImgProps, IMAGE_DIMENSIONS, lazyImgProps } from "@/lib/imageSeo";
+import {
+  heroImageAlt,
+  heroImgProps,
+  IMAGE_DIMENSIONS,
+  lazyImgProps,
+} from "@/lib/imageSeo";
 import { cn } from "@/lib/utils";
 
 type BaseProps = {
@@ -25,7 +30,9 @@ export function SoftImageHero({
   className,
 }: BaseProps) {
   return (
-    <section className={cn("relative overflow-hidden bg-[#f4f3ef] py-24", className)}>
+    <section
+      className={cn("relative overflow-hidden bg-[#f4f3ef] py-24", className)}
+    >
       <div className="page-shell relative z-10">
         <div className="grid items-center gap-12 overflow-hidden rounded-[2.5rem] bg-white p-8 shadow-[0_24px_70px_rgba(0,48,73,0.08)] lg:grid-cols-[0.9fr_1.1fr] lg:p-12">
           <SectionReveal>
@@ -40,7 +47,11 @@ export function SoftImageHero({
             <p className="mt-5 max-w-lg text-[clamp(1rem,0.95rem+0.14vw,1.05rem)] leading-8 text-brand-navy/[0.72]">
               {subtitle}
             </p>
-            {actions && <div className="mt-8 flex flex-col gap-4 sm:flex-row">{actions}</div>}
+            {actions && (
+              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                {actions}
+              </div>
+            )}
           </SectionReveal>
 
           <SectionReveal delay={0.08} className="relative">
@@ -75,7 +86,12 @@ export function EditorialMusicHero({
   className,
 }: BaseProps) {
   return (
-    <section className={cn("relative overflow-hidden bg-[#eef0eb] py-20 lg:py-24", className)}>
+    <section
+      className={cn(
+        "relative overflow-hidden bg-[#eef0eb] py-20 lg:py-24",
+        className,
+      )}
+    >
       <div className="page-shell relative z-10">
         <div className="grid items-center gap-10 overflow-hidden rounded-[2rem] bg-[#f7f8f4] p-8 shadow-[0_24px_80px_rgba(0,48,73,0.08)] lg:grid-cols-[0.9fr_1.1fr] lg:p-12">
           <SectionReveal>
@@ -87,7 +103,9 @@ export function EditorialMusicHero({
             <h1 className="mt-6 max-w-md text-[clamp(2.2rem,1.6rem+1.7vw,4rem)] font-bold leading-[0.98] text-brand-navy">
               {title}
             </h1>
-            <p className="mt-5 max-w-md text-base leading-8 text-brand-navy/[0.68]">{subtitle}</p>
+            <p className="mt-5 max-w-md text-base leading-8 text-brand-navy/[0.68]">
+              {subtitle}
+            </p>
             <div className="mt-8 max-w-md overflow-hidden rounded-full bg-white p-2 shadow-lg shadow-brand-navy/10">
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                 <input
@@ -100,10 +118,17 @@ export function EditorialMusicHero({
                 </button>
               </div>
             </div>
-            {actions && <div className="mt-6 flex flex-col gap-4 sm:flex-row">{actions}</div>}
+            {actions && (
+              <div className="mt-6 flex flex-col gap-4 sm:flex-row">
+                {actions}
+              </div>
+            )}
           </SectionReveal>
 
-          <SectionReveal delay={0.08} className="relative min-h-[20rem] lg:min-h-[28rem]">
+          <SectionReveal
+            delay={0.08}
+            className="relative min-h-[20rem] lg:min-h-[28rem]"
+          >
             <div className="absolute left-0 top-10 h-[2px] w-full bg-brand-navy/[0.12]" />
             <div className="absolute left-0 top-20 h-[2px] w-full bg-brand-navy/10" />
             <div className="absolute left-0 top-32 h-[2px] w-full bg-brand-navy/[0.08]" />
@@ -114,7 +139,13 @@ export function EditorialMusicHero({
               "right-[3%] top-[34%]",
               "right-[18%] top-[52%]",
             ].map((position, idx) => (
-              <div key={idx} className={cn("absolute h-14 w-14 overflow-hidden rounded-full border-[4px] border-white shadow-lg", position)}>
+              <div
+                key={idx}
+                className={cn(
+                  "absolute h-14 w-14 overflow-hidden rounded-full border-[4px] border-white shadow-lg",
+                  position,
+                )}
+              >
                 <img
                   src={image}
                   alt=""
@@ -160,7 +191,9 @@ export function TeamPanelsHero({
   ];
 
   return (
-    <section className={cn("relative overflow-hidden bg-[#fbf5e8] py-20", className)}>
+    <section
+      className={cn("relative overflow-hidden bg-[#fbf5e8] py-20", className)}
+    >
       <div className="page-shell relative z-10 text-center">
         {eyebrow && (
           <div className="inline-flex rounded-full bg-brand-beige px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-brand-teal">
@@ -171,12 +204,17 @@ export function TeamPanelsHero({
           <h1 className="mx-auto mt-6 max-w-3xl text-[clamp(2rem,1.5rem+1.5vw,3.5rem)] font-bold leading-[1.02] text-brand-navy">
             {title}
           </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-8 text-brand-navy/65">{subtitle}</p>
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-8 text-brand-navy/65">
+            {subtitle}
+          </p>
         </SectionReveal>
 
         {actions && <div className="mt-8 flex justify-center">{actions}</div>}
 
-        <SectionReveal delay={0.08} className="mx-auto mt-14 grid max-w-6xl gap-5 md:grid-cols-5">
+        <SectionReveal
+          delay={0.08}
+          className="mx-auto mt-14 grid max-w-6xl gap-5 md:grid-cols-5"
+        >
           {panelImages.map((panelImage, idx) => (
             <div
               key={idx}
@@ -196,9 +234,20 @@ export function TeamPanelsHero({
               />
               <div className="px-4 py-5 text-left">
                 <div className="text-sm font-bold text-brand-navy">
-                  {["Real-Time Collaboration", "Task & Project Tracking", "Performance Insights", "School Coordination", "Leadership Visibility"][idx]}
+                  {
+                    [
+                      "Real-Time Collaboration",
+                      "Task & Project Tracking",
+                      "Performance Insights",
+                      "School Coordination",
+                      "Leadership Visibility",
+                    ][idx]
+                  }
                 </div>
-                <p className="mt-2 text-xs leading-5 text-brand-navy/55">Built to show outcomes, workflows, and daily impact for every team member.</p>
+                <p className="mt-2 text-xs leading-5 text-brand-navy/55">
+                  Built to show outcomes, workflows, and daily impact for every
+                  team member.
+                </p>
               </div>
             </div>
           ))}
@@ -217,7 +266,9 @@ export function PlayfulSplitHero({
   className,
 }: BaseProps) {
   return (
-    <section className={cn("relative overflow-hidden bg-[#fbfaf3] py-20", className)}>
+    <section
+      className={cn("relative overflow-hidden bg-[#fbfaf3] py-20", className)}
+    >
       <div className="absolute inset-0 opacity-50">
         <div className="absolute left-[8%] top-[18%] h-6 w-6 rounded-full bg-brand-navy/[0.08]" />
         <div className="absolute left-[18%] top-[44%] h-4 w-4 rounded-full bg-brand-orange/20" />
@@ -234,8 +285,14 @@ export function PlayfulSplitHero({
           <h1 className="mt-6 max-w-xl text-[clamp(2.1rem,1.5rem+1.7vw,3.7rem)] font-bold leading-[1.02] text-brand-navy">
             {title}
           </h1>
-          <p className="mt-5 max-w-lg text-base leading-8 text-brand-navy/[0.66]">{subtitle}</p>
-          {actions && <div className="mt-8 flex flex-col gap-4 sm:flex-row">{actions}</div>}
+          <p className="mt-5 max-w-lg text-base leading-8 text-brand-navy/[0.66]">
+            {subtitle}
+          </p>
+          {actions && (
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+              {actions}
+            </div>
+          )}
         </SectionReveal>
 
         <SectionReveal delay={0.08} className="relative">
@@ -265,7 +322,9 @@ export function PricingShowcaseHero({
   className,
 }: Pick<BaseProps, "eyebrow" | "title" | "subtitle" | "className">) {
   return (
-    <section className={cn("relative overflow-hidden bg-[#dfe8c9] py-20", className)}>
+    <section
+      className={cn("relative overflow-hidden bg-[#dfe8c9] py-20", className)}
+    >
       <div className="page-shell relative z-10 text-center">
         {eyebrow && (
           <div className="inline-flex rounded-full bg-white/65 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-brand-teal">
@@ -273,24 +332,72 @@ export function PricingShowcaseHero({
           </div>
         )}
         <SectionReveal>
-          <h1 className="mt-6 text-[clamp(2rem,1.5rem+1.3vw,3.1rem)] font-bold leading-[1.04] text-brand-navy">{title}</h1>
-          <p className="mx-auto mt-4 max-w-2xl text-base leading-8 text-brand-navy/65">{subtitle}</p>
+          <h1 className="mt-6 text-[clamp(2rem,1.5rem+1.3vw,3.1rem)] font-bold leading-[1.04] text-brand-navy">
+            {title}
+          </h1>
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-8 text-brand-navy/65">
+            {subtitle}
+          </p>
         </SectionReveal>
 
-        <SectionReveal delay={0.08} className="mx-auto mt-14 grid max-w-5xl gap-6 md:grid-cols-3">
+        <SectionReveal
+          delay={0.08}
+          className="mx-auto mt-14 grid max-w-5xl gap-6 md:grid-cols-3"
+        >
           {[
-            { name: "Starter Plan", price: "$14", tone: "bg-white text-brand-navy" },
-            { name: "Basic Plan", price: "$29", tone: "bg-[#123b1d] text-white scale-[1.03]" },
-            { name: "Premium Plan", price: "$139", tone: "bg-white text-brand-navy" },
+            {
+              name: "Starter Plan",
+              price: "$14",
+              tone: "bg-white text-brand-navy",
+            },
+            {
+              name: "Basic Plan",
+              price: "$29",
+              tone: "bg-[#123b1d] text-white scale-[1.03]",
+            },
+            {
+              name: "Premium Plan",
+              price: "$139",
+              tone: "bg-white text-brand-navy",
+            },
           ].map((plan) => (
-            <div key={plan.name} className={cn("rounded-[1.75rem] p-8 shadow-[0_20px_50px_rgba(0,48,73,0.08)]", plan.tone)}>
+            <div
+              key={plan.name}
+              className={cn(
+                "rounded-[1.75rem] p-8 shadow-[0_20px_50px_rgba(0,48,73,0.08)]",
+                plan.tone,
+              )}
+            >
               <div className="text-lg font-semibold">{plan.name}</div>
               <div className="mt-5 text-5xl font-bold">{plan.price}</div>
-              <div className={cn("mt-2 text-sm", plan.name === "Basic Plan" ? "text-white/[0.72]" : "text-brand-navy/55")}>per user per month</div>
-              <button className={cn("mt-8 rounded-full px-6 py-3 text-sm font-bold", plan.name === "Basic Plan" ? "bg-white text-[#123b1d]" : "bg-brand-beige text-brand-navy")}>
+              <div
+                className={cn(
+                  "mt-2 text-sm",
+                  plan.name === "Basic Plan"
+                    ? "text-white/[0.72]"
+                    : "text-brand-navy/55",
+                )}
+              >
+                per user per month
+              </div>
+              <button
+                className={cn(
+                  "mt-8 rounded-full px-6 py-3 text-sm font-bold",
+                  plan.name === "Basic Plan"
+                    ? "bg-white text-[#123b1d]"
+                    : "bg-brand-beige text-brand-navy",
+                )}
+              >
                 Join Membership
               </button>
-              <div className={cn("mt-8 space-y-3 text-sm", plan.name === "Basic Plan" ? "text-white/[0.72]" : "text-brand-navy/60")}>
+              <div
+                className={cn(
+                  "mt-8 space-y-3 text-sm",
+                  plan.name === "Basic Plan"
+                    ? "text-white/[0.72]"
+                    : "text-brand-navy/60",
+                )}
+              >
                 <div>Unlimited operations</div>
                 <div>Attendance and communication</div>
                 <div>Weekly reports included</div>
@@ -312,18 +419,28 @@ export function AgencySplitHero({
   className,
 }: BaseProps) {
   return (
-    <section className={cn("relative overflow-hidden bg-[#f8f8f6] py-20", className)}>
+    <section
+      className={cn("relative overflow-hidden bg-[#f8f8f6] py-20", className)}
+    >
       <div className="page-shell relative z-10 grid items-center gap-10 lg:grid-cols-[0.95fr_1.05fr]">
         <SectionReveal>
           {eyebrow && (
-            <div className="text-xs font-semibold uppercase tracking-[0.32em] text-brand-teal/75">{eyebrow}</div>
+            <div className="text-xs font-semibold uppercase tracking-[0.32em] text-brand-teal/75">
+              {eyebrow}
+            </div>
           )}
           <h1 className="mt-6 max-w-lg text-[clamp(2.1rem,1.5rem+1.7vw,3.7rem)] font-bold leading-[1.02] text-brand-navy">
             {title}
           </h1>
           <div className="mt-5 h-1 w-16 rounded-full bg-brand-teal" />
-          <p className="mt-6 max-w-lg text-base leading-8 text-brand-navy/65">{subtitle}</p>
-          {actions && <div className="mt-8 flex flex-col gap-4 sm:flex-row">{actions}</div>}
+          <p className="mt-6 max-w-lg text-base leading-8 text-brand-navy/65">
+            {subtitle}
+          </p>
+          {actions && (
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+              {actions}
+            </div>
+          )}
         </SectionReveal>
 
         <SectionReveal delay={0.08} className="relative">
@@ -368,9 +485,17 @@ export function TechBackdropHero({
               {eyebrow}
             </div>
           )}
-          <h1 className="mt-6 text-[clamp(2.1rem,1.5rem+1.6vw,3.5rem)] font-bold leading-[1.02]">{title}</h1>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-white/[0.78]">{subtitle}</p>
-          {actions && <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">{actions}</div>}
+          <h1 className="mt-6 text-[clamp(2.1rem,1.5rem+1.6vw,3.5rem)] font-bold leading-[1.02]">
+            {title}
+          </h1>
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-white/[0.78]">
+            {subtitle}
+          </p>
+          {actions && (
+            <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              {actions}
+            </div>
+          )}
         </SectionReveal>
       </div>
     </section>

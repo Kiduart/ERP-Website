@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { ArrowLeft, Home, LifeBuoy } from "lucide-react";
 import { Link } from "wouter";
+import { Stagger } from "@/components/ui/Stagger";
 import { PageTransition } from "@/components/ui/PageTransition";
 
 export default function NotFound() {
@@ -27,7 +28,10 @@ export default function NotFound() {
           yet. The good news is the rest of the site is still awake and ready to help.
         </p>
 
-        <div className="mx-auto mt-10 grid max-w-3xl gap-4 text-left sm:grid-cols-3">
+        <Stagger
+          className="mx-auto mt-10 grid max-w-3xl gap-4 text-left sm:grid-cols-3"
+          itemClassName="motion-brick"
+        >
           <button
             type="button"
             onClick={() => router.back()}
@@ -55,7 +59,7 @@ export default function NotFound() {
             <p className="mt-4 text-sm font-semibold text-white">Help center</p>
             <p className="mt-2 text-sm leading-6 text-white/55">Open support resources and guided answers.</p>
           </Link>
-        </div>
+        </Stagger>
 
         <p className="mt-10 text-sm text-white/45">
           If this keeps happening, reach out through the contact page and we&apos;ll fix the route.

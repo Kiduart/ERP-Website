@@ -3,6 +3,7 @@ import { SchemaMarkup } from "@/components/seo/SchemaMarkup";
 import { pageSeo } from "@/lib/pageSeo";
 import { buildCareersFaqSchema, buildInternJobPostingSchema } from "@/lib/seoSchemas";
 import { bannerAltFromSrc, heroImgProps, IMAGE_DIMENSIONS } from "@/lib/imageSeo";
+import { Stagger } from "@/components/ui/Stagger";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CtaSection } from "@/components/ui/CtaSection";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
@@ -112,20 +113,20 @@ export default function Careers({
         />
         <FloatingIcons icons={["Heart", "Rocket", "BookOpen"]} count={4} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid md:grid-cols-3 gap-8">
+          <Stagger className="grid md:grid-cols-3 gap-8" itemClassName="motion-stamp">
             {values.map((item, idx) => {
               const Icon = careersIconMap[item.icon] ?? BookOpen;
               return (
-              <SectionReveal key={idx} delay={idx * 0.1} className="bg-white p-8 rounded-3xl shadow-lg border border-brand-navy/5 text-center">
+              <div key={idx} className="bg-white p-8 rounded-3xl shadow-lg border border-brand-navy/5 text-center">
                 <div className="w-16 h-16 rounded-2xl bg-brand-teal/10 flex items-center justify-center mx-auto mb-6">
                   <Icon className="w-8 h-8 text-brand-teal" />
                 </div>
                 <h3 className="text-2xl font-bold text-brand-navy mb-4">{item.title}</h3>
                 <p className="text-brand-navy/70">{item.desc}</p>
-              </SectionReveal>
+              </div>
             );
             })}
-          </div>
+          </Stagger>
         </div>
       </section>
 
@@ -213,11 +214,11 @@ export default function Careers({
             <p className="mx-auto mt-4 max-w-2xl text-brand-navy/70">{campaign.intro}</p>
           </SectionReveal>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {internRoles.map((role, index) => {
+          <Stagger className="mt-10 grid gap-6 md:grid-cols-3" itemClassName="motion-brick">
+            {internRoles.map((role) => {
               const Icon = internRoleIcons[role.id as keyof typeof internRoleIcons] ?? Rocket;
               return (
-                <SectionReveal key={role.id} delay={index * 0.08} className="flex h-full flex-col rounded-3xl border border-brand-navy/10 bg-white p-7 shadow-lg shadow-brand-navy/5">
+                <div key={role.id} className="flex h-full flex-col rounded-3xl border border-brand-navy/10 bg-white p-7 shadow-lg shadow-brand-navy/5">
                   <div className="mb-5 flex items-center justify-between gap-3">
                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-teal/10">
                       <Icon className="h-6 w-6 text-brand-teal" />
@@ -246,10 +247,10 @@ export default function Careers({
                   >
                     Apply for this role
                   </a>
-                </SectionReveal>
+                </div>
               );
             })}
-          </div>
+          </Stagger>
 
           <SectionReveal className="mt-10 rounded-[1.75rem] border border-brand-navy/10 bg-white p-8 text-center shadow-lg shadow-brand-navy/5">
             <h3 className="text-2xl font-bold text-brand-navy">{openRoles.stateTitle}</h3>

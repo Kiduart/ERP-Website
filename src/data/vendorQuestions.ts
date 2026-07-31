@@ -38,7 +38,7 @@ export const VENDOR_QUESTIONS: VendorQuestion[] = [
     question: "On the day we leave, can we take everything with us?",
     risk: "Export is where lock-in hides. Some contracts allow only PDFs, some charge a migration fee, and some simply stop responding once you give notice.",
     answer:
-      "Student records, fee ledgers, attendance and academic data export in CSV, Excel and PDF whenever you ask — including on the way out — and we remove your data after the agreed wind-down window.",
+      "Student records, fee ledgers, attendance and academic data export in CSV, Excel and PDF whenever you ask  including on the way out  and we remove your data after the agreed wind-down window.",
     verify: { label: "Read the data terms", href: "/privacy-policy" },
   },
   {
@@ -54,7 +54,7 @@ export const VENDOR_QUESTIONS: VendorQuestion[] = [
     question: "Who can open marks, fee ledgers and staff salaries?",
     risk: "Many school systems ship one all-powerful admin login that the whole office ends up sharing, so salary and exam data are one click away from anyone at the front desk.",
     answer:
-      "Access is decided by role, not by trust. Permissions are explicit per role, can only be delegated downward, and each role gets its own panel — an accountant never lands on exam marks.",
+      "Access is decided by role, not by trust. Permissions are explicit per role, can only be delegated downward, and each role gets its own panel  an accountant never lands on exam marks.",
     verify: { label: "See the role panels", href: "/platform" },
   },
   {
@@ -68,7 +68,7 @@ export const VENDOR_QUESTIONS: VendorQuestion[] = [
   {
     id: "audit",
     question: "Can someone quietly change a mark or waive a fee?",
-    risk: "Without a real audit trail, a disputed mark or a written-off fee becomes one person's word against another's — and logs that can be edited prove nothing.",
+    risk: "Without a real audit trail, a disputed mark or a written-off fee becomes one person's word against another's  and logs that can be edited prove nothing.",
     answer:
       "Logins, permission changes and financial events are written to an audit log, and audit records are chained to the record before them so tampering is detectable rather than silent.",
     verify: { label: "See the audit layer", href: "/security" },
@@ -84,7 +84,7 @@ export const VENDOR_QUESTIONS: VendorQuestion[] = [
   {
     id: "india-fit",
     question: "Does it work the way an Indian school actually runs?",
-    risk: "Software built for another market forces your school to fit its shape — no session-wise structure, no fee concessions, no transfer certificate, and parent updates on channels families do not use.",
+    risk: "Software built for another market forces your school to fit its shape  no session-wise structure, no fee concessions, no transfer certificate, and parent updates on channels families do not use.",
     answer:
       "Academic sessions, classes and sections, fee heads with concessions, transfer certificates, transport routes, hostel and library all ship as first-class modules, and parents hear from the school over WhatsApp, SMS and email.",
     verify: { label: "See the academic modules", href: "/features/academic" },

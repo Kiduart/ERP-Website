@@ -8,9 +8,16 @@ import { SITE_ORIGIN } from "@/components/seo/PageSeoHead";
 import { buildBreadcrumbSchema, buildItemListSchema } from "@/lib/seoSchemas";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
 import { CtaSection } from "@/components/ui/CtaSection";
+import { InView } from "@/components/ui/InView";
+import { Stagger } from "@/components/ui/Stagger";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { ProductIcon } from "@/components/product/ProductIcon";
-import { ACCENTS, SectionHeading, StatChip, type AccentName } from "@/components/product/ProductPrimitives";
+import {
+  ACCENTS,
+  SectionHeading,
+  StatChip,
+  type AccentName,
+} from "@/components/product/ProductPrimitives";
 import { MATRIX_TOTALS } from "@/data/featureMatrix";
 import { PRODUCT_PERSONAS } from "@/data/productPersonas";
 
@@ -56,10 +63,10 @@ export default function Solutions({ personas, totals }: SolutionsPageProps) {
     <>
       <PageSeoHead
         title="School ERP Solutions by Role: Teachers, Parents, Finance, Admin | KIDUART"
-        description="Role-based school ERP solutions for school groups, principals, admin staff, academic coordinators, teachers, accountants, parents and students — with the daily challenges each one faces."
+        description="Role-based school ERP solutions for school groups, principals, admin staff, academic coordinators, teachers, accountants, parents and students  with the daily challenges each one faces."
         path="/solutions"
         ogImage={`${SITE_ORIGIN}/images/banner/solution-hero-1.jpg`}
-        keywords="school ERP for teachers, school ERP for parents, school ERP for accountants, school management software for principals, multi campus school software"
+        keywords="school ERP for teachers, school ERP for parents, school ERP for accountants, school management software for principals, multi campus school software, school ERP software India, parent portal for schools, cloud-based school ERP"
       />
       <SchemaMarkup
         data={[
@@ -69,7 +76,10 @@ export default function Solutions({ personas, totals }: SolutionsPageProps) {
           ]),
           buildItemListSchema(
             "KIDUART school ERP solutions by role",
-            personas.map((persona) => ({ name: persona.pageLabel, path: `/solutions/${persona.slug}` })),
+            personas.map((persona) => ({
+              name: persona.pageLabel,
+              path: `/solutions/${persona.slug}`,
+            })),
           ),
         ]}
       />
@@ -78,22 +88,34 @@ export default function Solutions({ personas, totals }: SolutionsPageProps) {
         <section className="relative overflow-hidden border-b border-brand-navy/[0.06] bg-white pb-14 pt-12 md:pb-20">
           <BackgroundBlobs
             blobs={[
-              { color: "#003049", size: 340, position: "top-left", opacity: 0.08 },
-              { color: "#f77f00", size: 300, position: "bottom-right", opacity: 0.1 },
+              {
+                color: "#003049",
+                size: 340,
+                position: "top-left",
+                opacity: 0.08,
+              },
+              {
+                color: "#f77f00",
+                size: 300,
+                position: "bottom-right",
+                opacity: 0.1,
+              },
             ]}
           />
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
-              <SectionReveal>
+              <SectionReveal instant>
                 <p className="section-kicker">Solutions by role</p>
                 <h1 className="mt-5 text-4xl font-bold leading-tight text-brand-navy md:text-5xl">
                   Eight roles, eight different jobs, one school platform
                 </h1>
                 <p className="mt-5 text-lg leading-8 text-brand-navy/[0.78]">
-                  A principal, an accountant and a class teacher have almost nothing in common in
-                  their daily work — so a single generic dashboard fails all three. Each page below
-                  starts from the problems that role actually reports, then names the module that
-                  removes it. Everything here is drawn from what KIDUART ships in the product today.
+                  A principal, an accountant and a class teacher have almost
+                  nothing in common in their daily work so a single generic
+                  dashboard fails all three. Each page below starts from the
+                  problems that role actually reports, then names the module
+                  that removes it. Everything here is drawn from what KIDUART
+                  ships in the product today.
                 </p>
                 <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                   <Link
@@ -112,9 +134,12 @@ export default function Solutions({ personas, totals }: SolutionsPageProps) {
                 </div>
               </SectionReveal>
 
-              <SectionReveal delay={0.1} className="grid grid-cols-2 gap-4">
+              <SectionReveal instant className="grid grid-cols-2 gap-4">
                 <StatChip value={personas.length} label="Role solutions" />
-                <StatChip value={`${totals.modules}+`} label="Business workflows" />
+                <StatChip
+                  value={`${totals.modules}+`}
+                  label="Business workflows"
+                />
                 <StatChip value={totals.categories} label="Functional areas" />
                 <StatChip value={0} label="Per-user charges" />
                 <div className="col-span-2 overflow-hidden rounded-[1.75rem] border border-brand-navy/[0.08]">
@@ -136,72 +161,88 @@ export default function Solutions({ personas, totals }: SolutionsPageProps) {
 
         <section className="section-space relative overflow-hidden bg-brand-beige/25">
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <SectionReveal>
+            <InView className="motion-rise" once>
               <SectionHeading
                 kicker="Pick the role you are buying for"
                 title="Start from the person who will use it every day"
                 description="Each role page lists the challenges that role reports, the modules that answer them, a typical day, and the panel they sign in to."
               />
-            </SectionReveal>
+            </InView>
 
-            <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-              {personas.map((persona, index) => {
+            <Stagger
+              className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4"
+              itemClassName="motion-lane h-full"
+            >
+              {personas.map((persona) => {
                 const tokens = ACCENTS[persona.accent];
                 return (
-                  <SectionReveal key={persona.slug} delay={Math.min(index * 0.04, 0.2)} className="h-full">
-                    <Link
-                      href={`/solutions/${persona.slug}`}
-                      className="group flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-brand-navy/[0.08] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand-teal/40"
-                    >
-                      <div className="relative aspect-[16/10] bg-brand-beige/40">
-                        <Image
-                          src={persona.image}
-                          alt={persona.imageAlt}
-                          fill
-                          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
-                          className="object-cover"
-                        />
-                      </div>
-                      <div className="flex flex-1 flex-col p-6">
-                        <span className="flex items-center gap-2.5">
-                          <span
-                            className={`inline-flex h-9 w-9 items-center justify-center rounded-xl ${tokens.softBg}`}
-                          >
-                            <ProductIcon name={persona.icon} className={`h-4 w-4 ${tokens.text}`} />
-                          </span>
-                          <span className="text-xs font-bold uppercase tracking-[0.16em] text-brand-navy/[0.74]">
-                            {persona.stage}
-                          </span>
+                  <Link
+                    key={persona.slug}
+                    href={`/solutions/${persona.slug}`}
+                    className="group flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-brand-navy/[0.08] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand-teal/40"
+                  >
+                    <div className="relative aspect-[16/10] bg-brand-beige/40">
+                      <Image
+                        src={persona.image}
+                        alt={persona.imageAlt}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 25vw"
+                        className="object-cover"
+                      />
+                    </div>
+                    <div className="flex flex-1 flex-col p-6">
+                      <span className="flex items-center gap-2.5">
+                        <span
+                          className={`inline-flex h-9 w-9 items-center justify-center rounded-xl ${tokens.softBg}`}
+                        >
+                          <ProductIcon
+                            name={persona.icon}
+                            className={`h-4 w-4 ${tokens.text}`}
+                          />
                         </span>
-                        <span className="mt-4 text-xl font-bold text-brand-navy">{persona.pageLabel}</span>
-                        <span className="mt-3 flex-grow text-sm leading-6 text-brand-navy/[0.78]">
-                          {persona.summary}
+                        <span className="text-xs font-bold uppercase tracking-[0.16em] text-brand-navy/[0.74]">
+                          {persona.stage}
                         </span>
-                        <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-brand-navy group-hover:text-brand-teal">
-                          {persona.challengeCount} challenges answered
-                          <ArrowRight className="h-4 w-4" aria-hidden="true" />
-                        </span>
-                      </div>
-                    </Link>
-                  </SectionReveal>
+                      </span>
+                      <span className="mt-4 text-xl font-bold text-brand-navy">
+                        {persona.pageLabel}
+                      </span>
+                      <span className="mt-3 flex-grow text-sm leading-6 text-brand-navy/[0.78]">
+                        {persona.summary}
+                      </span>
+                      <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-brand-navy group-hover:text-brand-teal">
+                        {persona.challengeCount} challenges answered
+                        <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                      </span>
+                    </div>
+                  </Link>
                 );
               })}
-            </div>
+            </Stagger>
           </div>
         </section>
 
         <section className="section-space relative overflow-hidden bg-white">
-          <BackgroundBlobs blobs={[{ color: "#0c716b", size: 340, position: "center-left", opacity: 0.1 }]} />
+          <BackgroundBlobs
+            blobs={[
+              {
+                color: "#0c716b",
+                size: 340,
+                position: "center-left",
+                opacity: 0.1,
+              },
+            ]}
+          />
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <SectionReveal>
+            <InView className="motion-rise" once>
               <SectionHeading
                 kicker="The honest ledger"
                 title="Where school days actually leak time"
                 description="One line per role: the problem we hear most often, and the module that removes it. No transformation language, just the mechanism."
               />
-            </SectionReveal>
+            </InView>
 
-            <SectionReveal delay={0.08} className="mt-10 overflow-hidden rounded-[2rem] border border-brand-navy/[0.08]">
+            <div className="mt-10 overflow-hidden rounded-[2rem] border border-brand-navy/[0.08]">
               <ul className="divide-y divide-brand-navy/[0.08]">
                 {personas.map((persona, index) => {
                   const tokens = ACCENTS[persona.accent];
@@ -213,8 +254,13 @@ export default function Solutions({ personas, totals }: SolutionsPageProps) {
                       }`}
                     >
                       <div className="flex items-center gap-2.5">
-                        <span className={`h-8 w-1.5 rounded-full ${tokens.bar}`} aria-hidden="true" />
-                        <span className="text-sm font-bold text-brand-navy">{persona.label}</span>
+                        <span
+                          className={`h-8 w-1.5 rounded-full ${tokens.bar}`}
+                          aria-hidden="true"
+                        />
+                        <span className="text-sm font-bold text-brand-navy">
+                          {persona.label}
+                        </span>
                       </div>
                       <div>
                         <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-orange-ink">
@@ -243,51 +289,72 @@ export default function Solutions({ personas, totals }: SolutionsPageProps) {
                   );
                 })}
               </ul>
-            </SectionReveal>
+            </div>
           </div>
         </section>
 
         <section className="section-space relative overflow-hidden border-y border-brand-navy/5 bg-brand-beige/25">
-          <BackgroundBlobs blobs={[{ color: "#003049", size: 380, position: "center-left", opacity: 0.12 }]} />
+          <BackgroundBlobs
+            blobs={[
+              {
+                color: "#003049",
+                size: 380,
+                position: "center-left",
+                opacity: 0.12,
+              },
+            ]}
+          />
           <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <SectionReveal className="rounded-[2rem] border border-brand-navy/10 bg-white p-8 shadow-xl shadow-brand-navy/5 md:p-12">
-              <p className="section-kicker">Why this matters</p>
-              <h2 className="mt-4 text-4xl font-bold text-brand-navy">
-                Better school systems create better daily outcomes
-              </h2>
-              <p className="mt-4 max-w-3xl text-lg leading-8 text-brand-navy/[0.74]">
-                KIDUART is built to remove repetitive admin work and make parent communication
-                consistent, so school teams spend more time on students and teaching quality.
-              </p>
+            <div className="rounded-[2rem] border border-brand-navy/10 bg-white p-8 shadow-xl shadow-brand-navy/5 md:p-12">
+              <InView className="motion-rise" once>
+                <p className="section-kicker">Why this matters</p>
+                <h2 className="mt-4 text-4xl font-bold text-brand-navy">
+                  Better school systems create better daily outcomes
+                </h2>
+                <p className="mt-4 max-w-3xl text-lg leading-8 text-brand-navy/[0.74]">
+                  KIDUART is built to remove repetitive admin work and make
+                  parent communication consistent, so school teams spend more
+                  time on students and teaching quality.
+                </p>
+              </InView>
 
-              <div className="mt-10 grid gap-6 md:grid-cols-3">
+              <Stagger
+                className="mt-10 grid gap-6 md:grid-cols-3"
+                itemClassName="motion-brick"
+              >
                 {impactHighlights.map((stat) => (
                   <div
                     key={stat.label}
                     className="rounded-3xl border border-brand-navy/10 bg-brand-beige/20 px-6 py-8 text-center"
                   >
                     <span className="inline-flex items-center gap-2 rounded-full border border-brand-navy/15 bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-brand-navy">
-                      <span className="h-1.5 w-1.5 rounded-full bg-brand-orange" aria-hidden="true" />
+                      <span
+                        className="h-1.5 w-1.5 rounded-full bg-brand-orange"
+                        aria-hidden="true"
+                      />
                       Coming soon
                     </span>
                     <p className="mt-4 text-sm font-semibold uppercase tracking-[0.18em] text-brand-navy/[0.82]">
                       {stat.label}
                     </p>
-                    <p className="mt-3 text-sm leading-6 text-brand-navy/[0.72]">{stat.note}</p>
+                    <p className="mt-3 text-sm leading-6 text-brand-navy/[0.72]">
+                      {stat.note}
+                    </p>
                   </div>
                 ))}
-              </div>
+              </Stagger>
               <p className="mt-6 text-sm leading-6 text-brand-navy/[0.7]">
-                We would rather show you the product than a number we cannot back yet. Every figure on
-                this site will be published only after it comes from live school data.
+                We would rather show you the product than a number we cannot
+                back yet. Every figure on this site will be published only after
+                it comes from live school data.
               </p>
-            </SectionReveal>
+            </div>
           </div>
         </section>
 
         <CtaSection
           title="Book a demo for the roles joining the call"
-          subtitle="Tell us who will be on the call — leadership, accounts, academics or class teachers — and we will run the walkthrough in their panels."
+          subtitle="Tell us who will be on the call  leadership, accounts, academics or class teachers  and we will run the walkthrough in their panels."
         />
       </PageTransition>
     </>

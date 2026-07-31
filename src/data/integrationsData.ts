@@ -1,10 +1,10 @@
 /**
  * Integrations are described by what the platform actually connects to today.
  *
- * status: "live"    — implemented and switched on from your own school settings
- * status: "guided"  — implemented, but connected with our team during onboarding
+ * status: "live"     implemented and switched on from your own school settings
+ * status: "guided"   implemented, but connected with our team during onboarding
  *                     because it needs credentials, consent or hardware on your side
- * status: "planned" — genuinely on the roadmap, and labelled that way on the site
+ * status: "planned"  genuinely on the roadmap, and labelled that way on the site
  *
  * `providers` lists the real services or protocols behind a connector so a school
  * can check the name their vendor uses. `modules` points at real entries in
@@ -87,19 +87,21 @@ export const INTEGRATION_CATEGORIES = [
     slug: "messaging",
     icon: "Megaphone",
     blurb:
-      "How notices, fee reminders and attendance alerts actually reach parents — WhatsApp, SMS, email and app notifications.",
+      "How notices, fee reminders and attendance alerts actually reach parents  WhatsApp, SMS, email and app notifications.",
   },
   {
     title: "Sign-in and identity",
     slug: "identity",
     icon: "KeyRound",
-    blurb: "Let staff and students use the school accounts they already have, without a second password.",
+    blurb:
+      "Let staff and students use the school accounts they already have, without a second password.",
   },
   {
     title: "Online classes and meetings",
     slug: "classes",
     icon: "MonitorSmartphone",
-    blurb: "Launch a class or a parent meeting from the timetable instead of pasting links into a group.",
+    blurb:
+      "Launch a class or a parent meeting from the timetable instead of pasting links into a group.",
   },
   {
     title: "Campus devices and tracking",
@@ -112,7 +114,8 @@ export const INTEGRATION_CATEGORIES = [
     title: "Files, data and developer access",
     slug: "platform",
     icon: "ScrollText",
-    blurb: "Document storage, exports your accountant can open, and the REST API your IT team can build against.",
+    blurb:
+      "Document storage, exports your accountant can open, and the REST API your IT team can build against.",
   },
 ] as const;
 
@@ -127,7 +130,7 @@ const integrationsData: Record<string, IntegrationEntry> = {
     description:
       "Collect fees online through Razorpay and let every successful payment post itself against the student's fee record.",
     intro:
-      "Razorpay is the default choice for Indian schools because parents already recognise it and it supports UPI, cards, netbanking and wallets in one checkout. In KIDUART, the parent opens the dues on the parent portal, pays through Razorpay, and the payment is written back against that student's fee record with a receipt number — so the accountant is not matching a bank statement to a WhatsApp screenshot the next morning.",
+      "Razorpay is the default choice for Indian schools because parents already recognise it and it supports UPI, cards, netbanking and wallets in one checkout. In KIDUART, the parent opens the dues on the parent portal, pays through Razorpay, and the payment is written back against that student's fee record with a receipt number  so the accountant is not matching a bank statement to a WhatsApp screenshot the next morning.",
     benefits: [
       "UPI, cards, netbanking and wallets in one parent checkout",
       "Payments post against the student's fee record automatically",
@@ -139,7 +142,7 @@ const integrationsData: Record<string, IntegrationEntry> = {
       {
         label: "Parent opens the dues",
         detail:
-          "The parent portal shows outstanding fee heads for that student — the same heads the front office sees, not a separate payment page.",
+          "The parent portal shows outstanding fee heads for that student  the same heads the front office sees, not a separate payment page.",
       },
       {
         label: "Order created with your keys",
@@ -266,11 +269,12 @@ const integrationsData: Record<string, IntegrationEntry> = {
       { area: "finance-and-fee-management", module: "Finance Reports" },
       { area: "parent-management", module: "Parent Portal" },
     ],
-    keywords: "Stripe school fees, international school fee payment, card fee collection school ERP",
+    keywords:
+      "Stripe school fees, international school fee payment, card fee collection school ERP",
     faqs: [
       {
         q: "Can we run Razorpay and Stripe together?",
-        a: "Most schools pick one primary gateway. If you genuinely need both — for example domestic fees on Razorpay and international payments on Stripe — raise it during the demo so we can configure it correctly.",
+        a: "Most schools pick one primary gateway. If you genuinely need both  for example domestic fees on Razorpay and international payments on Stripe  raise it during the demo so we can configure it correctly.",
       },
       {
         q: "Are refunds handled in KIDUART?",
@@ -285,7 +289,8 @@ const integrationsData: Record<string, IntegrationEntry> = {
     category: "Fee payments",
     status: "planned",
     providers: ["Orders API", "Capture", "Dispute webhooks"],
-    description: "Planned: PayPal as an additional gateway for school fee collection.",
+    description:
+      "Planned: PayPal as an additional gateway for school fee collection.",
     intro:
       "PayPal is supported in our platform billing stack but is not released as a school fee gateway. Online fee collection today runs on Razorpay for domestic payments and Stripe where card or international support is needed. We would rather say that plainly than let a logo imply something it does not do.",
     benefits: [
@@ -296,25 +301,31 @@ const integrationsData: Record<string, IntegrationEntry> = {
     flow: [
       {
         label: "Today",
-        detail: "Use Razorpay or Stripe for online fee collection. Both are live and reconcile into the fee book.",
+        detail:
+          "Use Razorpay or Stripe for online fee collection. Both are live and reconcile into the fee book.",
       },
       {
         label: "If you need PayPal",
-        detail: "Tell us at the demo which families need it, so the requirement is logged against a real school.",
+        detail:
+          "Tell us at the demo which families need it, so the requirement is logged against a real school.",
       },
       {
         label: "When it ships",
-        detail: "The setup will mirror the other gateways: your own PayPal business account and encrypted credentials.",
+        detail:
+          "The setup will mirror the other gateways: your own PayPal business account and encrypted credentials.",
       },
       {
         label: "What will not change",
-        detail: "Settlement stays with your account, and KIDUART records the transaction and issues the receipt.",
+        detail:
+          "Settlement stays with your account, and KIDUART records the transaction and issues the receipt.",
       },
     ],
     ownership: {
-      credentials: "When released, your own PayPal business account credentials, encrypted per school.",
+      credentials:
+        "When released, your own PayPal business account credentials, encrypted per school.",
       data: "The same payment reference and status record the live gateways create.",
-      billing: "PayPal fees would be charged on your account, as with every other gateway.",
+      billing:
+        "PayPal fees would be charged on your account, as with every other gateway.",
     },
     steps: [
       "Use Razorpay or Stripe for live collection today",
@@ -337,11 +348,15 @@ const integrationsData: Record<string, IntegrationEntry> = {
     accent: "teal",
     category: "Messaging and notifications",
     status: "live",
-    providers: ["WhatsApp Cloud API", "Meta message templates", "Delivery webhooks"],
+    providers: [
+      "WhatsApp Cloud API",
+      "Meta message templates",
+      "Delivery webhooks",
+    ],
     description:
       "Reach parents on the channel they actually read, using approved WhatsApp Business templates from the school's own number.",
     intro:
-      "Parents read WhatsApp. KIDUART connects to the WhatsApp Business Cloud API so notices, fee reminders and attendance alerts go out as approved template messages from the school's own number — with a record of what was sent, instead of a teacher forwarding messages from a personal phone at 10pm.",
+      "Parents read WhatsApp. KIDUART connects to the WhatsApp Business Cloud API so notices, fee reminders and attendance alerts go out as approved template messages from the school's own number  with a record of what was sent, instead of a teacher forwarding messages from a personal phone at 10pm.",
     benefits: [
       "Notices and reminders on the channel parents check",
       "Messages sent from the school's own business number",
@@ -420,9 +435,9 @@ const integrationsData: Record<string, IntegrationEntry> = {
     status: "live",
     providers: ["Twilio", "MSG91", "Amazon SNS", "DLT templates"],
     description:
-      "Send attendance alerts, fee reminders, OTPs and urgent notices as SMS — the one channel every parent can receive.",
+      "Send attendance alerts, fee reminders, OTPs and urgent notices as SMS  the one channel every parent can receive.",
     intro:
-      "Not every parent has a smartphone, checks email, or installs an app, but almost every parent receives SMS. KIDUART sends transactional SMS through a supported gateway — Twilio, MSG91 or Amazon SNS — using templates you manage in-product, so an absence alert or a fee reminder reaches the guardian on the same day rather than in a diary note the child forgets to show.",
+      "Not every parent has a smartphone, checks email, or installs an app, but almost every parent receives SMS. KIDUART sends transactional SMS through a supported gateway  Twilio, MSG91 or Amazon SNS  using templates you manage in-product, so an absence alert or a fee reminder reaches the guardian on the same day rather than in a diary note the child forgets to show.",
     benefits: [
       "Same-day absence alerts to the guardian on record",
       "Fee due and receipt confirmations by SMS",
@@ -433,7 +448,8 @@ const integrationsData: Record<string, IntegrationEntry> = {
     flow: [
       {
         label: "Event triggers a message",
-        detail: "Absence, fee due, notice, OTP — you decide which events are allowed to send SMS at all.",
+        detail:
+          "Absence, fee due, notice, OTP  you decide which events are allowed to send SMS at all.",
       },
       {
         label: "Template resolved",
@@ -443,7 +459,7 @@ const integrationsData: Record<string, IntegrationEntry> = {
       {
         label: "Gateway sends it",
         detail:
-          "The configured provider — Twilio, MSG91 or Amazon SNS — delivers to the guardian number on the student record.",
+          "The configured provider  Twilio, MSG91 or Amazon SNS  delivers to the guardian number on the student record.",
       },
       {
         label: "Status written back",
@@ -452,12 +468,14 @@ const integrationsData: Record<string, IntegrationEntry> = {
       },
     ],
     ownership: {
-      credentials: "Your gateway account credentials and sender ID, held against your school configuration.",
+      credentials:
+        "Your gateway account credentials and sender ID, held against your school configuration.",
       data: "KIDUART records which template was sent to which number and the delivery status returned.",
-      billing: "SMS credits are billed by your provider on your own account, so you control pricing and volume.",
+      billing:
+        "SMS credits are billed by your provider on your own account, so you control pricing and volume.",
     },
     steps: [
-      "Pick your gateway — Twilio, MSG91 or Amazon SNS",
+      "Pick your gateway  Twilio, MSG91 or Amazon SNS",
       "Share the credentials and approved sender ID",
       "Map which events send SMS: absence, fee due, notice, OTP",
       "Approve the message templates for each event",
@@ -470,9 +488,13 @@ const integrationsData: Record<string, IntegrationEntry> = {
     ],
     modules: [
       { area: "communication", module: "Messaging" },
-      { area: "security-and-authentication", module: "Authentication Communications" },
+      {
+        area: "security-and-authentication",
+        module: "Authentication Communications",
+      },
     ],
-    keywords: "school SMS gateway India, bulk SMS school ERP, attendance SMS alert parents, DLT school SMS",
+    keywords:
+      "school SMS gateway India, bulk SMS school ERP, attendance SMS alert parents, DLT school SMS",
     faqs: [
       {
         q: "Who pays for the SMS credits?",
@@ -494,7 +516,11 @@ const integrationsData: Record<string, IntegrationEntry> = {
     accent: "navy",
     category: "Messaging and notifications",
     status: "live",
-    providers: ["Programmable Messaging", "Messaging Service SID", "Status callbacks"],
+    providers: [
+      "Programmable Messaging",
+      "Messaging Service SID",
+      "Status callbacks",
+    ],
     description:
       "Use Twilio as your SMS gateway, including messaging services and delivery status callbacks.",
     intro:
@@ -508,25 +534,31 @@ const integrationsData: Record<string, IntegrationEntry> = {
     flow: [
       {
         label: "Credentials configured",
-        detail: "Your Twilio account SID, auth token and sending number or messaging service SID are set for your school.",
+        detail:
+          "Your Twilio account SID, auth token and sending number or messaging service SID are set for your school.",
       },
       {
         label: "Message queued",
-        detail: "School events queue the message rather than blocking the screen your staff is working on.",
+        detail:
+          "School events queue the message rather than blocking the screen your staff is working on.",
       },
       {
         label: "Twilio delivers",
-        detail: "The message is sent through Twilio's Programmable Messaging API to the guardian or staff number.",
+        detail:
+          "The message is sent through Twilio's Programmable Messaging API to the guardian or staff number.",
       },
       {
         label: "Callback verified and stored",
-        detail: "Twilio's status callback is signature-checked and written back so delivery is auditable.",
+        detail:
+          "Twilio's status callback is signature-checked and written back so delivery is auditable.",
       },
     ],
     ownership: {
-      credentials: "Your Twilio account SID and auth token, held in your school's messaging configuration.",
+      credentials:
+        "Your Twilio account SID and auth token, held in your school's messaging configuration.",
       data: "Message reference, recipient and delivery status stay in KIDUART's communication log.",
-      billing: "Twilio bills your own account per segment, so spend stays visible to you.",
+      billing:
+        "Twilio bills your own account per segment, so spend stays visible to you.",
     },
     steps: [
       "Create or reuse a Twilio account for the school",
@@ -542,9 +574,13 @@ const integrationsData: Record<string, IntegrationEntry> = {
     ],
     modules: [
       { area: "communication", module: "Messaging" },
-      { area: "security-and-authentication", module: "Authentication Communications" },
+      {
+        area: "security-and-authentication",
+        module: "Authentication Communications",
+      },
     ],
-    keywords: "Twilio school SMS integration, Twilio messaging service school ERP",
+    keywords:
+      "Twilio school SMS integration, Twilio messaging service school ERP",
     faqs: [
       {
         q: "Is Twilio a good fit for an Indian school?",
@@ -576,25 +612,31 @@ const integrationsData: Record<string, IntegrationEntry> = {
     flow: [
       {
         label: "DLT templates registered",
-        detail: "Your absence, fee and OTP templates are registered on DLT under your own entity, as Indian regulation requires.",
+        detail:
+          "Your absence, fee and OTP templates are registered on DLT under your own entity, as Indian regulation requires.",
       },
       {
         label: "Event fills the template",
-        detail: "KIDUART fills the approved template with values from the student, fee or login record.",
+        detail:
+          "KIDUART fills the approved template with values from the student, fee or login record.",
       },
       {
         label: "MSG91 sends it",
-        detail: "The message goes out on your sender ID to the guardian numbers on record.",
+        detail:
+          "The message goes out on your sender ID to the guardian numbers on record.",
       },
       {
         label: "Delivery report stored",
-        detail: "MSG91's report updates the message record, so failed numbers surface for correction.",
+        detail:
+          "MSG91's report updates the message record, so failed numbers surface for correction.",
       },
     ],
     ownership: {
-      credentials: "Your MSG91 auth key and sender ID, stored against your school's messaging configuration.",
+      credentials:
+        "Your MSG91 auth key and sender ID, stored against your school's messaging configuration.",
       data: "KIDUART keeps the template used, recipient and delivery status.",
-      billing: "SMS credits are purchased and billed on your own MSG91 account.",
+      billing:
+        "SMS credits are purchased and billed on your own MSG91 account.",
     },
     steps: [
       "Create an MSG91 account in the school's name",
@@ -610,9 +652,13 @@ const integrationsData: Record<string, IntegrationEntry> = {
     ],
     modules: [
       { area: "communication", module: "Messaging" },
-      { area: "security-and-authentication", module: "Authentication Communications" },
+      {
+        area: "security-and-authentication",
+        module: "Authentication Communications",
+      },
     ],
-    keywords: "MSG91 school SMS, DLT template school SMS India, school sender ID SMS",
+    keywords:
+      "MSG91 school SMS, DLT template school SMS India, school sender ID SMS",
     faqs: [
       {
         q: "Who registers the DLT templates?",
@@ -634,7 +680,7 @@ const integrationsData: Record<string, IntegrationEntry> = {
     description:
       "Send circulars, receipts, report card links and account emails through your own email provider.",
     intro:
-      "Email is where longer school communication belongs: circulars, fee receipts, report card links, staff notices and account verification. KIDUART sends through your provider — plain SMTP or a delivery service like SendGrid, Amazon SES or Mailgun — so mail arrives from your school domain and lands in inboxes rather than spam.",
+      "Email is where longer school communication belongs: circulars, fee receipts, report card links, staff notices and account verification. KIDUART sends through your provider  plain SMTP or a delivery service like SendGrid, Amazon SES or Mailgun  so mail arrives from your school domain and lands in inboxes rather than spam.",
     benefits: [
       "Mail sent from your school domain, not a generic address",
       "Fee receipts and circulars delivered as records parents can keep",
@@ -645,25 +691,31 @@ const integrationsData: Record<string, IntegrationEntry> = {
     flow: [
       {
         label: "Provider chosen",
-        detail: "Start with your existing SMTP mailbox, or move to SendGrid, Amazon SES or Mailgun as volume grows.",
+        detail:
+          "Start with your existing SMTP mailbox, or move to SendGrid, Amazon SES or Mailgun as volume grows.",
       },
       {
         label: "Domain authenticated",
-        detail: "SPF and DKIM records are published once so mail sent on your behalf is trusted by inbox providers.",
+        detail:
+          "SPF and DKIM records are published once so mail sent on your behalf is trusted by inbox providers.",
       },
       {
         label: "Mail queued and sent",
-        detail: "Circulars, receipts and account mail are queued, so a large send never blocks the person who triggered it.",
+        detail:
+          "Circulars, receipts and account mail are queued, so a large send never blocks the person who triggered it.",
       },
       {
         label: "Events recorded",
-        detail: "Delivery, bounce and complaint webhooks are stored so a wrong address is corrected rather than repeated.",
+        detail:
+          "Delivery, bounce and complaint webhooks are stored so a wrong address is corrected rather than repeated.",
       },
     ],
     ownership: {
-      credentials: "Your SMTP or provider API credentials and your own from-address on your school domain.",
+      credentials:
+        "Your SMTP or provider API credentials and your own from-address on your school domain.",
       data: "KIDUART stores what was sent, to whom, and the delivery outcome.",
-      billing: "Your provider bills your account. Plain SMTP on an existing mailbox costs nothing extra to start.",
+      billing:
+        "Your provider bills your account. Plain SMTP on an existing mailbox costs nothing extra to start.",
     },
     steps: [
       "Pick the provider your school already uses, or start with SMTP",
@@ -682,7 +734,8 @@ const integrationsData: Record<string, IntegrationEntry> = {
       { area: "communication", module: "Announcements" },
       { area: "security-and-authentication", module: "Core Authentication" },
     ],
-    keywords: "school email circular software, SendGrid school ERP, Amazon SES school email, SMTP school notification",
+    keywords:
+      "school email circular software, SendGrid school ERP, Amazon SES school email, SMTP school notification",
     faqs: [
       {
         q: "Do we have to buy an email service?",
@@ -700,11 +753,15 @@ const integrationsData: Record<string, IntegrationEntry> = {
     accent: "teal",
     category: "Messaging and notifications",
     status: "live",
-    providers: ["Expo push service", "Device token registry", "Android and iOS"],
+    providers: [
+      "Expo push service",
+      "Device token registry",
+      "Android and iOS",
+    ],
     description:
       "Push alerts straight to the parent and staff mobile app, with no per-message cost.",
     intro:
-      "Once a parent installs the app, push notification becomes the cheapest and fastest channel you have. Device tokens are registered at sign-in and stored against the user, so a notice, a fee reminder or an attendance alert reaches the right phone — and the same event can still fall back to SMS for parents who have not installed anything.",
+      "Once a parent installs the app, push notification becomes the cheapest and fastest channel you have. Device tokens are registered at sign-in and stored against the user, so a notice, a fee reminder or an attendance alert reaches the right phone  and the same event can still fall back to SMS for parents who have not installed anything.",
     benefits: [
       "No per-message cost once a parent is on the app",
       "Alerts tied to the user's role, not a broadcast group",
@@ -715,25 +772,31 @@ const integrationsData: Record<string, IntegrationEntry> = {
     flow: [
       {
         label: "Device registers",
-        detail: "When a parent or staff member signs in on the app, the device token is stored against that user.",
+        detail:
+          "When a parent or staff member signs in on the app, the device token is stored against that user.",
       },
       {
         label: "Event queues a push",
-        detail: "Attendance, fee, notice and approval events queue a notification rather than sending inline.",
+        detail:
+          "Attendance, fee, notice and approval events queue a notification rather than sending inline.",
       },
       {
         label: "Delivered to the device",
-        detail: "The push is delivered to the registered Android or iOS devices for that user.",
+        detail:
+          "The push is delivered to the registered Android or iOS devices for that user.",
       },
       {
         label: "Tokens kept clean",
-        detail: "Devices that stop accepting messages are deactivated, so you are not sending into the void.",
+        detail:
+          "Devices that stop accepting messages are deactivated, so you are not sending into the void.",
       },
     ],
     ownership: {
-      credentials: "Handled by KIDUART as part of the mobile app — there is nothing for your IT team to buy or configure.",
+      credentials:
+        "Handled by KIDUART as part of the mobile app  there is nothing for your IT team to buy or configure.",
       data: "The device token and the notifications sent to it. Notification content comes from your own records.",
-      billing: "No per-message charge for push. This is what keeps routine alerts off your SMS bill.",
+      billing:
+        "No per-message charge for push. This is what keeps routine alerts off your SMS bill.",
     },
     steps: [
       "Parents and staff install the KIDUART app and sign in",
@@ -774,7 +837,7 @@ const integrationsData: Record<string, IntegrationEntry> = {
     description:
       "Let staff and students sign in with the Google accounts your school already issues.",
     intro:
-      "If your school runs Google Workspace for Education, staff and students already have a managed account. KIDUART supports Google sign-in so they use it here too — one less password to reset, and access that follows the account your IT admin already controls.",
+      "If your school runs Google Workspace for Education, staff and students already have a managed account. KIDUART supports Google sign-in so they use it here too  one less password to reset, and access that follows the account your IT admin already controls.",
     benefits: [
       "One school account instead of another password to remember",
       "Fewer password reset requests at the front office",
@@ -785,32 +848,38 @@ const integrationsData: Record<string, IntegrationEntry> = {
     flow: [
       {
         label: "User picks Google sign-in",
-        detail: "Staff or students choose Google at the login screen instead of typing a separate password.",
+        detail:
+          "Staff or students choose Google at the login screen instead of typing a separate password.",
       },
       {
         label: "Google proves identity",
-        detail: "Google's OAuth flow confirms who they are and returns a verified email address.",
+        detail:
+          "Google's OAuth flow confirms who they are and returns a verified email address.",
       },
       {
         label: "Matched to a KIDUART user",
-        detail: "The verified address is matched to an existing user record — sign-in does not create access on its own.",
+        detail:
+          "The verified address is matched to an existing user record  sign-in does not create access on its own.",
       },
       {
         label: "Role decides what opens",
-        detail: "The panel and permissions come from their KIDUART role, exactly as with a password login.",
+        detail:
+          "The panel and permissions come from their KIDUART role, exactly as with a password login.",
       },
     ],
     ownership: {
-      credentials: "Your Workspace domain and admin consent. Google holds the password; KIDUART never sees it.",
+      credentials:
+        "Your Workspace domain and admin consent. Google holds the password; KIDUART never sees it.",
       data: "KIDUART stores the verified email and the link to the user record.",
-      billing: "No additional cost. Your existing Workspace for Education licence is enough.",
+      billing:
+        "No additional cost. Your existing Workspace for Education licence is enough.",
     },
     steps: [
       "Confirm your Google Workspace domain with our team",
       "We register the sign-in client for your school",
       "Choose which roles may use Google sign-in",
       "Test with one staff and one student account",
-      "Announce it to staff — existing passwords keep working",
+      "Announce it to staff  existing passwords keep working",
     ],
     requirements: [
       "Google Workspace for Education (or a managed Google domain)",
@@ -821,7 +890,8 @@ const integrationsData: Record<string, IntegrationEntry> = {
       { area: "security-and-authentication", module: "Core Authentication" },
       { area: "security-and-authentication", module: "Roles & Permissions" },
     ],
-    keywords: "Google sign-in school ERP, Google Workspace for Education login, school single sign-on India",
+    keywords:
+      "Google sign-in school ERP, Google Workspace for Education login, school single sign-on India",
     faqs: [
       {
         q: "Does Google sign-in change what someone can see?",
@@ -854,23 +924,28 @@ const integrationsData: Record<string, IntegrationEntry> = {
     flow: [
       {
         label: "User picks Microsoft sign-in",
-        detail: "Staff choose Microsoft at the login screen and are sent to your tenant.",
+        detail:
+          "Staff choose Microsoft at the login screen and are sent to your tenant.",
       },
       {
         label: "Your tenant authenticates",
-        detail: "Your Microsoft policies, including MFA, apply before anything is returned to KIDUART.",
+        detail:
+          "Your Microsoft policies, including MFA, apply before anything is returned to KIDUART.",
       },
       {
         label: "Matched to a KIDUART user",
-        detail: "The verified account is matched to an existing user record; sign-in alone does not grant access.",
+        detail:
+          "The verified account is matched to an existing user record; sign-in alone does not grant access.",
       },
       {
         label: "Role decides what opens",
-        detail: "Panels, modules and data visibility come from the KIDUART role, not from Microsoft.",
+        detail:
+          "Panels, modules and data visibility come from the KIDUART role, not from Microsoft.",
       },
     ],
     ownership: {
-      credentials: "Your Microsoft tenant and admin consent. Passwords and MFA stay with Microsoft.",
+      credentials:
+        "Your Microsoft tenant and admin consent. Passwords and MFA stay with Microsoft.",
       data: "KIDUART stores the verified account identifier and its link to the user record.",
       billing: "No extra cost beyond your existing Microsoft 365 licensing.",
     },
@@ -890,7 +965,8 @@ const integrationsData: Record<string, IntegrationEntry> = {
       { area: "security-and-authentication", module: "Core Authentication" },
       { area: "security-and-authentication", module: "Session & Tokens" },
     ],
-    keywords: "Microsoft 365 school login, Entra ID school ERP sign-in, school SSO Microsoft",
+    keywords:
+      "Microsoft 365 school login, Entra ID school ERP sign-in, school SSO Microsoft",
     faqs: [
       {
         q: "Can we use Microsoft sign-in only for staff?",
@@ -923,25 +999,31 @@ const integrationsData: Record<string, IntegrationEntry> = {
     flow: [
       {
         label: "Class or meeting scheduled",
-        detail: "A teacher or the office schedules the session in the timetable or as a parent-teacher meeting.",
+        detail:
+          "A teacher or the office schedules the session in the timetable or as a parent-teacher meeting.",
       },
       {
         label: "Zoom meeting created",
-        detail: "KIDUART calls Zoom with your school's server-to-server credentials and creates the meeting.",
+        detail:
+          "KIDUART calls Zoom with your school's server-to-server credentials and creates the meeting.",
       },
       {
         label: "Link travels with the notice",
-        detail: "The join link is attached to the schedule entry and goes out through the notice the class already receives.",
+        detail:
+          "The join link is attached to the schedule entry and goes out through the notice the class already receives.",
       },
       {
         label: "Attendance stays in KIDUART",
-        detail: "Presence is recorded in the attendance module so online and offline days sit in the same register.",
+        detail:
+          "Presence is recorded in the attendance module so online and offline days sit in the same register.",
       },
     ],
     ownership: {
-      credentials: "Your Zoom account and server-to-server app credentials, stored encrypted against your school.",
+      credentials:
+        "Your Zoom account and server-to-server app credentials, stored encrypted against your school.",
       data: "KIDUART stores the meeting ID, link and schedule. Recordings stay in your Zoom account.",
-      billing: "Zoom licensing stays on your account, including the meeting duration limits of your plan.",
+      billing:
+        "Zoom licensing stays on your account, including the meeting duration limits of your plan.",
     },
     steps: [
       "Tell us during onboarding that you use Zoom",
@@ -960,7 +1042,8 @@ const integrationsData: Record<string, IntegrationEntry> = {
       { area: "academic", module: "Parent-Teacher Meetings" },
       { area: "communication", module: "Events" },
     ],
-    keywords: "Zoom school ERP integration, online class link timetable, parent teacher meeting Zoom school",
+    keywords:
+      "Zoom school ERP integration, online class link timetable, parent teacher meeting Zoom school",
     faqs: [
       {
         q: "Is attendance for an online class recorded automatically?",
@@ -978,7 +1061,11 @@ const integrationsData: Record<string, IntegrationEntry> = {
     accent: "teal",
     category: "Online classes and meetings",
     status: "guided",
-    providers: ["Google Calendar API", "Meet conference links", "Workspace consent"],
+    providers: [
+      "Google Calendar API",
+      "Meet conference links",
+      "Workspace consent",
+    ],
     description:
       "Generate Google Meet links for classes and meetings for schools already on Google Workspace.",
     intro:
@@ -993,25 +1080,31 @@ const integrationsData: Record<string, IntegrationEntry> = {
     flow: [
       {
         label: "Session scheduled in KIDUART",
-        detail: "A class period or meeting is created with its date, time and participants.",
+        detail:
+          "A class period or meeting is created with its date, time and participants.",
       },
       {
         label: "Calendar event created",
-        detail: "KIDUART creates the event on your Workspace calendar with a Meet conference attached.",
+        detail:
+          "KIDUART creates the event on your Workspace calendar with a Meet conference attached.",
       },
       {
         label: "Link attached to the schedule",
-        detail: "The Meet link is stored with the class or meeting so it is found from the timetable.",
+        detail:
+          "The Meet link is stored with the class or meeting so it is found from the timetable.",
       },
       {
         label: "Notice carries it out",
-        detail: "The class or parent group receives the link through the notice channel they already use.",
+        detail:
+          "The class or parent group receives the link through the notice channel they already use.",
       },
     ],
     ownership: {
-      credentials: "Your Workspace domain and the consent your admin grants for calendar access.",
+      credentials:
+        "Your Workspace domain and the consent your admin grants for calendar access.",
       data: "Calendar events live in your Workspace. KIDUART keeps the link against the schedule entry.",
-      billing: "Covered by your existing Google Workspace for Education licence.",
+      billing:
+        "Covered by your existing Google Workspace for Education licence.",
     },
     steps: [
       "Confirm your Google Workspace domain during onboarding",
@@ -1030,7 +1123,8 @@ const integrationsData: Record<string, IntegrationEntry> = {
       { area: "academic", module: "Academic Calendar" },
       { area: "communication", module: "Events" },
     ],
-    keywords: "Google Meet school timetable, online class link Google Workspace school",
+    keywords:
+      "Google Meet school timetable, online class link Google Workspace school",
     faqs: [
       {
         q: "Do students need Google accounts?",
@@ -1063,23 +1157,28 @@ const integrationsData: Record<string, IntegrationEntry> = {
     flow: [
       {
         label: "Meeting scheduled",
-        detail: "A class period, staff meeting or parent meeting is created in KIDUART with its participants.",
+        detail:
+          "A class period, staff meeting or parent meeting is created in KIDUART with its participants.",
       },
       {
         label: "Graph creates the meeting",
-        detail: "KIDUART calls Microsoft Graph on your tenant to create the online meeting.",
+        detail:
+          "KIDUART calls Microsoft Graph on your tenant to create the online meeting.",
       },
       {
         label: "Link stored with the schedule",
-        detail: "The join link stays attached to the class or event, not in someone's inbox.",
+        detail:
+          "The join link stays attached to the class or event, not in someone's inbox.",
       },
       {
         label: "Group is notified",
-        detail: "Staff or parents receive it through the notice channel already configured.",
+        detail:
+          "Staff or parents receive it through the notice channel already configured.",
       },
     ],
     ownership: {
-      credentials: "Your Microsoft tenant and the application consent your IT admin grants.",
+      credentials:
+        "Your Microsoft tenant and the application consent your IT admin grants.",
       data: "Meetings and any channel content live in your Microsoft 365 tenant.",
       billing: "Covered by your existing Microsoft 365 licensing for staff.",
     },
@@ -1130,13 +1229,29 @@ const integrationsData: Record<string, IntegrationEntry> = {
       "Available now: Google sign-in and Google Meet",
     ],
     flow: [
-      { label: "Today", detail: "Schools run Classroom alongside KIDUART; class lists are exported at session start." },
-      { label: "Tell us", detail: "Raise it during the demo so the requirement is logged against a real school." },
-      { label: "When it ships", detail: "Roster sync will follow KIDUART's class and section structure as the source of truth." },
-      { label: "What stays yours", detail: "Coursework and grades in Classroom remain in your Workspace." },
+      {
+        label: "Today",
+        detail:
+          "Schools run Classroom alongside KIDUART; class lists are exported at session start.",
+      },
+      {
+        label: "Tell us",
+        detail:
+          "Raise it during the demo so the requirement is logged against a real school.",
+      },
+      {
+        label: "When it ships",
+        detail:
+          "Roster sync will follow KIDUART's class and section structure as the source of truth.",
+      },
+      {
+        label: "What stays yours",
+        detail: "Coursework and grades in Classroom remain in your Workspace.",
+      },
     ],
     ownership: {
-      credentials: "When released, Workspace admin consent for the Classroom scopes.",
+      credentials:
+        "When released, Workspace admin consent for the Classroom scopes.",
       data: "Class and enrolment data would flow out of KIDUART; coursework stays in Classroom.",
       billing: "No additional cost is expected beyond Workspace for Education.",
     },
@@ -1146,7 +1261,10 @@ const integrationsData: Record<string, IntegrationEntry> = {
       "You are notified when it enters testing",
       "Early schools help validate the sync before general release",
     ],
-    requirements: ["Google Workspace for Education", "Classes and sections maintained in KIDUART"],
+    requirements: [
+      "Google Workspace for Education",
+      "Classes and sections maintained in KIDUART",
+    ],
     modules: [
       { area: "academic", module: "Classes & Sections" },
       { area: "academic", module: "Assignments" },
@@ -1154,7 +1272,7 @@ const integrationsData: Record<string, IntegrationEntry> = {
     faqs: [
       {
         q: "Can we use Google Classroom alongside KIDUART today?",
-        a: "Yes — schools do. They simply run in parallel until the sync ships. Google sign-in and Google Meet are available now.",
+        a: "Yes  schools do. They simply run in parallel until the sync ships. Google sign-in and Google Meet are available now.",
       },
     ],
   },
@@ -1165,7 +1283,8 @@ const integrationsData: Record<string, IntegrationEntry> = {
     category: "Online classes and meetings",
     status: "planned",
     providers: ["Moodle web services", "Enrolment sync"],
-    description: "Planned: connect a Moodle LMS to KIDUART student and class records.",
+    description:
+      "Planned: connect a Moodle LMS to KIDUART student and class records.",
     intro:
       "Moodle integration is a roadmap item. Schools that run Moodle for course content want their student and class data to come from one place instead of being re-entered. The planned scope is user and enrolment sync from KIDUART into Moodle courses. It is not available yet, and we would rather say so here.",
     benefits: [
@@ -1174,13 +1293,30 @@ const integrationsData: Record<string, IntegrationEntry> = {
       "Planned: fewer manual enrolment lists each session",
     ],
     flow: [
-      { label: "Today", detail: "Export class and student lists from KIDUART reports and import them into Moodle." },
-      { label: "Tell us", detail: "Share your Moodle version and hosting so scope can be assessed properly." },
-      { label: "When it ships", detail: "KIDUART would stay the record of who is in which class, and push that into Moodle." },
-      { label: "What stays yours", detail: "Course content and activity data remain in your Moodle installation." },
+      {
+        label: "Today",
+        detail:
+          "Export class and student lists from KIDUART reports and import them into Moodle.",
+      },
+      {
+        label: "Tell us",
+        detail:
+          "Share your Moodle version and hosting so scope can be assessed properly.",
+      },
+      {
+        label: "When it ships",
+        detail:
+          "KIDUART would stay the record of who is in which class, and push that into Moodle.",
+      },
+      {
+        label: "What stays yours",
+        detail:
+          "Course content and activity data remain in your Moodle installation.",
+      },
     ],
     ownership: {
-      credentials: "When released, a Moodle web services token your IT team issues.",
+      credentials:
+        "When released, a Moodle web services token your IT team issues.",
       data: "User and enrolment records would flow out of KIDUART; course content stays in Moodle.",
       billing: "Moodle hosting stays on your side, as it does today.",
     },
@@ -1190,7 +1326,10 @@ const integrationsData: Record<string, IntegrationEntry> = {
       "We assess scope against the roadmap",
       "You are notified when the connector is available for testing",
     ],
-    requirements: ["A Moodle installation your IT team can configure", "Class structure maintained in KIDUART"],
+    requirements: [
+      "A Moodle installation your IT team can configure",
+      "Class structure maintained in KIDUART",
+    ],
     modules: [
       { area: "academic", module: "Classes & Sections" },
       { area: "student-management", module: "Student Directory" },
@@ -1217,10 +1356,25 @@ const integrationsData: Record<string, IntegrationEntry> = {
       "Planned: consistent class structure across both systems",
     ],
     flow: [
-      { label: "Today", detail: "Class lists are exported from KIDUART and imported into Canvas each session." },
-      { label: "Tell us", detail: "Share your Canvas instance details so the requirement is logged." },
-      { label: "When it ships", detail: "Enrolments would sync from KIDUART classes into Canvas courses." },
-      { label: "What stays yours", detail: "Course design and grading stay inside Canvas." },
+      {
+        label: "Today",
+        detail:
+          "Class lists are exported from KIDUART and imported into Canvas each session.",
+      },
+      {
+        label: "Tell us",
+        detail:
+          "Share your Canvas instance details so the requirement is logged.",
+      },
+      {
+        label: "When it ships",
+        detail:
+          "Enrolments would sync from KIDUART classes into Canvas courses.",
+      },
+      {
+        label: "What stays yours",
+        detail: "Course design and grading stay inside Canvas.",
+      },
     ],
     ownership: {
       credentials: "When released, a Canvas admin API token.",
@@ -1232,7 +1386,10 @@ const integrationsData: Record<string, IntegrationEntry> = {
       "We log the requirement with your setup details",
       "You are notified when it reaches testing",
     ],
-    requirements: ["A Canvas instance with admin access", "Classes and sections in KIDUART"],
+    requirements: [
+      "A Canvas instance with admin access",
+      "Classes and sections in KIDUART",
+    ],
     modules: [
       { area: "academic", module: "Classes & Sections" },
       { area: "student-management", module: "Student Directory" },
@@ -1254,7 +1411,7 @@ const integrationsData: Record<string, IntegrationEntry> = {
     description:
       "Push fingerprint and card punches from your existing attendance machines into staff and student attendance.",
     intro:
-      "Most schools already own an attendance machine at the gate or the staff room. KIDUART accepts punches from those devices through a device endpoint secured with its own API key, so the punch lands in the same attendance record your registers, reports and payroll already read from — instead of a monthly export nobody reconciles.",
+      "Most schools already own an attendance machine at the gate or the staff room. KIDUART accepts punches from those devices through a device endpoint secured with its own API key, so the punch lands in the same attendance record your registers, reports and payroll already read from  instead of a monthly export nobody reconciles.",
     benefits: [
       "Gate and staff-room punches land in the attendance record directly",
       "Staff attendance feeds leave and payroll instead of a separate sheet",
@@ -1265,23 +1422,28 @@ const integrationsData: Record<string, IntegrationEntry> = {
     flow: [
       {
         label: "Device is registered",
-        detail: "Each machine is registered for your school and issued its own device key, so a device is not a user account.",
+        detail:
+          "Each machine is registered for your school and issued its own device key, so a device is not a user account.",
       },
       {
         label: "Punch is captured",
-        detail: "A fingerprint or card punch is read at the gate, the staff room or the hostel entry point.",
+        detail:
+          "A fingerprint or card punch is read at the gate, the staff room or the hostel entry point.",
       },
       {
         label: "Sent to KIDUART",
-        detail: "The device or its connector posts the punch to the attendance endpoint using the device key.",
+        detail:
+          "The device or its connector posts the punch to the attendance endpoint using the device key.",
       },
       {
         label: "Written to attendance",
-        detail: "The punch is matched to the student or staff record and becomes attendance, visible in registers and reports.",
+        detail:
+          "The punch is matched to the student or staff record and becomes attendance, visible in registers and reports.",
       },
     ],
     ownership: {
-      credentials: "The device key belongs to your school and can be rotated or revoked without touching staff logins.",
+      credentials:
+        "The device key belongs to your school and can be rotated or revoked without touching staff logins.",
       data: "KIDUART stores the punch time and the matched person. Fingerprint templates stay on your device.",
       billing: "The hardware is yours. There is no per-punch charge from us.",
     },
@@ -1301,7 +1463,8 @@ const integrationsData: Record<string, IntegrationEntry> = {
       { area: "academic", module: "Attendance" },
       { area: "hr-and-staff-management", module: "Staff Attendance" },
     ],
-    keywords: "biometric attendance school ERP, ZKTeco school attendance integration, RFID card attendance school",
+    keywords:
+      "biometric attendance school ERP, ZKTeco school attendance integration, RFID card attendance school",
     faqs: [
       {
         q: "Do we have to buy new machines?",
@@ -1338,23 +1501,28 @@ const integrationsData: Record<string, IntegrationEntry> = {
     flow: [
       {
         label: "Vehicle and route recorded",
-        detail: "Buses, drivers, routes and stops are maintained in the transport module.",
+        detail:
+          "Buses, drivers, routes and stops are maintained in the transport module.",
       },
       {
         label: "Tracker reports position",
-        detail: "Your GPS device or its platform posts location updates against the vehicle record.",
+        detail:
+          "Your GPS device or its platform posts location updates against the vehicle record.",
       },
       {
         label: "Matched to the route",
-        detail: "The position is placed against the route and its stops, so the office sees progress rather than raw coordinates.",
+        detail:
+          "The position is placed against the route and its stops, so the office sees progress rather than raw coordinates.",
       },
       {
         label: "Events drive alerts",
-        detail: "Stop and geofence events can trigger the parent notification channels you already use.",
+        detail:
+          "Stop and geofence events can trigger the parent notification channels you already use.",
       },
     ],
     ownership: {
-      credentials: "Your tracking hardware and its account. KIDUART receives location data against your vehicles.",
+      credentials:
+        "Your tracking hardware and its account. KIDUART receives location data against your vehicles.",
       data: "Vehicle position history sits with your school's transport records.",
       billing: "SIM and tracker charges stay with your existing vendor.",
     },
@@ -1375,7 +1543,8 @@ const integrationsData: Record<string, IntegrationEntry> = {
       { area: "transport-management", module: "Routes" },
       { area: "transport-management", module: "Vehicles" },
     ],
-    keywords: "school bus GPS tracking software, live bus tracking parents app, school transport route management",
+    keywords:
+      "school bus GPS tracking software, live bus tracking parents app, school transport route management",
     faqs: [
       {
         q: "Does this replace our tracking vendor?",
@@ -1397,7 +1566,7 @@ const integrationsData: Record<string, IntegrationEntry> = {
     description:
       "Store admission documents, certificates and staff files in managed cloud storage instead of a shared drive.",
     intro:
-      "Schools accumulate documents: birth certificates, transfer certificates, mark sheets, staff qualifications, ID proofs. KIDUART stores uploads in managed cloud storage — Cloudinary for media and Amazon S3 with CDN delivery for documents — and links each file to the record it belongs to, so a document is found from the student's profile rather than a folder someone renamed.",
+      "Schools accumulate documents: birth certificates, transfer certificates, mark sheets, staff qualifications, ID proofs. KIDUART stores uploads in managed cloud storage  Cloudinary for media and Amazon S3 with CDN delivery for documents  and links each file to the record it belongs to, so a document is found from the student's profile rather than a folder someone renamed.",
     benefits: [
       "Documents attached to the student or staff record",
       "No shared drive naming conventions to maintain",
@@ -1408,25 +1577,31 @@ const integrationsData: Record<string, IntegrationEntry> = {
     flow: [
       {
         label: "Upload at the record",
-        detail: "The front office attaches a document while admitting a student or onboarding a staff member.",
+        detail:
+          "The front office attaches a document while admitting a student or onboarding a staff member.",
       },
       {
         label: "Scanned and stored",
-        detail: "The file is checked and written to managed cloud storage rather than an email attachment or a shared folder.",
+        detail:
+          "The file is checked and written to managed cloud storage rather than an email attachment or a shared folder.",
       },
       {
         label: "Linked to the profile",
-        detail: "The document is attached to that student or staff record with its type, so it is searchable by person.",
+        detail:
+          "The document is attached to that student or staff record with its type, so it is searchable by person.",
       },
       {
         label: "Opened by permission",
-        detail: "Only roles with rights on that record can open it, and access follows the same rules as the record itself.",
+        detail:
+          "Only roles with rights on that record can open it, and access follows the same rules as the record itself.",
       },
     ],
     ownership: {
-      credentials: "Managed by KIDUART as part of the platform, so your school does not run buckets or CDNs.",
+      credentials:
+        "Managed by KIDUART as part of the platform, so your school does not run buckets or CDNs.",
       data: "Your documents belong to your school and are exportable when you ask.",
-      billing: "Storage is part of your subscription. There is no separate cloud bill to reconcile.",
+      billing:
+        "Storage is part of your subscription. There is no separate cloud bill to reconcile.",
     },
     steps: [
       "Confirm the document types you collect during onboarding",
@@ -1444,7 +1619,8 @@ const integrationsData: Record<string, IntegrationEntry> = {
       { area: "student-management", module: "Documents" },
       { area: "facilities-and-inventory", module: "Infrastructure" },
     ],
-    keywords: "school document management software, student certificate storage school ERP",
+    keywords:
+      "school document management software, student certificate storage school ERP",
     faqs: [
       {
         q: "Who can see a student's documents?",
@@ -1466,7 +1642,7 @@ const integrationsData: Record<string, IntegrationEntry> = {
     description:
       "Take any list or report out as Excel, CSV or PDF for your accountant, trust office or board submission.",
     intro:
-      "Not every hand-off needs an API. Fee collection summaries go to the accountant, staff lists go to the trust office, student data goes into a board format. KIDUART exports lists and reports as Excel, CSV or PDF, and takes bulk imports the same way — so moving data in and out never depends on someone retyping it.",
+      "Not every hand-off needs an API. Fee collection summaries go to the accountant, staff lists go to the trust office, student data goes into a board format. KIDUART exports lists and reports as Excel, CSV or PDF, and takes bulk imports the same way  so moving data in and out never depends on someone retyping it.",
     benefits: [
       "Fee, attendance, academic and staff reports as Excel or CSV",
       "Printable PDF reports for board and trust submissions",
@@ -1477,24 +1653,29 @@ const integrationsData: Record<string, IntegrationEntry> = {
     flow: [
       {
         label: "Filter the list",
-        detail: "Pick the class, section, date range or fee head you actually need on screen.",
+        detail:
+          "Pick the class, section, date range or fee head you actually need on screen.",
       },
       {
         label: "Export the view",
-        detail: "The export carries your filters, so what downloads matches what you were looking at.",
+        detail:
+          "The export carries your filters, so what downloads matches what you were looking at.",
       },
       {
         label: "Open where you work",
-        detail: "Excel or CSV opens in the tool your accountant or office already uses; reports print as PDF.",
+        detail:
+          "Excel or CSV opens in the tool your accountant or office already uses; reports print as PDF.",
       },
       {
         label: "Bring data back in",
-        detail: "The same structure works for bulk import when you are loading a new session's data.",
+        detail:
+          "The same structure works for bulk import when you are loading a new session's data.",
       },
     ],
     ownership: {
-      credentials: "None. Exports follow the permissions of the person requesting them.",
-      data: "Your data, in an open format, whenever you want it — no lock-in argument required.",
+      credentials:
+        "None. Exports follow the permissions of the person requesting them.",
+      data: "Your data, in an open format, whenever you want it  no lock-in argument required.",
       billing: "Included. Exports are not a paid add-on.",
     },
     steps: [
@@ -1513,7 +1694,8 @@ const integrationsData: Record<string, IntegrationEntry> = {
       { area: "reports-and-analytics", module: "Financial Reports" },
       { area: "student-management", module: "Bulk Operations" },
     ],
-    keywords: "school ERP excel export, school data export csv, fee report export accountant",
+    keywords:
+      "school ERP excel export, school data export csv, fee report export accountant",
     faqs: [
       {
         q: "Do you integrate directly with Tally?",
@@ -1531,11 +1713,16 @@ const integrationsData: Record<string, IntegrationEntry> = {
     accent: "navy",
     category: "Files, data and developer access",
     status: "live",
-    providers: ["REST /api/v1", "Scoped API keys", "OpenAPI reference", "Payment webhooks"],
+    providers: [
+      "REST /api/v1",
+      "Scoped API keys",
+      "OpenAPI reference",
+      "Payment webhooks",
+    ],
     description:
       "Build against a versioned REST API with managed API keys, published reference docs and rate limits.",
     intro:
-      "If your school runs an internal system — a website, an attendance device, a reporting warehouse — your developers can work against the KIDUART REST API. Endpoints are versioned under a stable base path, access uses managed API keys with scoped permissions rather than a shared staff login, and every request is rate limited and logged.",
+      "If your school runs an internal system  a website, an attendance device, a reporting warehouse  your developers can work against the KIDUART REST API. Endpoints are versioned under a stable base path, access uses managed API keys with scoped permissions rather than a shared staff login, and every request is rate limited and logged.",
     benefits: [
       "Versioned REST endpoints under a stable /api/v1 base path",
       "Managed API keys with per-scope permissions instead of a staff password",
@@ -1546,25 +1733,31 @@ const integrationsData: Record<string, IntegrationEntry> = {
     flow: [
       {
         label: "Access requested",
-        detail: "You tell us what the integration needs to read or write, and for which part of the school.",
+        detail:
+          "You tell us what the integration needs to read or write, and for which part of the school.",
       },
       {
         label: "Scoped key issued",
-        detail: "A key is issued with only those scopes — a reporting job never gets permission to write records.",
+        detail:
+          "A key is issued with only those scopes  a reporting job never gets permission to write records.",
       },
       {
         label: "Developer builds",
-        detail: "Your developer works against the versioned endpoints using the published reference.",
+        detail:
+          "Your developer works against the versioned endpoints using the published reference.",
       },
       {
         label: "Calls logged and limited",
-        detail: "Requests are rate limited and recorded, so unusual usage is visible and a leaked key can be revoked.",
+        detail:
+          "Requests are rate limited and recorded, so unusual usage is visible and a leaked key can be revoked.",
       },
     ],
     ownership: {
-      credentials: "Keys are issued to your school and can be rotated or revoked by you at any time.",
+      credentials:
+        "Keys are issued to your school and can be rotated or revoked by you at any time.",
       data: "Anything the key's scopes allow, and nothing else. Scope is the boundary, not trust.",
-      billing: "API access is part of your subscription, subject to fair-use rate limits.",
+      billing:
+        "API access is part of your subscription, subject to fair-use rate limits.",
     },
     steps: [
       "Request API access for your school and describe the use case",
@@ -1582,7 +1775,8 @@ const integrationsData: Record<string, IntegrationEntry> = {
       { area: "security-and-authentication", module: "API Access" },
       { area: "reports-and-analytics", module: "Custom Reports" },
     ],
-    keywords: "school ERP REST API, school management API integration, school data API key",
+    keywords:
+      "school ERP REST API, school management API integration, school data API key",
     faqs: [
       {
         q: "Can an API key be limited to read-only?",
@@ -1608,22 +1802,40 @@ const integrationsData: Record<string, IntegrationEntry> = {
     description:
       "Planned: adoption analytics for the parent and student portals, built without profiling children.",
     intro:
-      "Some schools want to know whether parents are actually opening the portal. Portal usage analytics is a roadmap item, and it will be built with student privacy in mind — adoption patterns, not individual behaviour profiles. Operational reporting on attendance, fees and academics is already available today in the reports module.",
+      "Some schools want to know whether parents are actually opening the portal. Portal usage analytics is a roadmap item, and it will be built with student privacy in mind  adoption patterns, not individual behaviour profiles. Operational reporting on attendance, fees and academics is already available today in the reports module.",
     benefits: [
       "Planned: portal adoption and usage visibility",
       "Planned: aggregate reporting rather than per-child tracking",
       "Available today: attendance, fee and academic reporting in-product",
     ],
     flow: [
-      { label: "Today", detail: "Use the reports and analytics module for operational reporting on real school data." },
-      { label: "Tell us", detail: "Describe the adoption question you are trying to answer, so we build the right thing." },
-      { label: "When it ships", detail: "Aggregate adoption views by class and role, not individual browsing histories." },
-      { label: "What we will not do", detail: "We are not going to sell child behaviour data to an advertising platform." },
+      {
+        label: "Today",
+        detail:
+          "Use the reports and analytics module for operational reporting on real school data.",
+      },
+      {
+        label: "Tell us",
+        detail:
+          "Describe the adoption question you are trying to answer, so we build the right thing.",
+      },
+      {
+        label: "When it ships",
+        detail:
+          "Aggregate adoption views by class and role, not individual browsing histories.",
+      },
+      {
+        label: "What we will not do",
+        detail:
+          "We are not going to sell child behaviour data to an advertising platform.",
+      },
     ],
     ownership: {
-      credentials: "None expected. This is intended as in-product reporting, not a third-party tracking script.",
+      credentials:
+        "None expected. This is intended as in-product reporting, not a third-party tracking script.",
       data: "Aggregate usage stays inside your school's own instance.",
-      billing: "Expected to be part of the reporting module rather than a paid add-on.",
+      billing:
+        "Expected to be part of the reporting module rather than a paid add-on.",
     },
     steps: [
       "Use the reports and analytics module for operational reporting today",
@@ -1646,7 +1858,7 @@ const integrationsData: Record<string, IntegrationEntry> = {
 
 export const INTEGRATION_SLUGS = Object.keys(integrationsData);
 
-/** Names schools ask about that are genuinely not connected — kept public on purpose. */
+/** Names schools ask about that are genuinely not connected  kept public on purpose. */
 export const INTEGRATIONS_NOT_SUPPORTED = [
   {
     name: "Cashfree, PayU, Paytm and PhonePe",

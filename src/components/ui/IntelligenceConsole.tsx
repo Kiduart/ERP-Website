@@ -68,7 +68,9 @@ export function IntelligenceConsole() {
   const tabListRef = useRef<HTMLDivElement>(null);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
-  const liveCount = INTELLIGENCE_WORKFLOWS.filter((item) => item.status === "live").length;
+  const liveCount = INTELLIGENCE_WORKFLOWS.filter(
+    (item) => item.status === "live",
+  ).length;
   const buildingCount = INTELLIGENCE_WORKFLOWS.length - liveCount;
 
   useEffect(() => {
@@ -86,7 +88,8 @@ export function IntelligenceConsole() {
     if (locked || !inView) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const timer = window.setInterval(
-      () => setActiveIndex((index) => (index + 1) % INTELLIGENCE_WORKFLOWS.length),
+      () =>
+        setActiveIndex((index) => (index + 1) % INTELLIGENCE_WORKFLOWS.length),
       AUTO_ADVANCE_MS,
     );
     return () => window.clearInterval(timer);
@@ -98,8 +101,13 @@ export function IntelligenceConsole() {
     const tab = tabRefs.current[activeIndex];
     if (!list || !tab || list.scrollWidth <= list.clientWidth + 4) return;
     const target = tab.offsetLeft - (list.clientWidth - tab.offsetWidth) / 2;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    list.scrollTo({ left: Math.max(0, target), behavior: reduced ? "auto" : "smooth" });
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    list.scrollTo({
+      left: Math.max(0, target),
+      behavior: reduced ? "auto" : "smooth",
+    });
   }, [activeIndex]);
 
   const select = useCallback((index: number) => {
@@ -110,8 +118,10 @@ export function IntelligenceConsole() {
   const onTabKeyDown = (event: React.KeyboardEvent, index: number) => {
     const last = INTELLIGENCE_WORKFLOWS.length - 1;
     let next: number | null = null;
-    if (event.key === "ArrowRight" || event.key === "ArrowDown") next = index === last ? 0 : index + 1;
-    if (event.key === "ArrowLeft" || event.key === "ArrowUp") next = index === 0 ? last : index - 1;
+    if (event.key === "ArrowRight" || event.key === "ArrowDown")
+      next = index === last ? 0 : index + 1;
+    if (event.key === "ArrowLeft" || event.key === "ArrowUp")
+      next = index === 0 ? last : index - 1;
     if (event.key === "Home") next = 0;
     if (event.key === "End") next = last;
     if (next === null) return;
@@ -128,8 +138,8 @@ export function IntelligenceConsole() {
             Signals it already has
           </h3>
           <p className="mt-3 text-sm leading-6" style={MUTED}>
-            Nothing extra to install or log. These streams are produced by the daily work your staff
-            is already doing inside KIDUART.
+            Nothing extra to install or log. These streams are produced by the
+            daily work your staff is already doing inside KIDUART.
           </p>
           <ul className="mt-5 space-y-3.5">
             {SIGNAL_STREAMS.map((stream, index) => (
@@ -140,7 +150,9 @@ export function IntelligenceConsole() {
                   className="console-live-dot mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-yellow"
                 />
                 <span>
-                  <span className="block text-sm font-bold text-brand-beige">{stream.label}</span>
+                  <span className="block text-sm font-bold text-brand-beige">
+                    {stream.label}
+                  </span>
                   <span className="block text-xs leading-5" style={MUTED}>
                     {stream.detail}
                   </span>
@@ -150,11 +162,14 @@ export function IntelligenceConsole() {
           </ul>
         </div>
 
-        <p className="mt-5 rounded-2xl border border-white/12 bg-white/[0.04] p-5 text-sm leading-6" style={MUTED}>
-          Live models run inside your own instance on your own records — no student data is sent to
-          an outside AI service. Anything marked{" "}
-          <span className="font-bold text-brand-beige">in development</span> is not switched on and
-          is not billed.
+        <p
+          className="mt-5 rounded-2xl border border-white/12 bg-white/[0.04] p-5 text-sm leading-6"
+          style={MUTED}
+        >
+          Live models run inside your own instance on your own records no
+          student data is sent to an outside AI service. Anything marked{" "}
+          <span className="font-bold text-brand-beige">in development</span> is
+          not switched on and is not billed.
         </p>
       </aside>
 
@@ -285,7 +300,10 @@ export function IntelligenceConsole() {
               </div>
 
               <div className="mt-7 flex flex-wrap items-center gap-2.5 border-t border-white/10 pt-5">
-                <span className="text-xs font-bold uppercase tracking-[0.16em]" style={MUTED}>
+                <span
+                  className="text-xs font-bold uppercase tracking-[0.16em]"
+                  style={MUTED}
+                >
                   Runs inside
                 </span>
                 {workflow.modules.map((module) => (

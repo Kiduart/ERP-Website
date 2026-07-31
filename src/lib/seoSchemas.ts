@@ -9,7 +9,8 @@ export const organizationSchema: JsonLd = {
   name: "KIDUART",
   url: SITE_URL,
   logo: LOGO_URL,
-  description: "School ERP software for Indian schools — admissions, fees, attendance, and parent communication",
+  description:
+    "School ERP software and school management system for Indian schools  admissions, online fee management, attendance tracking, and parent communication",
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "sales",
@@ -21,12 +22,26 @@ export const softwareApplicationSchema: JsonLd = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
   name: "KIDUART School ERP",
+  alternateName: [
+    "KIDUART School Management Software",
+    "KIDUART School Management System",
+  ],
   applicationCategory: "EducationalApplication",
   operatingSystem: "Web",
+  description:
+    "Cloud-based school ERP software for Indian schools covering admissions, fee management, attendance, exams, and parent portal.",
   offers: {
     "@type": "Offer",
     availability: "https://schema.org/InStock",
   },
+  featureList: [
+    "School admissions workflow",
+    "Online fee management",
+    "Attendance tracking",
+    "Exam and report cards",
+    "Parent portal",
+    "Role-based dashboards",
+  ],
 };
 
 export type BreadcrumbEntry = { name: string; path: string };
@@ -45,7 +60,10 @@ export function buildBreadcrumbSchema(entries: BreadcrumbEntry[]): JsonLd {
 }
 
 /** Lists modules or features so search engines see the depth of a module area. */
-export function buildItemListSchema(name: string, items: { name: string; path?: string }[]): JsonLd {
+export function buildItemListSchema(
+  name: string,
+  items: { name: string; path?: string }[],
+): JsonLd {
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -172,7 +190,9 @@ export function buildInternJobPostingSchema({
   };
 }
 
-export function buildCareersFaqSchema(items: Array<{ q: string; a: string }>): JsonLd {
+export function buildCareersFaqSchema(
+  items: Array<{ q: string; a: string }>,
+): JsonLd {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",

@@ -3,59 +3,113 @@ import { SchemaMarkup } from "@/components/seo/SchemaMarkup";
 import { pageSeo } from "@/lib/pageSeo";
 import { softwareApplicationSchema } from "@/lib/seoSchemas";
 import type { GetStaticProps } from "next";
+import dynamic from "next/dynamic";
+import Head from "next/head";
 import { Link } from "wouter";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
-import { CtaSection } from "@/components/ui/CtaSection";
 import { HomeCurveHero } from "@/components/ui/CustomHeroes";
-import { SchoolJourney } from "@/components/ui/SchoolJourney";
-import { SystemSwitchboard } from "@/components/ui/SystemSwitchboard";
-import { CapabilityAtlas, type AtlasArea } from "@/components/ui/CapabilityAtlas";
-import { IntelligenceConsole } from "@/components/ui/IntelligenceConsole";
-import { RolloutRunway } from "@/components/ui/RolloutRunway";
-import { FoundingCharter } from "@/components/ui/FoundingCharter";
-import { VendorChecklistTeaser } from "@/components/ui/VendorChecklist";
-import {
-  IntegrationFabric,
-  type FabricCategory,
-  type FabricStatus,
+import type { AtlasArea } from "@/components/ui/CapabilityAtlas";
+import type {
+  FabricCategory,
+  FabricStatus,
 } from "@/components/ui/IntegrationFabric";
-import {
-  SecurityPerimeter,
-  type PerimeterLayer,
-  type PerimeterScenario,
+import type {
+  PerimeterLayer,
+  PerimeterScenario,
 } from "@/components/ui/SecurityPerimeter";
 import { AREA_NARRATIVES } from "@/data/productNarrative";
-import { MATRIX_CATEGORIES, countSubModules, topModules } from "@/data/featureMatrix";
-import integrationsData, { INTEGRATION_CATEGORIES } from "@/data/integrationsData";
+import {
+  MATRIX_CATEGORIES,
+  countSubModules,
+  topModules,
+} from "@/data/featureMatrix";
+import integrationsData, {
+  INTEGRATION_CATEGORIES,
+} from "@/data/integrationsData";
 import { SECURITY_LAYERS, SECURITY_SCENARIOS } from "@/data/securityPosture";
 import { CONTACT_PHONE_E164 } from "@/lib/contact";
-import { FloatingIcons } from "@/components/animations/FloatingIcons";
-import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
-const faqs = [
-  {
-    q: "What does your school ERP software manage?",
-    a: "KIDUART covers the school operations journey from student records and fee collection to attendance, exams, transport, library, HR, and parent communication. Everything runs from one dashboard so your admin team stops switching between spreadsheets, WhatsApp, and paper registers.",
-  },
-  {
-    q: "Is this suitable for schools in India?",
-    a: "Yes. KIDUART is designed for the Indian school context, including typical fee structures, academic session patterns, and how families expect updates. We are onboarding pilot schools in Uttar Pradesh and welcome demos from schools across India.",
-  },
-  {
-    q: "How does AI help school management?",
-    a: "The AI layer works on patterns in your own school data. It surfaces irregular attendance early, prioritizes fee accounts that need follow-up, speeds report card publishing from structured marks, and helps staff draft clearer parent circulars.",
-  },
-  {
-    q: "Can different staff have different access?",
-    a: "Yes. KIDUART uses role-based access control. A class teacher sees attendance and gradebook data for their sections. A finance officer sees fee accounts and payment history. The principal sees the full school dashboard. Parents access only their child's profile.",
-  },
-];
-
+const SchoolJourney = dynamic(
+  () => import("@/components/ui/SchoolJourney").then((m) => m.SchoolJourney),
+  { ssr: true },
+);
+const SystemSwitchboard = dynamic(
+  () =>
+    import("@/components/ui/SystemSwitchboard").then(
+      (m) => m.SystemSwitchboard,
+    ),
+  { ssr: true },
+);
+const CapabilityAtlas = dynamic(
+  () =>
+    import("@/components/ui/CapabilityAtlas").then((m) => m.CapabilityAtlas),
+  { ssr: true },
+);
+const IntelligenceConsole = dynamic(
+  () =>
+    import("@/components/ui/IntelligenceConsole").then(
+      (m) => m.IntelligenceConsole,
+    ),
+  { ssr: true },
+);
+const RolloutRunway = dynamic(
+  () => import("@/components/ui/RolloutRunway").then((m) => m.RolloutRunway),
+  { ssr: true },
+);
+const FoundingCharter = dynamic(
+  () =>
+    import("@/components/ui/FoundingCharter").then((m) => m.FoundingCharter),
+  { ssr: true },
+);
+const VendorChecklistTeaser = dynamic(
+  () =>
+    import("@/components/ui/VendorChecklist").then(
+      (m) => m.VendorChecklistTeaser,
+    ),
+  { ssr: true },
+);
+const IntegrationFabric = dynamic(
+  () =>
+    import("@/components/ui/IntegrationFabric").then(
+      (m) => m.IntegrationFabric,
+    ),
+  { ssr: true },
+);
+const SecurityPerimeter = dynamic(
+  () =>
+    import("@/components/ui/SecurityPerimeter").then(
+      (m) => m.SecurityPerimeter,
+    ),
+  { ssr: true },
+);
+const CtaSection = dynamic(
+  () => import("@/components/ui/CtaSection").then((m) => m.CtaSection),
+  { ssr: true },
+);
+const FloatingIcons = dynamic(
+  () =>
+    import("@/components/animations/FloatingIcons").then(
+      (m) => m.FloatingIcons,
+    ),
+  { ssr: false },
+);
+const BackgroundBlobs = dynamic(
+  () =>
+    import("@/components/animations/BackgroundBlobs").then(
+      (m) => m.BackgroundBlobs,
+    ),
+  { ssr: false },
+);
 type HomeProps = {
   areaCards: AtlasArea[];
   integrationBoard: FabricCategory[];
-  integrationCounts: { live: number; guided: number; planned: number; total: number };
+  integrationCounts: {
+    live: number;
+    guided: number;
+    planned: number;
+    total: number;
+  };
   securityLayers: PerimeterLayer[];
   securityScenarios: PerimeterScenario[];
   securityStats: { layers: number; modules: number; capabilities: number };
@@ -72,13 +126,24 @@ export default function Home({
   return (
     <>
       <PageSeoHead {...pageSeo.home} />
+      <Head>
+        <link
+          rel="preload"
+          as="image"
+          type="image/avif"
+          imageSrcSet="/images/banner/responsive/home-hero-640.avif 640w, /images/banner/responsive/home-hero-1024.avif 1024w, /images/banner/responsive/home-hero-1600.avif 1600w"
+          imageSizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1600px"
+          fetchPriority="high"
+        />
+      </Head>
       <SchemaMarkup
         type="Organization"
         data={{
           name: "KIDUART",
           url: "https://www.kiduart.com",
           logo: "https://www.kiduart.com/images/logo.png",
-          description: "School ERP software for Indian schools",
+          description:
+            "School ERP software and school management system for Indian schools  admissions, fees, attendance, and parent communication",
           address: {
             "@type": "PostalAddress",
             addressLocality: "Noida",
@@ -99,10 +164,10 @@ export default function Home({
 
       <PageTransition instant className="pt-0 pb-0">
         <HomeCurveHero
-          title="Complete school operations, from admission records to parent updates"
-          subtitle="KIDUART connects student records, fees, attendance, exams, transport, library, HR, and communication in one ERP built for how Indian schools actually work."
+          title="School ERP software for Indian schools  admissions to parent updates"
+          subtitle="KIDUART is a cloud-based school management system that connects student records, online fee management, attendance tracking, exams, report cards, transport, library, HR, and parent communication in one school ERP."
           image="/images/banner/home-hero.jpeg"
-          actions={(
+          actions={
             <>
               <Link
                 href="/demo"
@@ -117,16 +182,20 @@ export default function Home({
                 Explore Modules <ArrowRight className="h-5 w-5" />
               </Link>
             </>
-          )}
+          }
         />
 
         <section className="section-space-tight relative overflow-hidden border-b border-brand-navy/5 bg-brand-beige/40">
           <div className="page-shell relative z-10">
             <SectionReveal className="mx-auto mb-10 max-w-3xl text-center">
               <div className="section-kicker">School operations journey</div>
-              <h2 className="section-title mt-6 text-brand-navy">Follow the path your school runs every day</h2>
+              <h2 className="section-title mt-6 text-brand-navy">
+                Follow the path your school runs every day
+              </h2>
               <p className="section-copy mt-4 text-brand-navy/70">
-                Pick any step to see what that module does. Each piece hands off to the next, so information entered once keeps moving through the school year.
+                Pick any step to see what that module does. Each piece hands off
+                to the next, so information entered once keeps moving through
+                the school year.
               </p>
             </SectionReveal>
 
@@ -139,18 +208,31 @@ export default function Home({
         <section className="section-space-tight relative overflow-hidden border-y border-brand-navy/5 bg-white">
           <BackgroundBlobs
             blobs={[
-              { color: "hsl(var(--blob-yellow))", size: 300, position: "center-left", opacity: 0.15 },
-              { color: "hsl(var(--blob-teal))", size: 300, position: "center-right", opacity: 0.15 },
+              {
+                color: "hsl(var(--blob-yellow))",
+                size: 300,
+                position: "center-left",
+                opacity: 0.15,
+              },
+              {
+                color: "hsl(var(--blob-teal))",
+                size: 300,
+                position: "center-right",
+                opacity: 0.15,
+              },
             ]}
           />
           <FloatingIcons icons={["Calculator", "BarChart2"]} count={4} />
           <div className="page-shell relative z-10">
             <SectionReveal className="mx-auto mb-12 max-w-3xl text-center">
               <div className="section-kicker">Built for daily school work</div>
-              <h2 className="section-title mt-6 text-brand-navy">What changes when everything sits in one system</h2>
+              <h2 className="section-title mt-6 text-brand-navy">
+                What changes when everything sits in one system
+              </h2>
               <p className="section-copy mt-4 text-brand-navy/70">
-                Flip the switch to see the same six jobs the way most schools run them today, and the way
-                they run once records, fees, attendance and communication share one system.
+                Flip the switch to see the same six jobs the way most schools
+                run them today, and the way they run once records, fees,
+                attendance and communication share one system.
               </p>
             </SectionReveal>
             <SectionReveal>
@@ -162,11 +244,30 @@ export default function Home({
         <section className="section-space relative overflow-hidden bg-brand-beige/30">
           <BackgroundBlobs
             blobs={[
-              { color: "hsl(var(--blob-orange))", size: 400, position: "top-right", opacity: 0.15 },
-              { color: "hsl(var(--brand-navy))", size: 400, position: "bottom-left", opacity: 0.12 },
+              {
+                color: "hsl(var(--blob-orange))",
+                size: 400,
+                position: "top-right",
+                opacity: 0.15,
+              },
+              {
+                color: "hsl(var(--brand-navy))",
+                size: 400,
+                position: "bottom-left",
+                opacity: 0.12,
+              },
             ]}
           />
-          <FloatingIcons icons={["Users", "Calendar", "CreditCard", "MessageSquare", "PieChart"]} count={5} />
+          <FloatingIcons
+            icons={[
+              "Users",
+              "Calendar",
+              "CreditCard",
+              "MessageSquare",
+              "PieChart",
+            ]}
+            count={5}
+          />
 
           <div className="page-shell relative z-10">
             <SectionReveal className="mx-auto mb-12 max-w-4xl text-center">
@@ -175,8 +276,9 @@ export default function Home({
                 Your whole school, mapped into working areas
               </h2>
               <p className="section-copy mt-4 text-brand-navy/70">
-                Filter by the part of school you want to fix first. Each area shows how deep it runs
-                in the live product — modules and workflows your team already recognises.
+                Filter by the part of school you want to fix first. Each area
+                shows how deep it runs in the live product modules and workflows
+                your team already recognises.
               </p>
             </SectionReveal>
 
@@ -195,18 +297,31 @@ export default function Home({
           </div>
         </section>
 
-        <section className="section-space relative overflow-hidden bg-brand-navy text-white" style={{ color: "rgb(var(--hero-foreground-rgb))" }}>
+        <section
+          className="section-space relative overflow-hidden bg-brand-navy text-white"
+          style={{ color: "rgb(var(--hero-foreground-rgb))" }}
+        >
           <BackgroundBlobs
             blobs={[
-              { color: "hsl(var(--blob-yellow))", size: 400, position: "top-left", opacity: 0.15 },
-              { color: "hsl(var(--blob-teal))", size: 400, position: "bottom-right", opacity: 0.15 },
+              {
+                color: "hsl(var(--blob-yellow))",
+                size: 400,
+                position: "top-left",
+                opacity: 0.15,
+              },
+              {
+                color: "hsl(var(--blob-teal))",
+                size: 400,
+                position: "bottom-right",
+                opacity: 0.15,
+              },
             ]}
           />
           <FloatingIcons icons={["Brain", "Atom", "Lightbulb"]} count={4} />
           {/* Alpha lives in the colour itself so contrast checkers can blend it with the navy behind */}
           <div className="pointer-events-none absolute left-0 top-0 h-full w-full overflow-hidden">
-            <div className="absolute right-[-5%] top-[-10%] h-96 w-96 rounded-full bg-[rgba(12,115,111,0.2)] blur-[100px]" />
-            <div className="absolute bottom-[-10%] left-[-5%] h-96 w-96 rounded-full bg-[rgba(245,129,0,0.2)] blur-[100px]" />
+            <div className="absolute right-[-5%] top-[-10%] h-96 w-96 rounded-full bg-[rgba(12,115,111,0.2)] blur-3xl" />
+            <div className="absolute bottom-[-10%] left-[-5%] h-96 w-96 rounded-full bg-[rgba(245,129,0,0.2)] blur-3xl" />
           </div>
 
           <div className="page-shell relative z-10">
@@ -217,11 +332,15 @@ export default function Home({
               <h2 className="section-title mb-4 text-brand-beige">
                 Your school data is already watching. This is what it says.
               </h2>
-              <p className="section-copy" style={{ color: "rgb(var(--hero-muted-rgb) / 0.7)" }}>
-                Not a chatbot bolted on top. KIDUART runs trend, risk and scoring models over your own
-                attendance, fee and exam records, then hands your team a short list worth acting on.
-                Pick any workflow to see exactly what it reads, what it computes, and who gets the
-                result.
+              <p
+                className="section-copy"
+                style={{ color: "rgb(var(--hero-muted-rgb) / 0.7)" }}
+              >
+                Not a chatbot bolted on top. KIDUART runs trend, risk and
+                scoring models over your own attendance, fee and exam records,
+                then hands your team a short list worth acting on. Pick any
+                workflow to see exactly what it reads, what it computes, and who
+                gets the result.
               </p>
             </SectionReveal>
 
@@ -234,8 +353,18 @@ export default function Home({
         <section className="section-space relative overflow-hidden bg-white">
           <BackgroundBlobs
             blobs={[
-              { color: "#0c716b", size: 400, position: "top-left", opacity: 0.15 },
-              { color: "#fcbf49", size: 400, position: "bottom-right", opacity: 0.15 },
+              {
+                color: "#0c716b",
+                size: 400,
+                position: "top-left",
+                opacity: 0.15,
+              },
+              {
+                color: "#fcbf49",
+                size: 400,
+                position: "bottom-right",
+                opacity: 0.15,
+              },
             ]}
           />
           <FloatingIcons icons={["CheckCircle2", "Users", "Star"]} count={4} />
@@ -246,10 +375,11 @@ export default function Home({
                 From your old spreadsheets to a live school, in five steps
               </h2>
               <p className="section-copy mt-4 text-brand-navy/70">
-                No mid-term freeze and no blank screens. Every step below runs on tooling that already
-                exists — import templates that validate before they save, fee structures that clone
-                across classes, permissions set per role, and a parallel run you sign off before the
-                switch.
+                No mid-term freeze and no blank screens. Every step below runs
+                on tooling that already exists import templates that validate
+                before they save, fee structures that clone across classes,
+                permissions set per role, and a parallel run you sign off before
+                the switch.
               </p>
             </SectionReveal>
 
@@ -259,9 +389,13 @@ export default function Home({
 
             <SectionReveal className="mx-auto mt-10 max-w-3xl rounded-2xl border border-brand-navy/[0.08] bg-brand-beige/30 px-6 py-5 text-center">
               <p className="text-sm leading-7 text-brand-navy/80">
-                How long each step takes depends on how clean your existing records are, so we plan
-                the dates with you instead of quoting an average we have not measured yet.{" "}
-                <Link href="/demo" className="font-bold text-brand-teal underline underline-offset-4">
+                How long each step takes depends on how clean your existing
+                records are, so we plan the dates with you instead of quoting an
+                average we have not measured yet.{" "}
+                <Link
+                  href="/demo"
+                  className="font-bold text-brand-teal underline underline-offset-4"
+                >
                   Book a walkthrough
                 </Link>{" "}
                 and we will map your session structure on the call.
@@ -375,8 +509,18 @@ export default function Home({
         <section className="section-space bg-white relative overflow-hidden">
           <BackgroundBlobs
             blobs={[
-              { color: "#0c716b", size: 400, position: "top-left", opacity: 0.15 },
-              { color: "#fcbf49", size: 400, position: "bottom-right", opacity: 0.15 },
+              {
+                color: "#0c716b",
+                size: 400,
+                position: "top-left",
+                opacity: 0.15,
+              },
+              {
+                color: "#fcbf49",
+                size: 400,
+                position: "bottom-right",
+                opacity: 0.15,
+              },
             ]}
           />
           <FloatingIcons icons={["Heart", "Star", "Users"]} count={4} />
@@ -384,12 +528,13 @@ export default function Home({
             <SectionReveal className="mx-auto mb-12 max-w-3xl text-center">
               <div className="section-kicker">Proof, not adjectives</div>
               <h2 className="section-title mt-6 text-brand-navy">
-                No testimonials yet — and we are not going to invent them
+                No testimonials yet and we are not going to invent them
               </h2>
               <p className="section-copy mt-4 text-brand-navy/70">
-                KIDUART is new to Indian schools. Rather than fill this space with stock photos and
-                quotes nobody said, here is the charter we sign with our first schools, and the exact
-                format their stories will take once they are real and verified.
+                KIDUART is new to Indian schools. Rather than fill this space
+                with stock photos and quotes nobody said, here is the charter we
+                sign with our first schools, and the exact format their stories
+                will take once they are real and verified.
               </p>
             </SectionReveal>
 
@@ -400,9 +545,18 @@ export default function Home({
             <SectionReveal className="mt-10">
               <div className="flex flex-wrap items-center justify-center gap-3">
                 {[
-                  { label: "Security controls, layer by layer", href: "/security" },
-                  { label: "What we do with school data", href: "/privacy-policy" },
-                  { label: "Every module area, in the open", href: "/features" },
+                  {
+                    label: "Security controls, layer by layer",
+                    href: "/security",
+                  },
+                  {
+                    label: "What we do with school data",
+                    href: "/privacy-policy",
+                  },
+                  {
+                    label: "Every module area, in the open",
+                    href: "/features",
+                  },
                 ].map((proof) => (
                   <Link
                     key={proof.href}
@@ -418,14 +572,30 @@ export default function Home({
           </div>
         </section>
 
-        <section className="section-space-tight relative overflow-hidden border-y border-white/10 bg-brand-navy" style={{ color: "#fcf6d3" }}>
+        <section
+          className="section-space-tight relative overflow-hidden border-y border-white/10 bg-brand-navy"
+          style={{ color: "#fcf6d3" }}
+        >
           <BackgroundBlobs
             blobs={[
-              { color: "#fcbf49", size: 360, position: "top-left", opacity: 0.14 },
-              { color: "#0c716b", size: 360, position: "bottom-right", opacity: 0.14 },
+              {
+                color: "#fcbf49",
+                size: 360,
+                position: "top-left",
+                opacity: 0.14,
+              },
+              {
+                color: "#0c716b",
+                size: 360,
+                position: "bottom-right",
+                opacity: 0.14,
+              },
             ]}
           />
-          <FloatingIcons icons={["CheckCircle2", "ShieldCheck", "Users"]} count={4} />
+          <FloatingIcons
+            icons={["CheckCircle2", "ShieldCheck", "Users"]}
+            count={4}
+          />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <SectionReveal className="mx-auto mb-9 max-w-3xl text-center">
               <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold text-brand-yellow">
@@ -434,10 +604,14 @@ export default function Home({
               <h2 className="section-title mb-4 mt-6 text-brand-beige">
                 Three questions that reveal more than a polished demo
               </h2>
-              <p className="section-copy" style={{ color: "rgb(var(--hero-muted-rgb) / 0.75)" }}>
-                Test the questions here, then take the complete nine-question checklist into every
-                school ERP call. It covers payment ownership, data isolation, exports, privacy,
-                permissions, audit trails and whether the screens in a demo are actually live.
+              <p
+                className="section-copy"
+                style={{ color: "rgb(var(--hero-muted-rgb) / 0.75)" }}
+              >
+                Test the questions here, then take the complete nine-question
+                checklist into every school ERP call. It covers payment
+                ownership, data isolation, exports, privacy, permissions, audit
+                trails and whether the screens in a demo are actually live.
               </p>
             </SectionReveal>
 
@@ -450,8 +624,18 @@ export default function Home({
         <section className="section-space relative overflow-hidden border-y border-brand-navy/5 bg-brand-beige/25">
           <BackgroundBlobs
             blobs={[
-              { color: "#0c716b", size: 340, position: "top-left", opacity: 0.12 },
-              { color: "#f77f00", size: 340, position: "bottom-right", opacity: 0.12 },
+              {
+                color: "#0c716b",
+                size: 340,
+                position: "top-left",
+                opacity: 0.12,
+              },
+              {
+                color: "#f77f00",
+                size: 340,
+                position: "bottom-right",
+                opacity: 0.12,
+              },
             ]}
           />
           <div className="page-shell relative z-10">
@@ -461,14 +645,19 @@ export default function Home({
                 Keep the tools you pay for. Stop retyping between them.
               </h2>
               <p className="section-copy mt-4 text-brand-navy/70">
-                Your payment gateway, your SMS sender ID, your WhatsApp number, your Google or Microsoft
-                accounts — they stay yours. KIDUART wires them into the record they belong to, and marks
-                honestly which ones are live today, which need a setup call, and which are still roadmap.
+                Your payment gateway, your SMS sender ID, your WhatsApp number,
+                your Google or Microsoft accounts they stay yours. KIDUART wires
+                them into the record they belong to, and marks honestly which
+                ones are live today, which need a setup call, and which are
+                still roadmap.
               </p>
             </SectionReveal>
 
             <SectionReveal>
-              <IntegrationFabric categories={integrationBoard} counts={integrationCounts} />
+              <IntegrationFabric
+                categories={integrationBoard}
+                counts={integrationCounts}
+              />
             </SectionReveal>
 
             <SectionReveal className="mt-8 flex flex-wrap items-center justify-center gap-3">
@@ -476,7 +665,8 @@ export default function Home({
                 href="/integrations"
                 className="inline-flex items-center gap-2 rounded-full bg-brand-navy px-6 py-3 text-sm font-bold text-brand-beige transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-teal"
               >
-                See all {integrationCounts.total} integrations <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                See all {integrationCounts.total} integrations{" "}
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
               <Link
                 href="/integrations/api-docs"
@@ -491,20 +681,34 @@ export default function Home({
         <section className="section-space-tight relative overflow-hidden border-t border-brand-navy/5 bg-white">
           <BackgroundBlobs
             blobs={[
-              { color: "#0c716b", size: 320, position: "top-left", opacity: 0.1 },
-              { color: "#f77f00", size: 300, position: "bottom-right", opacity: 0.1 },
+              {
+                color: "#0c716b",
+                size: 320,
+                position: "top-left",
+                opacity: 0.1,
+              },
+              {
+                color: "#f77f00",
+                size: 300,
+                position: "bottom-right",
+                opacity: 0.1,
+              },
             ]}
           />
           <FloatingIcons icons={["ShieldCheck", "Lock", "Eye"]} count={4} />
           <div className="page-shell relative z-10">
             <SectionReveal className="mx-auto mb-9 max-w-3xl text-center">
-              <div className="section-kicker">Security, tested against real situations</div>
+              <div className="section-kicker">
+                Security, tested against real situations
+              </div>
               <h2 className="section-title mt-6 text-brand-navy">
-                Ask what happens when it goes wrong, not whether we say &ldquo;bank-grade&rdquo;
+                Ask what happens when it goes wrong, not whether we say
+                &ldquo;bank-grade&rdquo;
               </h2>
               <p className="section-copy mt-4 text-brand-navy/70">
-                Try three real situations here. The complete security page documents all six defence
-                layers, data-handling rules, honest boundaries and the controls behind each claim.
+                Try three real situations here. The complete security page
+                documents all six defence layers, data-handling rules, honest
+                boundaries and the controls behind each claim.
               </p>
             </SectionReveal>
 
@@ -521,7 +725,8 @@ export default function Home({
                 href="/security"
                 className="inline-flex items-center gap-2 rounded-full bg-brand-navy px-6 py-3 text-sm font-bold text-brand-beige transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-teal"
               >
-                Open the complete security review <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                Open the complete security review{" "}
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
               <Link
                 href="/privacy-policy"
@@ -542,9 +747,15 @@ export default function Home({
   );
 }
 
-const STATUS_ORDER: Record<FabricStatus, number> = { live: 0, guided: 1, planned: 2 };
+const STATUS_ORDER: Record<FabricStatus, number> = {
+  live: 0,
+  guided: 1,
+  planned: 2,
+};
 
-const securityArea = MATRIX_CATEGORIES.find((category) => category.slug === "security-and-authentication");
+const securityArea = MATRIX_CATEGORIES.find(
+  (category) => category.slug === "security-and-authentication",
+);
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => ({
   props: {
@@ -566,9 +777,15 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => ({
         })),
     })).filter((category) => category.connectors.length > 0),
     integrationCounts: {
-      live: Object.values(integrationsData).filter((entry) => entry.status === "live").length,
-      guided: Object.values(integrationsData).filter((entry) => entry.status === "guided").length,
-      planned: Object.values(integrationsData).filter((entry) => entry.status === "planned").length,
+      live: Object.values(integrationsData).filter(
+        (entry) => entry.status === "live",
+      ).length,
+      guided: Object.values(integrationsData).filter(
+        (entry) => entry.status === "guided",
+      ).length,
+      planned: Object.values(integrationsData).filter(
+        (entry) => entry.status === "planned",
+      ).length,
       total: Object.keys(integrationsData).length,
     },
     securityLayers: SECURITY_LAYERS.map((layer) => ({
@@ -587,7 +804,9 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => ({
       capabilities: securityArea?.featureCount ?? 0,
     },
     areaCards: MATRIX_CATEGORIES.map((category) => {
-      const narrative = AREA_NARRATIVES.find((entry) => entry.slug === category.slug);
+      const narrative = AREA_NARRATIVES.find(
+        (entry) => entry.slug === category.slug,
+      );
       return {
         slug: category.slug,
         label: narrative?.label ?? category.name,

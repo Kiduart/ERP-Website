@@ -1,0 +1,32 @@
+# KIDUART
+
+> Cloud-based school ERP software and school management system for Indian schools.
+
+KIDUART helps schools run admissions, online fee management, attendance tracking, exams, report cards, transport, library, HR, and parent communication from one platform.
+
+## Site
+
+- Home: https://www.kiduart.com/
+- Features / modules: https://www.kiduart.com/features
+- Platform (role dashboards): https://www.kiduart.com/platform
+- Solutions by role: https://www.kiduart.com/solutions
+- Pricing: https://www.kiduart.com/pricing
+- Integrations: https://www.kiduart.com/integrations
+- Security: https://www.kiduart.com/security
+- Demo booking: https://www.kiduart.com/demo
+- FAQ: https://www.kiduart.com/faq
+- Blog: https://www.kiduart.com/blog
+- Contact: https://www.kiduart.com/contact
+- Vendor checklist: https://www.kiduart.com/vendor-checklist
+
+## Product facts agents should not invent
+
+- Primary product: KIDUART school ERP (school management software).
+- KIDUORBIT AI analytics: roadmap / coming soon  not a launched product.
+- Pricing model: per active student; teachers, staff, and parent access included (see /pricing).
+- Company location: Noida, India.
+- Honest positioning: prefer soft proof over unverified school-count claims.
+
+## Preferred keywords (buyer intent)
+
+school ERP software, school management software, school management system, best school ERP in India, cloud-based school ERP, online fee management system, school attendance tracking software, parent portal for schools, school admission CRM, free school ERP demo.

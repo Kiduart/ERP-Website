@@ -5,7 +5,11 @@ const SITE_ORIGIN = "https://www.kiduart.com";
 const LOGO_URL = `${SITE_ORIGIN}/logo.png`;
 const SUPPORT_EMAIL = CONTACT_EMAIL;
 
-const PLACEHOLDER_ENV_VALUES = new Set(["support@yourdomain.com", "your_app_password", ""]);
+const PLACEHOLDER_ENV_VALUES = new Set([
+  "support@yourdomain.com",
+  "your_app_password",
+  "",
+]);
 
 const BRAND = {
   navy: "#003049",
@@ -42,6 +46,7 @@ type DemoEmailPayload = {
   school: string;
   role: string;
   students: string;
+  website?: string;
   message?: string;
 };
 
@@ -92,7 +97,10 @@ function getEmailConfig(): EmailConfig | null {
     };
   } catch (error) {
     if (process.env.NODE_ENV !== "production") {
-      console.warn("Email service not configured. Skipping outgoing email in non-production mode.", error);
+      console.warn(
+        "Email service not configured. Skipping outgoing email in non-production mode.",
+        error,
+      );
       return null;
     }
 
@@ -189,10 +197,8 @@ function renderPriorityBanner(text: string) {
 function renderBrandedFooter() {
   const linkCells = PRODUCT_LINKS.map(
     (link) =>
-      `<a href="${link.href}" style="color:${BRAND.teal};text-decoration:none;font-size:13px;font-weight:600;">${escapeHtml(link.label)}</a>`
-  ).join(
-    `<span style="color:#cbd5e1;padding:0 6px;">|</span>`
-  );
+      `<a href="${link.href}" style="color:${BRAND.teal};text-decoration:none;font-size:13px;font-weight:600;">${escapeHtml(link.label)}</a>`,
+  ).join(`<span style="color:#cbd5e1;padding:0 6px;">|</span>`);
 
   return `
     <tr>
@@ -201,7 +207,7 @@ function renderBrandedFooter() {
           <tr>
             <td style="padding-top:22px;">
               <p style="margin:0 0 10px;font-size:13px;line-height:1.6;color:${BRAND.muted};">
-                <strong style="color:${BRAND.navy};">KIDUART</strong> — School ERP for Indian schools
+                <strong style="color:${BRAND.navy};">KIDUART</strong>  School ERP for Indian schools
               </p>
               <p style="margin:0 0 12px;font-size:13px;line-height:1.6;">
                 <a href="mailto:${SUPPORT_EMAIL}" style="color:${BRAND.teal};text-decoration:none;">${escapeHtml(SUPPORT_EMAIL)}</a>
@@ -277,7 +283,7 @@ function getAutoReplyHtml(options: AutoReplyOptions) {
   const paragraphs = options.introParagraphs
     .map(
       (p) =>
-        `<p style="margin:0 0 14px;font-size:15px;line-height:1.75;color:${BRAND.muted};">${escapeHtml(p)}</p>`
+        `<p style="margin:0 0 14px;font-size:15px;line-height:1.75;color:${BRAND.muted};">${escapeHtml(p)}</p>`,
     )
     .join("");
 
@@ -306,7 +312,7 @@ function getAutoReplyHtml(options: AutoReplyOptions) {
     (link) =>
       `<td align="center" style="padding:6px 4px;">
         <a href="${link.href}" style="font-size:12px;font-weight:600;color:${BRAND.teal};text-decoration:none;">${escapeHtml(link.label)}</a>
-      </td>`
+      </td>`,
   ).join("");
 
   const body = `
@@ -364,7 +370,8 @@ export async function sendContactInquiryEmail(payload: ContactEmailPayload) {
       intro:
         "A school team member submitted a contact inquiry through the KIDUART website. Review the details below and follow up from your inbox.",
       rows,
-      footerNote: "Reply directly to this thread to reach the sender at their submitted email address.",
+      footerNote:
+        "Reply directly to this thread to reach the sender at their submitted email address.",
     }),
   });
 
@@ -386,8 +393,14 @@ export async function sendContactInquiryEmail(payload: ContactEmailPayload) {
         "You can explore product pages while you wait using the links below.",
       ],
       signature: "KIDUART Support",
-      primaryCta: { label: "Explore Features", href: `${SITE_ORIGIN}/features` },
-      secondaryCta: { label: "Contact Support", href: `mailto:${SUPPORT_EMAIL}` },
+      primaryCta: {
+        label: "Explore Features",
+        href: `${SITE_ORIGIN}/features`,
+      },
+      secondaryCta: {
+        label: "Contact Support",
+        href: `mailto:${SUPPORT_EMAIL}`,
+      },
     }),
   });
 }
@@ -408,6 +421,7 @@ export async function sendDemoRequestEmail(payload: DemoEmailPayload) {
     renderRow("School", payload.school),
     renderRow("Role", payload.role),
     renderRow("Students", payload.students),
+    renderRow("Website", payload.website?.trim() || "Not provided"),
     renderRow("Message", payload.message?.trim() || "Not provided"),
   ].join("");
 
@@ -415,7 +429,7 @@ export async function sendDemoRequestEmail(payload: DemoEmailPayload) {
     from: getFromAddress(config, "KIDUART Website"),
     to: config.mailTo,
     replyTo: payload.email,
-    subject: `New Demo Request — ${payload.school}`,
+    subject: `New Demo Request  ${payload.school}`,
     priority: "high",
     headers: {
       "X-Priority": "1",
@@ -428,15 +442,16 @@ export async function sendDemoRequestEmail(payload: DemoEmailPayload) {
       intro:
         "A school leader requested a KIDUART product demo. This is a high-priority lead and should be reviewed promptly by the sales or onboarding team.",
       rows,
-      priorityBanner: "High priority lead — respond promptly",
-      footerNote: "This lead came from the Book a Demo page. Confirm session timing and school context in your reply.",
+      priorityBanner: "High priority lead  respond promptly",
+      footerNote:
+        "This lead came from the Book a Demo page. Confirm session timing and school context in your reply.",
     }),
   });
 
   await transporter.sendMail({
     from: getFromAddress(config, "KIDUART Team"),
     to: payload.email,
-    subject: "We've received your demo request — KIDUART",
+    subject: "We've received your demo request  KIDUART",
     html: getAutoReplyHtml({
       recipientName: payload.firstName,
       headline: "Your demo request is confirmed",
@@ -451,13 +466,18 @@ export async function sendDemoRequestEmail(payload: DemoEmailPayload) {
         "During the session, we walk through admissions, fees, attendance, and parent communication workflows.",
       ],
       signature: "KIDUART Team",
-      primaryCta: { label: "Explore Features", href: `${SITE_ORIGIN}/features` },
+      primaryCta: {
+        label: "Explore Features",
+        href: `${SITE_ORIGIN}/features`,
+      },
       secondaryCta: { label: "View Pricing", href: `${SITE_ORIGIN}/pricing` },
     }),
   });
 }
 
-export async function sendNewsletterSubscriptionEmail(payload: NewsletterEmailPayload) {
+export async function sendNewsletterSubscriptionEmail(
+  payload: NewsletterEmailPayload,
+) {
   const config = getEmailConfig();
 
   if (!config) {
@@ -495,17 +515,22 @@ export async function sendNewsletterSubscriptionEmail(payload: NewsletterEmailPa
       ],
       nextSteps: [
         "Your email is added to our subscriber list.",
-        "You'll receive occasional updates — no spam, unsubscribe anytime.",
+        "You'll receive occasional updates  no spam, unsubscribe anytime.",
         "Explore KIDUART while you wait using the links below.",
       ],
       signature: "KIDUART Team",
-      primaryCta: { label: "Explore Platform", href: `${SITE_ORIGIN}/platform` },
+      primaryCta: {
+        label: "Explore Platform",
+        href: `${SITE_ORIGIN}/platform`,
+      },
       secondaryCta: { label: "Book a Demo", href: `${SITE_ORIGIN}/demo` },
     }),
   });
 }
 
-export async function sendCapabilitySheetEmail(payload: CapabilitySheetPayload) {
+export async function sendCapabilitySheetEmail(
+  payload: CapabilitySheetPayload,
+) {
   const config = getEmailConfig();
 
   if (!config) {
@@ -523,7 +548,7 @@ export async function sendCapabilitySheetEmail(payload: CapabilitySheetPayload) 
     from: getFromAddress(config, "KIDUART Website"),
     to: config.mailTo,
     replyTo: payload.email,
-    subject: `Capability Sheet Request — ${payload.school}`,
+    subject: `Capability Sheet Request  ${payload.school}`,
     html: getEmailShell({
       title: "Capability Sheet Request",
       headerSubtitle: "Qualified product-interest lead",
@@ -554,7 +579,10 @@ export async function sendCapabilitySheetEmail(payload: CapabilitySheetPayload) 
       ],
       signature: "KIDUART Team",
       primaryCta: { label: "Book a Demo", href: `${SITE_ORIGIN}/demo` },
-      secondaryCta: { label: "Explore Features", href: `${SITE_ORIGIN}/features` },
+      secondaryCta: {
+        label: "Explore Features",
+        href: `${SITE_ORIGIN}/features`,
+      },
     }),
   });
 }

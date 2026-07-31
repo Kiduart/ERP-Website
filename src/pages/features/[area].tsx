@@ -266,7 +266,7 @@ export default function FeatureArea({ narrative, modules, counts, panels, siblin
           </div>
         </section>
 
-        <section id="modules" className="section-space relative scroll-mt-24 overflow-hidden bg-white">
+        <section id="modules" className="section-space relative scroll-mt-24 overflow-visible bg-white">
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <SectionReveal>
               <SectionHeading
@@ -276,9 +276,9 @@ export default function FeatureArea({ narrative, modules, counts, panels, siblin
               />
             </SectionReveal>
 
-            <SectionReveal delay={0.08} className="mt-10">
+            <div className="mt-10">
               <ModuleShelf areaSlug={narrative.slug} modules={modules} accent={accent} />
-            </SectionReveal>
+            </div>
 
             {hiddenFeatureCount > 0 && (
               <SectionReveal delay={0.1} className="mt-10">
@@ -356,7 +356,7 @@ export const getStaticProps: GetStaticProps<AreaPageProps> = async (context) => 
   return {
     props: {
       narrative,
-      modules: orderedModules.map(toPublicModule),
+      modules: orderedModules.map((module) => toPublicModule(module)),
       counts: {
         features: category.featureCount,
         modules: category.moduleCount,

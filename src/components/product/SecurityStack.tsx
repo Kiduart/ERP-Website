@@ -1,6 +1,13 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+} from "react";
 import { Check, MousePointerClick } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { InView } from "@/components/ui/InView";
 import { ACCENTS } from "@/components/product/ProductPrimitives";
 import { ProductIcon } from "@/components/product/ProductIcon";
 import type { SecurityLayer } from "@/data/securityPosture";
@@ -40,8 +47,13 @@ export function SecurityStack({ layers }: { layers: SecurityLayer[] }) {
       (entries) => {
         const visible = entries
           .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
-        if (visible?.target instanceof HTMLElement && visible.target.dataset.layer) {
+          .sort(
+            (a, b) => a.boundingClientRect.top - b.boundingClientRect.top,
+          )[0];
+        if (
+          visible?.target instanceof HTMLElement &&
+          visible.target.dataset.layer
+        ) {
           setActiveId(visible.target.dataset.layer);
         }
       },
@@ -62,7 +74,9 @@ export function SecurityStack({ layers }: { layers: SecurityLayer[] }) {
 
     const onScroll = () => {
       const scrollable = pane.scrollHeight - pane.clientHeight;
-      setProgress(scrollable > 0 ? Math.min(1, pane.scrollTop / scrollable) : 0);
+      setProgress(
+        scrollable > 0 ? Math.min(1, pane.scrollTop / scrollable) : 0,
+      );
     };
 
     onScroll();
@@ -72,7 +86,17 @@ export function SecurityStack({ layers }: { layers: SecurityLayer[] }) {
 
   useEffect(() => {
     if (!panelScroll) return;
-    railRefs.current.get(activeId)?.scrollIntoView({ block: "nearest" });
+    const node = railRefs.current.get(activeId);
+    if (!node) return;
+    // Keep the active rail item visible inside the list only  never scroll the page.
+    const list = node.closest("ul");
+    if (!list || list.scrollHeight <= list.clientHeight) return;
+    const listRect = list.getBoundingClientRect();
+    const nodeRect = node.getBoundingClientRect();
+    if (nodeRect.top >= listRect.top && nodeRect.bottom <= listRect.bottom)
+      return;
+    list.scrollTop +=
+      nodeRect.top - listRect.top - (listRect.height - nodeRect.height) / 2;
   }, [activeId, panelScroll]);
 
   const register = (id: string) => (node: HTMLElement | null) => {
@@ -89,7 +113,9 @@ export function SecurityStack({ layers }: { layers: SecurityLayer[] }) {
       event.preventDefault();
       setActiveId(id);
 
-      const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+      const reduce = window.matchMedia?.(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
       const behavior: ScrollBehavior = reduce ? "auto" : "smooth";
 
       if (panelScroll && pane) {
@@ -102,13 +128,17 @@ export function SecurityStack({ layers }: { layers: SecurityLayer[] }) {
   );
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[minmax(0,18rem)_minmax(0,1fr)] lg:gap-10">
+    <InView
+      once
+      className="grid gap-8 lg:grid-cols-[minmax(0,18rem)_minmax(0,1fr)] lg:gap-10"
+    >
       <div className="lg:sticky lg:top-28 lg:self-start">
         <p className="text-sm font-bold uppercase tracking-[0.18em] text-brand-navy">
           {layers.length} layers, outside in
         </p>
         <p className="mt-2 text-sm leading-6 text-brand-navy/[0.74]">
-          Each plate is a separate control. A gap in one does not open the record underneath it.
+          Each plate is a separate control. A gap in one does not open the
+          record underneath it.
         </p>
 
         <div className="mt-4 hidden items-center gap-3 lg:flex">
@@ -118,7 +148,10 @@ export function SecurityStack({ layers }: { layers: SecurityLayer[] }) {
               style={{ width: `${Math.round(progress * 100)}%` }}
             />
           </span>
-          <span className="text-xs font-bold tabular-nums text-brand-navy/[0.72]" aria-live="polite">
+          <span
+            className="text-xs font-bold tabular-nums text-brand-navy/[0.72]"
+            aria-live="polite"
+          >
             {activeIndex + 1}/{layers.length}
           </span>
         </div>
@@ -148,13 +181,17 @@ export function SecurityStack({ layers }: { layers: SecurityLayer[] }) {
                     <span
                       className={cn(
                         "flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-xs font-extrabold",
-                        isActive ? "bg-brand-yellow text-brand-navy" : cn(tokens.softBg, tokens.text),
+                        isActive
+                          ? "bg-brand-yellow text-brand-navy"
+                          : cn(tokens.softBg, tokens.text),
                       )}
                       aria-hidden="true"
                     >
                       {String(layer.order).padStart(2, "0")}
                     </span>
-                    <span className="whitespace-nowrap lg:whitespace-normal">{layer.title}</span>
+                    <span className="whitespace-nowrap lg:whitespace-normal">
+                      {layer.title}
+                    </span>
                   </a>
                 </li>
               );
@@ -163,7 +200,10 @@ export function SecurityStack({ layers }: { layers: SecurityLayer[] }) {
         </nav>
 
         <p className="mt-4 hidden items-center gap-2 text-xs font-semibold text-brand-navy/[0.7] lg:flex">
-          <MousePointerClick className="h-3.5 w-3.5 text-brand-teal" aria-hidden="true" />
+          <MousePointerClick
+            className="h-3.5 w-3.5 text-brand-teal"
+            aria-hidden="true"
+          />
           Scroll inside the stack or pick a layer
         </p>
       </div>
@@ -175,7 +215,7 @@ export function SecurityStack({ layers }: { layers: SecurityLayer[] }) {
         aria-label="Security layers detail"
         className="capability-scroll relative space-y-6 lg:max-h-[76vh] lg:overflow-y-auto lg:pr-3"
       >
-        {layers.map((layer) => {
+        {layers.map((layer, index) => {
           const tokens = ACCENTS[layer.accent];
           const isActive = layer.id === activeId;
           return (
@@ -184,8 +224,9 @@ export function SecurityStack({ layers }: { layers: SecurityLayer[] }) {
               id={`layer-${layer.id}`}
               data-layer={layer.id}
               ref={register(layer.id)}
+              style={{ "--stagger": index } as CSSProperties}
               className={cn(
-                "relative scroll-mt-28 overflow-hidden rounded-[2rem] border bg-white p-6 transition-shadow duration-300 md:p-8 lg:scroll-mt-4",
+                "motion-stack relative scroll-mt-28 overflow-hidden rounded-[2rem] border bg-white p-6 transition-shadow duration-300 md:p-8 lg:scroll-mt-4",
                 tokens.border,
                 isActive ? "shadow-xl shadow-brand-navy/[0.08]" : "shadow-sm",
               )}
@@ -200,19 +241,39 @@ export function SecurityStack({ layers }: { layers: SecurityLayer[] }) {
               />
 
               <div className="flex flex-wrap items-start gap-4">
-                <span className={cn("flex h-12 w-12 items-center justify-center rounded-2xl", tokens.softBg)}>
-                  <ProductIcon name={layer.icon} className={cn("h-6 w-6", tokens.text)} />
+                <span
+                  className={cn(
+                    "flex h-12 w-12 items-center justify-center rounded-2xl",
+                    tokens.softBg,
+                  )}
+                >
+                  <ProductIcon
+                    name={layer.icon}
+                    className={cn("h-6 w-6", tokens.text)}
+                  />
                 </span>
                 <div className="min-w-0 flex-1">
-                  <p className={cn("text-xs font-bold uppercase tracking-[0.18em]", tokens.text)}>
-                    Layer {String(layer.order).padStart(2, "0")} · {layer.module}
+                  <p
+                    className={cn(
+                      "text-xs font-bold uppercase tracking-[0.18em]",
+                      tokens.text,
+                    )}
+                  >
+                    Layer {String(layer.order).padStart(2, "0")} ·{" "}
+                    {layer.module}
                   </p>
-                  <h3 className="mt-1.5 text-2xl font-bold text-brand-navy">{layer.title}</h3>
+                  <h3 className="mt-1.5 text-2xl font-bold text-brand-navy">
+                    {layer.title}
+                  </h3>
                 </div>
               </div>
 
-              <p className="mt-5 text-lg font-semibold leading-8 text-brand-navy">{layer.promise}</p>
-              <p className="mt-3 leading-7 text-brand-navy/[0.78]">{layer.detail}</p>
+              <p className="mt-5 text-lg font-semibold leading-8 text-brand-navy">
+                {layer.promise}
+              </p>
+              <p className="mt-3 leading-7 text-brand-navy/[0.78]">
+                {layer.detail}
+              </p>
 
               <ul className="mt-6 grid gap-2.5 sm:grid-cols-2">
                 {layer.controls.map((control) => (
@@ -229,7 +290,9 @@ export function SecurityStack({ layers }: { layers: SecurityLayer[] }) {
                     >
                       <Check className={cn("h-3 w-3", tokens.text)} />
                     </span>
-                    <span className="text-sm leading-6 text-brand-navy/[0.82]">{control}</span>
+                    <span className="text-sm leading-6 text-brand-navy/[0.82]">
+                      {control}
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -237,6 +300,6 @@ export function SecurityStack({ layers }: { layers: SecurityLayer[] }) {
           );
         })}
       </div>
-    </div>
+    </InView>
   );
 }

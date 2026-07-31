@@ -1,4 +1,4 @@
-import Head from "next/head";
+import { Stagger } from "@/components/ui/Stagger";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CtaSection } from "@/components/ui/CtaSection";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
@@ -6,6 +6,8 @@ import { FloatingIcons } from "@/components/animations/FloatingIcons";
 import { Search, MapPin, TrendingUp, ArrowRight, FolderSearch } from "lucide-react";
 import { Link } from "wouter";
 import { useState } from "react";
+import { PageSeoHead } from "@/components/seo/PageSeoHead";
+import { pageSeo } from "@/lib/pageSeo";
 import { bannerAltFromSrc, heroImgProps, IMAGE_DIMENSIONS, lazyImgProps } from "@/lib/imageSeo";
 import { ComingSoonBadge, ComingSoonContentMask } from "@/components/common/ComingSoonOverlay";
 import { customerStoryFilters, customerStories, type CustomerStory } from "@/data/customerStoriesData";
@@ -56,23 +58,7 @@ export default function CustomerStories({ stories }: CustomerStoriesPageProps) {
 
   return (
     <PageTransition className="pt-20 pb-0">
-      <Head>
-        <title>School ERP Customer Stories | KIDUART</title>
-        <meta
-          name="description"
-          content="Illustrative scenarios for K-12, private, international, and multi-branch schools planning fees, attendance, and parent communication on KIDUART. Verified customer stories will be published as schools go live."
-        />
-        <link rel="canonical" href="https://www.kiduart.com/stories" />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="KIDUART" />
-        <meta property="og:title" content="School ERP Customer Stories | KIDUART" />
-        <meta property="og:description" content="Illustrative school scenarios for fees, attendance, and parent communication on KIDUART." />
-        <meta property="og:url" content="https://www.kiduart.com/stories" />
-        <meta property="og:image" content="https://www.kiduart.com/images/banner/home-hero.jpeg" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="School ERP Customer Stories | KIDUART" />
-        <meta name="twitter:description" content="Illustrative school scenarios for fees, attendance, and parent communication on KIDUART." />
-      </Head>
+      <PageSeoHead {...pageSeo.stories} />
       <section className="relative overflow-hidden bg-[#f6efdf]">
         <div className="page-shell relative z-10 flex min-h-[calc(100svh-5rem)] flex-col justify-center py-10">
           <SectionReveal className="mx-auto max-w-3xl text-center">
@@ -80,10 +66,10 @@ export default function CustomerStories({ stories }: CustomerStoriesPageProps) {
               Customer stories
             </div> */}
             <h1 className="text-[clamp(2.1rem,1.5rem+2.2vw,3.05rem)] font-bold leading-[0.98] text-brand-navy">
-              How schools use KIDUART day to day
+              School ERP stories: how Indian schools run day to day
             </h1>
             <p className="mx-auto mt-5 max-w-2xl text-[clamp(1rem,0.96rem+0.2vw,1.06rem)] leading-7 text-brand-navy/65">
-              These outlines reflect the situations we hear most often in conversations with Indian school teams: scattered records, fee follow-ups that never end, and parents who still call the office for basic updates. Full published case studies are on the way.
+              These school management scenarios reflect what we hear most often: scattered records, fee follow-ups that never end, and parents who still call the office for basic updates. Full published case studies are on the way.
             </p>
           </SectionReveal>
 
@@ -184,9 +170,12 @@ export default function CustomerStories({ stories }: CustomerStoriesPageProps) {
           </SectionReveal>
 
           {filteredStories.length > 0 ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredStories.map((story, idx) => (
-                <SectionReveal key={story.slug} delay={idx * 0.1} className="relative overflow-hidden bg-white rounded-2xl shadow-lg shadow-brand-navy/5 border border-brand-navy/5 flex flex-col hover:-translate-y-1 transition-transform group">
+            <Stagger
+              className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+              itemClassName="motion-brick motion-brick-dense"
+            >
+              {filteredStories.map((story) => (
+                <div key={story.slug} className="relative overflow-hidden bg-white rounded-2xl shadow-lg shadow-brand-navy/5 border border-brand-navy/5 flex flex-col hover:-translate-y-1 transition-transform group">
                   <ComingSoonBadge />
                   <Link href={`/customer-stories/${story.slug}`} className="block pointer-events-none">
                     <div className={`h-32 bg-gradient-to-r ${story.color} flex items-center px-6 relative`}>
@@ -222,9 +211,9 @@ export default function CustomerStories({ stories }: CustomerStoriesPageProps) {
                       Coming Soon
                     </button>
                   </div>
-                </SectionReveal>
+                </div>
               ))}
-            </div>
+            </Stagger>
           ) : (
             <SectionReveal className="text-center py-20">
               <FolderSearch className="w-16 h-16 text-brand-navy/20 mx-auto mb-4" />

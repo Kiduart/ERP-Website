@@ -11,7 +11,7 @@ const BLOG_SLUGS = [
 export default {
   siteUrl: "https://www.kiduart.com",
   generateRobotsTxt: true,
-  exclude: ["/404", "/not-found", "/login"],
+  exclude: ["/404", "/not-found", "/login", "/home"],
   additionalPaths: async () =>
     BLOG_SLUGS.map((slug) => ({
       loc: `/blog/${slug}`,

@@ -21,15 +21,30 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       school: String(req.body?.school ?? "").trim(),
       role: String(req.body?.role ?? "").trim(),
       students: String(req.body?.students ?? "").trim(),
+      website: String(req.body?.website ?? "").trim(),
       message: String(req.body?.message ?? "").trim(),
     };
 
     if (!payload.firstName || !payload.lastName || !payload.email || !payload.code || !payload.phone || !payload.school || !payload.role || !payload.students ) {
-      return res.status(400).json({ success: false, error: "All demo request fields except message are required." });
+      return res.status(400).json({ success: false, error: "All demo request fields except message and website are required." });
     }
 
     if (!isValidEmail(payload.email)) {
       return res.status(400).json({ success: false, error: "Please provide a valid email address." });
+    }
+
+    if (payload.website) {
+      try {
+        // Accept bare domains by normalising for validation
+        const candidate = /^https?:\/\//i.test(payload.website)
+          ? payload.website
+          : `https://${payload.website}`;
+        // eslint-disable-next-line no-new
+        new URL(candidate);
+        payload.website = candidate;
+      } catch {
+        return res.status(400).json({ success: false, error: "Please provide a valid school website URL." });
+      }
     }
 
     await sendDemoRequestEmail(payload);

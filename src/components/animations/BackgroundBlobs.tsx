@@ -1,10 +1,16 @@
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 interface BlobProps {
   color: string;
   size: number;
-  position: "top-left" | "top-right" | "bottom-left" | "bottom-right" | "center-left" | "center-right";
+  position:
+    | "top-left"
+    | "top-right"
+    | "bottom-left"
+    | "bottom-right"
+    | "center-left"
+    | "center-right";
   opacity: number;
 }
 
@@ -15,6 +21,9 @@ interface BackgroundBlobsProps {
 export function BackgroundBlobs({ blobs }: BackgroundBlobsProps) {
   const prefersReducedMotion = useReducedMotion();
   const [isMobile, setIsMobile] = useState(true);
+  const [scrolling, setScrolling] = useState(false);
+  const [inView, setInView] = useState(false);
+  const [host, setHost] = useState<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const media = window.matchMedia("(max-width: 768px)");
@@ -24,52 +33,90 @@ export function BackgroundBlobs({ blobs }: BackgroundBlobsProps) {
     return () => media.removeEventListener("change", handleChange);
   }, []);
 
-  if (prefersReducedMotion || isMobile) {
-    return null;
+  useEffect(() => {
+    let timer = 0;
+    const onScroll = () => {
+      setScrolling(true);
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => setScrolling(false), 140);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.clearTimeout(timer);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!host || typeof IntersectionObserver === "undefined") {
+      setInView(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) setInView(true);
+      },
+      { rootMargin: "100px" },
+    );
+    observer.observe(host);
+    return () => observer.disconnect();
+  }, [host]);
+
+  if (prefersReducedMotion || isMobile || !inView) {
+    return <div ref={setHost} className="pointer-events-none absolute inset-0" aria-hidden="true" />;
   }
 
   const getPositionStyles = (position: BlobProps["position"]) => {
     switch (position) {
-      case "top-left": return { top: "-5%", left: "-5%" };
-      case "top-right": return { top: "-5%", right: "-5%" };
-      case "bottom-left": return { bottom: "-5%", left: "-5%" };
-      case "bottom-right": return { bottom: "-5%", right: "-5%" };
-      case "center-left": return { top: "40%", left: "-10%" };
-      case "center-right": return { top: "40%", right: "-10%" };
-      default: return {};
+      case "top-left":
+        return { top: "-5%", left: "-5%" };
+      case "top-right":
+        return { top: "-5%", right: "-5%" };
+      case "bottom-left":
+        return { bottom: "-5%", left: "-5%" };
+      case "bottom-right":
+        return { bottom: "-5%", right: "-5%" };
+      case "center-left":
+        return { top: "40%", left: "-10%" };
+      case "center-right":
+        return { top: "40%", right: "-10%" };
+      default:
+        return {};
     }
   };
 
   return (
-    <>
+    <div ref={setHost} className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
       {blobs.map((blob, i) => {
-        const duration = 8 + (i % 6); // 8-14s
+        const duration = 8 + (i % 6);
         return (
-          <motion.div
+          <m.div
             key={i}
-            className="absolute rounded-full blur-3xl"
+            className="absolute rounded-full blur-3xl will-change-transform"
             style={{
               backgroundColor: blob.color,
               opacity: blob.opacity,
               width: blob.size,
               height: blob.size,
-              zIndex: 0,
-              pointerEvents: "none",
-              ...getPositionStyles(blob.position)
+              ...getPositionStyles(blob.position),
             }}
-            animate={{
-              scale: [1, 1.08, 1],
-              x: [0, 15, 0],
-              y: [0, -15, 0]
-            }}
+            animate={
+              scrolling
+                ? undefined
+                : {
+                    scale: [1, 1.06, 1],
+                    x: [0, 12, 0],
+                    y: [0, -12, 0],
+                  }
+            }
             transition={{
               duration,
-              repeat: Infinity,
-              ease: "easeInOut"
+              repeat: scrolling ? 0 : Infinity,
+              ease: "easeInOut",
             }}
           />
         );
       })}
-    </>
+    </div>
   );
 }

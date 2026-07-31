@@ -1,6 +1,17 @@
 import { Link } from "wouter";
-import { ArrowUpRight, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react";
-import { CONTACT_EMAIL, CONTACT_LOCATION, CONTACT_PHONE_DISPLAY } from "@/lib/contact";
+import {
+  ArrowUpRight,
+  Instagram,
+  Linkedin,
+  Mail,
+  MapPin,
+  Phone,
+} from "lucide-react";
+import {
+  CONTACT_EMAIL,
+  CONTACT_LOCATION,
+  CONTACT_PHONE_DISPLAY,
+} from "@/lib/contact";
 import { useState, type FormEvent } from "react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -23,8 +34,9 @@ const NAV_COLUMNS: { heading: string; links: FooterLink[] }[] = [
     links: [
       { label: "About Us", href: "/about" },
       { label: "Contact Us", href: "/contact" },
-      { label: "Careers", href: "/careers", soon: true },
+      { label: "Careers", href: "/careers" },
       { label: "Customer Stories", href: "/stories", soon: true },
+      { label: "KIDUORBIT AI", href: "/kiduorbit", soon: true },
     ],
   },
   {
@@ -33,7 +45,7 @@ const NAV_COLUMNS: { heading: string; links: FooterLink[] }[] = [
       { label: "Help Center", href: "/help" },
       { label: "FAQ", href: "/faq" },
       { label: "ERP Vendor Checklist", href: "/vendor-checklist" },
-      { label: "Blog & Insights", href: "/blog", soon: true },
+      { label: "Blog & Insights", href: "/blog" },
     ],
   },
   {
@@ -67,7 +79,11 @@ const DESTINATIONS = [
   },
 ] as const;
 
-const CLOSING_LINE = ["Built in India", "For Indian schools", "Your data stays yours"] as const;
+const CLOSING_LINE = [
+  "Built in India",
+  "For Indian schools",
+  "Your data stays yours",
+] as const;
 
 const navLinkClass =
   "hover-underline-group inline-flex min-h-6 items-center gap-2 py-0.5 text-sm leading-6 text-brand-navy/[0.72] transition-colors hover:text-brand-teal";
@@ -108,7 +124,10 @@ export function Footer() {
 
       const contentType = response.headers.get("content-type") || "";
       const rawBody = await response.text();
-      const result = contentType.includes("application/json") && rawBody ? JSON.parse(rawBody) : {};
+      const result =
+        contentType.includes("application/json") && rawBody
+          ? JSON.parse(rawBody)
+          : {};
 
       if (!response.ok) {
         throw new Error(
@@ -121,12 +140,16 @@ export function Footer() {
       setEmail("");
       toast({
         title: "Subscribed",
-        description: "You are subscribed. We will only send things worth reading.",
+        description:
+          "You are subscribed. We will only send things worth reading.",
       });
     } catch (error) {
       toast({
         title: "Subscription failed",
-        description: error instanceof Error ? error.message : "Something went wrong while subscribing.",
+        description:
+          error instanceof Error
+            ? error.message
+            : "Something went wrong while subscribing.",
         variant: "destructive",
       });
     } finally {
@@ -141,7 +164,7 @@ export function Footer() {
           <div>
             <Link href="/" className="inline-block">
               <img
-                src="/logo.png"
+                src="/logo.webp"
                 alt="KIDUART school ERP"
                 className="h-10 w-auto sm:h-11"
                 width={512}
@@ -151,12 +174,15 @@ export function Footer() {
               />
             </Link>
             <p className="mt-7 max-w-lg text-[clamp(1.35rem,1.1rem+0.9vw,1.85rem)] font-bold leading-snug text-brand-navy">
-              School operations, closed for the day —
-              <span className="text-brand-teal"> open again when you are ready.</span>
+              School operations, closed for the day
+              <span className="text-brand-teal">
+                {" "}
+                open again when you are ready.
+              </span>
             </p>
             <p className="mt-4 max-w-md text-sm leading-7 text-brand-navy/[0.72]">
-              Admissions, fees, attendance, exams, transport, hostel, library, HR and parent
-              communication — one system for Indian schools.
+              Admissions, fees, attendance, exams, transport, hostel, library,
+              HR and parent communication one system for Indian schools.
             </p>
 
             <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm">
@@ -210,7 +236,7 @@ export function Footer() {
               The monthly note
             </p>
             <p className="mt-2 text-sm leading-6 text-brand-navy/[0.74]">
-              What actually changes in school operations — once a month, no drip.
+              What actually changes in school operations once a month, no drip.
             </p>
             <label htmlFor="footer-newsletter-email" className="sr-only">
               Email address
@@ -235,14 +261,20 @@ export function Footer() {
             </div>
             <p className="mt-3 text-xs leading-5 text-brand-navy/[0.65]">
               Unsubscribe in one click.{" "}
-              <Link href="/privacy-policy" className="font-semibold underline underline-offset-2 hover:text-brand-teal">
+              <Link
+                href="/privacy-policy"
+                className="font-semibold underline underline-offset-2 hover:text-brand-teal"
+              >
                 Privacy
               </Link>
             </p>
           </form>
         </div>
 
-        <nav aria-label="Where to go next" className="border-b border-brand-navy/[0.1] py-10">
+        <nav
+          aria-label="Where to go next"
+          className="border-b border-brand-navy/[0.1] py-10"
+        >
           <p className="text-[0.68rem] font-bold uppercase tracking-[0.2em] text-brand-navy/[0.72]">
             Where to go next
           </p>
@@ -268,7 +300,9 @@ export function Footer() {
                       aria-hidden
                     />
                   </span>
-                  <span className="mt-2 text-sm leading-6 text-brand-navy/[0.68]">{door.detail}</span>
+                  <span className="mt-2 text-sm leading-6 text-brand-navy/[0.68]">
+                    {door.detail}
+                  </span>
                 </Link>
               </li>
             ))}
@@ -285,7 +319,9 @@ export function Footer() {
                 {column.links.map((link) => (
                   <li key={link.href}>
                     <Link href={link.href} className={navLinkClass}>
-                      <span className="center-gradient-underline">{link.label}</span>
+                      <span className="center-gradient-underline">
+                        {link.label}
+                      </span>
                       {link.soon && <SoonBadge />}
                     </Link>
                   </li>
@@ -302,11 +338,18 @@ export function Footer() {
         </p>
         <div className="page-shell relative z-10">
           <div className="flex flex-col gap-4 border-t border-brand-navy/[0.1] py-6 text-sm text-brand-navy/[0.65] sm:flex-row sm:items-center sm:justify-between">
-            <p>&copy; {new Date().getFullYear()} KIDUART Inc. All rights reserved.</p>
+            <p>
+              &copy; {new Date().getFullYear()} KIDUART Inc. All rights
+              reserved.
+            </p>
             <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs font-semibold tracking-wide text-brand-navy/[0.7]">
               {CLOSING_LINE.map((part, index) => (
                 <span key={part} className="inline-flex items-center gap-3">
-                  {index > 0 && <span className="text-brand-navy/25" aria-hidden="true">·</span>}
+                  {index > 0 && (
+                    <span className="text-brand-navy/25" aria-hidden="true">
+                      ·
+                    </span>
+                  )}
                   {part}
                 </span>
               ))}

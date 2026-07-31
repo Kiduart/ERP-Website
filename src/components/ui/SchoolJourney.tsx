@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useCallback, useRef, useState } from "react";
 import { ArrowRight, Check, ChevronLeft, ChevronRight } from "lucide-react";
 import { ProductIcon } from "@/components/product/ProductIcon";
+import { InView } from "@/components/ui/InView";
 import { SCHOOL_OPERATIONS_JOURNEY } from "@/lib/siteData";
 
 const steps = SCHOOL_OPERATIONS_JOURNEY;
@@ -39,7 +40,7 @@ export function SchoolJourney() {
   const progress = (activeIndex / (steps.length - 1)) * 100;
 
   return (
-    <div className="grid gap-8 lg:grid-cols-[19rem_1fr] lg:gap-10">
+    <InView once={false} className="home-rise grid gap-8 lg:grid-cols-[19rem_1fr] lg:gap-10">
       {/* Stepper rail */}
       <div
         role="tablist"
@@ -75,7 +76,8 @@ export function SchoolJourney() {
               tabIndex={isActive ? 0 : -1}
               onClick={() => setActiveIndex(index)}
               onKeyDown={(event) => onTabKeyDown(event, index)}
-              className={`group relative z-[1] flex min-w-[9.25rem] flex-shrink-0 snap-start flex-col items-start gap-2 rounded-2xl border p-3 text-left transition-all duration-300 lg:min-w-0 lg:flex-row lg:items-center lg:gap-3 lg:border-transparent lg:bg-transparent lg:p-2 ${
+              style={{ ["--stagger" as string]: index }}
+              className={`home-stagger-item group relative z-[1] flex min-w-[9.25rem] flex-shrink-0 snap-start flex-col items-start gap-2 rounded-2xl border p-3 text-left transition-all duration-300 lg:min-w-0 lg:flex-row lg:items-center lg:gap-3 lg:border-transparent lg:bg-transparent lg:p-2 ${
                 isActive
                   ? "border-brand-teal/40 bg-white shadow-md lg:bg-white lg:shadow-sm"
                   : "border-brand-navy/10 bg-white/70 hover:border-brand-teal/30 hover:bg-white lg:hover:bg-white/70"
@@ -239,6 +241,6 @@ export function SchoolJourney() {
           </div>
         </div>
       </div>
-    </div>
+    </InView>
   );
 }

@@ -4,7 +4,7 @@
  * The counts, module names and feature lists come from `feature-matrix.json`
  * (generated from the product sheet). This file only adds the narrative: what
  * the area is for, how the daily flow runs, and who lives inside it. Keep every
- * claim traceable to a real module — no invented metrics.
+ * claim traceable to a real module  no invented metrics.
  */
 
 export type NarrativeStep = {
@@ -41,7 +41,7 @@ export const AREA_NARRATIVES: AreaNarrative[] = [
     summary:
       "Enquiries, applications, interviews and registration run as one pipeline instead of a diary and a stack of forms.",
     intro:
-      "Admission season is where most schools lose information: a parent calls, someone notes it in a register, the form goes to another desk, and nobody can say how many enquiries actually converted. KIDUART runs the whole admission workflow as a single pipeline — enquiry capture, application review, interview scheduling with evaluation, and final registration that creates the student record automatically.",
+      "Admission season is where most schools lose information: a parent calls, someone notes it in a register, the form goes to another desk, and nobody can say how many enquiries actually converted. KIDUART runs the whole admission workflow as a single pipeline  enquiry capture, application review, interview scheduling with evaluation, and final registration that creates the student record automatically.",
     dailyFlow: [
       {
         title: "Capture the enquiry",
@@ -67,7 +67,7 @@ export const AREA_NARRATIVES: AreaNarrative[] = [
     outcomes: [
       "One pipeline view of every enquiry and application",
       "Interview outcomes attached to the applicant record",
-      "Registration that seeds the student profile — no re-typing",
+      "Registration that seeds the student profile  no re-typing",
     ],
     roles: ["Admission staff", "School admin", "Principal"],
     panels: ["school-admin", "director"],
@@ -82,7 +82,7 @@ export const AREA_NARRATIVES: AreaNarrative[] = [
     summary:
       "Directory, documents, enrollment, promotion, transfer certificates and a student self-service portal in one place.",
     intro:
-      "A student record is not one screen — it is admission details, documents, class and section history, promotions, transfers and the student's own portal access. KIDUART keeps all of it on a single profile, so attendance, fees, exams and communication all read the same source instead of three different registers.",
+      "A student record is not one screen  it is admission details, documents, class and section history, promotions, transfers and the student's own portal access. KIDUART keeps all of it on a single profile, so attendance, fees, exams and communication all read the same source instead of three different registers.",
     dailyFlow: [
       {
         title: "Create the profile once",
@@ -119,7 +119,8 @@ export const AREA_NARRATIVES: AreaNarrative[] = [
     slug: "academic",
     label: "Academics",
     stage: "The daily teaching engine",
-    headline: "Classes, timetable, attendance, curriculum and exams in one academic core",
+    headline:
+      "Classes, timetable, attendance, curriculum and exams in one academic core",
     summary:
       "The largest area in the platform: calendar, classes and sections, subjects, curriculum, attendance, examinations, diary, discipline and PTM.",
     intro:
@@ -151,7 +152,12 @@ export const AREA_NARRATIVES: AreaNarrative[] = [
       "Exams from schedule to result without parallel spreadsheets",
       "Curriculum, syllabus and lesson plans visible to coordinators",
     ],
-    roles: ["Teacher", "Academic coordinator", "Head of department", "Principal"],
+    roles: [
+      "Teacher",
+      "Academic coordinator",
+      "Head of department",
+      "Principal",
+    ],
     panels: ["academic", "teacher", "school-admin"],
     icon: "GraduationCap",
     accent: "teal",
@@ -164,7 +170,7 @@ export const AREA_NARRATIVES: AreaNarrative[] = [
     summary:
       "Parent directory, parent-student linking, a communication log and a self-service parent portal.",
     intro:
-      "Parents are not a mailing list — each guardian is linked to specific children, sometimes across classes and sometimes across campuses. KIDUART keeps a parent directory with verified links to students, logs what was communicated and when, and gives families a portal where attendance, fees, results and notices are visible without a phone call to the office.",
+      "Parents are not a mailing list  each guardian is linked to specific children, sometimes across classes and sometimes across campuses. KIDUART keeps a parent directory with verified links to students, logs what was communicated and when, and gives families a portal where attendance, fees, results and notices are visible without a phone call to the office.",
     dailyFlow: [
       {
         title: "Register the guardian",
@@ -184,7 +190,7 @@ export const AREA_NARRATIVES: AreaNarrative[] = [
       {
         title: "Let families self-serve",
         detail:
-          "The parent portal answers the routine questions — attendance, dues, results, circulars — on its own.",
+          "The parent portal answers the routine questions  attendance, dues, results, circulars  on its own.",
       },
     ],
     outcomes: [
@@ -242,11 +248,12 @@ export const AREA_NARRATIVES: AreaNarrative[] = [
     slug: "hr-and-staff-management",
     label: "HR & Staff",
     stage: "The team behind the classes",
-    headline: "Staff records, attendance, leave, payroll and appraisals together",
+    headline:
+      "Staff records, attendance, leave, payroll and appraisals together",
     summary:
       "Teacher and staff directories, departments and designations, staff attendance, leave workflow, payroll processing, performance reviews and a teacher portal.",
     intro:
-      "Schools usually run HR in three places: a staff list, an attendance register and a salary sheet. This area keeps them in one flow — teaching and non-teaching staff directories, departments and designations, staff attendance, leave requests with approval trails, payroll processing with components and deductions, performance appraisal, and a teacher portal for self-service.",
+      "Schools usually run HR in three places: a staff list, an attendance register and a salary sheet. This area keeps them in one flow  teaching and non-teaching staff directories, departments and designations, staff attendance, leave requests with approval trails, payroll processing with components and deductions, performance appraisal, and a teacher portal for self-service.",
     dailyFlow: [
       {
         title: "Build the staff structure",
@@ -283,11 +290,12 @@ export const AREA_NARRATIVES: AreaNarrative[] = [
     slug: "communication",
     label: "Communication",
     stage: "One voice to the school",
-    headline: "Announcements, notices, events and messaging that reach the right people",
+    headline:
+      "Announcements, notices, events and messaging that reach the right people",
     summary:
       "Notice board, announcements, event management and messaging over in-app, email and SMS channels.",
     intro:
-      "Broadcasting to everyone is easy; reaching exactly one section's parents is what schools actually need. This area covers announcements and notice board management, school event management, and messaging across in-app, email and SMS — targeted at the right classes, sections or staff groups, with a record of what went out.",
+      "Broadcasting to everyone is easy; reaching exactly one section's parents is what schools actually need. This area covers announcements and notice board management, school event management, and messaging across in-app, email and SMS  targeted at the right classes, sections or staff groups, with a record of what went out.",
     dailyFlow: [
       {
         title: "Choose the audience",
@@ -332,19 +340,23 @@ export const AREA_NARRATIVES: AreaNarrative[] = [
     dailyFlow: [
       {
         title: "Catalog the collection",
-        detail: "Books are cataloged with inventory detail, so copies and availability are known.",
+        detail:
+          "Books are cataloged with inventory detail, so copies and availability are known.",
       },
       {
         title: "Enroll members",
-        detail: "Students and staff become library members with their own borrowing history.",
+        detail:
+          "Students and staff become library members with their own borrowing history.",
       },
       {
         title: "Issue, return, reserve",
-        detail: "Circulation and reservations run through one workflow instead of a ledger book.",
+        detail:
+          "Circulation and reservations run through one workflow instead of a ledger book.",
       },
       {
         title: "Handle fines and review usage",
-        detail: "Fines are tracked automatically and library reports show usage patterns.",
+        detail:
+          "Fines are tracked automatically and library reports show usage patterns.",
       },
     ],
     outcomes: [
@@ -369,19 +381,23 @@ export const AREA_NARRATIVES: AreaNarrative[] = [
     dailyFlow: [
       {
         title: "Plan routes and stops",
-        detail: "Routes are defined with stops and assigned vehicles, then students are mapped to stops.",
+        detail:
+          "Routes are defined with stops and assigned vehicles, then students are mapped to stops.",
       },
       {
         title: "Assign drivers and vehicles",
-        detail: "Driver and fleet records keep licence, vehicle and route assignments together.",
+        detail:
+          "Driver and fleet records keep licence, vehicle and route assignments together.",
       },
       {
         title: "Track the trip",
-        detail: "Live vehicle tracking answers where-is-the-bus questions with data, not guesswork.",
+        detail:
+          "Live vehicle tracking answers where-is-the-bus questions with data, not guesswork.",
       },
       {
         title: "Maintain the fleet",
-        detail: "Maintenance records make servicing planned work rather than an emergency.",
+        detail:
+          "Maintenance records make servicing planned work rather than an emergency.",
       },
     ],
     outcomes: [
@@ -406,19 +422,23 @@ export const AREA_NARRATIVES: AreaNarrative[] = [
     dailyFlow: [
       {
         title: "Set up rooms",
-        detail: "Hostel rooms are configured with capacity, so allocation reflects reality.",
+        detail:
+          "Hostel rooms are configured with capacity, so allocation reflects reality.",
       },
       {
         title: "Allocate beds",
-        detail: "Room and bed allocation ties each resident student to a specific place.",
+        detail:
+          "Room and bed allocation ties each resident student to a specific place.",
       },
       {
         title: "Take hostel attendance",
-        detail: "Residential attendance is tracked independently of classroom attendance.",
+        detail:
+          "Residential attendance is tracked independently of classroom attendance.",
       },
       {
         title: "Run mess and visitors",
-        detail: "Meal planning and the visitor log complete the daily hostel record.",
+        detail:
+          "Meal planning and the visitor log complete the daily hostel record.",
       },
     ],
     outcomes: [
@@ -439,23 +459,27 @@ export const AREA_NARRATIVES: AreaNarrative[] = [
     summary:
       "Campus infrastructure modelled as buildings, floors, wings and rooms, with facilities and asset management.",
     intro:
-      "Timetables assume rooms exist, audits assume assets are listed. This area models the campus properly — buildings, floors, wings and rooms — and keeps facilities and asset records against them, so room allocation, maintenance and inventory questions have one answer.",
+      "Timetables assume rooms exist, audits assume assets are listed. This area models the campus properly  buildings, floors, wings and rooms  and keeps facilities and asset records against them, so room allocation, maintenance and inventory questions have one answer.",
     dailyFlow: [
       {
         title: "Model the campus",
-        detail: "Buildings, floors and wings create the physical structure of the school.",
+        detail:
+          "Buildings, floors and wings create the physical structure of the school.",
       },
       {
         title: "Define rooms",
-        detail: "Rooms are recorded with purpose and capacity, ready for academic and hostel use.",
+        detail:
+          "Rooms are recorded with purpose and capacity, ready for academic and hostel use.",
       },
       {
         title: "Register assets",
-        detail: "Facilities and assets are tracked against the spaces they belong to.",
+        detail:
+          "Facilities and assets are tracked against the spaces they belong to.",
       },
       {
         title: "Plan upkeep",
-        detail: "Records make maintenance and audits a lookup instead of a walkaround.",
+        detail:
+          "Records make maintenance and audits a lookup instead of a walkaround.",
       },
     ],
     outcomes: [
@@ -472,7 +496,8 @@ export const AREA_NARRATIVES: AreaNarrative[] = [
     slug: "reports-and-analytics",
     label: "Reports & Analytics",
     stage: "Decisions, not data entry",
-    headline: "Academic, attendance and financial reporting with a custom report builder",
+    headline:
+      "Academic, attendance and financial reporting with a custom report builder",
     summary:
       "Academic performance reports, attendance analytics, financial reporting, student report cards, teacher-facing reports, school-wide analytics and a custom report builder.",
     intro:
@@ -480,19 +505,23 @@ export const AREA_NARRATIVES: AreaNarrative[] = [
     dailyFlow: [
       {
         title: "Start from live data",
-        detail: "Reports read the same records staff already maintain, so there is no export-and-clean step.",
+        detail:
+          "Reports read the same records staff already maintain, so there is no export-and-clean step.",
       },
       {
         title: "Use ready templates",
-        detail: "Academic, attendance, financial and student reports cover the recurring requests.",
+        detail:
+          "Academic, attendance, financial and student reports cover the recurring requests.",
       },
       {
         title: "Build the unusual one",
-        detail: "The custom report builder handles board, trustee and management specific formats.",
+        detail:
+          "The custom report builder handles board, trustee and management specific formats.",
       },
       {
         title: "Share the view",
-        detail: "School analytics gives leadership a rollup while teachers keep their own focused reports.",
+        detail:
+          "School analytics gives leadership a rollup while teachers keep their own focused reports.",
       },
     ],
     outcomes: [
@@ -517,19 +546,23 @@ export const AREA_NARRATIVES: AreaNarrative[] = [
     dailyFlow: [
       {
         title: "Sign in to your view",
-        detail: "Each role lands on a dashboard built for its job, not a generic home screen.",
+        detail:
+          "Each role lands on a dashboard built for its job, not a generic home screen.",
       },
       {
         title: "See what needs action",
-        detail: "Admin widgets surface attendance, fee and academic signals for the day.",
+        detail:
+          "Admin widgets surface attendance, fee and academic signals for the day.",
       },
       {
         title: "Navigate by permission",
-        detail: "The dynamic sidebar shows only the modules a role is allowed to open.",
+        detail:
+          "The dynamic sidebar shows only the modules a role is allowed to open.",
       },
       {
         title: "Drill into the module",
-        detail: "Every widget is a route into the underlying record, not a dead tile.",
+        detail:
+          "Every widget is a route into the underlying record, not a dead tile.",
       },
     ],
     outcomes: [
@@ -554,19 +587,23 @@ export const AREA_NARRATIVES: AreaNarrative[] = [
     dailyFlow: [
       {
         title: "Verify the person",
-        detail: "Password policy, email and phone verification and MFA establish who is signing in.",
+        detail:
+          "Password policy, email and phone verification and MFA establish who is signing in.",
       },
       {
         title: "Control the session",
-        detail: "Session listing, revocation and token handling keep access current, not permanent.",
+        detail:
+          "Session listing, revocation and token handling keep access current, not permanent.",
       },
       {
         title: "Scope the permissions",
-        detail: "Roles and delegation decide which modules and actions each person can reach.",
+        detail:
+          "Roles and delegation decide which modules and actions each person can reach.",
       },
       {
         title: "Restrict the surface",
-        detail: "IP lists, geo-restriction and API keys limit where and how the system can be accessed.",
+        detail:
+          "IP lists, geo-restriction and API keys limit where and how the system can be accessed.",
       },
     ],
     outcomes: [
@@ -591,19 +628,23 @@ export const AREA_NARRATIVES: AreaNarrative[] = [
     dailyFlow: [
       {
         title: "Set up the organisation",
-        detail: "Profile, branding, preferences and academic session are configured once for the group.",
+        detail:
+          "Profile, branding, preferences and academic session are configured once for the group.",
       },
       {
         title: "Add campuses",
-        detail: "Multi-school administration brings each campus in with its own data boundary.",
+        detail:
+          "Multi-school administration brings each campus in with its own data boundary.",
       },
       {
         title: "Delegate school admins",
-        detail: "School admin account management controls who runs which campus.",
+        detail:
+          "School admin account management controls who runs which campus.",
       },
       {
         title: "Compare and consolidate",
-        detail: "Cross-school reports and org analytics compare campuses on the same definitions.",
+        detail:
+          "Cross-school reports and org analytics compare campuses on the same definitions.",
       },
     ],
     outcomes: [
@@ -611,7 +652,12 @@ export const AREA_NARRATIVES: AreaNarrative[] = [
       "Consolidated reporting on shared definitions",
       "Group-level subscription and billing",
     ],
-    roles: ["Organisation owner", "Organisation admin", "Director", "Group finance"],
+    roles: [
+      "Organisation owner",
+      "Organisation admin",
+      "Director",
+      "Group finance",
+    ],
     panels: ["organization", "director", "system-admin"],
     icon: "Network",
     accent: "teal",
@@ -621,25 +667,30 @@ export const AREA_NARRATIVES: AreaNarrative[] = [
     label: "Support Desk",
     stage: "When something needs a human",
     headline: "Support tickets that stay attached to your school",
-    summary: "Support ticket management for schools and organisations, with replies and status tracking.",
+    summary:
+      "Support ticket management for schools and organisations, with replies and status tracking.",
     intro:
       "Questions do not stop after onboarding. Support ticket management lets school and organisation users raise issues in the product, track status, and keep the conversation attached to their own account instead of scattered across personal inboxes.",
     dailyFlow: [
       {
         title: "Raise the ticket",
-        detail: "Staff open a ticket from inside the product with the context already attached.",
+        detail:
+          "Staff open a ticket from inside the product with the context already attached.",
       },
       {
         title: "Track the status",
-        detail: "Ticket status shows what is being worked on and what is waiting on the school.",
+        detail:
+          "Ticket status shows what is being worked on and what is waiting on the school.",
       },
       {
         title: "Reply in thread",
-        detail: "Replies stay on the ticket, so history is preserved for the next person who asks.",
+        detail:
+          "Replies stay on the ticket, so history is preserved for the next person who asks.",
       },
       {
         title: "Escalate at org level",
-        detail: "Organisations can see and manage tickets across their campuses.",
+        detail:
+          "Organisations can see and manage tickets across their campuses.",
       },
     ],
     outcomes: [
@@ -654,9 +705,8 @@ export const AREA_NARRATIVES: AreaNarrative[] = [
   },
 ];
 
-export const AREA_NARRATIVE_BY_SLUG: Record<string, AreaNarrative> = Object.fromEntries(
-  AREA_NARRATIVES.map((area) => [area.slug, area]),
-);
+export const AREA_NARRATIVE_BY_SLUG: Record<string, AreaNarrative> =
+  Object.fromEntries(AREA_NARRATIVES.map((area) => [area.slug, area]));
 
 export function getAreaNarrative(slug: string): AreaNarrative | undefined {
   return AREA_NARRATIVE_BY_SLUG[slug];

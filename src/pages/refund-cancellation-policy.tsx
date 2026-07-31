@@ -1,6 +1,9 @@
 import Head from "next/head";
 import { PageTransition } from "@/components/ui/PageTransition";
-import { LegalPolicyPage, type LegalSection } from "@/components/legal/LegalPolicyPage";
+import {
+  LegalPolicyPage,
+  type LegalSection,
+} from "@/components/legal/LegalPolicyPage";
 
 const sections: LegalSection[] = [
   {
@@ -58,12 +61,48 @@ const sections: LegalSection[] = [
     table: {
       headers: ["Scenario", "Refund status", "Notes"],
       rows: [
-        { cells: ["Duplicate payment or accidental double charge", "Usually eligible", "Subject to payment verification and absence of offsetting dues."] },
-        { cells: ["Paid service materially different from the accepted proposal, invoice, or plan", "May be eligible", "Subject to review of documents, communications, and delivery status."] },
-        { cells: ["Major unresolved technical issue that substantially prevents service use", "May be eligible", "The customer should first report the issue and allow reasonable time for investigation and remediation."] },
-        { cells: ["Subscription cancellation during active billing period without platform failure", "Generally not eligible", "Access may continue until the end of the paid term."] },
-        { cells: ["Change of mind after purchase", "Generally not eligible", "Especially where digital services have already been provisioned."] },
-        { cells: ["Setup, onboarding, migration, training, or one-time service fees after work begins", "Generally not eligible", "These are professional service charges and resources may already be assigned."] },
+        {
+          cells: [
+            "Duplicate payment or accidental double charge",
+            "Usually eligible",
+            "Subject to payment verification and absence of offsetting dues.",
+          ],
+        },
+        {
+          cells: [
+            "Paid service materially different from the accepted proposal, invoice, or plan",
+            "May be eligible",
+            "Subject to review of documents, communications, and delivery status.",
+          ],
+        },
+        {
+          cells: [
+            "Major unresolved technical issue that substantially prevents service use",
+            "May be eligible",
+            "The customer should first report the issue and allow reasonable time for investigation and remediation.",
+          ],
+        },
+        {
+          cells: [
+            "Subscription cancellation during active billing period without platform failure",
+            "Generally not eligible",
+            "Access may continue until the end of the paid term.",
+          ],
+        },
+        {
+          cells: [
+            "Change of mind after purchase",
+            "Generally not eligible",
+            "Especially where digital services have already been provisioned.",
+          ],
+        },
+        {
+          cells: [
+            "Setup, onboarding, migration, training, or one-time service fees after work begins",
+            "Generally not eligible",
+            "These are professional service charges and resources may already be assigned.",
+          ],
+        },
       ],
     },
   },
@@ -138,10 +177,22 @@ export default function RefundCancellationPolicy() {
           name="description"
           content="Review KIDUART's Refund / Cancellation Policy for school ERP subscriptions, renewals, setup fees, onboarding, implementation, training, and approved refund timelines."
         />
-        <link rel="canonical" href="https://www.kiduart.com/refund-cancellation-policy" />
-        <meta property="og:title" content="Refund / Cancellation Policy | KIDUART School ERP Billing" />
-        <meta property="og:description" content="Understand cancellation rules, refund eligibility, non-refundable charges, refund review conditions, and processing timelines for KIDUART services." />
-        <meta property="og:url" content="https://www.kiduart.com/refund-cancellation-policy" />
+        <link
+          rel="canonical"
+          href="https://www.kiduart.com/refund-cancellation-policy"
+        />
+        <meta
+          property="og:title"
+          content="Refund / Cancellation Policy | KIDUART School ERP Billing"
+        />
+        <meta
+          property="og:description"
+          content="Understand cancellation rules, refund eligibility, non-refundable charges, refund review conditions, and processing timelines for KIDUART services."
+        />
+        <meta
+          property="og:url"
+          content="https://www.kiduart.com/refund-cancellation-policy"
+        />
         <meta property="og:type" content="website" />
       </Head>
       <LegalPolicyPage
@@ -150,7 +201,7 @@ export default function RefundCancellationPolicy() {
         subtitle="This policy explains how KIDUART handles subscription cancellations, service cancellations, refund requests, and payment-related queries."
         effectiveLabel="Effective date: 29 July 2026"
         summary={[
-          "This policy covers what a school pays KIDUART — not school fees a parent pays to a school through the platform.",
+          "This policy covers what a school pays KIDUART  not school fees a parent pays to a school through the platform.",
           "Cancellations may stop future renewals, but refunds are available only in limited cases described below.",
           "Setup, onboarding, migration, training, and professional service charges are generally non-refundable once initiated.",
           "Approved refunds are usually processed back to the original payment method within the stated timeline.",

@@ -3,7 +3,7 @@
  * session setup, import templates with validation, fee structure templates,
  * role permissions, message templates and the parallel run before go-live.
  *
- * No timelines or averages are claimed here — we have no verified school
+ * No timelines or averages are claimed here  we have no verified school
  * rollouts to quote yet, so the plan describes work, not weeks.
  */
 
@@ -81,7 +81,7 @@ export const ROLLOUT_STAGES: RolloutStage[] = [
       "Concessions assigned, structures published, and your own payment gateway account connected",
     ],
     guardrail:
-      "Structures are published deliberately and can be archived — nothing starts billing because someone opened a screen.",
+      "Structures are published deliberately and can be archived  nothing starts billing because someone opened a screen.",
     modules: [
       { label: "Fees & Finance", href: "/features/finance-and-fee-management" },
       { label: "Integrations", href: "/integrations" },
@@ -104,7 +104,10 @@ export const ROLLOUT_STAGES: RolloutStage[] = [
     guardrail:
       "Permissions are per role and per school, and every admin action lands in an audit trail that cannot be edited.",
     modules: [
-      { label: "Security & Access", href: "/features/security-and-authentication" },
+      {
+        label: "Security & Access",
+        href: "/features/security-and-authentication",
+      },
       { label: "Communication", href: "/features/communication" },
     ],
   },

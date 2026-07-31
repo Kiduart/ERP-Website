@@ -1,6 +1,8 @@
 import { useMemo, useState } from "react";
 import { Link } from "wouter";
 import { ArrowUpRight } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Stagger } from "@/components/ui/Stagger";
 import { ProductIcon } from "@/components/product/ProductIcon";
 import {
   IntegrationStatusPill,
@@ -36,6 +38,12 @@ const FILTERS: { value: Filter; label: string }[] = [
 
 export function IntegrationDirectory({ categories }: { categories: DirectoryCategory[] }) {
   const [filter, setFilter] = useState<Filter>("all");
+  const [filterPulse, setFilterPulse] = useState(0);
+
+  const applyFilter = (value: Filter) => {
+    setFilter(value);
+    if (value !== filter) setFilterPulse((n) => n + 1);
+  };
 
   const counts = useMemo(() => {
     const all = categories.flatMap((category) => category.connectors);
@@ -88,7 +96,7 @@ export function IntegrationDirectory({ categories }: { categories: DirectoryCate
                     key={entry.value}
                     type="button"
                     aria-pressed={isActive}
-                    onClick={() => setFilter(entry.value)}
+                    onClick={() => applyFilter(entry.value)}
                     className={`rounded-full border px-3 py-1.5 text-xs font-bold transition-colors ${
                       isActive
                         ? "border-brand-navy bg-brand-navy text-brand-beige"
@@ -125,10 +133,21 @@ export function IntegrationDirectory({ categories }: { categories: DirectoryCate
                 </div>
               </div>
 
-              <ul className="mt-8 grid gap-5 md:grid-cols-2">
-                {category.connectors.map((connector) => (
-                  <li key={connector.slug} hidden={!matches(connector.status)}>
-                    <article className="group flex h-full flex-col rounded-[1.5rem] border border-brand-navy/[0.1] bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand-teal/40 hover:shadow-xl hover:shadow-brand-navy/[0.06]">
+              <Stagger
+                as="ul"
+                className="mt-8 grid gap-5 md:grid-cols-2"
+                itemClassName="motion-brick motion-brick-dense"
+                once
+              >
+                {shown.map((connector) => (
+                  <li key={connector.slug}>
+                    <article
+                      key={filterPulse > 0 ? `${connector.slug}-${filter}-${filterPulse}` : connector.slug}
+                      className={cn(
+                        "group flex h-full flex-col rounded-[1.5rem] border border-brand-navy/[0.1] bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand-teal/40 hover:shadow-xl hover:shadow-brand-navy/[0.06]",
+                        filterPulse > 0 && "journey-panel-enter",
+                      )}
+                    >
                       <div className="flex items-start justify-between gap-3">
                         <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-beige/60 text-brand-navy transition-colors group-hover:bg-brand-teal/[0.12] group-hover:text-brand-teal">
                           <ProductIcon name={connector.icon} className="h-6 w-6" />
@@ -186,7 +205,7 @@ export function IntegrationDirectory({ categories }: { categories: DirectoryCate
                     </article>
                   </li>
                 ))}
-              </ul>
+              </Stagger>
             </section>
           );
         })}

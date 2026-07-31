@@ -7,7 +7,17 @@
  * pages can render live feature counts instead of invented capability lists.
  */
 
-export type PanelLayout = "console" | "network" | "insight" | "operations" | "planner" | "classroom" | "ledger" | "people" | "family" | "learner";
+export type PanelLayout =
+  | "console"
+  | "network"
+  | "insight"
+  | "operations"
+  | "planner"
+  | "classroom"
+  | "ledger"
+  | "people"
+  | "family"
+  | "learner";
 
 export type PanelModuleRef = {
   /** Category slug in feature-matrix.json */
@@ -26,7 +36,7 @@ export type ProductPanel = {
   headline: string;
   summary: string;
   intro: string;
-  /** Concrete things the panel shows — traceable to shipped modules */
+  /** Concrete things the panel shows  traceable to shipped modules */
   whatYouSee: string[];
   /** Typical first hour in this panel */
   firstHour: string[];
@@ -47,7 +57,7 @@ export const PRODUCT_PANELS: ProductPanel[] = [
     label: "System Admin Console",
     shortLabel: "System Admin",
     audience: ["Platform administrator", "System admin"],
-    stage: "Layer 01 — Platform control",
+    stage: "Layer 01  Platform control",
     headline: "The console that provisions schools, roles and subscriptions",
     summary:
       "Module and permission definitions, organisation provisioning, subscription plans, payment settings, invoices, audit logs and system health.",
@@ -73,9 +83,14 @@ export const PRODUCT_PANELS: ProductPanel[] = [
       { area: "organization-management", module: "Subscription" },
       { area: "organization-management", module: "School Management" },
     ],
-    areas: ["security-and-authentication", "organization-management", "support"],
+    areas: [
+      "security-and-authentication",
+      "organization-management",
+      "support",
+    ],
     image: "/images/panels/system-admin.png",
-    imageAlt: "System administrator console showing tenants, roles and subscription controls",
+    imageAlt:
+      "System administrator console showing tenants, roles and subscription controls",
     layout: "console",
     accent: "navy",
     icon: "ServerCog",
@@ -86,7 +101,7 @@ export const PRODUCT_PANELS: ProductPanel[] = [
     label: "Organisation Panel",
     shortLabel: "Organisation",
     audience: ["Organisation owner", "Organisation admin", "Group manager"],
-    stage: "Layer 02 — Multi-campus HQ",
+    stage: "Layer 02  Multi-campus HQ",
     headline: "One HQ view across every campus in the group",
     summary:
       "Organisation dashboard and health analytics, school administration, member management, consolidated cross-school reports and group billing.",
@@ -114,7 +129,8 @@ export const PRODUCT_PANELS: ProductPanel[] = [
     ],
     areas: ["organization-management", "reports-and-analytics", "support"],
     image: "/images/panels/organization.png",
-    imageAlt: "Organisation panel comparing multiple school campuses in one dashboard",
+    imageAlt:
+      "Organisation panel comparing multiple school campuses in one dashboard",
     layout: "network",
     accent: "teal",
     icon: "Network",
@@ -125,12 +141,12 @@ export const PRODUCT_PANELS: ProductPanel[] = [
     label: "Director & Leadership View",
     shortLabel: "Director",
     audience: ["Director", "Principal", "Vice principal", "Trustee"],
-    stage: "Layer 03 — Leadership",
+    stage: "Layer 03  Leadership",
     headline: "The weekly picture: academics, attendance and money together",
     summary:
       "School-wide analytics with academic performance, attendance trends, financial reporting and a custom report builder for board packs.",
     intro:
-      "Leadership does not need every screen — it needs the same four answers every week: are students attending, are results moving, are fees collected, and is the staff position stable. This view pulls school analytics, academic performance reports, attendance analytics and financial reporting into one place, with a custom report builder for board and trustee formats.",
+      "Leadership does not need every screen  it needs the same four answers every week: are students attending, are results moving, are fees collected, and is the staff position stable. This view pulls school analytics, academic performance reports, attendance analytics and financial reporting into one place, with a custom report builder for board and trustee formats.",
     whatYouSee: [
       "School-wide analytics dashboard",
       "Academic performance and result trends",
@@ -151,9 +167,14 @@ export const PRODUCT_PANELS: ProductPanel[] = [
       { area: "reports-and-analytics", module: "Financial Reports" },
       { area: "reports-and-analytics", module: "Custom Reports" },
     ],
-    areas: ["reports-and-analytics", "dashboard-and-insights", "organization-management"],
+    areas: [
+      "reports-and-analytics",
+      "dashboard-and-insights",
+      "organization-management",
+    ],
     image: "/images/panels/director.png",
-    imageAlt: "Leadership dashboard with academic, attendance and financial trend charts",
+    imageAlt:
+      "Leadership dashboard with academic, attendance and financial trend charts",
     layout: "insight",
     accent: "navy",
     icon: "Compass",
@@ -164,7 +185,7 @@ export const PRODUCT_PANELS: ProductPanel[] = [
     label: "School Admin Desk",
     shortLabel: "School Admin",
     audience: ["School admin", "Admin staff", "Front office"],
-    stage: "Layer 04 — The school desk",
+    stage: "Layer 04  The school desk",
     headline: "The operational desk where the school day is actually run",
     summary:
       "Admissions, student and parent records, classes and sections, staff, fees, communication, library, transport, hostel and facilities in one workspace.",
@@ -199,7 +220,8 @@ export const PRODUCT_PANELS: ProductPanel[] = [
       "facilities-and-inventory",
     ],
     image: "/images/panels/school-admin.png",
-    imageAlt: "School administration workspace with students, fees and communication modules",
+    imageAlt:
+      "School administration workspace with students, fees and communication modules",
     layout: "operations",
     accent: "orange",
     icon: "Building",
@@ -210,7 +232,7 @@ export const PRODUCT_PANELS: ProductPanel[] = [
     label: "Academic Coordinator Panel",
     shortLabel: "Academic",
     audience: ["Academic coordinator", "Head of department", "Senior teacher"],
-    stage: "Layer 05 — Academic planning",
+    stage: "Layer 05  Academic planning",
     headline: "Curriculum, timetable and examinations planned in one panel",
     summary:
       "Academic calendar and terms, curriculum with syllabus and lesson plans, subject-teacher allocation, timetable and the full examination cycle.",
@@ -238,7 +260,8 @@ export const PRODUCT_PANELS: ProductPanel[] = [
     ],
     areas: ["academic", "reports-and-analytics"],
     image: "/images/panels/academic.png",
-    imageAlt: "Academic coordinator panel with curriculum, timetable and exam planning",
+    imageAlt:
+      "Academic coordinator panel with curriculum, timetable and exam planning",
     layout: "planner",
     accent: "teal",
     icon: "CalendarRange",
@@ -248,8 +271,13 @@ export const PRODUCT_PANELS: ProductPanel[] = [
     order: 6,
     label: "Teacher Workspace",
     shortLabel: "Teacher",
-    audience: ["Teacher", "Class teacher", "Substitute teacher", "Teaching assistant"],
-    stage: "Layer 06 — The classroom",
+    audience: [
+      "Teacher",
+      "Class teacher",
+      "Substitute teacher",
+      "Teaching assistant",
+    ],
+    stage: "Layer 06  The classroom",
     headline: "Attendance, marks, diary and assignments in a few taps",
     summary:
       "A deliberately narrow workspace: class attendance, marks entry, class diary, assignments, discipline notes, teacher reports and self-service leave.",
@@ -288,12 +316,12 @@ export const PRODUCT_PANELS: ProductPanel[] = [
     label: "Finance & Accounts Panel",
     shortLabel: "Finance",
     audience: ["Accountant", "Finance officer", "Clerk"],
-    stage: "Layer 07 — Money",
+    stage: "Layer 07  Money",
     headline: "The fee book, the counter and the dues list in one panel",
     summary:
       "Fee heads, structures and templates, concessions, collection with receipts, refunds, online payments, due tracking, expenses and finance reports.",
     intro:
-      "Accounts teams work two lists: who has paid and who has not. This panel keeps the fee book that generates both — heads and categories, structures and templates, class or student level allocation, concessions, counter and online collection with receipts, refunds, due tracking with reminders, expenses, and reporting that reconciles the month.",
+      "Accounts teams work two lists: who has paid and who has not. This panel keeps the fee book that generates both  heads and categories, structures and templates, class or student level allocation, concessions, counter and online collection with receipts, refunds, due tracking with reminders, expenses, and reporting that reconciles the month.",
     whatYouSee: [
       "Fee heads, structures, templates and allocations",
       "Concession and discount records per student",
@@ -327,12 +355,12 @@ export const PRODUCT_PANELS: ProductPanel[] = [
     label: "HR & Staff Panel",
     shortLabel: "HR & Staff",
     audience: ["HR staff", "Principal", "Head of department"],
-    stage: "Layer 08 — The team",
+    stage: "Layer 08  The team",
     headline: "Staff records, attendance, leave and payroll in one cycle",
     summary:
       "Teaching and non-teaching directories, departments and designations, staff attendance, leave approvals, payroll processing and performance appraisal.",
     intro:
-      "HR in a school is not just hiring — it is substitutions, leave balances, salary cycles and appraisal records. This panel holds staff and teacher directories, departments and designations, staff attendance, leave requests with approval trails, payroll processing with components and deductions, and performance appraisal history.",
+      "HR in a school is not just hiring  it is substitutions, leave balances, salary cycles and appraisal records. This panel holds staff and teacher directories, departments and designations, staff attendance, leave requests with approval trails, payroll processing with components and deductions, and performance appraisal history.",
     whatYouSee: [
       "Teaching and non-teaching staff directories",
       "Departments, designations and reporting structure",
@@ -366,8 +394,9 @@ export const PRODUCT_PANELS: ProductPanel[] = [
     label: "Parent Portal",
     shortLabel: "Parent",
     audience: ["Parent", "Guardian"],
-    stage: "Layer 09 — The family",
-    headline: "Attendance, fees, results and notices without calling the office",
+    stage: "Layer 09  The family",
+    headline:
+      "Attendance, fees, results and notices without calling the office",
     summary:
       "A self-service portal covering attendance, fee dues and payments, results, circulars, PTM and transport information for each linked child.",
     intro:
@@ -405,12 +434,12 @@ export const PRODUCT_PANELS: ProductPanel[] = [
     label: "Student Portal",
     shortLabel: "Student",
     audience: ["Student", "Prefect", "Head boy or girl"],
-    stage: "Layer 10 — The learner",
+    stage: "Layer 10  The learner",
     headline: "Timetable, assignments, attendance and results in one login",
     summary:
       "Student self-service with timetable, assignment submission, attendance record, results, library borrowings and school notices.",
     intro:
-      "Students need a small, clear surface: what is on today, what is due, what was scored, and what is borrowed. The student portal covers timetable and calendar, assignment submission, attendance history, published results, library borrowings and notices — nothing more, so it stays usable on a shared phone.",
+      "Students need a small, clear surface: what is on today, what is due, what was scored, and what is borrowed. The student portal covers timetable and calendar, assignment submission, attendance history, published results, library borrowings and notices  nothing more, so it stays usable on a shared phone.",
     whatYouSee: [
       "Personal timetable and academic calendar",
       "Assignments with submission status",

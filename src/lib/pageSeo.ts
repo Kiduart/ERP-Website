@@ -1,85 +1,131 @@
 import { SITE_ORIGIN } from "@/components/seo/PageSeoHead";
 import type { PageSeoHeadProps } from "@/components/seo/PageSeoHead";
+import {
+  DEMO_META_KEYWORDS,
+  FEATURES_META_KEYWORDS,
+  HOME_META_KEYWORDS,
+  PLATFORM_META_KEYWORDS,
+  PRICING_META_KEYWORDS,
+} from "@/data/seoKeywords";
 
 export const pageSeo = {
   home: {
-    title: "School ERP Software for Indian Schools | KIDUART",
+    title:
+      "School ERP Software & School Management System for Indian Schools | KIDUART",
     description:
-      "Manage admissions, fees, attendance, exams, and parent updates in one school ERP. Built for Indian schools. Book a free KIDUART demo.",
+      "Cloud-based school ERP software for Indian schools: admissions, online fee management, attendance tracking, exams, report cards, and parent portal  one school management system. Book a free demo.",
     path: "/",
     ogImage: `${SITE_ORIGIN}/images/banner/home-hero.jpeg`,
+    keywords: HOME_META_KEYWORDS,
   },
   pricing: {
-    title: "School ERP Pricing Plans for Indian Schools | KIDUART",
+    title: "School ERP Pricing India | Transparent Per-Student Plans | KIDUART",
     description:
-      "Pay per active student with teachers, staff, and parent access included. Compare KIDUART school ERP plans for Indian schools with transparent pricing.",
+      "School ERP pricing for Indian schools with per-active-student billing. Teachers, staff, and parent portal access included. Compare KIDUART school management software plans.",
     path: "/pricing",
     ogImage: `${SITE_ORIGIN}/images/banner/home-hero.jpeg`,
+    keywords: PRICING_META_KEYWORDS,
   },
   features: {
-    title: "School ERP Features & Modules for Indian Schools | KIDUART",
+    title:
+      "School ERP Features & Modules | School Management Software India | KIDUART",
     description:
-      "Student records, fees, attendance, exams, parent portal, and staff tools in one school ERP. Explore KIDUART modules built for Indian school teams.",
+      "Explore school ERP features: student information system, fee management, attendance tracking, exams, report cards, parent communication, transport, library, and HR  built for Indian schools.",
     path: "/features",
     ogImage: `${SITE_ORIGIN}/images/banner/features-hero.jpg`,
-    keywords:
-      "school ERP features, school management software modules, school ERP India, school attendance system, school fee management software",
+    keywords: FEATURES_META_KEYWORDS,
   },
   platform: {
-    title: "School ERP Platform with Role Dashboards | KIDUART",
+    title:
+      "School ERP Platform with Role Dashboards | School Management Software | KIDUART",
     description:
-      "Dashboards for admins, teachers, finance, HR, students, parents, and directors. One KIDUART platform tailored to every role in your school.",
+      "Role-based school ERP platform for admins, teachers, finance, HR, students, parents, and directors. One school management system tailored to every role.",
     path: "/platform",
     ogImage: `${SITE_ORIGIN}/images/banner/platform-hero.jpg`,
+    keywords: PLATFORM_META_KEYWORDS,
   },
   blog: {
-    title: "School ERP Blog: EdTech & Operations Insights | KIDUART",
+    title: "School ERP Blog: Guides & Comparisons for Indian Schools | KIDUART",
     description:
-      "Articles on school ERP, EdTech, admissions, fees, and daily operations for Indian school administrators. Read practical insights from KIDUART.",
+      "School ERP and school management software guides for India  fee collection with UPI, attendance alerts, parent communication, security checklists, and KIDUORBIT AI notes for school admins.",
     path: "/blog",
     ogImage: `${SITE_ORIGIN}/images/banner/blog-hero.avif`,
+    keywords:
+      "school ERP blog, school management software guide India, best school ERP software in India, online fee management tips, parent teacher communication school",
   },
   contact: {
-    title: "Contact KIDUART | School ERP Sales & Support in India",
+    title: "Contact KIDUART | School ERP Sales & Support in Noida, India",
     description:
-      "Book a demo, ask product questions, or request support. KIDUART is based in Noida, Uttar Pradesh and provides guided support for school teams.",
+      "Contact KIDUART in Noida for school ERP demos, pricing, and support. Talk to sales about admissions, fees, attendance tracking, and parent communication walkthroughs.",
     path: "/contact",
-    ogImage: `${SITE_ORIGIN}/images/banner/contact-post-1.jpg`,
+    ogImage: `${SITE_ORIGIN}/images/banner/help-center-hero-1.jpg`,
+    keywords:
+      "contact KIDUART, school ERP demo India, school management software support Noida, KIDUART sales, school ERP pricing enquiry, best school ERP in India contact",
+  },
+  about: {
+    title:
+      "About KIDUART | School ERP Company Building School Management Software",
+    description:
+      "KIDUART is a Noida-based school ERP company building role-based school management software for Indian schools  fees, attendance, academics, parent updates, with an honest KIDUORBIT AI roadmap.",
+    path: "/about",
+    ogImage: `${SITE_ORIGIN}/about.jpg`,
+    keywords:
+      "about KIDUART, school ERP company India, school management software Noida, KIDUART founding team, Indian school ERP, cloud-based school ERP company",
   },
   demo: {
-    title: "Book a Free KIDUART School ERP Demo for Your School",
+    title:
+      "Free School ERP Demo India | Book KIDUART School Management Walkthrough",
     description:
-      "Book a free live demo. See admissions, fees, attendance, and reporting workflows in a real school context. No commitment required.",
+      "Book a free live school ERP demo for Indian schools. See admissions CRM, online fee management, attendance tracking, exams, and parent portal on your school structure. No card required.",
     path: "/demo",
     ogImage: `${SITE_ORIGIN}/images/banner/home-hero.jpeg`,
+    keywords: DEMO_META_KEYWORDS,
+  },
+  login: {
+    title: "KIDUART Login | School Admin, Teacher, Parent & Student Portals",
+    description:
+      "Sign in to your KIDUART school ERP portal. Choose your role  school admin, teacher, finance, HR, parent, student  and continue to your school management dashboard.",
+    path: "/login",
+    ogImage: `${SITE_ORIGIN}/images/banner/platform-hero.jpg`,
+    keywords:
+      "KIDUART login, school ERP login India, parent portal login, student portal login, school admin login, teacher login KIDUART, school management system login",
   },
   security: {
-    title: "School Data Security & Privacy for ERP | KIDUART",
+    title: "School Data Security & Privacy for School ERP | KIDUART",
     description:
-      "KIDUART uses encryption controls, role-based access, audit logging, and school-level data isolation to protect student, fee, and staff data.",
+      "School ERP security for Indian schools: encryption controls, role-based access, audit logging, and school-level data isolation to protect student, fee, and staff data.",
     path: "/security",
     ogImage: `${SITE_ORIGIN}/images/banner/security-hero.jpg`,
+    keywords:
+      "school ERP security, school data privacy India, student data protection ERP, role based access school software, KIDUART security",
   },
   kiduorbit: {
-    title: "KIDUORBIT for School ERP | Early support signals",
+    title: "KIDUORBIT AI | Next-Phase School Analytics (Coming Soon) | KIDUART",
     description:
-      "KIDUORBIT surfaces attendance and grade patterns for staff review. The analytics layer inside KIDUART — built for counsellors and teachers, not surveillance.",
+      "KIDUORBIT is KIDUART's next-phase AI layer for Indian schools  predictive review lists on attendance, fees, and academics for staff follow-up. Not launched yet; preview the roadmap.",
     path: "/kiduorbit",
-    ogImage: `${SITE_ORIGIN}/images/banner/home-hero.jpeg`,
+    ogImage: `${SITE_ORIGIN}/images/blog/blog-kiduorbit-soon.png`,
+    keywords:
+      "KIDUORBIT AI, school ERP AI India, predictive analytics for schools, attendance risk forecast, fee default scoring, AI school management software",
   },
   help: {
-    title: "KIDUART Help Center | School ERP Guides & Support",
+    title:
+      "KIDUART Help Center | School ERP Guides & School Management Support",
     description:
-      "Search guides for setup, students, fees, attendance, and integrations. Find answers or contact KIDUART support from Noida, India.",
+      "School ERP help guides for setup, students, fees, attendance tracking, and integrations. Find answers or contact KIDUART support from Noida, India.",
     path: "/help",
     ogImage: `${SITE_ORIGIN}/images/banner/home-hero.jpeg`,
+    keywords:
+      "school ERP help, school management software support, KIDUART help center, fee setup guide school ERP, attendance tracking guide",
   },
   apiDocs: {
-    title: "KIDUART API Documentation | School ERP Integrations",
+    title: "KIDUART API Documentation | School ERP Integrations & REST API",
     description:
-      "REST endpoints and webhooks for connecting your LMS, payments, and internal systems to KIDUART. Bearer authentication and sandbox testing.",
+      "School ERP API docs: REST endpoints and webhooks for LMS, payments, and internal systems. Bearer authentication and sandbox testing for school management integrations.",
     path: "/integrations/api-docs",
     ogImage: `${SITE_ORIGIN}/images/banner/home-hero.jpeg`,
+    keywords:
+      "school ERP API, school management REST API, student data API, attendance API integration, school API key scopes",
   },
   careers: {
     title: "KIDUART Internships & Careers | Python, UI/UX & BD Jobs in Noida",
@@ -90,20 +136,48 @@ export const pageSeo = {
     keywords:
       "KIDUART careers, KIDUART internship, EdTech jobs Noida, Python intern Noida, UI UX internship India, business development intern, school ERP jobs, fresher internship EdTech, startup internship Noida",
   },
+  faq: {
+    title:
+      "School ERP FAQ | Modules, Pricing, Security & Integrations | KIDUART",
+    description:
+      "FAQ on school ERP software and school management system: modules, per-student pricing, live integrations, student data security, and what KIDUART has not built yet.",
+    path: "/faq",
+    ogImage: `${SITE_ORIGIN}/images/banner/home-hero.jpeg`,
+    keywords:
+      "school ERP FAQ, school management software questions, school ERP pricing FAQ India, school data security FAQ, KIDUART FAQ",
+  },
+  stories: {
+    title:
+      "School ERP Customer Stories | School Management Scenarios | KIDUART",
+    description:
+      "How Indian schools plan fees, attendance tracking, and parent communication on school ERP software. Illustrative KIDUART scenarios; verified case studies publish as schools go live.",
+    path: "/stories",
+    ogImage: `${SITE_ORIGIN}/images/banner/home-hero.jpeg`,
+    keywords:
+      "school ERP customer stories, school management software case study India, KIDUART school scenarios, multi branch school ERP",
+  },
 } as const;
 
-export function featurePageSeo(slug: string, title: string, description: string): PageSeoHeadProps {
-  const trimmed = description.length > 155 ? `${description.slice(0, 152)}...` : description;
+export function featurePageSeo(
+  slug: string,
+  title: string,
+  description: string,
+): PageSeoHeadProps {
+  const trimmed =
+    description.length > 155 ? `${description.slice(0, 152)}...` : description;
   return {
-    title: `${title} | KIDUART School ERP`,
+    title: `${title} | School ERP Features | KIDUART`,
     description: trimmed,
     path: `/features/${slug}`,
     ogImage: `${SITE_ORIGIN}/images/banner/features-hero.jpg`,
+    keywords: `${title.toLowerCase()}, school ERP features, school management software, KIDUART`,
   };
 }
 
 function clampDescription(description: string): string {
-  return description.length > 155 ? `${description.slice(0, 152)}...` : description;
+  return description.length > 155
+    ? `${description.slice(0, 152)}...`
+    : description;
 }
 
 /** Module-area page, e.g. /features/finance-and-fee-management */
@@ -115,12 +189,13 @@ export function areaPageSeo(area: {
   moduleCount: number;
   summary: string;
 }): PageSeoHeadProps {
+  const labelLower = area.label.toLowerCase();
   return {
-    title: `${area.label} Module for Schools | KIDUART`,
+    title: `${area.label} Module | School ERP Software India | KIDUART`,
     description: clampDescription(area.summary),
     path: `/features/${area.slug}`,
     ogImage: `${SITE_ORIGIN}/images/banner/features-hero.jpg`,
-    keywords: `${area.label.toLowerCase()} school ERP, ${area.label.toLowerCase()} module, school management software ${area.label.toLowerCase()}, KIDUART ${area.label.toLowerCase()}`,
+    keywords: `${labelLower} school ERP, ${labelLower} module, school management software ${labelLower}, school ERP India, KIDUART ${labelLower}`,
   };
 }
 
@@ -133,13 +208,15 @@ export function moduleFeaturePageSeo(params: {
   featureCount: number;
   subModuleCount: number;
 }): PageSeoHeadProps {
+  const nameLower = params.moduleName.toLowerCase();
   return {
-    title: `${params.moduleName} for Schools | KIDUART`,
+    title: `${params.moduleName} Software for Schools | School ERP | KIDUART`,
     description: clampDescription(
-      `${params.moduleName} in KIDUART is part of the ${params.areaLabel} area — the workflows schools ask about most, with a full sheet available on request.`,
+      `${params.moduleName} in KIDUART school ERP is part of ${params.areaLabel}  the workflows Indian schools ask about most, with a full capability sheet on request.`,
     ),
     path: `/features/${params.areaSlug}/${params.moduleSlug}`,
     ogImage: `${SITE_ORIGIN}/images/banner/features-hero.jpg`,
+    keywords: `${nameLower} school ERP, ${nameLower} school management software, ${params.areaLabel.toLowerCase()} school software, KIDUART ${nameLower}`,
   };
 }
 
@@ -149,9 +226,10 @@ export function integrationPageSeo(
   description: string,
   keywords?: string,
 ): PageSeoHeadProps {
-  const trimmed = description.length > 155 ? `${description.slice(0, 152)}...` : description;
+  const trimmed =
+    description.length > 155 ? `${description.slice(0, 152)}...` : description;
   return {
-    title: `${name} Integration for KIDUART School ERP`,
+    title: `${name} Integration for School ERP | KIDUART`,
     description: trimmed,
     path: `/integrations/${slug}`,
     ogImage: `${SITE_ORIGIN}/images/banner/home-hero.jpeg`,
@@ -159,13 +237,19 @@ export function integrationPageSeo(
   };
 }
 
-export function blogPostPageSeo(slug: string, title: string, excerpt: string): PageSeoHeadProps {
-  const trimmed = excerpt.length > 155 ? `${excerpt.slice(0, 152)}...` : excerpt;
+export function blogPostPageSeo(
+  slug: string,
+  title: string,
+  excerpt: string,
+): PageSeoHeadProps {
+  const trimmed =
+    excerpt.length > 155 ? `${excerpt.slice(0, 152)}...` : excerpt;
   return {
-    title: `${title} | KIDUART Blog`,
+    title: `${title} | School ERP Blog | KIDUART`,
     description: trimmed,
     path: `/blog/${slug}`,
     ogImage: `${SITE_ORIGIN}/images/banner/blog-hero.avif`,
     ogType: "article",
+    keywords: `school ERP, school management software India, ${title.toLowerCase()}, KIDUART blog`,
   };
 }

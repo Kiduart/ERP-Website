@@ -1,10 +1,10 @@
-import { motion, useReducedMotion } from "framer-motion";
+import { m, useReducedMotion } from "framer-motion";
 import { CSSProperties, ReactNode, useEffect, useState } from "react";
 
 /**
  * Resolved after mount only. Deciding this during the first client render would
  * swap the rendered element type mid-hydration, and React keeps the server
- * markup (opacity: 0) — which leaves whole sections permanently blank.
+ * markup (opacity: 0) which leaves whole sections permanently blank.
  */
 function useSkipMotion() {
   const reduceMotion = useReducedMotion();
@@ -24,7 +24,8 @@ function useSkipMotion() {
 export function PageTransition({
   children,
   className = "",
-  instant = false,
+  /** Default true: page swaps must feel instant. Fade-in made every nav feel slow. */
+  instant = true,
 }: {
   children: ReactNode;
   className?: string;
@@ -37,15 +38,14 @@ export function PageTransition({
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 15 }}
+    <m.div
+      initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -15 }}
-      transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
       className={className}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -74,15 +74,15 @@ export function SectionReveal({
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
+    <m.div
+      initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
+      viewport={{ once: true, margin: "0px 0px -8% 0px", amount: 0.15 }}
+      transition={{ duration: 0.32, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
       style={style}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }

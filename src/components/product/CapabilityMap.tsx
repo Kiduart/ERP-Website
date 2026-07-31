@@ -2,7 +2,10 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
 import { ArrowUpRight, MousePointerClick } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { ACCENTS, type AccentName } from "@/components/product/ProductPrimitives";
+import {
+  ACCENTS,
+  type AccentName,
+} from "@/components/product/ProductPrimitives";
 import { ProductIcon } from "@/components/product/ProductIcon";
 
 export type CapabilityArea = {
@@ -53,8 +56,13 @@ export function CapabilityMap({ areas }: { areas: CapabilityArea[] }) {
       (entries) => {
         const visible = entries
           .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
-        if (visible?.target instanceof HTMLElement && visible.target.dataset.slug) {
+          .sort(
+            (a, b) => a.boundingClientRect.top - b.boundingClientRect.top,
+          )[0];
+        if (
+          visible?.target instanceof HTMLElement &&
+          visible.target.dataset.slug
+        ) {
           setActiveSlug(visible.target.dataset.slug);
         }
       },
@@ -75,7 +83,9 @@ export function CapabilityMap({ areas }: { areas: CapabilityArea[] }) {
 
     const onScroll = () => {
       const scrollable = pane.scrollHeight - pane.clientHeight;
-      setProgress(scrollable > 0 ? Math.min(1, pane.scrollTop / scrollable) : 0);
+      setProgress(
+        scrollable > 0 ? Math.min(1, pane.scrollTop / scrollable) : 0,
+      );
     };
 
     onScroll();
@@ -85,7 +95,17 @@ export function CapabilityMap({ areas }: { areas: CapabilityArea[] }) {
 
   useEffect(() => {
     if (!panelScroll) return;
-    railRefs.current.get(activeSlug)?.scrollIntoView({ block: "nearest" });
+    const node = railRefs.current.get(activeSlug);
+    if (!node) return;
+    // Keep the active rail item visible inside the list only  never scroll the page.
+    const list = node.closest("ul");
+    if (!list || list.scrollHeight <= list.clientHeight) return;
+    const listRect = list.getBoundingClientRect();
+    const nodeRect = node.getBoundingClientRect();
+    if (nodeRect.top >= listRect.top && nodeRect.bottom <= listRect.bottom)
+      return;
+    list.scrollTop +=
+      nodeRect.top - listRect.top - (listRect.height - nodeRect.height) / 2;
   }, [activeSlug, panelScroll]);
 
   const registerSection = (slug: string) => (node: HTMLElement | null) => {
@@ -102,7 +122,9 @@ export function CapabilityMap({ areas }: { areas: CapabilityArea[] }) {
       event.preventDefault();
       setActiveSlug(slug);
 
-      const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+      const reduce = window.matchMedia?.(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
       const behavior: ScrollBehavior = reduce ? "auto" : "smooth";
 
       if (panelScroll && pane) {
@@ -121,7 +143,8 @@ export function CapabilityMap({ areas }: { areas: CapabilityArea[] }) {
           Module areas
         </p>
         <p className="mt-2 text-sm leading-6 text-brand-navy/[0.74]">
-          Grouped the way schools divide work — office, academic, finance, campus and platform.
+          Grouped the way schools divide work office, academic, finance, campus
+          and platform.
         </p>
 
         <div className="mt-4 hidden items-center gap-3 lg:flex">
@@ -131,7 +154,10 @@ export function CapabilityMap({ areas }: { areas: CapabilityArea[] }) {
               style={{ width: `${Math.round(progress * 100)}%` }}
             />
           </span>
-          <span className="text-xs font-bold tabular-nums text-brand-navy/[0.72]" aria-live="polite">
+          <span
+            className="text-xs font-bold tabular-nums text-brand-navy/[0.72]"
+            aria-live="polite"
+          >
             {activeIndex + 1}/{areas.length}
           </span>
         </div>
@@ -157,7 +183,9 @@ export function CapabilityMap({ areas }: { areas: CapabilityArea[] }) {
                         : "border-brand-navy/[0.1] bg-white text-brand-navy hover:border-brand-teal/40 hover:text-brand-teal",
                     )}
                   >
-                    <span className="whitespace-nowrap lg:whitespace-normal">{area.label}</span>
+                    <span className="whitespace-nowrap lg:whitespace-normal">
+                      {area.label}
+                    </span>
                   </a>
                 </li>
               );
@@ -166,7 +194,10 @@ export function CapabilityMap({ areas }: { areas: CapabilityArea[] }) {
         </nav>
 
         <p className="mt-4 hidden items-center gap-2 text-xs font-semibold text-brand-navy/[0.7] lg:flex">
-          <MousePointerClick className="h-3.5 w-3.5 text-brand-teal" aria-hidden="true" />
+          <MousePointerClick
+            className="h-3.5 w-3.5 text-brand-teal"
+            aria-hidden="true"
+          />
           Scroll inside the panel or pick an area
         </p>
       </div>
@@ -187,6 +218,14 @@ export function CapabilityMap({ areas }: { areas: CapabilityArea[] }) {
               id={`area-${area.slug}`}
               data-slug={area.slug}
               ref={registerSection(area.slug)}
+              style={
+                isActive
+                  ? undefined
+                  : {
+                      contentVisibility: "auto",
+                      containIntrinsicSize: "auto 280px",
+                    }
+              }
               className={cn(
                 "scroll-mt-28 rounded-[2rem] border bg-white/95 p-6 shadow-sm transition-shadow duration-300 md:p-8 lg:scroll-mt-4",
                 tokens.border,
@@ -196,15 +235,28 @@ export function CapabilityMap({ areas }: { areas: CapabilityArea[] }) {
               <div className="flex flex-wrap items-start justify-between gap-4">
                 <div className="flex items-start gap-4">
                   <span
-                    className={cn("inline-flex h-12 w-12 items-center justify-center rounded-2xl", tokens.softBg)}
+                    className={cn(
+                      "inline-flex h-12 w-12 items-center justify-center rounded-2xl",
+                      tokens.softBg,
+                    )}
                   >
-                    <ProductIcon name={area.icon} className={cn("h-6 w-6", tokens.text)} />
+                    <ProductIcon
+                      name={area.icon}
+                      className={cn("h-6 w-6", tokens.text)}
+                    />
                   </span>
                   <div>
-                    <p className={cn("text-xs font-bold uppercase tracking-[0.18em]", tokens.text)}>
+                    <p
+                      className={cn(
+                        "text-xs font-bold uppercase tracking-[0.18em]",
+                        tokens.text,
+                      )}
+                    >
                       {area.stage}
                     </p>
-                    <h3 className="mt-1.5 text-2xl font-bold text-brand-navy">{area.label}</h3>
+                    <h3 className="mt-1.5 text-2xl font-bold text-brand-navy">
+                      {area.label}
+                    </h3>
                   </div>
                 </div>
                 <dl className="flex gap-4 text-sm">
@@ -212,13 +264,19 @@ export function CapabilityMap({ areas }: { areas: CapabilityArea[] }) {
                     <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-navy/[0.7]">
                       Coverage
                     </dt>
-                    <dd className="text-sm font-bold text-brand-navy">Modules + workflows</dd>
+                    <dd className="text-sm font-bold text-brand-navy">
+                      Modules + workflows
+                    </dd>
                   </div>
                 </dl>
               </div>
 
-              <p className="mt-5 text-lg font-semibold leading-8 text-brand-navy">{area.headline}</p>
-              <p className="mt-3 leading-7 text-brand-navy/[0.78]">{area.summary}</p>
+              <p className="mt-5 text-lg font-semibold leading-8 text-brand-navy">
+                {area.headline}
+              </p>
+              <p className="mt-3 leading-7 text-brand-navy/[0.78]">
+                {area.summary}
+              </p>
 
               <ul className="mt-5 flex flex-wrap gap-2">
                 {area.topModules.map((module) => (

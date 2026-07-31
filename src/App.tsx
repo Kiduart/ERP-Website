@@ -10,6 +10,7 @@ import { AccessibilityProvider } from "@/components/common/AccessibilityWidget";
 import { DeferredMount } from "@/components/common/DeferredMount";
 import { ScrollRestoration } from "@/components/common/ScrollRestoration";
 import { ScrollToTopButton } from "@/components/common/ScrollToTopButton";
+import { MotionProvider } from "@/components/animations/MotionProvider";
 
 const AccessibilityWidget = dynamic(
   () => import("@/components/common/AccessibilityWidget").then((mod) => mod.AccessibilityWidget),
@@ -42,7 +43,6 @@ type AppShellProps = {
 
 export function AppShell({ children }: AppShellProps) {
   const [queryClient] = useState(() => new QueryClient());
-  const [stickyDemoBarDismissed, setStickyDemoBarDismissed] = useState(false);
   const router = useRouter();
   const shouldShowGetInTouch = useMemo(
     () => !["/contact", "/demo", "/404", "/not-found"].includes(router.pathname),
@@ -55,6 +55,7 @@ export function AppShell({ children }: AppShellProps) {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <MotionProvider>
       <AccessibilityProvider>
         <TooltipProvider>
           <ScrollRestoration />
@@ -79,16 +80,14 @@ export function AppShell({ children }: AppShellProps) {
             </DeferredMount>
             {shouldShowStickyDemoBar && (
               <DeferredMount timeoutMs={2200}>
-                <StickyDemoBar
-                  dismissed={stickyDemoBarDismissed}
-                  onDismiss={() => setStickyDemoBarDismissed(true)}
-                />
+                <StickyDemoBar />
               </DeferredMount>
             )}
           </div>
           <Toaster />
         </TooltipProvider>
       </AccessibilityProvider>
+      </MotionProvider>
     </QueryClientProvider>
   );
 }

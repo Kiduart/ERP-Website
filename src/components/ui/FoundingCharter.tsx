@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { ArrowRight, ShieldCheck } from "lucide-react";
+import { InView } from "@/components/ui/InView";
 
 const CHARTER_CLAUSES: { title: string; body: string }[] = [
   {
@@ -20,16 +21,28 @@ const CHARTER_CLAUSES: { title: string; body: string }[] = [
   },
   {
     title: "The first stories will be attributable",
-    body: "When this section fills, each story will carry the school's name and city, the person who said it, and the number they measured — published with their written consent.",
+    body: "When this section fills, each story will carry the school's name and city, the person who said it, and the number they measured  published with their written consent.",
   },
 ];
 
-const STORY_FIELDS = ["School and city", "Who said it, and their role", "Which modules they run", "The number they measured", "Consent on record"];
+const STORY_FIELDS = [
+  "School and city",
+  "Who said it, and their role",
+  "Which modules they run",
+  "The number they measured",
+  "Consent on record",
+];
 
 export function FoundingCharter() {
   return (
-    <div className="grid gap-8 lg:grid-cols-12 lg:gap-10">
-      <article className="relative overflow-hidden rounded-[1.75rem] border border-brand-navy/10 bg-white p-6 shadow-lg shadow-brand-navy/[0.05] md:p-9 lg:col-span-7">
+    <InView
+      once={false}
+      className="home-rise grid gap-8 lg:grid-cols-12 lg:gap-10"
+    >
+      <article
+        style={{ ["--stagger" as string]: 0 }}
+        className="home-brick relative overflow-hidden rounded-[1.75rem] border border-brand-navy/10 bg-white p-6 shadow-lg shadow-brand-navy/[0.05] md:p-9 lg:col-span-7"
+      >
         <span
           aria-hidden="true"
           className="pointer-events-none absolute inset-y-0 left-7 hidden w-px bg-brand-orange/30 md:block"
@@ -51,7 +64,8 @@ export function FoundingCharter() {
             {CHARTER_CLAUSES.map((clause, index) => (
               <li
                 key={clause.title}
-                className="border-t border-brand-navy/[0.08] pt-5 first:border-t-0 first:pt-0"
+                style={{ ["--stagger" as string]: index + 1 }}
+                className="home-brick border-t border-brand-navy/[0.08] pt-5 first:border-t-0 first:pt-0"
               >
                 <div className="flex gap-4">
                   <span
@@ -61,8 +75,12 @@ export function FoundingCharter() {
                     {String(index + 1).padStart(2, "0")}
                   </span>
                   <div>
-                    <h4 className="text-base font-bold text-brand-navy">{clause.title}</h4>
-                    <p className="mt-1.5 text-sm leading-7 text-brand-navy/80">{clause.body}</p>
+                    <h4 className="text-base font-bold text-brand-navy">
+                      {clause.title}
+                    </h4>
+                    <p className="mt-1.5 text-sm leading-7 text-brand-navy/80">
+                      {clause.body}
+                    </p>
                   </div>
                 </div>
               </li>
@@ -79,7 +97,7 @@ export function FoundingCharter() {
               <span className="block">schools</span>
             </span>
             <p className="max-w-sm text-sm leading-6 text-brand-navy/80">
-              Clause three is not a slogan — it is already written into our{" "}
+              Clause three is not a slogan it is already written into our{" "}
               <Link
                 href="/privacy-policy"
                 className="font-bold text-brand-teal underline underline-offset-4"
@@ -99,12 +117,17 @@ export function FoundingCharter() {
         </div>
       </article>
 
-      <div className="lg:col-span-5">
+      <div
+        className="home-brick lg:col-span-5"
+        style={{ ["--stagger" as string]: 2 }}
+      >
         <div className="rounded-[1.75rem] border border-brand-navy/10 bg-brand-beige/30 p-6 md:p-8">
-          <h3 className="text-lg font-bold text-brand-navy">What will sit here instead</h3>
+          <h3 className="text-lg font-bold text-brand-navy">
+            What will sit here instead
+          </h3>
           <p className="mt-2 text-sm leading-7 text-brand-navy/80">
-            This is the format every story on this page will follow. Nothing gets published until a
-            school signs off on the numbers in it.
+            This is the format every story on this page will follow. Nothing
+            gets published until a school signs off on the numbers in it.
           </p>
 
           <dl className="mt-6 space-y-4">
@@ -122,29 +145,36 @@ export function FoundingCharter() {
           </dl>
 
           <p className="mt-6 flex gap-2.5 rounded-2xl border border-brand-teal/20 bg-white px-4 py-3.5 text-sm leading-6 text-brand-navy/80">
-            <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-brand-teal" aria-hidden="true" />
+            <ShieldCheck
+              className="mt-0.5 h-4 w-4 shrink-0 text-brand-teal"
+              aria-hidden="true"
+            />
             <span>
-              Under India&apos;s Consumer Protection Act, a review that is not based on a genuine
-              experience is a misleading advertisement. We would rather show you an empty template
-              than a made-up quote.
+              Under India&apos;s Consumer Protection Act, a review that is not
+              based on a genuine experience is a misleading advertisement. We
+              would rather show you an empty template than a made-up quote.
             </span>
           </p>
         </div>
 
         <div className="mt-6 rounded-[1.75rem] border border-brand-navy/10 bg-white p-6 md:p-8">
-          <h3 className="text-lg font-bold text-brand-navy">Be one of the first schools</h3>
+          <h3 className="text-lg font-bold text-brand-navy">
+            Be one of the first schools
+          </h3>
           <p className="mt-2 text-sm leading-7 text-brand-navy/80">
-            Founding schools get a named contact through setup and a direct line into what we build
-            next. In return, we ask for honest feedback — and your story only if you want to give it.
+            Founding schools get a named contact through setup and a direct line
+            into what we build next. In return, we ask for honest feedback and
+            your story only if you want to give it.
           </p>
           <Link
             href="/demo"
             className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-navy px-6 py-3.5 text-base font-bold text-brand-beige transition-colors hover:bg-brand-teal"
           >
-            Talk to us about a rollout <ArrowRight className="h-5 w-5" aria-hidden="true" />
+            Talk to us about a rollout{" "}
+            <ArrowRight className="h-5 w-5" aria-hidden="true" />
           </Link>
         </div>
       </div>
-    </div>
+    </InView>
   );
 }

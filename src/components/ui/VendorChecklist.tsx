@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { ArrowRight, ArrowUpRight, Check, ShieldCheck, TriangleAlert } from "lucide-react";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Check,
+  ShieldCheck,
+  TriangleAlert,
+} from "lucide-react";
+import { Stagger } from "@/components/ui/Stagger";
 import { VENDOR_QUESTIONS } from "@/data/vendorQuestions";
 
 const MUTED = { color: "rgb(var(--hero-muted-rgb) / 0.78)" };
@@ -10,12 +17,14 @@ export function VendorChecklist() {
 
   const toggle = (id: string) =>
     setPicked((current) =>
-      current.includes(id) ? current.filter((entry) => entry !== id) : [...current, id],
+      current.includes(id)
+        ? current.filter((entry) => entry !== id)
+        : [...current, id],
     );
 
   return (
     <div>
-      <ol className="space-y-4">
+      <Stagger as="ol" className="space-y-4" itemClassName="motion-stamp">
         {VENDOR_QUESTIONS.map((item, index) => {
           const isPicked = picked.includes(item.id);
 
@@ -89,7 +98,7 @@ export function VendorChecklist() {
             </li>
           );
         })}
-      </ol>
+      </Stagger>
 
       <div className="mt-8 flex flex-col items-center gap-4 rounded-[1.5rem] border border-white/12 bg-white/[0.05] px-6 py-7 text-center md:flex-row md:justify-between md:text-left">
         <div>
@@ -99,14 +108,16 @@ export function VendorChecklist() {
               : `${picked.length} of ${VENDOR_QUESTIONS.length} questions picked`}
           </p>
           <p className="mt-1 text-sm leading-6" style={MUTED}>
-            Ask them to us on the call — and ask the same list to every other vendor you shortlist.
+            Ask them to us on the call and ask the same list to every other
+            vendor you shortlist.
           </p>
         </div>
         <Link
           href="/demo"
           className="inline-flex shrink-0 items-center gap-2 rounded-full bg-brand-yellow px-7 py-3.5 text-base font-bold text-brand-navy transition-colors hover:bg-brand-beige"
         >
-          Put us through it <ArrowRight className="h-5 w-5" aria-hidden="true" />
+          Put us through it{" "}
+          <ArrowRight className="h-5 w-5" aria-hidden="true" />
         </Link>
       </div>
     </div>
@@ -125,7 +136,11 @@ export function VendorChecklistTeaser() {
           <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-yellow">
             Try three questions here
           </p>
-          <div className="mt-4 space-y-2" role="tablist" aria-label="ERP vendor questions">
+          <div
+            className="mt-4 space-y-2"
+            role="tablist"
+            aria-label="ERP vendor questions"
+          >
             {sample.map((item, index) => {
               const isActive = item.id === active?.id;
               return (
@@ -142,10 +157,15 @@ export function VendorChecklistTeaser() {
                       : "border-white/12 bg-white/[0.04] hover:border-white/30"
                   }`}
                 >
-                  <span className="font-mono text-xs font-bold text-brand-yellow" aria-hidden="true">
+                  <span
+                    className="font-mono text-xs font-bold text-brand-yellow"
+                    aria-hidden="true"
+                  >
                     {String(index + 1).padStart(2, "0")}
                   </span>
-                  <span className="text-sm font-semibold leading-6 text-brand-beige">{item.question}</span>
+                  <span className="text-sm font-semibold leading-6 text-brand-beige">
+                    {item.question}
+                  </span>
                 </button>
               );
             })}
