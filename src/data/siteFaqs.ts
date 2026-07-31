@@ -11,9 +11,8 @@ export type SiteFaqGroup = {
 };
 
 /**
- * Answers are written against the shipped product: 16 module areas, 90 modules,
- * 1368 features, 10 role panels. Where something is not built yet, the answer
- * says so instead of hedging.
+ * Answers are written against the shipped product matrix and role panels.
+ * Where something is not built yet, the answer says so instead of hedging.
  */
 export const SITE_FAQ_GROUPS: SiteFaqGroup[] = [
   {
@@ -23,15 +22,15 @@ export const SITE_FAQ_GROUPS: SiteFaqGroup[] = [
     icon: "Layers",
     items: [
       {
-        q: "How many modules does KIDUART actually have?",
-        a: "The product is organised into 16 module areas containing 90 functional modules, 137 sub-modules and 1,368 individual features. Areas include Organisation Management, Academic, Admission, Student Management, Parent Management, HR & Staff, Finance & Fee Management, Communication, Library, Transport, Hostel, Facilities & Inventory, Reports & Analytics, Dashboard & Insights, Security & Authentication, and Support. Every one of those areas has its own page on this site with the full module list.",
+        q: "How deep does KIDUART go across school operations?",
+        a: "The product is organised into functional areas — Organisation, Academic, Admission, Student and Parent Management, HR & Staff, Finance & Fees, Communication, Library, Transport, Hostel, Facilities & Inventory, Reports & Analytics, Dashboard & Insights, Security & Authentication, and Support — each with its own page on this site. Depth sits in the workflows inside those areas, not in a marketing feature count.",
       },
       {
         q: "Which area is the deepest?",
-        a: "Academic, with 338 features across 11 modules — attendance, timetable, examinations, assignments, curriculum, class diary, discipline, houses and parent-teacher meetings all live there. HR & Staff Management is next at 176 features, then Security & Authentication at 163 and Finance & Fee Management at 105.",
+        a: "Academic — attendance, timetable, examinations, assignments, curriculum, class diary, discipline, houses and parent-teacher meetings all live there. HR & Staff, Security & Authentication, and Finance & Fees follow closely for schools that run those operations in-house.",
       },
       {
-        q: "Do we have to take all 16 areas?",
+        q: "Do we have to take every area?",
         a: "No. A day school with no boarding does not need Hostel Management, and a school that outsources buses does not need Transport. We enable the areas you run and price accordingly, and you can add areas later in the session.",
       },
       {

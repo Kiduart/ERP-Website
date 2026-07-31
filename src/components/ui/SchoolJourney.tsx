@@ -160,11 +160,11 @@ export function SchoolJourney() {
               </h3>
             </div>
             <span className="ml-auto rounded-2xl border border-brand-navy/10 bg-brand-beige/30 px-4 py-2.5 text-center">
-              <span className="block text-xl font-extrabold leading-none text-brand-navy">
-                {active.featureCount}
+              <span className="block text-sm font-extrabold leading-none text-brand-navy">
+                Live module
               </span>
               <span className="mt-1 block text-[0.65rem] font-bold uppercase tracking-[0.14em] text-brand-navy/[0.72]">
-                features here
+                in the product
               </span>
             </span>
           </div>

@@ -59,16 +59,16 @@ export default function Pricing({ coverage, totals, coreAreaCount }: PricingPage
               Pay per student, switch on the modules you actually run
             </h1>
             <p className="mt-4 text-lg leading-8 text-brand-navy/[0.72]">
-              KIDUART ships {totals.categories} module areas, {totals.modules} functional modules and{" "}
-              {totals.features.toLocaleString("en-IN")} features. You pay for active students — staff, teacher,
-              student and parent logins are included — and your plan decides which of those areas are switched on.
+              KIDUART covers the full school operations stack — functional areas and workflows you
+              switch on as you grow. You pay for active students — staff, teacher, student and parent
+              logins are included — and your plan decides which areas are switched on.
             </p>
           </SectionReveal>
 
           <SectionReveal className="mx-auto mb-14 grid max-w-4xl grid-cols-2 gap-4 md:grid-cols-4">
-            <StatChip value={totals.categories} label="Module areas" />
-            <StatChip value={totals.modules} label="Functional modules" />
-            <StatChip value={totals.features.toLocaleString("en-IN")} label="Features" />
+            <StatChip value={totals.categories} label="Functional areas" />
+            <StatChip value={`${totals.modules}+`} label="Business workflows" />
+            <StatChip value="Full" label="School operations stack" />
             <StatChip value="0" label="Per-user charges" />
           </SectionReveal>
 
@@ -102,7 +102,11 @@ export default function Pricing({ coverage, totals, coreAreaCount }: PricingPage
                 </div>
 
                 <p className="mt-6 text-xs font-bold uppercase tracking-[0.18em] text-brand-teal">
-                  {plan.areas.length} module {plan.areas.length === 1 ? "area" : "areas"} included
+                  {plan.name === "Complete"
+                    ? "All module areas included"
+                    : plan.name === "Group"
+                      ? "Group layer across campuses"
+                      : "Core module areas included"}
                 </p>
                 <ul className="mt-4 mb-8 flex-1 space-y-3.5">
                   {plan.features.map((feat) => (
@@ -196,7 +200,7 @@ export default function Pricing({ coverage, totals, coreAreaCount }: PricingPage
                             {area.label}
                           </span>
                           <span className="mt-0.5 block text-xs font-semibold text-brand-navy/[0.7]">
-                            {area.moduleCount} modules · {area.featureCount} features
+                            Open area details
                           </span>
                         </span>
                       </Link>

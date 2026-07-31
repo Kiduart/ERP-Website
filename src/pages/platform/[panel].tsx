@@ -68,7 +68,7 @@ type PanelPageProps = {
   };
 };
 
-export default function PanelPage({ panel, modules, areas, totals, neighbours }: PanelPageProps) {
+export default function PanelPage({ panel, modules, areas, neighbours }: PanelPageProps) {
   const tokens = ACCENTS[panel.accent];
   const trail = [
     { name: "Home", path: "/" },
@@ -118,8 +118,8 @@ export default function PanelPage({ panel, modules, areas, totals, neighbours }:
                 <p className="mt-5 text-lg leading-8 text-brand-navy/[0.78]">{panel.intro}</p>
 
                 <div className="mt-7 grid gap-3 sm:grid-cols-3">
-                  <StatChip value={totals.modules} label="Modules in reach" />
-                  <StatChip value={totals.features} label="Features available" />
+                  <StatChip value="Modules" label="In reach for this role" />
+                  <StatChip value="Workflows" label="Day-to-day use" />
                   <StatChip value={panel.audience.length} label="Role types" />
                 </div>
 
@@ -135,7 +135,7 @@ export default function PanelPage({ panel, modules, areas, totals, neighbours }:
                     href="/platform"
                     className="inline-flex items-center justify-center gap-2 rounded-full border border-brand-navy/[0.14] bg-white px-7 py-3.5 text-base font-bold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
                   >
-                    All 10 panels
+                    All panels
                   </Link>
                 </div>
               </SectionReveal>
@@ -232,7 +232,7 @@ export default function PanelPage({ panel, modules, areas, totals, neighbours }:
                     {module.subModules.join(" · ")}
                   </span>
                   <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-brand-navy group-hover:text-brand-teal">
-                    {module.featureCount} features
+                    Open module
                     <ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </span>
                 </Link>
@@ -250,7 +250,7 @@ export default function PanelPage({ panel, modules, areas, totals, neighbours }:
                     >
                       <span className="text-base font-bold text-brand-navy">{area.label}</span>
                       <span className="mt-1 text-xs font-semibold uppercase tracking-[0.14em] text-brand-navy/[0.7]">
-                        {area.moduleCount} modules · {area.featureCount} features
+                        Open area
                       </span>
                     </Link>
                   </li>

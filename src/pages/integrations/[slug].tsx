@@ -286,7 +286,7 @@ export default function IntegrationDetail({
                     </p>
                     <h3 className="mt-2 text-xl font-bold text-brand-navy">{entry.moduleName}</h3>
                     <p className="mt-2 text-sm font-semibold text-brand-navy/[0.74]">
-                      {entry.featureCount} capabilities in this module
+                      Linked workflows in the product
                     </p>
                     <TextLink href={`/features/${entry.areaSlug}/${entry.moduleSlug}`} className="mt-4">
                       Open {entry.moduleName}

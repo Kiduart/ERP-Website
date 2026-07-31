@@ -25,7 +25,7 @@ import {
   type PerimeterScenario,
 } from "@/components/ui/SecurityPerimeter";
 import { AREA_NARRATIVES } from "@/data/productNarrative";
-import { MATRIX_CATEGORIES, MATRIX_TOTALS, countSubModules, topModules } from "@/data/featureMatrix";
+import { MATRIX_CATEGORIES, countSubModules, topModules } from "@/data/featureMatrix";
 import integrationsData, { INTEGRATION_CATEGORIES } from "@/data/integrationsData";
 import { SECURITY_LAYERS, SECURITY_SCENARIOS } from "@/data/securityPosture";
 import { CONTACT_PHONE_E164 } from "@/lib/contact";
@@ -54,7 +54,6 @@ const faqs = [
 
 type HomeProps = {
   areaCards: AtlasArea[];
-  totals: typeof MATRIX_TOTALS;
   integrationBoard: FabricCategory[];
   integrationCounts: { live: number; guided: number; planned: number; total: number };
   securityLayers: PerimeterLayer[];
@@ -64,7 +63,6 @@ type HomeProps = {
 
 export default function Home({
   areaCards,
-  totals,
   integrationBoard,
   integrationCounts,
   securityLayers,
@@ -174,12 +172,11 @@ export default function Home({
             <SectionReveal className="mx-auto mb-12 max-w-4xl text-center">
               <div className="section-kicker">Capability atlas</div>
               <h2 className="section-title mt-6 text-brand-navy">
-                Your whole school, mapped into {totals.categories} working areas
+                Your whole school, mapped into working areas
               </h2>
               <p className="section-copy mt-4 text-brand-navy/70">
                 Filter by the part of school you want to fix first. Each area shows how deep it runs
-                — {totals.modules} modules and{" "}
-                {totals.features.toLocaleString("en-IN")} capabilities are live in the product today.
+                in the live product — modules and workflows your team already recognises.
               </p>
             </SectionReveal>
 
@@ -604,6 +601,5 @@ export const getStaticProps: GetStaticProps<HomeProps> = async () => ({
         topModules: topModules(category, 3).map((entry) => entry.name),
       };
     }),
-    totals: MATRIX_TOTALS,
   },
 });

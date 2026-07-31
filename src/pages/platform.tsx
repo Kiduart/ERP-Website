@@ -61,9 +61,9 @@ export default function Platform({ panels, totals }: PlatformPageProps) {
 
       <PageTransition className="pt-20 pb-0">
         <ImageBackdropHero
-          eyebrow="One platform, ten panels"
+          eyebrow="One platform, dedicated panels"
           title="The same school data, shaped for the person looking at it"
-          subtitle={`A principal, an accountant, a class teacher and a parent should never share a screen. KIDUART ships ten role panels over one database — ${totals.modules} modules and ${totals.features} features, filtered by role and permission.`}
+          subtitle="A principal, an accountant, a class teacher and a parent should never share a screen. KIDUART ships dedicated role panels over one database — filtered by role and permission."
           image="/images/banner/platform-hero.jpg"
         />
 
@@ -79,10 +79,10 @@ export default function Platform({ panels, totals }: PlatformPageProps) {
             </SectionReveal>
 
             <SectionReveal delay={0.08} className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <StatChip value={panels.length} label="Role panels" />
-              <StatChip value={totals.categories} label="Module areas" />
-              <StatChip value={totals.modules} label="Functional modules" />
-              <StatChip value={totals.features} label="Features" />
+              <StatChip value={panels.length} label="Dedicated user panels" />
+              <StatChip value={totals.categories} label="Functional areas" />
+              <StatChip value={`${totals.modules}+`} label="Business workflows" />
+              <StatChip value="Full" label="School operations platform" />
             </SectionReveal>
           </div>
         </section>
@@ -154,7 +154,7 @@ export default function Platform({ panels, totals }: PlatformPageProps) {
                                 Modules behind it
                               </dt>
                               <dd className="mt-2 text-sm leading-6 text-brand-navy/[0.82]">
-                                {panel.areaLabels.join(" · ")} — {panel.featureCount} features
+                                {panel.areaLabels.join(" · ")}
                               </dd>
                             </div>
                           </dl>

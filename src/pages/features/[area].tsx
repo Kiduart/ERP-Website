@@ -105,7 +105,7 @@ export default function FeatureArea({ narrative, modules, counts, panels, siblin
                 </div>
 
                 <p className="mt-5 text-sm font-bold uppercase tracking-[0.16em] text-brand-navy/[0.72]">
-                  {narrative.label} · one of 16 module areas
+                  {narrative.label} · part of the full platform
                 </p>
                 <h1 className="mt-3 text-[clamp(2rem,1.5rem+2vw,3.25rem)] font-bold leading-[1.12] text-brand-navy">
                   {narrative.headline}
@@ -124,13 +124,13 @@ export default function FeatureArea({ narrative, modules, counts, panels, siblin
                     href="#modules"
                     className="inline-flex items-center justify-center gap-2 rounded-full border border-brand-navy/[0.14] bg-white px-7 py-3.5 text-base font-bold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
                   >
-                    Browse {counts.modules} modules
+                    Browse modules in this area
                   </a>
                   <Link
                     href="/features"
                     className="inline-flex items-center justify-center gap-2 rounded-full border border-transparent px-5 py-3.5 text-sm font-bold text-brand-navy/[0.72] transition-colors hover:text-brand-teal"
                   >
-                    All 16 areas
+                    All areas
                   </Link>
                 </div>
               </SectionReveal>
@@ -142,13 +142,13 @@ export default function FeatureArea({ narrative, modules, counts, panels, siblin
                       <span className="console-live-dot h-1.5 w-1.5 rounded-full bg-brand-teal" aria-hidden="true" />
                       From the capability matrix
                     </p>
-                    <p className="text-xs font-semibold text-brand-navy/[0.72]">Counted, not rounded</p>
+                    <p className="text-xs font-semibold text-brand-navy/[0.72]">Live in the product</p>
                   </div>
 
                   <div className="grid grid-cols-3 gap-2.5">
-                    <StatChip value={counts.modules} label="Modules" animate />
-                    <StatChip value={counts.subModules} label="Sub-modules" animate />
-                    <StatChip value={counts.features} label="Features" animate />
+                    <StatChip value="Modules" label="In this area" />
+                    <StatChip value="Workflows" label="Schools run daily" />
+                    <StatChip value="Depth" label="Capabilities covered" />
                   </div>
 
                   <div className="mt-3 rounded-[1.35rem] border border-brand-navy/[0.1] bg-white p-5">
@@ -180,9 +180,6 @@ export default function FeatureArea({ narrative, modules, counts, panels, siblin
                               className="flex items-center justify-between gap-3 rounded-xl border border-white/10 bg-white/5 px-3.5 py-2.5 text-sm transition-colors hover:border-brand-yellow/40 hover:text-brand-yellow"
                             >
                               <span className="font-semibold">{module.name}</span>
-                              <span className="text-xs font-bold tabular-nums text-brand-beige/70">
-                                {module.featureCount}
-                              </span>
                             </a>
                           </li>
                         ))}
@@ -256,9 +253,9 @@ export default function FeatureArea({ narrative, modules, counts, panels, siblin
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <SectionReveal>
               <SectionHeading
-                kicker={`${counts.modules} modules · ${counts.features} capabilities`}
+                kicker="Modules in this area"
                 title="Every module, with the capabilities schools ask about most"
-                description={`Open any module to see how it is structured and what your team will use daily. ${narrative.label} is one of 16 areas in the KIDUART capability matrix.`}
+                description={`Open any module to see how it is structured and what your team will use daily. ${narrative.label} connects to the rest of the platform in everyday school work.`}
               />
             </SectionReveal>
 
@@ -295,7 +292,7 @@ export default function FeatureArea({ narrative, modules, counts, panels, siblin
                     >
                       <span className="text-base font-bold text-brand-navy">{sibling.label}</span>
                       <span className="mt-2 text-sm text-brand-navy/[0.72]">
-                        {sibling.featureCount} features
+                        Connected in daily use
                       </span>
                     </Link>
                   </li>

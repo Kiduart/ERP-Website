@@ -32,7 +32,7 @@ export default function Security({ layers, areaFeatureCount, areaModuleCount }: 
       <PageSeoHead {...pageSeo.security} />
       <HeroSection
         title="School data carries real consequences. We build like it does."
-        subtitle={`Student profiles, fee transactions, attendance and exam results sit behind ${areaModuleCount} security modules and ${areaFeatureCount} individual controls — role-based permissions, authenticator-app MFA, session control, tenant-level data separation and audit logging.`}
+        subtitle="Student profiles, fee transactions, attendance and exam results sit behind role-based permissions, authenticator-app MFA, session control, tenant-level data separation and audit logging — not a paid security bolt-on."
         image="/images/banner/security-hero.jpg"
         layout="center"
       />
@@ -59,23 +59,23 @@ export default function Security({ layers, areaFeatureCount, areaModuleCount }: 
                 what, prove what happened, and keep one school's data out of another's reach.
               </p>
               <p className="mt-4 text-lg leading-8 text-brand-navy/[0.74]">
-                Security in KIDUART is not a paid add-on. It is a module area like any other, with its own
-                modules and features, and it applies to every panel — from the system admin console down to a parent
+                Security in KIDUART is not a paid add-on. It is a functional area like any other, with its own
+                workflows and controls, and it applies to every panel — from the system admin console down to a parent
                 checking one child's attendance.
               </p>
               <Link
                 href="/features/security-and-authentication"
                 className="mt-6 inline-flex items-center gap-2 rounded-full bg-brand-navy px-6 py-3.5 text-sm font-bold text-brand-beige transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-teal"
               >
-                See all {areaModuleCount} security modules <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                See the security module area <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </SectionReveal>
 
             <SectionReveal delay={0.15} className="grid gap-4 sm:grid-cols-2">
-              <StatChip value={areaModuleCount} label="Security modules" />
-              <StatChip value={areaFeatureCount} label="Security features" />
               <StatChip value={layers.length} label="Defence layers" />
+              <StatChip value="Role-based" label="Access control" />
               <StatChip value="Per school" label="Data separation" />
+              <StatChip value="Audited" label="Sensitive actions" />
               <div className="sm:col-span-2 rounded-2xl border border-brand-navy/[0.1] bg-brand-beige/25 p-5">
                 <h3 className="text-sm font-bold uppercase tracking-[0.16em] text-brand-navy">
                   The short version

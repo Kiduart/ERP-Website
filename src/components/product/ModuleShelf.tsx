@@ -31,8 +31,6 @@ export function ModuleShelf({
   return (
     <div className="space-y-4">
       {modules.map((module, index) => {
-        const subModuleLabel = module.subModules.length === 1 ? "sub-module" : "sub-modules";
-
         return (
           <details
             key={module.slug}
@@ -60,7 +58,9 @@ export function ModuleShelf({
                   </span>
                   <h3 className="mt-1 text-lg font-bold text-brand-navy md:text-xl">{module.name}</h3>
                   <span className="mt-1 block text-sm text-brand-navy/[0.74]">
-                    {module.featureCount} features · {module.subModules.length} {subModuleLabel}
+                    {module.subModules.length === 1
+                      ? "One workflow group inside this module"
+                      : "Workflow groups your team opens day to day"}
                   </span>
                 </span>
               </span>
@@ -91,10 +91,6 @@ export function ModuleShelf({
                       <h4 className="text-sm font-bold uppercase tracking-[0.16em] text-brand-navy">
                         {subModule.name}
                       </h4>
-                      <span className="text-xs font-semibold text-brand-navy/[0.72]">
-                        {subModule.featureCount}{" "}
-                        {subModule.featureCount === 1 ? "capability" : "capabilities"}
-                      </span>
                     </div>
                     <ul className="mt-3 grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
                       {subModule.features.map((feature) => (
@@ -111,7 +107,7 @@ export function ModuleShelf({
                       ))}
                       {subModule.hiddenFeatureCount > 0 && (
                         <li className="sm:col-span-2 xl:col-span-1">
-                          <HiddenCapabilitiesLink count={subModule.hiddenFeatureCount} />
+                          <HiddenCapabilitiesLink />
                         </li>
                       )}
                     </ul>
@@ -132,7 +128,7 @@ export function ModuleShelf({
                     href="#capability-sheet"
                     className="inline-flex items-center gap-1.5 rounded-full border border-brand-navy/[0.14] bg-white px-5 py-3 text-sm font-bold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
                   >
-                    Request remaining {module.hiddenFeatureCount}
+                    Request the full sheet
                     <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                   </a>
                 )}

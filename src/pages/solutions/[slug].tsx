@@ -192,9 +192,6 @@ export default function SolutionDetail({
                                 className="inline-flex items-center gap-1.5 rounded-full border border-brand-navy/[0.12] bg-brand-beige/25 px-3.5 py-1.5 text-sm font-semibold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
                               >
                                 {module.moduleName}
-                                <span className="text-xs font-bold text-brand-navy/[0.75]">
-                                  {module.featureCount}
-                                </span>
                               </Link>
                             </li>
                           ))}
@@ -290,7 +287,7 @@ export default function SolutionDetail({
                     >
                       <span className="text-base font-bold text-brand-navy">{area.label}</span>
                       <span className="mt-2 text-xs font-semibold uppercase tracking-[0.14em] text-brand-navy/[0.7]">
-                        {area.moduleCount} modules · {area.featureCount} features
+                        Open area
                       </span>
                     </Link>
                   </li>

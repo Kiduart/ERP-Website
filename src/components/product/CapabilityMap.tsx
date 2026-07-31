@@ -118,7 +118,7 @@ export function CapabilityMap({ areas }: { areas: CapabilityArea[] }) {
     <div className="grid gap-8 lg:grid-cols-[minmax(0,18rem)_minmax(0,1fr)] lg:gap-10">
       <div className="lg:sticky lg:top-28 lg:self-start">
         <p className="text-sm font-bold uppercase tracking-[0.18em] text-brand-navy">
-          {areas.length} module areas
+          Module areas
         </p>
         <p className="mt-2 text-sm leading-6 text-brand-navy/[0.74]">
           Grouped the way schools divide work — office, academic, finance, campus and platform.
@@ -158,9 +158,6 @@ export function CapabilityMap({ areas }: { areas: CapabilityArea[] }) {
                     )}
                   >
                     <span className="whitespace-nowrap lg:whitespace-normal">{area.label}</span>
-                    <span className={cn("text-xs font-bold", isActive ? "text-brand-yellow" : "text-brand-navy/[0.72]")}>
-                      {area.featureCount}
-                    </span>
                   </a>
                 </li>
               );
@@ -213,15 +210,9 @@ export function CapabilityMap({ areas }: { areas: CapabilityArea[] }) {
                 <dl className="flex gap-4 text-sm">
                   <div>
                     <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-navy/[0.7]">
-                      Modules
+                      Coverage
                     </dt>
-                    <dd className="text-xl font-extrabold text-brand-navy">{area.moduleCount}</dd>
-                  </div>
-                  <div>
-                    <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-navy/[0.7]">
-                      Features
-                    </dt>
-                    <dd className="text-xl font-extrabold text-brand-navy">{area.featureCount}</dd>
+                    <dd className="text-sm font-bold text-brand-navy">Modules + workflows</dd>
                   </div>
                 </dl>
               </div>
@@ -237,7 +228,6 @@ export function CapabilityMap({ areas }: { areas: CapabilityArea[] }) {
                       className="inline-flex items-center gap-1.5 rounded-full border border-brand-navy/[0.12] bg-brand-beige/25 px-3.5 py-1.5 text-sm font-semibold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
                     >
                       {module.name}
-                      <span className="text-xs font-bold text-brand-navy/[0.75]">{module.featureCount}</span>
                     </Link>
                   </li>
                 ))}
@@ -247,7 +237,7 @@ export function CapabilityMap({ areas }: { areas: CapabilityArea[] }) {
                 href={`/features/${area.slug}`}
                 className="mt-6 inline-flex items-center gap-1.5 text-sm font-bold text-brand-navy underline-offset-4 transition-colors hover:text-brand-teal hover:underline"
               >
-                Explore {area.label} — all {area.moduleCount} modules, {area.subModuleCount} sub-modules
+                Explore {area.label}
                 <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
               </Link>
             </section>

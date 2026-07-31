@@ -24,19 +24,19 @@ type FeaturesPageProps = {
 };
 
 export default function Features({ areas, totals, panels }: FeaturesPageProps) {
-  const highlights = [
-    { value: totals.categories, suffix: "", label: "module areas" },
-    { value: totals.modules, suffix: "", label: "functional modules" },
-    { value: totals.subModules, suffix: "", label: "sub-modules" },
-    { value: totals.features, suffix: "", label: "shipped features" },
+  const highlights: { value?: number; display?: string; suffix: string; label: string }[] = [
+    { value: totals.categories, suffix: "", label: "functional areas" },
+    { value: totals.modules, suffix: "+", label: "business workflows" },
+    { display: "Deep", suffix: "", label: "capability matrix" },
+    { display: "Full", suffix: "", label: "school operations platform" },
   ];
 
   return (
     <>
       <PageSeoHead
         {...pageSeo.features}
-        title={`School ERP Features: ${totals.modules} Modules, ${totals.features} Features | KIDUART`}
-        description={`Explore all ${totals.categories} module areas of the KIDUART school ERP — ${totals.modules} functional modules and ${totals.features} features covering admissions, academics, fees, HR, transport, hostel, library and security.`}
+        title="School ERP Features: Modules & Capabilities | KIDUART"
+        description="Explore KIDUART school ERP module areas — admissions, academics, fees, HR, transport, hostel, library and security — with the workflows schools ask about most."
       />
       <SchemaMarkup
         data={[
@@ -53,9 +53,9 @@ export default function Features({ areas, totals, panels }: FeaturesPageProps) {
 
       <PageTransition className="pt-20 pb-0">
         <CircleShowcaseHero
-          eyebrow={`${totals.modules} modules · ${totals.features} features`}
+          eyebrow="School ERP capability map"
           title="Every module your school actually runs, documented feature by feature"
-          subtitle={`KIDUART ships ${totals.features} features across ${totals.modules} functional modules in ${totals.categories} areas — from the first admission enquiry to consolidated multi-campus reporting. This page is the full map, not a highlight reel.`}
+          subtitle="From the first admission enquiry to consolidated multi-campus reporting — this page is the full map of what ships in the product today, not a highlight reel."
           image="/images/banner/features-hero.jpg"
           actions={
             <>
@@ -87,10 +87,10 @@ export default function Features({ areas, totals, panels }: FeaturesPageProps) {
               <div className="flex flex-wrap items-center justify-between gap-3 px-2 pb-4 pt-1">
                 <p className="inline-flex items-center gap-2 text-[0.68rem] font-bold uppercase tracking-[0.18em] text-brand-teal">
                   <span className="console-live-dot h-1.5 w-1.5 rounded-full bg-brand-teal" aria-hidden="true" />
-                  Live count from the capability matrix
+                  Capability depth from the product matrix
                 </p>
                 <p className="text-xs font-semibold text-brand-navy/[0.72]">
-                  Updated whenever a module ships — never rounded up
+                  Soft counts where they help — never a feature ceiling
                 </p>
               </div>
 
@@ -112,7 +112,11 @@ export default function Features({ areas, totals, panels }: FeaturesPageProps) {
                       ))}
                     </span>
                     <dd className="text-[clamp(2.1rem,1.6rem+1.4vw,2.9rem)] font-extrabold leading-none text-brand-navy">
-                      <AnimatedCounter end={highlight.value} suffix={highlight.suffix} />
+                      {typeof highlight.value === "number" ? (
+                        <AnimatedCounter end={highlight.value} suffix={highlight.suffix} />
+                      ) : (
+                        highlight.display
+                      )}
                     </dd>
                     <dt className="mt-3 text-xs font-bold uppercase tracking-[0.16em] text-brand-navy/[0.72]">
                       {highlight.label}
@@ -133,7 +137,7 @@ export default function Features({ areas, totals, panels }: FeaturesPageProps) {
                   start with what they actually run.
                 </p>
                 <p className="mt-5 text-[0.68rem] font-bold uppercase tracking-[0.16em] text-brand-navy/[0.72]">
-                  Shipped into {panels.length} role panels
+                  Shipped into dedicated role panels
                 </p>
                 <div className="mt-3 flex flex-wrap gap-2">
                   {panels.map((panel) => (
@@ -165,7 +169,7 @@ export default function Features({ areas, totals, panels }: FeaturesPageProps) {
                 Pick the area you are evaluating
               </h2>
               <p className="mt-4 text-lg leading-8 text-brand-navy/[0.74]">
-                Each area opens into its own page with every module and sub-module it contains, plus
+                Each area opens into its own page with every module and workflow group it contains, plus
                 the capabilities schools ask about most — so you can judge the depth for yourself.
               </p>
             </SectionReveal>

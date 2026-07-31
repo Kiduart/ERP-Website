@@ -31,7 +31,7 @@ export default function FAQ() {
         <title>School ERP FAQ — Modules, Pricing, Security & Integrations | KIDUART</title>
         <meta
           name="description"
-          content="Straight answers about KIDUART school ERP: what the 16 module areas and 90 modules cover, how per-student pricing works, which integrations are live, how student data is protected, and what we have not built yet."
+          content="Straight answers about KIDUART school ERP: what the functional areas and workflows cover, how per-student pricing works, which integrations are live, how student data is protected, and what we have not built yet."
         />
         <link rel="canonical" href="https://www.kiduart.com/faq" />
         <meta property="og:type" content="website" />
@@ -61,10 +61,10 @@ export default function FAQ() {
           </SectionReveal>
 
           <SectionReveal delay={0.1} className="mx-auto mt-12 grid max-w-3xl grid-cols-2 gap-4 md:grid-cols-4">
-            <StatChip value={MATRIX_TOTALS.categories} label="Module areas" />
-            <StatChip value={MATRIX_TOTALS.modules} label="Modules" />
-            <StatChip value={MATRIX_TOTALS.features.toLocaleString("en-IN")} label="Features" />
-            <StatChip value="10" label="Role panels" />
+            <StatChip value={MATRIX_TOTALS.categories} label="Functional areas" />
+            <StatChip value={`${MATRIX_TOTALS.modules}+`} label="Business workflows" />
+            <StatChip value="Full" label="School operations" />
+            <StatChip value="10" label="Dedicated panels" />
           </SectionReveal>
         </div>
       </section>

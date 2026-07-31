@@ -41,7 +41,7 @@ const DROPDOWNS: Record<string, DropdownGroup[]> = {
     {
       title: "Core operations",
       items: [
-        { label: "All 16 module areas", href: "/features", note: "90 modules, 1368 features" },
+        { label: "All module areas", href: "/features", note: "Full capability map" },
         { label: "Academics", href: "/features/academic", note: "Attendance, exams, curriculum" },
         { label: "Fees & Finance", href: "/features/finance-and-fee-management", note: "Structures, collection, dues" },
         { label: "Student Records", href: "/features/student-management", note: "Profiles to transfer certificates" },
@@ -86,7 +86,7 @@ const DROPDOWNS: Record<string, DropdownGroup[]> = {
     {
       title: "Admin panels",
       items: [
-        { label: "All 10 role panels", href: "/platform", note: "One database, ten views" },
+        { label: "All role panels", href: "/platform", note: "One database, dedicated views" },
         { label: "System admin console", href: "/platform/system-admin", note: "Modules, roles, billing" },
         { label: "Organisation panel", href: "/platform/organization", note: "Multi-campus HQ" },
         { label: "Director & leadership", href: "/platform/director", note: "Weekly decision view" },

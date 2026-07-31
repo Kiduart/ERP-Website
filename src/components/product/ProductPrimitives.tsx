@@ -123,8 +123,8 @@ export function HiddenCapabilitiesLink({
   href = "#capability-sheet",
   className,
 }: {
-  count: number;
-  /** Short context shown after the count, e.g. "in Examination" */
+  /** Kept for callers; not shown in the public cue to avoid inventory ceilings */
+  count?: number;
   label?: string;
   href?: string;
   className?: string;
@@ -145,7 +145,7 @@ export function HiddenCapabilitiesLink({
       </span>
       <span className="min-w-0 flex-1">
         <span className="font-semibold">
-          {count} more{label ? ` ${label}` : ""}
+          More capabilities{label ? ` ${label}` : ""}
         </span>
         <span className="text-brand-navy/[0.72] group-hover/lock:text-brand-teal/80">
           {" "}

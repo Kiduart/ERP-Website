@@ -38,10 +38,6 @@ export default function FeatureModule({ area, productModule, counts, siblings, p
     { name: area.label, path: `/features/${area.slug}` },
     { name: productModule.name, path: `/features/${area.slug}/${productModule.slug}` },
   ];
-  const visibleFeatureCount = productModule.subModules.reduce(
-    (sum, sub) => sum + sub.features.length,
-    0,
-  );
 
   return (
     <>
@@ -59,7 +55,7 @@ export default function FeatureModule({ area, productModule, counts, siblings, p
         data={[
           buildBreadcrumbSchema(trail),
           buildItemListSchema(
-            `${productModule.name} sub-modules in KIDUART`,
+            `${productModule.name} workflows in KIDUART`,
             productModule.subModules.map((subModule) => ({ name: subModule.name })),
           ),
         ]}
@@ -95,10 +91,9 @@ export default function FeatureModule({ area, productModule, counts, siblings, p
                   {productModule.name}
                 </h1>
                 <p className="mt-5 max-w-xl text-lg leading-8 text-brand-navy/[0.78]">
-                  {productModule.name} ships {counts.features} capabilities across {counts.subModules}{" "}
-                  {counts.subModules === 1 ? "sub-module" : "sub-modules"}, as part of the{" "}
-                  {area.label.toLowerCase()} area. Each sub-module below lists what your team will use
-                  most often; the rest we walk through live, against your own school setup.
+                  {productModule.name} sits inside the {area.label.toLowerCase()} area. Each workflow
+                  group below lists what your team will use most often; the rest we walk through live,
+                  against your own school setup.
                 </p>
 
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
@@ -114,7 +109,7 @@ export default function FeatureModule({ area, productModule, counts, siblings, p
                       href="#capability-sheet"
                       className="inline-flex items-center justify-center gap-2 rounded-full border border-brand-navy/[0.14] bg-white px-7 py-3.5 text-base font-bold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
                     >
-                      Request full sheet ({productModule.hiddenFeatureCount} more)
+                      Request the full sheet
                     </a>
                   )}
                 </div>
@@ -128,18 +123,18 @@ export default function FeatureModule({ area, productModule, counts, siblings, p
                       Module depth
                     </p>
                     <p className="text-xs font-semibold text-brand-navy/[0.72]">
-                      {visibleFeatureCount} listed · {productModule.hiddenFeatureCount} gated
+                      Ask for the full sheet when you need every line
                     </p>
                   </div>
 
                   <div className="grid grid-cols-2 gap-2.5">
-                    <StatChip value={counts.features} label="Features" animate />
-                    <StatChip value={counts.subModules} label="Sub-modules" animate />
+                    <StatChip value="Workflows" label="Day-to-day use" />
+                    <StatChip value="Groups" label="Inside this module" />
                   </div>
 
                   <div className="mt-3 rounded-[1.35rem] border border-brand-navy/[0.1] bg-white p-5">
                     <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-navy/[0.72]">
-                      Sub-modules inside
+                      Workflow groups inside
                     </p>
                     <ul className="mt-3 space-y-2">
                       {productModule.subModules.map((subModule, index) => (
@@ -153,9 +148,6 @@ export default function FeatureModule({ area, productModule, counts, siblings, p
                                 {String(index + 1).padStart(2, "0")}
                               </span>
                               {subModule.name}
-                            </span>
-                            <span className="text-xs font-bold tabular-nums text-brand-navy/[0.72]">
-                              {subModule.featureCount}
                             </span>
                           </a>
                         </li>
@@ -172,7 +164,7 @@ export default function FeatureModule({ area, productModule, counts, siblings, p
           <BackgroundBlobs blobs={[{ color: "#0c716b", size: 280, position: "center-left", opacity: 0.08 }]} />
           <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <SectionReveal className="mb-8">
-              <p className="section-kicker">Capabilities by sub-module</p>
+              <p className="section-kicker">Capabilities by workflow</p>
               <h2 className="mt-4 text-3xl font-bold text-brand-navy md:text-4xl">
                 What {productModule.name.toLowerCase()} covers day to day
               </h2>
@@ -192,14 +184,10 @@ export default function FeatureModule({ area, productModule, counts, siblings, p
                   <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-brand-navy/[0.08] bg-brand-beige/20 px-6 py-5 md:px-8">
                     <div>
                       <p className="text-[0.68rem] font-bold uppercase tracking-[0.16em] text-brand-navy/[0.72]">
-                        Sub-module {String(index + 1).padStart(2, "0")}
+                        Workflow {String(index + 1).padStart(2, "0")}
                       </p>
                       <h2 className="mt-1 text-2xl font-bold text-brand-navy">{subModule.name}</h2>
                     </div>
-                    <p className="text-sm font-semibold uppercase tracking-[0.16em] text-brand-navy/[0.72]">
-                      {subModule.featureCount}{" "}
-                      {subModule.featureCount === 1 ? "capability" : "capabilities"}
-                    </p>
                   </div>
 
                   <ul className="grid gap-2.5 p-6 sm:grid-cols-2 md:p-8">
@@ -221,10 +209,7 @@ export default function FeatureModule({ area, productModule, counts, siblings, p
                     ))}
                     {subModule.hiddenFeatureCount > 0 && (
                       <li className="sm:col-span-2">
-                        <HiddenCapabilitiesLink
-                          count={subModule.hiddenFeatureCount}
-                          label={`in ${subModule.name}`}
-                        />
+                        <HiddenCapabilitiesLink label={`in ${subModule.name}`} />
                       </li>
                     )}
                   </ul>
@@ -260,7 +245,7 @@ export default function FeatureModule({ area, productModule, counts, siblings, p
                       >
                         <span className="text-sm font-bold text-brand-navy">{sibling.name}</span>
                         <span className="text-xs font-semibold uppercase tracking-[0.14em] text-brand-navy/[0.7]">
-                          {sibling.featureCount} features
+                          Open module
                         </span>
                       </Link>
                     </li>

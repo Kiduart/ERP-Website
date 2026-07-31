@@ -224,23 +224,23 @@ export default function About({ totals, panelCount, personaCount }: AboutProps) 
           <SectionReveal className="mx-auto max-w-3xl text-center">
             <div className="section-kicker">What we have built so far</div>
             <h2 className="section-title mt-6 text-brand-navy">
-              {totals.modules} modules, {totals.features.toLocaleString("en-IN")} features, one school record
+              Built from one capability matrix — not a slide deck
             </h2>
             <p className="section-copy mt-4 text-brand-navy/70">
               We keep a single capability matrix as the source of truth for the product, and this website is generated
-              from it. That is why the numbers on our features, platform and pricing pages agree with each other — they
-              come from the same file our engineering team maintains, not from a slide deck.
+              from it. That is why features, platform and pricing pages stay consistent — they come from the same file
+              our engineering team maintains.
             </p>
           </SectionReveal>
 
           <SectionReveal className="mx-auto mt-12 grid max-w-5xl grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
             {[
-              { value: totals.categories, label: "Module areas", href: "/features" },
-              { value: totals.modules, label: "Modules", href: "/features" },
-              { value: totals.subModules, label: "Sub-modules", href: "/features" },
-              { value: totals.features.toLocaleString("en-IN"), label: "Features", href: "/features" },
-              { value: panelCount, label: "Role panels", href: "/platform" },
+              { value: totals.categories, label: "Functional areas", href: "/features" },
+              { value: `${totals.modules}+`, label: "Business workflows", href: "/features" },
+              { value: "Full", label: "School operations", href: "/features" },
+              { value: panelCount, label: "Dedicated panels", href: "/platform" },
               { value: personaCount, label: "Role solutions", href: "/solutions" },
+              { value: "0", label: "Per-user charges", href: "/pricing" },
             ].map((stat) => (
               <Link
                 key={stat.label}

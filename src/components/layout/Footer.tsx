@@ -49,19 +49,19 @@ const NAV_COLUMNS: { heading: string; links: FooterLink[] }[] = [
 const DESTINATIONS = [
   {
     href: "/features",
-    kicker: "16 areas · 90 modules",
+    kicker: "Functional areas",
     title: "Features",
     detail: "The full capability map, area by area.",
   },
   {
     href: "/platform",
-    kicker: "10 role panels",
+    kicker: "Dedicated user panels",
     title: "Platform",
     detail: "What each role opens on their own dashboard.",
   },
   {
     href: "/solutions",
-    kicker: "8 role journeys",
+    kicker: "Role journeys",
     title: "Solutions",
     detail: "How a principal, teacher or accountant works day to day.",
   },

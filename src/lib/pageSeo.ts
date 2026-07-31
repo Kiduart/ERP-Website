@@ -116,7 +116,7 @@ export function areaPageSeo(area: {
   summary: string;
 }): PageSeoHeadProps {
   return {
-    title: `${area.label} Module for Schools — ${area.featureCount} Features | KIDUART`,
+    title: `${area.label} Module for Schools | KIDUART`,
     description: clampDescription(area.summary),
     path: `/features/${area.slug}`,
     ogImage: `${SITE_ORIGIN}/images/banner/features-hero.jpg`,
@@ -134,9 +134,9 @@ export function moduleFeaturePageSeo(params: {
   subModuleCount: number;
 }): PageSeoHeadProps {
   return {
-    title: `${params.moduleName} — ${params.featureCount} School ERP Features | KIDUART`,
+    title: `${params.moduleName} for Schools | KIDUART`,
     description: clampDescription(
-      `${params.moduleName} in KIDUART covers ${params.featureCount} features across ${params.subModuleCount} sub-modules, part of the ${params.areaLabel} module area for schools.`,
+      `${params.moduleName} in KIDUART is part of the ${params.areaLabel} area — the workflows schools ask about most, with a full sheet available on request.`,
     ),
     path: `/features/${params.areaSlug}/${params.moduleSlug}`,
     ogImage: `${SITE_ORIGIN}/images/banner/features-hero.jpg`,

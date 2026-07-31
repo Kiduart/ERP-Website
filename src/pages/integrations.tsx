@@ -101,8 +101,8 @@ export default function Integrations({ categories, ledger, counts }: Integration
   return (
     <PageTransition className="pt-20 pb-0">
       <PageSeoHead
-        title={`${counts.total} School ERP Integrations — Razorpay, WhatsApp, SMS, Google & Microsoft | KIDUART`}
-        description={`Connect KIDUART with the tools your school already runs: Razorpay and Stripe fee payments, WhatsApp Business, Twilio and MSG91 SMS, email delivery, Google and Microsoft sign-in, Zoom, Teams and Meet, biometric attendance devices, bus GPS tracking and a REST API. ${counts.live} live today, ${counts.guided} set up with our team, ${counts.planned} openly marked roadmap.`}
+        title="School ERP Integrations — Razorpay, WhatsApp, SMS, Google & Microsoft | KIDUART"
+        description="Connect KIDUART with the tools your school already runs: Razorpay and Stripe fee payments, WhatsApp Business, Twilio and MSG91 SMS, email delivery, Google and Microsoft sign-in, Zoom, Teams and Meet, biometric attendance devices, bus GPS tracking and a REST API. Live connectors ship today; guided ones set up with our team; roadmap stays labelled roadmap."
         path="/integrations"
         keywords="school ERP integrations, Razorpay school fees, WhatsApp parent notification school, school SMS gateway India, MSG91 school SMS, Google Workspace school login, biometric attendance integration, school bus GPS tracking software, school ERP REST API"
       />
@@ -122,7 +122,7 @@ export default function Integrations({ categories, ledger, counts }: Integration
       <CircleShowcaseHero
         eyebrow="School ERP integrations"
         title="Connect the tools your school already runs"
-        subtitle={`Fee gateways, parent messaging, school sign-in accounts, online classes, gate devices and a REST API. ${counts.live} connectors are live today, ${counts.guided} are switched on with our team, and ${counts.planned} are listed as roadmap instead of being dressed up as features.`}
+        subtitle="Fee gateways, parent messaging, school sign-in accounts, online classes, gate devices and a REST API. Live connectors ship today; guided ones are switched on with our team; roadmap items stay labelled as roadmap — not dressed up as features."
         image="/images/banner/integration-hero.jpg"
         actions={(
           <>
@@ -192,7 +192,7 @@ export default function Integrations({ categories, ledger, counts }: Integration
           <SectionReveal className="mb-12 max-w-3xl">
             <p className="section-kicker">The full directory</p>
             <h2 className="mt-4 text-3xl font-bold text-brand-navy md:text-4xl">
-              {counts.total} connectors, grouped by the job they do
+              Connectors grouped by the job they do
             </h2>
             <p className="mt-4 text-base leading-8 text-brand-navy/[0.76]">
               Filter by status or jump to the category you care about. Every connector page explains the

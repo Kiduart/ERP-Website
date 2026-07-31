@@ -47,7 +47,7 @@ const sections: LegalSection[] = [
   {
     title: "Module-Wise Data We Process",
     intro: [
-      "KIDUART ships 16 module areas, and a school switches on only the ones it uses. Because the modules decide what data exists in the system, this table maps each area to the data it processes — so you can see exactly what turning a module on means for personal data.",
+      "KIDUART ships functional module areas, and a school switches on only the ones it uses. Because the modules decide what data exists in the system, this table maps each area to the data it processes — so you can see exactly what turning a module on means for personal data.",
       "If your school does not use Transport, no route or vehicle allocation data exists for your students. The same is true for Hostel, Library, and every other area.",
     ],
     table: {
@@ -190,7 +190,7 @@ export default function PrivacyPolicy() {
         subtitle="How KIDUART collects, uses, stores, shares, and protects personal data across its website, school ERP platform, demo requests, and related services."
         effectiveLabel="Last updated: 29 July 2026"
         summary={[
-          "The modules your school switches on decide what data exists — section 5 maps each of the 16 module areas to the data it processes.",
+          "The modules your school switches on decide what data exists — section 5 maps each functional area to the data it processes.",
           "Access follows role: a parent sees their own children, a teacher their classes, an accountant the fee book.",
           "Schools using KIDUART are responsible for ensuring they are authorized to share personal data with us.",
           "You can export everything and ask us to remove it; we do not sell school data or train models on student records.",

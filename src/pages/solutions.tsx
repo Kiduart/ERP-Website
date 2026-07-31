@@ -93,7 +93,7 @@ export default function Solutions({ personas, totals }: SolutionsPageProps) {
                   A principal, an accountant and a class teacher have almost nothing in common in
                   their daily work — so a single generic dashboard fails all three. Each page below
                   starts from the problems that role actually reports, then names the module that
-                  removes it. All of it is drawn from the {totals.features} features KIDUART ships today.
+                  removes it. Everything here is drawn from what KIDUART ships in the product today.
                 </p>
                 <div className="mt-8 flex flex-col gap-4 sm:flex-row">
                   <Link
@@ -107,16 +107,16 @@ export default function Solutions({ personas, totals }: SolutionsPageProps) {
                     href="/platform"
                     className="inline-flex items-center justify-center gap-2 rounded-full border border-brand-navy/[0.14] bg-white px-7 py-3.5 text-base font-bold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
                   >
-                    See the 10 role panels
+                    See the role panels
                   </Link>
                 </div>
               </SectionReveal>
 
               <SectionReveal delay={0.1} className="grid grid-cols-2 gap-4">
                 <StatChip value={personas.length} label="Role solutions" />
-                <StatChip value={totals.modules} label="Functional modules" />
-                <StatChip value={totals.features} label="Features shipped" />
-                <StatChip value={totals.categories} label="Module areas" />
+                <StatChip value={`${totals.modules}+`} label="Business workflows" />
+                <StatChip value={totals.categories} label="Functional areas" />
+                <StatChip value="Full" label="School operations" />
                 <div className="col-span-2 overflow-hidden rounded-[1.75rem] border border-brand-navy/[0.08]">
                   <div className="relative aspect-[16/9]">
                     <Image

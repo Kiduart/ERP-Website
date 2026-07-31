@@ -78,7 +78,7 @@ export const VENDOR_QUESTIONS: VendorQuestion[] = [
     question: "Is that demo screen real, or is it a roadmap?",
     risk: "Demos are often stitched from screens that only exist for the demo. The gap shows up months later, renamed as customisation and quoted separately.",
     answer:
-      "The 16 areas, 90 modules and 1,368 capabilities listed on this site are what exists. Anything still being built is labelled in development on the page itself and is not billed.",
+      "What you see on the Features pages is what ships. Anything still being built is labelled in development on the page itself and is not billed.",
     verify: { label: "Browse the module areas", href: "/features" },
   },
   {

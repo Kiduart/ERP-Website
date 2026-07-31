@@ -8,8 +8,8 @@ import { useToast } from "@/hooks/use-toast";
  */
 export function CapabilitySheetRequest({
   context,
-  hiddenCount,
-  totalCount,
+  hiddenCount: _hiddenCount,
+  totalCount: _totalCount,
 }: {
   /** Which area or module the visitor was reading when they asked */
   context: string;
@@ -85,12 +85,12 @@ export function CapabilitySheetRequest({
             Full capability sheet
           </span>
           <h2 className="mt-5 text-2xl font-bold leading-tight text-white md:text-3xl">
-            Want the remaining {hiddenCount} capabilities in writing?
+            Want the rest of the capabilities in writing?
           </h2>
           <p className="mt-4 max-w-xl text-base leading-8 text-white/75">
-            We publish the capabilities schools ask about most. The complete sheet — all{" "}
-            {totalCount} of them, with how each one behaves — goes out by email so we can answer
-            questions about your own setup alongside it.
+            We publish the capabilities schools ask about most. The complete sheet — with how each
+            one behaves — goes out by email so we can answer questions about your own setup alongside
+            it.
           </p>
         </div>
 

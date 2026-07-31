@@ -114,7 +114,7 @@ export function IntegrationFabric({
                     {category.title}
                   </span>
                   <span className="block text-xs font-semibold text-brand-navy/[0.7]">
-                    {category.connectors.length} connectors
+                    Live · guided · planned
                   </span>
                 </span>
               </button>

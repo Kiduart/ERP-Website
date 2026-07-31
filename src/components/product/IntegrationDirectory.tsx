@@ -69,7 +69,7 @@ export function IntegrationDirectory({ categories }: { categories: DirectoryCate
                     <span className="truncate">{category.title}</span>
                   </span>
                   <span className="shrink-0 text-xs font-bold text-brand-navy/[0.7]">
-                    {category.connectors.length}
+                    View
                   </span>
                 </a>
               </li>

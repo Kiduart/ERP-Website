@@ -74,7 +74,7 @@ export function CapabilityAtlas({ areas }: { areas: AtlasArea[] }) {
 
   const visibleCount = areas.filter((area) => isVisible(area.slug)).length;
 
-  const filters = [{ id: "all", label: `All ${areas.length} areas` }, ...ATLAS_GROUPS];
+  const filters = [{ id: "all", label: "All areas" }, ...ATLAS_GROUPS];
 
   return (
     <div>
@@ -100,7 +100,9 @@ export function CapabilityAtlas({ areas }: { areas: AtlasArea[] }) {
       </div>
 
       <p className="mt-5 text-center text-sm font-medium text-brand-navy/70" aria-live="polite">
-        Showing {visibleCount} of {areas.length} areas
+        {activeGroup === "all"
+          ? "Every working area of the school"
+          : `Showing ${visibleCount} area${visibleCount === 1 ? "" : "s"} in this group`}
       </p>
 
       <div key={activeGroup} className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
@@ -108,6 +110,8 @@ export function CapabilityAtlas({ areas }: { areas: AtlasArea[] }) {
           const tokens = ACCENTS[area.accent];
           const depth = Math.max(6, Math.round((area.featureCount / deepest) * 100));
           const visible = isVisible(area.slug);
+          const depthLabel =
+            depth >= 70 ? "Deep coverage" : depth >= 40 ? "Solid coverage" : "Focused coverage";
 
           return (
             <article
@@ -139,15 +143,12 @@ export function CapabilityAtlas({ areas }: { areas: AtlasArea[] }) {
 
               <p className="mt-4 flex-1 text-sm leading-7 text-brand-navy/75">{area.summary}</p>
 
-              {/* Depth meter: how much of the platform's deepest area this one carries */}
               <div className="mt-5">
                 <div className="flex items-baseline justify-between gap-3">
                   <span className="text-xs font-bold uppercase tracking-[0.14em] text-brand-navy/70">
                     Depth
                   </span>
-                  <span className="text-sm font-bold text-brand-navy">
-                    {area.featureCount} capabilities
-                  </span>
+                  <span className="text-sm font-bold text-brand-navy">{depthLabel}</span>
                 </div>
                 <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-brand-navy/[0.08]">
                   <span
@@ -156,10 +157,6 @@ export function CapabilityAtlas({ areas }: { areas: AtlasArea[] }) {
                     aria-hidden="true"
                   />
                 </div>
-                <p className="mt-2 text-xs font-semibold text-brand-navy/70">
-                  {area.moduleCount} {area.moduleCount === 1 ? "module" : "modules"} ·{" "}
-                  {area.subModuleCount} {area.subModuleCount === 1 ? "sub-module" : "sub-modules"}
-                </p>
               </div>
 
               <ul className="mt-4 flex flex-wrap gap-1.5">
