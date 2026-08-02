@@ -110,7 +110,7 @@ export const careersFaqs: CareersFaqItem[] = [
   },
   {
     q: "Where is the KIDUART internship based?",
-    a: "KIDUART is based in Noida, Uttar Pradesh. Some roles may include remote-friendly work depending on the team and project needs. Location details are confirmed during the interview process.",
+    a: "KIDUART is based in Noida, Uttar Pradesh, and runs a hybrid workplace with flexible on-site time. Some roles are remote-friendly depending on the team and project. See our Workplace Policy at /workplace-policy for details; exact expectations are confirmed during interviews.",
   },
   {
     q: "How do I apply for a KIDUART internship?",

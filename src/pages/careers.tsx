@@ -136,8 +136,18 @@ export default function Careers({
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <SectionReveal className="max-w-3xl mx-auto">
             <h2 className="text-3xl font-bold text-brand-navy mb-6">{workText.heading}</h2>
-            <p className="text-lg text-brand-navy/70 leading-relaxed mb-12">
+            <p className="text-lg text-brand-navy/70 leading-relaxed mb-4">
               {workText.body}
+            </p>
+            <p className="mb-12 text-base text-brand-navy/65">
+              Hybrid details for candidates:{" "}
+              <a
+                href="/workplace-policy"
+                className="font-bold text-brand-teal underline underline-offset-4 hover:text-brand-navy"
+              >
+                Workplace Policy
+              </a>
+              .
             </p>
           </SectionReveal>
 

@@ -156,6 +156,15 @@ export const pageSeo = {
     keywords:
       "school ERP customer stories, school management software case study India, KIDUART school scenarios, multi branch school ERP",
   },
+  workplace: {
+    title: "Workplace Policy | Hybrid Work at KIDUART Noida",
+    description:
+      "KIDUART hybrid workplace policy: Noida base, flexible on-site time, remote-friendly roles where possible, and clear expectations for candidates and teammates.",
+    path: "/workplace-policy",
+    ogImage: `${SITE_ORIGIN}/images/banner/home-hero.jpeg`,
+    keywords:
+      "KIDUART workplace policy, hybrid work Noida, remote friendly EdTech jobs, KIDUART careers hybrid",
+  },
 } as const;
 
 export function featurePageSeo(
