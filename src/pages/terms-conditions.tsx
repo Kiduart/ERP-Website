@@ -162,6 +162,25 @@ const sections: LegalSection[] = [
     ],
   },
   {
+    id: "founding-50",
+    title: "Founding 50 Schools Offer",
+    intro: [
+      "From time to time KIDUART may run promotional programmes for schools, including the Founding 50 Schools campaign described on our website and campaign materials. This section explains how that offer works. If a signed proposal or order form states different commercial terms for your school, that written document controls.",
+    ],
+    bullets: [
+      "Founding 50 refers to a limited promotional cohort of up to fifty (50) eligible schools selected by KIDUART after a demo and fit review — not to the first fifty applications automatically.",
+      "Zero software cost in campaign materials means KIDUART subscription or platform software fees for the SaaS product may be waived for the current academic session only, as defined for that school in writing (typically the school year period agreed at onboarding).",
+      "Zero software cost does not automatically include third-party fees (payment gateway charges, SMS/WhatsApp credits, hardware, biometrics, GPS devices), custom development, migration projects, on-site training beyond the package stated in writing, or any school-paid parent fees collected through the platform.",
+      "Premium ERP features means access to the modules and workflows listed as included in your Founding 50 confirmation or order form. Roadmap items and unpublished features are not included.",
+      "The offer is available only while founding seats remain and may be withdrawn, limited, or modified for future applicants. KIDUART may decline or defer a school that is not operationally ready to implement.",
+      "After the waived session ends, continued use is billed under KIDUART's then-current pricing or a written renewal agreement, unless another written arrangement is in place. There is no obligation to continue after the promotional period.",
+      "Demo bookings are free and do not create a commitment until both parties confirm onboarding in writing. Campaign creative (including on-site posters and website pop-ups) is promotional and must be read with these Terms.",
+      "Details and updates for this campaign may also be published at /founding-50 on the KIDUART website.",
+    ],
+    highlight:
+      "Founding 50 benefits apply only to schools that receive written confirmation from KIDUART. Marketing statements such as \"maximum benefit\" describe the intent of the package and do not replace the specific module list and dates in your confirmation.",
+  },
+  {
     title: "Governing Law and Jurisdiction",
     intro: [
       "These Terms are governed by the laws of India. Subject to any separate written agreement, courts having jurisdiction over Noida, Uttar Pradesh, India shall have jurisdiction for disputes arising from these Terms or the Services.",
@@ -203,11 +222,11 @@ export default function TermsConditions() {
         eyebrow="Legal Agreement"
         title="Terms & Conditions"
         subtitle="These Terms & Conditions govern access to and use of the KIDUART website, platform, products, and related services."
-        effectiveLabel="Effective date: 29 July 2026"
+        effectiveLabel="Effective date: 7 August 2026"
         summary={[
           "Access depends on the plan and module areas enabled for your school; billing is on active student count, not per user.",
+          "Founding 50 Schools: zero software cost for the waived academic session only — limited seats, written confirmation required.",
           "Schools are responsible for authorized account use and the lawfulness of data they submit.",
-          "Separate commercial agreements, proposals, order forms, SLAs, or DPAs may override specific service-level terms where expressly stated.",
           "Misuse, unauthorized access, credential sharing, scraping, or unlawful data use may lead to suspension or termination.",
         ]}
         sections={sections}

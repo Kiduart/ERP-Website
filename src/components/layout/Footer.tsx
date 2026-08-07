@@ -55,6 +55,7 @@ const NAV_COLUMNS: { heading: string; links: FooterLink[] }[] = [
       { label: "Terms & Conditions", href: "/terms-conditions" },
       { label: "Refund / Cancellation", href: "/refund-cancellation-policy" },
       { label: "Workplace Policy", href: "/workplace-policy" },
+      { label: "Founding 50 Offer", href: "/founding-50" },
     ],
   },
 ];

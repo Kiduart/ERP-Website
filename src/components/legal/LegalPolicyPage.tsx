@@ -9,6 +9,8 @@ type TableRow = {
 
 export type LegalSection = {
   title: string;
+  /** Optional stable anchor, e.g. founding-50 */
+  id?: string;
   intro?: string[];
   bullets?: string[];
   table?: {
@@ -76,7 +78,7 @@ export function LegalPolicyPage({
                 {sections.map((section, index) => (
                   <a
                     key={section.title}
-                    href={`#section-${index + 1}`}
+                    href={`#${section.id ?? `section-${index + 1}`}`}
                     className="rounded-lg bg-white px-3 py-2 text-sm font-medium leading-5 text-brand-navy/[0.72] transition-colors hover:text-brand-navy"
                   >
                     {index + 1}. {section.title}
@@ -96,7 +98,7 @@ export function LegalPolicyPage({
                 {sections.map((section, index) => (
                   <a
                     key={section.title}
-                    href={`#section-${index + 1}`}
+                    href={`#${section.id ?? `section-${index + 1}`}`}
                     className="block px-3 py-2 text-sm font-medium transition-colors rounded-lg text-brand-navy/[0.68] hover:bg-white hover:text-brand-navy"
                   >
                     {index + 1}. {section.title}
@@ -110,7 +112,7 @@ export function LegalPolicyPage({
             {sections.map((section, index) => (
               <SectionReveal key={section.title} delay={Math.min(index * 0.03, 0.18)}>
                 <article
-                  id={`section-${index + 1}`}
+                  id={section.id ?? `section-${index + 1}`}
                   className="scroll-mt-28 rounded-[1.5rem] border border-brand-navy/[0.08] bg-white p-6 shadow-lg shadow-brand-navy/5 sm:p-8"
                 >
                   <div className="flex items-start gap-4 mb-5">

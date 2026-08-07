@@ -165,6 +165,16 @@ export const pageSeo = {
     keywords:
       "KIDUART workplace policy, hybrid work Noida, remote friendly EdTech jobs, KIDUART careers hybrid",
   },
+  founding50: {
+    title:
+      "Founding 50 Schools | Zero Cost School ERP for Current Session | KIDUART",
+    description:
+      "Join KIDUART Founding 50 Schools: premium school ERP software at zero software cost for the current academic session in India. Book a free demo — limited seats, clear T&Cs.",
+    path: "/founding-50",
+    ogImage: `${SITE_ORIGIN}/images/campaign/founding-50-poster.png`,
+    keywords:
+      "Founding 50 Schools, zero cost school ERP, free school ERP India current session, KIDUART founding offer, school management software free trial founding, school ERP demo India",
+  },
 } as const;
 
 export function featurePageSeo(

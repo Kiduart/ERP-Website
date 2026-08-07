@@ -27,6 +27,14 @@ const StickyDemoBar = dynamic(
   { ssr: false }
 );
 
+const FoundingFiftyPopup = dynamic(
+  () =>
+    import("@/components/common/FoundingFiftyPopup").then(
+      (mod) => mod.FoundingFiftyPopup,
+    ),
+  { ssr: false }
+);
+
 const CursorEffect = dynamic(
   () => import("@/components/animations/CursorEffect").then((mod) => mod.CursorEffect),
   { ssr: false }
@@ -83,6 +91,7 @@ export function AppShell({ children }: AppShellProps) {
                 <StickyDemoBar />
               </DeferredMount>
             )}
+            <FoundingFiftyPopup />
           </div>
           <Toaster />
         </TooltipProvider>
