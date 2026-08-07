@@ -150,7 +150,7 @@ export default function Founding50Page() {
                   alt="KIDUART Founding 50 Schools poster: school ERP software at zero cost, book a free demo"
                   className="h-auto w-full"
                   width={682}
-                  height={720}
+                  height={916}
                   loading="eager"
                   decoding="async"
                 />

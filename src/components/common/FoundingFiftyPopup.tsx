@@ -6,11 +6,11 @@ import { cn } from "@/lib/utils";
 
 const DELAY_MS = 2800;
 
-/** Poster is pre-cropped to the in-artwork CTA; keep aspect for layout stability. */
+/** Poster: full top intact; only bottom trimmed after in-art demo CTA */
 const POSTER = {
   src: "/images/campaign/founding-50-poster.png",
   width: 682,
-  height: 720,
+  height: 916,
 } as const;
 
 const HIDE_PATHS = new Set([
@@ -98,7 +98,7 @@ export function FoundingFiftyPopup() {
         aria-describedby={descId}
         className={cn(
           "relative z-10 flex w-full max-w-[22rem] flex-col overflow-hidden sm:max-w-[24rem]",
-          "max-h-[min(90dvh,680px)] rounded-[1.35rem] bg-[#f7f4eb]",
+          "max-h-[min(92dvh,760px)] rounded-[1.35rem] bg-[#f7f4eb]",
           "border border-brand-navy/10 shadow-[0_28px_80px_rgba(0,48,73,0.38)]",
           "animate-in fade-in-0 zoom-in-95 duration-300",
         )}
@@ -125,9 +125,9 @@ export function FoundingFiftyPopup() {
           </p>
 
           <img
-            src={POSTER.src}
+            src={`${POSTER.src}?v=3`}
             alt="KIDUART Founding 50 Schools campaign: school ERP software at zero cost for the current academic session, book a free demo"
-            className="block h-auto w-full"
+            className="block h-auto w-full object-top object-contain"
             width={POSTER.width}
             height={POSTER.height}
             decoding="async"
