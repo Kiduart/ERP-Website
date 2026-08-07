@@ -9,6 +9,7 @@ import { CtaSection } from "@/components/ui/CtaSection";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
 import { FloatingIcons } from "@/components/animations/FloatingIcons";
 import { BookOpen, Code2, LayoutTemplate, Rocket, TrendingUp } from "lucide-react";
+import { Link } from "wouter";
 import {
   careersBenefits,
   careersFaqs,
@@ -141,12 +142,12 @@ export default function Careers({
             </p>
             <p className="mb-12 text-base text-brand-navy/65">
               Hybrid details for candidates:{" "}
-              <a
+              <Link
                 href="/workplace-policy"
                 className="font-bold text-brand-teal underline underline-offset-4 hover:text-brand-navy"
               >
                 Workplace Policy
-              </a>
+              </Link>
               .
             </p>
           </SectionReveal>
