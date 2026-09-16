@@ -1,7 +1,7 @@
 import { AUTHOR_PRODUCT, STYLE, post } from "./_helpers";
 
 export default post("multi-campus-school-erp-india", {
-  title: "Multi-Campus School ERP for Trusts and School Groups in India",
+  title: "Multi-Campus School ERP Software for Trusts in India",
   author: AUTHOR_PRODUCT,
   date: "March 3, 2026",
   category: "School Management",
@@ -173,7 +173,9 @@ Multi-campus school ERP succeeds when trusts gain **visibility without voyeurism
 
 Running five campuses should feel like one organisation with five professional operations  not five WhatsApp groups and a prayer before board meetings.
 
-That is the problem the organisation panel and tenant architecture set out to solve. Ask vendors to demo it explicitly before you buy your fifth spreadsheet clone.`,
+That is the problem the organisation panel and tenant architecture set out to solve. Ask vendors to demo it explicitly before you buy your fifth spreadsheet clone.
+
+See it in the product: [organisation management](/features/organization-management), [WhatsApp integration](/integrations/whatsapp-business) for campus parent alerts, [school payroll](/features/hr-and-staff-management/payroll), or a [free school ERP demo](/demo).`,
   relatedSlugs: [
     "role-based-panels-school-erp",
     "school-erp-benefits",

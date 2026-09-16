@@ -1,5 +1,6 @@
 import type { GetStaticPaths, GetStaticProps } from "next";
 import { Link } from "wouter";
+import { CommercialPaths } from "@/components/seo/CommercialPaths";
 import { PageSeoHead } from "@/components/seo/PageSeoHead";
 import { SchemaMarkup } from "@/components/seo/SchemaMarkup";
 import { integrationPageSeo } from "@/lib/pageSeo";
@@ -154,7 +155,9 @@ export default function IntegrationDetail({
                 </div>
 
                 <h1 className="mt-6 text-[clamp(2rem,1.5rem+1.8vw,3.5rem)] font-bold leading-[1.05] text-brand-navy">
-                  {integration.name} with KIDUART
+                  {slug === "whatsapp-business"
+                    ? "School ERP with WhatsApp integration"
+                    : `${integration.name} with KIDUART`}
                 </h1>
                 <p className="mt-5 max-w-2xl text-lg leading-8 text-brand-navy/[0.78]">
                   {integration.intro}
@@ -186,6 +189,9 @@ export default function IntegrationDetail({
                     All integrations
                   </Link>
                 </div>
+                {slug === "whatsapp-business" ? (
+                  <CommercialPaths current="/integrations/whatsapp-business" />
+                ) : null}
               </SectionReveal>
 
               <SectionReveal

@@ -18,7 +18,8 @@ export const BLOG_PRODUCT_LINKS: Record<string, { href: string; label: string }[
   ],
   "multi-campus-school-erp-india": [
     { href: "/features/organization-management", label: "Organisation management" },
-    { href: "/platform/organization", label: "Organisation panel" },
+    { href: "/integrations/whatsapp-business", label: "WhatsApp integration" },
+    { href: "/demo", label: "Free demo" },
   ],
   "role-based-panels-school-erp": [
     { href: "/platform", label: "Role panels" },
@@ -37,8 +38,9 @@ export const BLOG_PRODUCT_LINKS: Record<string, { href: string; label: string }[
     { href: "/pricing", label: "Pricing" },
   ],
   "top-10-school-management-software-india-2026": [
-    { href: "/features", label: "Feature map" },
-    { href: "/demo", label: "Book a demo" },
+    { href: "/blog/multi-campus-school-erp-india", label: "Multi-campus school ERP" },
+    { href: "/integrations/whatsapp-business", label: "WhatsApp integration" },
+    { href: "/demo", label: "Free demo" },
   ],
   "top-10-school-mobile-apps-india-2026": [
     { href: "/platform/parent", label: "Parent panel" },

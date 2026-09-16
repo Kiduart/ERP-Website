@@ -11,6 +11,7 @@ export type PageSeoHeadProps = {
   ogImage?: string;
   ogType?: "website" | "article";
   keywords?: string;
+  robots?: string;
 };
 
 function canonicalUrl(path: string): string {
@@ -27,6 +28,7 @@ export function PageSeoHead({
   ogImage = DEFAULT_OG_IMAGE,
   ogType = "website",
   keywords,
+  robots,
 }: PageSeoHeadProps) {
   const canonical = canonicalUrl(path);
 
@@ -34,6 +36,7 @@ export function PageSeoHead({
     <Head>
       <title>{title}</title>
       <meta name="description" content={description} />
+      {robots ? <meta name="robots" content={robots} /> : null}
       {keywords ? <meta name="keywords" content={keywords} /> : null}
       <link rel="canonical" href={canonical} />
       <meta property="og:type" content={ogType} />

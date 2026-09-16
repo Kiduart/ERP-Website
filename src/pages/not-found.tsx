@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import Head from "next/head";
 import { ArrowLeft, Home, LifeBuoy } from "lucide-react";
 import { Link } from "wouter";
 import { Stagger } from "@/components/ui/Stagger";
@@ -9,6 +10,10 @@ export default function NotFound() {
 
   return (
     <PageTransition className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#09090b] px-4 py-10 text-white">
+      <Head>
+        <title>Page not found | KIDUART</title>
+        <meta name="robots" content="noindex" />
+      </Head>
       <div
         className="absolute inset-0 bg-cover bg-center opacity-30 grayscale"
         style={{

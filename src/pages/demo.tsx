@@ -1,5 +1,6 @@
 import { PageSeoHead } from "@/components/seo/PageSeoHead";
 import { SchemaMarkup } from "@/components/seo/SchemaMarkup";
+import { CommercialPaths } from "@/components/seo/CommercialPaths";
 import { pageSeo } from "@/lib/pageSeo";
 import { InView } from "@/components/ui/InView";
 import { Stagger } from "@/components/ui/Stagger";
@@ -36,6 +37,7 @@ import {
 } from "@/lib/contact";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { buildBreadcrumbSchema, buildFaqPageSchema } from "@/lib/seoSchemas";
+import { useAnalytics } from "@/hooks/useAnalytics";
 import { useState } from "react";
 import { Link } from "wouter";
 
@@ -110,6 +112,7 @@ async function parseApiResponse(response: Response) {
 }
 
 export default function RequestDemo() {
+  const { trackDemoRequest } = useAnalytics();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -174,6 +177,7 @@ export default function RequestDemo() {
         description:
           "We will be in touch soon to finalise your session. Check your inbox for a confirmation shortly.",
       });
+      trackDemoRequest();
       setSuccessMessage(
         "Your request is in. We will be in touch soon to confirm your session time and understand your priorities.",
       );
@@ -244,7 +248,7 @@ export default function RequestDemo() {
           <div className="lg:col-span-2">
             <SectionReveal>
               <h1 className="mb-6 text-4xl font-bold leading-tight text-brand-navy md:text-5xl">
-                See exactly how KIDUART works for your school
+                Book a free school ERP demo
               </h1>
               <p className="mb-10 text-lg text-brand-navy/70">
                 This is not a recorded walkthrough. It is a live session shaped
@@ -252,6 +256,7 @@ export default function RequestDemo() {
                 workflow problems you want to solve fees, attendance, role
                 panels, or parent updates. Bring your hardest questions.
               </p>
+              <CommercialPaths current="/demo" />
               <div className="mb-8 flex flex-wrap items-center gap-4 text-sm text-brand-navy/[0.72]">
                 <span className="font-semibold">Not ready to book yet?</span>
                 <a

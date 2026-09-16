@@ -1,5 +1,6 @@
 import { PageSeoHead } from "@/components/seo/PageSeoHead";
 import { SchemaMarkup } from "@/components/seo/SchemaMarkup";
+import { CommercialPaths } from "@/components/seo/CommercialPaths";
 import { pageSeo } from "@/lib/pageSeo";
 import { softwareApplicationSchema } from "@/lib/seoSchemas";
 import type { GetStaticProps } from "next";
@@ -187,6 +188,12 @@ export default function Home({
 
         <section className="section-space-tight relative overflow-hidden border-b border-brand-navy/5 bg-brand-beige/40">
           <div className="page-shell relative z-10">
+            <div className="mb-10 border-b border-brand-navy/10 pb-8">
+              <h2 className="text-sm font-bold uppercase tracking-[0.16em] text-brand-navy/55">
+                Start with the workflow you came for
+              </h2>
+              <CommercialPaths showLabel={false} />
+            </div>
             <SectionReveal className="mx-auto mb-10 max-w-3xl text-center">
               <div className="section-kicker">School operations journey</div>
               <h2 className="section-title mt-6 text-brand-navy">

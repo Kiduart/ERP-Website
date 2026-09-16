@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { ArrowRight, Check } from "lucide-react";
 import { PageSeoHead } from "@/components/seo/PageSeoHead";
 import { SchemaMarkup } from "@/components/seo/SchemaMarkup";
+import { CommercialPaths } from "@/components/seo/CommercialPaths";
 import { moduleFeaturePageSeo } from "@/lib/pageSeo";
 import { buildBreadcrumbSchema, buildItemListSchema } from "@/lib/seoSchemas";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
@@ -96,13 +97,18 @@ export default function FeatureModule({ area, productModule, counts, siblings, p
                   Functional module · {area.label}
                 </p>
                 <h1 className="mt-3 text-[clamp(2rem,1.5rem+2vw,3.25rem)] font-bold leading-[1.12] text-brand-navy">
-                  {productModule.name}
+                  {area.slug === "hr-and-staff-management" && productModule.slug === "payroll"
+                    ? "School payroll software"
+                    : productModule.name}
                 </h1>
                 <p className="mt-5 max-w-xl text-lg leading-8 text-brand-navy/[0.78]">
-                  {productModule.name} sits inside the {area.label.toLowerCase()} area. Each workflow
-                  group below lists what your team will use most often; the rest we walk through live,
-                  against your own school setup.
+                  {area.slug === "hr-and-staff-management" && productModule.slug === "payroll"
+                    ? "School payroll runs from staff records you already keep: salary components, deductions, payslips, and the leave or attendance the HR panel holds. It is not a second spreadsheet beside the staff directory."
+                    : `${productModule.name} sits inside the ${area.label.toLowerCase()} area. Each workflow group below lists what your team will use most often; the rest we walk through live, against your own school setup.`}
                 </p>
+                {area.slug === "hr-and-staff-management" && productModule.slug === "payroll" ? (
+                  <CommercialPaths current="/features/hr-and-staff-management/payroll" />
+                ) : null}
 
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                   <Link

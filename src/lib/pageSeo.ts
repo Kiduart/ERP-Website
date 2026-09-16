@@ -73,10 +73,9 @@ export const pageSeo = {
       "about KIDUART, school ERP company India, school management software Noida, KIDUART founding team, Indian school ERP, cloud-based school ERP company",
   },
   demo: {
-    title:
-      "Free School ERP Demo India | Book KIDUART School Management Walkthrough",
+    title: "Free School ERP Demo | Book a Live KIDUART Walkthrough",
     description:
-      "Book a free live school ERP demo for Indian schools. See admissions CRM, online fee management, attendance tracking, exams, and parent portal on your school structure. No card required.",
+      "Book a free school ERP demo. A live walkthrough of admissions, fees, attendance, payroll, and parent updates on your school structure. No card required.",
     path: "/demo",
     ogImage: `${SITE_ORIGIN}/images/banner/home-hero.jpeg`,
     keywords: DEMO_META_KEYWORDS,
@@ -227,6 +226,20 @@ export function moduleFeaturePageSeo(params: {
   featureCount: number;
   subModuleCount: number;
 }): PageSeoHeadProps {
+  if (
+    params.areaSlug === "hr-and-staff-management" &&
+    params.moduleSlug === "payroll"
+  ) {
+    return {
+      title: "School Payroll Software | Staff Salary Cycle | KIDUART",
+      description:
+        "School payroll software in KIDUART: salary components, deductions, payslips, and leave or attendance already held in HR. Not a second spreadsheet.",
+      path: "/features/hr-and-staff-management/payroll",
+      ogImage: `${SITE_ORIGIN}/images/banner/features-hero.jpg`,
+      keywords:
+        "payroll software for schools, school payroll software, school HR payroll, KIDUART payroll",
+    };
+  }
   const nameLower = params.moduleName.toLowerCase();
   return {
     title: `${params.moduleName} Software for Schools | School ERP | KIDUART`,
@@ -245,6 +258,17 @@ export function integrationPageSeo(
   description: string,
   keywords?: string,
 ): PageSeoHeadProps {
+  if (slug === "whatsapp-business") {
+    return {
+      title: "School ERP with WhatsApp Integration | KIDUART",
+      description:
+        "School ERP with WhatsApp integration on your own Business number: attendance alerts, fee reminders, and notices, with a delivery record. Book a free demo.",
+      path: "/integrations/whatsapp-business",
+      ogImage: `${SITE_ORIGIN}/images/banner/home-hero.jpeg`,
+      keywords:
+        "school ERP with WhatsApp integration, WhatsApp Business school software, parent alerts WhatsApp, KIDUART",
+    };
+  }
   const trimmed =
     description.length > 155 ? `${description.slice(0, 152)}...` : description;
   return {
@@ -256,16 +280,30 @@ export function integrationPageSeo(
   };
 }
 
+const BLOG_QUERY_SEO: Record<string, { title: string; description: string }> = {
+  "top-10-school-management-software-india-2026": {
+    title: "Top 10 School Management Software in India (2026) | KIDUART",
+    description:
+      "Comparison of ten school management software options Indian schools evaluate in 2026: fees, attendance, payroll, and parent updates. Verify every claim in a demo.",
+  },
+  "multi-campus-school-erp-india": {
+    title: "Multi-Campus School ERP Software for Trusts in India | KIDUART",
+    description:
+      "Multi-campus school ERP software for Indian trusts: organisation rollups, campus isolation, and group reporting without merging every student record.",
+  },
+};
+
 export function blogPostPageSeo(
   slug: string,
   title: string,
   excerpt: string,
 ): PageSeoHeadProps {
+  const aligned = BLOG_QUERY_SEO[slug];
   const trimmed =
     excerpt.length > 155 ? `${excerpt.slice(0, 152)}...` : excerpt;
   return {
-    title: `${title} | School ERP Blog | KIDUART`,
-    description: trimmed,
+    title: aligned?.title ?? `${title} | School ERP Blog | KIDUART`,
+    description: aligned?.description ?? trimmed,
     path: `/blog/${slug}`,
     ogImage: `${SITE_ORIGIN}/images/banner/blog-hero.avif`,
     ogType: "article",

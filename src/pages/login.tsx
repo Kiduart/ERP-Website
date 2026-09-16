@@ -38,7 +38,7 @@ const LOGIN_ROLES = PRODUCT_PANELS.filter(
 export default function Login() {
   return (
     <PageTransition className="pt-20 pb-0">
-      <PageSeoHead {...pageSeo.login} />
+      <PageSeoHead {...pageSeo.login} robots="noindex, follow" />
       <SchemaMarkup
         data={[
           buildBreadcrumbSchema([

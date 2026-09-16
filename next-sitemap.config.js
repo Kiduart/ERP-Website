@@ -19,9 +19,16 @@ const BLOG_SLUGS = [
 function priorityFor(path) {
   if (path === "/") return 1;
   if (
-    ["/pricing", "/demo", "/features", "/founding-50", "/contact", "/platform"].includes(
-      path,
-    )
+    path === "/demo" ||
+    path === "/pricing" ||
+    path === "/features" ||
+    path === "/founding-50" ||
+    path === "/contact" ||
+    path === "/platform" ||
+    path === "/blog/multi-campus-school-erp-india" ||
+    path === "/blog/top-10-school-management-software-india-2026" ||
+    path === "/integrations/whatsapp-business" ||
+    path === "/features/hr-and-staff-management/payroll"
   ) {
     return 0.9;
   }
@@ -42,7 +49,7 @@ export default {
     BLOG_SLUGS.map((slug) => ({
       loc: `/blog/${slug}`,
       changefreq: "weekly",
-      priority: 0.8,
+      priority: priorityFor(`/blog/${slug}`),
       lastmod: new Date().toISOString(),
     })),
   transform: async (_config, path) => ({
