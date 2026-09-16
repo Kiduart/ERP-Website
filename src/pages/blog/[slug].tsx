@@ -13,6 +13,7 @@ import {
   getCmsBlogPost,
 } from "@/lib/cms/content";
 import type { ContentMeta } from "@/lib/cms/types";
+import { productLinksFor } from "@/data/blogProductLinks";
 import { blogPostPageSeo } from "@/lib/pageSeo";
 import { buildArticleSchema, buildBreadcrumbSchema } from "@/lib/seoSchemas";
 import {
@@ -94,6 +95,7 @@ export default function BlogPostPage({
   const imageIndex = listingPosts.findIndex((p) => p.slug === post.slug);
   const heroImage = getBlogHeroImage(post, Math.max(0, imageIndex));
   const postMap = new Map(listingPosts.map((item) => [item.slug, item]));
+  const productLinks = productLinksFor(post.slug);
   const related = post.relatedSlugs
     .map((relatedSlug) => postMap.get(relatedSlug) ?? null)
     .filter((item): item is NonNullable<typeof item> => item !== null)
@@ -319,6 +321,30 @@ export default function BlogPostPage({
                 </div>
               </aside>
             </div>
+          </div>
+        </section>
+
+        <section className="border-t border-brand-navy/8 bg-brand-beige/40 py-12 md:py-14">
+          <div className="page-shell">
+            <p className="text-[0.7rem] font-bold uppercase tracking-[0.2em] text-brand-teal">
+              In the product
+            </p>
+            <h2 className="mt-3 text-2xl font-bold tracking-tight text-brand-navy">
+              The pages this article is about
+            </h2>
+            <ul className="mt-6 flex flex-wrap gap-3">
+              {productLinks.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="inline-flex items-center gap-2 rounded-full border border-brand-navy/15 bg-white px-5 py-2.5 text-sm font-bold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal"
+                  >
+                    {item.label}
+                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </section>
 
