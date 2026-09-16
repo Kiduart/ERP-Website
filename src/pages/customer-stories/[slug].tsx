@@ -1,12 +1,10 @@
-import { useEffect } from "react";
-import { useLocation } from "wouter";
+import type { GetServerSideProps } from "next";
+
+/** Old story URLs were crawled as empty 200s. Send them to the stories index. */
+export const getServerSideProps: GetServerSideProps = async () => ({
+  redirect: { destination: "/stories", permanent: true },
+});
 
 export default function StoryDetail() {
-  const [, navigate] = useLocation();
-
-  useEffect(() => {
-    navigate("/stories", { replace: true });
-  }, [navigate]);
-
   return null;
 }

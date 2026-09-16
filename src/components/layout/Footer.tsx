@@ -46,6 +46,7 @@ const NAV_COLUMNS: { heading: string; links: FooterLink[] }[] = [
       { label: "FAQ", href: "/faq" },
       { label: "ERP Vendor Checklist", href: "/vendor-checklist" },
       { label: "Blog & Insights", href: "/blog" },
+      { label: "Sitemap", href: "/sitemap.xml" },
     ],
   },
   {
@@ -320,12 +321,20 @@ export function Footer() {
               <ul className="space-y-2.5">
                 {column.links.map((link) => (
                   <li key={link.href}>
-                    <Link href={link.href} className={navLinkClass}>
-                      <span className="center-gradient-underline">
-                        {link.label}
-                      </span>
-                      {link.soon && <SoonBadge />}
-                    </Link>
+                    {link.href.endsWith(".xml") ? (
+                      <a href={link.href} className={navLinkClass}>
+                        <span className="center-gradient-underline">
+                          {link.label}
+                        </span>
+                      </a>
+                    ) : (
+                      <Link href={link.href} className={navLinkClass}>
+                        <span className="center-gradient-underline">
+                          {link.label}
+                        </span>
+                        {link.soon && <SoonBadge />}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>

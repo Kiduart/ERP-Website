@@ -53,6 +53,15 @@ const nextConfig = {
   },
   async redirects() {
     return [
+      { source: "/home", destination: "/", permanent: true },
+      { source: "/privacy", destination: "/privacy-policy", permanent: true },
+      { source: "/terms", destination: "/terms-conditions", permanent: true },
+      { source: "/refund", destination: "/refund-cancellation-policy", permanent: true },
+      { source: "/customer-stories", destination: "/stories", permanent: true },
+      { source: "/customer-stories/:slug", destination: "/stories", permanent: true },
+      { source: "/about/team", destination: "/about", permanent: true },
+      { source: "/about/team/:slug", destination: "/about", permanent: true },
+      { source: "/sitemap-0.xml", destination: "/sitemap.xml", permanent: true },
       {
         source: "/help-center",
         destination: "/help",

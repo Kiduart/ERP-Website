@@ -1,13 +1,10 @@
-import { useEffect } from "react";
-import { useRouter } from "next/router";
+import type { GetServerSideProps } from "next";
 
-/** Leadership detail pages are not published yet  avoid indexing fictional bios. */
+/** Leadership bios are not published. Empty 200s here were soft 404s. */
+export const getServerSideProps: GetServerSideProps = async () => ({
+  redirect: { destination: "/about", permanent: true },
+});
+
 export default function TeamProfileRedirect() {
-  const router = useRouter();
-
-  useEffect(() => {
-    router.replace("/about");
-  }, [router]);
-
   return null;
 }
