@@ -7,7 +7,7 @@ import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { CtaSection } from "@/components/ui/CtaSection";
 import { pageSeo } from "@/lib/pageSeo";
 import { buildFaqPageSchema } from "@/lib/seoSchemas";
-import { ChevronDown, MessageCircleQuestion } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { ProductIcon } from "@/components/product/ProductIcon";
 import { StatChip } from "@/components/product/ProductPrimitives";
 import { SITE_FAQ_GROUPS, SITE_FAQ_SCHEMA_DATA } from "@/data/siteFaqs";
@@ -20,6 +20,7 @@ const totalQuestions = SITE_FAQ_GROUPS.reduce((sum, group) => sum + group.items.
 
 export default function FAQ() {
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [openQuestion, setOpenQuestion] = useState<string | null>(null);
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -101,7 +102,16 @@ export default function FAQ() {
 
                 <div className="space-y-3">
                   {group.items.map((faq) => (
-                    <details key={faq.q} className="group rounded-2xl border border-brand-navy/[0.1] bg-white transition-colors open:border-brand-teal/40 open:bg-brand-teal/[0.04]">
+                    <details
+                      key={faq.q}
+                      className="group rounded-2xl border border-brand-navy/[0.1] bg-white transition-colors open:border-brand-teal/40 open:bg-brand-teal/[0.04]"
+                      onToggle={(event) => {
+                        const node = event.currentTarget;
+                        setOpenQuestion((current) =>
+                          node.open ? faq.q : current === faq.q ? null : current,
+                        );
+                      }}
+                    >
                         <summary className="flex cursor-pointer items-center justify-between gap-6 px-6 py-5 text-left marker:content-none">
                           <span className="text-lg font-bold text-brand-navy">{faq.q}</span>
                           <ChevronDown
@@ -122,14 +132,9 @@ export default function FAQ() {
       <section className="section-space border-y border-brand-navy/5 bg-brand-beige/20">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <InView once className="motion-rise rounded-3xl border border-brand-navy/10 bg-white p-8 shadow-xl shadow-brand-navy/5 md:p-12">
-            <div className="mb-8 flex items-center gap-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-brand-orange/10">
-                <MessageCircleQuestion className="h-6 w-6 text-brand-orange" aria-hidden="true" />
-              </div>
-              <div>
-                <h2 className="text-2xl font-bold text-brand-navy">Still have a question?</h2>
-                <p className="text-brand-navy/[0.72]">Ask us directly. Our team will respond as quickly as possible.</p>
-              </div>
+            <div className="mb-8">
+              <h2 className="text-2xl font-bold text-brand-navy">Still have a question?</h2>
+              <p className="text-brand-navy/[0.72]">Ask us directly. Our team will respond as quickly as possible.</p>
             </div>
 
             {formSubmitted ? (
@@ -137,7 +142,10 @@ export default function FAQ() {
                 Received. We will get back to you soon.
               </div>
             ) : (
-              <form onSubmit={handleFormSubmit} className="space-y-6">
+              <form
+                onSubmit={handleFormSubmit}
+                className="space-y-6"
+              >
                 <div className="grid gap-6 md:grid-cols-2">
                   <div>
                     <label htmlFor="faq-name" className="mb-2 block text-sm font-medium text-brand-navy">

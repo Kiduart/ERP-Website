@@ -132,7 +132,7 @@ export default function Home({
           rel="preload"
           as="image"
           type="image/avif"
-          imageSrcSet="/images/banner/responsive/home-hero-640.avif 640w, /images/banner/responsive/home-hero-1024.avif 1024w, /images/banner/responsive/home-hero-1600.avif 1600w"
+          imageSrcSet="/images/banner/responsive/home-kidu-frame-640.avif 640w, /images/banner/responsive/home-kidu-frame-1024.avif 1024w, /images/banner/responsive/home-kidu-frame-1600.avif 1600w"
           imageSizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1600px"
           fetchPriority="high"
         />
@@ -167,7 +167,7 @@ export default function Home({
         <HomeCurveHero
           title="School ERP software for Indian schools  admissions to parent updates"
           subtitle="KIDUART is a cloud-based school management system that connects student records, online fee management, attendance tracking, exams, report cards, transport, library, HR, and parent communication in one school ERP."
-          image="/images/banner/home-hero.jpeg"
+          image="/images/banner/home-kidu-frame.jpg"
           actions={
             <>
               <Link

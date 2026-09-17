@@ -59,6 +59,29 @@ export function SystemSwitchboard() {
         </p>
       </div>
 
+      <div className="switchboard-stack relative mt-8 w-full overflow-hidden rounded-[1.75rem]">
+        <img
+          src="/kidu/switch/scattered.webp"
+          alt="Kidu in a school office where six jobs sit on separate desks and the cables are unplugged"
+          width={1200}
+          height={675}
+          className="switchboard-face aspect-[16/9] w-full object-cover"
+          data-active={!connected}
+          aria-hidden={connected ? "true" : undefined}
+          decoding="async"
+        />
+        <img
+          src="/kidu/switch/connected.webp"
+          alt="Kidu beside one table where the same six jobs are cabled into a single ledger"
+          width={1200}
+          height={675}
+          className="switchboard-face aspect-[16/9] w-full object-cover"
+          data-active={connected}
+          aria-hidden={connected ? undefined : "true"}
+          decoding="async"
+        />
+      </div>
+
       <div className="home-stagger mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
         {items.map((item, index) => (
           <article

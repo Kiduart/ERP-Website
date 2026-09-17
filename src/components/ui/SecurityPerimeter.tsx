@@ -2,6 +2,7 @@ import { useCallback, useRef, useState } from "react";
 import { Link } from "wouter";
 import { ArrowUpRight, Check, ShieldAlert } from "lucide-react";
 import { ProductIcon } from "@/components/product/ProductIcon";
+import { KiduScene } from "@/components/kidu/KiduScene";
 
 export type PerimeterLayer = {
   id: string;
@@ -28,10 +29,12 @@ export function SecurityPerimeter({
   layers,
   scenarios,
   stats,
+  companion = false,
 }: {
   layers: PerimeterLayer[];
   scenarios: PerimeterScenario[];
   stats: { layers: number; modules: number; capabilities: number };
+  companion?: boolean;
 }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -80,6 +83,11 @@ export function SecurityPerimeter({
         </p>
       </div>
 
+      {companion ? (
+        <div className="mt-6">
+          <KiduScene pose="thinking" size="sm" />
+        </div>
+      ) : null}
       <div className="mt-6 grid gap-6 lg:grid-cols-12 lg:gap-8">
         <div
           role="tablist"

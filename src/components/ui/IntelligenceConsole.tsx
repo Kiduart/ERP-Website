@@ -20,7 +20,6 @@ import {
   SIGNAL_STREAMS,
   type IntelligenceWorkflow,
 } from "@/data/intelligenceWorkflows";
-
 const ICONS: Record<string, LucideIcon> = {
   Activity,
   BellRing,

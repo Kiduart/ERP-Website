@@ -100,6 +100,8 @@ const BANNER_ALT_BY_FILE: Record<string, string> = {
     "KIDUART product and engineering team building school ERP software in India",
   "home-hero.jpeg":
     "Indian school campus using KIDUART ERP for daily administration",
+  "home-kidu-frame.jpg":
+    "Kidu standing on the classroom floor, pointing toward the School ERP headline",
   "stories-post-1.jpg":
     "School principal reviewing administrative dashboard on KIDUART ERP",
   "stories-post-2.jpg":

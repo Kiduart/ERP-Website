@@ -23,8 +23,8 @@ import {
 import { buildBreadcrumbSchema } from "@/lib/seoSchemas";
 import { useToast } from "@/hooks/use-toast";
 import { useState, type FormEvent } from "react";
+import { FormGuide } from "@/components/kidu/FormGuide";
 import { Link } from "wouter";
-
 type ContactFormState = {
   name: string;
   email: string;
@@ -53,6 +53,7 @@ export default function Contact() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+  const [fieldHint, setFieldHint] = useState("");
   const [formData, setFormData] = useState<ContactFormState>({
     name: "",
     email: "",
@@ -328,12 +329,30 @@ export default function Contact() {
             <div className="lg:col-span-2">
               <SectionReveal
                 delay={0.3}
-                className="rounded-3xl border border-brand-navy/5 bg-white p-8 shadow-2xl shadow-brand-navy/10 md:p-12"
+                className="overflow-hidden rounded-3xl border border-brand-navy/5 bg-white shadow-2xl shadow-brand-navy/10"
               >
+                <FormGuide
+                  mode="contact"
+                  empty={!formData.name.trim() && !formData.email.trim() && !formData.phone.trim() && !formData.message.trim()}
+                  success={Boolean(successMessage)}
+                  hint={fieldHint}
+                />
+                <div className="p-8 md:p-12">
                 <h2 className="mb-8 text-3xl font-bold text-brand-navy">
                   Send us a message
                 </h2>
-                <form className="space-y-6" onSubmit={handleSubmit}>
+                <form
+                  className="space-y-6"
+                  onSubmit={handleSubmit}
+                  onFocusCapture={(event) => {
+                    const hint = (event.target as HTMLElement).getAttribute("data-kidu-hint") ?? "";
+                    setFieldHint(hint);
+                  }}
+                  onBlurCapture={(event) => {
+                    const next = event.relatedTarget as Node | null;
+                    if (!event.currentTarget.contains(next)) setFieldHint("");
+                  }}
+                >
                   <div className="grid gap-6 md:grid-cols-2">
                     <div className="space-y-2">
                       <label className="text-sm font-bold text-brand-navy">
@@ -342,6 +361,8 @@ export default function Contact() {
                       <input
                         required
                         type="text"
+                        name="name"
+                        data-kidu-hint="Your name, so the team knows who wrote."
                         value={formData.name}
                         onChange={(e) => handleChange("name", e.target.value)}
                         className="field-surface w-full rounded-xl border border-brand-navy/10 px-4 py-3 transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-brand-teal"
@@ -355,6 +376,8 @@ export default function Contact() {
                       <input
                         required
                         type="email"
+                        name="email"
+                        data-kidu-hint="An email we can reply to."
                         value={formData.email}
                         onChange={(e) => handleChange("email", e.target.value)}
                         className="field-surface w-full rounded-xl border border-brand-navy/10 px-4 py-3 transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-brand-teal"
@@ -381,6 +404,8 @@ export default function Contact() {
                         inputMode="numeric"
                         pattern="[0-9]{10}"
                         maxLength={10}
+                        name="phone"
+                        data-kidu-hint="A 10 digit number."
                         value={formData.phone}
                         onChange={(e) =>
                           handleChange(
@@ -419,6 +444,8 @@ export default function Contact() {
                     <textarea
                       required
                       rows={5}
+                      name="message"
+                      data-kidu-hint="What you want the team to look at."
                       value={formData.message}
                       onChange={(e) => handleChange("message", e.target.value)}
                       className="field-surface w-full resize-none rounded-xl border border-brand-navy/10 px-4 py-3 transition-all focus:border-transparent focus:outline-none focus:ring-2 focus:ring-brand-teal"
@@ -443,6 +470,7 @@ export default function Contact() {
                     </p>
                   ) : null}
                 </form>
+                </div>
               </SectionReveal>
             </div>
           </div>

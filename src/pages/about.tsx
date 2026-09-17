@@ -27,6 +27,7 @@ import {
   Trophy,
 } from "lucide-react";
 import { Link } from "wouter";
+import { useState } from "react";
 import type { GetStaticProps } from "next";
 
 type AboutProps = {
@@ -35,22 +36,35 @@ type AboutProps = {
   personaCount: number;
 };
 
-const TIMELINE = [
+const TIMELINE: {
+  title: string;
+  body: string;
+  pose: string;
+  line: string;
+}[] = [
   {
     title: "Listen in Uttar Pradesh",
     body: "Fee files in five Excels. Attendance on paper. Parents calling the desk for answers nobody can find. Same story in every admin office we sat in.",
+    pose: "thinking",
+    line: "Fee files in five Excels. Same story in every office we sat in.",
   },
   {
     title: "Build around roles",
     body: "Ten panels  because a class teacher, an accountant, and a trustee need different things from the same record. Short training is a design outcome.",
+    pose: "explaining-features",
+    line: "A teacher, an accountant, and a trustee need different things from the same record.",
   },
   {
     title: "One capability matrix",
     body: "Features, platform, and pricing stay consistent because they come from the same source of truth engineering maintains  not a marketing slide deck.",
+    pose: "confident",
+    line: "Features, platform, and pricing come from one source of truth.",
   },
   {
     title: "Next phase: KIDUORBIT",
     body: "Intelligence on data schools already record. Not launched yet. ERP baseline first; orbit when the streams are clean.",
+    pose: "sharing-insights",
+    line: "Not launched. Intelligence comes after the records are clean.",
   },
 ];
 
@@ -59,6 +73,8 @@ export default function About({
   panelCount,
   personaCount,
 }: AboutProps) {
+  const [beat, setBeat] = useState(0);
+
   return (
     <PageTransition className="pt-20 pb-0">
       <PageSeoHead {...pageSeo.about} />
@@ -180,8 +196,7 @@ export default function About({
               to role panels and a careful next phase for AI.
             </p>
           </InView>
-
-          <div className="relative mx-auto mt-14 max-w-3xl">
+          <div className="mx-auto mt-14 max-w-3xl">
             <div
               aria-hidden="true"
               className="runway-spine absolute bottom-0 left-[1.15rem] top-0 w-1 rounded-full bg-brand-navy/10 md:left-1/2 md:-ml-0.5"
@@ -195,10 +210,17 @@ export default function About({
                     index % 2 === 1 ? "md:text-right" : ""
                   }`}
                 >
-                  <div
+                  <button
+                    type="button"
+                    aria-pressed={index === beat}
+                    onClick={() => setBeat(index)}
                     className={`${
-                      index % 2 === 1 ? "md:col-start-2" : ""
-                    } rounded-[1.35rem] border border-brand-navy/8 bg-white/90 p-6 shadow-sm backdrop-blur-sm`}
+                      index % 2 === 1 ? "md:col-start-2 md:text-right" : "text-left"
+                    } rounded-[1.35rem] border bg-white/90 p-6 text-left shadow-sm backdrop-blur-sm ${
+                      index === beat
+                        ? "border-brand-teal"
+                        : "border-brand-navy/8"
+                    }`}
                   >
                     <span className="font-serif text-lg font-bold text-brand-orange-ink">
                       {String(index + 1).padStart(2, "0")}
@@ -209,7 +231,7 @@ export default function About({
                     <p className="mt-2 text-sm leading-7 text-brand-navy/[0.72]">
                       {item.body}
                     </p>
-                  </div>
+                  </button>
                   <span
                     aria-hidden="true"
                     className="absolute left-[0.85rem] top-8 z-10 h-4 w-4 rounded-full border-2 border-brand-yellow bg-brand-navy md:left-1/2 md:-ml-2"

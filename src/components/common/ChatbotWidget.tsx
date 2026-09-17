@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect } from "react";
-import { MessageCircle, X, Bot, Send } from "lucide-react";
+import { X, Send } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CONTACT_EMAIL, CONTACT_PHONE_DISPLAY, WHATSAPP_URL } from "@/lib/contact";
 import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
+import { KIDU_INTRO, KIDU_POSES } from "@/components/kidu/poses";
 
 type Message = {
   id: string;
@@ -34,7 +35,7 @@ export function ChatbotWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [showNudge, setShowNudge] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { id: "1", sender: "bot", text: "Hi! I'm KIDU, a Product Expert. How can we help you today?" }
+    { id: "1", sender: "bot", text: `${KIDU_INTRO} How can we help you today?` }
   ]);
   const [inputValue, setInputValue] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -97,12 +98,26 @@ export function ChatbotWidget() {
             setShowNudge(false);
             setIsOpen(!isOpen);
           }}
-          aria-label={isOpen ? "Close chat" : "Open chat"}
+          aria-label={isOpen ? "Close chat with Kidu" : "Open chat with Kidu"}
           aria-expanded={isOpen}
           aria-controls="kiduart-chat-panel"
-          className={`flex h-14 w-14 items-center justify-center rounded-full bg-brand-navy text-white shadow-xl transition-transform hover:scale-105 ${showNudge ? "animate-pulse" : ""}`}
+          className={`flex h-14 w-14 items-center justify-center overflow-hidden rounded-full shadow-xl transition-transform hover:scale-105 ${
+            isOpen
+              ? "bg-brand-navy text-white"
+              : "border border-brand-navy/10 bg-brand-beige"
+          } ${showNudge && !isOpen ? "ring-2 ring-brand-orange ring-offset-2" : ""}`}
         >
-          <MessageCircle className="w-7 h-7" aria-hidden />
+          {isOpen ? (
+            <X className="h-6 w-6" aria-hidden />
+          ) : (
+            <img
+              src={KIDU_POSES["always-here"].src}
+              alt=""
+              width={56}
+              height={56}
+              className="h-full w-full object-cover object-[center_8%]"
+            />
+          )}
         </button>
       </div>
 
@@ -116,20 +131,26 @@ export function ChatbotWidget() {
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             className="fixed bottom-24 right-6 z-50 flex w-[calc(100vw-2rem)] max-w-80 flex-col overflow-hidden rounded-2xl border border-brand-navy/10 bg-white shadow-2xl sm:max-w-96"
             role="dialog"
-            aria-label="KIDUART support chat"
+            aria-label="Chat with Kidu"
           >
             {/* Header */}
             <div className="bg-brand-navy p-4 flex items-center justify-between text-white">
               <div className="flex items-center gap-3">
                 <div className="relative">
-                  <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                    <Bot className="w-6 h-6" />
+                  <div className="h-10 w-10 overflow-hidden rounded-full bg-brand-beige">
+                    <img
+                      src={KIDU_POSES["always-here"].src}
+                      alt=""
+                      width={40}
+                      height={40}
+                      className="h-full w-full object-cover object-[center_8%]"
+                    />
                   </div>
-                  <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-brand-navy rounded-full"></div>
+                  <div className="absolute bottom-0 right-0 h-3 w-3 rounded-full border-2 border-brand-navy bg-green-500"></div>
                 </div>
                 <div>
-                  <h3 className="font-bold text-sm">KIDUART Support</h3>
-                  <p className="text-xs text-white/70">We typically reply in a few minutes</p>
+                  <h3 className="font-bold text-sm">Kidu</h3>
+                  <p className="text-xs text-white/70">Your AI school guide</p>
                 </div>
               </div>
               <button

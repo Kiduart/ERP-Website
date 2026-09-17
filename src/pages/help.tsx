@@ -4,7 +4,8 @@ import { Stagger } from "@/components/ui/Stagger";
 import { PageTransition, SectionReveal } from "@/components/ui/PageTransition";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
 import { FloatingIcons } from "@/components/animations/FloatingIcons";
-import { Search, Settings, Users, BarChart3, ArrowRight, MessageCircle, Ticket, Mail, X, Play } from "lucide-react";
+import { Search, Settings, Users, BarChart3, ArrowRight, Ticket, Mail, X, Play } from "lucide-react";
+import { KIDU_POSES } from "@/components/kidu/poses";
 import { Link } from "wouter";
 import { useEffect, useRef, useState } from "react";
 import { bannerAltFromSrc, heroImgProps, IMAGE_DIMENSIONS } from "@/lib/imageSeo";
@@ -225,7 +226,13 @@ export default function HelpCenter() {
             </div>
 
             <div className="bg-white p-8 rounded-2xl text-center shadow-md border-2 border-brand-teal flex flex-col items-center">
-              <MessageCircle className="w-10 h-10 text-brand-teal mx-auto mb-4" />
+              <img
+                src={KIDU_POSES["always-here"].src}
+                alt=""
+                width={64}
+                height={64}
+                className="mx-auto mb-4 h-16 w-16 rounded-full object-cover object-[center_8%]"
+              />
               <h3 className="text-xl font-bold text-brand-navy mb-2">Live Chat</h3>
               <p className="text-brand-navy/60 text-sm mb-6 flex-grow">Start a chat request and our team will connect with you as support agents become available.</p>
               <button onClick={() => setChatOpen(true)} className="w-full py-3 rounded-xl bg-brand-teal font-bold text-white hover:bg-brand-navy transition-colors">
@@ -251,12 +258,16 @@ export default function HelpCenter() {
           <div className="bg-white w-full max-w-md rounded-2xl shadow-2xl relative z-10 flex flex-col overflow-hidden animate-in fade-in zoom-in duration-200">
             <div className="bg-brand-navy p-4 flex items-center justify-between text-white">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-brand-teal flex items-center justify-center font-bold">K</div>
+                <img
+                  src={KIDU_POSES["always-here"].src}
+                  alt=""
+                  width={40}
+                  height={40}
+                  className="h-10 w-10 rounded-full object-cover object-[center_8%]"
+                />
                 <div>
-                  <h3 className="font-bold">KIDUART Support</h3>
-                  <div className="text-xs text-white/70 flex items-center gap-1">
-                    <span className="w-2 h-2 rounded-full bg-green-400"></span> Chat request
-                  </div>
+                  <h3 className="font-bold">Kidu</h3>
+                  <div className="text-xs text-white/70">Goes to the support team</div>
                 </div>
               </div>
               <button onClick={() => setChatOpen(false)} className="text-white/70 hover:text-white transition-colors">
@@ -266,9 +277,15 @@ export default function HelpCenter() {
 
             <div className="p-6 bg-brand-beige/10 min-h-[300px] flex flex-col">
               <div className="flex gap-3 mb-6">
-                <div className="w-8 h-8 rounded-full bg-brand-teal flex-shrink-0 flex items-center justify-center text-white text-sm font-bold">K</div>
+                <img
+                  src={KIDU_POSES["always-here"].src}
+                  alt=""
+                  width={32}
+                  height={32}
+                  className="h-8 w-8 flex-shrink-0 rounded-full object-cover object-[center_8%]"
+                />
                 <div className="bg-white p-3 rounded-2xl rounded-tl-none shadow-sm border border-brand-navy/5 text-brand-navy text-sm">
-                  Hi there! How can I help you today?
+                  This request goes to the support team. I will not invent an answer.
                 </div>
               </div>
 

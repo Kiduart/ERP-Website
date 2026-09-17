@@ -39,8 +39,8 @@ import { WhatsAppIcon } from "@/components/ui/WhatsAppIcon";
 import { buildBreadcrumbSchema, buildFaqPageSchema } from "@/lib/seoSchemas";
 import { useAnalytics } from "@/hooks/useAnalytics";
 import { useState } from "react";
+import { FormGuide } from "@/components/kidu/FormGuide";
 import { Link } from "wouter";
-
 const demoSchema = z
   .object({
     firstName: z.string().min(2, "First name is required"),
@@ -116,6 +116,7 @@ export default function RequestDemo() {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
+  const [fieldHint, setFieldHint] = useState("");
   const form = useForm<DemoFormValues>({
     resolver: zodResolver(demoSchema),
     defaultValues: {
@@ -134,6 +135,8 @@ export default function RequestDemo() {
   });
 
   const hasWebsite = form.watch("hasWebsite");
+  const watchedName = form.watch(["firstName", "lastName", "email", "phone", "school"]);
+  const demoEmpty = watchedName.every((value) => !String(value ?? "").trim());
 
   const onSubmit = async (data: DemoFormValues) => {
     setIsSubmitting(true);
@@ -257,7 +260,7 @@ export default function RequestDemo() {
                 panels, or parent updates. Bring your hardest questions.
               </p>
               <CommercialPaths current="/demo" />
-              <div className="mb-8 flex flex-wrap items-center gap-4 text-sm text-brand-navy/[0.72]">
+              <div className="mb-8 mt-8 flex flex-wrap items-center gap-4 text-sm text-brand-navy/[0.72]">
                 <span className="font-semibold">Not ready to book yet?</span>
                 <a
                   href={WHATSAPP_URL}
@@ -333,8 +336,15 @@ export default function RequestDemo() {
           <div className="lg:col-span-3">
             <InView
               once
-              className="motion-rise rounded-3xl border border-brand-navy/5 bg-white p-8 shadow-xl sm:p-10"
+              className="motion-rise overflow-hidden rounded-3xl border border-brand-navy/5 bg-white shadow-xl"
             >
+              <FormGuide
+                mode="demo"
+                empty={demoEmpty}
+                success={Boolean(successMessage)}
+                hint={fieldHint}
+              />
+              <div className="p-8 sm:p-10">
               <h2 className="mb-2 text-2xl font-bold text-brand-navy">
                 Book your free demo
               </h2>
@@ -347,6 +357,21 @@ export default function RequestDemo() {
                 <form
                   onSubmit={form.handleSubmit(onSubmit)}
                   className="space-y-6"
+                  onFocusCapture={(event) => {
+                    const name = (event.target as HTMLElement).getAttribute("name") ?? "";
+                    const hints: Record<string, string> = {
+                      firstName: "First name is required.",
+                      lastName: "Last name is required.",
+                      email: "A school email we can reply to.",
+                      phone: "A 10 digit number.",
+                      school: "The school name, as it should appear on the record.",
+                    };
+                    setFieldHint(hints[name] ?? "");
+                  }}
+                  onBlurCapture={(event) => {
+                    const next = event.relatedTarget as Node | null;
+                    if (!event.currentTarget.contains(next)) setFieldHint("");
+                  }}
                 >
                   <div className="grid gap-6 md:grid-cols-2">
                     <FormField
@@ -624,6 +649,7 @@ export default function RequestDemo() {
                   ) : null}
                 </form>
               </Form>
+              </div>
             </InView>
           </div>
         </div>

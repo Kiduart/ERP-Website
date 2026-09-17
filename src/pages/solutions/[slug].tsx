@@ -1,4 +1,5 @@
 import type { GetStaticPaths, GetStaticProps } from "next";
+import { useState } from "react";
 import Image from "next/image";
 import { Link } from "wouter";
 import { ArrowRight, Check } from "lucide-react";
@@ -75,6 +76,8 @@ export default function SolutionDetail({
   otherPersonas,
 }: SolutionDetailProps) {
   const tokens = ACCENTS[persona.accent];
+  const [dayIndex, setDayIndex] = useState(0);
+  const [challengeIndex, setChallengeIndex] = useState(0);
   const trail = [
     { name: "Home", path: "/" },
     { name: "Solutions", path: "/solutions" },
@@ -205,9 +208,41 @@ export default function SolutionDetail({
             >
               {challenges.map((challenge, index) => (
                 <li key={challenge.problem}>
-                  <div className="overflow-hidden rounded-[2rem] border border-brand-navy/[0.08] bg-white shadow-sm">
+                  <div
+                    className={`overflow-hidden rounded-[2rem] border bg-white shadow-sm ${
+                      persona.slug === "school-administration" && index === challengeIndex
+                        ? "border-brand-teal"
+                        : "border-brand-navy/[0.08]"
+                    }`}
+                  >
                     <div className="grid gap-0 md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
-                      <div className="border-b border-brand-navy/[0.08] bg-brand-beige/25 p-6 md:border-b-0 md:border-r md:p-8">
+                      <div
+                        className={`border-b border-brand-navy/[0.08] bg-brand-beige/25 p-6 md:border-b-0 md:border-r md:p-8 ${
+                          persona.slug === "school-administration" ? "cursor-pointer" : ""
+                        }`}
+                        onClick={
+                          persona.slug === "school-administration"
+                            ? () => setChallengeIndex(index)
+                            : undefined
+                        }
+                        onKeyDown={
+                          persona.slug === "school-administration"
+                            ? (event) => {
+                                if (event.key === "Enter" || event.key === " ") {
+                                  event.preventDefault();
+                                  setChallengeIndex(index);
+                                }
+                              }
+                            : undefined
+                        }
+                        role={persona.slug === "school-administration" ? "button" : undefined}
+                        tabIndex={persona.slug === "school-administration" ? 0 : undefined}
+                        aria-pressed={
+                          persona.slug === "school-administration"
+                            ? index === challengeIndex
+                            : undefined
+                        }
+                      >
                         <span className="inline-flex h-9 items-center gap-2 rounded-full bg-white px-3.5 text-xs font-bold uppercase tracking-[0.16em] text-brand-orange-ink">
                           Challenge {String(index + 1).padStart(2, "0")}
                         </span>
@@ -267,8 +302,21 @@ export default function SolutionDetail({
                   {persona.dayInLife.map((step, index) => (
                     <li
                       key={step.when}
-                      className="relative flex gap-5 pb-8 last:pb-0"
+                      className={`relative flex gap-5 pb-8 last:pb-0 ${
+                        persona.slug === "teachers" && index === dayIndex
+                          ? "rounded-2xl bg-brand-beige/40"
+                          : ""
+                      }`}
                     >
+                      {persona.slug === "teachers" ? (
+                        <button
+                          type="button"
+                          className="absolute inset-0 z-20 rounded-2xl"
+                          aria-pressed={index === dayIndex}
+                          aria-label={step.when}
+                          onClick={() => setDayIndex(index)}
+                        />
+                      ) : null}
                       {index < persona.dayInLife.length - 1 ? (
                         <span
                           className="absolute left-[1.15rem] top-10 h-full w-px bg-brand-navy/[0.12]"

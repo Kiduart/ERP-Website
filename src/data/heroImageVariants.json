@@ -42,5 +42,9 @@
   "/images/banner/home-hero.jpeg": {
     "avif": "/images/banner/responsive/home-hero-640.avif 640w, /images/banner/responsive/home-hero-1024.avif 1024w, /images/banner/responsive/home-hero-1600.avif 1600w",
     "webp": "/images/banner/responsive/home-hero-640.webp 640w, /images/banner/responsive/home-hero-1024.webp 1024w, /images/banner/responsive/home-hero-1600.webp 1600w"
+  },
+  "/images/banner/home-kidu-frame.jpg": {
+    "avif": "/images/banner/responsive/home-kidu-frame-640.avif 640w, /images/banner/responsive/home-kidu-frame-1024.avif 1024w, /images/banner/responsive/home-kidu-frame-1600.avif 1600w",
+    "webp": "/images/banner/responsive/home-kidu-frame-640.webp 640w, /images/banner/responsive/home-kidu-frame-1024.webp 1024w, /images/banner/responsive/home-kidu-frame-1600.webp 1600w"
   }
 }

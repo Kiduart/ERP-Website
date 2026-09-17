@@ -1,4 +1,5 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
+import { Link } from "wouter";
 import { SectionReveal } from "@/components/ui/PageTransition";
 import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
 import { FloatingIcons } from "@/components/animations/FloatingIcons";
@@ -255,38 +256,61 @@ export function HomeCurveHero({
   image: string;
   actions: ReactNode;
 }) {
+  const [pointingAt, setPointingAt] = useState<string | null>(null);
+  const chips = [
+    { label: "Fees", href: "/features/finance-and-fee-management" },
+    { label: "Attendance", href: "/features/academic/attendance" },
+    { label: "Exams", href: "/features/academic/examination" },
+    { label: "Parents", href: "/features/parent-management" },
+  ];
+
   return (
-    <section className="relative min-h-screen overflow-hidden">
+    <section className="relative min-h-screen overflow-hidden bg-brand-beige">
       <div className="absolute inset-0">
         <HeroPicture
           image={image}
-          alt={heroImageAlt(title)}
+          alt="Kidu standing on the classroom floor, pointing toward the School ERP headline"
           priority
-          dimensions={IMAGE_DIMENSIONS.heroWide}
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 1600px"
-          className="h-full w-full object-cover"
-          wrapperClassName="absolute inset-0 block h-full w-full [&>img]:h-full [&>img]:w-full [&>img]:object-cover"
+          dimensions={{ width: 1600, height: 900 }}
+          sizes="100vw"
+          className="h-full w-full object-cover object-[78%_center]"
+          wrapperClassName="absolute inset-0 block h-full w-full [&>img]:h-full [&>img]:w-full [&>img]:object-cover [&>img]:object-[78%_center]"
         />
-        {/* Light haze only  keeps the photo, logo and navbar readable instead of darkening the page */}
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.42)_0%,rgba(252,249,240,0.18)_45%,rgba(255,255,255,0.38)_100%)]" />
-        {/* Feathered wash behind the copy  no card edge, so the classroom stays visible around it */}
-        <div className="absolute inset-0 bg-[radial-gradient(58%_46%_at_50%_54%,rgba(255,255,255,0.72)_0%,rgba(255,255,255,0.4)_58%,rgba(255,255,255,0)_100%)]" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-[min(42rem,46%)] bg-[linear-gradient(90deg,hsl(var(--brand-beige)/0.96)_0%,hsl(var(--brand-beige)/0.84)_62%,hsl(var(--brand-beige)/0)_100%)]" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-brand-beige/75 to-transparent" />
       </div>
-
-      <div className="page-shell relative z-20 flex min-h-screen items-center justify-center pb-16 pt-36 md:pt-40">
-        <SectionReveal instant className="mx-auto max-w-3xl text-center">
-          <div className="inline-flex rounded-full border border-brand-teal/40 bg-white/85 px-4 py-2 text-xs font-semibold uppercase tracking-[0.26em] text-brand-navy backdrop-blur-sm">
+      <div className="page-shell relative z-20 flex min-h-screen items-center pb-16 pt-32">
+        <SectionReveal instant className="w-full max-w-lg">
+          <div className="inline-flex rounded-full border border-brand-teal/40 bg-brand-beige/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.26em] text-brand-navy">
             AI school ERP platform
           </div>
-          {/* White halo instead of a panel: dark brand text stays legible over the photo's busy areas */}
-          <h1 className="mx-auto mt-6 max-w-3xl text-[clamp(2.05rem,1.4rem+1.7vw,3.35rem)] font-bold leading-[1.06] text-brand-navy [text-shadow:0_1px_0_rgba(255,255,255,0.9),0_2px_16px_rgba(255,255,255,0.95)]">
+          <h1 className="mt-6 text-[clamp(2.15rem,1.5rem+1.8vw,3.5rem)] font-bold leading-[1.05] text-brand-navy [text-shadow:0_1px_0_rgba(250,248,240,0.95)]">
             {title}
           </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-[clamp(1rem,0.95rem+0.14vw,1.08rem)] font-medium leading-8 text-brand-navy/[0.88] [text-shadow:0_1px_0_rgba(255,255,255,0.9),0_1px_12px_rgba(255,255,255,0.95)]">
+          <p className="mt-5 text-[clamp(1rem,0.95rem+0.14vw,1.08rem)] font-medium leading-8 text-brand-navy [text-shadow:0_1px_0_rgba(250,248,240,0.9)]">
             {subtitle}
           </p>
-          <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            {actions}
+          <div className="mt-8 flex flex-col gap-4 sm:flex-row">{actions}</div>
+          <p className="mt-8 min-h-5 text-sm font-bold tracking-wide text-brand-navy" aria-live="polite">
+            {pointingAt}
+          </p>
+          <div className="flex max-w-md flex-wrap gap-2">
+            {chips.map((chip) => (
+              <Link
+                key={chip.href}
+                href={chip.href}
+                onMouseEnter={() => setPointingAt(chip.label)}
+                onMouseLeave={() => setPointingAt(null)}
+                onFocus={() => setPointingAt(chip.label)}
+                onBlur={() => setPointingAt(null)}
+                className={cn(
+                  "rounded-full border border-brand-navy/15 bg-brand-beige/90 px-4 py-2 text-sm font-bold text-brand-navy transition-colors hover:border-brand-teal hover:text-brand-teal",
+                  pointingAt === chip.label && "border-brand-teal text-brand-teal",
+                )}
+              >
+                {chip.label}
+              </Link>
+            ))}
           </div>
         </SectionReveal>
       </div>

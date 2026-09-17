@@ -27,6 +27,7 @@ const HERO_FILES = [
   "career-post-1.jpg",
   "help-center-hero-1.jpg",
   "home-hero.jpeg",
+  "home-kidu-frame.jpg",
 ];
 
 async function main() {

@@ -1,4 +1,5 @@
 import type { GetStaticProps } from "next";
+import { useState } from "react";
 import Image from "next/image";
 import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
@@ -59,6 +60,7 @@ const impactHighlights = [
 ];
 
 export default function Solutions({ personas, totals }: SolutionsPageProps) {
+  const [hovered, setHovered] = useState<string | null>(null);
   return (
     <>
       <PageSeoHead
@@ -162,11 +164,13 @@ export default function Solutions({ personas, totals }: SolutionsPageProps) {
         <section className="section-space relative overflow-hidden bg-brand-beige/25">
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <InView className="motion-rise" once>
-              <SectionHeading
-                kicker="Pick the role you are buying for"
-                title="Start from the person who will use it every day"
-                description="Each role page lists the challenges that role reports, the modules that answer them, a typical day, and the panel they sign in to."
-              />
+              <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-end">
+                <SectionHeading
+                  kicker="Pick the role you are buying for"
+                  title="Start from the person who will use it every day"
+                  description="Each role page lists the challenges that role reports, the modules that answer them, a typical day, and the panel they sign in to."
+                />
+              </div>
             </InView>
 
             <Stagger
@@ -179,7 +183,15 @@ export default function Solutions({ personas, totals }: SolutionsPageProps) {
                   <Link
                     key={persona.slug}
                     href={`/solutions/${persona.slug}`}
-                    className="group flex h-full flex-col overflow-hidden rounded-[1.75rem] border border-brand-navy/[0.08] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand-teal/40"
+                    onMouseEnter={() => setHovered(persona.slug)}
+                    onFocus={() => setHovered(persona.slug)}
+                    onMouseLeave={() => setHovered(null)}
+                    onBlur={() => setHovered(null)}
+                    className={`group flex h-full flex-col overflow-hidden rounded-[1.75rem] border bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-brand-teal/40 ${
+                      hovered === persona.slug
+                        ? "border-brand-teal"
+                        : "border-brand-navy/[0.08]"
+                    }`}
                   >
                     <div className="relative aspect-[16/10] bg-brand-beige/40">
                       <Image

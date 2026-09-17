@@ -11,6 +11,7 @@ import { BackgroundBlobs } from "@/components/animations/BackgroundBlobs";
 import { FloatingIcons } from "@/components/animations/FloatingIcons";
 import { ArrowRight, Info } from "lucide-react";
 import { SecurityStack } from "@/components/product/SecurityStack";
+import { TrustClouds } from "@/components/kidu/TrustClouds";
 import { SecurityPerimeter } from "@/components/ui/SecurityPerimeter";
 import {
   DATA_HANDLING_PRINCIPLES,
@@ -41,6 +42,7 @@ export default function Security({
         image="/images/banner/security-hero.jpg"
         layout="center"
       />
+      <TrustClouds layers={layers} />
 
       <section className="section-space-tight relative overflow-hidden border-b border-brand-navy/5 bg-white">
         <BackgroundBlobs
@@ -193,7 +195,7 @@ export default function Security({
         </div>
       </section>
 
-      <section className="section-space relative overflow-hidden bg-brand-beige/25">
+      <section id="defence-layers" className="section-space relative overflow-hidden bg-brand-beige/25">
         <BackgroundBlobs
           blobs={[
             {

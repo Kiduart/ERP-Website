@@ -4,11 +4,44 @@ import { ArrowRight, Check, ChevronLeft, ChevronRight } from "lucide-react";
 import { ProductIcon } from "@/components/product/ProductIcon";
 import { InView } from "@/components/ui/InView";
 import { SCHOOL_OPERATIONS_JOURNEY } from "@/lib/siteData";
-
 const steps = SCHOOL_OPERATIONS_JOURNEY;
+
+const JOURNEY_FRAME: Record<string, { src: string; alt: string }> = {
+  admissions: {
+    src: "/kidu/journey/admissions.webp",
+    alt: "Kidu at the school front desk, with an open register and a blank enquiry slip",
+  },
+  "student-records": {
+    src: "/kidu/journey/records.webp",
+    alt: "Kidu holding one blank student file beside a single filing cabinet",
+  },
+  "classes-timetable": {
+    src: "/kidu/journey/classes.webp",
+    alt: "Kidu pointing at one period on a timetable fixed to the corridor wall",
+  },
+  attendance: {
+    src: "/kidu/journey/attendance.webp",
+    alt: "Kidu marking one tick in a blank attendance register",
+  },
+  examinations: {
+    src: "/kidu/journey/exams.webp",
+    alt: "Kidu beside a blank exam paper and a pen, with no score written",
+  },
+  fees: {
+    src: "/kidu/journey/fees.webp",
+    alt: "Kidu at the fee counter with an open receipt book and a blank amount line",
+  },
+  communication: {
+    src: "/kidu/journey/parents.webp",
+    alt: "Kidu waving at the school gate, phone in hand, three blank notices on the gate board",
+  },
+};
+
+const GATE_CHIPS = ["Notices", "Events", "Messages"] as const;
 
 export function SchoolJourney() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [gateChip, setGateChip] = useState<string | null>(null);
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const active = steps[activeIndex];
   const nextStep = steps[(activeIndex + 1) % steps.length];
@@ -17,6 +50,7 @@ export function SchoolJourney() {
   const selectStep = useCallback((index: number, moveFocus = false) => {
     const next = (index + steps.length) % steps.length;
     setActiveIndex(next);
+    setGateChip(null);
     const node = tabRefs.current[next];
     if (moveFocus) node?.focus({ preventScroll: true });
     node?.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
@@ -74,7 +108,7 @@ export function SchoolJourney() {
               aria-selected={isActive}
               aria-controls="journey-panel"
               tabIndex={isActive ? 0 : -1}
-              onClick={() => setActiveIndex(index)}
+              onClick={() => selectStep(index)}
               onKeyDown={(event) => onTabKeyDown(event, index)}
               style={{ ["--stagger" as string]: index }}
               className={`home-stagger-item group relative z-[1] flex min-w-[9.25rem] flex-shrink-0 snap-start flex-col items-start gap-2 rounded-2xl border p-3 text-left transition-all duration-300 lg:min-w-0 lg:flex-row lg:items-center lg:gap-3 lg:border-transparent lg:bg-transparent lg:p-2 ${
@@ -150,7 +184,42 @@ export function SchoolJourney() {
         />
 
         <div key={active.id} className="journey-panel-enter relative z-10">
-          <div className="flex flex-wrap items-center gap-4">
+          {JOURNEY_FRAME[active.id] ? (
+            <div className="relative -mx-6 -mt-6 mb-6 overflow-hidden md:-mx-9 md:-mt-9">
+              <img
+                src={JOURNEY_FRAME[active.id].src}
+                alt={JOURNEY_FRAME[active.id].alt}
+                width={1200}
+                height={675}
+                className="aspect-[16/9] w-full object-cover"
+                loading={activeIndex === 0 ? "eager" : "lazy"}
+                decoding="async"
+              />
+              {active.id === "communication" ? (
+                <>
+                  {GATE_CHIPS.map((chip, index) => (
+                    <button
+                      key={chip}
+                      type="button"
+                      onMouseEnter={() => setGateChip(chip)}
+                      onMouseLeave={() => setGateChip(null)}
+                      onFocus={() => setGateChip(chip)}
+                      onBlur={() => setGateChip(null)}
+                      className={`absolute top-[25%] flex h-[20%] items-center justify-center px-1 text-center text-[0.65rem] font-bold leading-tight text-brand-navy sm:text-xs ${
+                        ["left-[14.5%] w-[10%]", "left-[26%] w-[9.5%]", "left-[37.5%] w-[8.5%]"][index]
+                      } ${gateChip === chip ? "ring-2 ring-brand-orange ring-inset" : ""}`}
+                    >
+                      {chip}
+                    </button>
+                  ))}
+                  <p className="absolute left-[15%] top-[47%] text-xs font-bold text-white" aria-live="polite">
+                    {gateChip}
+                  </p>
+                </>
+              ) : null}
+            </div>
+          ) : null}
+          <div className="mb-6 flex flex-wrap items-center gap-4">
             <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-navy text-brand-beige">
               <ProductIcon name={active.icon} className="h-7 w-7" />
             </span>

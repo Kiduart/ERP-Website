@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { ArrowRight, CalendarClock, ShieldCheck, Sparkles } from "lucide-react";
 import { CTA_SCHOOLS_SUBTITLE } from "@/lib/siteData";
 import { useAnalytics } from "@/hooks/useAnalytics";
+import { KiduScene } from "@/components/kidu/KiduScene";
 
 const ASSURANCES = [
   { icon: CalendarClock, label: "30-minute walkthrough", detail: "Booked around your school hours" },
@@ -10,7 +11,15 @@ const ASSURANCES = [
   { icon: ShieldCheck, label: "No card, no lock-in", detail: "Nothing is charged to see the product" },
 ];
 
-export function CtaSection({ title = "See KIDUART with your own school data", subtitle = CTA_SCHOOLS_SUBTITLE }) {
+export function CtaSection({
+  title = "See KIDUART with your own school data",
+  subtitle = CTA_SCHOOLS_SUBTITLE,
+  companion = false,
+}: {
+  title?: string;
+  subtitle?: string;
+  companion?: boolean;
+}) {
   const { trackEvent } = useAnalytics();
 
   return (
@@ -21,6 +30,17 @@ export function CtaSection({ title = "See KIDUART with your own school data", su
       <div className="page-shell relative z-10">
         <InView once className="motion-rise">
           <div className="console-rail relative mx-auto mb-10 max-w-md" aria-hidden="true" />
+          {companion ? (
+            <div className="mx-auto mb-8 flex max-w-xl justify-center">
+              <div className="rounded-3xl bg-white p-2">
+                <KiduScene
+                  pose="welcome"
+                  size="sm"
+                  line="The buttons below book the walkthrough."
+                />
+              </div>
+            </div>
+          ) : null}
           <div className="mx-auto max-w-3xl text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-brand-yellow">
               <span className="console-live-dot h-1.5 w-1.5 rounded-full bg-brand-yellow" aria-hidden="true" />

@@ -37,6 +37,7 @@ export function IntegrationFabric({
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const select = useCallback((index: number) => setActiveIndex(index), []);
+  const active = categories[activeIndex];
 
   const onTabKeyDown = (event: React.KeyboardEvent, index: number) => {
     const last = categories.length - 1;

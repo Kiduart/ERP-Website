@@ -104,6 +104,25 @@ export function SecurityStack({ layers }: { layers: SecurityLayer[] }) {
     else sectionRefs.current.delete(id);
   };
 
+  useEffect(() => {
+    const onFocus = (event: Event) => {
+      const id = (event as CustomEvent<string>).detail;
+      const node = sectionRefs.current.get(id);
+      const pane = paneRef.current;
+      if (!node || !layers.some((layer) => layer.id === id)) return;
+      setActiveId(id);
+      const reduce = window.matchMedia?.(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      const behavior: ScrollBehavior = reduce ? "auto" : "smooth";
+      if (panelScroll && pane) {
+        pane.scrollTo({ top: Math.max(0, node.offsetTop - 8), behavior });
+      }
+    };
+    window.addEventListener("kiduart:focus-layer", onFocus);
+    return () => window.removeEventListener("kiduart:focus-layer", onFocus);
+  }, [layers, panelScroll]);
+
   const jumpTo = useCallback(
     (event: React.MouseEvent<HTMLAnchorElement>, id: string) => {
       const node = sectionRefs.current.get(id);
